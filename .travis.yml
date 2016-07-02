@@ -1,0 +1,41 @@
+language: r
+cache: packages
+
+matrix:
+  include:
+    - os: linux
+      dist: precise
+      sudo: false
+    - os: linux
+      dist: trusty
+      env: R_CODECOV=true
+    - os: osx
+      osx_image: xcode7.2
+      brew_packages: imagemagick
+      latex: false
+      r_check_args: '--as-cran --no-manual'
+    - os: osx
+      osx_image: beta-xcode6.1
+      env: R_NOBREW=true
+
+addons:
+  apt:
+    packages:
+      - libmagick++-dev
+
+r_github_packages:
+  - jimhester/covr
+
+warnings_are_errors: true
+#r_check_revdep: true
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
+
+before_install:
+  - if [[ "${R_NOBREW}" ]]; then curl -OLSs https://raw.githubusercontent.com/Homebrew/install/master/uninstall; sudo ruby uninstall --force; rm uninstall; fi
+
+after_success:
+  - if [[ "${R_CODECOV}" ]]; then R -e 'covr::codecov()'; fi

@@ -1,0 +1,8 @@
+.Rproj.user
+.Rhistory
+.RData
+*.o
+*.a
+*.so
+*.png
+src/Makevars

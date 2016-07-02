@@ -1,0 +1,13 @@
+Package: magick
+Type: Package
+Title: Simple Image-Processing in R
+Version: 0.1
+Author: Jeroen Ooms
+Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>
+Description: Bindings to the C++ API of the ImageMagick image-processing
+    library, the most comprehensive open-source image processing package available.
+License: MIT + file LICENSE
+Imports:
+    Rcpp (>= 0.12)
+LinkingTo: Rcpp
+RoxygenNote: 5.0.1
