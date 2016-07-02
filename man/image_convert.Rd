@@ -19,6 +19,8 @@ png_file <- tempfile(fileext = ".png")
 png(png_file)
 plot(cars)
 dev.off()
-image_convert(png_file)
+image_convert(png_file, "jpg")
+image_convert(png_file, "gif")
+image_convert(png_file, "pdf")
 }
 
