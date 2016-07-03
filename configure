@@ -51,7 +51,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 
     PKG_CFLAGS=$($BREWDIR/opt/pkg-config/bin/pkg-config --cflags $PKG_CONFIG_NAME)
     PKG_LIBS=$($BREWDIR/opt/pkg-config/bin/pkg-config --libs --static $PKG_CONFIG_NAME libpng)
-    PKG_LIBS="-L$BREWDIR/opt/libtool/lib $PKG_LIBS"
+    PKG_LIBS="-L$BREWDIR/lib $PKG_LIBS" #pkg-config misses a few paths
     rm -f $BREWDIR/lib/*.dylib
     rm -f $BREWDIR/Cellar/*/*/lib/*.dylib
   fi

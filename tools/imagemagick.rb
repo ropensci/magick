@@ -57,7 +57,7 @@ class Imagemagick < Formula
       --prefix=#{prefix}
       --disable-dependency-tracking
       --disable-silent-rules
-      --enable-shared
+      --disable-shared
       --enable-static
       --without-modules
     ]
