@@ -1,0 +1,18 @@
+PKG_CPPFLAGS=-I../windows/imagemagick-7.0.2.2/include/ImageMagick-7
+PKG_CXXFLAGS=-DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16
+CXX_STD=CXX11
+
+PKG_LIBS= -L../windows/imagemagick-7.0.2.2/lib${R_ARCH} \
+  -lMagick++-7.Q16 -lMagickWand-7.Q16 -lMagickCore-7.Q16 \
+  -lpng -ljpeg -ltiff -ltiffxx -lfreetype -lharfbuzz \
+  -llzma -lbz2 -lz -lgdi32 -lws2_32 -lOleAut32
+
+all: clean
+
+clean:
+	rm -f $(OBJECTS) $(SHLIB)
+
+winlibs: clean
+	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R"
+
+.PHONY: all winlibs clean

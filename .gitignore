@@ -4,5 +4,7 @@
 *.o
 *.a
 *.so
+*.dll
 *.png
 src/Makevars
+windows
