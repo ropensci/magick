@@ -7,10 +7,10 @@ PKG_LIBS= \
   -L../windows/imagemagick-7.0.2.2/lib${subst gcc ,-,${R_COMPILED_BY}}${R_ARCH} \
   -L../windows/imagemagick-7.0.2.2/lib${R_ARCH} \
   -lMagick++-7.Q16 -lMagickWand-7.Q16 -lMagickCore-7.Q16 \
-  -lpng -ljpeg -ltiff -lfreetype -lharfbuzz -llzma -lbz2 -lz \
+  -lpng -ljpeg -ltiff -lfreetype -lharfbuzz -lxml2 -liconv -llzma -lbz2 -lz \
   -lgdi32 -lws2_32 -lOleAut32 -pthread
 
-all: winlibs
+all: clean winlibs
 
 clean:
 	rm -f $(OBJECTS) $(SHLIB)
