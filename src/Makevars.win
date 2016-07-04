@@ -10,12 +10,12 @@ PKG_LIBS= \
   -lpng -ljpeg -ltiff -lfreetype -lharfbuzz -llzma -lbz2 -lz \
   -lgdi32 -lws2_32 -lOleAut32 -pthread
 
-all: clean
+all: winlibs
 
 clean:
 	rm -f $(OBJECTS) $(SHLIB)
 
-winlibs: clean
+winlibs:
 	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R"
 
 .PHONY: all winlibs clean
