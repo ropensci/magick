@@ -4,12 +4,12 @@
 \alias{image_convert}
 \title{Convert Image}
 \usage{
-image_convert(image, to = "jpg")
+image_convert(image, format = "jpg")
 }
 \arguments{
 \item{image}{file path or raw vector to input image}
 
-\item{to}{output format, e.g. \code{jpeg}, \code{png}, etc}
+\item{format}{output format, e.g. \code{jpeg}, \code{png}, etc}
 }
 \description{
 Converts image to another format.

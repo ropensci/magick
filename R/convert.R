@@ -4,7 +4,7 @@
 #'
 #' @importFrom Rcpp sourceCpp
 #' @param image file path or raw vector to input image
-#' @param to output format, e.g. \code{jpeg}, \code{png}, etc
+#' @param format output format, e.g. \code{jpeg}, \code{png}, etc
 #' @useDynLib magick
 #' @export
 #' @examples png_file <- tempfile(fileext = ".png")
@@ -15,8 +15,8 @@
 #' image_convert(png_file, "gif")
 #' image_convert(png_file, "pdf")
 #' image_convert(png_file, "tiff")
-image_convert <- function(image, to = "jpg"){
-  stopifnot(is.character(to))
+image_convert <- function(image, format = "jpg"){
+  stopifnot(is.character(format))
   if(is.character(image)){
     image <- normalizePath(image, mustWork = TRUE)
     input <- readBin(image, raw(), file.info(image)$size)
@@ -25,9 +25,9 @@ image_convert <- function(image, to = "jpg"){
   } else {
     stop("Parameter 'image' must be file path or raw vector with image data")
   }
-  output <- convert_to(input, to)
+  output <- convert_to(input, format)
   if(is.character(image)){
-    outfile <- paste0(sub("\\.[a-zA-Z]+$", "", image), ".", to)
+    outfile <- paste0(sub("\\.[a-zA-Z]+$", "", image), ".", format)
     writeBin(output, outfile)
     return(outfile)
   } else {

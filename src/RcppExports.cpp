@@ -6,14 +6,25 @@
 using namespace Rcpp;
 
 // convert_to
-Rcpp::RawVector convert_to(Rcpp::RawVector x, Rcpp::String to);
-RcppExport SEXP magick_convert_to(SEXP xSEXP, SEXP toSEXP) {
+Rcpp::RawVector convert_to(Rcpp::RawVector x, Rcpp::String format);
+RcppExport SEXP magick_convert_to(SEXP xSEXP, SEXP formatSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< Rcpp::RawVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< Rcpp::String >::type to(toSEXP);
-    __result = Rcpp::wrap(convert_to(x, to));
+    Rcpp::traits::input_parameter< Rcpp::String >::type format(formatSEXP);
+    __result = Rcpp::wrap(convert_to(x, format));
+    return __result;
+END_RCPP
+}
+// magick_coder_info
+Rcpp::List magick_coder_info(Rcpp::String format);
+RcppExport SEXP magick_magick_coder_info(SEXP formatSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< Rcpp::String >::type format(formatSEXP);
+    __result = Rcpp::wrap(magick_coder_info(format));
     return __result;
 END_RCPP
 }
