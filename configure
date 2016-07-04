@@ -35,7 +35,8 @@ elif [ "$PKGCONFIG_CFLAGS" ] || [ "$PKGCONFIG_LIBS" ]; then
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   if [ $(command -v brew) ]; then
     BREWDIR=$(brew --prefix)
-    PKG_CFLAGS="-I$BREWDIR/opt/$PKG_BREW_NAME/include/ImageMagick-6 -DMAGICKCORE_QUANTUM_DEPTH=16 -DMAGICKCORE_HDRI_ENABLE=0"
+    INCLUDE_DIR=$(echo /usr/local/opt/imagemagick/include/*)
+    PKG_CFLAGS="-I$INCLUDE_DIR -DMAGICKCORE_QUANTUM_DEPTH=16 -DMAGICKCORE_HDRI_ENABLE=0"
     PKG_LIBS="-L$BREWDIR/opt/$PKG_BREW_NAME/lib $PKG_LIBS"
   else
     BREWDIR="/tmp/homebrew"
