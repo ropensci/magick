@@ -5,6 +5,19 @@
 
 using namespace Rcpp;
 
+// animate
+Rcpp::RawVector animate(Rcpp::List list, Rcpp::String format, int animationDelay);
+RcppExport SEXP magick_animate(SEXP listSEXP, SEXP formatSEXP, SEXP animationDelaySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< Rcpp::List >::type list(listSEXP);
+    Rcpp::traits::input_parameter< Rcpp::String >::type format(formatSEXP);
+    Rcpp::traits::input_parameter< int >::type animationDelay(animationDelaySEXP);
+    __result = Rcpp::wrap(animate(list, format, animationDelay));
+    return __result;
+END_RCPP
+}
 // convert_to
 Rcpp::RawVector convert_to(Rcpp::RawVector x, Rcpp::String format);
 RcppExport SEXP magick_convert_to(SEXP xSEXP, SEXP formatSEXP) {

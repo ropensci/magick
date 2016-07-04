@@ -17,20 +17,7 @@
 #' image_convert(png_file, "tiff")
 image_convert <- function(image, format = "jpg"){
   stopifnot(is.character(format))
-  if(is.character(image)){
-    image <- normalizePath(image, mustWork = TRUE)
-    input <- readBin(image, raw(), file.info(image)$size)
-  } else if(is.raw(image)) {
-    input <- image
-  } else {
-    stop("Parameter 'image' must be file path or raw vector with image data")
-  }
+  input <- read_image(image)
   output <- convert_to(input, format)
-  if(is.character(image)){
-    outfile <- paste0(sub("\\.[a-zA-Z]+$", "", image), ".", format)
-    writeBin(output, outfile)
-    return(outfile)
-  } else {
-    return(output)
-  }
+  write_image(output, image, format)
 }
