@@ -22,5 +22,6 @@ dev.off()
 image_convert(png_file, "jpg")
 image_convert(png_file, "gif")
 image_convert(png_file, "pdf")
+image_convert(png_file, "tiff")
 }
 
