@@ -12,8 +12,6 @@ matrix:
     - os: osx
       osx_image: xcode7.2
       brew_packages: imagemagick
-      latex: false
-      r_check_args: '--as-cran --no-manual'
     - os: osx
       osx_image: beta-xcode6.1
       env: R_NOBREW=true
