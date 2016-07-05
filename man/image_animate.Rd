@@ -4,7 +4,7 @@
 \alias{image_animate}
 \title{Create Animation}
 \usage{
-image_animate(images, format = "gif", delay = 100)
+image_animate(images, format = "gif", delay = 100, path = NULL)
 }
 \arguments{
 \item{images}{list of images (URLs or raw vectors)}
@@ -12,7 +12,9 @@ image_animate(images, format = "gif", delay = 100)
 \item{format}{output format which supports animations}
 
 \item{delay}{time in 1/100ths of a second (0 to 65535) which must expire before displaying
-the next image in an animated sequence.}
+the next image in an animated sequence. Length must be 1 or equal length of \code{images}.}
+
+\item{path}{file to write output. Use \code{NULL} to return as raw vector.}
 }
 \description{
 Creates an animation out of a series of images.
@@ -25,7 +27,7 @@ images <- sapply(1:5, function(i){
   dev.off()
   return(tmp)
 })
-gif_file <- image_animate(images, "gif")
+gif_file <- image_animate(images, "gif", path = tempfile())
 viewer <- getOption("viewer", browseURL)
 viewer(gif_file)
 }

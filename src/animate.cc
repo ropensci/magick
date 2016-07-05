@@ -1,17 +1,14 @@
-#include <Rcpp.h>
-#include <Magick++.h>
+#include "magick_types.h"
 #include <list>
 
 // [[Rcpp::export]]
-Rcpp::RawVector animate(Rcpp::List list, Rcpp::String format, int animationDelay = 100){
+Rcpp::RawVector magick_image_animage(Rcpp::List list, Rcpp::String format, Rcpp::IntegerVector animationDelay){
   std::list<Magick::Image> imageList;
   for(int i = 0; i < list.length(); i++){
-    Rcpp::RawVector x = list[i];
-    Magick::Blob input( x.begin(), x.length());
-    Magick::Image image( input );
-    image.magick( format );
-    image.animationDelay(animationDelay);
-    imageList.push_back(image);
+    Rcpp::XPtr<Magick::Image> image = list[i];
+    image->magick( format );
+    image->animationDelay(animationDelay[i]);
+    imageList.push_back(*image);
   }
   Magick::Blob output;
   writeImages( imageList.begin(), imageList.end(),  &output );
