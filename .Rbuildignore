@@ -1,6 +1,12 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^src/Makevars$
-.travis.yml
-appveyor.yml
+.travis.yml$
+appveyor.yml$
 ^windows
+.*\.png$
+.*\.gif$
+.*\.png$
+.*\.jpg$
+.*\.pdf$
+.*\.tiff$

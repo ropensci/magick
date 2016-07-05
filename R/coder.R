@@ -1,4 +1,4 @@
-#' CoderInfo
+#' Coder Info
 #'
 #' Provide information regarding ImageMagick support for an image format.
 #' Raises an error for unsupported formats.

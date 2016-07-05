@@ -16,12 +16,28 @@ XPtrImage magick_image_read(Rcpp::RawVector x){
 }
 
 // [[Rcpp::export]]
-Rcpp::RawVector  magick_image_write( Rcpp::XPtr<Magick::Image> img, Rcpp::String format){
+Rcpp::RawVector  magick_image_write( XPtrImage img, Rcpp::String format){
   Magick::Image image = *img;
   Magick::Blob output;
-  image.magick( format ); // Set output format
+  if(strlen(format.get_cstring()))
+    image.magick( format );
   image.write( &output );
   Rcpp::RawVector res(output.length());
   memcpy(res.begin(), output.data(), output.length());
   return res;
+}
+
+// [[Rcpp::export]]
+Rcpp::List  magick_image_info( XPtrImage img){
+  Magick::Image image = *img;
+  return Rcpp::List::create(
+    Rcpp::_["size"] = Rcpp::String(image.size()),
+    Rcpp::_["density"] = Rcpp::String(image.density()),
+    Rcpp::_["page"] = Rcpp::String(image.page()),
+    Rcpp::_["font"] = Rcpp::String(image.font()),
+    Rcpp::_["quality"] = image.quality(),
+    Rcpp::_["filesize"] = image.fileSize(),
+    Rcpp::_["format"] = image.format(),
+    Rcpp::_["magick"] = image.magick()
+  );
 }

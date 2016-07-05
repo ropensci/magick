@@ -6,5 +6,10 @@
 *.so
 *.dll
 *.png
+*.gif
+*.png
+*.jpg
+*.pdf
+*.tiff
 src/Makevars
 windows

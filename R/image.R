@@ -9,14 +9,17 @@
 #' @useDynLib magick
 #' @export
 #' @rdname magick_image
+#' @references ImageMagick documentation: \url{https://www.imagemagick.org/Magick++/Image++.html}
 #' @examples png_file <- tempfile(fileext = ".png")
 #' png(png_file)
 #' plot(cars)
 #' dev.off()
-#' image_write(png_file, "jpg")
-#' image_write(png_file, "gif")
-#' image_write(png_file, "pdf")
-#' image_write(png_file, "tiff")
+#' image <- image_read(png_file)
+#' image_info(image)
+#' image_write(image, "jpg", "output.jpg")
+#' image_write(image, "gif", "output.gif")
+#' image_write(image, "pdf", "output.pdf")
+#' image_write(image, "tiff", "output.tiff")
 image_read <- function(image){
   if(inherits(image, "magick-image")){
     return(image)
@@ -43,14 +46,19 @@ image_write <- function(image, format, path = NULL){
 }
 
 #' @export
+#' @rdname magick_image
+image_info <- function(image){
+  magick_image_info(image_read(image))
+}
+
+#' @export
 "print.magick-image" <- function(x, ...){
+  info <- image_info(x)
   viewer <- getOption("viewer")
   if(is.function(viewer)){
     tmp <- file.path(tempdir(), "preview.jpg")
-    try({
-      image_write(x, "jpg", tmp)
-      viewer(tmp)
-    }, silent = FALSE) # Change to TRUE in production
+    image_write(x, format = "jpg", path = tmp)
+    viewer(tmp)
   }
   NextMethod()
 }
