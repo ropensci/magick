@@ -15,7 +15,7 @@ matrix:
       latex: false
     - os: osx
       osx_image: beta-xcode6.1
-      env: R_NOBREW=true
+      disable_homebrew: true
 
 addons:
   apt:
@@ -32,9 +32,6 @@ notifications:
   email:
     on_success: change
     on_failure: change
-
-before_install:
-  - if [[ "${R_NOBREW}" ]]; then curl -OLSs https://raw.githubusercontent.com/Homebrew/install/master/uninstall; sudo ruby uninstall --force; rm uninstall; fi
 
 after_success:
   - if [[ "${R_CODECOV}" ]]; then R -e 'covr::codecov()'; fi
