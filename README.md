@@ -63,3 +63,5 @@ brew install imagemagick
 
 See the R `?magick` manual page for information on how to install additional dictionaries.
 
+
+[![](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
