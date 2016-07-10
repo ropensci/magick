@@ -6,9 +6,27 @@ matrix:
     - os: linux
       dist: precise
       sudo: false
+      addons:
+        apt:
+          packages: libmagick++-dev
+    - os: linux
+      dist: precise
+      sudo: false
+      addons:
+        apt:
+          packages: libgraphicsmagick++1-dev
     - os: linux
       dist: trusty
       env: R_CODECOV=true
+      addons:
+        apt:
+          packages: libmagick++-dev
+    - os: linux
+      dist: trusty
+      sudo: required
+      addons:
+        apt:
+          packages: libgraphicsmagick++1-dev
     - os: osx
       osx_image: xcode7.2
       brew_packages: imagemagick
@@ -19,8 +37,7 @@ matrix:
 
 addons:
   apt:
-    packages:
-      - libmagick++-dev
+    packages: libmagick++-dev
 
 r_github_packages:
   - jimhester/covr
