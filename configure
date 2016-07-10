@@ -21,6 +21,9 @@ if [ $(command -v pkg-config) ]; then
 elif [ $(command -v Magick++-config) ]; then
   PKGCONFIG_CFLAGS=$(Magick++-config --cflags)
   PKGCONFIG_LIBS=$(Magick++-config --libs)
+elif [ $(command -v GraphicsMagick++-config) ]; then
+  PKGCONFIG_CFLAGS=$(GraphicsMagick++-config --cflags)
+  PKGCONFIG_LIBS=$(GraphicsMagick++-config --libs)
 fi
 
 # Note that cflags may be empty in case of success
