@@ -28,9 +28,11 @@ plot(cars)
 dev.off()
 
 # Convert to formats
-magick::image_convert(png_file, "jpg")
-magick::image_convert(png_file, "gif")
-magick::image_convert(png_file, "pdf")
+image <- magick::image_read(png_file)
+magick::image_write(image, "jpg", "output.jpg")
+magick::image_write(image, "gif", "output.gif")
+magick::image_write(image, "pdf", "output.pdf")
+
 ```
 
 ## Installation
