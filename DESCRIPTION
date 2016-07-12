@@ -8,6 +8,8 @@ Description: Bindings to the ImageMagick image-processing library, the
     most comprehensive open-source image processing package available.
 License: MIT + file LICENSE
 Imports:
-    Rcpp (>= 0.12)
+    Rcpp (>= 0.12),
+    curl
 LinkingTo: Rcpp
+Suggests: magrittr
 RoxygenNote: 5.0.1
