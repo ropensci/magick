@@ -5,23 +5,27 @@ magick_coder_info <- function(format) {
     .Call('magick_magick_coder_info', PACKAGE = 'magick', format)
 }
 
+magick_frame_read <- function(x) {
+    .Call('magick_magick_frame_read', PACKAGE = 'magick', x)
+}
+
+magick_frame_write <- function(frame, format) {
+    .Call('magick_magick_frame_write', PACKAGE = 'magick', frame, format)
+}
+
+magick_frame_info <- function(frame) {
+    .Call('magick_magick_frame_info', PACKAGE = 'magick', frame)
+}
+
 magick_image_read <- function(x) {
     .Call('magick_magick_image_read', PACKAGE = 'magick', x)
 }
 
-magick_image_write <- function(img, format) {
-    .Call('magick_magick_image_write', PACKAGE = 'magick', img, format)
+magick_image_create <- function(inputList) {
+    .Call('magick_magick_image_create', PACKAGE = 'magick', inputList)
 }
 
-magick_image_info <- function(img) {
-    .Call('magick_magick_image_info', PACKAGE = 'magick', img)
-}
-
-magick_imagelist_create <- function(inputList) {
-    .Call('magick_magick_imagelist_create', PACKAGE = 'magick', inputList)
-}
-
-magick_imagelist_write <- function(images, format, delay) {
-    .Call('magick_magick_imagelist_write', PACKAGE = 'magick', images, format, delay)
+magick_image_write <- function(image, format, delay) {
+    .Call('magick_magick_image_write', PACKAGE = 'magick', image, format, delay)
 }
 

@@ -2,8 +2,11 @@
 #include <Magick++.h>
 #include <list>
 
-void finalize_image( Magick::Image* image );
-void finalize_image_list( std::list<Magick::Image> *imageList );
+typedef Magick::Image Frame;
+typedef std::vector<Magick::Image> Image;
 
-typedef Rcpp::XPtr<Magick::Image, Rcpp::PreserveStorage, finalize_image> XPtrImage;
-typedef Rcpp::XPtr<std::list<Magick::Image>, Rcpp::PreserveStorage, finalize_image_list> XPtrImageList;
+void finalize_frame(Frame *frame);
+void finalize_image(Image *image);
+
+typedef Rcpp::XPtr<Frame, Rcpp::PreserveStorage, finalize_frame> XPtrFrame;
+typedef Rcpp::XPtr<Image, Rcpp::PreserveStorage, finalize_image> XPtrImage;

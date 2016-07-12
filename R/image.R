@@ -1,25 +1,35 @@
-#' Magick Images
+#' Image
 #'
-#' Converts image to another format.
+#' Create and manipulate sequences of images, for example to generate animation.
 #'
-#' @importFrom Rcpp sourceCpp
-#' @param image magick-image object, file path or raw vector with image data
-#' @param format output format, e.g. \code{jpeg}, \code{png}, \code{pdf} or \code{gif}.
-#' @param path file to write output. Use \code{NULL} to return as raw vector.
-#' @useDynLib magick
 #' @export
-#' @rdname magick_image
-#' @references ImageMagick documentation: \url{https://www.imagemagick.org/Magick++/Image++.html}
-#' @examples png_file <- tempfile(fileext = ".png")
-#' png(png_file)
-#' plot(cars)
-#' dev.off()
-#' image <- image_read(png_file)
-#' image_info(image)
-#' image_write(image, "jpg", "output.jpg")
-#' image_write(image, "gif", "output.gif")
-#' image_write(image, "pdf", "output.pdf")
-#' image_write(image, "tiff", "output.tiff")
+#' @rdname image
+#' @param image vector of images. Each element is passed to \link{image_read}.
+#' @param format output format which supports animations
+#' @param delay time in 1/100ths of a second (0 to 65535) which must expire before displaying
+#' the next image in an animated sequence.
+#' @param path file to write output. Use \code{NULL} to return as raw vector.
+#' @examples
+#' images <- sapply(1:5, function(i){
+#'   png(tmp <- tempfile(), width = 800, height = 600)
+#'   par(ask = FALSE)
+#'   plot(rnorm(100))
+#'   dev.off()
+#'   return(tmp)
+#' })
+#' animation <- image_create(images)
+#' image_write(animation, path = "out.gif")
+image_create <- function(image){
+  if(inherits(image, "magick-image")){
+    return(image)
+  }
+  stopifnot(is.character(image) || is.list(image))
+  image <- lapply(image, frame_read)
+  magick_image_create(image)
+}
+
+#' @export
+#' @rdname  image
 image_read <- function(image){
   if(inherits(image, "magick-image")){
     return(image)
@@ -35,9 +45,10 @@ image_read <- function(image){
 }
 
 #' @export
-#' @rdname magick_image
-image_write <- function(image, format, path = NULL){
-  buf <- magick_image_write(image_read(image), format)
+#' @rdname image
+image_write <- function(image, format = "gif", delay = 100, path = NULL){
+  image <- image_create(image)
+  buf <- magick_image_write(image, format, delay)
   if(is.character(path)){
     writeBin(buf, path)
     return(path)
@@ -46,19 +57,28 @@ image_write <- function(image, format, path = NULL){
 }
 
 #' @export
-#' @rdname magick_image
-image_info <- function(image){
-  magick_image_info(image_read(image))
-}
-
-#' @export
 "print.magick-image" <- function(x, ...){
-  info <- image_info(x)
   viewer <- getOption("viewer")
   if(is.function(viewer)){
-    tmp <- file.path(tempdir(), "preview.jpg")
-    image_write(x, format = "jpg", path = tmp)
+    tmp <- file.path(tempdir(), "preview.gif")
+    image_write(x, format = "gif", path = tmp)
     viewer(tmp)
   }
   NextMethod()
 }
+
+#' @export
+"[.magick-image" <- function(i, j){
+  stop("[ not yet implemented")
+}
+
+#' @export
+"[[.magick-image" <- function(i, j){
+  stop("[[ not yet implemented")
+}
+
+#' @export
+"c.magick-image" <- function(...){
+  stop("c() not yet implemented")
+}
+

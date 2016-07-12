@@ -1,6 +1,4 @@
-#include <Rcpp.h>
-#include <Magick++.h>
-#include <iostream>
+#include "magick_types.h"
 
 // [[Rcpp::export]]
 Rcpp::List magick_coder_info(Rcpp::String format){
