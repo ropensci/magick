@@ -51,12 +51,13 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     mkdir -p $BREWDIR
     echo "Auto-brewing $PKG_BREW_NAME in $BREWDIR..."
     curl -fsSL https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C $BREWDIR
-    HOMEBREW_CACHE="/tmp" $BREWDIR/bin/brew install pkg-config $PKG_BREW_NAME 2>&1 | perl -pe 's/Warning/Note/gi'
 
     # Rebuild imagemagick --without-modules
-    HOMEBREW_CACHE="/tmp" $BREWDIR/bin/brew uninstall --force imagemagick 2>&1 | perl -pe 's/Warning/Note/gi'
+    BREW_DEPS=$($BREWDIR/bin/brew deps -n $PKG_BREW_NAME)
+    HOMEBREW_CACHE="/tmp" $BREWDIR/bin/brew install $BREW_DEPS --force-bottle 2>&1 | perl -pe 's/Warning/Note/gi'
     HOMEBREW_CACHE="/tmp" $BREWDIR/bin/brew install tools/imagemagick.rb 2>&1 | perl -pe 's/Warning/Note/gi'
 
+    # Get build flags from pkg-config
     PKG_CFLAGS=$($BREWDIR/opt/pkg-config/bin/pkg-config --cflags $PKG_CONFIG_NAME)
     PKG_LIBS=$($BREWDIR/opt/pkg-config/bin/pkg-config --libs --static $PKG_CONFIG_NAME libpng)
     PKG_LIBS="-L$BREWDIR/lib $PKG_LIBS" #pkg-config misses a few paths
