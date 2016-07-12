@@ -18,16 +18,16 @@ PKG_LIBS="-lMagick++-6.Q16"
 if [ $(command -v pkg-config) ]; then
   PKGCONFIG_CFLAGS=$(pkg-config --cflags --silence-errors ${PKG_CONFIG_NAME})
   PKGCONFIG_LIBS=$(pkg-config --libs ${PKG_CONFIG_NAME})
+elif [ $(command -v Magick++-config) ]; then
+  PKGCONFIG_CFLAGS=$(Magick++-config --cflags)
+  PKGCONFIG_LIBS=$(Magick++-config --libs)
 fi
 
-if [ -z "$PKGCONFIG_LIBS"]; then
-  if [ $(command -v Magick++-config) ]; then
-    PKGCONFIG_CFLAGS=$(Magick++-config --cflags)
-    PKGCONFIG_LIBS=$(Magick++-config --libs)
-  elif [ $(command -v GraphicsMagick++-config) ]; then
-    PKGCONFIG_CFLAGS=$(GraphicsMagick++-config --cppflags)
-    PKGCONFIG_LIBS=$(GraphicsMagick++-config --libs)
-  fi
+# Pick up on GraphicsMagick but warn against it
+if [ -z "$PKGCONFIG_LIBS" ] && [ $(command -v GraphicsMagick++-config) ]; then
+  echo "Warning: found GraphicsMagick++ instead of ImageMatick++. Not recommended."
+  PKGCONFIG_CFLAGS=$(GraphicsMagick++-config --cppflags)
+  PKGCONFIG_LIBS=$(GraphicsMagick++-config --libs)
 fi
 
 # Note that cflags may be empty in case of success
