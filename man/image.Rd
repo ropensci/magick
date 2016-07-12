@@ -34,6 +34,8 @@ image_write(image, path = NULL)
 \item{delay}{time in 1/100ths of a second (0 to 65535) which must expire before displaying
 the next image in an animated sequence.}
 
+\item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string}}
+
 \item{geometry}{a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
 for example \code{"10x10+5-5"}.}
 }

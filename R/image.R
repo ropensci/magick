@@ -10,6 +10,7 @@
 #' @param path file path, URL, or raw vector with image data
 #' @param image object returned by \code{image_read}
 #' @param format output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.
+#' @param color a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string}
 #' @param delay time in 1/100ths of a second (0 to 65535) which must expire before displaying
 #' the next image in an animated sequence.
 #' @param geometry a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
@@ -90,7 +91,7 @@ image_write <- function(image, path = NULL){
 "[[.magick-image" <- function(x, i){
   stopifnot(inherits(x, "magick-image"))
   stop("not yet implemented")
-  magick_image_frame(x, i)
+  #magick_image_frame(x, i)
 }
 
 #' @export
