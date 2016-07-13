@@ -2,19 +2,13 @@
 #'
 #' Read, write and edit images. All image functions are vectorized, meaning
 #' they can operate either on a single frame or a series of frames (e.g. to
-#' work with video or animation).
+#' create a collage, video, or animation).
 #'
 #' @export
 #' @aliases image magick imagemagick
 #' @rdname image
 #' @param path file path, URL, or raw vector with image data
 #' @param image object returned by \code{image_read}
-#' @param format output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.
-#' @param color a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string}
-#' @param delay time in 1/100ths of a second (0 to 65535) which must expire before displaying
-#' the next image in an animated sequence.
-#' @param geometry a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
-#' for example \code{"10x10+5-5"}.
 #' @references Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}
 #' @examples library(magrittr)
 #' img <- image_read("https://jeroenooms.github.io/images/frink.png")
@@ -37,6 +31,7 @@ image_read <- function(path){
 
 #' @export
 #' @rdname image
+#' @param format output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.
 image_format <- function(image, format){
   stopifnot(inherits(image, "magick-image"))
   magick_image_format(image, format)
@@ -44,6 +39,8 @@ image_format <- function(image, format){
 
 #' @export
 #' @rdname image
+#' @param delay time in 1/100ths of a second (0 to 65535) which must expire before displaying
+#' the next image in an animated sequence.
 image_delay <- function(image, delay){
   stopifnot(inherits(image, "magick-image"))
   magick_image_delay(image, delay)
@@ -58,9 +55,20 @@ image_trim <- function(image){
 
 #' @export
 #' @rdname image
+#' @param color a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string}
+#' @param geometry a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
+#' for example \code{"10x10+5-5"}.
 image_border <- function(image, color = "", geometry = ""){
   stopifnot(inherits(image, "magick-image"))
   magick_image_border(image, color, geometry)
+}
+
+#' @export
+#' @rdname image
+#' @param stack if false, rectangular image frames are stacked left-to-right otherwise top-to-bottom.
+image_append <- function(image, stack = FALSE){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_append(image, stack)
 }
 
 #' @export

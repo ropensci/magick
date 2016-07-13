@@ -2,6 +2,7 @@
 % Please edit documentation in R/image.R
 \name{image_read}
 \alias{image}
+\alias{image_append}
 \alias{image_border}
 \alias{image_delay}
 \alias{image_format}
@@ -22,6 +23,8 @@ image_trim(image)
 
 image_border(image, color = "", geometry = "")
 
+image_append(image, stack = FALSE)
+
 image_write(image, path = NULL)
 }
 \arguments{
@@ -38,11 +41,13 @@ the next image in an animated sequence.}
 
 \item{geometry}{a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
 for example \code{"10x10+5-5"}.}
+
+\item{stack}{if false, rectangular image frames are stacked left-to-right otherwise top-to-bottom.}
 }
 \description{
 Read, write and edit images. All image functions are vectorized, meaning
 they can operate either on a single frame or a series of frames (e.g. to
-work with video or animation).
+create a collage, video, or animation).
 }
 \examples{
 library(magrittr)

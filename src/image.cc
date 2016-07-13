@@ -116,6 +116,17 @@ Rcpp::RawVector magick_image_write( XPtrImage image){
 }
 
 // [[Rcpp::export]]
+XPtrImage magick_image_append( XPtrImage image, bool stack){
+  Frame frame;
+  appendImages( &frame, image->begin(), image->end(), stack);
+  Image *out = new Image;
+  out->push_back(frame);
+  XPtrImage ptr(out);
+  ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
+  return ptr;
+}
+
+// [[Rcpp::export]]
 XPtrImage magick_image_create(Rcpp::List inputList){
   Image *image = new Image;
   for(int i = 0; i < inputList.length(); i++){

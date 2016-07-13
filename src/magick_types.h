@@ -3,7 +3,7 @@
 #include <list>
 
 typedef Magick::Image Frame;
-typedef std::vector<Magick::Image> Image;
+typedef std::vector<Frame> Image;
 
 void finalize_frame(Frame *frame);
 void finalize_image(Image *image);

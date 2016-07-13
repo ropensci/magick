@@ -57,6 +57,10 @@ magick_image_write <- function(image) {
     .Call('magick_magick_image_write', PACKAGE = 'magick', image)
 }
 
+magick_image_append <- function(image, stack) {
+    .Call('magick_magick_image_append', PACKAGE = 'magick', image, stack)
+}
+
 magick_image_create <- function(inputList) {
     .Call('magick_magick_image_create', PACKAGE = 'magick', inputList)
 }

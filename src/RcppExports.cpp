@@ -166,6 +166,18 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// magick_image_append
+XPtrImage magick_image_append(XPtrImage image, bool stack);
+RcppExport SEXP magick_magick_image_append(SEXP imageSEXP, SEXP stackSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< XPtrImage >::type image(imageSEXP);
+    Rcpp::traits::input_parameter< bool >::type stack(stackSEXP);
+    __result = Rcpp::wrap(magick_image_append(image, stack));
+    return __result;
+END_RCPP
+}
 // magick_image_create
 XPtrImage magick_image_create(Rcpp::List inputList);
 RcppExport SEXP magick_magick_image_create(SEXP inputListSEXP) {
