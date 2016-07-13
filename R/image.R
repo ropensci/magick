@@ -26,8 +26,13 @@
 #' # trim off the border again
 #' img %>% image_trim()
 image_read <- function(path){
-  buf <- read_path(path)
-  magick_image_read(buf)
+  if(is.character(path)){
+    buflist <- lapply(path, read_path)
+    magick_image_read_list(buflist)
+  } else {
+    buf <- read_path(path)
+    magick_image_read(buf)
+  }
 }
 
 #' @export

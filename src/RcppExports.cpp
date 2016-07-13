@@ -62,6 +62,17 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// magick_image_read_list
+XPtrImage magick_image_read_list(Rcpp::List list);
+RcppExport SEXP magick_magick_image_read_list(SEXP listSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< Rcpp::List >::type list(listSEXP);
+    __result = Rcpp::wrap(magick_image_read_list(list));
+    return __result;
+END_RCPP
+}
 // magick_image_length
 int magick_image_length(XPtrImage image);
 RcppExport SEXP magick_magick_image_length(SEXP imageSEXP) {

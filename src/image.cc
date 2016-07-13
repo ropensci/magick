@@ -14,8 +14,21 @@ void finalize_image( Image *image ){
 // [[Rcpp::export]]
 XPtrImage magick_image_read(Rcpp::RawVector x){
   Image *image = new Image;
-  Magick::Blob input( x.begin(), x.length());
-  Magick::readImages( image, input );
+  Magick::readImages(image, Magick::Blob(x.begin(), x.length()));
+  XPtrImage ptr(image);
+  ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
+  return ptr;
+}
+
+// [[Rcpp::export]]
+XPtrImage magick_image_read_list(Rcpp::List list){
+  Image *image = new Image;
+  for(int i = 0; i < list.size(); i++) {
+    if(TYPEOF(list[i]) != RAWSXP)
+      throw std::runtime_error("magick_image_read_list can only read raw vectors");
+    Rcpp::RawVector x = list[i];
+    Magick::readImages(image, Magick::Blob(x.begin(), x.length()));
+  }
   XPtrImage ptr(image);
   ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
   return ptr;
