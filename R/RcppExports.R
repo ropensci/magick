@@ -17,14 +17,6 @@ magick_frame_info <- function(frame) {
     .Call('magick_magick_frame_info', PACKAGE = 'magick', frame)
 }
 
-magick_image_read <- function(x) {
-    .Call('magick_magick_image_read', PACKAGE = 'magick', x)
-}
-
-magick_image_read_list <- function(list) {
-    .Call('magick_magick_image_read_list', PACKAGE = 'magick', list)
-}
-
 magick_image_length <- function(image) {
     .Call('magick_magick_image_length', PACKAGE = 'magick', image)
 }
@@ -53,6 +45,14 @@ magick_image_border <- function(image, color, geometry) {
     .Call('magick_magick_image_border', PACKAGE = 'magick', image, color, geometry)
 }
 
+magick_image_read <- function(x) {
+    .Call('magick_magick_image_read', PACKAGE = 'magick', x)
+}
+
+magick_image_read_list <- function(list) {
+    .Call('magick_magick_image_read_list', PACKAGE = 'magick', list)
+}
+
 magick_image_write <- function(image) {
     .Call('magick_magick_image_write', PACKAGE = 'magick', image)
 }
@@ -61,7 +61,39 @@ magick_image_append <- function(image, stack) {
     .Call('magick_magick_image_append', PACKAGE = 'magick', image, stack)
 }
 
-magick_image_create <- function(inputList) {
-    .Call('magick_magick_image_create', PACKAGE = 'magick', inputList)
+magick_image_average <- function(image) {
+    .Call('magick_magick_image_average', PACKAGE = 'magick', image)
+}
+
+magick_image_coalesce <- function(image) {
+    .Call('magick_magick_image_coalesce', PACKAGE = 'magick', image)
+}
+
+magick_image_flatten <- function(image) {
+    .Call('magick_magick_image_flatten', PACKAGE = 'magick', image)
+}
+
+magick_image_fft <- function(image) {
+    .Call('magick_magick_image_fft', PACKAGE = 'magick', image)
+}
+
+magick_image_map <- function(image, map_image, dither) {
+    .Call('magick_magick_image_map', PACKAGE = 'magick', image, map_image, dither)
+}
+
+magick_image_montage <- function(image) {
+    .Call('magick_magick_image_montage', PACKAGE = 'magick', image)
+}
+
+magick_image_morph <- function(image, frames) {
+    .Call('magick_magick_image_morph', PACKAGE = 'magick', image, frames)
+}
+
+magick_image_mosaic <- function(image) {
+    .Call('magick_magick_image_mosaic', PACKAGE = 'magick', image)
+}
+
+magick_image_quantize <- function(image) {
+    .Call('magick_magick_image_quantize', PACKAGE = 'magick', image)
 }
 
