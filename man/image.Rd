@@ -46,7 +46,7 @@ work with video or animation).
 }
 \examples{
 library(magrittr)
-img <- image_read("http://jeroenooms.github.io/images/frink.png")
+img <- image_read("https://jeroenooms.github.io/images/frink.png")
 print(img)
 
 # trim whitespace and add a border

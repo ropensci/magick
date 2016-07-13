@@ -17,7 +17,7 @@
 #' for example \code{"10x10+5-5"}.
 #' @references Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}
 #' @examples library(magrittr)
-#' img <- image_read("http://jeroenooms.github.io/images/frink.png")
+#' img <- image_read("https://jeroenooms.github.io/images/frink.png")
 #' print(img)
 #'
 #' # trim whitespace and add a border
