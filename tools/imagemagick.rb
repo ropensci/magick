@@ -60,6 +60,7 @@ class Imagemagick < Formula
       --disable-shared
       --enable-static
       --without-modules
+      --with-fontconfig=yes
     ]
 
     if build.with? "openmp"
@@ -93,7 +94,6 @@ class Imagemagick < Formula
     args << "--with-quantum-depth=#{quantum_depth}" if quantum_depth
     args << "--with-rsvg" if build.with? "librsvg"
     args << "--without-x" if build.without? "x11"
-    args << "--with-fontconfig=yes" if build.with? "fontconfig"
     args << "--with-freetype=yes" if build.with? "freetype"
     args << "--with-webp=yes" if build.with? "webp"
 
