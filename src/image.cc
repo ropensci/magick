@@ -49,14 +49,14 @@ XPtrImage magick_image_subset(XPtrImage image, Rcpp::IntegerVector index){
   //validate valid indices
   //TODO: support negative index for dropping frames
   for(int i = 0; i < index.size(); i++){
-    int x = index[i];
+    size_t x = index[i];
     if(x < 1 || x > image->size())
       throw std::runtime_error("subscript out of bounds");
   }
   Image *out = new Image;
   out->reserve(index.length());
   for(int i = 0; i < index.size(); i++){
-    int x = index[i];
+    size_t x = index[i];
     Frame frame = (*image)[x-1]; //1 based indexing ;)
     out->insert(out->end(), frame);
   }
