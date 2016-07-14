@@ -7,7 +7,7 @@
 #' @export
 "[[.magick-image" <- function(x, i){
   stopifnot(inherits(x, "magick-image"))
-  stop("not yet implemented")
+  stop("[[ not yet implemented")
   #magick_image_frame(x, i)
 }
 
@@ -22,6 +22,13 @@
 "length.magick-image" <- function(x){
   stopifnot(inherits(x, "magick-image"))
   magick_image_length(x)
+}
+
+#' @export
+"as.list.magick-image" <- function(x, ...){
+  stopifnot(inherits(x, "magick-image"))
+  len <- length(x)
+  lapply(seq_len(len), magick_image_subset, image = x)
 }
 
 #' @export

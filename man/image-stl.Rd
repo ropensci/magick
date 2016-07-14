@@ -3,38 +3,82 @@
 \name{image-stl}
 \alias{image-stl}
 \alias{image_append}
+\alias{image_average}
+\alias{image_coalesce}
+\alias{image_fft}
+\alias{image_flatten}
+\alias{image_map}
+\alias{image_montage}
+\alias{image_morph}
+\alias{image_mosaic}
+\alias{image_quantize}
 \alias{image_read}
 \alias{image_write}
 \title{Image Manipulation}
 \usage{
 image_read(path)
 
+image_write(image, path = NULL)
+
 image_append(image, stack = FALSE)
 
-image_write(image, path = NULL)
+image_average(image)
+
+image_coalesce(image)
+
+image_flatten(image)
+
+image_fft(image)
+
+image_map(image, map_image, dither = FALSE)
+
+image_montage(image)
+
+image_morph(image, frames)
+
+image_mosaic(image)
+
+image_quantize(image)
 }
 \arguments{
 \item{path}{file path, URL, or raw vector with image data}
 
 \item{image}{object returned by \code{image_read}}
 
-\item{stack}{if false, rectangular image frames are stacked left-to-right otherwise top-to-bottom.}
+\item{stack}{place images top-to-bottom (TRUE) or left-to-right (FALSE)}
+
+\item{map_image}{reference image to map colors from}
+
+\item{dither}{set TRUE to enable dithering}
+
+\item{frames}{number of frames to use in output animation}
 }
 \description{
 Read, write and edit images. All image functions are vectorized, meaning
 they can operate either on a single frame or a series of frames (e.g. to
 create a collage, video, or animation).
+
+Append a sequence of image frames left-to-right or top-to-bottom
+using \code{image_append}.
 }
 \examples{
-library(magrittr)
-img <- image_read("https://jeroenooms.github.io/images/frink.png")
-print(img)
+# Download image from the web
+frink <- image_read("https://jeroenooms.github.io/images/frink.png")
+image_write(frink, "output.png")
+# Create thumbnails from GIF
+banana <- image_read(system.file("banana.gif", package = "magick"))
+length(banana)
+image_average(banana)
+image_flatten(banana)
+image_append(banana)
+image_append(banana, stack = TRUE)
 
-# trim whitespace and add a border
-img \%>\% image_trim() \%>\% image_border("blue", "6x6+0+0")
-
-# trim off the border again
-img \%>\% image_trim()
+# Combine with another image
+logo <- image_read(system.file("Rlogo.png", package = "magick"))
+oldlogo <- image_read(system.file("Rlogo-old.png", package = "magick"))
+image_append(c(image_append(banana[c(1,3)], stack = TRUE), logo))
+image_average(c(image_append(banana[c(1,3)], stack = TRUE), logo))
+image_format(image_morph(c(oldlogo, logo, oldlogo), frames = 10), "gif")
 }
 \references{
 Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}

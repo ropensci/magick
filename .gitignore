@@ -11,5 +11,6 @@
 *.jpg
 *.pdf
 *.tiff
+!inst/*
 src/Makevars
 windows

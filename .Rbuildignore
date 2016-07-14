@@ -4,9 +4,4 @@
 .travis.yml$
 appveyor.yml$
 ^windows
-.*\.png$
-.*\.gif$
-.*\.png$
-.*\.jpg$
-.*\.pdf$
-.*\.tiff$
+^[^/]+\.(gif|png|jpg|jpeg|pdf|tiff)$
