@@ -64,6 +64,7 @@ using \code{image_append}.
 \examples{
 # Download image from the web
 frink <- image_read("https://jeroenooms.github.io/images/frink.png")
+image_crop(frink)
 image_write(frink, "output.png")
 # Create thumbnails from GIF
 banana <- image_read(system.file("banana.gif", package = "magick"))
@@ -73,12 +74,17 @@ image_flatten(banana)
 image_append(banana)
 image_append(banana, stack = TRUE)
 
+# Append images together
+image_append(image_scale(c(image_append(banana[c(1,3)], stack = TRUE), frink)))
+image_average(image_scale(c(image_append(banana[c(1,3)], stack = TRUE), frink)))
 # Combine with another image
 logo <- image_read(system.file("Rlogo.png", package = "magick"))
 oldlogo <- image_read(system.file("Rlogo-old.png", package = "magick"))
-image_append(c(image_append(banana[c(1,3)], stack = TRUE), logo))
-image_average(c(image_append(banana[c(1,3)], stack = TRUE), logo))
-image_format(image_morph(c(oldlogo, logo, oldlogo), frames = 10), "gif")
+
+# Create morphing animation
+both <- image_scale(c(oldlogo, logo), "400x400")
+animation <- image_morph(both, 10)
+image_format(animation, "gif")
 }
 \references{
 Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}

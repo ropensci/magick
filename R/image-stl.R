@@ -14,6 +14,7 @@
 #' @examples
 #' # Download image from the web
 #' frink <- image_read("https://jeroenooms.github.io/images/frink.png")
+#' image_crop(frink)
 #' image_write(frink, "output.png")
 image_read <- function(path){
   if(is.character(path)){
@@ -51,11 +52,9 @@ image_write <- function(image, path = NULL){
 #' image_append(banana)
 #' image_append(banana, stack = TRUE)
 #'
-#' # Combine with another image
-#' logo <- image_read(system.file("Rlogo.png", package = "magick"))
-#' oldlogo <- image_read(system.file("Rlogo-old.png", package = "magick"))
-#' image_append(c(image_append(banana[c(1,3)], stack = TRUE), logo))
-#' image_average(c(image_append(banana[c(1,3)], stack = TRUE), logo))
+#' # Append images together
+#' image_append(image_scale(c(image_append(banana[c(1,3)], stack = TRUE), frink)))
+#' image_average(image_scale(c(image_append(banana[c(1,3)], stack = TRUE), frink)))
 image_append <- function(image, stack = FALSE){
   stopifnot(inherits(image, "magick-image"))
   magick_image_append(image, stack)
@@ -108,7 +107,15 @@ image_montage <- function(image){
 
 #' @export
 #' @rdname image-stl
-#' @examples image_format(image_morph(c(oldlogo, logo, oldlogo), frames = 10), "gif")
+#' @examples
+#' # Combine with another image
+#' logo <- image_read(system.file("Rlogo.png", package = "magick"))
+#' oldlogo <- image_read(system.file("Rlogo-old.png", package = "magick"))
+#'
+#' # Create morphing animation
+#' both <- image_scale(c(oldlogo, logo), "400x400")
+#' animation <- image_morph(both, 10)
+#' image_format(animation, "gif")
 #' @param frames number of frames to use in output animation
 image_morph <- function(image, frames){
   stopifnot(inherits(image, "magick-image"))

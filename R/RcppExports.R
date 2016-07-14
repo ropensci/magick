@@ -41,6 +41,26 @@ magick_image_trim <- function(image) {
     .Call('magick_magick_image_trim', PACKAGE = 'magick', image)
 }
 
+magick_image_background <- function(image, color) {
+    .Call('magick_magick_image_background', PACKAGE = 'magick', image, color)
+}
+
+magick_image_matte <- function(image, matte, color) {
+    .Call('magick_magick_image_matte', PACKAGE = 'magick', image, matte, color)
+}
+
+magick_image_pen <- function(image, color) {
+    .Call('magick_magick_image_pen', PACKAGE = 'magick', image, color)
+}
+
+magick_image_crop <- function(image, geometry) {
+    .Call('magick_magick_image_crop', PACKAGE = 'magick', image, geometry)
+}
+
+magick_image_scale <- function(image, geometry) {
+    .Call('magick_magick_image_scale', PACKAGE = 'magick', image, geometry)
+}
+
 magick_image_border <- function(image, color, geometry) {
     .Call('magick_magick_image_border', PACKAGE = 'magick', image, color, geometry)
 }

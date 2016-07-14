@@ -2,9 +2,14 @@
 % Please edit documentation in R/image-manipulate.R
 \name{image-manipulate}
 \alias{image-manipulate}
+\alias{image_background}
 \alias{image_border}
+\alias{image_crop}
 \alias{image_delay}
 \alias{image_format}
+\alias{image_matte}
+\alias{image_pen}
+\alias{image_scale}
 \alias{image_trim}
 \title{Manipulating Images}
 \usage{
@@ -13,6 +18,16 @@ image_format(image, format)
 image_delay(image, delay)
 
 image_trim(image)
+
+image_background(image, color)
+
+image_matte(image, matte = TRUE, color = "")
+
+image_pen(image, color)
+
+image_crop(image, geometry = "")
+
+image_scale(image, geometry = "")
 
 image_border(image, color = "", geometry = "")
 }
@@ -25,6 +40,9 @@ image_border(image, color = "", geometry = "")
 the next image in an animated sequence.}
 
 \item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string}}
+
+\item{matte}{if the image has transparency. If set True, store matte channel
+if the image has one otherwise create an opaque one.}
 
 \item{geometry}{a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
 for example \code{"10x10+5-5"}.}

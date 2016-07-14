@@ -25,6 +25,49 @@ XPtrImage magick_image_trim( XPtrImage image){
 }
 
 // [[Rcpp::export]]
+XPtrImage magick_image_background( XPtrImage image, Rcpp::String color){
+  for_each ( image->begin(), image->end(), Magick::backgroundColorImage(Magick::Color(color.get_cstring())));
+  return image;
+}
+
+// [[Rcpp::export]]
+XPtrImage magick_image_matte( XPtrImage image, bool matte, Rcpp::String color){
+  for_each ( image->begin(), image->end(), Magick::matteImage(matte));
+  if(strlen(color.get_cstring()))
+    for_each ( image->begin(), image->end(), Magick::matteColorImage(color.get_cstring()));
+  return image;
+}
+
+// [[Rcpp::export]]
+XPtrImage magick_image_pen( XPtrImage image, Rcpp::String color){
+  if(strlen(color.get_cstring()))
+    for_each ( image->begin(), image->end(), Magick::penColorImage(color.get_cstring()));
+  return image;
+}
+
+// [[Rcpp::export]]
+XPtrImage magick_image_crop( XPtrImage image, Rcpp::String geometry){
+  const char * geom = geometry.get_cstring();
+  if(strlen(geom)){
+    for_each (image->begin(), image->end(), Magick::cropImage(geom));
+  } else {
+    for_each (image->begin(), image->end(), Magick::cropImage(image->front().size()));
+  }
+  return image;
+}
+
+// [[Rcpp::export]]
+XPtrImage magick_image_scale( XPtrImage image, Rcpp::String geometry){
+  const char * geom = geometry.get_cstring();
+  if(strlen(geom)){
+    for_each (image->begin(), image->end(), Magick::scaleImage(geom));
+  } else {
+    for_each (image->begin(), image->end(), Magick::scaleImage(image->front().size()));
+  }
+  return image;
+}
+
+// [[Rcpp::export]]
 XPtrImage magick_image_border( XPtrImage image, Rcpp::String color, Rcpp::String geometry){
   //need to set color before adding the border!
   if(strlen(color.get_cstring()))
