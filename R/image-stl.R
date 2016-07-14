@@ -54,7 +54,6 @@ image_write <- function(image, path = NULL){
 #'
 #' # Append images together
 #' image_append(image_scale(c(image_append(banana[c(1,3)], stack = TRUE), frink)))
-#' image_average(image_scale(c(image_append(banana[c(1,3)], stack = TRUE), frink)))
 image_append <- function(image, stack = FALSE){
   stopifnot(inherits(image, "magick-image"))
   magick_image_append(image, stack)
@@ -114,6 +113,7 @@ image_montage <- function(image){
 #'
 #' # Create morphing animation
 #' both <- image_scale(c(oldlogo, logo), "400x400")
+#' image_average(image_crop(c(oldlogo, logo)))
 #' animation <- image_morph(both, 10)
 #' image_format(animation, "gif")
 #' @param frames number of frames to use in output animation

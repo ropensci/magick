@@ -76,13 +76,13 @@ image_append(banana, stack = TRUE)
 
 # Append images together
 image_append(image_scale(c(image_append(banana[c(1,3)], stack = TRUE), frink)))
-image_average(image_scale(c(image_append(banana[c(1,3)], stack = TRUE), frink)))
 # Combine with another image
 logo <- image_read(system.file("Rlogo.png", package = "magick"))
 oldlogo <- image_read(system.file("Rlogo-old.png", package = "magick"))
 
 # Create morphing animation
 both <- image_scale(c(oldlogo, logo), "400x400")
+image_average(image_crop(c(oldlogo, logo)))
 animation <- image_morph(both, 10)
 image_format(animation, "gif")
 }
