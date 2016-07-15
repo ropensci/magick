@@ -3,11 +3,13 @@
 \name{image-manipulate}
 \alias{image-manipulate}
 \alias{image_background}
+\alias{image_blur}
 \alias{image_border}
 \alias{image_crop}
 \alias{image_delay}
 \alias{image_format}
 \alias{image_matte}
+\alias{image_noise}
 \alias{image_pen}
 \alias{image_scale}
 \alias{image_trim}
@@ -30,6 +32,10 @@ image_crop(image, geometry = "")
 image_scale(image, geometry = "")
 
 image_border(image, color = "", geometry = "")
+
+image_noise(image, noisetype = 2)
+
+image_blur(image, radius = 1, sigma = 0.5)
 }
 \arguments{
 \item{image}{object returned by \code{image_read}}
@@ -46,9 +52,22 @@ if the image has one otherwise create an opaque one.}
 
 \item{geometry}{a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
 for example \code{"10x10+5-5"}.}
+
+\item{noisetype}{integer betwee 0 and 5 with
+\href{https://www.imagemagick.org/Magick++/Enumerations.html#NoiseType}{noisetype}.}
+
+\item{radius}{the radius of the Gaussian, in pixels, not counting the center pixel.}
+
+\item{sigma}{the standard deviation of the Laplacian, in pixels.}
 }
 \description{
 Vectorized functions for manipulating images.
+}
+\examples{
+logo <- image_read(system.file("Rlogo.png", package = "magick"))
+image_noise(logo)
+logo <- image_read(system.file("Rlogo.png", package = "magick"))
+image_blur(logo, 10, 10)
 }
 \seealso{
 Other image: \code{\link{image-stl}}

@@ -85,6 +85,31 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// magick_image_noise
+XPtrImage magick_image_noise(XPtrImage image, int noisetype);
+RcppExport SEXP magick_magick_image_noise(SEXP imageSEXP, SEXP noisetypeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< XPtrImage >::type image(imageSEXP);
+    Rcpp::traits::input_parameter< int >::type noisetype(noisetypeSEXP);
+    __result = Rcpp::wrap(magick_image_noise(image, noisetype));
+    return __result;
+END_RCPP
+}
+// magick_image_blur
+XPtrImage magick_image_blur(XPtrImage image, const double radius, const double sigma);
+RcppExport SEXP magick_magick_image_blur(SEXP imageSEXP, SEXP radiusSEXP, SEXP sigmaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< XPtrImage >::type image(imageSEXP);
+    Rcpp::traits::input_parameter< const double >::type radius(radiusSEXP);
+    Rcpp::traits::input_parameter< const double >::type sigma(sigmaSEXP);
+    __result = Rcpp::wrap(magick_image_blur(image, radius, sigma));
+    return __result;
+END_RCPP
+}
 // magick_image_delay
 XPtrImage magick_image_delay(XPtrImage image, int delay);
 RcppExport SEXP magick_magick_image_delay(SEXP imageSEXP, SEXP delaySEXP) {

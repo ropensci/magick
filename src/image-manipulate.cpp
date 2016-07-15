@@ -7,6 +7,31 @@
 #include <list>
 
 // [[Rcpp::export]]
+XPtrImage magick_image_noise( XPtrImage image, int noisetype){
+  for_each ( image->begin(), image->end(), Magick::addNoiseImage((Magick::NoiseType) noisetype));
+  return image;
+}
+
+/*
+
+// [[Rcpp::export]]
+XPtrImage magick_image_annotates( XPtrImage image, const std::string text, Rcpp::String bbox, int gravity){
+  Magick::annotateImage fun(text, Magick::Geometry(bbox.get_cstring()));
+  for_each ( image->begin(), image->end(), fun);
+  return image;
+}
+
+*/
+
+
+// [[Rcpp::export]]
+XPtrImage magick_image_blur( XPtrImage image, const double radius = 1, const double sigma = 0.5){
+  for_each ( image->begin(), image->end(), Magick::blurImage(radius, sigma));
+  return image;
+}
+
+
+// [[Rcpp::export]]
 XPtrImage magick_image_delay( XPtrImage image, int delay){
   for_each ( image->begin(), image->end(), Magick::animationDelayImage(delay));
   return image;

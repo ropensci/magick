@@ -29,6 +29,14 @@ magick_image_subset <- function(image, index) {
     .Call('magick_magick_image_subset', PACKAGE = 'magick', image, index)
 }
 
+magick_image_noise <- function(image, noisetype) {
+    .Call('magick_magick_image_noise', PACKAGE = 'magick', image, noisetype)
+}
+
+magick_image_blur <- function(image, radius = 1, sigma = 0.5) {
+    .Call('magick_magick_image_blur', PACKAGE = 'magick', image, radius, sigma)
+}
+
 magick_image_delay <- function(image, delay) {
     .Call('magick_magick_image_delay', PACKAGE = 'magick', image, delay)
 }

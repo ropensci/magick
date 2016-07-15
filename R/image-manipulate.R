@@ -76,3 +76,27 @@ image_border <- function(image, color = "", geometry = ""){
   stopifnot(inherits(image, "magick-image"))
   magick_image_border(image, color, geometry)
 }
+
+#' @export
+#' @rdname image-manipulate
+#' @param noisetype integer betwee 0 and 5 with
+#' \href{https://www.imagemagick.org/Magick++/Enumerations.html#NoiseType}{noisetype}.
+#' @examples
+#' logo <- image_read(system.file("Rlogo.png", package = "magick"))
+#' image_noise(logo)
+image_noise <- function(image, noisetype = 2){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_noise(image, noisetype)
+}
+
+#' @export
+#' @rdname image-manipulate
+#' @param radius the radius of the Gaussian, in pixels, not counting the center pixel.
+#' @param sigma the standard deviation of the Laplacian, in pixels.
+#' @examples
+#' logo <- image_read(system.file("Rlogo.png", package = "magick"))
+#' image_blur(logo, 10, 10)
+image_blur <- function(image, radius = 1, sigma = 0.5){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_blur(image, radius, sigma)
+}
