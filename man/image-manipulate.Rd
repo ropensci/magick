@@ -12,6 +12,11 @@
 \alias{image_contrast}
 \alias{image_crop}
 \alias{image_delay}
+\alias{image_edge}
+\alias{image_emboss}
+\alias{image_enhance}
+\alias{image_equalize}
+\alias{image_flip}
 \alias{image_format}
 \alias{image_matte}
 \alias{image_noise}
@@ -43,6 +48,16 @@ image_noise(image, noisetype = 2)
 image_blur(image, radius = 1, sigma = 0.5)
 
 image_charcoal(image, radius = 1, sigma = 0.5)
+
+image_edge(image, radius = 1)
+
+image_emboss(image, radius = 1, sigma = 0.5)
+
+image_enhance(image)
+
+image_equalize(image)
+
+image_flip(image)
 
 image_chop(image, geometry)
 
@@ -101,6 +116,11 @@ image_border(logo, "red", "10x10")
 image_noise(logo)
 image_blur(logo, 10, 10)
 image_charcoal(logo)
+image_edge(logo)
+image_emboss(logo)
+image_enhance(logo)
+image_equalize(logo)
+image_flip(logo)
 # chops off 100 pixels from left and 20 from top
 image_chop(logo, "100x20")
 image_colorize(logo, 50, "red")

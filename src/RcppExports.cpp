@@ -171,6 +171,64 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// magick_image_edge
+XPtrImage magick_image_edge(XPtrImage input, size_t radius);
+RcppExport SEXP magick_magick_image_edge(SEXP inputSEXP, SEXP radiusSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< size_t >::type radius(radiusSEXP);
+    __result = Rcpp::wrap(magick_image_edge(input, radius));
+    return __result;
+END_RCPP
+}
+// magick_image_emboss
+XPtrImage magick_image_emboss(XPtrImage input, const double radius, const double sigma);
+RcppExport SEXP magick_magick_image_emboss(SEXP inputSEXP, SEXP radiusSEXP, SEXP sigmaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< const double >::type radius(radiusSEXP);
+    Rcpp::traits::input_parameter< const double >::type sigma(sigmaSEXP);
+    __result = Rcpp::wrap(magick_image_emboss(input, radius, sigma));
+    return __result;
+END_RCPP
+}
+// magick_image_enhance
+XPtrImage magick_image_enhance(XPtrImage input);
+RcppExport SEXP magick_magick_image_enhance(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    __result = Rcpp::wrap(magick_image_enhance(input));
+    return __result;
+END_RCPP
+}
+// magick_image_equalize
+XPtrImage magick_image_equalize(XPtrImage input);
+RcppExport SEXP magick_magick_image_equalize(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    __result = Rcpp::wrap(magick_image_equalize(input));
+    return __result;
+END_RCPP
+}
+// magick_image_flip
+XPtrImage magick_image_flip(XPtrImage input);
+RcppExport SEXP magick_magick_image_flip(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    __result = Rcpp::wrap(magick_image_flip(input));
+    return __result;
+END_RCPP
+}
 // magick_image_format
 XPtrImage magick_image_format(XPtrImage input, Rcpp::String format);
 RcppExport SEXP magick_magick_image_format(SEXP inputSEXP, SEXP formatSEXP) {

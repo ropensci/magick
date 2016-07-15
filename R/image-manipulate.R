@@ -120,6 +120,51 @@ image_charcoal <- function(image, radius = 1, sigma = 0.5){
 #' @export
 #' @rdname image-manipulate
 #' @examples
+#' image_edge(logo)
+image_edge <- function(image, radius = 1){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_edge(image, radius)
+}
+
+#' @export
+#' @rdname image-manipulate
+#' @examples
+#' image_emboss(logo)
+image_emboss <- function(image, radius = 1, sigma = 0.5){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_emboss(image, radius, sigma)
+}
+
+#' @export
+#' @rdname image-manipulate
+#' @examples
+#' image_enhance(logo)
+image_enhance <- function(image){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_enhance(image)
+}
+
+#' @export
+#' @rdname image-manipulate
+#' @examples
+#' image_equalize(logo)
+image_equalize <- function(image){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_equalize(image)
+}
+
+#' @export
+#' @rdname image-manipulate
+#' @examples
+#' image_flip(logo)
+image_flip <- function(image){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_flip(image)
+}
+
+#' @export
+#' @rdname image-manipulate
+#' @examples
 #' # chops off 100 pixels from left and 20 from top
 #' image_chop(logo, "100x20")
 image_chop <- function(image, geometry){

@@ -57,6 +57,26 @@ magick_image_delay <- function(input, delay) {
     .Call('magick_magick_image_delay', PACKAGE = 'magick', input, delay)
 }
 
+magick_image_edge <- function(input, radius) {
+    .Call('magick_magick_image_edge', PACKAGE = 'magick', input, radius)
+}
+
+magick_image_emboss <- function(input, radius = 1, sigma = 0.5) {
+    .Call('magick_magick_image_emboss', PACKAGE = 'magick', input, radius, sigma)
+}
+
+magick_image_enhance <- function(input) {
+    .Call('magick_magick_image_enhance', PACKAGE = 'magick', input)
+}
+
+magick_image_equalize <- function(input) {
+    .Call('magick_magick_image_equalize', PACKAGE = 'magick', input)
+}
+
+magick_image_flip <- function(input) {
+    .Call('magick_magick_image_flip', PACKAGE = 'magick', input)
+}
+
 magick_image_format <- function(input, format) {
     .Call('magick_magick_image_format', PACKAGE = 'magick', input, format)
 }

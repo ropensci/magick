@@ -61,6 +61,43 @@ XPtrImage magick_image_delay( XPtrImage input, int delay){
 }
 
 // [[Rcpp::export]]
+XPtrImage magick_image_edge( XPtrImage input, size_t radius){
+  XPtrImage output = copy(input);
+  for_each ( output->begin(), output->end(), Magick::edgeImage(radius));
+  return output;
+}
+
+// [[Rcpp::export]]
+XPtrImage magick_image_emboss( XPtrImage input, const double radius = 1, const double sigma = 0.5){
+  XPtrImage output = copy(input);
+  for_each ( output->begin(), output->end(), Magick::embossImage(radius, sigma));
+  return output;
+}
+
+// [[Rcpp::export]]
+XPtrImage magick_image_enhance( XPtrImage input){
+  XPtrImage output = copy(input);
+  for_each ( output->begin(), output->end(), Magick::enhanceImage());
+  return output;
+}
+
+// [[Rcpp::export]]
+XPtrImage magick_image_equalize( XPtrImage input){
+  XPtrImage output = copy(input);
+  for_each ( output->begin(), output->end(), Magick::equalizeImage());
+  return output;
+}
+
+// [[Rcpp::export]]
+XPtrImage magick_image_flip( XPtrImage input){
+  XPtrImage output = copy(input);
+  for_each ( output->begin(), output->end(), Magick::flipImage());
+  return output;
+}
+
+
+
+// [[Rcpp::export]]
 XPtrImage magick_image_format( XPtrImage input, Rcpp::String format){
   XPtrImage output = copy(input);
   for_each ( output->begin(), output->end(), Magick::magickImage(format.get_cstring()));
