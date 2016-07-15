@@ -4,9 +4,9 @@ class Imagemagick < Formula
   # Please always keep the Homebrew mirror as the primary URL as the
   # ImageMagick site removes tarballs regularly which means we get issues
   # unnecessarily and older versions of the formula are broken.
-  url "https://dl.bintray.com/homebrew/mirror/imagemagick-6.9.5-1.tar.xz"
-  mirror "https://www.imagemagick.org/download/ImageMagick-6.9.5-1.tar.xz"
-  sha256 "b1749ca8040a2ef03dc2318e4a73db47faf87966187408377ab148bcfa97082f"
+  url "https://dl.bintray.com/homebrew/mirror/imagemagick-6.9.5-2.tar.xz"
+  mirror "https://www.imagemagick.org/download/ImageMagick-6.9.5-2.tar.xz"
+  sha256 "f29e7991fe3d6ce819d99fc35926248f2f109fc826b4e26f3ced5b19f2cd0326"
 
   head "http://git.imagemagick.org/repos/ImageMagick.git"
 
@@ -31,9 +31,9 @@ class Imagemagick < Formula
   depends_on "libpng" => :recommended
   depends_on "libtiff" => :recommended
   depends_on "freetype" => :recommended
+  depends_on "fontconfig" => :recommended
 
   depends_on :x11 => :optional
-  depends_on "fontconfig" => :optional
   depends_on "little-cms" => :optional
   depends_on "little-cms2" => :optional
   depends_on "libwmf" => :optional
@@ -61,6 +61,7 @@ class Imagemagick < Formula
       --enable-static
       --without-modules
       --with-fontconfig=yes
+      --with-freetype=yes
     ]
 
     if build.with? "openmp"
