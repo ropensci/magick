@@ -26,6 +26,7 @@ image_delay <- function(image, delay){
 #' @rdname image-manipulate
 #' @examples
 #' logo <- image_read(system.file("Rlogo.png", package = "magick"))
+#' logo <- image_scale(logo, "400")
 #' image_trim(logo)
 image_trim <- function(image){
   stopifnot(inherits(image, "magick-image"))
@@ -73,6 +74,14 @@ image_crop <- function(image, geometry = ""){
 image_scale <- function(image, geometry = ""){
   stopifnot(inherits(image, "magick-image"))
   magick_image_scale(image, geometry)
+}
+
+#' @export
+#' @rdname image-manipulate
+#' @examples image_sample(logo, "200x200")
+image_sample <- function(image, geometry = ""){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_sample(image, geometry)
 }
 
 #' @export
@@ -129,6 +138,15 @@ image_edge <- function(image, radius = 1){
 #' @export
 #' @rdname image-manipulate
 #' @examples
+#' image_oilpaint(logo)
+image_oilpaint <- function(image, radius = 1){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_oilpaint(image, radius)
+}
+
+#' @export
+#' @rdname image-manipulate
+#' @examples
 #' image_emboss(logo)
 image_emboss <- function(image, radius = 1, sigma = 0.5){
   stopifnot(inherits(image, "magick-image"))
@@ -160,6 +178,102 @@ image_equalize <- function(image){
 image_flip <- function(image){
   stopifnot(inherits(image, "magick-image"))
   magick_image_flip(image)
+}
+
+#' @export
+#' @rdname image-manipulate
+#' @examples
+#' image_flop(logo)
+image_flop <- function(image){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_flop(image)
+}
+
+# lol this is so ugly it should be illegal
+#' @export
+#' @rdname image-manipulate
+#' @examples
+#' image_frame(logo)
+image_frame <- function(image, geometry = "25x25+6+6"){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_frame(image, geometry)
+}
+
+#' @export
+#' @rdname image-manipulate
+#' @param factor image implode factor (special effect)
+#' @examples
+#' image_implode(logo)
+image_implode <- function(image, factor = 0.5){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_implode(image, factor)
+}
+
+
+#' @export
+#' @rdname image-manipulate
+#' @examples
+#' image_negate(logo)
+image_negate <- function(image){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_negate(image)
+}
+
+#' @export
+#' @rdname image-manipulate
+#' @examples
+#' image_normalize(logo)
+image_normalize <- function(image){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_normalize(image)
+}
+
+#' @export
+#' @rdname image-manipulate
+#' @examples
+#' image_opacity(logo)
+image_opacity <- function(image, opacity = 1){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_opacity(image, opacity)
+}
+
+#' @export
+#' @rdname image-manipulate
+#' @param degrees how many degrees
+#' @examples
+#' image_rotate(logo, 45)
+image_rotate <- function(image, degrees){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_rotate(image, degrees)
+}
+
+#' @export
+#' @rdname image-manipulate
+#' @param point string indicating the flood-fill starting point
+#' @param fuzz Colors within this distance are considered equal.
+#' Use this option to match colors that are close to the target color in RGB space.
+#' I think max distance (from #000000 to #FFFFFF) is 256^3.
+#' @examples
+#' image_fill(logo, "red")
+#' image_fill(logo, "red", fuzz = 256^2)
+image_fill <- function(image, color, point = "1x1", fuzz = 0){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_fill(image, color, point, fuzz)
+}
+
+#' @export
+#' @rdname image-manipulate
+#' @param black_point double: the darkest color in the image.
+#' Colors darker than the black point are set to zero.
+#' @param white_point double: the lightest color in the image.
+#' Colors brighter than the white point are set to the maximum quantum value.
+#' @param mid_point double: a gamma correction to apply to the image.
+#' Use this option to match colors that are close to the target color in RGB space.
+#' @param channel an integer specifying a
+#' \href{https://www.imagemagick.org/Magick++/Enumerations.html#ChannelType}{ChannelType}
+image_level <- function(image, black_point, white_point, mid_point = 1, channel = 0){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_level(image, black_point, white_point, mid_point, channel)
 }
 
 #' @export

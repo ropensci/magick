@@ -16,11 +16,22 @@
 \alias{image_emboss}
 \alias{image_enhance}
 \alias{image_equalize}
+\alias{image_fill}
 \alias{image_flip}
+\alias{image_flop}
 \alias{image_format}
+\alias{image_frame}
+\alias{image_implode}
+\alias{image_level}
 \alias{image_matte}
+\alias{image_negate}
 \alias{image_noise}
+\alias{image_normalize}
+\alias{image_oilpaint}
+\alias{image_opacity}
 \alias{image_pen}
+\alias{image_rotate}
+\alias{image_sample}
 \alias{image_scale}
 \alias{image_trim}
 \title{Manipulating Images}
@@ -41,6 +52,8 @@ image_crop(image, geometry = "")
 
 image_scale(image, geometry = "")
 
+image_sample(image, geometry = "")
+
 image_border(image, color = "", geometry = "")
 
 image_noise(image, noisetype = 2)
@@ -51,6 +64,8 @@ image_charcoal(image, radius = 1, sigma = 0.5)
 
 image_edge(image, radius = 1)
 
+image_oilpaint(image, radius = 1)
+
 image_emboss(image, radius = 1, sigma = 0.5)
 
 image_enhance(image)
@@ -58,6 +73,24 @@ image_enhance(image)
 image_equalize(image)
 
 image_flip(image)
+
+image_flop(image)
+
+image_frame(image, geometry = "25x25+6+6")
+
+image_implode(image, factor = 0.5)
+
+image_negate(image)
+
+image_normalize(image)
+
+image_opacity(image, opacity = 1)
+
+image_rotate(image, degrees)
+
+image_fill(image, color, point = "1x1", fuzz = 0)
+
+image_level(image, black_point, white_point, mid_point = 1, channel = 0)
 
 image_chop(image, geometry)
 
@@ -91,7 +124,29 @@ for example \code{"10x10+5-5"}.}
 
 \item{sigma}{the standard deviation of the Laplacian, in pixels.}
 
+\item{factor}{image implode factor (special effect)}
+
 \item{opacity}{percentage of transparency}
+
+\item{degrees}{how many degrees}
+
+\item{point}{string indicating the flood-fill starting point}
+
+\item{fuzz}{Colors within this distance are considered equal.
+Use this option to match colors that are close to the target color in RGB space.
+I think max distance (from #000000 to #FFFFFF) is 256^3.}
+
+\item{black_point}{double: the darkest color in the image.
+Colors darker than the black point are set to zero.}
+
+\item{white_point}{double: the lightest color in the image.
+Colors brighter than the white point are set to the maximum quantum value.}
+
+\item{mid_point}{double: a gamma correction to apply to the image.
+Use this option to match colors that are close to the target color in RGB space.}
+
+\item{channel}{an integer specifying a
+\href{https://www.imagemagick.org/Magick++/Enumerations.html#ChannelType}{ChannelType}}
 
 \item{composite_image}{composition image}
 
@@ -107,20 +162,32 @@ Vectorized functions for manipulating images.
 }
 \examples{
 logo <- image_read(system.file("Rlogo.png", package = "magick"))
+logo <- image_scale(logo, "400")
 image_trim(logo)
 image_matte(logo, color = "red")
 image_pen(logo, color = "red")
 image_crop(logo, "400x400+200+200")
 image_scale(logo, "200x200")
+image_sample(logo, "200x200")
 image_border(logo, "red", "10x10")
 image_noise(logo)
 image_blur(logo, 10, 10)
 image_charcoal(logo)
 image_edge(logo)
+image_oilpaint(logo)
 image_emboss(logo)
 image_enhance(logo)
 image_equalize(logo)
 image_flip(logo)
+image_flop(logo)
+image_frame(logo)
+image_implode(logo)
+image_negate(logo)
+image_normalize(logo)
+image_opacity(logo)
+image_rotate(logo, 45)
+image_fill(logo, "red")
+image_fill(logo, "red", fuzz = 256^2)
 # chops off 100 pixels from left and 20 from top
 image_chop(logo, "100x20")
 image_colorize(logo, 50, "red")
