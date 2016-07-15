@@ -27,9 +27,13 @@ image_read <- function(path){
 }
 
 #' @export
+#' @inheritParams image-manipulate
 #' @rdname image-stl
-image_write <- function(image, path = NULL){
+image_write <- function(image, path = NULL, format = NULL){
   stopifnot(inherits(image, "magick-image"))
+  if(length(format)){
+    image <- image_format(image, format)
+  }
   buf <- magick_image_write(image)
   if(is.character(path)){
     writeBin(buf, path)

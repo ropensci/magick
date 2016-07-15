@@ -17,6 +17,14 @@ int magick_image_length(XPtrImage image){
 }
 
 // [[Rcpp::export]]
+XPtrImage copy (XPtrImage image){
+  Image *out = new Image(*image);
+  XPtrImage ptr(out);
+  ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
+  return ptr;
+}
+
+// [[Rcpp::export]]
 XPtrImage magick_image_join(Rcpp::List input){
   int len = 0;
   for(int i = 0; i < input.length(); i++){

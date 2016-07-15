@@ -24,6 +24,9 @@ image_delay <- function(image, delay){
 
 #' @export
 #' @rdname image-manipulate
+#' @examples
+#' logo <- image_read(system.file("Rlogo.png", package = "magick"))
+#' image_trim(logo)
 image_trim <- function(image){
   stopifnot(inherits(image, "magick-image"))
   magick_image_trim(image)
@@ -40,6 +43,8 @@ image_background <- function(image, color){
 #' @rdname image-manipulate
 #' @param matte if the image has transparency. If set True, store matte channel
 #' if the image has one otherwise create an opaque one.
+#' @examples
+#' image_matte(logo, color = "red")
 image_matte <- function(image, matte = TRUE, color = ""){
   stopifnot(inherits(image, "magick-image"))
   magick_image_matte(image, matte, color)
@@ -47,6 +52,7 @@ image_matte <- function(image, matte = TRUE, color = ""){
 
 #' @export
 #' @rdname image-manipulate
+#' @examples image_pen(logo, color = "red")
 image_pen <- function(image, color){
   stopifnot(inherits(image, "magick-image"))
   magick_image_pen(image, color)
@@ -55,6 +61,7 @@ image_pen <- function(image, color){
 
 #' @export
 #' @rdname image-manipulate
+#' @examples image_crop(logo, "400x400+200+200")
 image_crop <- function(image, geometry = ""){
   stopifnot(inherits(image, "magick-image"))
   magick_image_crop(image, geometry)
@@ -62,6 +69,7 @@ image_crop <- function(image, geometry = ""){
 
 #' @export
 #' @rdname image-manipulate
+#' @examples image_scale(logo, "200x200")
 image_scale <- function(image, geometry = ""){
   stopifnot(inherits(image, "magick-image"))
   magick_image_scale(image, geometry)
@@ -72,6 +80,7 @@ image_scale <- function(image, geometry = ""){
 #' @param color a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string}
 #' @param geometry a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
 #' for example \code{"10x10+5-5"}.
+#' @examples image_border(logo, "red", "10x10")
 image_border <- function(image, color = "", geometry = ""){
   stopifnot(inherits(image, "magick-image"))
   magick_image_border(image, color, geometry)
@@ -82,7 +91,6 @@ image_border <- function(image, color = "", geometry = ""){
 #' @param noisetype integer betwee 0 and 5 with
 #' \href{https://www.imagemagick.org/Magick++/Enumerations.html#NoiseType}{noisetype}.
 #' @examples
-#' logo <- image_read(system.file("Rlogo.png", package = "magick"))
 #' image_noise(logo)
 image_noise <- function(image, noisetype = 2){
   stopifnot(inherits(image, "magick-image"))
@@ -94,9 +102,70 @@ image_noise <- function(image, noisetype = 2){
 #' @param radius the radius of the Gaussian, in pixels, not counting the center pixel.
 #' @param sigma the standard deviation of the Laplacian, in pixels.
 #' @examples
-#' logo <- image_read(system.file("Rlogo.png", package = "magick"))
 #' image_blur(logo, 10, 10)
 image_blur <- function(image, radius = 1, sigma = 0.5){
   stopifnot(inherits(image, "magick-image"))
   magick_image_blur(image, radius, sigma)
+}
+
+#' @export
+#' @rdname image-manipulate
+#' @examples
+#' image_charcoal(logo)
+image_charcoal <- function(image, radius = 1, sigma = 0.5){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_charcoal(image, radius, sigma)
+}
+
+#' @export
+#' @rdname image-manipulate
+#' @examples
+#' # chops off 100 pixels from left and 20 from top
+#' image_chop(logo, "100x20")
+image_chop <- function(image, geometry){
+  stopifnot(inherits(image, "magick-image"))
+  stopifnot(is.character(geometry))
+  magick_image_chop(image, geometry)
+}
+
+#' @export
+#' @rdname image-manipulate
+#' @param opacity percentage of transparency
+#' @examples
+#' image_colorize(logo, 50, "red")
+image_colorize <- function(image, opacity, color){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_colorize(image, opacity, color)
+}
+
+#' @export
+#' @rdname image-manipulate
+#' @param offset geometry string with offset
+#' @param operator integer specifying the
+#' \href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}.
+#' @param composite_image composition image
+#' @examples
+#' image_composite(logo, operator = 2)
+image_composite <- function(image, composite_image = image[1], operator = 1, offset = "0x0"){
+  stopifnot(inherits(image, "magick-image"))
+  stopifnot(inherits(composite_image, "magick-image"))
+  magick_image_composite(image, composite_image, offset, operator)
+}
+
+#' @export
+#' @rdname image-manipulate
+#' @param sharpen enhance intensity differences in image
+#' @examples
+#' test <- image_read(system.file("Rlogo-old.png", package = "magick"))
+#' test <- image_scale(test, "400x400")
+#' out <- list()
+#' for(i in 1:10){
+#'   out[[i]] <- test
+#'   test <- image_contrast(test)
+#' }
+#' animation <- do.call(c, out)
+#' image_format(animation, "gif")
+image_contrast <- function(image, sharpen = 1){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_contrast(image, sharpen)
 }

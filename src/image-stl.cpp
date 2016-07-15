@@ -92,9 +92,10 @@ XPtrImage magick_image_fft( XPtrImage image){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_map( XPtrImage image, XPtrImage map_image, bool dither){
-  mapImages(image->begin(), image->end(), map_image->front(), dither);
-  return image;
+XPtrImage magick_image_map( XPtrImage input, XPtrImage map_image, bool dither){
+  XPtrImage output = copy(input);
+  mapImages(output->begin(), output->end(), map_image->front(), dither);
+  return output;
 }
 
 // [[Rcpp::export]]
@@ -128,7 +129,8 @@ XPtrImage magick_image_mosaic( XPtrImage image){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_quantize(XPtrImage image){
-  quantizeImages(image->begin(), image->end());
-  return image;
+XPtrImage magick_image_quantize(XPtrImage input){
+  XPtrImage output = copy(input);
+  quantizeImages(output->begin(), output->end());
+  return output;
 }

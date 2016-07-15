@@ -18,7 +18,7 @@
 \usage{
 image_read(path)
 
-image_write(image, path = NULL)
+image_write(image, path = NULL, format = NULL)
 
 image_append(image, stack = FALSE)
 
@@ -44,6 +44,8 @@ image_quantize(image)
 \item{path}{file path, URL, or raw vector with image data}
 
 \item{image}{object returned by \code{image_read}}
+
+\item{format}{output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.}
 
 \item{stack}{place images top-to-bottom (TRUE) or left-to-right (FALSE)}
 

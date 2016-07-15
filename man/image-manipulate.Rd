@@ -5,6 +5,11 @@
 \alias{image_background}
 \alias{image_blur}
 \alias{image_border}
+\alias{image_charcoal}
+\alias{image_chop}
+\alias{image_colorize}
+\alias{image_composite}
+\alias{image_contrast}
 \alias{image_crop}
 \alias{image_delay}
 \alias{image_format}
@@ -36,6 +41,17 @@ image_border(image, color = "", geometry = "")
 image_noise(image, noisetype = 2)
 
 image_blur(image, radius = 1, sigma = 0.5)
+
+image_charcoal(image, radius = 1, sigma = 0.5)
+
+image_chop(image, geometry)
+
+image_colorize(image, opacity, color)
+
+image_composite(image, composite_image = image[1], operator = 1,
+  offset = "0x0")
+
+image_contrast(image, sharpen = 1)
 }
 \arguments{
 \item{image}{object returned by \code{image_read}}
@@ -59,15 +75,45 @@ for example \code{"10x10+5-5"}.}
 \item{radius}{the radius of the Gaussian, in pixels, not counting the center pixel.}
 
 \item{sigma}{the standard deviation of the Laplacian, in pixels.}
+
+\item{opacity}{percentage of transparency}
+
+\item{composite_image}{composition image}
+
+\item{operator}{integer specifying the
+\href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}.}
+
+\item{offset}{geometry string with offset}
+
+\item{sharpen}{enhance intensity differences in image}
 }
 \description{
 Vectorized functions for manipulating images.
 }
 \examples{
 logo <- image_read(system.file("Rlogo.png", package = "magick"))
+image_trim(logo)
+image_matte(logo, color = "red")
+image_pen(logo, color = "red")
+image_crop(logo, "400x400+200+200")
+image_scale(logo, "200x200")
+image_border(logo, "red", "10x10")
 image_noise(logo)
-logo <- image_read(system.file("Rlogo.png", package = "magick"))
 image_blur(logo, 10, 10)
+image_charcoal(logo)
+# chops off 100 pixels from left and 20 from top
+image_chop(logo, "100x20")
+image_colorize(logo, 50, "red")
+image_composite(logo, operator = 2)
+test <- image_read(system.file("Rlogo-old.png", package = "magick"))
+test <- image_scale(test, "400x400")
+out <- list()
+for(i in 1:10){
+  out[[i]] <- test
+  test <- image_contrast(test)
+}
+animation <- do.call(c, out)
+image_format(animation, "gif")
 }
 \seealso{
 Other image: \code{\link{image-stl}}
