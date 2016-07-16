@@ -42,26 +42,6 @@ image_background <- function(image, color){
 
 #' @export
 #' @rdname image-manipulate
-#' @param matte if the image has transparency. If set True, store matte channel
-#' if the image has one otherwise create an opaque one.
-#' @examples
-#' image_matte(logo, color = "red")
-image_matte <- function(image, matte = TRUE, color = ""){
-  stopifnot(inherits(image, "magick-image"))
-  magick_image_matte(image, matte, color)
-}
-
-#' @export
-#' @rdname image-manipulate
-#' @examples image_pen(logo, color = "red")
-image_pen <- function(image, color){
-  stopifnot(inherits(image, "magick-image"))
-  magick_image_pen(image, color)
-}
-
-
-#' @export
-#' @rdname image-manipulate
 #' @examples image_crop(logo, "400x400+200+200")
 image_crop <- function(image, geometry = ""){
   stopifnot(inherits(image, "magick-image"))
@@ -230,15 +210,6 @@ image_normalize <- function(image){
 
 #' @export
 #' @rdname image-manipulate
-#' @examples
-#' image_opacity(logo)
-image_opacity <- function(image, opacity = 1){
-  stopifnot(inherits(image, "magick-image"))
-  magick_image_opacity(image, opacity)
-}
-
-#' @export
-#' @rdname image-manipulate
 #' @param degrees how many degrees
 #' @examples
 #' image_rotate(logo, 45)
@@ -259,21 +230,6 @@ image_rotate <- function(image, degrees){
 image_fill <- function(image, color, point = "1x1", fuzz = 0){
   stopifnot(inherits(image, "magick-image"))
   magick_image_fill(image, color, point, fuzz)
-}
-
-#' @export
-#' @rdname image-manipulate
-#' @param black_point double: the darkest color in the image.
-#' Colors darker than the black point are set to zero.
-#' @param white_point double: the lightest color in the image.
-#' Colors brighter than the white point are set to the maximum quantum value.
-#' @param mid_point double: a gamma correction to apply to the image.
-#' Use this option to match colors that are close to the target color in RGB space.
-#' @param channel an integer specifying a
-#' \href{https://www.imagemagick.org/Magick++/Enumerations.html#ChannelType}{ChannelType}
-image_level <- function(image, black_point, white_point, mid_point = 1, channel = 0){
-  stopifnot(inherits(image, "magick-image"))
-  magick_image_level(image, black_point, white_point, mid_point, channel)
 }
 
 #' @export

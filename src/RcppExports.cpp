@@ -300,18 +300,6 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// magick_image_opacity
-XPtrImage magick_image_opacity(XPtrImage input, size_t opacity);
-RcppExport SEXP magick_magick_image_opacity(SEXP inputSEXP, SEXP opacitySEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< size_t >::type opacity(opacitySEXP);
-    __result = Rcpp::wrap(magick_image_opacity(input, opacity));
-    return __result;
-END_RCPP
-}
 // magick_image_rotate
 XPtrImage magick_image_rotate(XPtrImage input, double degrees);
 RcppExport SEXP magick_magick_image_rotate(SEXP inputSEXP, SEXP degreesSEXP) {
@@ -333,21 +321,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< double >::type factor(factorSEXP);
     __result = Rcpp::wrap(magick_image_implode(input, factor));
-    return __result;
-END_RCPP
-}
-// magick_image_level
-XPtrImage magick_image_level(XPtrImage input, double black_point, double white_point, double mid_point, int channel);
-RcppExport SEXP magick_magick_image_level(SEXP inputSEXP, SEXP black_pointSEXP, SEXP white_pointSEXP, SEXP mid_pointSEXP, SEXP channelSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< double >::type black_point(black_pointSEXP);
-    Rcpp::traits::input_parameter< double >::type white_point(white_pointSEXP);
-    Rcpp::traits::input_parameter< double >::type mid_point(mid_pointSEXP);
-    Rcpp::traits::input_parameter< int >::type channel(channelSEXP);
-    __result = Rcpp::wrap(magick_image_level(input, black_point, white_point, mid_point, channel));
     return __result;
 END_RCPP
 }
@@ -409,31 +382,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< Rcpp::String >::type color(colorSEXP);
     __result = Rcpp::wrap(magick_image_background(input, color));
-    return __result;
-END_RCPP
-}
-// magick_image_matte
-XPtrImage magick_image_matte(XPtrImage input, bool matte, Rcpp::String color);
-RcppExport SEXP magick_magick_image_matte(SEXP inputSEXP, SEXP matteSEXP, SEXP colorSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< bool >::type matte(matteSEXP);
-    Rcpp::traits::input_parameter< Rcpp::String >::type color(colorSEXP);
-    __result = Rcpp::wrap(magick_image_matte(input, matte, color));
-    return __result;
-END_RCPP
-}
-// magick_image_pen
-XPtrImage magick_image_pen(XPtrImage input, Rcpp::String color);
-RcppExport SEXP magick_magick_image_pen(SEXP inputSEXP, SEXP colorSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< Rcpp::String >::type color(colorSEXP);
-    __result = Rcpp::wrap(magick_image_pen(input, color));
     return __result;
 END_RCPP
 }
@@ -619,17 +567,6 @@ BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< XPtrImage >::type image(imageSEXP);
     __result = Rcpp::wrap(magick_image_mosaic(image));
-    return __result;
-END_RCPP
-}
-// magick_image_quantize
-XPtrImage magick_image_quantize(XPtrImage input);
-RcppExport SEXP magick_magick_image_quantize(SEXP inputSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    __result = Rcpp::wrap(magick_image_quantize(input));
     return __result;
 END_RCPP
 }

@@ -142,36 +142,16 @@ XPtrImage magick_image_oilpaint( XPtrImage input, size_t radius){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_opacity( XPtrImage input, size_t opacity){
-  XPtrImage output = copy(input);
-  for_each ( output->begin(), output->end(), Magick::opacityImage(opacity));
-  return output;
-}
-
-// [[Rcpp::export]]
 XPtrImage magick_image_rotate( XPtrImage input, double degrees){
   XPtrImage output = copy(input);
   for_each ( output->begin(), output->end(), Magick::rotateImage(degrees));
   return output;
 }
 
-
-
 // [[Rcpp::export]]
 XPtrImage magick_image_implode( XPtrImage input, double factor){
   XPtrImage output = copy(input);
   for_each ( output->begin(), output->end(), Magick::implodeImage(factor));
-  return output;
-}
-
-// [[Rcpp::export]]
-XPtrImage magick_image_level( XPtrImage input, double black_point, double white_point, double mid_point, int channel){
-  XPtrImage output = copy(input);
-  if(channel == 0){
-    for_each ( output->begin(), output->end(), Magick::levelChannelImage((Magick::ChannelType) channel, black_point, white_point, mid_point));
-  } else {
-    for_each ( output->begin(), output->end(), Magick::levelImage(black_point, white_point, mid_point));
-  }
   return output;
 }
 
@@ -208,23 +188,6 @@ XPtrImage magick_image_contrast( XPtrImage input, size_t sharpen){
 XPtrImage magick_image_background( XPtrImage input, Rcpp::String color){
   XPtrImage output = copy(input);
   for_each (output->begin(), output->end(), Magick::backgroundColorImage(Magick::Color(color.get_cstring())));
-  return output;
-}
-
-// [[Rcpp::export]]
-XPtrImage magick_image_matte( XPtrImage input, bool matte, Rcpp::String color){
-  XPtrImage output = copy(input);
-  if(strlen(color.get_cstring()))
-    for_each ( output->begin(), output->end(), Magick::matteColorImage(color.get_cstring()));
-  for_each ( output->begin(), output->end(), Magick::matteImage(matte));
-  return output;
-}
-
-// [[Rcpp::export]]
-XPtrImage magick_image_pen( XPtrImage input, Rcpp::String color){
-  XPtrImage output = copy(input);
-  if(strlen(color.get_cstring()))
-    for_each ( output->begin(), output->end(), Magick::penColorImage(color.get_cstring()));
   return output;
 }
 

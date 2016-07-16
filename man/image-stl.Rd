@@ -11,7 +11,6 @@
 \alias{image_montage}
 \alias{image_morph}
 \alias{image_mosaic}
-\alias{image_quantize}
 \alias{image_read}
 \alias{image_write}
 \title{Image Manipulation}
@@ -37,8 +36,6 @@ image_montage(image)
 image_morph(image, frames)
 
 image_mosaic(image)
-
-image_quantize(image)
 }
 \arguments{
 \item{path}{file path, URL, or raw vector with image data}

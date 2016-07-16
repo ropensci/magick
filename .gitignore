@@ -11,6 +11,9 @@
 *.jpg
 *.pdf
 *.tiff
-!inst/*
+!inst/*.gif
+!inst/*.png
+inst/etc
+inst/share
 src/Makevars
 windows

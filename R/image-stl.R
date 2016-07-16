@@ -133,10 +133,3 @@ image_mosaic <- function(image){
   stopifnot(inherits(image, "magick-image"))
   magick_image_mosaic(image)
 }
-
-#' @export
-#' @rdname image-stl
-image_quantize <- function(image){
-  stopifnot(inherits(image, "magick-image"))
-  magick_image_quantize(image)
-}

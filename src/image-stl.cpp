@@ -127,10 +127,3 @@ XPtrImage magick_image_mosaic( XPtrImage image){
   ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
   return ptr;
 }
-
-// [[Rcpp::export]]
-XPtrImage magick_image_quantize(XPtrImage input){
-  XPtrImage output = copy(input);
-  quantizeImages(output->begin(), output->end());
-  return output;
-}

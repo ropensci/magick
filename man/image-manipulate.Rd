@@ -22,14 +22,10 @@
 \alias{image_format}
 \alias{image_frame}
 \alias{image_implode}
-\alias{image_level}
-\alias{image_matte}
 \alias{image_negate}
 \alias{image_noise}
 \alias{image_normalize}
 \alias{image_oilpaint}
-\alias{image_opacity}
-\alias{image_pen}
 \alias{image_rotate}
 \alias{image_sample}
 \alias{image_scale}
@@ -43,10 +39,6 @@ image_delay(image, delay)
 image_trim(image)
 
 image_background(image, color)
-
-image_matte(image, matte = TRUE, color = "")
-
-image_pen(image, color)
 
 image_crop(image, geometry = "")
 
@@ -84,13 +76,9 @@ image_negate(image)
 
 image_normalize(image)
 
-image_opacity(image, opacity = 1)
-
 image_rotate(image, degrees)
 
 image_fill(image, color, point = "1x1", fuzz = 0)
-
-image_level(image, black_point, white_point, mid_point = 1, channel = 0)
 
 image_chop(image, geometry)
 
@@ -111,9 +99,6 @@ the next image in an animated sequence.}
 
 \item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string}}
 
-\item{matte}{if the image has transparency. If set True, store matte channel
-if the image has one otherwise create an opaque one.}
-
 \item{geometry}{a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
 for example \code{"10x10+5-5"}.}
 
@@ -126,8 +111,6 @@ for example \code{"10x10+5-5"}.}
 
 \item{factor}{image implode factor (special effect)}
 
-\item{opacity}{percentage of transparency}
-
 \item{degrees}{how many degrees}
 
 \item{point}{string indicating the flood-fill starting point}
@@ -136,17 +119,7 @@ for example \code{"10x10+5-5"}.}
 Use this option to match colors that are close to the target color in RGB space.
 I think max distance (from #000000 to #FFFFFF) is 256^3.}
 
-\item{black_point}{double: the darkest color in the image.
-Colors darker than the black point are set to zero.}
-
-\item{white_point}{double: the lightest color in the image.
-Colors brighter than the white point are set to the maximum quantum value.}
-
-\item{mid_point}{double: a gamma correction to apply to the image.
-Use this option to match colors that are close to the target color in RGB space.}
-
-\item{channel}{an integer specifying a
-\href{https://www.imagemagick.org/Magick++/Enumerations.html#ChannelType}{ChannelType}}
+\item{opacity}{percentage of transparency}
 
 \item{composite_image}{composition image}
 
@@ -164,8 +137,6 @@ Vectorized functions for manipulating images.
 logo <- image_read(system.file("Rlogo.png", package = "magick"))
 logo <- image_scale(logo, "400")
 image_trim(logo)
-image_matte(logo, color = "red")
-image_pen(logo, color = "red")
 image_crop(logo, "400x400+200+200")
 image_scale(logo, "200x200")
 image_sample(logo, "200x200")
@@ -184,7 +155,6 @@ image_frame(logo)
 image_implode(logo)
 image_negate(logo)
 image_normalize(logo)
-image_opacity(logo)
 image_rotate(logo, 45)
 image_fill(logo, "red")
 image_fill(logo, "red", fuzz = 256^2)
