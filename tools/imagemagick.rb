@@ -60,7 +60,7 @@ class Imagemagick < Formula
       --disable-shared
       --enable-static
       --without-modules
-      --with-fontconfig=yes
+      --with-fontconfig=no
       --with-freetype=yes
     ]
 
