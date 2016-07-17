@@ -9,8 +9,13 @@
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/magick)](http://cran.r-project.org/web/packages/magick/index.html)
 [![Github Stars](https://img.shields.io/github/stars/jeroenooms/magick.svg?style=social&label=Github)](https://github.com/jeroenooms/magick)
 
-> Bindings to the ImageMagick image-processing library, the
-  most comprehensive open-source image processing package available.
+> Bindings to ImageMagick: the most comprehensive open-source image
+  processing library available. Supports many common formats (png, jpeg, tiff,
+  pdf, etc) and manipulations (rotate, scale, crop, trim, flip, blur, etc).
+  All operations are vectorized via the Magick++ STL meaning they operate either
+  on a single frame or a series of frames for working with layers, collages,
+  video, or animation. Images are automatically previewed when printed to the
+  console in RStudio or an X11 GUI, creating a fully interactive environment
 
 ## Documentation
 
@@ -60,13 +65,12 @@ On __Fedora__,  __CentOS or RHEL__ we need [ImageMagick-c++-devel](https://apps.
 sudo yum install ImageMagick-c++-devel
 ````
 
-On __OS-X__ use [magick](https://github.com/Homebrew/homebrew-core/blob/master/Formula/imagemagick.rb) from Homebrew:
+On __OS-X__ use [imagemagick](https://github.com/Homebrew/homebrew-core/blob/master/Formula/imagemagick.rb) from Homebrew:
 
 ```
 brew install imagemagick
 ```
 
-See the R `?magick` manual page for information on how to install additional dictionaries.
-
+There is also a fork of imagemagick called graphicsmagick, but it doesn't work as well. I highly recommend you build with imagemagick.
 
 [![](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)

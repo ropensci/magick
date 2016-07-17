@@ -4,8 +4,13 @@ Title: Advanced Image-Processing in R
 Version: 0.1
 Author: Jeroen Ooms
 Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>
-Description: Bindings to the ImageMagick image-processing library, the
-    most comprehensive open-source image processing package available.
+Description: Bindings to ImageMagick: the most comprehensive open-source image
+    processing library available. Supports many common formats (png, jpeg, tiff,
+    pdf, etc) and manipulations (rotate, scale, crop, trim, flip, blur, etc).
+    All operations are vectorized via the Magick++ STL meaning they operate either
+    on a single frame or a series of frames for working with layers, collages,
+    video, or animation. Images are automatically previewed when printed to the
+    console in RStudio or any X11 GUI, creating a fully interactive environment.
 License: MIT + file LICENSE
 Imports:
     Rcpp (>= 0.12),
