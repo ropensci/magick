@@ -44,6 +44,26 @@ image_write <- function(image, path = NULL, format = NULL){
   return(buf)
 }
 
+#' @export
+#' @param animate support animations in the X11 display
+#' @rdname image-read
+image_display <- function(image, animate = TRUE){
+  if(isTRUE(animate)){
+    magick_image_animate(image)
+  } else {
+    magick_image_display(imate)
+  }
+}
+
+#' @export
+#' @param browser argument passed to \link[utils:browseURL]{browseURL}
+#' @rdname image-read
+image_browse <- function(image, browser = getOption("browser")){
+  tmp <- tempfile()
+  image_write(image, path = tmp)
+  utils::browseURL(tmp)
+}
+
 #' @description Append a sequence of image frames left-to-right or top-to-bottom
 #' using \code{image_append}.
 #' @export

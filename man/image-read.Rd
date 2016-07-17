@@ -4,7 +4,9 @@
 \alias{image-read}
 \alias{image_append}
 \alias{image_average}
+\alias{image_browse}
 \alias{image_coalesce}
+\alias{image_display}
 \alias{image_fft}
 \alias{image_flatten}
 \alias{image_map}
@@ -18,6 +20,10 @@
 image_read(path)
 
 image_write(image, path = NULL, format = NULL)
+
+image_display(image, animate = TRUE)
+
+image_browse(image, browser = getOption("browser"))
 
 image_append(image, stack = FALSE)
 
@@ -43,6 +49,10 @@ image_mosaic(image)
 \item{image}{object returned by \code{image_read}}
 
 \item{format}{output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.}
+
+\item{animate}{support animations in the X11 display}
+
+\item{browser}{argument passed to \link[utils:browseURL]{browseURL}}
 
 \item{stack}{place images top-to-bottom (TRUE) or left-to-right (FALSE)}
 
