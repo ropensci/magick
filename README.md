@@ -1,6 +1,6 @@
 # magick
 
-##### *Simple Image-Processing in R*
+##### *Advanced Image-Processing in R*
 
 [![Build Status](https://travis-ci.org/jeroenooms/magick.svg?branch=master)](https://travis-ci.org/jeroenooms/magick)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jeroenooms/magick?branch=master&svg=true)](https://ci.appveyor.com/project/jeroenooms/magick)
@@ -16,22 +16,27 @@
 
 About the underlying library:
 
- - [Magick++ API Documentation](https://www.imagemagick.org/Magick++/Documentation.html)
+ - [Magick++ STL Documentation](https://www.imagemagick.org/Magick++/STL.html)
 
 ## Hello World
 
+Run the examples in RStudio to see a live previews of the images!
+
 ```r
-# Create a PNG
-png_file <- tempfile(fileext = ".png")
-png(png_file)
-plot(cars)
-dev.off()
+# Download image from the web
+frink <- image_read("https://jeroenooms.github.io/images/frink.png")
+print(frink)
+
+frink2 <- image_trim(frink)
+image_write(frink2, "output.png")
+
+
 
 # Convert to formats
 image <- magick::image_read(png_file)
-magick::image_write(image, "jpg", "output.jpg")
-magick::image_write(image, "gif", "output.gif")
-magick::image_write(image, "pdf", "output.pdf")
+magick::image_write(image, "output.jpg", format = "jpg")
+magick::image_write(image, "output.gif", format = "gif")
+magick::image_write(image, "output.pdf", format = "pdf")
 
 ```
 

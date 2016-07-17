@@ -25,6 +25,18 @@ XPtrImage copy (XPtrImage image){
 }
 
 // [[Rcpp::export]]
+XPtrImage magick_image_rev(XPtrImage input){
+  Image *output = new Image;
+  output->reserve(input->size());
+  for(Image::reverse_iterator i = input->rbegin();i != input->rend(); ++i){
+    output->insert(output->end(), *i);
+  }
+  XPtrImage ptr(output);
+  ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
+  return ptr;
+}
+
+// [[Rcpp::export]]
 XPtrImage magick_image_join(Rcpp::List input){
   int len = 0;
   for(int i = 0; i < input.length(); i++){

@@ -25,6 +25,10 @@ copy <- function(image) {
     .Call('magick_copy', PACKAGE = 'magick', image)
 }
 
+magick_image_rev <- function(input) {
+    .Call('magick_magick_image_rev', PACKAGE = 'magick', input)
+}
+
 magick_image_join <- function(input) {
     .Call('magick_magick_image_join', PACKAGE = 'magick', input)
 }

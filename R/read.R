@@ -6,16 +6,16 @@
 #'
 #' @export
 #' @family image
-#' @rdname image-stl
-#' @name image-stl
+#' @rdname image-read
+#' @name image-read
 #' @param path file path, URL, or raw vector with image data
 #' @param image object returned by \code{image_read}
 #' @references Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}
 #' @examples
 #' # Download image from the web
 #' frink <- image_read("https://jeroenooms.github.io/images/frink.png")
-#' image_crop(frink)
-#' image_write(frink, "output.png")
+#' frink2 <- image_crop(frink)
+#' image_write(frink2, "output.png")
 image_read <- function(path){
   if(is.character(path)){
     buflist <- lapply(path, read_path)
@@ -28,7 +28,7 @@ image_read <- function(path){
 
 #' @export
 #' @inheritParams image-manipulate
-#' @rdname image-stl
+#' @rdname image-read
 image_write <- function(image, path = NULL, format = NULL){
   stopifnot(inherits(image, "magick-image"))
   if(length(format)){
@@ -45,7 +45,7 @@ image_write <- function(image, path = NULL, format = NULL){
 #' @description Append a sequence of image frames left-to-right or top-to-bottom
 #' using \code{image_append}.
 #' @export
-#' @rdname image-stl
+#' @rdname image-read
 #' @param stack place images top-to-bottom (TRUE) or left-to-right (FALSE)
 #' @examples
 #' # Create thumbnails from GIF
@@ -64,35 +64,35 @@ image_append <- function(image, stack = FALSE){
 }
 
 #' @export
-#' @rdname image-stl
+#' @rdname image-read
 image_average <- function(image){
   stopifnot(inherits(image, "magick-image"))
   magick_image_average(image)
 }
 
 #' @export
-#' @rdname image-stl
+#' @rdname image-read
 image_coalesce <- function(image){
   stopifnot(inherits(image, "magick-image"))
   magick_image_coalesce(image)
 }
 
 #' @export
-#' @rdname image-stl
+#' @rdname image-read
 image_flatten <- function(image){
   stopifnot(inherits(image, "magick-image"))
   magick_image_flatten(image)
 }
 
 #' @export
-#' @rdname image-stl
+#' @rdname image-read
 image_fft <- function(image){
   stopifnot(inherits(image, "magick-image"))
   magick_image_fft(image)
 }
 
 #' @export
-#' @rdname image-stl
+#' @rdname image-read
 #' @param map_image reference image to map colors from
 #' @param dither set TRUE to enable dithering
 image_map <- function(image, map_image, dither = FALSE){
@@ -102,14 +102,14 @@ image_map <- function(image, map_image, dither = FALSE){
 }
 
 #' @export
-#' @rdname image-stl
+#' @rdname image-read
 image_montage <- function(image){
   stopifnot(inherits(image, "magick-image"))
   magick_image_montage(image)
 }
 
 #' @export
-#' @rdname image-stl
+#' @rdname image-read
 #' @examples
 #' # Combine with another image
 #' logo <- image_read(system.file("Rlogo.png", package = "magick"))
@@ -128,7 +128,7 @@ image_morph <- function(image, frames){
 }
 
 #' @export
-#' @rdname image-stl
+#' @rdname image-read
 image_mosaic <- function(image){
   stopifnot(inherits(image, "magick-image"))
   magick_image_mosaic(image)

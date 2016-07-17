@@ -5,7 +5,7 @@
 #' @export
 #' @rdname image-manipulate
 #' @name image-manipulate
-#' @inheritParams image-stl
+#' @inheritParams image-read
 #' @family image
 #' @param format output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.
 image_format <- function(image, format){

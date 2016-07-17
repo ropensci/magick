@@ -25,6 +25,12 @@
 }
 
 #' @export
+"rev.magick-image" <- function(x){
+  stopifnot(inherits(x, "magick-image"))
+  magick_image_rev(x)
+}
+
+#' @export
 "as.list.magick-image" <- function(x, ...){
   stopifnot(inherits(x, "magick-image"))
   len <- length(x)

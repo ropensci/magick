@@ -73,6 +73,17 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// magick_image_rev
+XPtrImage magick_image_rev(XPtrImage input);
+RcppExport SEXP magick_magick_image_rev(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    __result = Rcpp::wrap(magick_image_rev(input));
+    return __result;
+END_RCPP
+}
 // magick_image_join
 XPtrImage magick_image_join(Rcpp::List input);
 RcppExport SEXP magick_magick_image_join(SEXP inputSEXP) {

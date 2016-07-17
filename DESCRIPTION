@@ -1,6 +1,6 @@
 Package: magick
 Type: Package
-Title: Simple Image-Processing in R
+Title: Advanced Image-Processing in R
 Version: 0.1
 Author: Jeroen Ooms
 Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>
