@@ -4,7 +4,6 @@
  */
 
 #include "magick_types.h"
-#include <list>
 
 // [[Rcpp::export]]
 XPtrImage magick_image_read(Rcpp::RawVector x){
@@ -38,13 +37,21 @@ Rcpp::RawVector magick_image_write( XPtrImage image){
 
 // [[Rcpp::export]]
 XPtrImage magick_image_display( XPtrImage image){
-  displayImages(image->begin(), image->end());
+#ifndef _WIN32
+  Magick::displayImages(image->begin(), image->end());
+#else
+  Rcpp::warning("X11 not supported on Windows");
+#endif
   return image;
 }
 
 // [[Rcpp::export]]
 XPtrImage magick_image_animate( XPtrImage image){
-  animateImages(image->begin(), image->end());
+#ifndef _WIN32
+  Magick::animateImages(image->begin(), image->end());
+#else
+  Rcpp::warning("X11 not supported on Windows");
+#endif
   return image;
 }
 
