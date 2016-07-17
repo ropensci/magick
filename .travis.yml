@@ -17,6 +17,8 @@ matrix:
       osx_image: beta-xcode6.1
       disable_homebrew: true
       latex: false
+      before_install:
+        - (while true; do echo 'Ping? Pong!'; sleep 500; done) &
 
 addons:
   apt:
