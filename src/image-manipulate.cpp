@@ -13,18 +13,6 @@ XPtrImage magick_image_noise( XPtrImage input, int noisetype){
   return output;
 }
 
-/*
-
-// [[Rcpp::export]]
-XPtrImage magick_image_annotates( XPtrImage image, const std::string text, Rcpp::String bbox, int gravity){
-  Magick::annotateImage fun(text, Magick::Geometry(bbox.get_cstring()));
-  for_each ( image->begin(), image->end(), fun);
-  return image;
-}
-
-*/
-
-
 // [[Rcpp::export]]
 XPtrImage magick_image_blur( XPtrImage input, const double radius = 1, const double sigma = 0.5){
   XPtrImage output = copy(input);
@@ -172,8 +160,10 @@ XPtrImage magick_image_trim( XPtrImage input){
 // [[Rcpp::export]]
 XPtrImage magick_image_composite( XPtrImage input, XPtrImage composite_image, Rcpp::String offset, int op){
   XPtrImage output = copy(input);
-  for_each(output->begin(), output->end(), Magick::compositeImage(composite_image->front(),
-    Magick::Geometry(offset.get_cstring()), (Magick::CompositeOperator) op));
+  if(composite_image->size()){
+    for_each(output->begin(), output->end(), Magick::compositeImage(composite_image->front(),
+      Magick::Geometry(offset.get_cstring()), (Magick::CompositeOperator) op));
+  }
   return output;
 }
 
@@ -198,8 +188,8 @@ XPtrImage magick_image_crop( XPtrImage input, Rcpp::String geometry){
   if(strlen(geom)){
     for_each (output->begin(), output->end(), Magick::cropImage(geom));
   } else {
-    //crop to size of first image
-    for_each (output->begin(), output->end(), Magick::cropImage(output->front().size()));
+    if(input->size())
+      for_each (output->begin(), output->end(), Magick::cropImage(input->front().size()));
   }
   return output;
 }
@@ -211,7 +201,8 @@ XPtrImage magick_image_scale( XPtrImage input, Rcpp::String geometry){
   if(strlen(geom)){
     for_each (output->begin(), output->end(), Magick::scaleImage(geom));
   } else {
-    for_each (output->begin(), output->end(), Magick::scaleImage(output->front().size()));
+    if(input->size())
+      for_each (output->begin(), output->end(), Magick::scaleImage(input->front().size()));
   }
   return output;
 }
@@ -223,7 +214,8 @@ XPtrImage magick_image_sample( XPtrImage input, Rcpp::String geometry){
   if(strlen(geom)){
     for_each (output->begin(), output->end(), Magick::sampleImage(geom));
   } else {
-    for_each (output->begin(), output->end(), Magick::sampleImage(output->front().size()));
+    if(input->size())
+      for_each (output->begin(), output->end(), Magick::sampleImage(input->front().size()));
   }
   return output;
 }
@@ -238,3 +230,15 @@ XPtrImage magick_image_border( XPtrImage input, Rcpp::String color, Rcpp::String
     for_each ( output->begin(), output->end(), Magick::borderImage(geometry.get_cstring()));
   return output;
 }
+
+
+/* This doesn't seem to work. Can't figure out what's wrong.
+
+// [[Rcpp::export]]
+XPtrImage magick_image_annotates( XPtrImage image, const std::string text, Rcpp::String bbox, int gravity){
+Magick::annotateImage fun(text, Magick::Geometry(bbox.get_cstring()));
+for_each ( image->begin(), image->end(), fun);
+return image;
+}
+
+*/

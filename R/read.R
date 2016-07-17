@@ -31,6 +31,8 @@ image_read <- function(path){
 #' @rdname image-read
 image_write <- function(image, path = NULL, format = NULL){
   stopifnot(inherits(image, "magick-image"))
+  if(!length(image))
+    warning("Writing image with 0 frames")
   if(length(format)){
     image <- image_format(image, format)
   }

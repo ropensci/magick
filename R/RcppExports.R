@@ -21,6 +21,10 @@ magick_image_length <- function(image) {
     .Call('magick_magick_image_length', PACKAGE = 'magick', image)
 }
 
+create <- function(len) {
+    .Call('magick_create', PACKAGE = 'magick', len)
+}
+
 copy <- function(image) {
     .Call('magick_copy', PACKAGE = 'magick', image)
 }

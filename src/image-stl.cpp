@@ -8,29 +8,27 @@
 
 // [[Rcpp::export]]
 XPtrImage magick_image_read(Rcpp::RawVector x){
-  Image *image = new Image;
-  Magick::readImages(image, Magick::Blob(x.begin(), x.length()));
-  XPtrImage ptr(image);
-  ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
-  return ptr;
+  XPtrImage image = create();
+  Magick::readImages(image.get(), Magick::Blob(x.begin(), x.length()));
+  return image;
 }
 
 // [[Rcpp::export]]
 XPtrImage magick_image_read_list(Rcpp::List list){
-  Image *image = new Image;
+  XPtrImage image = create();
   for(int i = 0; i < list.size(); i++) {
     if(TYPEOF(list[i]) != RAWSXP)
       throw std::runtime_error("magick_image_read_list can only read raw vectors");
     Rcpp::RawVector x = list[i];
-    Magick::readImages(image, Magick::Blob(x.begin(), x.length()));
+    Magick::readImages(image.get(), Magick::Blob(x.begin(), x.length()));
   }
-  XPtrImage ptr(image);
-  ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
-  return ptr;
+  return image;
 }
 
 // [[Rcpp::export]]
 Rcpp::RawVector magick_image_write( XPtrImage image){
+  if(!image->size())
+    return Rcpp::RawVector(0);
   Magick::Blob output;
   writeImages( image->begin(), image->end(),  &output );
   Rcpp::RawVector res(output.length());
@@ -53,77 +51,64 @@ XPtrImage magick_image_append( XPtrImage image, bool stack){
 XPtrImage magick_image_average( XPtrImage image){
   Frame frame;
   averageImages( &frame, image->begin(), image->end());
-  Image *out = new Image;
+  XPtrImage out = create();
   out->push_back(frame);
-  XPtrImage ptr(out);
-  ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
-  return ptr;
+  return out;
 }
 
 // [[Rcpp::export]]
 XPtrImage magick_image_coalesce( XPtrImage image){
-  Image *out = new Image;
-  coalesceImages( out, image->begin(), image->end());
-  XPtrImage ptr(out);
-  ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
-  return ptr;
+  XPtrImage out = create();
+  coalesceImages( out.get(), image->begin(), image->end());
+  return out;
 }
 
 // [[Rcpp::export]]
 XPtrImage magick_image_flatten( XPtrImage image){
   Frame frame;
   flattenImages( &frame, image->begin(), image->end());
-  Image *out = new Image;
+  XPtrImage out = create();
   out->push_back(frame);
-  XPtrImage ptr(out);
-  ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
-  return ptr;
+  return out;
 }
 
 /* Not very useful. Requires imagemagick configuration with --enable-fftw=yes */
 // [[Rcpp::export]]
 XPtrImage magick_image_fft( XPtrImage image){
-  Image *out = new Image;
-  Frame frame(image->front()); //only decompose first frame
-  forwardFourierTransformImage(out, frame);
-  XPtrImage ptr(out);
-  ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
-  return ptr;
+  XPtrImage out = create();
+  if(image->size())
+    forwardFourierTransformImage(out.get(), image->front());
+  return out;
 }
 
 // [[Rcpp::export]]
 XPtrImage magick_image_map( XPtrImage input, XPtrImage map_image, bool dither){
   XPtrImage output = copy(input);
-  mapImages(output->begin(), output->end(), map_image->front(), dither);
+  if(map_image->size())
+    mapImages(output->begin(), output->end(), map_image->front(), dither);
   return output;
 }
 
 // [[Rcpp::export]]
 XPtrImage magick_image_montage( XPtrImage image){
-  Image *out = new Image;
+  XPtrImage out = create();
   Magick::Montage montageOpts = Magick::Montage();
-  montageImages(out, image->begin(), image->end(), montageOpts);
-  XPtrImage ptr(out);
-  ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
-  return ptr;
+  montageImages(out.get(), image->begin(), image->end(), montageOpts);
+  return out;
 }
 
 // [[Rcpp::export]]
 XPtrImage magick_image_morph( XPtrImage image, int frames){
-  Image *out = new Image;
-  morphImages( out, image->begin(), image->end(), frames);
-  XPtrImage ptr(out);
-  ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
-  return ptr;
+  XPtrImage out = create();
+  morphImages( out.get(), image->begin(), image->end(), frames);
+  return out;
 }
 
 // [[Rcpp::export]]
 XPtrImage magick_image_mosaic( XPtrImage image){
   Frame frame;
   mosaicImages( &frame, image->begin(), image->end());
-  Image *out = new Image;
+  XPtrImage out = create();
   out->push_back(frame);
-  XPtrImage ptr(out);
-  ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
-  return ptr;
+  return out;
 }

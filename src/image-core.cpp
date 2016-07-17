@@ -17,6 +17,21 @@ int magick_image_length(XPtrImage image){
 }
 
 // [[Rcpp::export]]
+XPtrImage create (int len){
+  Image *image = new Image;
+  if(len > 0){
+    image->reserve(len);
+  }
+  XPtrImage ptr(image);
+  ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
+  return ptr;
+}
+
+XPtrImage create (){
+  return create (0);
+}
+
+// [[Rcpp::export]]
 XPtrImage copy (XPtrImage image){
   Image *out = new Image(*image);
   XPtrImage ptr(out);
@@ -26,32 +41,26 @@ XPtrImage copy (XPtrImage image){
 
 // [[Rcpp::export]]
 XPtrImage magick_image_rev(XPtrImage input){
-  Image *output = new Image;
-  output->reserve(input->size());
+  XPtrImage output = create(input->size());
   for(Image::reverse_iterator i = input->rbegin();i != input->rend(); ++i){
     output->insert(output->end(), *i);
   }
-  XPtrImage ptr(output);
-  ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
-  return ptr;
+  return output;
 }
 
 // [[Rcpp::export]]
 XPtrImage magick_image_join(Rcpp::List input){
-  int len = 0;
+  int outlen = 0;
   for(int i = 0; i < input.length(); i++){
     XPtrImage x = input[i];
-    len += x->size();
+    outlen += x->size();
   }
-  Image *image = new Image;
-  image->reserve(len);
+  XPtrImage output = create(outlen);
   for(int i = 0; i < input.length(); i++){
     XPtrImage x = input[i];
-    image->insert(image->end(), x->begin(), x->end());
+    output->insert(output->end(), x->begin(), x->end());
   }
-  XPtrImage ptr(image);
-  ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
-  return ptr;
+  return output;
 }
 
 // [[Rcpp::export]]
@@ -63,14 +72,11 @@ XPtrImage magick_image_subset(XPtrImage image, Rcpp::IntegerVector index){
     if(x < 1 || x > image->size())
       throw std::runtime_error("subscript out of bounds");
   }
-  Image *out = new Image;
-  out->reserve(index.length());
+  XPtrImage output = create(index.length());
   for(int i = 0; i < index.size(); i++){
     size_t x = index[i];
     Frame frame = (*image)[x-1]; //1 based indexing ;)
-    out->insert(out->end(), frame);
+    output->insert(output->end(), frame);
   }
-  XPtrImage ptr(out);
-  ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
-  return ptr;
+  return output;
 }

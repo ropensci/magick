@@ -62,6 +62,17 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// create
+XPtrImage create(int len);
+RcppExport SEXP magick_create(SEXP lenSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< int >::type len(lenSEXP);
+    __result = Rcpp::wrap(create(len));
+    return __result;
+END_RCPP
+}
 // copy
 XPtrImage copy(XPtrImage image);
 RcppExport SEXP magick_copy(SEXP imageSEXP) {
