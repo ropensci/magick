@@ -2,13 +2,7 @@
 "[.magick-image" <- function(x, i){
   stopifnot(inherits(x, "magick-image"))
   stopifnot(is.numeric(i))
-  i <- as.integer(i)[as.logical(i)]
-  if(all(i < 0)){
-    i <- seq_along(x)[i]
-  }
-  if(!all(i > 0)){
-    stop("subscripts must be all positive or all negative")
-  }
+  i <- seq_along(x)[i]  # normalize to positive subscripts
   magick_image_subset(x, i)
 }
 
