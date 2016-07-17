@@ -165,6 +165,14 @@ magick_image_write <- function(image) {
     .Call('magick_magick_image_write', PACKAGE = 'magick', image)
 }
 
+magick_image_display <- function(image) {
+    .Call('magick_magick_image_display', PACKAGE = 'magick', image)
+}
+
+magick_image_animate <- function(image) {
+    .Call('magick_magick_image_animate', PACKAGE = 'magick', image)
+}
+
 magick_image_append <- function(image, stack) {
     .Call('magick_magick_image_append', PACKAGE = 'magick', image, stack)
 }

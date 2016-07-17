@@ -37,6 +37,18 @@ Rcpp::RawVector magick_image_write( XPtrImage image){
 }
 
 // [[Rcpp::export]]
+XPtrImage magick_image_display( XPtrImage image){
+  displayImages(image->begin(), image->end());
+  return image;
+}
+
+// [[Rcpp::export]]
+XPtrImage magick_image_animate( XPtrImage image){
+  animateImages(image->begin(), image->end());
+  return image;
+}
+
+// [[Rcpp::export]]
 XPtrImage magick_image_append( XPtrImage image, bool stack){
   Frame frame;
   appendImages( &frame, image->begin(), image->end(), stack);

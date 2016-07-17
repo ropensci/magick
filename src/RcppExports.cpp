@@ -489,6 +489,28 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// magick_image_display
+XPtrImage magick_image_display(XPtrImage image);
+RcppExport SEXP magick_magick_image_display(SEXP imageSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< XPtrImage >::type image(imageSEXP);
+    __result = Rcpp::wrap(magick_image_display(image));
+    return __result;
+END_RCPP
+}
+// magick_image_animate
+XPtrImage magick_image_animate(XPtrImage image);
+RcppExport SEXP magick_magick_image_animate(SEXP imageSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< XPtrImage >::type image(imageSEXP);
+    __result = Rcpp::wrap(magick_image_animate(image));
+    return __result;
+END_RCPP
+}
 // magick_image_append
 XPtrImage magick_image_append(XPtrImage image, bool stack);
 RcppExport SEXP magick_magick_image_append(SEXP imageSEXP, SEXP stackSEXP) {
