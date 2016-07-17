@@ -51,7 +51,7 @@ image_display <- function(image, animate = TRUE){
   if(isTRUE(animate)){
     magick_image_animate(image)
   } else {
-    magick_image_display(imate)
+    magick_image_display(image)
   }
 }
 
