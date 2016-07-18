@@ -47,5 +47,6 @@
     image_write(x, path = tmp)
     viewer(tmp)
   }
-  NextMethod()
+  print(image_info(x))
+  invisible()
 }

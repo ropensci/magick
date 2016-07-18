@@ -173,6 +173,7 @@ animation <- do.call(c, out)
 image_format(animation, "gif")
 }
 \seealso{
-Other image: \code{\link{image-read}}
+Other image: \code{\link{image-attributes}},
+  \code{\link{image-read}}
 }
 

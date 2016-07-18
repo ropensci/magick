@@ -41,13 +41,6 @@ XPtrImage magick_image_colorize( XPtrImage input, const size_t opacity, Rcpp::St
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_delay( XPtrImage input, int delay){
-  XPtrImage output = copy(input);
-  for_each ( output->begin(), output->end(), Magick::animationDelayImage(delay));
-  return output;
-}
-
-// [[Rcpp::export]]
 XPtrImage magick_image_edge( XPtrImage input, size_t radius){
   XPtrImage output = copy(input);
   for_each ( output->begin(), output->end(), Magick::edgeImage(radius));
@@ -231,7 +224,7 @@ XPtrImage magick_image_border( XPtrImage input, Rcpp::String color, Rcpp::String
 }
 
 
-/* This doesn't seem to work. Can't figure out what's wrong.
+/* This doesn't seem to work. Can't figure out what's wrong. */
 
 // [[Rcpp::export]]
 XPtrImage magick_image_annotates( XPtrImage image, const std::string text, Rcpp::String bbox, int gravity){
@@ -240,4 +233,3 @@ for_each ( image->begin(), image->end(), fun);
 return image;
 }
 
-*/

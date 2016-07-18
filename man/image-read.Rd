@@ -99,6 +99,7 @@ image_format(animation, "gif")
 Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}
 }
 \seealso{
-Other image: \code{\link{image-manipulate}}
+Other image: \code{\link{image-attributes}},
+  \code{\link{image-manipulate}}
 }
 

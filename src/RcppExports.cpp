@@ -6,48 +6,37 @@
 
 using namespace Rcpp;
 
-// magick_coder_info
-Rcpp::List magick_coder_info(Rcpp::String format);
-RcppExport SEXP magick_magick_coder_info(SEXP formatSEXP) {
+// magick_image_delay
+XPtrImage magick_image_delay(XPtrImage input, int delay);
+RcppExport SEXP magick_magick_image_delay(SEXP inputSEXP, SEXP delaySEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< Rcpp::String >::type format(formatSEXP);
-    __result = Rcpp::wrap(magick_coder_info(format));
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< int >::type delay(delaySEXP);
+    __result = Rcpp::wrap(magick_image_delay(input, delay));
     return __result;
 END_RCPP
 }
-// magick_frame_read
-XPtrFrame magick_frame_read(Rcpp::RawVector x);
-RcppExport SEXP magick_magick_frame_read(SEXP xSEXP) {
+// magick_image_verbose
+XPtrImage magick_image_verbose(XPtrImage input);
+RcppExport SEXP magick_magick_image_verbose(SEXP inputSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< Rcpp::RawVector >::type x(xSEXP);
-    __result = Rcpp::wrap(magick_frame_read(x));
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    __result = Rcpp::wrap(magick_image_verbose(input));
     return __result;
 END_RCPP
 }
-// magick_frame_write
-Rcpp::RawVector magick_frame_write(XPtrFrame frame, Rcpp::String format);
-RcppExport SEXP magick_magick_frame_write(SEXP frameSEXP, SEXP formatSEXP) {
+// magick_image_info
+Rcpp::DataFrame magick_image_info(XPtrImage input);
+RcppExport SEXP magick_magick_image_info(SEXP inputSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< XPtrFrame >::type frame(frameSEXP);
-    Rcpp::traits::input_parameter< Rcpp::String >::type format(formatSEXP);
-    __result = Rcpp::wrap(magick_frame_write(frame, format));
-    return __result;
-END_RCPP
-}
-// magick_frame_info
-Rcpp::List magick_frame_info(XPtrFrame frame);
-RcppExport SEXP magick_magick_frame_info(SEXP frameSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< XPtrFrame >::type frame(frameSEXP);
-    __result = Rcpp::wrap(magick_frame_info(frame));
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    __result = Rcpp::wrap(magick_image_info(input));
     return __result;
 END_RCPP
 }
@@ -118,6 +107,51 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// magick_coder_info
+Rcpp::List magick_coder_info(Rcpp::String format);
+RcppExport SEXP magick_magick_coder_info(SEXP formatSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< Rcpp::String >::type format(formatSEXP);
+    __result = Rcpp::wrap(magick_coder_info(format));
+    return __result;
+END_RCPP
+}
+// magick_frame_read
+XPtrFrame magick_frame_read(Rcpp::RawVector x);
+RcppExport SEXP magick_magick_frame_read(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type x(xSEXP);
+    __result = Rcpp::wrap(magick_frame_read(x));
+    return __result;
+END_RCPP
+}
+// magick_frame_write
+Rcpp::RawVector magick_frame_write(XPtrFrame frame, Rcpp::String format);
+RcppExport SEXP magick_magick_frame_write(SEXP frameSEXP, SEXP formatSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< XPtrFrame >::type frame(frameSEXP);
+    Rcpp::traits::input_parameter< Rcpp::String >::type format(formatSEXP);
+    __result = Rcpp::wrap(magick_frame_write(frame, format));
+    return __result;
+END_RCPP
+}
+// magick_frame_info
+Rcpp::List magick_frame_info(XPtrFrame frame);
+RcppExport SEXP magick_magick_frame_info(SEXP frameSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< XPtrFrame >::type frame(frameSEXP);
+    __result = Rcpp::wrap(magick_frame_info(frame));
+    return __result;
+END_RCPP
+}
 // magick_image_noise
 XPtrImage magick_image_noise(XPtrImage input, int noisetype);
 RcppExport SEXP magick_magick_image_noise(SEXP inputSEXP, SEXP noisetypeSEXP) {
@@ -178,18 +212,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const size_t >::type opacity(opacitySEXP);
     Rcpp::traits::input_parameter< Rcpp::String >::type color(colorSEXP);
     __result = Rcpp::wrap(magick_image_colorize(input, opacity, color));
-    return __result;
-END_RCPP
-}
-// magick_image_delay
-XPtrImage magick_image_delay(XPtrImage input, int delay);
-RcppExport SEXP magick_magick_image_delay(SEXP inputSEXP, SEXP delaySEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< int >::type delay(delaySEXP);
-    __result = Rcpp::wrap(magick_image_delay(input, delay));
     return __result;
 END_RCPP
 }
@@ -453,6 +475,20 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::String >::type color(colorSEXP);
     Rcpp::traits::input_parameter< Rcpp::String >::type geometry(geometrySEXP);
     __result = Rcpp::wrap(magick_image_border(input, color, geometry));
+    return __result;
+END_RCPP
+}
+// magick_image_annotates
+XPtrImage magick_image_annotates(XPtrImage image, const std::string text, Rcpp::String bbox, int gravity);
+RcppExport SEXP magick_magick_image_annotates(SEXP imageSEXP, SEXP textSEXP, SEXP bboxSEXP, SEXP gravitySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< XPtrImage >::type image(imageSEXP);
+    Rcpp::traits::input_parameter< const std::string >::type text(textSEXP);
+    Rcpp::traits::input_parameter< Rcpp::String >::type bbox(bboxSEXP);
+    Rcpp::traits::input_parameter< int >::type gravity(gravitySEXP);
+    __result = Rcpp::wrap(magick_image_annotates(image, text, bbox, gravity));
     return __result;
 END_RCPP
 }
