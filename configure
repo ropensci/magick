@@ -59,7 +59,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 
     # Rebuild imagemagick --without-modules
     export PKG_CONFIG="$BREWDIR/bin/pkg-config"
-    HOMEBREW_CACHE="/tmp" $BREW install tools/imagemagick.rb 2>&1 | perl -pe 's/Warning/Note/gi'
+    HOMEBREW_CACHE="/tmp" $BREW install imagemagick --without-modules 2>&1 | perl -pe 's/Warning/Note/gi'
 
     # Get build flags from pkg-config
     PKG_CFLAGS=$($PKG_CONFIG --cflags $PKG_CONFIG_NAME)
