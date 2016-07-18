@@ -1,3 +1,5 @@
+#define R_NO_REMAP
+#define NO_C_HEADERS
 #include <Rcpp.h>
 #include <Magick++.h>
 #include <list>

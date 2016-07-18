@@ -37,22 +37,22 @@ Rcpp::RawVector magick_image_write( XPtrImage image){
 
 // [[Rcpp::export]]
 XPtrImage magick_image_display( XPtrImage image){
-#ifndef _WIN32
+#ifdef X11_DELEGATE
   XPtrImage output = copy(image);
   Magick::displayImages(output->begin(), output->end());
 #else
-  Rcpp::warning("X11 not supported on Windows");
+  Rcpp::warning("ImageMagick was build without X11 support");
 #endif
   return image;
 }
 
 // [[Rcpp::export]]
 XPtrImage magick_image_animate( XPtrImage image){
-#ifndef _WIN32
+#ifdef X11_DELEGATE
   XPtrImage output = copy(image);
   Magick::animateImages(output->begin(), output->end());
 #else
-  Rcpp::warning("X11 not supported on Windows");
+  Rcpp::warning("ImageMagick was build without X11 support");
 #endif
   return image;
 }
