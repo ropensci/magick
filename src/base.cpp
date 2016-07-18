@@ -4,7 +4,6 @@
  */
 
 #include "magick_types.h"
-#include <list>
 
 //External R pointer finalizer
 void finalize_image( Image *image ){

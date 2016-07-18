@@ -4,7 +4,6 @@
  */
 
 #include "magick_types.h"
-#include <list>
 
 // [[Rcpp::export]]
 XPtrImage magick_image_noise( XPtrImage input, int noisetype){
