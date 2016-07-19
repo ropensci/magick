@@ -11,6 +11,7 @@ void finalize_image(Image *image);
 
 typedef Rcpp::XPtr<Frame, Rcpp::PreserveStorage, finalize_frame> XPtrFrame;
 typedef Rcpp::XPtr<Image, Rcpp::PreserveStorage, finalize_image> XPtrImage;
+typedef Image::iterator Iter;
 
 XPtrImage create ();
 XPtrImage create (int len);

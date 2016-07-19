@@ -231,9 +231,8 @@ XPtrImage magick_image_border( XPtrImage input, Rcpp::String color, Rcpp::String
 // [[Rcpp::export]]
 XPtrImage magick_image_annotate( XPtrImage input, const std::string text, Rcpp::String bbox, int gravity){
   XPtrImage output = copy(input);
-  for(int i = 0; i < output->size(); i++){
-    output->at(i).annotate(text, Magick::Geometry(bbox.get_cstring()), (Magick::GravityType) gravity);
-  }
+  for (Iter it = input->begin(); it != input->end(); ++it)
+    it->annotate(text, Magick::Geometry(bbox.get_cstring()), (Magick::GravityType) gravity);
   return output;
 }
 

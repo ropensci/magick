@@ -9,9 +9,8 @@
 Rcpp::IntegerVector magick_attr_delay( XPtrImage input, int delay){
   for_each ( input->begin(), input->end(), Magick::animationDelayImage(delay));
   Rcpp::IntegerVector out(input->size());
-  for(int i = 0; i < input->size(); i++){
-    out[i] = input->at(i).animationDelay();
-  }
+  for (Iter it = input->begin(); it != input->end(); ++it)
+    out.push_back(it->animationDelay());
   return out;
 }
 
