@@ -224,7 +224,8 @@ XPtrImage magick_image_border( XPtrImage input, Rcpp::String color, Rcpp::String
 }
 
 
-/* This doesn't seem to work. Can't figure out what's wrong. */
+/* This doesn't seem to work. Can't figure out what's wrong.
+ * https://github.com/ImageMagick/ImageMagick/commit/903e501876d405ffd6f9f38f5e72db9acc3d15e8
 
 // [[Rcpp::export]]
 XPtrImage magick_image_annotates( XPtrImage image, const std::string text, Rcpp::String bbox, int gravity){
@@ -233,3 +234,4 @@ for_each ( image->begin(), image->end(), fun);
 return image;
 }
 
+ */
