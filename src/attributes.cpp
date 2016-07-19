@@ -6,10 +6,13 @@
 #include "magick_types.h"
 
 // [[Rcpp::export]]
-XPtrImage magick_image_delay( XPtrImage input, int delay){
-  XPtrImage output = copy(input);
-  for_each ( output->begin(), output->end(), Magick::animationDelayImage(delay));
-  return output;
+Rcpp::IntegerVector magick_attr_delay( XPtrImage input, int delay){
+  for_each ( input->begin(), input->end(), Magick::animationDelayImage(delay));
+  Rcpp::IntegerVector out(input->size());
+  for(int i = 0; i < input->size(); i++){
+    out[i] = input->at(i).animationDelay();
+  }
+  return out;
 }
 
 // [[Rcpp::export]]

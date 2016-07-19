@@ -224,14 +224,16 @@ XPtrImage magick_image_border( XPtrImage input, Rcpp::String color, Rcpp::String
 }
 
 
-/* This doesn't seem to work. Can't figure out what's wrong.
+/* STL is broken for annotateImage.
  * https://github.com/ImageMagick/ImageMagick/commit/903e501876d405ffd6f9f38f5e72db9acc3d15e8
+ */
 
 // [[Rcpp::export]]
-XPtrImage magick_image_annotates( XPtrImage image, const std::string text, Rcpp::String bbox, int gravity){
-Magick::annotateImage fun(text, Magick::Geometry(bbox.get_cstring()));
-for_each ( image->begin(), image->end(), fun);
-return image;
+XPtrImage magick_image_annotate( XPtrImage input, const std::string text, Rcpp::String bbox, int gravity){
+  XPtrImage output = copy(input);
+  for(int i = 0; i < output->size(); i++){
+    output->at(i).annotate(text, Magick::Geometry(bbox.get_cstring()), (Magick::GravityType) gravity);
+  }
+  return output;
 }
 
- */

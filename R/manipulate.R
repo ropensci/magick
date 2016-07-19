@@ -15,15 +15,6 @@ image_format <- function(image, format){
 
 #' @export
 #' @rdname image-manipulate
-#' @param delay time in 1/100ths of a second (0 to 65535) which must expire before displaying
-#' the next image in an animated sequence.
-image_delay <- function(image, delay){
-  stopifnot(inherits(image, "magick-image"))
-  magick_image_delay(image, delay)
-}
-
-#' @export
-#' @rdname image-manipulate
 #' @examples
 #' logo <- image_read(system.file("Rlogo.png", package = "magick"))
 #' logo <- image_scale(logo, "400")
@@ -283,4 +274,15 @@ image_composite <- function(image, composite_image = image[1], operator = 1, off
 image_contrast <- function(image, sharpen = 1){
   stopifnot(inherits(image, "magick-image"))
   magick_image_contrast(image, sharpen)
+}
+
+#' @export
+#' @rdname image-manipulate
+#' @param text annotation text
+#' @param location string with location of the text
+#' @param gravity specifies horizontal/vertical float direction
+#' @examples image_annotate(logo, "This is a test")
+image_annotate <- function(image, text, location = "0x0", gravity = 1){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_annotate(image, text, location, gravity)
 }

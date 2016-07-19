@@ -2,6 +2,7 @@
 % Please edit documentation in R/manipulate.R
 \name{image-manipulate}
 \alias{image-manipulate}
+\alias{image_annotate}
 \alias{image_background}
 \alias{image_blur}
 \alias{image_border}
@@ -11,7 +12,6 @@
 \alias{image_composite}
 \alias{image_contrast}
 \alias{image_crop}
-\alias{image_delay}
 \alias{image_edge}
 \alias{image_emboss}
 \alias{image_enhance}
@@ -33,8 +33,6 @@
 \title{Manipulating Images}
 \usage{
 image_format(image, format)
-
-image_delay(image, delay)
 
 image_trim(image)
 
@@ -88,14 +86,13 @@ image_composite(image, composite_image = image[1], operator = 1,
   offset = "0x0")
 
 image_contrast(image, sharpen = 1)
+
+image_annotate(image, text, location = "0x0", gravity = 1)
 }
 \arguments{
 \item{image}{object returned by \code{image_read}}
 
 \item{format}{output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.}
-
-\item{delay}{time in 1/100ths of a second (0 to 65535) which must expire before displaying
-the next image in an animated sequence.}
 
 \item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string}}
 
@@ -129,6 +126,12 @@ I think max distance (from #000000 to #FFFFFF) is 256^3.}
 \item{offset}{geometry string with offset}
 
 \item{sharpen}{enhance intensity differences in image}
+
+\item{text}{annotation text}
+
+\item{location}{string with location of the text}
+
+\item{gravity}{specifies horizontal/vertical float direction}
 }
 \description{
 Vectorized functions for manipulating images.
@@ -171,6 +174,7 @@ for(i in 1:10){
 }
 animation <- do.call(c, out)
 image_format(animation, "gif")
+image_annotate(logo, "This is a test")
 }
 \seealso{
 Other image: \code{\link{image-attributes}},

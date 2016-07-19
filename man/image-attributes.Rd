@@ -2,13 +2,19 @@
 % Please edit documentation in R/attributes.R
 \name{image-attributes}
 \alias{image-attributes}
+\alias{image_delay}
 \alias{image_info}
 \title{Image Attributes}
 \usage{
 image_info(image)
+
+image_delay(image, delay)
 }
 \arguments{
 \item{image}{object returned by \code{image_read}}
+
+\item{delay}{time in 1/100ths of a second (0 to 65535) which must expire before displaying
+the next image in an animated sequence.}
 }
 \description{
 Functions to get or set Image attributes.

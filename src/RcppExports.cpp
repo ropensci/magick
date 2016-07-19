@@ -6,15 +6,15 @@
 
 using namespace Rcpp;
 
-// magick_image_delay
-XPtrImage magick_image_delay(XPtrImage input, int delay);
-RcppExport SEXP magick_magick_image_delay(SEXP inputSEXP, SEXP delaySEXP) {
+// magick_attr_delay
+Rcpp::IntegerVector magick_attr_delay(XPtrImage input, int delay);
+RcppExport SEXP magick_magick_attr_delay(SEXP inputSEXP, SEXP delaySEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< int >::type delay(delaySEXP);
-    __result = Rcpp::wrap(magick_image_delay(input, delay));
+    __result = Rcpp::wrap(magick_attr_delay(input, delay));
     return __result;
 END_RCPP
 }
@@ -475,6 +475,20 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::String >::type color(colorSEXP);
     Rcpp::traits::input_parameter< Rcpp::String >::type geometry(geometrySEXP);
     __result = Rcpp::wrap(magick_image_border(input, color, geometry));
+    return __result;
+END_RCPP
+}
+// magick_image_annotate
+XPtrImage magick_image_annotate(XPtrImage input, const std::string text, Rcpp::String bbox, int gravity);
+RcppExport SEXP magick_magick_image_annotate(SEXP inputSEXP, SEXP textSEXP, SEXP bboxSEXP, SEXP gravitySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< const std::string >::type text(textSEXP);
+    Rcpp::traits::input_parameter< Rcpp::String >::type bbox(bboxSEXP);
+    Rcpp::traits::input_parameter< int >::type gravity(gravitySEXP);
+    __result = Rcpp::wrap(magick_image_annotate(input, text, bbox, gravity));
     return __result;
 END_RCPP
 }
