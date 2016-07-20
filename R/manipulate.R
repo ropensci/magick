@@ -282,7 +282,7 @@ image_contrast <- function(image, sharpen = 1){
 #' @param location string with location of the text
 #' @param gravity specifies horizontal/vertical float direction
 #' @examples image_annotate(logo, "This is a test")
-image_annotate <- function(image, text, location = "0x0", gravity = 1){
+image_annotate <- function(image, text, location = "0x0", gravity = "northwest"){
   stopifnot(inherits(image, "magick-image"))
   magick_image_annotate(image, text, location, gravity)
 }

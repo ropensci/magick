@@ -87,7 +87,7 @@ image_composite(image, composite_image = image[1], operator = 1,
 
 image_contrast(image, sharpen = 1)
 
-image_annotate(image, text, location = "0x0", gravity = 1)
+image_annotate(image, text, location = "0x0", gravity = "northwest")
 }
 \arguments{
 \item{image}{object returned by \code{image_read}}

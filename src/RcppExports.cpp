@@ -479,7 +479,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_annotate
-XPtrImage magick_image_annotate(XPtrImage input, const std::string text, Rcpp::String bbox, int gravity);
+XPtrImage magick_image_annotate(XPtrImage input, const std::string text, Rcpp::String bbox, Rcpp::String gravity);
 RcppExport SEXP magick_magick_image_annotate(SEXP inputSEXP, SEXP textSEXP, SEXP bboxSEXP, SEXP gravitySEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
@@ -487,7 +487,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< const std::string >::type text(textSEXP);
     Rcpp::traits::input_parameter< Rcpp::String >::type bbox(bboxSEXP);
-    Rcpp::traits::input_parameter< int >::type gravity(gravitySEXP);
+    Rcpp::traits::input_parameter< Rcpp::String >::type gravity(gravitySEXP);
     __result = Rcpp::wrap(magick_image_annotate(input, text, bbox, gravity));
     return __result;
 END_RCPP
