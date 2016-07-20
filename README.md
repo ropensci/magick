@@ -25,24 +25,56 @@ About the underlying library:
 
 ## Hello World
 
-Run the examples in RStudio to see a live previews of the images!
+**Run examples in RStudio** to see a live previews of the images!
 
 ```r
-# Download image from the web
 frink <- image_read("https://jeroenooms.github.io/images/frink.png")
-print(frink)
+image_trim(frink)
+image_scale(frink, "200x200")
+image_flip(frink)
+image_rotate(frink, 45)
+image_negate(frink)
+image_border(frink, "red", "10x10")
+```
 
-frink2 <- image_trim(frink)
-image_write(frink2, "output.png")
+Effects
 
+```r
+image_oilpaint(frink)
+image_implode(frink)
+image_charcoal(frink)
+image_blur(frink)
+image_edge(frink)
+```
 
+Create GIF animation:
 
-# Convert to formats
-image <- magick::image_read(png_file)
-magick::image_write(image, "output.jpg", format = "jpg")
-magick::image_write(image, "output.gif", format = "gif")
-magick::image_write(image, "output.pdf", format = "pdf")
+```r
+# Download images
+oldlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-2.png")
+newlogo <- image_read("https://www.r-project.org/logo/Rlogo.png")
+logos <- c(oldlogo, newlogo)
+logos <- image_scale(logos, "400x400")
 
+# Create GIF
+(animation1 <- image_format(logos, "gif"))
+image_write(animation1, "anim1.gif")
+
+# Morph effect
+(animation2 <- image_format(image_morph(logos, frames = 10), "gif"))
+image_write(animation2, "anim2.gif")
+
+```
+
+Edit GIF anination
+
+```r
+banana <- image_read(system.file("banana.gif", package = "magick"))
+length(banana)
+banana[1]
+banana[1:3]
+rev(banana)
+image_scale(c(banana, newlogo))
 ```
 
 ## Installation
