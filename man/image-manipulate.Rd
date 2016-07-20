@@ -87,7 +87,7 @@ image_composite(image, composite_image = image[1], operator = 1,
 
 image_contrast(image, sharpen = 1)
 
-image_annotate(image, text, location = "0x0", gravity = "northwest")
+image_annotate(image, text, location = "northwest")
 }
 \arguments{
 \item{image}{object returned by \code{image_read}}
@@ -129,9 +129,7 @@ I think max distance (from #000000 to #FFFFFF) is 256^3.}
 
 \item{text}{annotation text}
 
-\item{location}{string with location of the text}
-
-\item{gravity}{specifies horizontal/vertical float direction}
+\item{location}{string with gravity or geometric location (\code{"10x10"})}
 }
 \description{
 Vectorized functions for manipulating images.
