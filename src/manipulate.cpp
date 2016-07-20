@@ -232,7 +232,7 @@ XPtrImage magick_image_border( XPtrImage input, Rcpp::String color, Rcpp::String
 XPtrImage magick_image_annotate( XPtrImage input, const std::string text, Rcpp::String bbox,
                                  Rcpp::String gravity){
   ssize_t opt = MagickCore::ParseCommandOption(
-    Magick::MagickGravityOptions, Magick::MagickFalse, gravity.get_cstring());
+    MagickCore::MagickGravityOptions, Magick::MagickFalse, gravity.get_cstring());
   if(opt < 0)
     throw std::runtime_error(std::string("Invalid GravityType parameter: ") + gravity.get_cstring());
   XPtrImage output = copy(input);
