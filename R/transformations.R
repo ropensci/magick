@@ -1,11 +1,23 @@
-#' Manipulating Images
+#' Image Transformations
 #'
-#' Vectorized functions for manipulating images.
+#' Vectorized functions for transforming images. These functions apply
+#' the same transformation to each frame in the image.
+#' The \href{https://www.imagemagick.org/Magick++/STL.html}{Magick++ documentation}
+#' explains meaning of each function and parameter. See \link{editing} for
+#' functions to read or combine image sequences.
+#'
+#' Each function returns a copy of the manipulated image; the input image will
+#' be unaffected. Therefore operations can be piped with magrittr if you're
+#' into that kind of stuff.
+#'
+#' Besides these functions also R-base functions such as \code{c()}, \code{[},
+#' \code{as.list()}, \code{rev}, \code{length}, and \code{print} can be used
+#' to work with image frames.
 #'
 #' @export
-#' @rdname image-manipulate
-#' @name image-manipulate
-#' @inheritParams image-read
+#' @rdname transformations
+#' @name transformations
+#' @inheritParams editing
 #' @family image
 #' @param format output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.
 image_format <- function(image, format){
@@ -14,7 +26,7 @@ image_format <- function(image, format){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @examples
 #' logo <- image_read(system.file("Rlogo.png", package = "magick"))
 #' logo <- image_scale(logo, "400")
@@ -25,14 +37,14 @@ image_trim <- function(image){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 image_background <- function(image, color){
   stopifnot(inherits(image, "magick-image"))
   magick_image_background(image, color)
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @examples image_crop(logo, "400x400+200+200")
 image_crop <- function(image, geometry = ""){
   stopifnot(inherits(image, "magick-image"))
@@ -40,7 +52,7 @@ image_crop <- function(image, geometry = ""){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @examples image_scale(logo, "200x200")
 image_scale <- function(image, geometry = ""){
   stopifnot(inherits(image, "magick-image"))
@@ -48,7 +60,7 @@ image_scale <- function(image, geometry = ""){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @examples image_sample(logo, "200x200")
 image_sample <- function(image, geometry = ""){
   stopifnot(inherits(image, "magick-image"))
@@ -56,7 +68,7 @@ image_sample <- function(image, geometry = ""){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @param color a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string}
 #' @param geometry a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
 #' for example \code{"10x10+5-5"}.
@@ -67,7 +79,7 @@ image_border <- function(image, color = "", geometry = ""){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @param noisetype integer betwee 0 and 5 with
 #' \href{https://www.imagemagick.org/Magick++/Enumerations.html#NoiseType}{noisetype}.
 #' @examples
@@ -78,7 +90,7 @@ image_noise <- function(image, noisetype = "gaussian"){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @param radius the radius of the Gaussian, in pixels, not counting the center pixel.
 #' @param sigma the standard deviation of the Laplacian, in pixels.
 #' @examples
@@ -89,7 +101,7 @@ image_blur <- function(image, radius = 1, sigma = 0.5){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @examples
 #' image_charcoal(logo)
 image_charcoal <- function(image, radius = 1, sigma = 0.5){
@@ -98,7 +110,7 @@ image_charcoal <- function(image, radius = 1, sigma = 0.5){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @examples
 #' image_edge(logo)
 image_edge <- function(image, radius = 1){
@@ -107,7 +119,7 @@ image_edge <- function(image, radius = 1){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @examples
 #' image_oilpaint(logo)
 image_oilpaint <- function(image, radius = 1){
@@ -116,7 +128,7 @@ image_oilpaint <- function(image, radius = 1){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @examples
 #' image_emboss(logo)
 image_emboss <- function(image, radius = 1, sigma = 0.5){
@@ -125,7 +137,7 @@ image_emboss <- function(image, radius = 1, sigma = 0.5){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @examples
 #' image_enhance(logo)
 image_enhance <- function(image){
@@ -134,7 +146,7 @@ image_enhance <- function(image){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @examples
 #' image_equalize(logo)
 image_equalize <- function(image){
@@ -143,7 +155,7 @@ image_equalize <- function(image){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @examples
 #' image_flip(logo)
 image_flip <- function(image){
@@ -152,7 +164,7 @@ image_flip <- function(image){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @examples
 #' image_flop(logo)
 image_flop <- function(image){
@@ -162,7 +174,7 @@ image_flop <- function(image){
 
 # lol this is so ugly it should be illegal
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @examples
 #' image_frame(logo)
 image_frame <- function(image, geometry = "25x25+6+6"){
@@ -171,7 +183,7 @@ image_frame <- function(image, geometry = "25x25+6+6"){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @param factor image implode factor (special effect)
 #' @examples
 #' image_implode(logo)
@@ -182,7 +194,7 @@ image_implode <- function(image, factor = 0.5){
 
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @examples
 #' image_negate(logo)
 image_negate <- function(image){
@@ -191,7 +203,7 @@ image_negate <- function(image){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @examples
 #' image_normalize(logo)
 image_normalize <- function(image){
@@ -200,7 +212,7 @@ image_normalize <- function(image){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @param degrees how many degrees
 #' @examples
 #' image_rotate(logo, 45)
@@ -210,7 +222,7 @@ image_rotate <- function(image, degrees){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @param point string indicating the flood-fill starting point
 #' @param fuzz Colors within this distance are considered equal.
 #' Use this option to match colors that are close to the target color in RGB space.
@@ -224,7 +236,7 @@ image_fill <- function(image, color, point = "1x1", fuzz = 0){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @examples
 #' # chops off 100 pixels from left and 20 from top
 #' image_chop(logo, "100x20")
@@ -235,7 +247,7 @@ image_chop <- function(image, geometry){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @param opacity percentage of transparency
 #' @examples
 #' image_colorize(logo, 50, "red")
@@ -245,7 +257,7 @@ image_colorize <- function(image, opacity, color){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @param offset geometry string with offset
 #' @param operator string with a
 #' \href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}.
@@ -261,7 +273,7 @@ image_composite <- function(image, composite_image = image[1], operator = "atop"
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @param sharpen enhance intensity differences in image
 #' @examples
 #' test <- image_scale(oldlogo, "400x400")
@@ -278,7 +290,7 @@ image_contrast <- function(image, sharpen = 1){
 }
 
 #' @export
-#' @rdname image-manipulate
+#' @rdname transformations
 #' @param text annotation text
 #' @param gravity string with
 #' \href{https://www.imagemagick.org/Magick++/Enumerations.html#GravityType}{gravity type}

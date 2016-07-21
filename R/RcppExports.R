@@ -41,16 +41,60 @@ magick_coder_info <- function(format) {
     .Call('magick_magick_coder_info', PACKAGE = 'magick', format)
 }
 
-magick_frame_read <- function(x) {
-    .Call('magick_magick_frame_read', PACKAGE = 'magick', x)
+magick_image_read <- function(x) {
+    .Call('magick_magick_image_read', PACKAGE = 'magick', x)
 }
 
-magick_frame_write <- function(frame, format) {
-    .Call('magick_magick_frame_write', PACKAGE = 'magick', frame, format)
+magick_image_read_list <- function(list) {
+    .Call('magick_magick_image_read_list', PACKAGE = 'magick', list)
 }
 
-magick_frame_info <- function(frame) {
-    .Call('magick_magick_frame_info', PACKAGE = 'magick', frame)
+magick_image_write <- function(image) {
+    .Call('magick_magick_image_write', PACKAGE = 'magick', image)
+}
+
+magick_image_display <- function(image) {
+    .Call('magick_magick_image_display', PACKAGE = 'magick', image)
+}
+
+magick_image_animate <- function(image) {
+    .Call('magick_magick_image_animate', PACKAGE = 'magick', image)
+}
+
+magick_image_append <- function(image, stack) {
+    .Call('magick_magick_image_append', PACKAGE = 'magick', image, stack)
+}
+
+magick_image_average <- function(image) {
+    .Call('magick_magick_image_average', PACKAGE = 'magick', image)
+}
+
+magick_image_coalesce <- function(image) {
+    .Call('magick_magick_image_coalesce', PACKAGE = 'magick', image)
+}
+
+magick_image_flatten <- function(image) {
+    .Call('magick_magick_image_flatten', PACKAGE = 'magick', image)
+}
+
+magick_image_fft <- function(image) {
+    .Call('magick_magick_image_fft', PACKAGE = 'magick', image)
+}
+
+magick_image_map <- function(input, map_image, dither) {
+    .Call('magick_magick_image_map', PACKAGE = 'magick', input, map_image, dither)
+}
+
+magick_image_montage <- function(image) {
+    .Call('magick_magick_image_montage', PACKAGE = 'magick', image)
+}
+
+magick_image_morph <- function(image, frames) {
+    .Call('magick_magick_image_morph', PACKAGE = 'magick', image, frames)
+}
+
+magick_image_mosaic <- function(image) {
+    .Call('magick_magick_image_mosaic', PACKAGE = 'magick', image)
 }
 
 magick_image_noise <- function(input, noisetype) {
@@ -163,61 +207,5 @@ magick_image_border <- function(input, color, geometry) {
 
 magick_image_annotate <- function(input, text, gravity, location, degrees) {
     .Call('magick_magick_image_annotate', PACKAGE = 'magick', input, text, gravity, location, degrees)
-}
-
-magick_image_read <- function(x) {
-    .Call('magick_magick_image_read', PACKAGE = 'magick', x)
-}
-
-magick_image_read_list <- function(list) {
-    .Call('magick_magick_image_read_list', PACKAGE = 'magick', list)
-}
-
-magick_image_write <- function(image) {
-    .Call('magick_magick_image_write', PACKAGE = 'magick', image)
-}
-
-magick_image_display <- function(image) {
-    .Call('magick_magick_image_display', PACKAGE = 'magick', image)
-}
-
-magick_image_animate <- function(image) {
-    .Call('magick_magick_image_animate', PACKAGE = 'magick', image)
-}
-
-magick_image_append <- function(image, stack) {
-    .Call('magick_magick_image_append', PACKAGE = 'magick', image, stack)
-}
-
-magick_image_average <- function(image) {
-    .Call('magick_magick_image_average', PACKAGE = 'magick', image)
-}
-
-magick_image_coalesce <- function(image) {
-    .Call('magick_magick_image_coalesce', PACKAGE = 'magick', image)
-}
-
-magick_image_flatten <- function(image) {
-    .Call('magick_magick_image_flatten', PACKAGE = 'magick', image)
-}
-
-magick_image_fft <- function(image) {
-    .Call('magick_magick_image_fft', PACKAGE = 'magick', image)
-}
-
-magick_image_map <- function(input, map_image, dither) {
-    .Call('magick_magick_image_map', PACKAGE = 'magick', input, map_image, dither)
-}
-
-magick_image_montage <- function(image) {
-    .Call('magick_magick_image_montage', PACKAGE = 'magick', image)
-}
-
-magick_image_morph <- function(image, frames) {
-    .Call('magick_magick_image_morph', PACKAGE = 'magick', image, frames)
-}
-
-magick_image_mosaic <- function(image) {
-    .Call('magick_magick_image_mosaic', PACKAGE = 'magick', image)
 }
 

@@ -1,13 +1,19 @@
-#' Image Manipulation
+#' Image Editing
 #'
-#' Read, write and edit images. All image functions are vectorized, meaning
-#' they can operate either on a single frame or a series of frames (e.g. to
-#' create a collage, video, or animation).
+#' Read, write and join or combine images. All image functions are vectorized,
+#' meaning they operate either on a single frame or a series of frames (e.g. a
+#' collage, video, or animation).
+#' The \href{https://www.imagemagick.org/Magick++/STL.html}{Magick++ documentation}
+#' explains meaning of each function and parameter.
+#' See \link{transformations} for vectorized
+#' image manipulation functions such as cutting and applying effects.
 #'
+#' @importFrom Rcpp sourceCpp
+#' @useDynLib magick
 #' @export
 #' @family image
-#' @rdname image-read
-#' @name image-read
+#' @rdname edit
+#' @name editing
 #' @param path file path, URL, or raw vector with image data
 #' @param image object returned by \code{image_read}
 #' @references Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}
@@ -27,8 +33,8 @@ image_read <- function(path){
 }
 
 #' @export
-#' @inheritParams image-manipulate
-#' @rdname image-read
+#' @inheritParams transformations
+#' @rdname edit
 image_write <- function(image, path = NULL, format = NULL){
   stopifnot(inherits(image, "magick-image"))
   if(!length(image))
@@ -46,7 +52,7 @@ image_write <- function(image, path = NULL, format = NULL){
 
 #' @export
 #' @param animate support animations in the X11 display
-#' @rdname image-read
+#' @rdname edit
 image_display <- function(image, animate = TRUE){
   if(isTRUE(animate)){
     magick_image_animate(image)
@@ -57,7 +63,7 @@ image_display <- function(image, animate = TRUE){
 
 #' @export
 #' @param browser argument passed to \link[utils:browseURL]{browseURL}
-#' @rdname image-read
+#' @rdname edit
 image_browse <- function(image, browser = getOption("browser")){
   tmp <- tempfile()
   image_write(image, path = tmp)
@@ -65,7 +71,7 @@ image_browse <- function(image, browser = getOption("browser")){
 }
 
 #' @export
-#' @rdname image-read
+#' @rdname edit
 #' @param stack place images top-to-bottom (TRUE) or left-to-right (FALSE)
 #' @examples
 #' # Create thumbnails from GIF
@@ -84,35 +90,35 @@ image_append <- function(image, stack = FALSE){
 }
 
 #' @export
-#' @rdname image-read
+#' @rdname edit
 image_average <- function(image){
   stopifnot(inherits(image, "magick-image"))
   magick_image_average(image)
 }
 
 #' @export
-#' @rdname image-read
+#' @rdname edit
 image_coalesce <- function(image){
   stopifnot(inherits(image, "magick-image"))
   magick_image_coalesce(image)
 }
 
 #' @export
-#' @rdname image-read
+#' @rdname edit
 image_flatten <- function(image){
   stopifnot(inherits(image, "magick-image"))
   magick_image_flatten(image)
 }
 
 #' @export
-#' @rdname image-read
+#' @rdname edit
 image_fft <- function(image){
   stopifnot(inherits(image, "magick-image"))
   magick_image_fft(image)
 }
 
 #' @export
-#' @rdname image-read
+#' @rdname edit
 #' @param map_image reference image to map colors from
 #' @param dither set TRUE to enable dithering
 image_map <- function(image, map_image, dither = FALSE){
@@ -122,14 +128,14 @@ image_map <- function(image, map_image, dither = FALSE){
 }
 
 #' @export
-#' @rdname image-read
+#' @rdname edit
 image_montage <- function(image){
   stopifnot(inherits(image, "magick-image"))
   magick_image_montage(image)
 }
 
 #' @export
-#' @rdname image-read
+#' @rdname edit
 #' @examples
 #' # Combine with another image
 #' logo <- image_read(system.file("Rlogo.png", package = "magick"))
@@ -148,14 +154,14 @@ image_morph <- function(image, frames){
 }
 
 #' @export
-#' @rdname image-read
+#' @rdname edit
 image_mosaic <- function(image){
   stopifnot(inherits(image, "magick-image"))
   magick_image_mosaic(image)
 }
 
 #' @export
-#' @rdname image-read
+#' @rdname edit
 #' @param ... images or lists of images to be combined into a image
 #' @examples
 #' # Break down and combine frames
