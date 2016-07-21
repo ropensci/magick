@@ -40,7 +40,7 @@ Magick::DisposeType Dispose(const char * str){
   ssize_t val = MagickCore::ParseCommandOption(
     MagickCore::MagickDisposeOptions, Magick::MagickFalse, str);
   if(val < 0)
-    throw std::runtime_error(std::string("Invalid CompositeOperator value: ") + str);
+    throw std::runtime_error(std::string("Invalid DisposeType value: ") + str);
   return (Magick::DisposeType) val;
 }
 

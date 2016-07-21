@@ -190,6 +190,5 @@ image_animate <- function(image, fps = 10, loop = 0, dispose = c("background", "
     stop("argument 'fps' must be a factor of 100")
   delay <- as.integer(100/fps)
   dispose <- match.arg(dispose)
-  method <- switch(dispose, "none" = 1, "background" = 3, "previous" = 4)
-  magick_image_animate(image, delay, as.integer(loop), method)
+  magick_image_animate(image, delay, as.integer(loop), dispose)
 }
