@@ -72,7 +72,7 @@ image_border <- function(image, color = "", geometry = ""){
 #' \href{https://www.imagemagick.org/Magick++/Enumerations.html#NoiseType}{noisetype}.
 #' @examples
 #' image_noise(logo)
-image_noise <- function(image, noisetype = 2){
+image_noise <- function(image, noisetype = "gaussian"){
   stopifnot(inherits(image, "magick-image"))
   magick_image_noise(image, noisetype)
 }
@@ -247,12 +247,14 @@ image_colorize <- function(image, opacity, color){
 #' @export
 #' @rdname image-manipulate
 #' @param offset geometry string with offset
-#' @param operator integer specifying the
+#' @param operator string with a
 #' \href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}.
 #' @param composite_image composition image
 #' @examples
-#' image_composite(logo, operator = 2)
-image_composite <- function(image, composite_image = image[1], operator = 1, offset = "0x0"){
+#' oldlogo <- image_read(system.file("Rlogo-old.png", package = "magick"))
+#' image_composite(logo, oldlogo)
+#' image_composite(logo, oldlogo, operator = "copyred")
+image_composite <- function(image, composite_image = image[1], operator = "atop", offset = "0x0"){
   stopifnot(inherits(image, "magick-image"))
   stopifnot(inherits(composite_image, "magick-image"))
   magick_image_composite(image, composite_image, offset, operator)
@@ -262,8 +264,7 @@ image_composite <- function(image, composite_image = image[1], operator = 1, off
 #' @rdname image-manipulate
 #' @param sharpen enhance intensity differences in image
 #' @examples
-#' test <- image_read(system.file("Rlogo-old.png", package = "magick"))
-#' test <- image_scale(test, "400x400")
+#' test <- image_scale(oldlogo, "400x400")
 #' out <- list()
 #' for(i in 1:10){
 #'   out[[i]] <- test
@@ -279,9 +280,11 @@ image_contrast <- function(image, sharpen = 1){
 #' @export
 #' @rdname image-manipulate
 #' @param text annotation text
-#' @param location string with gravity or geometric location (\code{"10x10"})
+#' @param gravity string with
+#' \href{https://www.imagemagick.org/Magick++/Enumerations.html#GravityType}{gravity type}
+#' @param location geometry string with location relative to \code{gravity}
 #' @examples image_annotate(logo, "This is a test")
-image_annotate <- function(image, text, location = "northwest"){
+image_annotate <- function(image, text, gravity = "northwest", location = "+0+0", degrees = 0){
   stopifnot(inherits(image, "magick-image"))
-  magick_image_annotate(image, text, location)
+  magick_image_annotate(image, text, gravity, location, degrees)
 }

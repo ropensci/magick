@@ -46,7 +46,7 @@ image_sample(image, geometry = "")
 
 image_border(image, color = "", geometry = "")
 
-image_noise(image, noisetype = 2)
+image_noise(image, noisetype = "gaussian")
 
 image_blur(image, radius = 1, sigma = 0.5)
 
@@ -82,12 +82,13 @@ image_chop(image, geometry)
 
 image_colorize(image, opacity, color)
 
-image_composite(image, composite_image = image[1], operator = 1,
+image_composite(image, composite_image = image[1], operator = "atop",
   offset = "0x0")
 
 image_contrast(image, sharpen = 1)
 
-image_annotate(image, text, location = "northwest")
+image_annotate(image, text, gravity = "northwest", location = "+0+0",
+  degrees = 0)
 }
 \arguments{
 \item{image}{object returned by \code{image_read}}
@@ -120,7 +121,7 @@ I think max distance (from #000000 to #FFFFFF) is 256^3.}
 
 \item{composite_image}{composition image}
 
-\item{operator}{integer specifying the
+\item{operator}{string with a
 \href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}.}
 
 \item{offset}{geometry string with offset}
@@ -129,7 +130,10 @@ I think max distance (from #000000 to #FFFFFF) is 256^3.}
 
 \item{text}{annotation text}
 
-\item{location}{string with gravity or geometric location (\code{"10x10"})}
+\item{gravity}{string with
+\href{https://www.imagemagick.org/Magick++/Enumerations.html#GravityType}{gravity type}}
+
+\item{location}{geometry string with location relative to \code{gravity}}
 }
 \description{
 Vectorized functions for manipulating images.
@@ -162,9 +166,10 @@ image_fill(logo, "red", fuzz = 256^2)
 # chops off 100 pixels from left and 20 from top
 image_chop(logo, "100x20")
 image_colorize(logo, 50, "red")
-image_composite(logo, operator = 2)
-test <- image_read(system.file("Rlogo-old.png", package = "magick"))
-test <- image_scale(test, "400x400")
+oldlogo <- image_read(system.file("Rlogo-old.png", package = "magick"))
+image_composite(logo, oldlogo)
+image_composite(logo, oldlogo, operator = "copyred")
+test <- image_scale(oldlogo, "400x400")
 out <- list()
 for(i in 1:10){
   out[[i]] <- test

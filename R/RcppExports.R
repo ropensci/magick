@@ -133,8 +133,8 @@ magick_image_trim <- function(input) {
     .Call('magick_magick_image_trim', PACKAGE = 'magick', input)
 }
 
-magick_image_composite <- function(input, composite_image, offset, op) {
-    .Call('magick_magick_image_composite', PACKAGE = 'magick', input, composite_image, offset, op)
+magick_image_composite <- function(input, composite_image, offset, composite) {
+    .Call('magick_magick_image_composite', PACKAGE = 'magick', input, composite_image, offset, composite)
 }
 
 magick_image_contrast <- function(input, sharpen) {
@@ -161,8 +161,8 @@ magick_image_border <- function(input, color, geometry) {
     .Call('magick_magick_image_border', PACKAGE = 'magick', input, color, geometry)
 }
 
-magick_image_annotate <- function(input, text, location) {
-    .Call('magick_magick_image_annotate', PACKAGE = 'magick', input, text, location)
+magick_image_annotate <- function(input, text, gravity, location, degrees) {
+    .Call('magick_magick_image_annotate', PACKAGE = 'magick', input, text, gravity, location, degrees)
 }
 
 magick_image_read <- function(x) {

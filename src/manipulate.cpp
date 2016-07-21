@@ -5,10 +5,50 @@
 
 #include "magick_types.h"
 
+Magick::Geometry Geom(const char * str){
+  Magick::Geometry geom(str);
+  if(!geom.isValid())
+    throw std::runtime_error(std::string("Invalid geometry string: ") + str);
+  return geom;
+}
+
+Magick::GravityType Gravity(const char * str){
+  ssize_t val = MagickCore::ParseCommandOption(
+    MagickCore::MagickGravityOptions, Magick::MagickFalse, str);
+  if(val < 0)
+    throw std::runtime_error(std::string("Invalid GravityType value: ") + str);
+  return (Magick::GravityType) val;
+}
+
+Magick::NoiseType Noise(const char * str){
+  ssize_t val = MagickCore::ParseCommandOption(
+    MagickCore::MagickNoiseOptions, Magick::MagickFalse, str);
+  if(val < 0)
+    throw std::runtime_error(std::string("Invalid NoiseType value: ") + str);
+  return (Magick::NoiseType) val;
+}
+
+Magick::CompositeOperator Composite(const char * str){
+  ssize_t val = MagickCore::ParseCommandOption(
+    MagickCore::MagickComposeOptions, Magick::MagickFalse, str);
+  if(val < 0)
+    throw std::runtime_error(std::string("Invalid CompositeOperator value: ") + str);
+  return (Magick::CompositeOperator) val;
+}
+
+Magick::Color Color(const char * str){
+  Magick::Color val(str);
+  if(!val.isValid())
+    throw std::runtime_error(std::string("Invalid Color value: ") + str);
+  return val;
+}
+
+
+
 // [[Rcpp::export]]
-XPtrImage magick_image_noise( XPtrImage input, int noisetype){
+XPtrImage magick_image_noise( XPtrImage input, const char * noisetype){
   XPtrImage output = copy(input);
-  for_each ( output->begin(), output->end(), Magick::addNoiseImage((Magick::NoiseType) noisetype));
+  for_each ( output->begin(), output->end(), Magick::addNoiseImage(Noise(noisetype)));
   return output;
 }
 
@@ -27,16 +67,16 @@ XPtrImage magick_image_charcoal( XPtrImage input, const double radius = 1, const
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_chop( XPtrImage input, Rcpp::String geometry){
+XPtrImage magick_image_chop( XPtrImage input, const char * geometry){
   XPtrImage output = copy(input);
-  for_each ( output->begin(), output->end(), Magick::chopImage(geometry.get_cstring()));
+  for_each ( output->begin(), output->end(), Magick::chopImage(Geom(geometry)));
   return output;
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_colorize( XPtrImage input, const size_t opacity, Rcpp::String color){
+XPtrImage magick_image_colorize( XPtrImage input, const size_t opacity, const char * color){
   XPtrImage output = copy(input);
-  for_each ( output->begin(), output->end(), Magick::colorizeImage(opacity, color.get_cstring()));
+  for_each ( output->begin(), output->end(), Magick::colorizeImage(opacity, Color(color)));
   return output;
 }
 
@@ -83,20 +123,20 @@ XPtrImage magick_image_flop( XPtrImage input){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_fill( XPtrImage input, Rcpp::String color, Rcpp::String point, double fuzz){
+XPtrImage magick_image_fill( XPtrImage input, const char * color, const char * point, double fuzz){
   XPtrImage output = copy(input);
   if(fuzz != 0){
     for_each ( output->begin(), output->end(), Magick::colorFuzzImage(fuzz));
   }
   for_each ( output->begin(), output->end(), Magick::floodFillColorImage(
-      Magick::Geometry(point.get_cstring()), Magick::Color(color.get_cstring())));
+      Magick::Geometry(Geom(point)), Color(color)));
   return output;
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_frame( XPtrImage input, Rcpp::String geometry){
+XPtrImage magick_image_frame( XPtrImage input, const char * geometry){
   XPtrImage output = copy(input);
-  for_each ( output->begin(), output->end(), Magick::frameImage(geometry.get_cstring()));
+  for_each ( output->begin(), output->end(), Magick::frameImage(Geom(geometry)));
   return output;
 }
 
@@ -136,9 +176,9 @@ XPtrImage magick_image_implode( XPtrImage input, double factor){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_format( XPtrImage input, Rcpp::String format){
+XPtrImage magick_image_format( XPtrImage input, const char * format){
   XPtrImage output = copy(input);
-  for_each ( output->begin(), output->end(), Magick::magickImage(format.get_cstring()));
+  for_each ( output->begin(), output->end(), Magick::magickImage(format));
   return output;
 }
 
@@ -150,11 +190,12 @@ XPtrImage magick_image_trim( XPtrImage input){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_composite( XPtrImage input, XPtrImage composite_image, Rcpp::String offset, int op){
+XPtrImage magick_image_composite( XPtrImage input, XPtrImage composite_image,
+                                  const char * offset, const char * composite){
   XPtrImage output = copy(input);
   if(composite_image->size()){
     for_each(output->begin(), output->end(), Magick::compositeImage(composite_image->front(),
-      Magick::Geometry(offset.get_cstring()), (Magick::CompositeOperator) op));
+      Geom(offset), Composite(composite)));
   }
   return output;
 }
@@ -167,18 +208,17 @@ XPtrImage magick_image_contrast( XPtrImage input, size_t sharpen){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_background( XPtrImage input, Rcpp::String color){
+XPtrImage magick_image_background( XPtrImage input, const char * color){
   XPtrImage output = copy(input);
-  for_each (output->begin(), output->end(), Magick::backgroundColorImage(Magick::Color(color.get_cstring())));
+  for_each (output->begin(), output->end(), Magick::backgroundColorImage(Color(color)));
   return output;
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_crop( XPtrImage input, Rcpp::String geometry){
+XPtrImage magick_image_crop( XPtrImage input, const char * geometry){
   XPtrImage output = copy(input);
-  const char * geom = geometry.get_cstring();
-  if(strlen(geom)){
-    for_each (output->begin(), output->end(), Magick::cropImage(geom));
+  if(strlen(geometry)){
+    for_each (output->begin(), output->end(), Magick::cropImage(Geom(geometry)));
   } else {
     if(input->size())
       for_each (output->begin(), output->end(), Magick::cropImage(input->front().size()));
@@ -187,11 +227,10 @@ XPtrImage magick_image_crop( XPtrImage input, Rcpp::String geometry){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_scale( XPtrImage input, Rcpp::String geometry){
+XPtrImage magick_image_scale( XPtrImage input, const char * geometry){
   XPtrImage output = copy(input);
-  const char * geom = geometry.get_cstring();
-  if(strlen(geom)){
-    for_each (output->begin(), output->end(), Magick::scaleImage(geom));
+  if(strlen(geometry)){
+    for_each (output->begin(), output->end(), Magick::scaleImage(Geom(geometry)));
   } else {
     if(input->size())
       for_each (output->begin(), output->end(), Magick::scaleImage(input->front().size()));
@@ -200,11 +239,10 @@ XPtrImage magick_image_scale( XPtrImage input, Rcpp::String geometry){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_sample( XPtrImage input, Rcpp::String geometry){
+XPtrImage magick_image_sample( XPtrImage input, const char * geometry){
   XPtrImage output = copy(input);
-  const char * geom = geometry.get_cstring();
-  if(strlen(geom)){
-    for_each (output->begin(), output->end(), Magick::sampleImage(geom));
+  if(strlen(geometry)){
+    for_each (output->begin(), output->end(), Magick::sampleImage(Geom(geometry)));
   } else {
     if(input->size())
       for_each (output->begin(), output->end(), Magick::sampleImage(input->front().size()));
@@ -213,13 +251,13 @@ XPtrImage magick_image_sample( XPtrImage input, Rcpp::String geometry){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_border( XPtrImage input, Rcpp::String color, Rcpp::String geometry){
+XPtrImage magick_image_border( XPtrImage input, const char * color, const char * geometry){
   XPtrImage output = copy(input);
   //need to set color before adding the border!
-  if(strlen(color.get_cstring()))
-    for_each ( output->begin(), output->end(), Magick::borderColorImage(color.get_cstring()));
-  if(strlen(geometry.get_cstring()))
-    for_each ( output->begin(), output->end(), Magick::borderImage(geometry.get_cstring()));
+  if(strlen(color))
+    for_each ( output->begin(), output->end(), Magick::borderColorImage(color));
+  if(strlen(geometry))
+    for_each ( output->begin(), output->end(), Magick::borderImage(Geom(geometry)));
   return output;
 }
 
@@ -229,17 +267,10 @@ XPtrImage magick_image_border( XPtrImage input, Rcpp::String color, Rcpp::String
  */
 
 // [[Rcpp::export]]
-XPtrImage magick_image_annotate( XPtrImage input, const std::string text, const char * location){
-  Magick::Geometry geom(location);
-  Magick::GravityType opt = (Magick::GravityType) MagickCore::ParseCommandOption(
-    MagickCore::MagickGravityOptions, Magick::MagickFalse, location);
-  if(opt < 0){
-    if(!geom.isValid())
-      throw std::runtime_error(std::string("Invalid location parameter: ") + location);
-    opt = Magick::ForgetGravity;
-  }
+XPtrImage magick_image_annotate( XPtrImage input, const std::string text, const char * gravity,
+                                 const char * location, double degrees){
   XPtrImage output = copy(input);
   for (Iter it = output->begin(); it != output->end(); ++it)
-    it->annotate(text, geom, opt);
+    it->annotate(text, Geom(location), Gravity(gravity), degrees);
   return output;
 }
