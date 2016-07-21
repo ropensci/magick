@@ -66,15 +66,25 @@ image_write(animation2, "anim2.gif")
 
 ```
 
-Edit GIF anination
+Read GIF anination frames
 
 ```r
+earth <- image_read("https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif")
+length(earth)
+earth[1]
+earth[1:3]
+rev(earth)
+```
+
+R logo with dancing banana
+
+```r
+logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
 banana <- image_read(system.file("banana.gif", package = "magick"))
-length(banana)
-banana[1]
-banana[1:3]
-rev(banana)
-image_scale(c(banana, newlogo))
+front <- image_scale(banana, "300")
+background <- image_scale(logo, "400")
+frames <- lapply(as.list(front), function(x) image_flatten(c(background, x)))
+image_format(image_join(frames), "gif")
 ```
 
 ## Installation
