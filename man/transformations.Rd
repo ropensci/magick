@@ -88,7 +88,8 @@ image_composite(image, composite_image = image[1], operator = "atop",
 image_contrast(image, sharpen = 1)
 
 image_annotate(image, text, gravity = "northwest", location = "+0+0",
-  degrees = 0)
+  degrees = 0, color = NULL, boxcolor = NULL, font = NULL,
+  size = NULL)
 }
 \arguments{
 \item{image}{object returned by \code{image_read}}
@@ -134,6 +135,12 @@ I think max distance (from #000000 to #FFFFFF) is 256^3.}
 \href{https://www.imagemagick.org/Magick++/Enumerations.html#GravityType}{gravity type}}
 
 \item{location}{geometry string with location relative to \code{gravity}}
+
+\item{boxcolor}{Base color that annotation text is rendered on.}
+
+\item{font}{Text rendering font. To use a TrueType font, precede the TrueType filename with an @.}
+
+\item{size}{font-size in pixels}
 }
 \description{
 Vectorized functions for transforming images. These functions apply
@@ -191,6 +198,8 @@ for(i in 1:10){
 animation <- do.call(c, out)
 image_format(animation, "gif")
 image_annotate(logo, "This is a test")
+image_annotate(logo, "APPROVED", size = 50, boxcolor = "yellow",
+   color = "red", degrees = 30, location = "+100+100")
 }
 \seealso{
 Other image: \code{\link{editing}}

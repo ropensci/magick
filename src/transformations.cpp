@@ -266,8 +266,17 @@ XPtrImage magick_image_border( XPtrImage input, const char * color, const char *
 
 // [[Rcpp::export]]
 XPtrImage magick_image_annotate( XPtrImage input, const std::string text, const char * gravity,
-                                 const char * location, double degrees){
+                                 const char * location, double degrees, Rcpp::CharacterVector color,
+                                 Rcpp::CharacterVector boxcolor, Rcpp::CharacterVector font, Rcpp::IntegerVector size){
   XPtrImage output = copy(input);
+  if(color.size())
+    for_each ( output->begin(), output->end(), Magick::penColorImage(Color(color[0])));
+  if(boxcolor.size())
+    for_each ( output->begin(), output->end(), Magick::boxColorImage(Color(boxcolor[0])));
+  if(font.size())
+    for_each ( output->begin(), output->end(), Magick::fontImage(std::string(font[0])));
+  if(size.size() > 0)
+    for_each ( output->begin(), output->end(), Magick::fontPointsizeImage(size[0]));
   for (Iter it = output->begin(); it != output->end(); ++it)
     it->annotate(text, Geom(location), Gravity(gravity), degrees);
   return output;

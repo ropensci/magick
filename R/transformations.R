@@ -295,8 +295,18 @@ image_contrast <- function(image, sharpen = 1){
 #' @param gravity string with
 #' \href{https://www.imagemagick.org/Magick++/Enumerations.html#GravityType}{gravity type}
 #' @param location geometry string with location relative to \code{gravity}
+#' @param size font-size in pixels
+#' @param boxcolor Base color that annotation text is rendered on.
+#' @param font Text rendering font. To use a TrueType font, precede the TrueType filename with an @.
 #' @examples image_annotate(logo, "This is a test")
-image_annotate <- function(image, text, gravity = "northwest", location = "+0+0", degrees = 0){
+#' image_annotate(logo, "APPROVED", size = 50, boxcolor = "yellow",
+#'    color = "red", degrees = 30, location = "+100+100")
+image_annotate <- function(image, text, gravity = "northwest", location = "+0+0", degrees = 0,
+                           color = NULL, boxcolor = NULL, font = NULL, size = NULL){
   stopifnot(inherits(image, "magick-image"))
-  magick_image_annotate(image, text, gravity, location, degrees)
+  color <- as.character(color)
+  boxcolor <- as.character(boxcolor)
+  font <- as.character(font)
+  size <- as.integer(size)
+  magick_image_annotate(image, text, gravity, location, degrees, color, boxcolor, font, size)
 }

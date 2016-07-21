@@ -261,7 +261,7 @@ magick_image_border <- function(input, color, geometry) {
     .Call('magick_magick_image_border', PACKAGE = 'magick', input, color, geometry)
 }
 
-magick_image_annotate <- function(input, text, gravity, location, degrees) {
-    .Call('magick_magick_image_annotate', PACKAGE = 'magick', input, text, gravity, location, degrees)
+magick_image_annotate <- function(input, text, gravity, location, degrees, color, boxcolor, font, size) {
+    .Call('magick_magick_image_annotate', PACKAGE = 'magick', input, text, gravity, location, degrees, color, boxcolor, font, size)
 }
 
