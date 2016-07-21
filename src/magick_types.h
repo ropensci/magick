@@ -20,3 +20,4 @@ XPtrImage copy (XPtrImage image);
 // Option parsers
 Magick::Geometry Geom(const char * str);
 Magick::Color Color(const char * str);
+Magick::DisposeType Dispose(const char * str);

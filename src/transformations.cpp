@@ -36,6 +36,14 @@ Magick::CompositeOperator Composite(const char * str){
   return (Magick::CompositeOperator) val;
 }
 
+Magick::DisposeType Dispose(const char * str){
+  ssize_t val = MagickCore::ParseCommandOption(
+    MagickCore::MagickDisposeOptions, Magick::MagickFalse, str);
+  if(val < 0)
+    throw std::runtime_error(std::string("Invalid CompositeOperator value: ") + str);
+  return (Magick::DisposeType) val;
+}
+
 Magick::Color Color(const char * str){
   Magick::Color val(str);
   if(!val.isValid())

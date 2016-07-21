@@ -39,13 +39,14 @@ Rcpp::RawVector magick_image_write( XPtrImage image){
 XPtrImage magick_image_display( XPtrImage image, bool animate){
 #ifndef X11_DELEGATE
   throw std::runtime_error("ImageMagick was build without X11 support");
-#endif
+#else
   XPtrImage output = copy(image);
   if(animate){
     Magick::animateImages(output->begin(), output->end());
   } else {
     Magick::displayImages(output->begin(), output->end());
   }
+#endif
   return image;
 }
 
@@ -127,11 +128,11 @@ XPtrImage magick_image_mosaic( XPtrImage image){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_animate( XPtrImage input, size_t delay, size_t iter, size_t method){
+XPtrImage magick_image_animate( XPtrImage input, size_t delay, size_t iter, const char * method){
   XPtrImage output = copy(input);
   for_each ( output->begin(), output->end(), Magick::animationDelayImage(delay));
   for_each ( output->begin(), output->end(), Magick::animationIterationsImage(iter));
-  for_each ( output->begin(), output->end(), Magick::gifDisposeMethodImage(method));
+  for_each ( output->begin(), output->end(), Magick::gifDisposeMethodImage(Dispose(method)));
   for_each ( output->begin(), output->end(), Magick::magickImage("gif"));
   return output;
 }

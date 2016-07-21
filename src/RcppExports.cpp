@@ -6,18 +6,6 @@
 
 using namespace Rcpp;
 
-// magick_attr_antialias
-Rcpp::LogicalVector magick_attr_antialias(XPtrImage input, Rcpp::LogicalVector antialias);
-RcppExport SEXP magick_magick_attr_antialias(SEXP inputSEXP, SEXP antialiasSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< Rcpp::LogicalVector >::type antialias(antialiasSEXP);
-    __result = Rcpp::wrap(magick_attr_antialias(input, antialias));
-    return __result;
-END_RCPP
-}
 // magick_attr_animationdelay
 Rcpp::IntegerVector magick_attr_animationdelay(XPtrImage input, Rcpp::IntegerVector delay);
 RcppExport SEXP magick_magick_attr_animationdelay(SEXP inputSEXP, SEXP delaySEXP) {
@@ -51,18 +39,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type color(colorSEXP);
     __result = Rcpp::wrap(magick_attr_boxcolor(input, color));
-    return __result;
-END_RCPP
-}
-// magick_attr_density
-Rcpp::CharacterVector magick_attr_density(XPtrImage input, Rcpp::CharacterVector geometry);
-RcppExport SEXP magick_magick_attr_density(SEXP inputSEXP, SEXP geometrySEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type geometry(geometrySEXP);
-    __result = Rcpp::wrap(magick_attr_density(input, geometry));
     return __result;
 END_RCPP
 }
@@ -102,18 +78,6 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// magick_attr_gifmethod
-Rcpp::IntegerVector magick_attr_gifmethod(XPtrImage input, Rcpp::IntegerVector method);
-RcppExport SEXP magick_magick_attr_gifmethod(SEXP inputSEXP, SEXP methodSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type method(methodSEXP);
-    __result = Rcpp::wrap(magick_attr_gifmethod(input, method));
-    return __result;
-END_RCPP
-}
 // magick_attr_label
 Rcpp::CharacterVector magick_attr_label(XPtrImage input, Rcpp::CharacterVector label);
 RcppExport SEXP magick_magick_attr_label(SEXP inputSEXP, SEXP labelSEXP) {
@@ -135,42 +99,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type format(formatSEXP);
     __result = Rcpp::wrap(magick_attr_format(input, format));
-    return __result;
-END_RCPP
-}
-// magick_attr_matte
-Rcpp::LogicalVector magick_attr_matte(XPtrImage input, Rcpp::LogicalVector matte);
-RcppExport SEXP magick_magick_attr_matte(SEXP inputSEXP, SEXP matteSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< Rcpp::LogicalVector >::type matte(matteSEXP);
-    __result = Rcpp::wrap(magick_attr_matte(input, matte));
-    return __result;
-END_RCPP
-}
-// magick_attr_mattecolor
-Rcpp::CharacterVector magick_attr_mattecolor(XPtrImage input, Rcpp::CharacterVector color);
-RcppExport SEXP magick_magick_attr_mattecolor(SEXP inputSEXP, SEXP colorSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type color(colorSEXP);
-    __result = Rcpp::wrap(magick_attr_mattecolor(input, color));
-    return __result;
-END_RCPP
-}
-// magick_attr_pencolor
-Rcpp::CharacterVector magick_attr_pencolor(XPtrImage input, Rcpp::CharacterVector color);
-RcppExport SEXP magick_magick_attr_pencolor(SEXP inputSEXP, SEXP colorSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type color(colorSEXP);
-    __result = Rcpp::wrap(magick_attr_pencolor(input, color));
     return __result;
 END_RCPP
 }
@@ -436,7 +364,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_animate
-XPtrImage magick_image_animate(XPtrImage input, size_t delay, size_t iter, size_t method);
+XPtrImage magick_image_animate(XPtrImage input, size_t delay, size_t iter, const char * method);
 RcppExport SEXP magick_magick_image_animate(SEXP inputSEXP, SEXP delaySEXP, SEXP iterSEXP, SEXP methodSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
@@ -444,7 +372,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< size_t >::type delay(delaySEXP);
     Rcpp::traits::input_parameter< size_t >::type iter(iterSEXP);
-    Rcpp::traits::input_parameter< size_t >::type method(methodSEXP);
+    Rcpp::traits::input_parameter< const char * >::type method(methodSEXP);
     __result = Rcpp::wrap(magick_image_animate(input, delay, iter, method));
     return __result;
 END_RCPP
