@@ -41,7 +41,7 @@ XPtrImage magick_image_display( XPtrImage image){
   XPtrImage output = copy(image);
   Magick::displayImages(output->begin(), output->end());
 #else
-  Rcpp::warning("ImageMagick was build without X11 support");
+  throw std::runtime_error("ImageMagick was build without X11 support");
 #endif
   return image;
 }
@@ -52,7 +52,7 @@ XPtrImage magick_image_animate( XPtrImage image){
   XPtrImage output = copy(image);
   Magick::animateImages(output->begin(), output->end());
 #else
-  Rcpp::warning("ImageMagick was build without X11 support");
+  throw std::runtime_error("ImageMagick was build without X11 support");
 #endif
   return image;
 }
