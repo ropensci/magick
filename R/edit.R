@@ -174,3 +174,10 @@ image_join <- function(...){
   stopifnot(all(vapply(x, inherits, logical(1), "magick-image")))
   magick_image_join(x)
 }
+
+#' @export
+#' @rdname edit
+image_info <- function(image){
+  stopifnot(inherits(image, "magick-image"))
+  magick_image_info(image)
+}

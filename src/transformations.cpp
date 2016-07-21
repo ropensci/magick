@@ -43,8 +43,6 @@ Magick::Color Color(const char * str){
   return val;
 }
 
-
-
 // [[Rcpp::export]]
 XPtrImage magick_image_noise( XPtrImage input, const char * noisetype){
   XPtrImage output = copy(input);

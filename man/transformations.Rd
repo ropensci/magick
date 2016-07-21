@@ -193,7 +193,6 @@ image_format(animation, "gif")
 image_annotate(logo, "This is a test")
 }
 \seealso{
-Other image: \code{\link{attributes}},
-  \code{\link{editing}}
+Other image: \code{\link{editing}}
 }
 

@@ -9,6 +9,7 @@
 \alias{image_display}
 \alias{image_fft}
 \alias{image_flatten}
+\alias{image_info}
 \alias{image_join}
 \alias{image_map}
 \alias{image_montage}
@@ -45,6 +46,8 @@ image_morph(image, frames)
 image_mosaic(image)
 
 image_join(...)
+
+image_info(image)
 }
 \arguments{
 \item{path}{file path, URL, or raw vector with image data}
@@ -110,7 +113,6 @@ image_format(image_join(frames), "gif")
 Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}
 }
 \seealso{
-Other image: \code{\link{attributes}},
-  \code{\link{transformations}}
+Other image: \code{\link{transformations}}
 }
 
