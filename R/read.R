@@ -156,14 +156,15 @@ image_mosaic <- function(image){
 
 #' @export
 #' @rdname image-read
-#' @param imagelist list with images to be combined into a single image vector
+#' @param ... images or lists of images to be combined into a image
 #' @examples
 #' # Break down and combine frames
 #' front <- image_scale(banana, "300")
 #' background <- image_scale(logo, "400")
 #' frames <- lapply(as.list(front), function(x) image_flatten(c(background, x)))
 #' image_format(image_join(frames), "gif")
-image_join <- function(imagelist){
-  stopifnot(all(vapply(imagelist, inherits, logical(1), "magick-image")))
-  magick_image_join(imagelist)
+image_join <- function(...){
+  x <- unlist(list(...))
+  stopifnot(all(vapply(x, inherits, logical(1), "magick-image")))
+  magick_image_join(x)
 }

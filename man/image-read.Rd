@@ -44,7 +44,7 @@ image_morph(image, frames)
 
 image_mosaic(image)
 
-image_join(imagelist)
+image_join(...)
 }
 \arguments{
 \item{path}{file path, URL, or raw vector with image data}
@@ -65,7 +65,7 @@ image_join(imagelist)
 
 \item{frames}{number of frames to use in output animation}
 
-\item{imagelist}{list with images to be combined into a single image vector}
+\item{...}{images or lists of images to be combined into a image}
 }
 \description{
 Read, write and edit images. All image functions are vectorized, meaning

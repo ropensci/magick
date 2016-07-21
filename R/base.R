@@ -15,9 +15,7 @@
 
 #' @export
 "c.magick-image" <- function(...){
-  x <- unlist(list(...))
-  stopifnot(all(vapply(x, inherits, logical(1), "magick-image")))
-  magick_image_join(x)
+  image_join(...)
 }
 
 #' @export
