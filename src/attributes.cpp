@@ -5,6 +5,8 @@
 
 #include "magick_types.h"
 
+#define Option(type, val) MagickCore::CommandOptionToMnemonic(type, val);
+
 // [[Rcpp::export]]
 Rcpp::IntegerVector magick_attr_delay( XPtrImage input, int delay){
   for_each ( input->begin(), input->end(), Magick::animationDelayImage(delay));
@@ -32,6 +34,7 @@ Rcpp::DataFrame magick_image_info( XPtrImage input){
   Rcpp::IntegerVector filesize(len);
   for(int i = 0; i < len; i++){
     Frame frame = input->at(i);
+    colorspace[i] = Option(MagickCore::MagickColorspaceOptions, frame.colorSpace());
     Magick::Geometry geom(frame.size());
     format[i] = std::string(frame.magick());
     width[i] = geom.width();
@@ -44,6 +47,7 @@ Rcpp::DataFrame magick_image_info( XPtrImage input){
     Rcpp::_["height"] = height,
     Rcpp::_["width"] = width,
     Rcpp::_["colors"] = colors,
+    Rcpp::_["colorspace"] = colorspace,
     Rcpp::_["filesize"] = filesize,
     Rcpp::_["stringsAsFactors"] = false
   );

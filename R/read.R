@@ -64,8 +64,6 @@ image_browse <- function(image, browser = getOption("browser")){
   utils::browseURL(tmp)
 }
 
-#' @description Append a sequence of image frames left-to-right or top-to-bottom
-#' using \code{image_append}.
 #' @export
 #' @rdname image-read
 #' @param stack place images top-to-bottom (TRUE) or left-to-right (FALSE)
@@ -154,4 +152,18 @@ image_morph <- function(image, frames){
 image_mosaic <- function(image){
   stopifnot(inherits(image, "magick-image"))
   magick_image_mosaic(image)
+}
+
+#' @export
+#' @rdname image-read
+#' @param imagelist list with images to be combined into a single image vector
+#' @examples
+#' # Break down and combine frames
+#' front <- image_scale(banana, "300")
+#' background <- image_scale(logo, "400")
+#' frames <- lapply(as.list(front), function(x) image_flatten(c(background, x)))
+#' image_format(image_join(frames), "gif")
+image_join <- function(imagelist){
+  stopifnot(all(vapply(imagelist, inherits, logical(1), "magick-image")))
+  magick_image_join(imagelist)
 }

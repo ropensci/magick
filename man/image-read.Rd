@@ -9,6 +9,7 @@
 \alias{image_display}
 \alias{image_fft}
 \alias{image_flatten}
+\alias{image_join}
 \alias{image_map}
 \alias{image_montage}
 \alias{image_morph}
@@ -42,6 +43,8 @@ image_montage(image)
 image_morph(image, frames)
 
 image_mosaic(image)
+
+image_join(imagelist)
 }
 \arguments{
 \item{path}{file path, URL, or raw vector with image data}
@@ -61,14 +64,13 @@ image_mosaic(image)
 \item{dither}{set TRUE to enable dithering}
 
 \item{frames}{number of frames to use in output animation}
+
+\item{imagelist}{list with images to be combined into a single image vector}
 }
 \description{
 Read, write and edit images. All image functions are vectorized, meaning
 they can operate either on a single frame or a series of frames (e.g. to
 create a collage, video, or animation).
-
-Append a sequence of image frames left-to-right or top-to-bottom
-using \code{image_append}.
 }
 \examples{
 # Download image from the web
@@ -94,6 +96,11 @@ both <- image_scale(c(oldlogo, logo), "400x400")
 image_average(image_crop(c(oldlogo, logo)))
 animation <- image_morph(both, 10)
 image_format(animation, "gif")
+# Break down and combine frames
+front <- image_scale(banana, "300")
+background <- image_scale(logo, "400")
+frames <- lapply(as.list(front), function(x) image_flatten(c(background, x)))
+image_format(image_join(frames), "gif")
 }
 \references{
 Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}
