@@ -2,6 +2,7 @@
 % Please edit documentation in R/edit.R
 \name{editing}
 \alias{editing}
+\alias{image_animate}
 \alias{image_append}
 \alias{image_average}
 \alias{image_browse}
@@ -48,6 +49,9 @@ image_mosaic(image)
 image_join(...)
 
 image_info(image)
+
+image_animate(image, fps = 10, loop = 0, dispose = c("background",
+  "previous", "none"))
 }
 \arguments{
 \item{path}{file path, URL, or raw vector with image data}
@@ -69,6 +73,13 @@ image_info(image)
 \item{frames}{number of frames to use in output animation}
 
 \item{...}{images or lists of images to be combined into a image}
+
+\item{fps}{frames per second}
+
+\item{loop}{how many times to repeat the animation. Default is infinite.}
+
+\item{dispose}{frame disposal method. See
+\href{http://www.imagemagick.org/Usage/anim_basics/}{documentation}}
 }
 \description{
 Read, write and join or combine images. All image functions are vectorized,
@@ -99,15 +110,14 @@ logo <- image_read(system.file("Rlogo.png", package = "magick"))
 oldlogo <- image_read(system.file("Rlogo-old.png", package = "magick"))
 
 # Create morphing animation
-both <- image_scale(c(oldlogo, logo), "400x400")
-image_average(image_crop(c(oldlogo, logo)))
-animation <- image_morph(both, 10)
-image_format(animation, "gif")
+both <- image_scale(c(oldlogo, logo), "400")
+image_average(both)
+image_animate(image_morph(both, 10))
 # Break down and combine frames
 front <- image_scale(banana, "300")
 background <- image_scale(logo, "400")
 frames <- lapply(as.list(front), function(x) image_flatten(c(background, x)))
-image_format(image_join(frames), "gif")
+image_animate(image_join(frames))
 }
 \references{
 Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}

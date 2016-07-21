@@ -54,11 +54,7 @@ image_write <- function(image, path = NULL, format = NULL){
 #' @param animate support animations in the X11 display
 #' @rdname edit
 image_display <- function(image, animate = TRUE){
-  if(isTRUE(animate)){
-    magick_image_animate(image)
-  } else {
-    magick_image_display(image)
-  }
+  magick_image_display(image, animate)
 }
 
 #' @export
@@ -142,10 +138,9 @@ image_montage <- function(image){
 #' oldlogo <- image_read(system.file("Rlogo-old.png", package = "magick"))
 #'
 #' # Create morphing animation
-#' both <- image_scale(c(oldlogo, logo), "400x400")
-#' image_average(image_crop(c(oldlogo, logo)))
-#' animation <- image_morph(both, 10)
-#' image_format(animation, "gif")
+#' both <- image_scale(c(oldlogo, logo), "400")
+#' image_average(both)
+#' image_animate(image_morph(both, 10))
 #' @param frames number of frames to use in output animation
 image_morph <- function(image, frames){
   stopifnot(inherits(image, "magick-image"))
@@ -168,7 +163,7 @@ image_mosaic <- function(image){
 #' front <- image_scale(banana, "300")
 #' background <- image_scale(logo, "400")
 #' frames <- lapply(as.list(front), function(x) image_flatten(c(background, x)))
-#' image_format(image_join(frames), "gif")
+#' image_animate(image_join(frames))
 image_join <- function(...){
   x <- unlist(list(...))
   stopifnot(all(vapply(x, inherits, logical(1), "magick-image")))
@@ -180,4 +175,21 @@ image_join <- function(...){
 image_info <- function(image){
   stopifnot(inherits(image, "magick-image"))
   magick_image_info(image)
+}
+
+
+#' @export
+#' @rdname edit
+#' @param dispose frame disposal method. See
+#' \href{http://www.imagemagick.org/Usage/anim_basics/}{documentation}
+#' @param fps frames per second
+#' @param loop how many times to repeat the animation. Default is infinite.
+image_animate <- function(image, fps = 10, loop = 0, dispose = c("background", "previous", "none")){
+  stopifnot(inherits(image, "magick-image"))
+  if(100 %% fps)
+    stop("argument 'fps' must be a factor of 100")
+  delay <- as.integer(100/fps)
+  dispose <- match.arg(dispose)
+  method <- switch(dispose, "none" = 1, "background" = 3, "previous" = 4)
+  magick_image_animate(image, delay, as.integer(loop), method)
 }

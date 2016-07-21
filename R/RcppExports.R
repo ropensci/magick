@@ -109,12 +109,8 @@ magick_image_write <- function(image) {
     .Call('magick_magick_image_write', PACKAGE = 'magick', image)
 }
 
-magick_image_display <- function(image) {
-    .Call('magick_magick_image_display', PACKAGE = 'magick', image)
-}
-
-magick_image_animate <- function(image) {
-    .Call('magick_magick_image_animate', PACKAGE = 'magick', image)
+magick_image_display <- function(image, animate) {
+    .Call('magick_magick_image_display', PACKAGE = 'magick', image, animate)
 }
 
 magick_image_append <- function(image, stack) {
@@ -151,6 +147,10 @@ magick_image_morph <- function(image, frames) {
 
 magick_image_mosaic <- function(image) {
     .Call('magick_magick_image_mosaic', PACKAGE = 'magick', image)
+}
+
+magick_image_animate <- function(input, delay, iter, method) {
+    .Call('magick_magick_image_animate', PACKAGE = 'magick', input, delay, iter, method)
 }
 
 magick_image_noise <- function(input, noisetype) {

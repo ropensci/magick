@@ -57,11 +57,11 @@ logos <- c(oldlogo, newlogo)
 logos <- image_scale(logos, "400x400")
 
 # Create GIF
-(animation1 <- image_format(logos, "gif"))
+(animation1 <- image_animate(logos))
 image_write(animation1, "anim1.gif")
 
 # Morph effect
-(animation2 <- image_format(image_morph(logos, frames = 10), "gif"))
+(animation2 <- image_animate(image_morph(logos, frames = 10))
 image_write(animation2, "anim2.gif")
 
 ```
@@ -84,7 +84,7 @@ banana <- image_read(system.file("banana.gif", package = "magick"))
 front <- image_scale(banana, "300")
 background <- image_scale(logo, "400")
 frames <- lapply(as.list(front), function(x) image_flatten(c(background, x)))
-image_format(image_join(frames), "gif")
+image_animate(image_join(frames))
 ```
 
 ## Installation

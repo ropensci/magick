@@ -321,24 +321,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_display
-XPtrImage magick_image_display(XPtrImage image);
-RcppExport SEXP magick_magick_image_display(SEXP imageSEXP) {
+XPtrImage magick_image_display(XPtrImage image, bool animate);
+RcppExport SEXP magick_magick_image_display(SEXP imageSEXP, SEXP animateSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< XPtrImage >::type image(imageSEXP);
-    __result = Rcpp::wrap(magick_image_display(image));
-    return __result;
-END_RCPP
-}
-// magick_image_animate
-XPtrImage magick_image_animate(XPtrImage image);
-RcppExport SEXP magick_magick_image_animate(SEXP imageSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< XPtrImage >::type image(imageSEXP);
-    __result = Rcpp::wrap(magick_image_animate(image));
+    Rcpp::traits::input_parameter< bool >::type animate(animateSEXP);
+    __result = Rcpp::wrap(magick_image_display(image, animate));
     return __result;
 END_RCPP
 }
@@ -442,6 +432,20 @@ BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< XPtrImage >::type image(imageSEXP);
     __result = Rcpp::wrap(magick_image_mosaic(image));
+    return __result;
+END_RCPP
+}
+// magick_image_animate
+XPtrImage magick_image_animate(XPtrImage input, size_t delay, size_t iter, size_t method);
+RcppExport SEXP magick_magick_image_animate(SEXP inputSEXP, SEXP delaySEXP, SEXP iterSEXP, SEXP methodSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< size_t >::type delay(delaySEXP);
+    Rcpp::traits::input_parameter< size_t >::type iter(iterSEXP);
+    Rcpp::traits::input_parameter< size_t >::type method(methodSEXP);
+    __result = Rcpp::wrap(magick_image_animate(input, delay, iter, method));
     return __result;
 END_RCPP
 }

@@ -36,24 +36,16 @@ Rcpp::RawVector magick_image_write( XPtrImage image){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_display( XPtrImage image){
-#ifdef X11_DELEGATE
-  XPtrImage output = copy(image);
-  Magick::displayImages(output->begin(), output->end());
-#else
+XPtrImage magick_image_display( XPtrImage image, bool animate){
+#ifndef X11_DELEGATE
   throw std::runtime_error("ImageMagick was build without X11 support");
 #endif
-  return image;
-}
-
-// [[Rcpp::export]]
-XPtrImage magick_image_animate( XPtrImage image){
-#ifdef X11_DELEGATE
   XPtrImage output = copy(image);
-  Magick::animateImages(output->begin(), output->end());
-#else
-  throw std::runtime_error("ImageMagick was build without X11 support");
-#endif
+  if(animate){
+    Magick::animateImages(output->begin(), output->end());
+  } else {
+    Magick::displayImages(output->begin(), output->end());
+  }
   return image;
 }
 
@@ -132,4 +124,14 @@ XPtrImage magick_image_mosaic( XPtrImage image){
   XPtrImage out = create();
   out->push_back(frame);
   return out;
+}
+
+// [[Rcpp::export]]
+XPtrImage magick_image_animate( XPtrImage input, size_t delay, size_t iter, size_t method){
+  XPtrImage output = copy(input);
+  for_each ( output->begin(), output->end(), Magick::animationDelayImage(delay));
+  for_each ( output->begin(), output->end(), Magick::animationIterationsImage(iter));
+  for_each ( output->begin(), output->end(), Magick::gifDisposeMethodImage(method));
+  for_each ( output->begin(), output->end(), Magick::magickImage("gif"));
+  return output;
 }
