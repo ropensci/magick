@@ -159,6 +159,9 @@ image_mosaic <- function(image){
 #' @rdname edit
 #' @param ... images or lists of images to be combined into a image
 #' @examples
+#' # Basic compositions
+#' image_composite(banana, image_scale(logo, "300"))
+#'
 #' # Break down and combine frames
 #' front <- image_scale(banana, "300")
 #' background <- image_scale(logo, "400")

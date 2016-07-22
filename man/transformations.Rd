@@ -88,7 +88,7 @@ image_composite(image, composite_image = image[1], operator = "atop",
 image_contrast(image, sharpen = 1)
 
 image_annotate(image, text, gravity = "northwest", location = "+0+0",
-  degrees = 0, font = NULL, size = NULL, color = NULL,
+  degrees = 0, font = "Arial", size = 12, color = NULL,
   strokecolor = NULL, boxcolor = NULL)
 }
 \arguments{

@@ -113,6 +113,9 @@ oldlogo <- image_read(system.file("Rlogo-old.png", package = "magick"))
 both <- image_scale(c(oldlogo, logo), "400")
 image_average(image_crop(both))
 image_animate(image_morph(both, 10))
+# Basic compositions
+image_composite(banana, image_scale(logo, "300"))
+
 # Break down and combine frames
 front <- image_scale(banana, "300")
 background <- image_scale(logo, "400")

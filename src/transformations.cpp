@@ -286,9 +286,19 @@ XPtrImage magick_image_annotate( XPtrImage input, const std::string text, const 
     for_each ( output->begin(), output->end(), Magick::boxColorImage(Color(boxcolor[0])));
   if(font.size())
     for_each ( output->begin(), output->end(), Magick::fontImage(std::string(font[0])));
-  if(size.size() > 0)
+  if(size.size())
     for_each ( output->begin(), output->end(), Magick::fontPointsizeImage(size[0]));
   for (Iter it = output->begin(); it != output->end(); ++it)
     it->annotate(text, Geom(location), Gravity(gravity), degrees);
+  if(color.size())
+    for_each ( output->begin(), output->end(), Magick::fillColorImage(input->front().fillColor()));
+  if(strokecolor.size())
+    for_each ( output->begin(), output->end(), Magick::strokeColorImage(input->front().strokeColor()));
+  if(boxcolor.size())
+    for_each ( output->begin(), output->end(), Magick::boxColorImage(input->front().boxColor()));
+  if(font.size())
+    for_each ( output->begin(), output->end(), Magick::fontImage(input->front().font()));
+  if(size.size())
+    for_each ( output->begin(), output->end(), Magick::fontPointsizeImage(fmin(10, input->front().fontPointsize())));
   return output;
 }
