@@ -5,8 +5,8 @@
 [![Build Status](https://travis-ci.org/jeroenooms/magick.svg?branch=master)](https://travis-ci.org/jeroenooms/magick)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jeroenooms/magick?branch=master&svg=true)](https://ci.appveyor.com/project/jeroenooms/magick)
 [![Coverage Status](https://codecov.io/github/jeroenooms/magick/coverage.svg?branch=master)](https://codecov.io/github/jeroenooms/magick?branch=master)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/magick)](http://cran.r-project.org/package=magick)
-[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/magick)](http://cran.r-project.org/web/packages/magick/index.html)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/magick)](https://cran.r-project.org/package=magick)
+[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/magick)](https://cran.r-project.org/package=magick)
 [![Github Stars](https://img.shields.io/github/stars/jeroenooms/magick.svg?style=social&label=Github)](https://github.com/jeroenooms/magick)
 
 > Bindings to ImageMagick: the most comprehensive open-source image
@@ -107,10 +107,10 @@ On __Fedora__,  __CentOS or RHEL__ we need [ImageMagick-c++-devel](https://apps.
 sudo yum install ImageMagick-c++-devel
 ````
 
-On __OS-X__ use [imagemagick](https://github.com/Homebrew/homebrew-core/blob/master/Formula/imagemagick.rb) from Homebrew:
+On __OS-X__ use [imagemagick](https://github.com/Homebrew/homebrew-core/blob/master/Formula/imagemagick.rb) from Homebrew. Note that we need to build `--with-fontconfig` to support text features such as annotation and svg rendering.
 
 ```
-brew install imagemagick
+brew install imagemagick --with-fontconfig
 ```
 
 There is also a fork of imagemagick called graphicsmagick, but it doesn't work as well. I highly recommend you build with imagemagick.
