@@ -15,6 +15,10 @@ matrix:
       brew_packages: imagemagick
       latex: false
     - os: osx
+      osx_image: xcode7.2
+      latex: false
+      brew_packages: 'imagemagick --with-fontconfig'
+    - os: osx
       osx_image: beta-xcode6.1
       disable_homebrew: true
       latex: false
