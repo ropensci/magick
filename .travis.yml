@@ -14,7 +14,7 @@ matrix:
       osx_image: xcode7.2
       env: PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
       latex: false
-      brew_packages: imagemagick --ignore-depends --verbose # should pick up on XQuartz x11/png/fc
+      brew_packages: imagemagick --ignore-depends --build-from-source --verbose # should pick up on XQuartz x11/png/fc
       before_install: brew install xz # build depends only
     - os: osx
       osx_image: xcode7.2
