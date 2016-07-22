@@ -14,9 +14,7 @@ matrix:
       osx_image: xcode7.2
       env: PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
       latex: false
-      brew_packages: imagemagick --ignore-dependencies --with-x11 --with-fontconfig
-      before_install:
-        - brew install pkg-config
+      brew_packages: imagemagick --with-x11 --with-fontconfig
     - os: osx
       osx_image: xcode7.2
       brew_packages: imagemagick

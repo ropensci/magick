@@ -202,9 +202,9 @@ image_annotate(logo, "This is a test")
 image_annotate(logo, "CONFIDENTIAL", size = 50, color = "red", boxcolor = "pink",
  degrees = 30, location = "+100+100")
 
-##\dontrun{
-## Setting fonts requires fontconfig support (and that you have the font)
-image_annotate(logo, "The quick brown fox", font="courier", size = 50)#}
+# Setting fonts requires fontconfig support (and that you have the font)
+myfont <- ifelse(identical("windows", .Platform$OS.type), "courier-new", "courier")
+image_annotate(logo, "The quick brown fox", font = myfont, size = 50)
 }
 \seealso{
 Other image: \code{\link{editing}}

@@ -54,10 +54,12 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     curl -fsSL https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C $BREWDIR
 
     # Get dependencies
-    HOMEBREW_CACHE="/tmp" $BREW install imagemagick --with-fontconfig --only-dependencies --force-bottle 2>&1 | perl -pe 's/Warning/Note/gi'
+    BREW_DEPS=$($BREW deps -n $PKG_BREW_NAME)
+    HOMEBREW_CACHE="/tmp" $BREW install $BREW_DEPS fontconfig --force-bottle 2>&1 | perl -pe 's/Warning/Note/gi'
     HOMEBREW_CACHE="/tmp" $BREW install imagemagick --without-modules --with-fontconfig 2>&1 | perl -pe 's/Warning/Note/gi'
 
     # Get build flags from pkg-config
+    PKG_CONFIG="$BREWDIR/bin/pkg-config"
     PKG_CFLAGS=$($PKG_CONFIG --cflags $PKG_CONFIG_NAME) -DBUILD_AUTOBREW
     PKG_LIBS=$($PKG_CONFIG --libs --static $PKG_CONFIG_NAME libpng)
     PKG_LIBS="-L$BREWDIR/lib $PKG_LIBS -lexpat" #pkg-config misses a few paths
