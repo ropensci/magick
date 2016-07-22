@@ -14,8 +14,8 @@
   pdf, etc) and manipulations (rotate, scale, crop, trim, flip, blur, etc).
   All operations are vectorized via the Magick++ STL meaning they operate either
   on a single frame or a series of frames for working with layers, collages,
-  video, or animation. When using RStudio, images are automatically previewed
-  when printed to the console, resulting in an interactive editing environment.
+  or animation. In RStudio images are automatically previewed when printed to
+  the console, resulting in an interactive editing environment.
 
 ## Documentation
 

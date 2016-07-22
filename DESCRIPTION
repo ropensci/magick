@@ -9,12 +9,15 @@ Description: Bindings to ImageMagick: the most comprehensive open-source image
     pdf, etc) and manipulations (rotate, scale, crop, trim, flip, blur, etc).
     All operations are vectorized via the Magick++ STL meaning they operate either
     on a single frame or a series of frames for working with layers, collages,
-    video, or animation. When using RStudio, images are automatically previewed
-    when printed to the console, resulting in an interactive editing environment.
+    or animation. In RStudio images are automatically previewed when printed to
+    the console, resulting in an interactive editing environment.
 License: MIT + file LICENSE
+URL: https://github.com/jeroenooms/magick#readme
+BugReports: https://github.com/jeroenooms/magick/issues
 Imports:
     Rcpp (>= 0.12),
     curl
 LinkingTo: Rcpp
+SystemRequirements: ImageMagick++: ImageMagick-c++-devel (rpm) or libmagick++-dev (deb).
 Suggests: magrittr
 RoxygenNote: 5.0.1
