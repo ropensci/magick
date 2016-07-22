@@ -38,7 +38,7 @@ image_flatten(image)
 
 image_fft(image)
 
-image_map(image, map_image, dither = FALSE)
+image_map(image, map, dither = FALSE)
 
 image_montage(image)
 
@@ -66,7 +66,7 @@ image_animate(image, fps = 10, loop = 0, dispose = c("background",
 
 \item{stack}{place images top-to-bottom (TRUE) or left-to-right (FALSE)}
 
-\item{map_image}{reference image to map colors from}
+\item{map}{reference image to map colors from}
 
 \item{dither}{set TRUE to enable dithering}
 
@@ -110,8 +110,8 @@ logo <- image_read(system.file("Rlogo.png", package = "magick"))
 oldlogo <- image_read(system.file("Rlogo-old.png", package = "magick"))
 
 # Create morphing animation
-both <- image_scale(c(oldlogo, logo), "400x400")
-image_average(both)
+both <- image_scale(c(oldlogo, logo), "400")
+image_average(image_crop(both))
 image_animate(image_morph(both, 10))
 # Break down and combine frames
 front <- image_scale(banana, "300")

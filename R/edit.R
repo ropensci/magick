@@ -115,12 +115,12 @@ image_fft <- function(image){
 
 #' @export
 #' @rdname edit
-#' @param map_image reference image to map colors from
+#' @param map reference image to map colors from
 #' @param dither set TRUE to enable dithering
-image_map <- function(image, map_image, dither = FALSE){
+image_map <- function(image, map, dither = FALSE){
   stopifnot(inherits(image, "magick-image"))
-  stopifnot(inherits(map_image, "magick-image"))
-  magick_image_map(image, map_image, dither)
+  stopifnot(inherits(map, "magick-image"))
+  magick_image_map(image, map, dither)
 }
 
 #' @export
@@ -138,8 +138,8 @@ image_montage <- function(image){
 #' oldlogo <- image_read(system.file("Rlogo-old.png", package = "magick"))
 #'
 #' # Create morphing animation
-#' both <- image_scale(c(oldlogo, logo), "400x400")
-#' image_average(both)
+#' both <- image_scale(c(oldlogo, logo), "400")
+#' image_average(image_crop(both))
 #' image_animate(image_morph(both, 10))
 #' @param frames number of frames to use in output animation
 image_morph <- function(image, frames){
