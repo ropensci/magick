@@ -136,11 +136,13 @@ I think max distance (from #000000 to #FFFFFF) is 256^3.}
 
 \item{location}{geometry string with location relative to \code{gravity}}
 
-\item{font}{Text rendering font. To use a TrueType font, precede the TrueType filename with an @.}
+\item{font}{rendering font. To use a TrueType font, precede the TrueType filename with an @.}
 
 \item{size}{font-size in pixels}
 
-\item{boxcolor}{Base color that annotation text is rendered on.}
+\item{strokecolor}{adds a stroke (border around the text)}
+
+\item{boxcolor}{background color that annotation text is rendered on.}
 }
 \description{
 Vectorized functions for transforming images. These functions apply

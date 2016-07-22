@@ -296,8 +296,9 @@ image_contrast <- function(image, sharpen = 1){
 #' \href{https://www.imagemagick.org/Magick++/Enumerations.html#GravityType}{gravity type}
 #' @param location geometry string with location relative to \code{gravity}
 #' @param size font-size in pixels
-#' @param boxcolor Base color that annotation text is rendered on.
-#' @param font Text rendering font. To use a TrueType font, precede the TrueType filename with an @.
+#' @param strokecolor adds a stroke (border around the text)
+#' @param boxcolor background color that annotation text is rendered on.
+#' @param font rendering font. To use a TrueType font, precede the TrueType filename with an @.
 #' @examples image_annotate(logo, "This is a test")
 #' image_annotate(logo, "CONFIDENTIAL", size = 50, color = "red",
 #'  boxcolor = "pink", degrees = 30, location = "+100+100")
