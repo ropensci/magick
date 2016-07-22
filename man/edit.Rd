@@ -110,7 +110,7 @@ logo <- image_read(system.file("Rlogo.png", package = "magick"))
 oldlogo <- image_read(system.file("Rlogo-old.png", package = "magick"))
 
 # Create morphing animation
-both <- image_scale(c(oldlogo, logo), "400")
+both <- image_scale(c(oldlogo, logo), "400x400")
 image_average(both)
 image_animate(image_morph(both, 10))
 # Break down and combine frames

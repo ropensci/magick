@@ -138,7 +138,7 @@ image_montage <- function(image){
 #' oldlogo <- image_read(system.file("Rlogo-old.png", package = "magick"))
 #'
 #' # Create morphing animation
-#' both <- image_scale(c(oldlogo, logo), "400")
+#' both <- image_scale(c(oldlogo, logo), "400x400")
 #' image_average(both)
 #' image_animate(image_morph(both, 10))
 #' @param frames number of frames to use in output animation
