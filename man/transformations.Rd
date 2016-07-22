@@ -204,7 +204,7 @@ image_annotate(logo, "CONFIDENTIAL", size = 50, color = "red", boxcolor = "pink"
 
 ##\dontrun{
 ## Setting fonts requires fontconfig support (and that you have the font)
-image_annotate(logo, "The quick brown fox", font="times-new-roman", size = 50)#}
+image_annotate(logo, "The quick brown fox", font="courier", size = 50)#}
 }
 \seealso{
 Other image: \code{\link{editing}}

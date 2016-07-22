@@ -303,7 +303,7 @@ image_contrast <- function(image, sharpen = 1){
 #'
 #' ##\dontrun{
 #' ## Setting fonts requires fontconfig support (and that you have the font)
-#' image_annotate(logo, "The quick brown fox", font="times-new-roman", size = 50)#}
+#' image_annotate(logo, "The quick brown fox", font="courier", size = 50)#}
 image_annotate <- function(image, text, gravity = "northwest", location = "+0+0", degrees = 0,
                            size = 10, font = NULL, color = NULL, strokecolor = NULL, boxcolor = NULL){
   stopifnot(inherits(image, "magick-image"))
