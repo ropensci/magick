@@ -18,6 +18,8 @@
 \alias{image_mosaic}
 \alias{image_read}
 \alias{image_write}
+\alias{imagemagick}
+\alias{magick}
 \title{Image Editing}
 \usage{
 image_read(path)
@@ -87,10 +89,14 @@ meaning they operate either on a single frame or a series of frames (e.g. a
 collage, video, or animation).
 The \href{https://www.imagemagick.org/Magick++/STL.html}{Magick++ documentation}
 explains meaning of each function and parameter.
-See \link{transformations} for vectorized
-image manipulation functions such as cutting and applying effects.
 }
 \details{
+Besides these functions also R-base functions such as \code{c()}, \code{[},
+\code{as.list()}, \code{rev}, \code{length}, and \code{print} can be used
+to work with image frames.
+See \link{transformations} for vectorized
+image manipulation functions such as cutting and applying effects.
+
 Some configurations of ImageMagick++ support reading SVG files but the rendering
 is not always very pleasing. Better results can be obtained by first rendering
 svg to a png using the \href{https://cran.r-project.org/package=rsvg}{rsvg package}.

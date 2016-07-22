@@ -27,3 +27,8 @@ read_url <- function(path){
 read_file <- function(path){
   readBin(normalizePath(path, mustWork = TRUE), raw(), file.info(path)$size)
 }
+
+assert_image <- function(image){
+  if(!inherits(image, "magick-image"))
+    stop("The 'image' argument is not a magick image object.", call. = FALSE)
+}

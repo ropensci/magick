@@ -5,6 +5,10 @@
 #' collage, video, or animation).
 #' The \href{https://www.imagemagick.org/Magick++/STL.html}{Magick++ documentation}
 #' explains meaning of each function and parameter.
+#'
+#' Besides these functions also R-base functions such as \code{c()}, \code{[},
+#' \code{as.list()}, \code{rev}, \code{length}, and \code{print} can be used
+#' to work with image frames.
 #' See \link{transformations} for vectorized
 #' image manipulation functions such as cutting and applying effects.
 #'
@@ -15,6 +19,7 @@
 #' @importFrom Rcpp sourceCpp
 #' @useDynLib magick
 #' @export
+#' @aliases magick imagemagick
 #' @family image
 #' @rdname edit
 #' @name editing
@@ -40,11 +45,11 @@ image_read <- function(path){
 #' @inheritParams transformations
 #' @rdname edit
 image_write <- function(image, path = NULL, format = NULL){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   if(!length(image))
     warning("Writing image with 0 frames")
   if(length(format)){
-    image <- image_format(image, format)
+    image <- magick_image_format(image, format)
   }
   buf <- magick_image_write(image)
   if(is.character(path)){
@@ -85,35 +90,35 @@ image_browse <- function(image, browser = getOption("browser")){
 #' # Append images together
 #' image_append(image_scale(c(image_append(banana[c(1,3)], stack = TRUE), frink)))
 image_append <- function(image, stack = FALSE){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_append(image, stack)
 }
 
 #' @export
 #' @rdname edit
 image_average <- function(image){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_average(image)
 }
 
 #' @export
 #' @rdname edit
 image_coalesce <- function(image){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_coalesce(image)
 }
 
 #' @export
 #' @rdname edit
 image_flatten <- function(image){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_flatten(image)
 }
 
 #' @export
 #' @rdname edit
 image_fft <- function(image){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_fft(image)
 }
 
@@ -122,7 +127,7 @@ image_fft <- function(image){
 #' @param map reference image to map colors from
 #' @param dither set TRUE to enable dithering
 image_map <- function(image, map, dither = FALSE){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   stopifnot(inherits(map, "magick-image"))
   magick_image_map(image, map, dither)
 }
@@ -130,7 +135,7 @@ image_map <- function(image, map, dither = FALSE){
 #' @export
 #' @rdname edit
 image_montage <- function(image){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_montage(image)
 }
 
@@ -147,7 +152,7 @@ image_montage <- function(image){
 #' image_animate(image_morph(both, 10))
 #' @param frames number of frames to use in output animation
 image_morph <- function(image, frames){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   stopifnot(is.numeric(frames))
   magick_image_morph(image, frames)
 }
@@ -155,7 +160,7 @@ image_morph <- function(image, frames){
 #' @export
 #' @rdname edit
 image_mosaic <- function(image){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_mosaic(image)
 }
 
@@ -180,7 +185,7 @@ image_join <- function(...){
 #' @export
 #' @rdname edit
 image_info <- function(image){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_info(image)
 }
 
@@ -192,7 +197,7 @@ image_info <- function(image){
 #' @param fps frames per second
 #' @param loop how many times to repeat the animation. Default is infinite.
 image_animate <- function(image, fps = 10, loop = 0, dispose = c("background", "previous", "none")){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   stopifnot(is.numeric(fps))
   stopifnot(is.numeric(loop))
   if(100 %% fps)

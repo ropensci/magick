@@ -10,6 +10,7 @@
 \alias{image_colorize}
 \alias{image_composite}
 \alias{image_contrast}
+\alias{image_convert}
 \alias{image_crop}
 \alias{image_edge}
 \alias{image_emboss}
@@ -18,7 +19,6 @@
 \alias{image_fill}
 \alias{image_flip}
 \alias{image_flop}
-\alias{image_format}
 \alias{image_frame}
 \alias{image_implode}
 \alias{image_negate}
@@ -32,8 +32,6 @@
 \alias{transformations}
 \title{Image Transformations}
 \usage{
-image_format(image, format)
-
 image_trim(image)
 
 image_background(image, color)
@@ -90,11 +88,11 @@ image_contrast(image, sharpen = 1)
 image_annotate(image, text, gravity = "northwest", location = "+0+0",
   degrees = 0, size = 10, font = NULL, color = NULL,
   strokecolor = NULL, boxcolor = NULL)
+
+image_convert(image, format)
 }
 \arguments{
 \item{image}{object returned by \code{image_read}}
-
-\item{format}{output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.}
 
 \item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string}}
 
@@ -143,6 +141,8 @@ I think max distance (from #000000 to #FFFFFF) is 256^3.}
 \item{strokecolor}{adds a stroke (border around the text)}
 
 \item{boxcolor}{background color that annotation text is rendered on.}
+
+\item{format}{output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.}
 }
 \description{
 Vectorized functions for transforming images. These functions apply
@@ -155,10 +155,6 @@ functions to read or combine image sequences.
 Each function returns a copy of the manipulated image; the input image will
 be unaffected. Therefore operations can be piped with magrittr if you're
 into that kind of stuff.
-
-Besides these functions also R-base functions such as \code{c()}, \code{[},
-\code{as.list()}, \code{rev}, \code{length}, and \code{print} can be used
-to work with image frames.
 }
 \examples{
 logo <- image_read(system.file("Rlogo.png", package = "magick"))

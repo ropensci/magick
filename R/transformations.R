@@ -10,21 +10,9 @@
 #' be unaffected. Therefore operations can be piped with magrittr if you're
 #' into that kind of stuff.
 #'
-#' Besides these functions also R-base functions such as \code{c()}, \code{[},
-#' \code{as.list()}, \code{rev}, \code{length}, and \code{print} can be used
-#' to work with image frames.
-#'
-#' @export
-#' @rdname transformations
 #' @name transformations
 #' @inheritParams editing
 #' @family image
-#' @param format output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.
-image_format <- function(image, format){
-  stopifnot(inherits(image, "magick-image"))
-  magick_image_format(image, format)
-}
-
 #' @export
 #' @rdname transformations
 #' @examples
@@ -32,14 +20,14 @@ image_format <- function(image, format){
 #' logo <- image_scale(logo, "400")
 #' image_trim(logo)
 image_trim <- function(image){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_trim(image)
 }
 
 #' @export
 #' @rdname transformations
 image_background <- function(image, color){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_background(image, color)
 }
 
@@ -47,7 +35,7 @@ image_background <- function(image, color){
 #' @rdname transformations
 #' @examples image_crop(logo, "400x400+200+200")
 image_crop <- function(image, geometry = ""){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_crop(image, geometry)
 }
 
@@ -55,7 +43,7 @@ image_crop <- function(image, geometry = ""){
 #' @rdname transformations
 #' @examples image_scale(logo, "200x200")
 image_scale <- function(image, geometry = ""){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_scale(image, geometry)
 }
 
@@ -63,7 +51,7 @@ image_scale <- function(image, geometry = ""){
 #' @rdname transformations
 #' @examples image_sample(logo, "200x200")
 image_sample <- function(image, geometry = ""){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_sample(image, geometry)
 }
 
@@ -74,7 +62,7 @@ image_sample <- function(image, geometry = ""){
 #' for example \code{"10x10+5-5"}.
 #' @examples image_border(logo, "red", "10x10")
 image_border <- function(image, color = "", geometry = ""){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_border(image, color, geometry)
 }
 
@@ -85,7 +73,7 @@ image_border <- function(image, color = "", geometry = ""){
 #' @examples
 #' image_noise(logo)
 image_noise <- function(image, noisetype = "gaussian"){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_noise(image, noisetype)
 }
 
@@ -96,7 +84,7 @@ image_noise <- function(image, noisetype = "gaussian"){
 #' @examples
 #' image_blur(logo, 10, 10)
 image_blur <- function(image, radius = 1, sigma = 0.5){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_blur(image, radius, sigma)
 }
 
@@ -105,7 +93,7 @@ image_blur <- function(image, radius = 1, sigma = 0.5){
 #' @examples
 #' image_charcoal(logo)
 image_charcoal <- function(image, radius = 1, sigma = 0.5){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_charcoal(image, radius, sigma)
 }
 
@@ -114,7 +102,7 @@ image_charcoal <- function(image, radius = 1, sigma = 0.5){
 #' @examples
 #' image_edge(logo)
 image_edge <- function(image, radius = 1){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_edge(image, radius)
 }
 
@@ -123,7 +111,7 @@ image_edge <- function(image, radius = 1){
 #' @examples
 #' image_oilpaint(logo)
 image_oilpaint <- function(image, radius = 1){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_oilpaint(image, radius)
 }
 
@@ -132,7 +120,7 @@ image_oilpaint <- function(image, radius = 1){
 #' @examples
 #' image_emboss(logo)
 image_emboss <- function(image, radius = 1, sigma = 0.5){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_emboss(image, radius, sigma)
 }
 
@@ -141,7 +129,7 @@ image_emboss <- function(image, radius = 1, sigma = 0.5){
 #' @examples
 #' image_enhance(logo)
 image_enhance <- function(image){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_enhance(image)
 }
 
@@ -150,7 +138,7 @@ image_enhance <- function(image){
 #' @examples
 #' image_equalize(logo)
 image_equalize <- function(image){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_equalize(image)
 }
 
@@ -159,7 +147,7 @@ image_equalize <- function(image){
 #' @examples
 #' image_flip(logo)
 image_flip <- function(image){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_flip(image)
 }
 
@@ -168,7 +156,7 @@ image_flip <- function(image){
 #' @examples
 #' image_flop(logo)
 image_flop <- function(image){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_flop(image)
 }
 
@@ -178,7 +166,7 @@ image_flop <- function(image){
 #' @examples
 #' image_frame(logo)
 image_frame <- function(image, geometry = "25x25+6+6"){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_frame(image, geometry)
 }
 
@@ -188,7 +176,7 @@ image_frame <- function(image, geometry = "25x25+6+6"){
 #' @examples
 #' image_implode(logo)
 image_implode <- function(image, factor = 0.5){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_implode(image, factor)
 }
 
@@ -198,7 +186,7 @@ image_implode <- function(image, factor = 0.5){
 #' @examples
 #' image_negate(logo)
 image_negate <- function(image){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_negate(image)
 }
 
@@ -207,7 +195,7 @@ image_negate <- function(image){
 #' @examples
 #' image_normalize(logo)
 image_normalize <- function(image){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_normalize(image)
 }
 
@@ -217,7 +205,7 @@ image_normalize <- function(image){
 #' @examples
 #' image_rotate(logo, 45)
 image_rotate <- function(image, degrees){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_rotate(image, degrees)
 }
 
@@ -231,7 +219,7 @@ image_rotate <- function(image, degrees){
 #' image_fill(logo, "red")
 #' image_fill(logo, "red", fuzz = 256^2)
 image_fill <- function(image, color, point = "1x1", fuzz = 0){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_fill(image, color, point, fuzz)
 }
 
@@ -240,7 +228,7 @@ image_fill <- function(image, color, point = "1x1", fuzz = 0){
 #' @examples
 #' image_chop(logo, "100x20")
 image_chop <- function(image, geometry){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   stopifnot(is.character(geometry))
   magick_image_chop(image, geometry)
 }
@@ -251,7 +239,7 @@ image_chop <- function(image, geometry){
 #' @examples
 #' image_colorize(logo, 50, "red")
 image_colorize <- function(image, opacity, color){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_colorize(image, opacity, color)
 }
 
@@ -267,7 +255,7 @@ image_colorize <- function(image, opacity, color){
 #' image_composite(logo, oldlogo, operator = "copyred")
 #'
 image_composite <- function(image, composite_image = image[1], operator = "atop", offset = "0x0"){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   stopifnot(inherits(composite_image, "magick-image"))
   magick_image_composite(image, composite_image, offset, operator)
 }
@@ -282,7 +270,7 @@ image_composite <- function(image, composite_image = image[1], operator = "atop"
 #' (blink <- image_animate(c(frames, rev(frames)), fps = 20, loop = 1))
 #'
 image_contrast <- function(image, sharpen = 1){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   magick_image_contrast(image, sharpen)
 }
 
@@ -306,11 +294,19 @@ image_contrast <- function(image, sharpen = 1){
 #' image_annotate(logo, "The quick brown fox", font = myfont, size = 50)
 image_annotate <- function(image, text, gravity = "northwest", location = "+0+0", degrees = 0,
                            size = 10, font = NULL, color = NULL, strokecolor = NULL, boxcolor = NULL){
-  stopifnot(inherits(image, "magick-image"))
+  assert_image(image)
   font <- as.character(font)
   size <- as.integer(size)
   color <- as.character(color)
   strokecolor <- as.character(strokecolor)
   boxcolor <- as.character(boxcolor)
   magick_image_annotate(image, text, gravity, location, degrees, size, font, color, strokecolor, boxcolor)
+}
+
+#' @export
+#' @rdname transformations
+#' @param format output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.
+image_convert <- function(image, format){
+  assert_image(image)
+  magick_image_format(image, format)
 }
