@@ -14,10 +14,10 @@ Description: Bindings to ImageMagick: the most comprehensive open-source image
 License: MIT + file LICENSE
 URL: https://github.com/jeroenooms/magick#readme
 BugReports: https://github.com/jeroenooms/magick/issues
+SystemRequirements: ImageMagick++: ImageMagick-c++-devel (rpm) or libmagick++-dev (deb)
 Imports:
     Rcpp (>= 0.12),
     curl
 LinkingTo: Rcpp
-SystemRequirements: ImageMagick++: ImageMagick-c++-devel (rpm) or libmagick++-dev (deb).
-Suggests: magrittr
+Suggests: rsvg
 RoxygenNote: 5.0.1
