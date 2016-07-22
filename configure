@@ -13,6 +13,7 @@ PKG_CSW_NAME="imagemagick_dev"
 PKG_BREW_NAME="imagemagick"
 PKG_TEST_HEADER="<Magick++.h>"
 PKG_LIBS="-lMagick++-6.Q16"
+PKG_TEST_HEADER="<Magick++.h>"
 
 # Use Magick++-config (on Solaris /opt/csw/bin must be in PATH)
 if [ $(command -v pkg-config) ]; then
@@ -91,7 +92,7 @@ echo "Using PKG_LIBS=$PKG_LIBS"
 echo "#include $PKG_TEST_HEADER" | ${CXXCPP} ${CPPFLAGS} ${PKG_CFLAGS} ${CXXFLAGS} -xc++ - >/dev/null 2>&1
 
 # Customize the error
-if [ $R_CONFIG_ERROR ]; then
+if [ $? -neq 0 ]; then
   echo "------------------------- ANTICONF ERROR ---------------------------"
   echo "Configuration failed because $PKG_CONFIG_NAME was not found. Try installing:"
   echo " * deb: $PKG_DEB_NAME (Debian, Ubuntu)"
