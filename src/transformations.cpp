@@ -278,7 +278,7 @@ XPtrImage magick_image_annotate( XPtrImage input, const std::string text, const 
                                  Rcpp::CharacterVector boxcolor, Rcpp::CharacterVector font, Rcpp::IntegerVector size){
   XPtrImage output = copy(input);
   if(color.size())
-    for_each ( output->begin(), output->end(), Magick::penColorImage(Color(color[0])));
+    for_each ( output->begin(), output->end(), Magick::fillColorImage(Color(color[0])));
   if(boxcolor.size())
     for_each ( output->begin(), output->end(), Magick::boxColorImage(Color(boxcolor[0])));
   if(font.size())
