@@ -238,7 +238,6 @@ image_fill <- function(image, color, point = "1x1", fuzz = 0){
 #' @export
 #' @rdname transformations
 #' @examples
-#' # chops off 100 pixels from left and 20 from top
 #' image_chop(logo, "100x20")
 image_chop <- function(image, geometry){
   stopifnot(inherits(image, "magick-image"))
@@ -262,10 +261,11 @@ image_colorize <- function(image, opacity, color){
 #' @param operator string with a
 #' \href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}.
 #' @param composite_image composition image
-#' @examples
+#' @examples # Compose images using one of many operators
 #' oldlogo <- image_read(system.file("Rlogo-old.png", package = "magick"))
 #' image_composite(logo, oldlogo)
 #' image_composite(logo, oldlogo, operator = "copyred")
+#'
 image_composite <- function(image, composite_image = image[1], operator = "atop", offset = "0x0"){
   stopifnot(inherits(image, "magick-image"))
   stopifnot(inherits(composite_image, "magick-image"))
@@ -276,14 +276,11 @@ image_composite <- function(image, composite_image = image[1], operator = "atop"
 #' @rdname transformations
 #' @param sharpen enhance intensity differences in image
 #' @examples
-#' test <- image_scale(oldlogo, "400x400")
-#' out <- list()
-#' for(i in 1:10){
-#'   out[[i]] <- test
-#'   test <- image_contrast(test)
-#' }
-#' animation <- do.call(c, out)
-#' image_format(animation, "gif")
+#' # Lights up the R logo
+#' frames <- image_scale(oldlogo, "400x400")
+#' for(i in 1:7) frames <- c(frames, image_contrast(frames[i]))
+#' (blink <- image_animate(c(frames, rev(frames)), fps = 20, loop = 1))
+#'
 image_contrast <- function(image, sharpen = 1){
   stopifnot(inherits(image, "magick-image"))
   magick_image_contrast(image, sharpen)
@@ -299,9 +296,11 @@ image_contrast <- function(image, sharpen = 1){
 #' @param strokecolor adds a stroke (border around the text)
 #' @param boxcolor background color that annotation text is rendered on.
 #' @param font rendering font. To use a TrueType font, precede the TrueType filename with an @.
-#' @examples image_annotate(logo, "This is a test")
+#' @examples # Add some text to an image
+#' image_annotate(logo, "This is a test")
 #' image_annotate(logo, "CONFIDENTIAL", size = 50, color = "red",
 #'  boxcolor = "pink", degrees = 30, location = "+100+100")
+#'
 image_annotate <- function(image, text, gravity = "northwest", location = "+0+0", degrees = 0,
                            font = "Arial", size = 12, color = NULL, strokecolor = NULL, boxcolor = NULL){
   stopifnot(inherits(image, "magick-image"))

@@ -189,6 +189,8 @@ image_info <- function(image){
 #' @param loop how many times to repeat the animation. Default is infinite.
 image_animate <- function(image, fps = 10, loop = 0, dispose = c("background", "previous", "none")){
   stopifnot(inherits(image, "magick-image"))
+  stopifnot(is.numeric(fps))
+  stopifnot(is.numeric(loop))
   if(100 %% fps)
     stop("argument 'fps' must be a factor of 100")
   delay <- as.integer(100/fps)

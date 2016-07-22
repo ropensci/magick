@@ -191,14 +191,11 @@ image_colorize(logo, 50, "red")
 oldlogo <- image_read(system.file("Rlogo-old.png", package = "magick"))
 image_composite(logo, oldlogo)
 image_composite(logo, oldlogo, operator = "copyred")
-test <- image_scale(oldlogo, "400x400")
-out <- list()
-for(i in 1:10){
-  out[[i]] <- test
-  test <- image_contrast(test)
-}
-animation <- do.call(c, out)
-image_format(animation, "gif")
+# Lights up the R logo
+frames <- image_scale(oldlogo, "400x400")
+for(i in 1:7) frames <- c(frames, image_contrast(frames[i]))
+(blink <- image_animate(c(frames, rev(frames)), fps = 20, loop = 1))
+
 image_annotate(logo, "This is a test")
 image_annotate(logo, "CONFIDENTIAL", size = 50, color = "red",
  boxcolor = "pink", degrees = 30, location = "+100+100")
