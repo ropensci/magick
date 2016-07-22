@@ -90,6 +90,11 @@ explains meaning of each function and parameter.
 See \link{transformations} for vectorized
 image manipulation functions such as cutting and applying effects.
 }
+\details{
+Some configurations of ImageMagick++ support reading SVG files but the rendering
+is not always very pleasing. Better results can be obtained by first rendering
+svg to a png using the \href{https://cran.r-project.org/package=rsvg}{rsvg package}.
+}
 \examples{
 # Download image from the web
 frink <- image_read("https://jeroenooms.github.io/images/frink.png")

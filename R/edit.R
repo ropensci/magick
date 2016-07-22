@@ -8,6 +8,10 @@
 #' See \link{transformations} for vectorized
 #' image manipulation functions such as cutting and applying effects.
 #'
+#' Some configurations of ImageMagick++ support reading SVG files but the rendering
+#' is not always very pleasing. Better results can be obtained by first rendering
+#' svg to a png using the \href{https://cran.r-project.org/package=rsvg}{rsvg package}.
+#'
 #' @importFrom Rcpp sourceCpp
 #' @useDynLib magick
 #' @export
