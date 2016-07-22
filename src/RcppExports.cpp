@@ -704,8 +704,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_annotate
-XPtrImage magick_image_annotate(XPtrImage input, const std::string text, const char * gravity, const char * location, double degrees, Rcpp::CharacterVector font, Rcpp::IntegerVector size, Rcpp::CharacterVector color, Rcpp::CharacterVector strokecolor, Rcpp::CharacterVector boxcolor);
-RcppExport SEXP magick_magick_image_annotate(SEXP inputSEXP, SEXP textSEXP, SEXP gravitySEXP, SEXP locationSEXP, SEXP degreesSEXP, SEXP fontSEXP, SEXP sizeSEXP, SEXP colorSEXP, SEXP strokecolorSEXP, SEXP boxcolorSEXP) {
+XPtrImage magick_image_annotate(XPtrImage input, const std::string text, const char * gravity, const char * location, double degrees, Rcpp::IntegerVector size, Rcpp::CharacterVector font, Rcpp::CharacterVector color, Rcpp::CharacterVector strokecolor, Rcpp::CharacterVector boxcolor);
+RcppExport SEXP magick_magick_image_annotate(SEXP inputSEXP, SEXP textSEXP, SEXP gravitySEXP, SEXP locationSEXP, SEXP degreesSEXP, SEXP sizeSEXP, SEXP fontSEXP, SEXP colorSEXP, SEXP strokecolorSEXP, SEXP boxcolorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -714,12 +714,12 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const char * >::type gravity(gravitySEXP);
     Rcpp::traits::input_parameter< const char * >::type location(locationSEXP);
     Rcpp::traits::input_parameter< double >::type degrees(degreesSEXP);
-    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type font(fontSEXP);
     Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type size(sizeSEXP);
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type font(fontSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type color(colorSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type strokecolor(strokecolorSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type boxcolor(boxcolorSEXP);
-    __result = Rcpp::wrap(magick_image_annotate(input, text, gravity, location, degrees, font, size, color, strokecolor, boxcolor));
+    __result = Rcpp::wrap(magick_image_annotate(input, text, gravity, location, degrees, size, font, color, strokecolor, boxcolor));
     return __result;
 END_RCPP
 }

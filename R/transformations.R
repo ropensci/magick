@@ -298,16 +298,19 @@ image_contrast <- function(image, sharpen = 1){
 #' @param font rendering font. To use a TrueType font, precede the TrueType filename with an @.
 #' @examples # Add some text to an image
 #' image_annotate(logo, "This is a test")
-#' image_annotate(logo, "CONFIDENTIAL", font = "times-new-roman", size = 50,
-#'  color = "red", boxcolor = "pink", degrees = 30, location = "+100+100")
+#' image_annotate(logo, "CONFIDENTIAL", size = 50, color = "red", boxcolor = "pink",
+#'  degrees = 30, location = "+100+100")
 #'
+#' \dontrun{
+#' ## Setting fonts requires fontconfig support (and that you have the font)
+#' image_annotate(logo, "The quick brown fox", font="times-new-roman", size = 50)}
 image_annotate <- function(image, text, gravity = "northwest", location = "+0+0", degrees = 0,
-                           font = "Arial", size = 12, color = NULL, strokecolor = NULL, boxcolor = NULL){
+                           size = 10, font = NULL, color = NULL, strokecolor = NULL, boxcolor = NULL){
   stopifnot(inherits(image, "magick-image"))
   font <- as.character(font)
   size <- as.integer(size)
   color <- as.character(color)
   strokecolor <- as.character(strokecolor)
   boxcolor <- as.character(boxcolor)
-  magick_image_annotate(image, text, gravity, location, degrees,  font, size, color, strokecolor, boxcolor)
+  magick_image_annotate(image, text, gravity, location, degrees, size, font, color, strokecolor, boxcolor)
 }

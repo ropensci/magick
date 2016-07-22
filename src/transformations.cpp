@@ -274,8 +274,8 @@ XPtrImage magick_image_border( XPtrImage input, const char * color, const char *
 
 // [[Rcpp::export]]
 XPtrImage magick_image_annotate( XPtrImage input, const std::string text, const char * gravity,
-                                 const char * location, double degrees, Rcpp::CharacterVector font,
-                                 Rcpp::IntegerVector size, Rcpp::CharacterVector color,
+                                 const char * location, double degrees, Rcpp::IntegerVector size,
+                                 Rcpp::CharacterVector font, Rcpp::CharacterVector color,
                                  Rcpp::CharacterVector strokecolor, Rcpp::CharacterVector boxcolor){
   XPtrImage output = copy(input);
   if(color.size())

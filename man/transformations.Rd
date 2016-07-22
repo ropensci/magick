@@ -88,7 +88,7 @@ image_composite(image, composite_image = image[1], operator = "atop",
 image_contrast(image, sharpen = 1)
 
 image_annotate(image, text, gravity = "northwest", location = "+0+0",
-  degrees = 0, font = "Arial", size = 12, color = NULL,
+  degrees = 0, size = 10, font = NULL, color = NULL,
   strokecolor = NULL, boxcolor = NULL)
 }
 \arguments{
@@ -136,9 +136,9 @@ I think max distance (from #000000 to #FFFFFF) is 256^3.}
 
 \item{location}{geometry string with location relative to \code{gravity}}
 
-\item{font}{rendering font. To use a TrueType font, precede the TrueType filename with an @.}
-
 \item{size}{font-size in pixels}
+
+\item{font}{rendering font. To use a TrueType font, precede the TrueType filename with an @.}
 
 \item{strokecolor}{adds a stroke (border around the text)}
 
@@ -199,9 +199,12 @@ for(i in 1:7) frames <- c(frames, image_contrast(frames[i]))
 
 # Add some text to an image
 image_annotate(logo, "This is a test")
-image_annotate(logo, "CONFIDENTIAL", font = "times-new-roman", size = 50,
- color = "red", boxcolor = "pink", degrees = 30, location = "+100+100")
+image_annotate(logo, "CONFIDENTIAL", size = 50, color = "red", boxcolor = "pink",
+ degrees = 30, location = "+100+100")
 
+\dontrun{
+## Setting fonts requires fontconfig support (and that you have the font)
+image_annotate(logo, "The quick brown fox", font "times-new-roman", size = 50)}
 }
 \seealso{
 Other image: \code{\link{editing}}
