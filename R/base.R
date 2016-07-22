@@ -40,8 +40,9 @@
 #' @export
 "print.magick-image" <- function(x, ...){
   viewer <- getOption("viewer")
+  ext <- ifelse(length(x), tolower(image_info(x[1])$format), "gif")
   if(is.function(viewer)){
-    tmp <- file.path(tempdir(), "preview.gif")
+    tmp <- file.path(tempdir(), paste0("preview.", ext))
     image_write(x, path = tmp)
     viewer(tmp)
   }
