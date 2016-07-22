@@ -185,20 +185,23 @@ image_normalize(logo)
 image_rotate(logo, 45)
 image_fill(logo, "red")
 image_fill(logo, "red", fuzz = 256^2)
-# chops off 100 pixels from left and 20 from top
 image_chop(logo, "100x20")
 image_colorize(logo, 50, "red")
+# Compose images using one of many operators
 oldlogo <- image_read(system.file("Rlogo-old.png", package = "magick"))
 image_composite(logo, oldlogo)
 image_composite(logo, oldlogo, operator = "copyred")
+
 # Lights up the R logo
 frames <- image_scale(oldlogo, "400x400")
 for(i in 1:7) frames <- c(frames, image_contrast(frames[i]))
 (blink <- image_animate(c(frames, rev(frames)), fps = 20, loop = 1))
 
+# Add some text to an image
 image_annotate(logo, "This is a test")
-image_annotate(logo, "CONFIDENTIAL", size = 50, color = "red",
- boxcolor = "pink", degrees = 30, location = "+100+100")
+image_annotate(logo, "CONFIDENTIAL", font = "times-new-roman", size = 50,
+ color = "red", boxcolor = "pink", degrees = 30, location = "+100+100")
+
 }
 \seealso{
 Other image: \code{\link{editing}}

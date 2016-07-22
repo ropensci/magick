@@ -298,8 +298,8 @@ image_contrast <- function(image, sharpen = 1){
 #' @param font rendering font. To use a TrueType font, precede the TrueType filename with an @.
 #' @examples # Add some text to an image
 #' image_annotate(logo, "This is a test")
-#' image_annotate(logo, "CONFIDENTIAL", size = 50, color = "red",
-#'  boxcolor = "pink", degrees = 30, location = "+100+100")
+#' image_annotate(logo, "CONFIDENTIAL", font = "times-new-roman", size = 50,
+#'  color = "red", boxcolor = "pink", degrees = 30, location = "+100+100")
 #'
 image_annotate <- function(image, text, gravity = "northwest", location = "+0+0", degrees = 0,
                            font = "Arial", size = 12, color = NULL, strokecolor = NULL, boxcolor = NULL){
