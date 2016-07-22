@@ -204,6 +204,16 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// autobrewed
+bool autobrewed();
+RcppExport SEXP magick_autobrewed() {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    __result = Rcpp::wrap(autobrewed());
+    return __result;
+END_RCPP
+}
 // magick_coder_info
 Rcpp::List magick_coder_info(Rcpp::String format);
 RcppExport SEXP magick_magick_coder_info(SEXP formatSEXP) {

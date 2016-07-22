@@ -79,3 +79,12 @@ XPtrImage magick_image_subset(XPtrImage image, Rcpp::IntegerVector index){
   }
   return output;
 }
+
+// [[Rcpp::export]]
+bool autobrewed(){
+#ifdef BUILD_AUTOBREW
+  return true;
+#else
+  return false;
+#endif
+}
