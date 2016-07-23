@@ -35,7 +35,7 @@ addons:
   apt:
     packages:
       - libmagick++-dev
-      - librsvg2-devel
+      - librsvg2-dev
       - libwebp-dev
 
 r_github_packages:
