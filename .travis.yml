@@ -33,7 +33,10 @@ matrix:
 
 addons:
   apt:
-    packages: libmagick++-dev
+    packages:
+      - libmagick++-dev
+      - librsvg2-devel
+      - libwebp-dev
 
 r_github_packages:
   - jimhester/covr
