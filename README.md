@@ -72,8 +72,8 @@ earth <- image_read("https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotatin
 length(earth)
 earth[1]
 earth[1:3]
-rev(earth)
-image_write(earth[1], "img/earth1.gif") ## <-- result of this is shown
+earth1 <- rev(image_flip(earth)) ## How Austrialans see earth
+image_write(earth1, "img/earth1.gif") ## <-- result of this is shown
 ```
 
 ![](img/earth1.gif)
