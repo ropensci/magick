@@ -22,13 +22,17 @@ Hello World
 
 ``` r
 library(magick)
+library(magrittr)
 frink <- image_read("https://jeroenooms.github.io/images/frink.png")
 image_trim(frink)
 image_scale(frink, "200x200")
 image_flip(frink)
 image_rotate(frink, 45) ## <-- result of this is shown
 image_negate(frink)
-image_border(image_flatten(frink), "red", "10x10")
+frink %>% 
+  image_background("green") %>% 
+  image_flatten() %>%
+  image_border("red", "10x10")
 ```
 
 ![](img/frink-rotated.png)

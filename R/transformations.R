@@ -26,6 +26,8 @@ image_trim <- function(image){
 
 #' @export
 #' @rdname transformations
+#' @examples
+#' image_flatten(image_background(logo, "pink"))
 image_background <- function(image, color){
   assert_image(image)
   magick_image_background(image, color)
@@ -216,8 +218,8 @@ image_rotate <- function(image, degrees){
 #' Use this option to match colors that are close to the target color in RGB space.
 #' I think max distance (from #000000 to #FFFFFF) is 256^3.
 #' @examples
-#' image_fill(logo, "red")
-#' image_fill(logo, "red", fuzz = 256^2)
+#' image_fill(image_flatten(logo), "red")
+#' image_fill(image_flatten(logo), "red", fuzz = 25600)
 image_fill <- function(image, color, point = "1x1", fuzz = 0){
   assert_image(image)
   magick_image_fill(image, color, point, fuzz)
