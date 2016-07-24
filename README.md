@@ -61,7 +61,7 @@ logos <- image_scale(logos, "400x400")
 image_write(animation1, "anim1.gif")
 
 # Morph effect
-(animation2 <- image_animate(image_morph(logos, frames = 10))
+(animation2 <- image_animate(image_morph(logos, frames = 10)))
 image_write(animation2, "anim2.gif")
 
 ```
