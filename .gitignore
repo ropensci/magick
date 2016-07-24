@@ -18,3 +18,5 @@ inst/share
 src/Makevars
 windows
 !img/*
+README.md
+
