@@ -17,3 +17,4 @@ inst/etc
 inst/share
 src/Makevars
 windows
+!img/*
