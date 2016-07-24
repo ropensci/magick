@@ -5,3 +5,5 @@
 appveyor.yml$
 ^windows
 ^[^/]+\.(gif|png|jpg|jpeg|pdf|tiff)$
+^img$
+^README\.Rmd$
