@@ -110,7 +110,7 @@ sudo yum install ImageMagick-c++-devel
 On __OS-X__ use [imagemagick](https://github.com/Homebrew/homebrew-core/blob/master/Formula/imagemagick.rb) from Homebrew. Note that we need to build `--with-fontconfig` to support text features such as annotation and svg rendering.
 
 ```
-brew install imagemagick --with-fontconfig
+brew install imagemagick --with-fontconfig --with-fftw
 ```
 
 There is also a fork of imagemagick called graphicsmagick, but it doesn't work as well. I highly recommend you build with imagemagick.
