@@ -57,7 +57,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     # Get dependencies
     BREW_DEPS=$($BREW deps -n $PKG_BREW_NAME)
     HOMEBREW_CACHE="/tmp" $BREW install $BREW_DEPS fontconfig fftw --force-bottle 2>&1 | perl -pe 's/Warning/Note/gi'
-    HOMEBREW_CACHE="/tmp" $BREW install imagemagick --without-modules --with-fftw --with-fontconfig 2>&1 | perl -pe 's/Warning/Note/gi'
+    HOMEBREW_CACHE="/tmp" $BREW install imagemagick --without-modules --with-fftw --with-fontconfig --enable-zero-configuration 2>&1 | perl -pe 's/Warning/Note/gi'
 
     # Get build flags from pkg-config
     PKG_CONFIG="$BREWDIR/bin/pkg-config"
