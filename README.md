@@ -28,7 +28,7 @@ image_scale(frink, "200x200")
 image_flip(frink)
 image_rotate(frink, 45) ## <-- result of this is shown
 image_negate(frink)
-image_border(frink, "red", "10x10")
+image_border(image_flatten(frink), "red", "10x10")
 ```
 
 ![](img/frink-rotated.png)
