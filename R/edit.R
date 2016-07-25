@@ -7,8 +7,8 @@
 #' explains meaning of each function and parameter.
 #'
 #' Besides these functions also R-base functions such as \code{c()}, \code{[},
-#' \code{as.list()}, \code{rev}, \code{length}, and \code{print} can be used
-#' to work with image frames.
+#' \code{as.list()}, \code{as.raster()}, \code{rev}, \code{length}, and \code{print}
+#' can be used to work with image frames.
 #' See \link{transformations} for vectorized
 #' image manipulation functions such as cutting and applying effects.
 #'
