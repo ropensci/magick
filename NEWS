@@ -1,0 +1,8 @@
+0.2
+  - Build binary package on OS-X --with-zero-configuation.
+    This fixes varoius "config xml file not found" errors.
+  - Add as.raster() method for images.
+  - image_write gains a 'flatten' argument
+
+0.1
+  - Initial CRAN release
