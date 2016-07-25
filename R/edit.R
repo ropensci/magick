@@ -29,8 +29,12 @@
 #' @examples
 #' # Download image from the web
 #' frink <- image_read("https://jeroenooms.github.io/images/frink.png")
-#' frink2 <- image_crop(frink)
+#' frink2 <- image_trim(frink)
 #' image_write(frink2, "output.png")
+#'
+#' # Plot to graphics device via legacy raster format
+#' raster <- as.raster(frink)
+#' plot(raster)
 image_read <- function(path){
   if(is.character(path)){
     buflist <- lapply(path, read_path)
@@ -44,10 +48,14 @@ image_read <- function(path){
 #' @export
 #' @inheritParams transformations
 #' @rdname edit
-image_write <- function(image, path = NULL, format = NULL){
+#' @param flatten should image be flattened before writing? This also replaces
+#' transparency with background color.
+image_write <- function(image, path = NULL, format = NULL, flatten = FALSE){
   assert_image(image)
   if(!length(image))
     warning("Writing image with 0 frames")
+  if(isTRUE(flatten))
+    image <- image_flatten(image)
   if(length(format)){
     image <- magick_image_format(image, format)
   }

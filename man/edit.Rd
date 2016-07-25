@@ -24,7 +24,7 @@
 \usage{
 image_read(path)
 
-image_write(image, path = NULL, format = NULL)
+image_write(image, path = NULL, format = NULL, flatten = FALSE)
 
 image_display(image, animate = TRUE)
 
@@ -61,6 +61,9 @@ image_animate(image, fps = 10, loop = 0, dispose = c("background",
 \item{image}{object returned by \code{image_read}}
 
 \item{format}{output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.}
+
+\item{flatten}{should image be flattened before writing? This also replaces
+transparency with background color.}
 
 \item{animate}{support animations in the X11 display}
 
@@ -104,8 +107,12 @@ svg to a png using the \href{https://cran.r-project.org/package=rsvg}{rsvg packa
 \examples{
 # Download image from the web
 frink <- image_read("https://jeroenooms.github.io/images/frink.png")
-frink2 <- image_crop(frink)
+frink2 <- image_trim(frink)
 image_write(frink2, "output.png")
+
+# Plot to graphics device via legacy raster format
+raster <- as.raster(frink)
+plot(raster)
 # Create thumbnails from GIF
 banana <- image_read(system.file("banana.gif", package = "magick"))
 length(banana)

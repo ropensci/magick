@@ -49,3 +49,14 @@
   print(image_info(x))
   invisible()
 }
+
+## apply is slow, can easily be optimized in c++.
+#' @export
+#' @importFrom grDevices as.raster
+"as.raster.magick-image" <- function(x, ...){
+  bitmap <- image_write(x[1], format = "rgb", flatten = TRUE)
+  info <- image_info(x)
+  dim(bitmap) <- c(3, info$width, info$height)
+  raster <- apply(bitmap, 3:2, function(x){paste(c('#', x), collapse = "")})
+  as.raster(raster)
+}
