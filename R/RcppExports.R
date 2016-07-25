@@ -85,8 +85,8 @@ magick_image_read_list <- function(list) {
     .Call('magick_magick_image_read_list', PACKAGE = 'magick', list)
 }
 
-magick_image_write <- function(image) {
-    .Call('magick_magick_image_write', PACKAGE = 'magick', image)
+magick_image_write <- function(input, format, quality) {
+    .Call('magick_magick_image_write', PACKAGE = 'magick', input, format, quality)
 }
 
 magick_image_display <- function(image, animate) {

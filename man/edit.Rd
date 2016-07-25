@@ -24,7 +24,8 @@
 \usage{
 image_read(path)
 
-image_write(image, path = NULL, format = NULL, flatten = FALSE)
+image_write(image, path = NULL, format = NULL, quality = NULL,
+  flatten = FALSE)
 
 image_display(image, animate = TRUE)
 
@@ -61,6 +62,8 @@ image_animate(image, fps = 10, loop = 0, dispose = c("background",
 \item{image}{object returned by \code{image_read}}
 
 \item{format}{output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.}
+
+\item{quality}{number between 0 and 100 for jpeg quality. Defaults to 75.}
 
 \item{flatten}{should image be flattened before writing? This also replaces
 transparency with background color.}
@@ -112,6 +115,7 @@ image_write(frink2, "output.png")
 
 # Plot to graphics device via legacy raster format
 raster <- as.raster(frink)
+par(ask=FALSE)
 plot(raster)
 # Create thumbnails from GIF
 banana <- image_read(system.file("banana.gif", package = "magick"))

@@ -34,6 +34,7 @@
 #'
 #' # Plot to graphics device via legacy raster format
 #' raster <- as.raster(frink)
+#' par(ask=FALSE)
 #' plot(raster)
 image_read <- function(path){
   if(is.character(path)){
@@ -50,16 +51,16 @@ image_read <- function(path){
 #' @rdname edit
 #' @param flatten should image be flattened before writing? This also replaces
 #' transparency with background color.
-image_write <- function(image, path = NULL, format = NULL, flatten = FALSE){
+#' @param quality number between 0 and 100 for jpeg quality. Defaults to 75.
+image_write <- function(image, path = NULL, format = NULL, quality = NULL, flatten = FALSE){
   assert_image(image)
   if(!length(image))
     warning("Writing image with 0 frames")
   if(isTRUE(flatten))
     image <- image_flatten(image)
-  if(length(format)){
-    image <- magick_image_format(image, format)
-  }
-  buf <- magick_image_write(image)
+  format <- as.character(format)
+  quality <- as.integer(quality)
+  buf <- magick_image_write(image, format, quality)
   if(is.character(path)){
     writeBin(buf, path)
     return(path)

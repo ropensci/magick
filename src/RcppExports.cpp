@@ -248,13 +248,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_write
-Rcpp::RawVector magick_image_write(XPtrImage image);
-RcppExport SEXP magick_magick_image_write(SEXP imageSEXP) {
+Rcpp::RawVector magick_image_write(XPtrImage input, Rcpp::CharacterVector format, Rcpp::IntegerVector quality);
+RcppExport SEXP magick_magick_image_write(SEXP inputSEXP, SEXP formatSEXP, SEXP qualitySEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< XPtrImage >::type image(imageSEXP);
-    __result = Rcpp::wrap(magick_image_write(image));
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type format(formatSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type quality(qualitySEXP);
+    __result = Rcpp::wrap(magick_image_write(input, format, quality));
     return __result;
 END_RCPP
 }
