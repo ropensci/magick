@@ -60,8 +60,8 @@
     image <- magick_image_flatten(image)
   }
   info <- image_info(image)
-  bitmap <- image_write(image, format = "rgb")
+  bitmap <- as.character(image_write(image, format = "rgb"))
   dim(bitmap) <- c(3, info$width, info$height)
-  raster <- apply(bitmap, 3:2, function(x){paste(c('#', x), collapse = "")})
+  raster <- apply(bitmap, 3:2, function(x){paste0(c('#', x), collapse = "")})
   as.raster(raster)
 }
