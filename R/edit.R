@@ -119,9 +119,10 @@ image_coalesce <- function(image){
 
 #' @export
 #' @rdname edit
-image_flatten <- function(image){
+image_flatten <- function(image, operator = NULL){
   assert_image(image)
-  magick_image_flatten(image)
+  operator <- as.character(operator)
+  magick_image_flatten(image, operator)
 }
 
 #' @export

@@ -27,10 +27,15 @@ image_trim <- function(image){
 #' @export
 #' @rdname transformations
 #' @examples
-#' image_flatten(image_background(logo, "pink"))
-image_background <- function(image, color){
+#' image_background(logo, "pink", flatten = TRUE)
+image_background <- function(image, color, flatten = FALSE){
   assert_image(image)
-  magick_image_background(image, color)
+  out <- magick_image_background(image, color)
+  if(isTRUE(flatten)){
+    image_flatten(out)
+  } else {
+    return(out)
+  }
 }
 
 #' @export
@@ -243,6 +248,18 @@ image_chop <- function(image, geometry){
 image_colorize <- function(image, opacity, color){
   assert_image(image)
   magick_image_colorize(image, opacity, color)
+}
+
+#' @export
+#' @rdname transformations
+#' @param pagesize geometry string with preferred size and location of an image canvas.
+#' @param density geometry string with vertical and horizontal resolution in pixels of
+#' the image. Specifies an image density when decoding a Postscript or PDF.
+image_page <- function(image, pagesize = NULL, density = NULL){
+  assert_image(image)
+  pagesize <- as.character(pagesize)
+  density <- as.character(density)
+  magick_image_page(image, pagesize, density)
 }
 
 #' @export

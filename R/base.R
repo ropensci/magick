@@ -57,7 +57,7 @@
   image <- x[1]
   # flatten can change length/dimensions!
   if(isTRUE(flatten)){
-    image <- magick_image_flatten(image)
+    image <- image_flatten(image)
   }
   info <- image_info(image)
   bitmap <- as.character(image_write(image, format = "rgb"))

@@ -105,8 +105,8 @@ magick_image_coalesce <- function(image) {
     .Call('magick_magick_image_coalesce', PACKAGE = 'magick', image)
 }
 
-magick_image_flatten <- function(image) {
-    .Call('magick_magick_image_flatten', PACKAGE = 'magick', image)
+magick_image_flatten <- function(input, composite) {
+    .Call('magick_magick_image_flatten', PACKAGE = 'magick', input, composite)
 }
 
 magick_image_fft <- function(image) {
@@ -223,6 +223,10 @@ magick_image_contrast <- function(input, sharpen) {
 
 magick_image_background <- function(input, color) {
     .Call('magick_magick_image_background', PACKAGE = 'magick', input, color)
+}
+
+magick_image_page <- function(input, pagesize, density) {
+    .Call('magick_magick_image_page', PACKAGE = 'magick', input, pagesize, density)
 }
 
 magick_image_crop <- function(input, geometry) {

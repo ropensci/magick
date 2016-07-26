@@ -37,7 +37,7 @@ image_average(image)
 
 image_coalesce(image)
 
-image_flatten(image)
+image_flatten(image, operator = NULL)
 
 image_fft(image)
 
@@ -73,6 +73,9 @@ transparency with background color.}
 \item{browser}{argument passed to \link[utils:browseURL]{browseURL}}
 
 \item{stack}{place images top-to-bottom (TRUE) or left-to-right (FALSE)}
+
+\item{operator}{string with a
+\href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}.}
 
 \item{map}{reference image to map colors from}
 

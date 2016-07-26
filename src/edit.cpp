@@ -31,7 +31,6 @@ Rcpp::RawVector magick_image_write( XPtrImage input, Rcpp::CharacterVector forma
   XPtrImage image = copy(input);
   if(format.size())
     for_each ( image->begin(), image->end(), Magick::magickImage(std::string(format[0])));
-  Rprintf("format ok\n");
   if(quality.size())
     for_each ( image->begin(), image->end(), Magick::qualityImage(quality[0]));
   Magick::Blob output;
@@ -84,8 +83,11 @@ XPtrImage magick_image_coalesce( XPtrImage image){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_flatten( XPtrImage image){
+XPtrImage magick_image_flatten( XPtrImage input, Rcpp::CharacterVector composite){
   Frame frame;
+  XPtrImage image = copy(input);
+  if(composite.size())
+    for_each ( image->begin(), image->end(), Magick::composeImage(Composite(std::string(composite[0]).c_str())));
   flattenImages( &frame, image->begin(), image->end());
   XPtrImage out = create();
   out->push_back(frame);

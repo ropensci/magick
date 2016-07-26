@@ -307,13 +307,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_flatten
-XPtrImage magick_image_flatten(XPtrImage image);
-RcppExport SEXP magick_magick_image_flatten(SEXP imageSEXP) {
+XPtrImage magick_image_flatten(XPtrImage input, Rcpp::CharacterVector composite);
+RcppExport SEXP magick_magick_image_flatten(SEXP inputSEXP, SEXP compositeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< XPtrImage >::type image(imageSEXP);
-    __result = Rcpp::wrap(magick_image_flatten(image));
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type composite(compositeSEXP);
+    __result = Rcpp::wrap(magick_image_flatten(input, composite));
     return __result;
 END_RCPP
 }
@@ -663,6 +664,19 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< const char * >::type color(colorSEXP);
     __result = Rcpp::wrap(magick_image_background(input, color));
+    return __result;
+END_RCPP
+}
+// magick_image_page
+XPtrImage magick_image_page(XPtrImage input, Rcpp::CharacterVector pagesize, Rcpp::CharacterVector density);
+RcppExport SEXP magick_magick_image_page(SEXP inputSEXP, SEXP pagesizeSEXP, SEXP densitySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type pagesize(pagesizeSEXP);
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type density(densitySEXP);
+    __result = Rcpp::wrap(magick_image_page(input, pagesize, density));
     return __result;
 END_RCPP
 }

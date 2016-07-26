@@ -131,11 +131,12 @@ XPtrImage magick_image_flop( XPtrImage input){
 // [[Rcpp::export]]
 XPtrImage magick_image_fill( XPtrImage input, const char * color, const char * point, double fuzz){
   XPtrImage output = copy(input);
-  if(fuzz != 0){
+  if(fuzz != 0)
     for_each ( output->begin(), output->end(), Magick::colorFuzzImage(fuzz));
-  }
   for_each ( output->begin(), output->end(), Magick::floodFillColorImage(
       Magick::Geometry(Geom(point)), Color(color)));
+  if(fuzz != 0)
+    for_each ( output->begin(), output->end(), Magick::colorFuzzImage(input->front().colorFuzz()));
   return output;
 }
 
@@ -217,6 +218,16 @@ XPtrImage magick_image_contrast( XPtrImage input, size_t sharpen){
 XPtrImage magick_image_background( XPtrImage input, const char * color){
   XPtrImage output = copy(input);
   for_each (output->begin(), output->end(), Magick::backgroundColorImage(Color(color)));
+  return output;
+}
+
+// [[Rcpp::export]]
+XPtrImage magick_image_page( XPtrImage input, Rcpp::CharacterVector pagesize, Rcpp::CharacterVector density){
+  XPtrImage output = copy(input);
+  if(pagesize.size())
+    for_each (output->begin(), output->end(), Magick::pageImage(Geom(pagesize[0])));
+  if(density.size())
+    for_each (output->begin(), output->end(), Magick::densityImage(Geom(density[0])));
   return output;
 }
 
