@@ -32,6 +32,8 @@ XPtrImage create (){
 
 // [[Rcpp::export]]
 XPtrImage copy (XPtrImage image){
+  if(!Rf_inherits(image, "magick-image"))
+    throw std::runtime_error("Image is not a magick-image object");
   Image *out = new Image(*image);
   XPtrImage ptr(out);
   ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
