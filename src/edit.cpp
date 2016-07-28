@@ -13,6 +13,13 @@ XPtrImage magick_image_read(Rcpp::RawVector x){
 }
 
 // [[Rcpp::export]]
+XPtrImage magick_image_readpath(const char * path){
+  XPtrImage image = create();
+  Magick::readImages(image.get(), path);
+  return image;
+}
+
+// [[Rcpp::export]]
 XPtrImage magick_image_read_list(Rcpp::List list){
   XPtrImage image = create();
   for(int i = 0; i < list.size(); i++) {

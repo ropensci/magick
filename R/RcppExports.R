@@ -81,6 +81,10 @@ magick_image_read <- function(x) {
     .Call('magick_magick_image_read', PACKAGE = 'magick', x)
 }
 
+magick_image_readpath <- function(path) {
+    .Call('magick_magick_image_readpath', PACKAGE = 'magick', path)
+}
+
 magick_image_read_list <- function(list) {
     .Call('magick_magick_image_read_list', PACKAGE = 'magick', list)
 }

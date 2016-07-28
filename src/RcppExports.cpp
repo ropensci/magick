@@ -236,6 +236,17 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// magick_image_readpath
+XPtrImage magick_image_readpath(const char * path);
+RcppExport SEXP magick_magick_image_readpath(SEXP pathSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const char * >::type path(pathSEXP);
+    __result = Rcpp::wrap(magick_image_readpath(path));
+    return __result;
+END_RCPP
+}
 // magick_image_read_list
 XPtrImage magick_image_read_list(Rcpp::List list);
 RcppExport SEXP magick_magick_image_read_list(SEXP listSEXP) {
