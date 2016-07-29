@@ -1,9 +1,13 @@
-#' Coder Info
+#' Magick Configuration
 #'
-#' Provide information regarding ImageMagick support for an image format.
-#' Raises an error for unsupported formats.
+#' ImageMagick can be configured to support various additional tool and formats
+#' via external libraries. These funtions show which features ImageMagick supports
+#' on your system.
+#'
+#' Note that \code{coder_info} raises an error for unsupported formats.
 #'
 #' @export
+#' @rdname config
 #' @param format image format such as \code{png}, \code{tiff} or \code{pdf}.
 #' @references \url{https://www.imagemagick.org/Magick++/CoderInfo.html}
 #' @examples coder_info("png")
@@ -13,4 +17,10 @@
 #' coder_info("gif")
 coder_info <- function(format){
   magick_coder_info(format)
+}
+
+#' @rdname config
+#' @export
+magick_config <- function(){
+  magick_config_internal()
 }

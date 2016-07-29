@@ -225,6 +225,16 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// magick_config_internal
+Rcpp::List magick_config_internal();
+RcppExport SEXP magick_magick_config_internal() {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    __result = Rcpp::wrap(magick_config_internal());
+    return __result;
+END_RCPP
+}
 // magick_image_read
 XPtrImage magick_image_read(Rcpp::RawVector x);
 RcppExport SEXP magick_magick_image_read(SEXP xSEXP) {

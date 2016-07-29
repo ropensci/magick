@@ -77,6 +77,10 @@ magick_coder_info <- function(format) {
     .Call('magick_magick_coder_info', PACKAGE = 'magick', format)
 }
 
+magick_config_internal <- function() {
+    .Call('magick_magick_config_internal', PACKAGE = 'magick')
+}
+
 magick_image_read <- function(x) {
     .Call('magick_magick_image_read', PACKAGE = 'magick', x)
 }

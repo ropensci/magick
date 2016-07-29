@@ -11,3 +11,125 @@ Rcpp::List magick_coder_info(Rcpp::String format){
     Rcpp::_["isMultiFrame"] = Rcpp::String(info.isMultiFrame())
   );
 }
+
+/* Delegates are defined in include/ImageMagick-6/magick/magick-baseconfig.h */
+
+// [[Rcpp::export]]
+Rcpp::List magick_config_internal(){
+  Rcpp::List out = Rcpp::List::create();
+#ifdef MAGICKCORE_BUILD_MODULES
+  out["modules"] = true;
+#else
+  out["modules"] = false;
+#endif
+
+#ifdef MAGICKCORE_CAIRO_DELEGATE
+  out["cairo"] = true;
+#else
+  out["cairo"] = false;
+#endif
+
+#ifdef MAGICKCORE_FONTCONFIG_DELEGATE
+  out["fontconfig"] = true;
+#else
+  out["fontonfig"] = false;
+#endif
+
+#ifdef MAGICKCORE_FREETYPE_DELEGATE
+  out["freetype"] = true;
+#else
+  out["freetype"] = false;
+#endif
+
+#ifdef FFTW_DELEGATE
+  out["fftw"] = true;
+#else
+  out["fftw"] = false;
+#endif
+
+#ifdef GS_DELEGATE
+  out["ghostscript"] = true;
+#else
+  out["ghostscript"] = false;
+#endif
+
+#ifdef MAGICKCORE_JPEG_DELEGATE
+  out["jpeg"] = true;
+#else
+  out["jpeg"] = false;
+#endif
+
+#ifdef LCMS_DELEGATE
+  out["lcms"] = true;
+#else
+  out["lcms"] = false;
+#endif
+
+#ifdef LIBOPENJP2_DELEGATE
+  out["libopenjp2"] = true;
+#else
+  out["libopenjp2"] = false;
+#endif
+
+#ifdef MAGICKCORE_LZMA_DELEGATE
+  out["lzma"] = true;
+#else
+  out["lzma"] = false;
+#endif
+
+#ifdef MAGICKCORE_PANGOCAIRO_DELEGATE
+  out["pangocairo"] = true;
+#else
+  out["pangocairo"] = false;
+#endif
+
+#ifdef MAGICKCORE_PANGO_DELEGATE
+  out["pango"] = true;
+#else
+  out["pango"] = false;
+#endif
+
+#ifdef MAGICKCORE_PNG_DELEGATE
+  out["png"] = true;
+#else
+  out["png"] = false;
+#endif
+
+#ifdef MAGICKCORE_RSVG_DELEGATE
+  out["rsvg"] = true;
+#else
+  out["rsvg"] = false;
+#endif
+
+#ifdef MAGICKCORE_TIFF_DELEGATE
+  out["tiff"] = true;
+#else
+  out["tiff"] = false;
+#endif
+
+#ifdef WEBP_DELEGATE
+  out["webp"] = true;
+#else
+  out["webp"] = false;
+#endif
+
+#ifdef WMF_DELEGATE
+  out["wmf"] = true;
+#else
+  out["wmf"] = false;
+#endif
+
+#ifdef X11_DELEGATE
+  out["x11"] = true;
+#else
+  out["x11"] = false;
+#endif
+
+#ifdef MAGICKCORE_XML_DELEGATE
+  out["xml"] = true;
+#else
+  out["xml"] = false;
+#endif
+
+  return out;
+}
