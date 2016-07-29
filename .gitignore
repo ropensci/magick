@@ -11,6 +11,7 @@
 *.jpg
 *.pdf
 *.tiff
+*.svg
 !inst/*.gif
 !inst/*.png
 inst/etc
