@@ -45,8 +45,9 @@ image_read <- function(path){
     magick_image_read(buf)
   }
   if(!isTRUE(magick_config()$rsvg)){
-    if(any(grepl("svg", tolower(image_info(image)$format)))){
-      warning("ImageMagick was built without librsvg support which causes poor qualty of SVG rendering. Use the 'rsvg' package instead.")
+    if(any(grepl("\\.svg$", tolower(path))) || any(grepl("svg|mvg", tolower(image_info(image)$format)))){
+      warning("ImageMagick was built without librsvg which causes poor qualty of SVG rendering.
+  For better results, rebuild ImageMagick --with-librsvg or use the 'rsvg' package in R.")
     }
   }
   return(image)
