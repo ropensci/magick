@@ -37,13 +37,19 @@
 #' par(ask=FALSE)
 #' plot(raster)
 image_read <- function(path){
-  if(is.character(path)){
+  image <- if(is.character(path)){
     buflist <- lapply(path, read_path)
     magick_image_read_list(buflist)
   } else {
     buf <- read_path(path)
     magick_image_read(buf)
   }
+  if(!isTRUE(magick_config()$rsvg)){
+    if(any(grepl("svg", tolower(image_info(image)$format)))){
+      warning("ImageMagick was built without librsvg support which causes poor qualty of SVG rendering. Use the 'rsvg' package instead.")
+    }
+  }
+  return(image)
 }
 
 #' @export
