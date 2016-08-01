@@ -1,8 +1,9 @@
 0.2
-  - Build binary package on OS-X --with-zero-configuation.
-    This fixes varoius "config xml file not found" errors.
-  - Add as.raster() method for images.
+  - Build binary package on OS-X --with-zero-configuation (fixes "config xml file" errors).
+  - image_read now reads straight from disk rather than via R.
+  - Add as.raster() method for images
   - image_write gains a 'flatten' argument
+  - Lots of small tweaks here and there
 
 0.1
   - Initial CRAN release
