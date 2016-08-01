@@ -61,7 +61,8 @@ image_animate(image, fps = 10, loop = 0, dispose = c("background",
 
 \item{image}{object returned by \code{image_read}}
 
-\item{format}{output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.}
+\item{format}{output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.
+Can also be a bitmap type such as \code{rgba} or \code{rgb}.}
 
 \item{quality}{number between 0 and 100 for jpeg quality. Defaults to 75.}
 

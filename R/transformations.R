@@ -325,6 +325,7 @@ image_annotate <- function(image, text, gravity = "northwest", location = "+0+0"
 #' @export
 #' @rdname transformations
 #' @param format output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.
+#' Can also be a bitmap type such as \code{rgba} or \code{rgb}.
 image_convert <- function(image, format){
   assert_image(image)
   magick_image_format(image, format)

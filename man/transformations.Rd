@@ -153,7 +153,8 @@ the image. Specifies an image density when decoding a Postscript or PDF.}
 
 \item{boxcolor}{background color that annotation text is rendered on.}
 
-\item{format}{output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.}
+\item{format}{output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.
+Can also be a bitmap type such as \code{rgba} or \code{rgb}.}
 }
 \description{
 Vectorized functions for transforming images. These functions apply
