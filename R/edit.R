@@ -46,15 +46,7 @@ image_read <- function(path){
     path <- vapply(path, replace_url, character(1))
     magick_image_readpath(path)
   } else if(is.array(path)){
-    if(length(dim(path)) != 3)
-      stop("Only 3D arrays can be converted to bitmaps")
-    if(is.raw(path)){
-      magick_image_readbitmap_raw(path)
-    } else if(is.double(path)){
-      magick_image_readbitmap_double(aperm(path))
-    } else {
-      stop("Unsupported bitmap array type")
-    }
+    image_readbitmap(path)
   } else if(is.raw(path)) {
     magick_image_readbin(path)
   } else {
@@ -67,6 +59,27 @@ For better results, rebuild ImageMagick --with-librsvg or use the 'rsvg' package
     }
   }
   return(image)
+}
+
+image_readbitmap <- function(x){
+  if(length(dim(x)) != 3)
+    stop("Only 3D arrays can be converted to bitmaps")
+  if(is.raw(x)){
+    magick_image_readbitmap_raw(x)
+  } else if(is.double(x)){
+    magick_image_readbitmap_double(aperm(x))
+  } else {
+    stop("Unsupported bitmap array type")
+  }
+}
+
+#' @export
+#' @param width rendered bitmap size
+#' @param height rendered bitmap size
+#' @rdname edit
+image_rsvg <- function(path, width = NULL, height = NULL){
+  bitmap <- rsvg::rsvg_raw(path, width = width, height = height)
+  magick_image_readbitmap_raw(bitmap)
 }
 
 #' @export

@@ -17,12 +17,15 @@
 \alias{image_morph}
 \alias{image_mosaic}
 \alias{image_read}
+\alias{image_rsvg}
 \alias{image_write}
 \alias{imagemagick}
 \alias{magick}
 \title{Image Editing}
 \usage{
 image_read(path)
+
+image_rsvg(path, width = NULL, height = NULL)
 
 image_write(image, path = NULL, format = NULL, quality = NULL,
   flatten = FALSE)
@@ -58,6 +61,10 @@ image_animate(image, fps = 10, loop = 0, dispose = c("background",
 }
 \arguments{
 \item{path}{file path, URL, or raw vector with image data}
+
+\item{width}{rendered bitmap size}
+
+\item{height}{rendered bitmap size}
 
 \item{image}{object returned by \code{image_read}}
 
