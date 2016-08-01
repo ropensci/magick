@@ -81,8 +81,8 @@ magick_config_internal <- function() {
     .Call('magick_magick_config_internal', PACKAGE = 'magick')
 }
 
-magick_image_readbin <- function(x, format) {
-    .Call('magick_magick_image_readbin', PACKAGE = 'magick', x, format)
+magick_image_readbin <- function(x) {
+    .Call('magick_magick_image_readbin', PACKAGE = 'magick', x)
 }
 
 magick_image_readpath <- function(paths) {

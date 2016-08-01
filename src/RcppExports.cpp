@@ -236,14 +236,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_readbin
-XPtrImage magick_image_readbin(Rcpp::RawVector x, const char * format);
-RcppExport SEXP magick_magick_image_readbin(SEXP xSEXP, SEXP formatSEXP) {
+XPtrImage magick_image_readbin(Rcpp::RawVector x);
+RcppExport SEXP magick_magick_image_readbin(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< Rcpp::RawVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< const char * >::type format(formatSEXP);
-    __result = Rcpp::wrap(magick_image_readbin(x, format));
+    __result = Rcpp::wrap(magick_image_readbin(x));
     return __result;
 END_RCPP
 }

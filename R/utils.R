@@ -17,6 +17,32 @@ is_url <- function(path){
   grepl("https?://", path)
 }
 
+replace_url <- function(path){
+  if(is_url(path)){
+    return(download_url(path))
+  } else {
+    return(path)
+  }
+}
+
+download_url <- function(url){
+  req <- curl::curl_fetch_memory(url)
+  if(req$status >= 400)
+    stop(sprintf("Failed to download %s (HTTP %d)", url, req$status))
+  headers <- tolower(curl::parse_headers(req$headers))
+  ctype <- headers[grepl("^content.type", headers)]
+  ctype <- sub("content.type ?:? +", "", ctype)
+  matches <- match(ctype, mimetypes$type)
+  extension <- if(length(matches) && !is.na(matches)){
+    sub("*.", ".", mimetypes$pattern[matches[1]], fixed = TRUE)
+  } else {
+    basename(url)
+  }
+  filename <- tempfile(fileext = extension)
+  writeBin(req$content, filename)
+  return(filename)
+}
+
 read_url <- function(path){
   req <- curl::curl_fetch_memory(path)
   if(req$status >= 400)
