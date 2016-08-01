@@ -121,6 +121,11 @@ image_write(frink2, "output.png")
 raster <- as.raster(frink)
 par(ask=FALSE)
 plot(raster)
+
+# Read bitmap arrays
+image_read(png::readPNG(system.file("Rlogo.png", package = "magick")))
+image_read(rsvg::rsvg(system.file("tiger.svg", package = "magick")))
+image_read(webp::read_webp(system.file("example.webp", package = "magick")))
 # Create thumbnails from GIF
 banana <- image_read(system.file("banana.gif", package = "magick"))
 length(banana)

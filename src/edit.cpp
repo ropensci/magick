@@ -5,6 +5,34 @@
 
 #include "magick_types.h"
 
+XPtrImage magick_image_bitmap(void * data, Magick::StorageType type, size_t slices, size_t width, size_t height){
+  const char * format;
+  switch ( slices ){
+    case 1 : format = "G"; break;
+    case 2 : format = "GA"; break;
+    case 3 : format = "RGB"; break;
+    case 4 : format = "RGBA"; break;
+    default: throw std::runtime_error("Invalid number of channels (must be 4 or less): " + std::to_string(slices));
+  }
+  Frame frame(width, height, format, type , data);
+  frame.magick("png");
+  XPtrImage image = create();
+  image->push_back(frame);
+  return image;
+}
+
+// [[Rcpp::export]]
+XPtrImage magick_image_readbitmap_raw(Rcpp::RawVector x){
+  Rcpp::IntegerVector dims(x.attr("dim"));
+  return magick_image_bitmap(x.begin(), Magick::CharPixel, dims[0], dims[1], dims[2]);
+}
+
+// [[Rcpp::export]]
+XPtrImage magick_image_readbitmap_double(Rcpp::NumericVector x){
+  Rcpp::IntegerVector dims(x.attr("dim"));
+  return magick_image_bitmap(x.begin(), Magick::DoublePixel, dims[0], dims[1], dims[2]);
+}
+
 // [[Rcpp::export]]
 XPtrImage magick_image_readbin(Rcpp::RawVector x){
   XPtrImage image = create();

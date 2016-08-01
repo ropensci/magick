@@ -21,5 +21,6 @@ Imports:
 LinkingTo: Rcpp
 Suggests:
     rsvg,
-    webp
+    webp,
+    png
 RoxygenNote: 5.0.1

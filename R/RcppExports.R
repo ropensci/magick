@@ -81,6 +81,14 @@ magick_config_internal <- function() {
     .Call('magick_magick_config_internal', PACKAGE = 'magick')
 }
 
+magick_image_readbitmap_raw <- function(x) {
+    .Call('magick_magick_image_readbitmap_raw', PACKAGE = 'magick', x)
+}
+
+magick_image_readbitmap_double <- function(x) {
+    .Call('magick_magick_image_readbitmap_double', PACKAGE = 'magick', x)
+}
+
 magick_image_readbin <- function(x) {
     .Call('magick_magick_image_readbin', PACKAGE = 'magick', x)
 }

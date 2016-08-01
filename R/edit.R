@@ -36,10 +36,25 @@
 #' raster <- as.raster(frink)
 #' par(ask=FALSE)
 #' plot(raster)
+#'
+#' # Read bitmap arrays
+#' image_read(png::readPNG(system.file("Rlogo.png", package = "magick")))
+#' image_read(rsvg::rsvg(system.file("tiger.svg", package = "magick")))
+#' image_read(webp::read_webp(system.file("example.webp", package = "magick")))
 image_read <- function(path){
   image <- if(is.character(path)){
     path <- vapply(path, replace_url, character(1))
     magick_image_readpath(path)
+  } else if(is.array(path)){
+    if(length(dim(path)) != 3)
+      stop("Only 3D arrays can be converted to bitmaps")
+    if(is.raw(path)){
+      magick_image_readbitmap_raw(path)
+    } else if(is.double(path)){
+      magick_image_readbitmap_double(aperm(path))
+    } else {
+      stop("Unsupported bitmap array type")
+    }
   } else if(is.raw(path)) {
     magick_image_readbin(path)
   } else {
@@ -48,7 +63,7 @@ image_read <- function(path){
   if(!isTRUE(magick_config()$rsvg)){
     if(any(grepl("\\.svg$", tolower(path))) || any(grepl("svg|mvg", tolower(image_info(image)$format)))){
       warning("ImageMagick was built without librsvg which causes poor qualty of SVG rendering.
-  For better results, rebuild ImageMagick --with-librsvg or use the 'rsvg' package in R.", call. = FALSE)
+For better results, rebuild ImageMagick --with-librsvg or use the 'rsvg' package in R.", call. = FALSE)
     }
   }
   return(image)
