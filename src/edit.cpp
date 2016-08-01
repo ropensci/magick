@@ -6,9 +6,12 @@
 #include "magick_types.h"
 
 // [[Rcpp::export]]
-XPtrImage magick_image_readbin(Rcpp::RawVector x){
+XPtrImage magick_image_readbin(Rcpp::RawVector x, const char * format){
   XPtrImage image = create();
-  Magick::readImages(image.get(), Magick::Blob(x.begin(), x.length()));
+  Magick::ReadOptions options = Magick::ReadOptions();
+  if(strlen(format))
+    strncpy(options.imageInfo()->magick, format, 100);
+  Magick::readImages(image.get(), Magick::Blob(x.begin(), x.length()), options);
   return image;
 }
 

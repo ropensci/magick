@@ -40,7 +40,7 @@ image_read <- function(path){
   image <- if(is.character(path)){
     magick_image_readpath(path)
   } else if(is.raw(path)) {
-    magick_image_readbin(path)
+    magick_image_readbin(path, "")
   } else {
     stop("path must be URL, filename or raw vector")
   }
