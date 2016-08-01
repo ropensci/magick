@@ -38,11 +38,11 @@
 #' plot(raster)
 image_read <- function(path){
   image <- if(is.character(path)){
-    buflist <- lapply(path, read_path)
-    magick_image_read_list(buflist)
+    magick_image_readpath(path)
+  } else if(is.raw(path)) {
+    magick_image_readbin(path)
   } else {
-    buf <- read_path(path)
-    magick_image_read(buf)
+    stop("path must be URL, filename or raw vector")
   }
   if(!isTRUE(magick_config()$rsvg)){
     if(any(grepl("\\.svg$", tolower(path))) || any(grepl("svg|mvg", tolower(image_info(image)$format)))){

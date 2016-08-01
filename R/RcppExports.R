@@ -81,12 +81,12 @@ magick_config_internal <- function() {
     .Call('magick_magick_config_internal', PACKAGE = 'magick')
 }
 
-magick_image_read <- function(x) {
-    .Call('magick_magick_image_read', PACKAGE = 'magick', x)
+magick_image_readbin <- function(x) {
+    .Call('magick_magick_image_readbin', PACKAGE = 'magick', x)
 }
 
-magick_image_readpath <- function(path) {
-    .Call('magick_magick_image_readpath', PACKAGE = 'magick', path)
+magick_image_readpath <- function(paths) {
+    .Call('magick_magick_image_readpath', PACKAGE = 'magick', paths)
 }
 
 magick_image_read_list <- function(list) {

@@ -6,16 +6,17 @@
 #include "magick_types.h"
 
 // [[Rcpp::export]]
-XPtrImage magick_image_read(Rcpp::RawVector x){
+XPtrImage magick_image_readbin(Rcpp::RawVector x){
   XPtrImage image = create();
   Magick::readImages(image.get(), Magick::Blob(x.begin(), x.length()));
   return image;
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_readpath(const char * path){
+XPtrImage magick_image_readpath(Rcpp::CharacterVector paths){
   XPtrImage image = create();
-  Magick::readImages(image.get(), path);
+  for(int i = 0; i < paths.size(); i++)
+    Magick::readImages(image.get(), std::string(paths[i]));
   return image;
 }
 

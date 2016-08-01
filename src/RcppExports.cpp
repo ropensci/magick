@@ -235,25 +235,25 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// magick_image_read
-XPtrImage magick_image_read(Rcpp::RawVector x);
-RcppExport SEXP magick_magick_image_read(SEXP xSEXP) {
+// magick_image_readbin
+XPtrImage magick_image_readbin(Rcpp::RawVector x);
+RcppExport SEXP magick_magick_image_readbin(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< Rcpp::RawVector >::type x(xSEXP);
-    __result = Rcpp::wrap(magick_image_read(x));
+    __result = Rcpp::wrap(magick_image_readbin(x));
     return __result;
 END_RCPP
 }
 // magick_image_readpath
-XPtrImage magick_image_readpath(const char * path);
-RcppExport SEXP magick_magick_image_readpath(SEXP pathSEXP) {
+XPtrImage magick_image_readpath(Rcpp::CharacterVector paths);
+RcppExport SEXP magick_magick_image_readpath(SEXP pathsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< const char * >::type path(pathSEXP);
-    __result = Rcpp::wrap(magick_image_readpath(path));
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type paths(pathsSEXP);
+    __result = Rcpp::wrap(magick_image_readpath(paths));
     return __result;
 END_RCPP
 }
