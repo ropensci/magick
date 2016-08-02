@@ -39,6 +39,7 @@ addons:
       - libwebp-dev
 
 r_github_packages:
+  - jeroenooms/rsvg
   - jimhester/covr
 
 warnings_are_errors: true
