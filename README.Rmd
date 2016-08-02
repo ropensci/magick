@@ -2,12 +2,12 @@
 
 ##### *Advanced Image-Processing in R*
 
-[![Build Status](https://travis-ci.org/jeroenooms/magick.svg?branch=master)](https://travis-ci.org/jeroenooms/magick)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jeroenooms/magick?branch=master&svg=true)](https://ci.appveyor.com/project/jeroenooms/magick)
-[![Coverage Status](https://codecov.io/github/jeroenooms/magick/coverage.svg?branch=master)](https://codecov.io/github/jeroenooms/magick?branch=master)
+[![Build Status](https://travis-ci.org/ropensci/magick.svg?branch=master)](https://travis-ci.org/ropensci/magick)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/magick?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/magick)
+[![Coverage Status](https://codecov.io/github/ropensci/magick/coverage.svg?branch=master)](https://codecov.io/github/ropensci/magick?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/magick)](https://cran.r-project.org/package=magick)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/magick)](https://cran.r-project.org/package=magick)
-[![Github Stars](https://img.shields.io/github/stars/jeroenooms/magick.svg?style=social&label=Github)](https://github.com/jeroenooms/magick)
+[![Github Stars](https://img.shields.io/github/stars/ropensci/magick.svg?style=social&label=Github)](https://github.com/ropensci/magick)
 
 > Bindings to ImageMagick: the most comprehensive open-source image
   processing library available. Supports many common formats (png, jpeg, tiff,

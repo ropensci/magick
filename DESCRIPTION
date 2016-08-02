@@ -12,8 +12,8 @@ Description: Bindings to ImageMagick: the most comprehensive open-source image
     or animation. In RStudio images are automatically previewed when printed to
     the console, resulting in an interactive editing environment.
 License: MIT + file LICENSE
-URL: https://github.com/jeroenooms/magick#readme
-BugReports: https://github.com/jeroenooms/magick/issues
+URL: https://github.com/ropensci/magick#readme
+BugReports: https://github.com/ropensci/magick/issues
 SystemRequirements: ImageMagick++: ImageMagick-c++-devel (rpm) or libmagick++-dev (deb)
 Imports:
     Rcpp (>= 0.12),
