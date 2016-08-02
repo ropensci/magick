@@ -24,6 +24,8 @@ matrix:
       osx_image: xcode7.2
       latex: false
       brew_packages: imagemagick --with-fontconfig
+      before_install:
+        - brew install webp librsvg
     - os: osx
       osx_image: beta-xcode6.1
       disable_homebrew: true
