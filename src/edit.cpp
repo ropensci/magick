@@ -12,7 +12,7 @@ XPtrImage magick_image_bitmap(void * data, Magick::StorageType type, size_t slic
     case 2 : format = "GA"; break;
     case 3 : format = "RGB"; break;
     case 4 : format = "RGBA"; break;
-    default: throw std::runtime_error("Invalid number of channels (must be 4 or less): " + std::to_string((long long unsigned int) slices));
+    default: throw std::runtime_error("Invalid number of channels (must be 4 or less)");
   }
   Frame frame(width, height, format, type , data);
   frame.magick("png");

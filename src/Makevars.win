@@ -9,12 +9,19 @@ PKG_CXXFLAGS=-DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16
 CXX_STD=CXX11
 
 PKG_LIBS= \
-  -L$(IMAGEMAGICK)/lib${LIBBUILD} \
-  -L$(IMAGEMAGICK)/lib${R_ARCH} \
-  -lMagick++-6.Q16 -lMagickWand-6.Q16 -lMagickCore-6.Q16 \
-  -lfftw3 -lwebp -lpng -ljpeg -ltiff \
-  -lfreetype -lharfbuzz -lxml2 -liconv -llzma -lbz2 -lz \
-  -lgdi32 -lws2_32 -lOleAut32 -pthread
+	-L$(IMAGEMAGICK)/lib${LIBBUILD} \
+	-L$(IMAGEMAGICK)/lib${R_ARCH} \
+	-lMagick++-6.Q16 -lMagickWand-6.Q16 -lMagickCore-6.Q16 \
+	-lfftw3 -llcms2 -ljpeg -ltiff -lwebp \
+	-lrsvg-2 \
+	-lxml2 -llzma \
+	-lpangocairo-1.0 -lpango-1.0 -lpangoft2-1.0 -lpangowin32-1.0 \
+	-lcairo -lfontconfig -lfreetype -lpixman-1 -lexpat -lbz2 -lz \
+	-lharfbuzz -lcroco-0.6 -lgdk_pixbuf-2.0 \
+	-lgio-2.0 -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 \
+	-lffi -lpcre -lpng16 -lintl -liconv \
+	-lusp10 -liphlpapi -lgdiplus -lgdi32 -lole32 -lwinmm -ldnsapi -lws2_32 \
+	-pthread
 
 all: clean winlibs
 
