@@ -73,10 +73,7 @@ image_readbitmap <- function(x){
   }
 }
 
-#' @export
-#' @param width rendered bitmap size
-#' @param height rendered bitmap size
-#' @rdname edit
+# Not exported for now
 image_rsvg <- function(path, width = NULL, height = NULL){
   bitmap <- rsvg::rsvg_raw(path, width = width, height = height)
   magick_image_readbitmap_raw(bitmap)
