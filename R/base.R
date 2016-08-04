@@ -21,8 +21,8 @@
 #' @export
 "print.bitmap" <- function(x, ...){
   dims <- dim(x)
-  cat(sprintf("%d channel %dx%d bitmap array:\n", dims[1], dims[2], dims[3]))
-  NextMethod()
+  cat(sprintf("%d channel %dx%d bitmap array:", dims[1], dims[2], dims[3]))
+  str(x)
 }
 
 #' @export
