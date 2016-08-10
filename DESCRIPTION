@@ -1,7 +1,7 @@
 Package: magick
 Type: Package
 Title: Advanced Image-Processing in R
-Version: 0.2
+Version: 0.2.9000
 Author: Jeroen Ooms
 Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>
 Description: Bindings to ImageMagick: the most comprehensive open-source image
