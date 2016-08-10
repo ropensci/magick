@@ -1,3 +1,6 @@
+0.2.1
+  - Try to fix the mac binary package
+
 0.2
   - Build binary package on OS-X --with-zero-configuation (fixes "config xml file" errors).
   - image_read now reads straight from disk rather than via R.
