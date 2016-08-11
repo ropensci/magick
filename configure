@@ -64,28 +64,38 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     MAC_VERSION=$(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}')
     HOMEBREW_CACHE="/tmp" $BREW install pkg-config
     export LIBS="-Z -L$BREWDIR/lib -L$BREWDIR/syslib -F/Library/Frameworks -F/System/Library/Frameworks"
+    export PKG_CONFIG="$BREWDIR/bin/pkg-config"
     export PKG_CONFIG_LIBDIR="$BREWDIR/lib/pkgconfig:/usr/lib/pkgconfig:$BREWDIR/Library/Homebrew/os/mac/pkgconfig/$MAC_VERSION"
     HOMEBREW_CACHE="/tmp" $BREW install $BREW_DEPS $EXTRA_DEPS librsvg ghostscript fftw webp --force-bottle 2>&1 | perl -pe 's/Warning/Note/gi'
     HOMEBREW_CACHE="/tmp" $BREW install imagemagick --without-modules --with-librsvg --with-pango --with-gslib \
       --with-fftw --with-webp --with-fontconfig --with-zero-configuration 2>&1 | perl -pe 's/Warning/Note/gi'
 
-    # Get build flags from pkg-config
-    PKG_CONFIG="$BREWDIR/bin/pkg-config"
-    PKG_CFLAGS=$($PKG_CONFIG --cflags $PKG_CONFIG_NAME)
-    PKG_CFLAGS="$PKG_CFLAGS -DBUILD_AUTOBREW"
-    PKG_LIBS=$($PKG_CONFIG --libs --static $PKG_CONFIG_NAME libpng libcroco-0.6 pangocairo gmodule-2.0)
-    PKG_LIBS="-L$BREWDIR/lib $PKG_LIBS -lexpat" #pkg-config misses a few paths
-    rm -f $BREWDIR/Cellar/*/*/lib/*.dylib
+    # If fail, try to fall back on system version of Magick++
+    unset LIBS
+    if [ $($PKG_CONFIG --exists $PKG_CONFIG_NAME) ]; then
+      # Get the CFLAGS and LIBS
+      PKG_CFLAGS=$($PKG_CONFIG --cflags $PKG_CONFIG_NAME)
+      PKG_CFLAGS="$PKG_CFLAGS -DBUILD_AUTOBREW"
+      PKG_LIBS=$($PKG_CONFIG --libs --static $PKG_CONFIG_NAME libpng libcroco-0.6 pangocairo gmodule-2.0)
+      PKG_LIBS="-L$BREWDIR/lib $PKG_LIBS -lexpat" #pkg-config misses a few paths
+      rm -f $BREWDIR/Cellar/*/*/lib/*.dylib
 
-    # Prevent CRAN builder from linking against old libs in /usr/local/lib
-    for FILE in $BREWDIR/Cellar/*/*/lib/*.a; do
-      BASENAME=$(basename $FILE)
-      LIBNAME=$(echo "${BASENAME%.*}" | cut -c4-)
-      cp -f $FILE $BREWDIR/lib/libbrew$LIBNAME.a
-      echo "created $BREWDIR/lib/libbrew$LIBNAME.a"
-      PKG_LIBS=$(echo $PKG_LIBS | sed "s/-l$LIBNAME /-lbrew$LIBNAME /g")
-    done
-    rm -f $BREWDIR/lib/*.dylib
+      # Prevent CRAN builder from linking against old libs in /usr/local/lib
+      for FILE in $BREWDIR/Cellar/*/*/lib/*.a; do
+        BASENAME=$(basename $FILE)
+        LIBNAME=$(echo "${BASENAME%.*}" | cut -c4-)
+        cp -f $FILE $BREWDIR/lib/libbrew$LIBNAME.a
+        echo "created $BREWDIR/lib/libbrew$LIBNAME.a"
+        PKG_LIBS=$(echo $PKG_LIBS | sed "s/-l$LIBNAME /-lbrew$LIBNAME /g")
+      done
+      rm -f $BREWDIR/lib/*.dylib
+    else
+      echo "Autobrew Failed. Falling back on system Magick++"
+      unset PKG_CONFIG_LIBDIR
+      export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
+      PKG_CFLAGS=$(pkg-config --cflags ${PKG_CONFIG_NAME})
+      PKG_LIBS=$(pkg-config --libs ${PKG_CONFIG_NAME})
+    fi
   fi
 fi
 
