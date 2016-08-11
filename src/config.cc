@@ -107,7 +107,7 @@ Rcpp::List magick_config_internal(){
   out["tiff"] = false;
 #endif
 
-#ifdef WEBP_DELEGATE
+#ifdef MAGICKCORE_WEBP_DELEGATE
   out["webp"] = true;
 #else
   out["webp"] = false;
