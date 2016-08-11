@@ -1,8 +1,8 @@
 R_COMPILED_BY ?=-4.6.3
-IMAGEMAGICK=../windows/imagemagick6-6.9.5-4
+IMAGEMAGICK=../windows/imagemagick7-7.0.2-7
 LIBBUILD=${subst gcc ,-,${R_COMPILED_BY}}${R_ARCH}
 
-PKG_CPPFLAGS=-I$(IMAGEMAGICK)/include/ImageMagick-6 \
+PKG_CPPFLAGS=-I$(IMAGEMAGICK)/include/ImageMagick-7 \
 	-I$(IMAGEMAGICK)/include${LIBBUILD}
 PKG_CXXFLAGS=-DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16
 
@@ -11,7 +11,7 @@ CXX_STD=CXX11
 PKG_LIBS= \
 	-L$(IMAGEMAGICK)/lib${LIBBUILD} \
 	-L$(IMAGEMAGICK)/lib${R_ARCH} \
-	-lMagick++-6.Q16 -lMagickWand-6.Q16 -lMagickCore-6.Q16 \
+	-lMagick++-7.Q16 -lMagickWand-7.Q16 -lMagickCore-7.Q16 \
 	-lfftw3 -llcms2 -ljpeg -ltiff -lwebp \
 	-lrsvg-2 \
 	-lxml2 -llzma \
@@ -20,7 +20,7 @@ PKG_LIBS= \
 	-lharfbuzz -lcroco-0.6 -lgdk_pixbuf-2.0 \
 	-lgio-2.0 -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 \
 	-lffi -lpcre -lpng16 -lintl -liconv \
-	-lusp10 -liphlpapi -lgdiplus -lgdi32 -lole32 -lwinmm -ldnsapi -lws2_32 \
+	-lusp10 -liphlpapi -lgdiplus -lgdi32 -lole32 -lwinmm -ldnsapi -loleaut32 -lws2_32 \
 	-pthread
 
 all: clean winlibs
