@@ -31,6 +31,12 @@ if [ -z "$PKGCONFIG_LIBS" ] && [ $(command -v GraphicsMagick++-config) ]; then
   PKGCONFIG_LIBS=$(GraphicsMagick++-config --libs)
 fi
 
+# Hack for CRAN server
+if [ -e "/Builds/CRAN-QA-Simon" ]; then
+  unset PKGCONFIG_CFLAGS
+  unset PKGCONFIG_LIBS
+fi
+
 # Note that cflags may be empty in case of success
 if [ "$INCLUDE_DIR" ] || [ "$LIB_DIR" ]; then
   echo "Found INCLUDE_DIR and/or LIB_DIR!"
