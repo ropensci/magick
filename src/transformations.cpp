@@ -51,7 +51,7 @@ Magick::Color Color(const char * str){
   return val;
 }
 
-#if MAGICKCORE_MAJOR_VERSION >= 7
+#if MagickLibVersion >= 0x700
 Magick::Point Point(const char * str){
   Magick::Point point(str);
   if(!point.isValid())
@@ -236,7 +236,7 @@ XPtrImage magick_image_page( XPtrImage input, Rcpp::CharacterVector pagesize, Rc
   if(pagesize.size())
     for_each (output->begin(), output->end(), Magick::pageImage(Geom(pagesize[0])));
   if(density.size())
-#if MAGICKCORE_MAJOR_VERSION >= 7
+#if MagickLibVersion >= 0x700
     for_each (output->begin(), output->end(), Magick::densityImage(Point(density[0])));
 #else
     for_each (output->begin(), output->end(), Magick::densityImage(Geom(density[0])));
