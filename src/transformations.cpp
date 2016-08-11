@@ -51,12 +51,14 @@ Magick::Color Color(const char * str){
   return val;
 }
 
+#if MAGICKCORE_MAJOR_VERSION >= 7
 Magick::Point Point(const char * str){
   Magick::Point point(str);
   if(!point.isValid())
     throw std::runtime_error(std::string("Invalid point string: ") + str);
   return point;
 }
+#endif
 
 // [[Rcpp::export]]
 XPtrImage magick_image_noise( XPtrImage input, const char * noisetype){
@@ -234,7 +236,11 @@ XPtrImage magick_image_page( XPtrImage input, Rcpp::CharacterVector pagesize, Rc
   if(pagesize.size())
     for_each (output->begin(), output->end(), Magick::pageImage(Geom(pagesize[0])));
   if(density.size())
+#if MAGICKCORE_MAJOR_VERSION >= 7
     for_each (output->begin(), output->end(), Magick::densityImage(Point(density[0])));
+#else
+    for_each (output->begin(), output->end(), Magick::densityImage(Geom(density[0])));
+#endif
   return output;
 }
 

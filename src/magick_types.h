@@ -22,4 +22,3 @@ Magick::Geometry Geom(const char * str);
 Magick::Color Color(const char * str);
 Magick::DisposeType Dispose(const char * str);
 Magick::CompositeOperator Composite(const char * str);
-Magick::Point Point(const char * str);
