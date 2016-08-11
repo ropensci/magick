@@ -17,7 +17,7 @@ Rcpp::List magick_coder_info(Rcpp::String format){
 // [[Rcpp::export]]
 Rcpp::List magick_config_internal(){
   Rcpp::List out = Rcpp::List::create(
-    Rcpp::_["version"] = MAGICKCORE_VERSION
+    Rcpp::_["version"] = MAGICKCORE_PACKAGE_VERSION
   );
 
 #ifdef MAGICKCORE_BUILD_MODULES
