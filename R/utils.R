@@ -19,9 +19,9 @@ is_url <- function(path){
 
 replace_url <- function(path){
   if(is_url(path)){
-    return(download_url(path))
+    download_url(path)
   } else {
-    return(path)
+    normalizePath(path, mustWork = FALSE)
   }
 }
 

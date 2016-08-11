@@ -6,11 +6,23 @@
   magick_image_subset(x, i)
 }
 
+#TODO: return 3 ch 'rgb' or 1 ch greyscale bitmap depending on colorspace
 #' @export
 "[[.magick-image" <- function(x, i){
   assert_image(x)
-  stop("[[ not yet implemented")
-  #magick_image_frame(x, i)
+  image <- x[i]
+  info <- image_info(image)
+  bitmap <- image_write(image, format = "rgba")
+  dim(bitmap) <- c(4, info$width, info$height)
+  class(bitmap) <- c("bitmap", "rgba")
+  return(bitmap)
+}
+
+#' @export
+"print.bitmap" <- function(x, ...){
+  dims <- dim(x)
+  cat(sprintf("%d channel %dx%d bitmap array:", dims[1], dims[2], dims[3]))
+  utils::str(x)
 }
 
 #' @export

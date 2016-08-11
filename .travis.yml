@@ -12,26 +12,13 @@ matrix:
       env: R_CODECOV=true
     - os: osx
       osx_image: xcode7.2
-      env: PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
       latex: false
-      brew_packages: imagemagick --ignore-depends --build-from-source --verbose # should pick up on XQuartz x11/png/fc
-      before_install: brew install webp librsvg xz # build depends only
-    - os: osx
-      osx_image: xcode7.2
-      brew_packages: imagemagick webp librsvg
-      latex: false
-    - os: osx
-      osx_image: xcode7.2
-      latex: false
-      brew_packages: imagemagick --with-fontconfig
-      before_install:
-        - brew install webp librsvg
+      brew_packages: imagemagick --with-fontconfig --with-webp --with-librsvg --with-fftw
+      env: FONTCONFIG_PATH=/opt/X11/lib/X11/fontconfig
     - os: osx
       osx_image: beta-xcode6.1
       disable_homebrew: true
       latex: false
-      before_install:
-        - (while true; do echo 'Ping? Pong!'; sleep 500; done) &
 
 addons:
   apt:
@@ -41,7 +28,6 @@ addons:
       - libwebp-dev
 
 r_github_packages:
-  - jeroenooms/rsvg
   - jimhester/covr
 
 warnings_are_errors: true
@@ -54,3 +40,7 @@ notifications:
 
 after_success:
   - if [[ "${R_CODECOV}" ]]; then R -e 'covr::codecov()'; fi
+
+# Prevents Travis timeout for building magick
+before_install:
+  - (while true; do echo 'Ping? Pong!'; sleep 500; done) &

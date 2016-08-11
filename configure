@@ -6,7 +6,7 @@
 # R CMD INSTALL --configure-vars='INCLUDE_DIR=/.../include LIB_DIR=/.../lib'
 
 # Library settings
-PKG_CONFIG_NAME="ImageMagick++"
+PKG_CONFIG_NAME="Magick++"
 PKG_DEB_NAME="libmagick++-dev"
 PKG_RPM_NAME="ImageMagick-c++-devel"
 PKG_CSW_NAME="imagemagick_dev"
@@ -57,7 +57,15 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     # Get dependencies
     BREW_DEPS=$($BREW deps -n $PKG_BREW_NAME)
     EXTRA_DEPS=$($BREW deps -n librsvg)
-    HOMEBREW_CACHE="/tmp" $BREW install $BREW_DEPS $EXTRA_DEPS librsvg ghostscript fftw --force-bottle 2>&1 | perl -pe 's/Warning/Note/gi'
+
+    # Hacks to avoid linking to /usr/local/lib on CRAN builder
+    mkdir -p $BREWDIR/syslib
+    ln -s /usr/lib/*.dylib $BREWDIR/syslib/
+    MAC_VERSION=$(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}')
+    HOMEBREW_CACHE="/tmp" $BREW install pkg-config
+    export LIBS="-Z -L$BREWDIR/lib -L$BREWDIR/syslib -F/Library/Frameworks -F/System/Library/Frameworks"
+    export PKG_CONFIG_LIBDIR="$BREWDIR/lib/pkgconfig:/usr/lib/pkgconfig:$BREWDIR/Library/Homebrew/os/mac/pkgconfig/$MAC_VERSION"
+    HOMEBREW_CACHE="/tmp" $BREW install $BREW_DEPS $EXTRA_DEPS librsvg ghostscript fftw webp --force-bottle 2>&1 | perl -pe 's/Warning/Note/gi'
     HOMEBREW_CACHE="/tmp" $BREW install imagemagick --without-modules --with-librsvg --with-pango --with-gslib \
       --with-fftw --with-webp --with-fontconfig --with-zero-configuration 2>&1 | perl -pe 's/Warning/Note/gi'
 

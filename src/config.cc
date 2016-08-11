@@ -41,13 +41,13 @@ Rcpp::List magick_config_internal(){
   out["freetype"] = false;
 #endif
 
-#ifdef FFTW_DELEGATE
+#ifdef MAGICKCORE_FFTW_DELEGATE
   out["fftw"] = true;
 #else
   out["fftw"] = false;
 #endif
 
-#ifdef GS_DELEGATE
+#ifdef MAGICKCORE_GS_DELEGATE
   out["ghostscript"] = true;
 #else
   out["ghostscript"] = false;
@@ -59,13 +59,13 @@ Rcpp::List magick_config_internal(){
   out["jpeg"] = false;
 #endif
 
-#ifdef LCMS_DELEGATE
+#ifdef MAGICKCORE_LCMS_DELEGATE
   out["lcms"] = true;
 #else
   out["lcms"] = false;
 #endif
 
-#ifdef LIBOPENJP2_DELEGATE
+#ifdef MAGICKCORE_LIBOPENJP2_DELEGATE
   out["libopenjp2"] = true;
 #else
   out["libopenjp2"] = false;
@@ -113,13 +113,13 @@ Rcpp::List magick_config_internal(){
   out["webp"] = false;
 #endif
 
-#ifdef WMF_DELEGATE
+#ifdef MAGICKCORE_WMF_DELEGATE
   out["wmf"] = true;
 #else
   out["wmf"] = false;
 #endif
 
-#ifdef X11_DELEGATE
+#ifdef MAGICKCORE_X11_DELEGATE
   out["x11"] = true;
 #else
   out["x11"] = false;
