@@ -82,7 +82,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
       # Get the CFLAGS and LIBS
       PKG_CFLAGS=$($PKG_CONFIG --cflags $PKG_CONFIG_NAME)
       PKG_CFLAGS="$PKG_CFLAGS -DBUILD_AUTOBREW"
-      PKG_LIBS=$($PKG_CONFIG --libs --static $PKG_CONFIG_NAME libpng libcroco-0.6 pangocairo gmodule-2.0)
+      PKG_LIBS=$($PKG_CONFIG --libs-only-l --static $PKG_CONFIG_NAME libpng libcroco-0.6 pangocairo gmodule-2.0)
       PKG_LIBS="-L$BREWDIR/lib $PKG_LIBS -lexpat" #pkg-config misses a few paths
       rm -f $BREWDIR/Cellar/*/*/lib/*.dylib
 
