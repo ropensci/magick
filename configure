@@ -78,7 +78,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 
     # If fail, try to fall back on system version of Magick++
     unset LIBS
-    if [ $($PKG_CONFIG --exists $PKG_CONFIG_NAME) ]; then
+    if $PKG_CONFIG --exists $PKG_CONFIG_NAME; then
       # Get the CFLAGS and LIBS
       PKG_CFLAGS=$($PKG_CONFIG --cflags $PKG_CONFIG_NAME)
       PKG_CFLAGS="$PKG_CFLAGS -DBUILD_AUTOBREW"
