@@ -74,7 +74,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     export PKG_CONFIG_LIBDIR="$BREWDIR/lib/pkgconfig:/usr/lib/pkgconfig:$BREWDIR/Library/Homebrew/os/mac/pkgconfig/$MAC_VERSION"
     HOMEBREW_CACHE="/tmp" $BREW install $BREW_DEPS $EXTRA_DEPS librsvg ghostscript fftw webp --force-bottle 2>&1 | perl -pe 's/Warning/Note/gi'
     HOMEBREW_CACHE="/tmp" $BREW install imagemagick --without-modules --with-librsvg --with-pango --with-gslib \
-      --with-fftw --with-webp --with-fontconfig --with-zero-configuration 2>&1 | perl -pe 's/Warning/Note/gi'
+      --with-fftw --with-webp --with-fontconfig --with-zero-configuration > inst/autobrew.log 2>&1
 
     # If fail, try to fall back on bottled version of Magick++
     unset LIBS
