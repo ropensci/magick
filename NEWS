@@ -1,3 +1,7 @@
+0.2.2
+  - Try again to fix the mac binary package
+  - Switch the Windows package to ImageMagick 7
+
 0.2.1
   - Try to fix the mac binary package
 
