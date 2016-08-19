@@ -17,6 +17,10 @@ matrix:
       env: FONTCONFIG_PATH=/opt/X11/lib/X11/fontconfig
     - os: osx
       osx_image: beta-xcode6.1
+      brew_packages: imagemagick
+      latex: false
+    - os: osx
+      osx_image: beta-xcode6.1
       disable_homebrew: true
       latex: false
 
