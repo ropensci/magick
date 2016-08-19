@@ -213,7 +213,7 @@ image_annotate(logo, "CONFIDENTIAL", size = 50, color = "red", boxcolor = "pink"
 
 # Setting fonts requires fontconfig support (and that you have the font)
 myfont <- ifelse(identical("windows", .Platform$OS.type), "courier-new", "courier")
-image_annotate(logo, "The quick brown fox", font = myfont, size = 50)
+try(image_annotate(logo, "The quick brown fox", font = myfont, size = 50))
 }
 \seealso{
 Other image: \code{\link{editing}}

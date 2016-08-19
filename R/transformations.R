@@ -310,7 +310,7 @@ image_contrast <- function(image, sharpen = 1){
 #'
 #' # Setting fonts requires fontconfig support (and that you have the font)
 #' myfont <- ifelse(identical("windows", .Platform$OS.type), "courier-new", "courier")
-#' image_annotate(logo, "The quick brown fox", font = myfont, size = 50)
+#' try(image_annotate(logo, "The quick brown fox", font = myfont, size = 50))
 image_annotate <- function(image, text, gravity = "northwest", location = "+0+0", degrees = 0,
                            size = 10, font = NULL, color = NULL, strokecolor = NULL, boxcolor = NULL){
   assert_image(image)
