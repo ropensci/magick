@@ -7,3 +7,4 @@ appveyor.yml$
 ^[^/]+\.(gif|png|jpg|jpeg|pdf|tiff|svg)$
 ^img$
 ^README\.Rmd$
+^notes.md$
