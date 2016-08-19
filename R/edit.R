@@ -112,7 +112,8 @@ image_display <- function(image, animate = TRUE){
 #' @param browser argument passed to \link[utils:browseURL]{browseURL}
 #' @rdname edit
 image_browse <- function(image, browser = getOption("browser")){
-  tmp <- tempfile()
+  ext <- ifelse(length(image), tolower(image_info(image[1])$format), "gif")
+  tmp <- tempfile(fileext = paste0(".", ext))
   image_write(image, path = tmp)
   utils::browseURL(tmp)
 }
