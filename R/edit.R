@@ -96,7 +96,7 @@ image_write <- function(image, path = NULL, format = NULL, quality = NULL, flatt
   buf <- magick_image_write(image, format, quality)
   if(is.character(path)){
     writeBin(buf, path)
-    return(path)
+    return(invisible(path))
   }
   return(buf)
 }
