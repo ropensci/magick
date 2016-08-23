@@ -29,8 +29,8 @@
 #' @examples
 #' # Download image from the web
 #' frink <- image_read("https://jeroenooms.github.io/images/frink.png")
-#' frink2 <- image_trim(frink)
-#' image_write(frink2, "output.png")
+#' worldcup_frink <- image_fill(frink, "orange", "+100+200", 30000)
+#' image_write(worldcup_frink, "output.png")
 #'
 #' # Plot to graphics device via legacy raster format
 #' raster <- as.raster(frink)
