@@ -91,6 +91,15 @@ image_write(tiger, path = "tiger.png", format = "png")
 
 If `path` is a filename, `image_write` returns `path` on success such that the result can be piped into function taking a file path.
 
+You can also internally convert the image to another format before applying transformations.
+
+```{r}
+tiger_png <- image_convert(tiger, "png")
+image_info(tiger_png)
+```
+
+Note that size is currently 0 because ImageMagick is lazy (in the good sense) and does not render until it has to.
+
 ### Preview
 
 IDE's with a built-in web browser (such as RStudio) automatically display magick images in the viewer. This results in a neat interactive image editing environment.
