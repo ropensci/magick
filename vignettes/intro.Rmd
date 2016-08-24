@@ -270,12 +270,39 @@ rev(earth) %>%
 
 ### Layers
 
+We can stack layers on top of each other as we would in Photoshop:
 
+```{r}
+bigdata <- image_read('http://feelgrafix.com/data_images/out/28/1004158-data.jpg')
+frink <- image_read("https://jeroenooms.github.io/images/frink.png")
+logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
+img <- c(bigdata, logo, frink)
+img <- image_scale(img, "400x400")
+image_info(img)
+```
 
+To flatten the layers into a single image
 
+```{r}
+image_flatten(img)
+```
+
+There are also some alternative [composite operators](https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator):
+
+```{r}
+image_flatten(img, 'Add')
+image_flatten(img, 'Modulate')
+image_flatten(img, 'Minus')
+```
 
 
 ### Animation
+
+Instead of treating vector elements as layers, we can also make them frames in an animation!
+
+```{r}
+image_animate(image_scale(img, "200x200"), fps = 4, dispose = "previous")
+```
 
 ```{r}
 # Background image
