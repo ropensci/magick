@@ -67,7 +67,6 @@ XPtrImage magick_image_join(Rcpp::List input){
 // [[Rcpp::export]]
 XPtrImage magick_image_subset(XPtrImage image, Rcpp::IntegerVector index){
   //validate valid indices
-  //TODO: support negative index for dropping frames
   for(int i = 0; i < index.size(); i++){
     size_t x = index[i];
     if(x < 1 || x > image->size())
@@ -76,10 +75,25 @@ XPtrImage magick_image_subset(XPtrImage image, Rcpp::IntegerVector index){
   XPtrImage output = create(index.length());
   for(int i = 0; i < index.size(); i++){
     size_t x = index[i];
-    Frame frame = (*image)[x-1]; //1 based indexing ;)
-    output->insert(output->end(), frame);
+    output->insert(output->end(), image->at(x-1)); //1 based indexing ;)
   }
   return output;
+}
+
+// [[Rcpp::export]]
+XPtrImage magick_image_replace(XPtrImage image, Rcpp::IntegerVector index, XPtrImage value){
+  for(int i = 0; i < index.size(); i++){
+    size_t x = index[i];
+    if(x < 1 || x > image->size())
+      throw std::runtime_error("subscript out of bounds");
+  }
+  if(value->size() != 1 && value->size() != index.size())
+    throw std::runtime_error("length of replacement value must be 1 or equal to number of replacements");
+  for(int i = 0; i < index.size(); i++){
+    size_t x = index[i];
+    image->at(x-1) = (value->size() == 1) ? value->at(0) : value->at(i);
+  }
+  return image;
 }
 
 // [[Rcpp::export]]

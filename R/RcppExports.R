@@ -69,6 +69,10 @@ magick_image_subset <- function(image, index) {
     .Call('magick_magick_image_subset', PACKAGE = 'magick', image, index)
 }
 
+magick_image_replace <- function(image, index, value) {
+    .Call('magick_magick_image_replace', PACKAGE = 'magick', image, index, value)
+}
+
 autobrewed <- function() {
     .Call('magick_autobrewed', PACKAGE = 'magick')
 }

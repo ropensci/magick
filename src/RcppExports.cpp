@@ -204,6 +204,19 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// magick_image_replace
+XPtrImage magick_image_replace(XPtrImage image, Rcpp::IntegerVector index, XPtrImage value);
+RcppExport SEXP magick_magick_image_replace(SEXP imageSEXP, SEXP indexSEXP, SEXP valueSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< XPtrImage >::type image(imageSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type index(indexSEXP);
+    Rcpp::traits::input_parameter< XPtrImage >::type value(valueSEXP);
+    __result = Rcpp::wrap(magick_image_replace(image, index, value));
+    return __result;
+END_RCPP
+}
 // autobrewed
 bool autobrewed();
 RcppExport SEXP magick_autobrewed() {

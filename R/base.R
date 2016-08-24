@@ -6,6 +6,14 @@
   magick_image_subset(x, i)
 }
 
+#' @export
+"[<-.magick-image" <- function(x, i, value){
+  assert_image(x)
+  stopifnot(is.numeric(i))
+  i <- seq_along(x)[i]
+  magick_image_replace(x, i, value)
+}
+
 #TODO: return 3 ch 'rgb' or 1 ch greyscale bitmap depending on colorspace
 #' @export
 "[[.magick-image" <- function(x, i){
@@ -16,6 +24,11 @@
   dim(bitmap) <- c(4, info$width, info$height)
   class(bitmap) <- c("bitmap", "rgba")
   return(bitmap)
+}
+
+#' @export
+"[[<-.magick-image" <- function(x, i, value){
+  stop("[[ assignment not implemented. Try single bracket.")
 }
 
 #' @export
