@@ -247,14 +247,35 @@ image_read("https://jeroenooms.github.io/images/frink.png") %>%
   image_annotate("The same thing with pipes", color = "white", size = 30)
 ```
 
-## Layers and animation
+
+## Image Vectors
 
 The examples above concern single images. However all functions in magick have been vectorized to support working with layers, compositions or animation.
 
-The standard base vector methods `[` `[[`, `$`, `c()` and `length()` are used to manipulate sets of images which can then be treated as layers or frames. This system is actually so extensive that we will do a separate blog post about it later.
+### Base methods
 
-For now here is an example on how to generate the instant classic dancing banana on R logo (which is probably why you are here):
+The standard base methods `[` `[[`, `c()` and `length()` are used to manipulate vectors of images which can then be treated as layers or frames. 
 
+```{r}
+earth <- image_read("https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif")
+earth <- image_scale(earth, "200")
+length(earth)
+head(image_info(earth))
+print(earth)
+
+rev(earth) %>% 
+  image_flip() %>% 
+  image_annotate("meanwhile in Australia", size = 20, color = "white")
+```
+
+### Layers
+
+
+
+
+
+
+### Animation
 
 ```{r}
 # Background image
@@ -275,4 +296,3 @@ print(animation)
 # Save as GIF
 image_write(animation, "Rlogo-banana.gif")
 ```
-
