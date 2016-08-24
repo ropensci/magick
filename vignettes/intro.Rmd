@@ -295,6 +295,19 @@ image_flatten(img, 'Modulate')
 image_flatten(img, 'Minus')
 ```
 
+### Pages
+
+When working with a PDF document, each page becomes an element of the vector:
+
+```{r}
+manual <- image_read('https://cran.r-project.org/web/packages/magick/magick.pdf')
+length(manual)
+
+# Convert the first page to PNG
+image_convert(image_scale(manual[1], "1200"), "png")
+```
+
+PDF rendering is usually done via ghostscript and the quality varies by system.
 
 ### Animation
 
