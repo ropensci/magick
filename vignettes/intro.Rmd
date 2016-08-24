@@ -317,6 +317,8 @@ Instead of treating vector elements as layers, we can also make them frames in a
 image_animate(image_scale(img, "200x200"), fps = 4, dispose = "previous")
 ```
 
+Let's put it all together:
+
 ```{r}
 # Background image
 logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
