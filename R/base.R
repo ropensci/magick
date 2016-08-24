@@ -9,6 +9,7 @@
 #' @export
 "[<-.magick-image" <- function(x, i, value){
   assert_image(x)
+  assert_image(value)
   stopifnot(is.numeric(i))
   i <- seq_along(x)[i]
   magick_image_replace(x, i, value)
