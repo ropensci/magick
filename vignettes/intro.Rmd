@@ -91,7 +91,9 @@ image_write(tiger, path = "tiger.png", format = "png")
 
 If `path` is a filename, `image_write` returns `path` on success such that the result can be piped into function taking a file path.
 
-You can also internally convert the image to another format before applying transformations.
+### Converting formats
+
+Magick keeps the image in memory in it's original format. Specify the `format` parmeter `image_write` to convert to another format. You can also internally convert the image to another format earlier, before applying transformations. This can be useful if your original format is lossy.
 
 ```{r}
 tiger_png <- image_convert(tiger, "png")
