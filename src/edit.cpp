@@ -79,7 +79,7 @@ Rcpp::RawVector magick_image_write( XPtrImage input, Rcpp::CharacterVector forma
 // [[Rcpp::export]]
 XPtrImage magick_image_display( XPtrImage image, bool animate){
 #ifndef MAGICKCORE_X11_DELEGATE
-  throw std::runtime_error("ImageMagick was build without X11 support");
+  throw std::runtime_error("ImageMagick was built without X11 support");
 #else
   XPtrImage output = copy(image);
   if(animate){
