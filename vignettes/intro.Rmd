@@ -29,7 +29,7 @@ The new [magick](https://cran.r-project.org/web/packages/magick/index.html) pack
 
 The ImageMagick library has an overwhelming amount of functionality. The current version of Magick exposes a decent chunk of it, but being a first release, documentation is still sparse. This post briefly introduces the most important concepts to get started.
 
-## Installation
+## Installing `magick`
 
 On Windows or OS-X the package is most easily installed via CRAN.
 
@@ -46,7 +46,7 @@ str(magick::magick_config())
 ```
 
 
-### Building from source
+### Build from source
 
 On Linux you need to install the ImageMagick++ library: on Debian/Ubuntu this is called [libmagick++-dev](https://packages.debian.org/testing/libmagick++-dev):
 
@@ -68,9 +68,11 @@ brew install imagemagick --with-fontconfig --with-librsvg --with-fftw
 
 The default imagemagick configuration on homebrew disables a bunch of features. It is recommended to brew with at least `--with-fontconfig` and `--with-librsvg` to support high quality font / svg rendering (the CRAN OSX binary package enables these as well).
 
-## IO and formats
+## Image IO
 
-### Reading and writing
+What makes magick so magical is that it automatically converts and renders all common image formats. ImageMagick supports dozens of formats and automatically detects the type. Use `magick::magick_config()` to list the formats that your version of ImageMagick supports.
+
+### Read and write
 
 Images can be read directly from a file path, URL, or raw vector with image data with `image_read`. The `image_info` function shows some meta data about the image, similar to the imagemagick `identify` command line utility.
 
@@ -89,7 +91,7 @@ image_write(tiger, path = "tiger.png", format = "png")
 
 If `path` is a filename, `image_write` returns `path` on success such that the result can be piped into function taking a file path.
 
-### Previewing
+### Preview
 
 IDE's with a built-in web browser (such as RStudio) automatically display magick images in the viewer. This results in a neat interactive image editing environment.
 
@@ -116,29 +118,7 @@ plot(raster)
 
 Also the R graphics device is relatively slow for displaying bitmap images.
 
-## Combining transformations
-
-Each of the image transformation functions returns a **modified copy** of the original image. It does not affect the original image.
-
-```{r}
-frink <- image_read("https://jeroenooms.github.io/images/frink.png")
-frink2 <- image_scale(frink, "100")
-image_info(frink)
-image_info(frink2)
-```
-
-Hence to combine transformations you need to wrap them:
-
-```{r}
-test <- image_rotate(frink, 90)
-test <- image_background(test, "blue", flatten = TRUE)
-test <- image_border(test, "red", "10x10")
-test <- image_annotate(test, "This is how we combine transformations", color = "white", size = 30)
-print(test)
-
-```
-
-## Transformations and effects
+## Transformations
 
 The best way to get a sense of available transformations is walk through the examples in the `?transformations` help page in RStudio. Below a few examples to get a sense of what is possible.
 
@@ -186,7 +166,7 @@ image_fill(frink, "orange", point = "+100+200", fuzz = 30000)
 
 With `image_fill` we can flood fill starting at pixel `point`. The `fuzz` parameter allows for the fill to cross for adjecent pixels with similarish colors. Its value must be between 0 and 256^2 specifying the max geometric distance between colors to be considered equal. Here we give professor frink an orange shirt for the World Cup.
 
-### Effects
+### Filters and effects
 
 ImageMagick also has a bunch of standard effects that are worth checking out.
 
@@ -223,6 +203,38 @@ image_annotate(frink, "The quick brown fox", font = 'times-new-roman', size = 30
 ```
 
 If your system has difficulty finding a font, you can also specify the full path to the font file in the `font` parameter.
+
+### Combining with pipes
+
+Each of the image transformation functions returns a **modified copy** of the original image. It does not affect the original image.
+
+```{r}
+frink <- image_read("https://jeroenooms.github.io/images/frink.png")
+frink2 <- image_scale(frink, "100")
+image_info(frink)
+image_info(frink2)
+```
+
+Hence to combine transformations you need to chain them:
+
+```{r}
+test <- image_rotate(frink, 90)
+test <- image_background(test, "blue", flatten = TRUE)
+test <- image_border(test, "red", "10x10")
+test <- image_annotate(test, "This is how we combine transformations", color = "white", size = 30)
+print(test)
+```
+
+Using `magrittr` pipe syntax makes it a bit more readable
+
+```{r}
+library(magrittr)
+image_read("https://jeroenooms.github.io/images/frink.png") %>%
+  image_rotate(270) %>%
+  image_background("blue", flatten = TRUE) %>%
+  image_border("red", "10x10") %>%
+  image_annotate("The same thing with pipes", color = "white", size = 30)
+```
 
 ## Layers and animation
 
