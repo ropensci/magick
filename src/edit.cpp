@@ -122,8 +122,10 @@ XPtrImage magick_image_coalesce( XPtrImage image){
 XPtrImage magick_image_flatten( XPtrImage input, Rcpp::CharacterVector composite){
   Frame frame;
   XPtrImage image = copy(input);
-  if(composite.size())
+  if(composite.size()){
+    for_each ( image->begin(), image->end(), Magick::commentImage("")); //required to force copy; weird bug in IM?
     for_each ( image->begin(), image->end(), Magick::composeImage(Composite(std::string(composite[0]).c_str())));
+  }
   flattenImages( &frame, image->begin(), image->end());
   XPtrImage out = create();
   out->push_back(frame);
