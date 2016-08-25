@@ -79,8 +79,8 @@
 ## apply is slow, can easily be optimized in c++.
 #' @export
 #' @importFrom grDevices as.raster
-"as.raster.magick-image" <- function(x, background = "transparent", ...){
-  image <- image_background(x, background, flatten = TRUE)
+"as.raster.magick-image" <- function(image, ...){
+  assert_image(image)
   info <- image_info(image)
   buf <- image[[1]]
   bitmap <- as.character(buf[1:3, , , drop = FALSE])
