@@ -145,8 +145,8 @@ magick_image_morph <- function(image, frames) {
     .Call('magick_magick_image_morph', PACKAGE = 'magick', image, frames)
 }
 
-magick_image_mosaic <- function(image) {
-    .Call('magick_magick_image_mosaic', PACKAGE = 'magick', image)
+magick_image_mosaic <- function(input, composite) {
+    .Call('magick_magick_image_mosaic', PACKAGE = 'magick', input, composite)
 }
 
 magick_image_animate <- function(input, delay, iter, method) {

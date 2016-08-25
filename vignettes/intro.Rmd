@@ -281,18 +281,47 @@ img <- image_scale(img, "400x400")
 image_info(img)
 ```
 
-To flatten the layers into a single image
+A mosaic prints images on top of one another, expanding the output canvas such that that everything fits:
+
+```{r}
+image_mosaic(img)
+```
+
+Flattening combines the layers into a single image which has the size of the first image:
 
 ```{r}
 image_flatten(img)
 ```
 
-There are also some alternative [composite operators](https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator):
+Flattening and mosaic allow for specifying alternative [composite operators](https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator):
 
 ```{r}
 image_flatten(img, 'Add')
 image_flatten(img, 'Modulate')
 image_flatten(img, 'Minus')
+```
+
+### Combining
+
+Appending means simply putting the frames next to each other:
+
+```{r}
+left_to_right <- image_append(image_scale(img, "x200"))
+image_background(left_to_right, "white", flatten = TRUE)
+```
+
+Use `stack = TRUE` to position them on top of each other:
+
+```{r}
+top_to_bottom <- image_append(image_scale(img, "100"), stack = TRUE)
+image_background(top_to_bottom, "white", flatten = TRUE)
+```
+
+Composing allows for combining two images on a specific position:
+
+```{r}
+bigdatafrink <- image_scale(image_rotate(image_background(frink, "none"), 300), "x200")
+image_composite(image_scale(bigdata, "x400"), bigdatafrink, offset = "+180+100")
 ```
 
 ### Pages
@@ -304,7 +333,7 @@ manual <- image_read('https://cran.r-project.org/web/packages/magick/magick.pdf'
 length(manual)
 
 # Convert the first page to PNG
-image_convert(image_scale(manual[1], "1200"), "png")
+image_convert(image_scale(manual[1], "600"), "png")
 ```
 
 PDF rendering is usually done via ghostscript and the quality varies by system.
@@ -314,22 +343,38 @@ PDF rendering is usually done via ghostscript and the quality varies by system.
 Instead of treating vector elements as layers, we can also make them frames in an animation!
 
 ```{r}
-image_animate(image_scale(img, "200x200"), fps = 4, dispose = "previous")
+image_animate(image_scale(img, "200x200"), fps = 1, dispose = "previous")
 ```
 
-Let's put it all together:
+Morphing creates a sequence of `n` images that gradually morph one image into another. It makes animations 
+
+```{r}
+newlogo <- image_scale(image_read(system.file("Rlogo.png", package = "magick")), "x150")
+oldlogo <- image_scale(image_read(system.file("Rlogo-old.png", package = "magick")), "x150")
+frames <- image_morph(c(oldlogo, newlogo), frames = 12)
+image_animate(frames)
+```
+
+
+If you read in an existing GIF or Video file, each frame becomes a layer:
+
+```{r}
+# Foreground image
+banana <- image_read(system.file("banana.gif", package = "magick"))
+banana <- image_scale(banana, "150")
+image_info(banana)
+```
+
+Manipulate the individual frames and put them back into an animation:
 
 ```{r}
 # Background image
-logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
-background <- image_scale(logo, "400")
-
-# Foreground image
-banana <- image_read(system.file("banana.gif", package = "magick"))
-front <- image_scale(banana, "300")
+background <- image_background(image_scale(logo, "200"), "white", flatten = TRUE)
 
 # Combine and flatten frames
-frames <- lapply(as.list(front), function(x) image_flatten(c(background, x)))
+frames <- lapply(banana, function(frame) {
+  image_composite(background, frame, offset = "+70+30")
+})
 
 # Turn frames into animation
 animation <- image_animate(image_join(frames))

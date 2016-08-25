@@ -165,7 +165,12 @@ XPtrImage magick_image_morph( XPtrImage image, int frames){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_mosaic( XPtrImage image){
+XPtrImage magick_image_mosaic( XPtrImage input, Rcpp::CharacterVector composite){
+  XPtrImage image = copy(input);
+  if(composite.size()){
+    for_each ( image->begin(), image->end(), Magick::commentImage("")); //required to force copy; weird bug in IM?
+    for_each ( image->begin(), image->end(), Magick::composeImage(Composite(std::string(composite[0]).c_str())));
+  }
   Frame frame;
   mosaicImages( &frame, image->begin(), image->end());
   XPtrImage out = create();

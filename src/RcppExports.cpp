@@ -422,13 +422,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_mosaic
-XPtrImage magick_image_mosaic(XPtrImage image);
-RcppExport SEXP magick_magick_image_mosaic(SEXP imageSEXP) {
+XPtrImage magick_image_mosaic(XPtrImage input, Rcpp::CharacterVector composite);
+RcppExport SEXP magick_magick_image_mosaic(SEXP inputSEXP, SEXP compositeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< XPtrImage >::type image(imageSEXP);
-    __result = Rcpp::wrap(magick_image_mosaic(image));
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type composite(compositeSEXP);
+    __result = Rcpp::wrap(magick_image_mosaic(input, composite));
     return __result;
 END_RCPP
 }

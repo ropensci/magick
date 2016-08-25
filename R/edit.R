@@ -203,9 +203,10 @@ image_morph <- function(image, frames){
 
 #' @export
 #' @rdname edit
-image_mosaic <- function(image){
+image_mosaic <- function(image, operator = NULL){
   assert_image(image)
-  magick_image_mosaic(image)
+  operator <- as.character(operator)
+  magick_image_mosaic(image, operator)
 }
 
 #' @export
