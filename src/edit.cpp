@@ -77,7 +77,7 @@ Rcpp::RawVector magick_image_write( XPtrImage input, Rcpp::CharacterVector forma
 }
 
 // [[Rcpp::export]]
-Rcpp::RawVector magick_image_write_bitmap(XPtrImage input, const char * format){
+Rcpp::RawVector magick_image_write_frame(XPtrImage input, const char * format){
   if(input->size() < 1)
     throw std::runtime_error("Image must have at least 1 frame to write a bitmap");
   XPtrImage image = copy(input);

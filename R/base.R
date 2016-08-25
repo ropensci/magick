@@ -21,7 +21,7 @@
   assert_image(x)
   image <- x[i]
   info <- image_info(image)
-  bitmap <- image_write(image, format = "rgba")
+  bitmap <- image_write_frame(image, format = "rgba")
   dim(bitmap) <- c(4, info$width, info$height)
   class(bitmap) <- c("bitmap", "rgba")
   return(bitmap)
@@ -86,7 +86,7 @@
     image <- image_flatten(image)
   }
   info <- image_info(image)
-  bitmap <- as.character(image_write_bitmap(image, format = "rgb"))
+  bitmap <- as.character(image_write_frame(image, format = "rgb"))
   dim(bitmap) <- c(3, info$width, info$height)
   raster <- apply(bitmap, 3:2, function(x){paste0(c('#', x), collapse = "")})
   as.raster(raster)

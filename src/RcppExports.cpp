@@ -316,15 +316,15 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// magick_image_write_bitmap
-Rcpp::RawVector magick_image_write_bitmap(XPtrImage input, const char * format);
-RcppExport SEXP magick_magick_image_write_bitmap(SEXP inputSEXP, SEXP formatSEXP) {
+// magick_image_write_frame
+Rcpp::RawVector magick_image_write_frame(XPtrImage input, const char * format);
+RcppExport SEXP magick_magick_image_write_frame(SEXP inputSEXP, SEXP formatSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< const char * >::type format(formatSEXP);
-    __result = Rcpp::wrap(magick_image_write_bitmap(input, format));
+    __result = Rcpp::wrap(magick_image_write_frame(input, format));
     return __result;
 END_RCPP
 }

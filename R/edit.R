@@ -102,9 +102,9 @@ image_write <- function(image, path = NULL, format = NULL, quality = NULL, flatt
 }
 
 #' @export
-image_write_bitmap <- function(image, format = "rgb"){
+image_write_frame <- function(image, format = "rgb"){
   assert_image(image)
-  magick_image_write_bitmap(image, format)
+  magick_image_write_frame(image, format)
 }
 
 #' @export
