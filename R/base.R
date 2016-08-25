@@ -79,15 +79,14 @@
 ## apply is slow, can easily be optimized in c++.
 #' @export
 #' @importFrom grDevices as.raster
-"as.raster.magick-image" <- function(x, flatten = TRUE, ...){
-  image <- x[1]
-  # flatten can change length/dimensions!
-  if(isTRUE(flatten)){
-    image <- image_flatten(image)
-  }
+"as.raster.magick-image" <- function(x, background = "transparent", ...){
+  image <- image_background(x, background, flatten = TRUE)
   info <- image_info(image)
-  bitmap <- as.character(image_write_frame(image, format = "rgb"))
+  buf <- image[[1]]
+  bitmap <- as.character(buf[1:3, , , drop = FALSE])
   dim(bitmap) <- c(3, info$width, info$height)
-  raster <- apply(bitmap, 3:2, function(x){paste0(c('#', x), collapse = "")})
+  alpha <- t(buf[4,1:info$width, 1:info$height, drop = TRUE] == as.raw(0x00))
+  raster <- apply(bitmap, 3:2, function(z){paste0(c('#', z), collapse = "")})
+  raster[alpha] <- "transparent"
   as.raster(raster)
 }
