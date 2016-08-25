@@ -380,11 +380,25 @@ image_write(animation, "Rlogo-banana.gif")
 
 Magick images can also be converted to raster objects for use with R's graphics device. Thereby we can combine it with other graphics tools. However do note that R's graphics device is very slow and has a very different coordinate system which reduces the quality of the image.
 
+### Base R rasters
+
+Base R has an `as.raster` format which converts the image to a vector of strings. The paper [Raster Images in R Graphics](https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Murrell.pdf) by Paul Murrell gives a nice overview.
+
 ```{r}
-frink_raster <- as.raster(frink)
-plot(frink_raster)
+plot(as.raster(frink))
 
 # Print over another graphic
 plot(cars)
-rasterImage(frink_raster, 23, 0, 25.5, 40)
+rasterImage(frink, 21, 0, 25, 80)
+```
+
+### Grid rasters
+
+The `grid` package makes it easier to overlay a raster on the graphics device without having to adjust for the x/y coordinates of the plot.
+
+```{r}
+library(ggplot2)
+library(grid)
+qplot(speed, dist, data = cars, geom = c("point", "smooth"))
+grid.raster(frink)
 ```
