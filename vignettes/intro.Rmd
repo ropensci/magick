@@ -118,16 +118,7 @@ image_display(tiger)
 image_browse(tiger)
 ```
 
-There is some functionality to convert images to R raster graphics and plot it on R's graphics display, but this doesn't always work too well yet.
-
-
-```r
-frink <- image_read("https://jeroenooms.github.io/images/frink.png")
-raster <- as.raster(frink)
-plot(raster)
-```
-
-Also the R graphics device is relatively slow for displaying bitmap images.
+Another method is converting the image to a raster object and plot it on R's graphics display. However this is very slow and only useful in combination with other plotting functionality. See [#raster](#raster-graphics) below.
 
 ## Transformations
 
@@ -382,4 +373,18 @@ print(animation)
 
 # Save as GIF
 image_write(animation, "Rlogo-banana.gif")
+```
+
+
+## Raster graphics
+
+Magick images can also be converted to raster objects for use with R's graphics device. Thereby we can combine it with other graphics tools. However do note that R's graphics device is very slow and has a very different coordinate system which reduces the quality of the image.
+
+```{r}
+frink_raster <- as.raster(frink)
+plot(frink_raster)
+
+# Print over another graphic
+plot(cars)
+rasterImage(frink_raster, 23, 0, 25.5, 40)
 ```
