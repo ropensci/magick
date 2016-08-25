@@ -124,7 +124,7 @@ Another method is converting the image to a raster object and plot it on R's gra
 
 The best way to get a sense of available transformations is walk through the examples in the `?transformations` help page in RStudio. Below a few examples to get a sense of what is possible.
 
-### The `Geometry` parameter
+### Cut and edit
 
 Several of the transformation functions take an `geometry` parameter which requires a special syntax of the form `AxB+C+D` where each element is optional. Some examples:
 
@@ -135,8 +135,6 @@ Several of the transformation functions take an `geometry` parameter which requi
   - `image_border(frink, "red", "20x10")`: *adds a border of 20px left+right and 10px top+bottom*
 
 The full syntax is specified in the [Magick::Geometry](http://www.imagemagick.org/Magick++/Geometry.html) documentation.
-
-### Cut and edit
 
 ```{r}
 # Example image
@@ -242,8 +240,6 @@ image_read("https://jeroenooms.github.io/images/frink.png") %>%
 ## Image Vectors
 
 The examples above concern single images. However all functions in magick have been vectorized to support working with layers, compositions or animation.
-
-### Base methods
 
 The standard base methods `[` `[[`, `c()` and `length()` are used to manipulate vectors of images which can then be treated as layers or frames. 
 
@@ -392,7 +388,7 @@ plot(cars)
 rasterImage(frink, 21, 0, 25, 80)
 ```
 
-### Grid rasters
+### The `grid` package
 
 The `grid` package makes it easier to overlay a raster on the graphics device without having to adjust for the x/y coordinates of the plot.
 
@@ -402,3 +398,24 @@ library(grid)
 qplot(speed, dist, data = cars, geom = c("point", "smooth"))
 grid.raster(frink)
 ```
+
+### The `raster` package
+
+The `raster` package has it's own classes for bitmaps which are useful for spatial applications. The simplest way to convert an image to raster is export it as a `tiff` file:
+
+```{r}
+tiff_file <- tempfile()
+image_write(frink, path = tiff_file, format = 'tiff')
+r <- raster::brick(tiff_file)
+raster::plotRGB(r)
+```
+
+You can also manually convert the bitmap array into a raster object, but this seems to drop some meta data:
+
+```{r}
+buf <- as.integer(frink[[1]])
+rr <- raster::brick(buf)
+raster::plotRGB(rr, asp = 1)
+```
+
+The raster package also does not seem to support transparency, which perhaps makes sense in the context of spatial imaging.
