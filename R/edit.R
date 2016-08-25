@@ -102,6 +102,12 @@ image_write <- function(image, path = NULL, format = NULL, quality = NULL, flatt
 }
 
 #' @export
+image_write_bitmap <- function(image, format = "rgb"){
+  assert_image(image)
+  magick_image_write_bitmap(image, format)
+}
+
+#' @export
 #' @param animate support animations in the X11 display
 #' @rdname edit
 image_display <- function(image, animate = TRUE){

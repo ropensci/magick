@@ -77,6 +77,18 @@ Rcpp::RawVector magick_image_write( XPtrImage input, Rcpp::CharacterVector forma
 }
 
 // [[Rcpp::export]]
+Rcpp::RawVector magick_image_write_bitmap(XPtrImage input, const char * format){
+  if(input->size() < 1)
+    throw std::runtime_error("Image must have at least 1 frame to write a bitmap");
+  XPtrImage image = copy(input);
+  Magick::Blob output;
+  input->front().write(&output, format, 8L);
+  Rcpp::RawVector res(output.length());
+  memcpy(res.begin(), output.data(), output.length());
+  return res;
+}
+
+// [[Rcpp::export]]
 XPtrImage magick_image_display( XPtrImage image, bool animate){
 #ifndef MAGICKCORE_X11_DELEGATE
   throw std::runtime_error("ImageMagick was built without X11 support");

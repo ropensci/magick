@@ -109,6 +109,10 @@ magick_image_write <- function(input, format, quality) {
     .Call('magick_magick_image_write', PACKAGE = 'magick', input, format, quality)
 }
 
+magick_image_write_bitmap <- function(input, format) {
+    .Call('magick_magick_image_write_bitmap', PACKAGE = 'magick', input, format)
+}
+
 magick_image_display <- function(image, animate) {
     .Call('magick_magick_image_display', PACKAGE = 'magick', image, animate)
 }

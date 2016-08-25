@@ -86,7 +86,7 @@
     image <- image_flatten(image)
   }
   info <- image_info(image)
-  bitmap <- as.character(image_write(image, format = "rgb"))
+  bitmap <- as.character(image_write_bitmap(image, format = "rgb"))
   dim(bitmap) <- c(3, info$width, info$height)
   raster <- apply(bitmap, 3:2, function(x){paste0(c('#', x), collapse = "")})
   as.raster(raster)
