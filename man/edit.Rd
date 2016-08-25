@@ -47,7 +47,7 @@ image_montage(image)
 
 image_morph(image, frames)
 
-image_mosaic(image)
+image_mosaic(image, operator = NULL)
 
 image_join(...)
 

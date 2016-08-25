@@ -23,6 +23,7 @@ LinkingTo: Rcpp
 Suggests:
     knitr,
     rmarkdown,
+    magrittr,
     rsvg,
     webp,
     png
