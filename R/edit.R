@@ -101,7 +101,6 @@ image_write <- function(image, path = NULL, format = NULL, quality = NULL, flatt
   return(buf)
 }
 
-#' @export
 image_write_frame <- function(image, format = "rgb"){
   assert_image(image)
   magick_image_write_frame(image, format)
