@@ -199,7 +199,7 @@ image_annotate(frink, "CONFIDENTIAL", size = 30, color = "red", boxcolor = "pink
   degrees = 60, location = "+50+100")
 
 # Only works if ImageMagick has fontconfig
-try(image_annotate(frink, "The quick brown fox", font = 'times-new-roman', size = 30))
+try(image_annotate(frink, "The quick brown fox", font = 'times-new-roman', size = 30), silent = T)
 ```
 
 If your system has difficulty finding a font, you can also specify the full path to the font file in the `font` parameter.
