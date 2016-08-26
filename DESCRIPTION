@@ -26,5 +26,6 @@ Suggests:
     magrittr,
     rsvg,
     webp,
-    png
+    png,
+    pdftools
 RoxygenNote: 5.0.1

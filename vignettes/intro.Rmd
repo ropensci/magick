@@ -313,17 +313,25 @@ image_composite(image_scale(bigdata, "x400"), bigdatafrink, offset = "+180+100")
 
 ### Pages
 
-When working with a PDF document, each page becomes an element of the vector:
+When reading a PDF document, each page becomes an element of the vector. Note that PDF gets rendered while reading so you need to specify the density immediately.
 
 ```{r}
-manual <- image_read('https://cran.r-project.org/web/packages/magick/magick.pdf', "72x72")
+manual <- image_read('https://cran.r-project.org/web/packages/magick/magick.pdf', density = "72x72")
 image_info(manual)
 
 # Convert the first page to PNG
-image_convert(image_scale(manual[1], "600"), "png", 8)
+image_convert(manual[1], "png", 8)
 ```
 
-PDF rendering is usually done via ghostscript and the quality varies by system.
+Magick requires ghostscript to render the PDF. An alternative method to read pdf is render it via the pdftools package:
+
+```{r}
+library(pdftools)
+bitmap <- pdf_render_page('https://cran.r-project.org/web/packages/magick/magick.pdf',
+  page = 1, dpi = 72, numeric = FALSE)
+image_read(bitmap)
+```
+
 
 ### Animation
 

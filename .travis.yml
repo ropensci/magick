@@ -27,6 +27,7 @@ addons:
       - libmagick++-dev
       - librsvg2-dev
       - libwebp-dev
+      - libpoppler-cpp-dev
       - r-cran-rgdal
 
 r_packages:
