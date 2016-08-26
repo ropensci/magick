@@ -155,6 +155,8 @@ the image. Specifies an image density when decoding a Postscript or PDF.}
 
 \item{format}{output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.
 Can also be a bitmap type such as \code{rgba} or \code{rgb}.}
+
+\item{depth}{color depth, must be 8 or 16}
 }
 \description{
 Vectorized functions for transforming images. These functions apply

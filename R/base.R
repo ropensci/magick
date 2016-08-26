@@ -28,18 +28,6 @@
 }
 
 #' @export
-"as.integer.magick-image" <- function(x, i){
-  assert_image(x)
-  image <- x[i]
-  info <- image_info(image)
-  bitmap <- image_write_frame(image, format = "rgba")
-  dim(bitmap) <- c(4, info$width, info$height)
-  class(bitmap) <- c("bitmap", "rgba")
-  return(bitmap)
-}
-
-
-#' @export
 "[[<-.magick-image" <- function(x, i, value){
   stop("[[ assignment not implemented. Try single bracket.")
 }
