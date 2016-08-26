@@ -31,6 +31,10 @@ addons:
       - librsvg2-dev
       - libwebp-dev
 
+r_cran_packages:
+  - ggplot2
+  - raster
+
 r_github_packages:
   - jimhester/covr
 
