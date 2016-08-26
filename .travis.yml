@@ -30,10 +30,9 @@ addons:
       - libmagick++-dev
       - librsvg2-dev
       - libwebp-dev
-
-r_packages:
-  - ggplot2
-  - raster
+      - r-cran-rgdal
+      - r-cran-ggplot2
+      - r-cran-raster
 
 r_github_packages:
   - jimhester/covr
