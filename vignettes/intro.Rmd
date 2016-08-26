@@ -84,7 +84,7 @@ image_info(tiger)
 
 We use `image_write` to export an image in any format to a file on disk, or in memory if `path = NULL`.
 
-```{r}
+```r
 # Render svg to png bitmap
 image_write(tiger, path = "tiger.png", format = "png")
 ```
@@ -316,8 +316,8 @@ image_composite(image_scale(bigdata, "x400"), bigdatafrink, offset = "+180+100")
 When working with a PDF document, each page becomes an element of the vector:
 
 ```{r}
-manual <- image_read('https://cran.r-project.org/web/packages/magick/magick.pdf')
-length(manual)
+manual <- image_read('https://cran.r-project.org/web/packages/magick/magick.pdf', "72x72")
+image_info(manual)
 
 # Convert the first page to PNG
 image_convert(image_scale(manual[1], "600"), "png", 8)

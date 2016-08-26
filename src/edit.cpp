@@ -34,17 +34,27 @@ XPtrImage magick_image_readbitmap_double(Rcpp::NumericVector x){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_readbin(Rcpp::RawVector x){
+XPtrImage magick_image_readbin(Rcpp::RawVector x, Rcpp::CharacterVector density, Rcpp::IntegerVector depth){
   XPtrImage image = create();
-  Magick::readImages(image.get(), Magick::Blob(x.begin(), x.length()));
+  Magick::ReadOptions opts = Magick::ReadOptions();
+  if(density.size())
+    opts.density(std::string(density.at(0)).c_str());
+  if(depth.size())
+    opts.depth(depth.at(0));
+  Magick::readImages(image.get(), Magick::Blob(x.begin(), x.length()), opts);
   return image;
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_readpath(Rcpp::CharacterVector paths){
+XPtrImage magick_image_readpath(Rcpp::CharacterVector paths, Rcpp::CharacterVector density, Rcpp::IntegerVector depth){
   XPtrImage image = create();
+  Magick::ReadOptions opts = Magick::ReadOptions();
+  if(density.size())
+    opts.density(std::string(density.at(0)).c_str());
+  if(depth.size())
+    opts.depth(depth.at(0));
   for(int i = 0; i < paths.size(); i++)
-    Magick::readImages(image.get(), std::string(paths[i]));
+    Magick::readImages(image.get(), std::string(paths[i]), opts);
   return image;
 }
 

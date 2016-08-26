@@ -25,6 +25,8 @@
 #' @name editing
 #' @param path file path, URL, or raw vector with image data
 #' @param image object returned by \code{image_read}
+#' @param density resolution to render pdf or svg
+#' @param depth image depth. Must be 8 or 6.
 #' @references Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}
 #' @examples
 #' # Download image from the web
@@ -41,14 +43,16 @@
 #' image_read(png::readPNG(system.file("Rlogo.png", package = "magick")))
 #' image_read(rsvg::rsvg(system.file("tiger.svg", package = "magick")))
 #' image_read(webp::read_webp(system.file("example.webp", package = "magick")))
-image_read <- function(path){
+image_read <- function(path, density = NULL, depth = NULL){
+  density <- as.character(density)
+  depth <- as.integer(depth)
   image <- if(is.character(path)){
     path <- vapply(path, replace_url, character(1))
-    magick_image_readpath(path)
+    magick_image_readpath(path, density, depth)
   } else if(is.array(path)){
     image_readbitmap(path)
   } else if(is.raw(path)) {
-    magick_image_readbin(path)
+    magick_image_readbin(path, density, depth)
   } else {
     stop("path must be URL, filename or raw vector")
   }

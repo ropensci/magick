@@ -93,12 +93,12 @@ magick_image_readbitmap_double <- function(x) {
     .Call('magick_magick_image_readbitmap_double', PACKAGE = 'magick', x)
 }
 
-magick_image_readbin <- function(x) {
-    .Call('magick_magick_image_readbin', PACKAGE = 'magick', x)
+magick_image_readbin <- function(x, density, depth) {
+    .Call('magick_magick_image_readbin', PACKAGE = 'magick', x, density, depth)
 }
 
-magick_image_readpath <- function(paths) {
-    .Call('magick_magick_image_readpath', PACKAGE = 'magick', paths)
+magick_image_readpath <- function(paths, density, depth) {
+    .Call('magick_magick_image_readpath', PACKAGE = 'magick', paths, density, depth)
 }
 
 magick_image_read_list <- function(list) {

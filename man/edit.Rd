@@ -22,7 +22,7 @@
 \alias{magick}
 \title{Image Editing}
 \usage{
-image_read(path)
+image_read(path, density = NULL, depth = NULL)
 
 image_write(image, path = NULL, format = NULL, quality = NULL,
   flatten = FALSE)
@@ -58,6 +58,10 @@ image_animate(image, fps = 10, loop = 0, dispose = c("background",
 }
 \arguments{
 \item{path}{file path, URL, or raw vector with image data}
+
+\item{density}{resolution to render pdf or svg}
+
+\item{depth}{image depth. Must be 8 or 6.}
 
 \item{image}{object returned by \code{image_read}}
 
