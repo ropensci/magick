@@ -92,7 +92,7 @@ image_annotate(image, text, gravity = "northwest", location = "+0+0",
   degrees = 0, size = 10, font = NULL, color = NULL,
   strokecolor = NULL, boxcolor = NULL)
 
-image_convert(image, format)
+image_convert(image, format, depth = NULL)
 }
 \arguments{
 \item{image}{object returned by \code{image_read}}

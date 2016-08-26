@@ -676,14 +676,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_format
-XPtrImage magick_image_format(XPtrImage input, const char * format);
-RcppExport SEXP magick_magick_image_format(SEXP inputSEXP, SEXP formatSEXP) {
+XPtrImage magick_image_format(XPtrImage input, const char * format, Rcpp::IntegerVector depth);
+RcppExport SEXP magick_magick_image_format(SEXP inputSEXP, SEXP formatSEXP, SEXP depthSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< const char * >::type format(formatSEXP);
-    __result = Rcpp::wrap(magick_image_format(input, format));
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type depth(depthSEXP);
+    __result = Rcpp::wrap(magick_image_format(input, format, depth));
     return __result;
 END_RCPP
 }

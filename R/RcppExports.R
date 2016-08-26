@@ -229,8 +229,8 @@ magick_image_implode <- function(input, factor) {
     .Call('magick_magick_image_implode', PACKAGE = 'magick', input, factor)
 }
 
-magick_image_format <- function(input, format) {
-    .Call('magick_magick_image_format', PACKAGE = 'magick', input, format)
+magick_image_format <- function(input, format, depth) {
+    .Call('magick_magick_image_format', PACKAGE = 'magick', input, format, depth)
 }
 
 magick_image_trim <- function(input) {

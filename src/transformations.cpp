@@ -192,9 +192,11 @@ XPtrImage magick_image_implode( XPtrImage input, double factor){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_format( XPtrImage input, const char * format){
+XPtrImage magick_image_format( XPtrImage input, const char * format, Rcpp::IntegerVector depth){
   XPtrImage output = copy(input);
   for_each ( output->begin(), output->end(), Magick::magickImage(format));
+  if(depth.size())
+    for_each ( output->begin(), output->end(), Magick::depthImage(depth.at(0)));
   return output;
 }
 

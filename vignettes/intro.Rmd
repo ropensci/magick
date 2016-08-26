@@ -320,7 +320,7 @@ manual <- image_read('https://cran.r-project.org/web/packages/magick/magick.pdf'
 length(manual)
 
 # Convert the first page to PNG
-image_convert(image_scale(manual[1], "600"), "png")
+image_convert(image_scale(manual[1], "600"), "png", 8)
 ```
 
 PDF rendering is usually done via ghostscript and the quality varies by system.

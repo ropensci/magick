@@ -326,7 +326,11 @@ image_annotate <- function(image, text, gravity = "northwest", location = "+0+0"
 #' @rdname transformations
 #' @param format output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.
 #' Can also be a bitmap type such as \code{rgba} or \code{rgb}.
-image_convert <- function(image, format){
+#' @param depth color depth, must be 8 or 16
+image_convert <- function(image, format, depth = NULL){
   assert_image(image)
-  magick_image_format(image, format)
+  depth <- as.integer(depth)
+  if(length(depth) && is.na(match(depth, c(8, 16))))
+    stop('depth must be 8 or 16 bit')
+  magick_image_format(image, format, depth)
 }
