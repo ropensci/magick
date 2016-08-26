@@ -48,6 +48,7 @@ XPtrImage magick_image_readbin(Rcpp::RawVector x, Rcpp::CharacterVector density,
 // [[Rcpp::export]]
 XPtrImage magick_image_readpath(Rcpp::CharacterVector paths, Rcpp::CharacterVector density, Rcpp::IntegerVector depth){
   XPtrImage image = create();
+#if MagickLibVersion >= 0x689
   Magick::ReadOptions opts = Magick::ReadOptions();
   if(density.size())
     opts.density(std::string(density.at(0)).c_str());
@@ -55,6 +56,10 @@ XPtrImage magick_image_readpath(Rcpp::CharacterVector paths, Rcpp::CharacterVect
     opts.depth(depth.at(0));
   for(int i = 0; i < paths.size(); i++)
     Magick::readImages(image.get(), std::string(paths[i]), opts);
+#else
+  for(int i = 0; i < paths.size(); i++)
+    Magick::readImages(image.get(), std::string(paths[i]));
+#endif
   return image;
 }
 
