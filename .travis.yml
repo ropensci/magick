@@ -31,7 +31,7 @@ addons:
       - librsvg2-dev
       - libwebp-dev
 
-r_cran_packages:
+r_packages:
   - ggplot2
   - raster
 
