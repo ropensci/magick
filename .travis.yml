@@ -30,10 +30,12 @@ addons:
       - libmagick++-dev
       - librsvg2-dev
       - libwebp-dev
-      - r-cran-rgdal
+      - libgdal-dev
+      - libproj-dev
 
 r_packages:
   - ggplot2
+  - rgdal
   - raster
 
 r_github_packages:
