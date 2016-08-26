@@ -36,12 +36,16 @@ XPtrImage magick_image_readbitmap_double(Rcpp::NumericVector x){
 // [[Rcpp::export]]
 XPtrImage magick_image_readbin(Rcpp::RawVector x, Rcpp::CharacterVector density, Rcpp::IntegerVector depth){
   XPtrImage image = create();
+#if MagickLibVersion >= 0x689
   Magick::ReadOptions opts = Magick::ReadOptions();
   if(density.size())
     opts.density(std::string(density.at(0)).c_str());
   if(depth.size())
     opts.depth(depth.at(0));
   Magick::readImages(image.get(), Magick::Blob(x.begin(), x.length()), opts);
+#else
+  Magick::readImages(image.get(), Magick::Blob(x.begin(), x.length()));
+#endif
   return image;
 }
 
