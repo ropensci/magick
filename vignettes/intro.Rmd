@@ -17,6 +17,7 @@ vignette: >
 
 ```{r, echo = FALSE}
 library(knitr)
+opts_chunk$set(comment=NA, fig.width=2, fig.height=2)
 "print.magick-image" <- function(x, ...){
   ext <- ifelse(length(x), tolower(image_info(x[1])$format), "gif")
   tmp <- tempfile(fileext = paste0(".", ext))
@@ -380,7 +381,7 @@ Magick images can also be converted to raster objects for use with R's graphics 
 
 Base R has an `as.raster` format which converts the image to a vector of strings. The paper [Raster Images in R Graphics](https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Murrell.pdf) by Paul Murrell gives a nice overview.
 
-```{r}
+```{r, fig.width=4, fig.height=2.5}
 plot(as.raster(frink))
 
 # Print over another graphic
@@ -392,7 +393,7 @@ rasterImage(frink, 21, 0, 25, 80)
 
 The `grid` package makes it easier to overlay a raster on the graphics device without having to adjust for the x/y coordinates of the plot.
 
-```{r}
+```{r, fig.width=4, fig.height=2.5}
 library(ggplot2)
 library(grid)
 qplot(speed, dist, data = cars, geom = c("point", "smooth"))
