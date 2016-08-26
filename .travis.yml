@@ -5,7 +5,7 @@ matrix:
   include:
     - os: linux
       dist: precise
-      sudo: false
+      sudo: required
     - os: linux
       dist: trusty
       sudo: required
@@ -30,8 +30,7 @@ addons:
       - libmagick++-dev
       - librsvg2-dev
       - libwebp-dev
-      - libgdal-dev
-      - libproj-dev
+      - r-cran-rgdal
 
 r_packages:
   - ggplot2
