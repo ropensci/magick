@@ -315,7 +315,7 @@ image_composite(image_scale(bigdata, "x400"), bigdatafrink, offset = "+180+100")
 
 When reading a PDF document, each page becomes an element of the vector. Note that PDF gets rendered while reading so you need to specify the density immediately.
 
-```{r}
+```{r, purl=FALSE}
 manual <- image_read('https://cran.r-project.org/web/packages/magick/magick.pdf', density = "72x72")
 image_info(manual)
 
