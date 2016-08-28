@@ -19,7 +19,10 @@ is_url <- function(path){
 
 replace_url <- function(path){
   if(is_url(path)){
-    download_url(path)
+    pattern <- "\\[[-,0-9]+\\]$"
+    suffix <- regmatches(path, regexpr(pattern, path))
+    path <- sub(pattern, "", path)
+    paste0(download_url(path), suffix)
   } else {
     normalizePath(path, mustWork = FALSE)
   }
