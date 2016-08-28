@@ -1,17 +1,20 @@
 R_COMPILED_BY ?=-4.6.3
-IMAGEMAGICK=../windows/imagemagick6-6.9.5-4
+IM_VERSION=6.9.5-4
+
+IM=$(call substr,$(IM_VERSION),1,1)
+IMPATH=../windows/imagemagick${IM}-${IM_VERSION}
 LIBBUILD=${subst gcc ,-,${R_COMPILED_BY}}${R_ARCH}
 
-PKG_CPPFLAGS=-I$(IMAGEMAGICK)/include/ImageMagick-6 \
-	-I$(IMAGEMAGICK)/include${LIBBUILD}
+PKG_CPPFLAGS=-I$(IMPATH)/include/ImageMagick-${IM} \
+	-I$(IMPATH)/include${LIBBUILD}
 PKG_CXXFLAGS=-DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16
 
 CXX_STD=CXX11
 
 PKG_LIBS= \
-	-L$(IMAGEMAGICK)/lib${LIBBUILD} \
-	-L$(IMAGEMAGICK)/lib${R_ARCH} \
-	-lMagick++-6.Q16 -lMagickWand-6.Q16 -lMagickCore-6.Q16 \
+	-L$(IMPATH)/lib${LIBBUILD} \
+	-L$(IMPATH)/lib${R_ARCH} \
+	-lMagick++-${IM}.Q16 -lMagickWand-${IM}.Q16 -lMagickCore-${IM}.Q16 \
 	-lfftw3 -llcms2 -ljpeg -ltiff -lwebp \
 	-lrsvg-2 \
 	-lxml2 -llzma \
@@ -29,6 +32,6 @@ clean:
 	rm -f $(OBJECTS) $(SHLIB)
 
 winlibs:
-	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R"
+	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R" ${IM_VERSION}
 
 .PHONY: all winlibs clean
