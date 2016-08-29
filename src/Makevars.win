@@ -1,7 +1,10 @@
-R_COMPILED_BY ?=-4.6.3
-IM_VERSION=6.9.5-4
+# ImageMagick build target
 IM=6
-IMPATH=../windows/imagemagick${IM}-${IM_VERSION}
+VERSION=6.9.5-4
+
+# Build config
+R_COMPILED_BY ?=-4.6.3
+IMPATH=../windows/imagemagick${IM}-${VERSION}
 LIBBUILD=${subst gcc ,-,${R_COMPILED_BY}}${R_ARCH}
 
 PKG_CPPFLAGS=-I$(IMPATH)/include/ImageMagick-${IM} \
@@ -31,6 +34,6 @@ clean:
 	rm -f $(OBJECTS) $(SHLIB)
 
 winlibs:
-	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R" ${IM_VERSION}
+	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R" ${VERSION}
 
 .PHONY: all winlibs clean
