@@ -108,6 +108,7 @@
 }
 
 #' @export
+#' @importFrom graphics plot
 "plot.magick-image" <- function(image, ...){
   plot(as.raster(image), ...)
 }
