@@ -106,3 +106,8 @@
   raster[alpha] <- "transparent"
   as.raster(raster)
 }
+
+#' @export
+"plot.magick-image" <- function(image, ...){
+  plot(as.raster(image), ...)
+}
