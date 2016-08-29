@@ -34,9 +34,7 @@ addons:
       - r-cran-rgdal
 
 r_packages:
-  - ggplot2
   - rgdal
-  - raster
 
 r_github_packages:
   - jimhester/covr

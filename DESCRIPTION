@@ -27,5 +27,7 @@ Suggests:
     rsvg,
     webp,
     png,
-    pdftools
+    pdftools,
+    ggplot2,
+    raster
 RoxygenNote: 5.0.1
