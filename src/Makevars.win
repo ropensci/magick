@@ -1,7 +1,6 @@
 R_COMPILED_BY ?=-4.6.3
 IM_VERSION=6.9.5-4
-
-IM=$(call substr,$(IM_VERSION),1,1)
+IM=6
 IMPATH=../windows/imagemagick${IM}-${IM_VERSION}
 LIBBUILD=${subst gcc ,-,${R_COMPILED_BY}}${R_ARCH}
 
