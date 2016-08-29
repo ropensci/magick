@@ -109,6 +109,6 @@
 
 #' @export
 #' @importFrom graphics plot
-"plot.magick-image" <- function(image, ...){
-  plot(as.raster(image), ...)
+"plot.magick-image" <- function(x, ...){
+  plot(as.raster(x), ...)
 }
