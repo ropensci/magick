@@ -127,13 +127,13 @@ par(ask=FALSE)
 plot(raster)
 
 # Read bitmap arrays
-download.file("https://www.r-project.org/logo/Rlogo.png", "Rlogo.png")
+curl::curl_download("https://www.r-project.org/logo/Rlogo.png", "Rlogo.png")
 image_read(png::readPNG("Rlogo.png"))
 
-download.file("https://jeroenooms.github.io/images/example.webp", "example.webp")
+curl::curl_download("https://jeroenooms.github.io/images/example.webp", "example.webp")
 image_read(webp::read_webp("example.webp"))
 
-download.file("http://jeroenooms.github.io/images/tiger.svg", "tiger.svg")
+curl::curl_download("http://jeroenooms.github.io/images/tiger.svg", "tiger.svg")
 image_read(rsvg::rsvg("tiger.svg"))
 # Create thumbnails from GIF
 banana <- image_read("https://jeroenooms.github.io/images/banana.gif")

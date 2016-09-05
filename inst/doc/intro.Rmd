@@ -12,7 +12,7 @@ output:
 vignette: >
   %\VignetteIndexEntry{The magick package: Advanced Image-Processing in R}
   %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, echo = FALSE}
