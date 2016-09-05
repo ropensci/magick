@@ -260,7 +260,7 @@ rev(earth) %>%
 We can stack layers on top of each other as we would in Photoshop:
 
 ```{r}
-bigdata <- image_read('http://feelgrafix.com/data_images/out/28/1004158-data.jpg')
+bigdata <- image_read('https://jeroenooms.github.io/images/bigdata.jpg')
 frink <- image_read("https://jeroenooms.github.io/images/frink.png")
 logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
 img <- c(bigdata, logo, frink)
