@@ -153,7 +153,7 @@ image_animate(image_scale(img, "200x200"), fps = 1, dispose = "previous")
 ## ------------------------------------------------------------------------
 newlogo <- image_scale(image_read("https://www.r-project.org/logo/Rlogo.png"), "x150")
 oldlogo <- image_scale(image_read("https://developer.r-project.org/Logo/Rlogo-3.png"), "x150")
-frames <- image_morph(c(oldlogo, newlogo), frames = 12)
+frames <- image_morph(c(oldlogo, newlogo), frames = 10)
 image_animate(frames)
 
 ## ------------------------------------------------------------------------
