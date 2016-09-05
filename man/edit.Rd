@@ -127,11 +127,16 @@ par(ask=FALSE)
 plot(raster)
 
 # Read bitmap arrays
-image_read(png::readPNG(system.file("Rlogo.png", package = "magick")))
-image_read(rsvg::rsvg(system.file("tiger.svg", package = "magick")))
-image_read(webp::read_webp(system.file("example.webp", package = "magick")))
+download.file("https://www.r-project.org/logo/Rlogo.png", "Rlogo.png")
+image_read(png::readPNG("Rlogo.png"))
+
+download.file("https://jeroenooms.github.io/images/example.webp", "example.webp")
+image_read(webp::read_webp("example.webp"))
+
+download.file("http://jeroenooms.github.io/images/tiger.svg", "tiger.svg")
+image_read(rsvg::rsvg("tiger.svg"))
 # Create thumbnails from GIF
-banana <- image_read(system.file("banana.gif", package = "magick"))
+banana <- image_read("https://jeroenooms.github.io/images/banana.gif")
 length(banana)
 image_average(banana)
 image_flatten(banana)
@@ -141,8 +146,8 @@ image_append(banana, stack = TRUE)
 # Append images together
 image_append(image_scale(c(image_append(banana[c(1,3)], stack = TRUE), frink)))
 # Combine with another image
-logo <- image_read(system.file("Rlogo.png", package = "magick"))
-oldlogo <- image_read(system.file("Rlogo-old.png", package = "magick"))
+logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
+oldlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-3.png")
 
 # Create morphing animation
 both <- image_scale(c(oldlogo, logo), "400")

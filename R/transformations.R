@@ -16,7 +16,7 @@
 #' @export
 #' @rdname transformations
 #' @examples
-#' logo <- image_read(system.file("Rlogo.png", package = "magick"))
+#' logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
 #' logo <- image_scale(logo, "400")
 #' image_trim(logo)
 image_trim <- function(image){
@@ -269,7 +269,7 @@ image_page <- function(image, pagesize = NULL, density = NULL){
 #' \href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}.
 #' @param composite_image composition image
 #' @examples # Compose images using one of many operators
-#' oldlogo <- image_read(system.file("Rlogo-old.png", package = "magick"))
+#' oldlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-3.png")
 #' image_composite(logo, oldlogo)
 #' image_composite(logo, oldlogo, operator = "copyred")
 #'

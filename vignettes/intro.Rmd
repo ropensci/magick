@@ -78,7 +78,7 @@ Images can be read directly from a file path, URL, or raw vector with image data
 
 ```{r}
 library(magick)
-tiger <- image_read('https://upload.wikimedia.org/wikipedia/commons/f/fd/Ghostscript_Tiger.svg')
+tiger <- image_read('http://jeroenooms.github.io/images/tiger.svg')
 image_info(tiger)
 ```
 
@@ -181,7 +181,6 @@ image_frame(frink, "25x25+10+10")
 # Silly filters
 image_charcoal(frink)
 image_oilpaint(frink)
-image_emboss(frink)
 image_edge(frink)
 image_negate(frink)
 ```
@@ -244,7 +243,7 @@ The examples above concern single images. However all functions in magick have b
 The standard base methods `[` `[[`, `c()` and `length()` are used to manipulate vectors of images which can then be treated as layers or frames. 
 
 ```{r}
-earth <- image_read("https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif")
+earth <- image_read("https://jeroenooms.github.io/images/earth.gif")
 earth <- image_scale(earth, "200")
 length(earth)
 head(image_info(earth))
@@ -264,7 +263,7 @@ bigdata <- image_read('https://jeroenooms.github.io/images/bigdata.jpg')
 frink <- image_read("https://jeroenooms.github.io/images/frink.png")
 logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
 img <- c(bigdata, logo, frink)
-img <- image_scale(img, "400x400")
+img <- image_scale(img, "300x300")
 image_info(img)
 ```
 
@@ -344,8 +343,8 @@ image_animate(image_scale(img, "200x200"), fps = 1, dispose = "previous")
 Morphing creates a sequence of `n` images that gradually morph one image into another. It makes animations 
 
 ```{r}
-newlogo <- image_scale(image_read(system.file("Rlogo.png", package = "magick")), "x150")
-oldlogo <- image_scale(image_read(system.file("Rlogo-old.png", package = "magick")), "x150")
+newlogo <- image_scale(image_read("https://www.r-project.org/logo/Rlogo.png"), "x150")
+oldlogo <- image_scale(image_read("https://developer.r-project.org/Logo/Rlogo-3.png"), "x150")
 frames <- image_morph(c(oldlogo, newlogo), frames = 12)
 image_animate(frames)
 ```
@@ -355,7 +354,7 @@ If you read in an existing GIF or Video file, each frame becomes a layer:
 
 ```{r}
 # Foreground image
-banana <- image_read(system.file("banana.gif", package = "magick"))
+banana <- image_read("https://jeroenooms.github.io/images/banana.gif")
 banana <- image_scale(banana, "150")
 image_info(banana)
 ```
@@ -374,8 +373,11 @@ frames <- lapply(banana, function(frame) {
 # Turn frames into animation
 animation <- image_animate(image_join(frames))
 print(animation)
+```
 
-# Save as GIF
+Animations can be saved as GIF of MPEG files:
+
+```r
 image_write(animation, "Rlogo-banana.gif")
 ```
 

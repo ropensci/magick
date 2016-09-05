@@ -102,7 +102,7 @@ R logo with dancing banana
 
 ```{r eval = FALSE}
 logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
-banana <- image_read(system.file("banana.gif", package = "magick"))
+banana <- image_read("https://jeroenooms.github.io/images/banana.gif")
 front <- image_scale(banana, "300")
 background <- image_scale(logo, "400")
 frames <- lapply(as.list(front), function(x) image_flatten(c(background, x)))

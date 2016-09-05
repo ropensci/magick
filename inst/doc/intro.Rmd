@@ -1,5 +1,5 @@
 ---
-title: "Advanced Image-Processing in R"
+title: "The magick package: Advanced Image-Processing in R"
 date: "`r Sys.Date()`"
 output:
   html_document:
@@ -25,7 +25,7 @@ library(knitr)
 }
 ```
 
-The new [magick](https://cran.r-project.org/web/packages/magick/index.html) package is an ambitious effort to modernize and simplify high-quality image processing in R. It wraps the [ImageMagick STL](https://www.imagemagick.org/Magick++/STL.html) which is perhaps the most comprehensive open-source image processing library available today.
+The new [magick](https://cran.r-project.org/package=magick) package is an ambitious effort to modernize and simplify high-quality image processing in R. It wraps the [ImageMagick STL](https://www.imagemagick.org/Magick++/STL.html) which is perhaps the most comprehensive open-source image processing library available today.
 
 The ImageMagick library has an overwhelming amount of functionality. The current version of Magick exposes a decent chunk of it, but being a first release, documentation is still sparse. This post briefly introduces the most important concepts to get started.
 
@@ -78,13 +78,13 @@ Images can be read directly from a file path, URL, or raw vector with image data
 
 ```{r}
 library(magick)
-tiger <- image_read('https://upload.wikimedia.org/wikipedia/commons/f/fd/Ghostscript_Tiger.svg')
+tiger <- image_read('http://jeroenooms.github.io/images/tiger.svg')
 image_info(tiger)
 ```
 
 We use `image_write` to export an image in any format to a file on disk, or in memory if `path = NULL`.
 
-```{r}
+```r
 # Render svg to png bitmap
 image_write(tiger, path = "tiger.png", format = "png")
 ```
@@ -118,22 +118,13 @@ image_display(tiger)
 image_browse(tiger)
 ```
 
-There is some functionality to convert images to R raster graphics and plot it on R's graphics display, but this doesn't always work too well yet.
-
-
-```r
-frink <- image_read("https://jeroenooms.github.io/images/frink.png")
-raster <- as.raster(frink)
-plot(raster)
-```
-
-Also the R graphics device is relatively slow for displaying bitmap images.
+Another method is converting the image to a raster object and plot it on R's graphics display. However this is very slow and only useful in combination with other plotting functionality. See [#raster](#raster-graphics) below.
 
 ## Transformations
 
 The best way to get a sense of available transformations is walk through the examples in the `?transformations` help page in RStudio. Below a few examples to get a sense of what is possible.
 
-### The `Geometry` parameter
+### Cut and edit
 
 Several of the transformation functions take an `geometry` parameter which requires a special syntax of the form `AxB+C+D` where each element is optional. Some examples:
 
@@ -144,8 +135,6 @@ Several of the transformation functions take an `geometry` parameter which requi
   - `image_border(frink, "red", "20x10")`: *adds a border of 20px left+right and 10px top+bottom*
 
 The full syntax is specified in the [Magick::Geometry](http://www.imagemagick.org/Magick++/Geometry.html) documentation.
-
-### Cut and edit
 
 ```{r}
 # Example image
@@ -192,7 +181,6 @@ image_frame(frink, "25x25+10+10")
 # Silly filters
 image_charcoal(frink)
 image_oilpaint(frink)
-image_emboss(frink)
 image_edge(frink)
 image_negate(frink)
 ```
@@ -210,7 +198,7 @@ image_annotate(frink, "CONFIDENTIAL", size = 30, color = "red", boxcolor = "pink
   degrees = 60, location = "+50+100")
 
 # Only works if ImageMagick has fontconfig
-image_annotate(frink, "The quick brown fox", font = 'times-new-roman', size = 30)
+try(image_annotate(frink, "The quick brown fox", font = 'times-new-roman', size = 30), silent = T)
 ```
 
 If your system has difficulty finding a font, you can also specify the full path to the font file in the `font` parameter.
@@ -252,12 +240,10 @@ image_read("https://jeroenooms.github.io/images/frink.png") %>%
 
 The examples above concern single images. However all functions in magick have been vectorized to support working with layers, compositions or animation.
 
-### Base methods
-
 The standard base methods `[` `[[`, `c()` and `length()` are used to manipulate vectors of images which can then be treated as layers or frames. 
 
 ```{r}
-earth <- image_read("https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif")
+earth <- image_read("https://jeroenooms.github.io/images/earth.gif")
 earth <- image_scale(earth, "200")
 length(earth)
 head(image_info(earth))
@@ -273,21 +259,27 @@ rev(earth) %>%
 We can stack layers on top of each other as we would in Photoshop:
 
 ```{r}
-bigdata <- image_read('http://feelgrafix.com/data_images/out/28/1004158-data.jpg')
+bigdata <- image_read('https://jeroenooms.github.io/images/bigdata.jpg')
 frink <- image_read("https://jeroenooms.github.io/images/frink.png")
 logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
 img <- c(bigdata, logo, frink)
-img <- image_scale(img, "400x400")
+img <- image_scale(img, "300x300")
 image_info(img)
 ```
 
-To flatten the layers into a single image
+A mosaic prints images on top of one another, expanding the output canvas such that that everything fits:
+
+```{r}
+image_mosaic(img)
+```
+
+Flattening combines the layers into a single image which has the size of the first image:
 
 ```{r}
 image_flatten(img)
 ```
 
-There are also some alternative [composite operators](https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator):
+Flattening and mosaic allow for specifying alternative [composite operators](https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator):
 
 ```{r}
 image_flatten(img, 'Add')
@@ -295,46 +287,147 @@ image_flatten(img, 'Modulate')
 image_flatten(img, 'Minus')
 ```
 
-### Pages
+### Combining
 
-When working with a PDF document, each page becomes an element of the vector:
+Appending means simply putting the frames next to each other:
 
 ```{r}
-manual <- image_read('https://cran.r-project.org/web/packages/magick/magick.pdf')
-length(manual)
-
-# Convert the first page to PNG
-image_convert(image_scale(manual[1], "1200"), "png")
+left_to_right <- image_append(image_scale(img, "x200"))
+image_background(left_to_right, "white", flatten = TRUE)
 ```
 
-PDF rendering is usually done via ghostscript and the quality varies by system.
+Use `stack = TRUE` to position them on top of each other:
+
+```{r}
+top_to_bottom <- image_append(image_scale(img, "100"), stack = TRUE)
+image_background(top_to_bottom, "white", flatten = TRUE)
+```
+
+Composing allows for combining two images on a specific position:
+
+```{r}
+bigdatafrink <- image_scale(image_rotate(image_background(frink, "none"), 300), "x200")
+image_composite(image_scale(bigdata, "x400"), bigdatafrink, offset = "+180+100")
+```
+
+### Pages
+
+When reading a PDF document, each page becomes an element of the vector. Note that PDF gets rendered while reading so you need to specify the density immediately.
+
+```{r, eval = FALSE}
+manual <- image_read('https://cran.r-project.org/web/packages/magick/magick.pdf', density = "72x72")
+image_info(manual)
+
+# Convert the first page to PNG
+image_convert(manual[1], "png", 8)
+```
+
+Magick requires ghostscript to render the PDF. An alternative method to read pdf is render it via the pdftools package:
+
+```{r}
+library(pdftools)
+bitmap <- pdf_render_page('https://cran.r-project.org/web/packages/magick/magick.pdf',
+  page = 1, dpi = 72, numeric = FALSE)
+image_read(bitmap)
+```
+
 
 ### Animation
 
 Instead of treating vector elements as layers, we can also make them frames in an animation!
 
 ```{r}
-image_animate(image_scale(img, "200x200"), fps = 4, dispose = "previous")
+image_animate(image_scale(img, "200x200"), fps = 1, dispose = "previous")
 ```
 
-Let's put it all together:
+Morphing creates a sequence of `n` images that gradually morph one image into another. It makes animations 
+
+```{r}
+newlogo <- image_scale(image_read("https://www.r-project.org/logo/Rlogo.png"), "x150")
+oldlogo <- image_scale(image_read("https://developer.r-project.org/Logo/Rlogo-3.png"), "x150")
+frames <- image_morph(c(oldlogo, newlogo), frames = 12)
+image_animate(frames)
+```
+
+
+If you read in an existing GIF or Video file, each frame becomes a layer:
+
+```{r}
+# Foreground image
+banana <- image_read("https://jeroenooms.github.io/images/banana.gif")
+banana <- image_scale(banana, "150")
+image_info(banana)
+```
+
+Manipulate the individual frames and put them back into an animation:
 
 ```{r}
 # Background image
-logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
-background <- image_scale(logo, "400")
-
-# Foreground image
-banana <- image_read(system.file("banana.gif", package = "magick"))
-front <- image_scale(banana, "300")
+background <- image_background(image_scale(logo, "200"), "white", flatten = TRUE)
 
 # Combine and flatten frames
-frames <- lapply(as.list(front), function(x) image_flatten(c(background, x)))
+frames <- lapply(banana, function(frame) {
+  image_composite(background, frame, offset = "+70+30")
+})
 
 # Turn frames into animation
 animation <- image_animate(image_join(frames))
 print(animation)
+```
 
-# Save as GIF
+Animations can be saved as GIF of MPEG files:
+
+```r
 image_write(animation, "Rlogo-banana.gif")
 ```
+
+
+## Raster graphics
+
+Magick images can also be converted to raster objects for use with R's graphics device. Thereby we can combine it with other graphics tools. However do note that R's graphics device is very slow and has a very different coordinate system which reduces the quality of the image.
+
+### Base R rasters
+
+Base R has an `as.raster` format which converts the image to a vector of strings. The paper [Raster Images in R Graphics](https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Murrell.pdf) by Paul Murrell gives a nice overview.
+
+```{r}
+plot(as.raster(frink))
+```
+
+```{r, fig.width=7, fig.height=5}
+# Print over another graphic
+plot(cars)
+rasterImage(frink, 21, 0, 25, 80)
+```
+
+### The `grid` package
+
+The `grid` package makes it easier to overlay a raster on the graphics device without having to adjust for the x/y coordinates of the plot.
+
+```{r, fig.width=5, fig.height=3}
+library(ggplot2)
+library(grid)
+qplot(speed, dist, data = cars, geom = c("point", "smooth"))
+grid.raster(frink)
+```
+
+### The `raster` package
+
+The `raster` package has it's own classes for bitmaps which are useful for spatial applications. The simplest way to convert an image to raster is export it as a `tiff` file:
+
+```{r, fig.height=2}
+tiff_file <- tempfile()
+image_write(frink, path = tiff_file, format = 'tiff')
+r <- raster::brick(tiff_file)
+raster::plotRGB(r)
+```
+
+You can also manually convert the bitmap array into a raster object, but this seems to drop some meta data:
+
+```{r, fig.height=2}
+buf <- as.integer(frink[[1]])
+rr <- raster::brick(buf)
+raster::plotRGB(rr, asp = 1)
+```
+
+The raster package also does not seem to support transparency, which perhaps makes sense in the context of spatial imaging.
