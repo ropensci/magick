@@ -75,6 +75,29 @@ image_border <- function(image, color = "", geometry = ""){
 
 #' @export
 #' @rdname transformations
+#' @param originX origin x coordinate
+#' @param originY origin y coordinate
+#' @param radius radius of circle
+#' @param stroke_color a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string}
+#' @param stroke_width stroke width
+#' @param fill_color a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string}
+#' @examples image_border(logo, "red", "10x10")
+image_circle <- function(image, originX, originY, radius, stroke_color = "", stroke_width = 1, fill_color = ""){
+  assert_image(image)
+
+  # Note that Magick++ DrawableCircle has arguments (originX_, originY_, perimX_, perimY_)
+  # and that the radius is sqrt( (originX-perimX_)^2+(originY-perimY_)^2 ).
+  # Here, we parameterise it by radius and calculate perimX and perimY (that must be equal).
+  #solve r = sqrt( (x-p)^2+(y-p)^2 ) for p
+  #http://www.wolframalpha.com/input/?i=solve+r+%3D+sqrt(+(x-p)%5E2%2B(y-p)%5E2+)+for+p
+  # FIXME: Clean up
+  perim <- 0.5*(-sqrt(abs(2*radius^2 - originX^2 - originY^2 + 2*originX*originY)) + originX + originY)
+
+  magick_image_circle(image, originX, originY, perim, perim, stroke_color, stroke_width, fill_color)
+}
+
+#' @export
+#' @rdname transformations
 #' @param noisetype integer betwee 0 and 5 with
 #' \href{https://www.imagemagick.org/Magick++/Enumerations.html#NoiseType}{noisetype}.
 #' @examples

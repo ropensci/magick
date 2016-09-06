@@ -803,6 +803,24 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// magick_image_circle
+XPtrImage magick_image_circle(XPtrImage input, const double originX, const double originY, const double perimX, const double perimY, const char * stroke_color, const double stroke_width, const char * fill_color);
+RcppExport SEXP magick_magick_image_circle(SEXP inputSEXP, SEXP originXSEXP, SEXP originYSEXP, SEXP perimXSEXP, SEXP perimYSEXP, SEXP stroke_colorSEXP, SEXP stroke_widthSEXP, SEXP fill_colorSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< const double >::type originX(originXSEXP);
+    Rcpp::traits::input_parameter< const double >::type originY(originYSEXP);
+    Rcpp::traits::input_parameter< const double >::type perimX(perimXSEXP);
+    Rcpp::traits::input_parameter< const double >::type perimY(perimYSEXP);
+    Rcpp::traits::input_parameter< const char * >::type stroke_color(stroke_colorSEXP);
+    Rcpp::traits::input_parameter< const double >::type stroke_width(stroke_widthSEXP);
+    Rcpp::traits::input_parameter< const char * >::type fill_color(fill_colorSEXP);
+    __result = Rcpp::wrap(magick_image_circle(input, originX, originY, perimX, perimY, stroke_color, stroke_width, fill_color));
+    return __result;
+END_RCPP
+}
 // magick_image_annotate
 XPtrImage magick_image_annotate(XPtrImage input, const std::string text, const char * gravity, const char * location, double degrees, Rcpp::IntegerVector size, Rcpp::CharacterVector font, Rcpp::CharacterVector color, Rcpp::CharacterVector strokecolor, Rcpp::CharacterVector boxcolor);
 RcppExport SEXP magick_magick_image_annotate(SEXP inputSEXP, SEXP textSEXP, SEXP gravitySEXP, SEXP locationSEXP, SEXP degreesSEXP, SEXP sizeSEXP, SEXP fontSEXP, SEXP colorSEXP, SEXP strokecolorSEXP, SEXP boxcolorSEXP) {
