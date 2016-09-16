@@ -95,7 +95,7 @@ image_annotate(image, text, gravity = "northwest", location = "+0+0",
 
 image_convert(image, format, depth = NULL)
 
-image_compare(image, compare_image, metric = "")
+image_compare(image, reference_image, metric = "")
 }
 \arguments{
 \item{image}{object returned by \code{image_read}}
@@ -161,6 +161,8 @@ Can also be a bitmap type such as \code{rgba} or \code{rgb}.}
 
 \item{depth}{color depth, must be 8 or 16}
 
+\item{reference_image}{another image to compare to}
+
 \item{metric}{string with a
 \href{http://www.imagemagick.org/script/command-line-options.php#metric}{metric type}}
 }
@@ -223,7 +225,8 @@ image_annotate(logo, "CONFIDENTIAL", size = 50, color = "red", boxcolor = "pink"
 myfont <- ifelse(identical("windows", .Platform$OS.type), "courier-new", "courier")
 try(image_annotate(logo, "The quick brown fox", font = myfont, size = 50))
 logo2 <- image_blur(logo)
-image_compare(logo, logo2, metric = "phash")
+if(magick_config()$version >= "6.8.7")
+ image_compare(logo, logo2, metric = "phash")
 }
 \seealso{
 Other image: \code{\link{editing}}

@@ -340,8 +340,10 @@ image_convert <- function(image, format, depth = NULL){
 #' @param reference_image another image to compare to
 #' @param metric string with a
 #' \href{http://www.imagemagick.org/script/command-line-options.php#metric}{metric type}
-#' @examples logo2 <- image_blur(logo)
-#' image_compare(logo, logo2, metric = "phash")
+#' @examples
+#' logo2 <- image_blur(logo)
+#' if(magick_config()$version >= "6.8.7")
+#'  image_compare(logo, logo2, metric = "phash")
 image_compare <- function(image, reference_image, metric = ""){
   metric <- as.character(metric)
   magick_image_compare(image, reference_image, metric)

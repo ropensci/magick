@@ -22,5 +22,7 @@ coder_info <- function(format){
 #' @rdname config
 #' @export
 magick_config <- function(){
-  magick_config_internal()
+  out <- magick_config_internal()
+  out$version = numeric_version(out$version)
+  out
 }
