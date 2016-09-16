@@ -8,6 +8,7 @@
 \alias{image_charcoal}
 \alias{image_chop}
 \alias{image_colorize}
+\alias{image_compare}
 \alias{image_composite}
 \alias{image_contrast}
 \alias{image_convert}
@@ -93,6 +94,8 @@ image_annotate(image, text, gravity = "northwest", location = "+0+0",
   strokecolor = NULL, boxcolor = NULL)
 
 image_convert(image, format, depth = NULL)
+
+image_compare(image, compare_image, metric = "")
 }
 \arguments{
 \item{image}{object returned by \code{image_read}}
@@ -157,6 +160,8 @@ the image. Specifies an image density when decoding a Postscript or PDF.}
 Can also be a bitmap type such as \code{rgba} or \code{rgb}.}
 
 \item{depth}{color depth, must be 8 or 16}
+
+\item{metric}{string with a metric type}
 }
 \description{
 Vectorized functions for transforming images. These functions apply
@@ -216,6 +221,8 @@ image_annotate(logo, "CONFIDENTIAL", size = 50, color = "red", boxcolor = "pink"
 # Setting fonts requires fontconfig support (and that you have the font)
 myfont <- ifelse(identical("windows", .Platform$OS.type), "courier-new", "courier")
 try(image_annotate(logo, "The quick brown fox", font = myfont, size = 50))
+logo2 <- image_blur(logo)
+image_compare(logo, logo2, metric = "phash")
 }
 \seealso{
 Other image: \code{\link{editing}}

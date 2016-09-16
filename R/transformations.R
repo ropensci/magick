@@ -334,3 +334,13 @@ image_convert <- function(image, format, depth = NULL){
     stop('depth must be 8 or 16 bit')
   magick_image_format(image, format, depth)
 }
+
+#' @export
+#' @rdname transformations
+#' @param metric string with a metric type
+#' @examples logo2 <- image_blur(logo)
+#' image_compare(logo, logo2, metric = "phash")
+image_compare <- function(image, compare_image, metric = ""){
+  metric <- as.character(metric)
+  magick_image_compare(image, compare_image, metric)
+}

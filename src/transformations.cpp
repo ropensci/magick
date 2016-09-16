@@ -28,6 +28,14 @@ Magick::NoiseType Noise(const char * str){
   return (Magick::NoiseType) val;
 }
 
+Magick::MetricType Metric(const char * str){
+  ssize_t val = MagickCore::ParseCommandOption(
+    MagickCore::MagickMetricOptions, Magick::MagickFalse, str);
+  if(val < 0)
+    throw std::runtime_error(std::string("Invalid MetricType value: ") + str);
+  return (Magick::MetricType) val;
+}
+
 Magick::CompositeOperator Composite(const char * str){
   ssize_t val = MagickCore::ParseCommandOption(
     MagickCore::MagickComposeOptions, Magick::MagickFalse, str);
@@ -327,4 +335,13 @@ XPtrImage magick_image_annotate( XPtrImage input, const std::string text, const 
   if(size.size())
     for_each ( output->begin(), output->end(), Magick::fontPointsizeImage(fmin(10, input->front().fontPointsize())));
   return output;
+}
+
+// [[Rcpp::export]]
+double magick_image_compare( XPtrImage input, XPtrImage compare_image, const char  * metric){
+  if(strlen(metric)){
+    return input->front().compare(compare_image->front(), Metric(metric));
+  } else {
+    return input->front().compare(compare_image->front());
+  }
 }
