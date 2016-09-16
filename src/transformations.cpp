@@ -345,7 +345,7 @@ double magick_image_compare( XPtrImage input, XPtrImage reference_image, const c
 #if MagickLibVersion >= 0x687
     return input->front().compare(reference_image->front(), Metric(metric));
 #else
-    throw std::runtime_error("imagemagick too old, does not custom support metrics")
+    throw std::runtime_error("imagemagick too old, does not custom support metrics");
 #endif
   } else {
     return input->front().compare(reference_image->front());
