@@ -28,6 +28,7 @@ Magick::NoiseType Noise(const char * str){
   return (Magick::NoiseType) val;
 }
 
+#if MagickLibVersion >= 0x687
 Magick::MetricType Metric(const char * str){
   ssize_t val = MagickCore::ParseCommandOption(
     MagickCore::MagickMetricOptions, Magick::MagickFalse, str);
@@ -35,6 +36,7 @@ Magick::MetricType Metric(const char * str){
     throw std::runtime_error(std::string("Invalid MetricType value: ") + str);
   return (Magick::MetricType) val;
 }
+#endif
 
 Magick::CompositeOperator Composite(const char * str){
   ssize_t val = MagickCore::ParseCommandOption(
@@ -338,10 +340,14 @@ XPtrImage magick_image_annotate( XPtrImage input, const std::string text, const 
 }
 
 // [[Rcpp::export]]
-double magick_image_compare( XPtrImage input, XPtrImage compare_image, const char  * metric){
+double magick_image_compare( XPtrImage input, XPtrImage reference_image, const char  * metric){
   if(strlen(metric)){
-    return input->front().compare(compare_image->front(), Metric(metric));
+#if MagickLibVersion >= 0x687
+    return input->front().compare(reference_image->front(), Metric(metric));
+#else
+    throw std::runtime_error("imagemagick too old, does not custom support metrics")
+#endif
   } else {
-    return input->front().compare(compare_image->front());
+    return input->front().compare(reference_image->front());
   }
 }

@@ -337,10 +337,11 @@ image_convert <- function(image, format, depth = NULL){
 
 #' @export
 #' @rdname transformations
-#' @param metric string with a metric type
+#' @param metric string with a
+#' \href{http://www.imagemagick.org/script/command-line-options.php#metric}{metric type}
 #' @examples logo2 <- image_blur(logo)
 #' image_compare(logo, logo2, metric = "phash")
-image_compare <- function(image, compare_image, metric = ""){
+image_compare <- function(image, reference_image, metric = ""){
   metric <- as.character(metric)
-  magick_image_compare(image, compare_image, metric)
+  magick_image_compare(image, reference_image, metric)
 }

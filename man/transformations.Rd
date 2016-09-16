@@ -161,7 +161,8 @@ Can also be a bitmap type such as \code{rgba} or \code{rgb}.}
 
 \item{depth}{color depth, must be 8 or 16}
 
-\item{metric}{string with a metric type}
+\item{metric}{string with a
+\href{http://www.imagemagick.org/script/command-line-options.php#metric}{metric type}}
 }
 \description{
 Vectorized functions for transforming images. These functions apply
