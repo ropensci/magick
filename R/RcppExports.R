@@ -273,7 +273,7 @@ magick_image_annotate <- function(input, text, gravity, location, degrees, size,
     .Call('magick_magick_image_annotate', PACKAGE = 'magick', input, text, gravity, location, degrees, size, font, color, strokecolor, boxcolor)
 }
 
-magick_image_compare <- function(input, compare_image, metric) {
-    .Call('magick_magick_image_compare', PACKAGE = 'magick', input, compare_image, metric)
+magick_image_compare <- function(input, reference_image, metric) {
+    .Call('magick_magick_image_compare', PACKAGE = 'magick', input, reference_image, metric)
 }
 

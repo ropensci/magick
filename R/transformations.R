@@ -337,6 +337,7 @@ image_convert <- function(image, format, depth = NULL){
 
 #' @export
 #' @rdname transformations
+#' @param reference_image another image to compare to
 #' @param metric string with a
 #' \href{http://www.imagemagick.org/script/command-line-options.php#metric}{metric type}
 #' @examples logo2 <- image_blur(logo)

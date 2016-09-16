@@ -824,15 +824,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_compare
-double magick_image_compare(XPtrImage input, XPtrImage compare_image, const char  * metric);
-RcppExport SEXP magick_magick_image_compare(SEXP inputSEXP, SEXP compare_imageSEXP, SEXP metricSEXP) {
+double magick_image_compare(XPtrImage input, XPtrImage reference_image, const char  * metric);
+RcppExport SEXP magick_magick_image_compare(SEXP inputSEXP, SEXP reference_imageSEXP, SEXP metricSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< XPtrImage >::type compare_image(compare_imageSEXP);
+    Rcpp::traits::input_parameter< XPtrImage >::type reference_image(reference_imageSEXP);
     Rcpp::traits::input_parameter< const char  * >::type metric(metricSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_compare(input, compare_image, metric));
+    rcpp_result_gen = Rcpp::wrap(magick_image_compare(input, reference_image, metric));
     return rcpp_result_gen;
 END_RCPP
 }
