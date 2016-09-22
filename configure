@@ -101,6 +101,9 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
       PKG_LIBS=$(echo $PKG_LIBS | sed "s/-l$LIBNAME /-lbrew$LIBNAME /g")
     done
     rm -f $BREWDIR/lib/*.dylib
+
+    # Copy configuration files
+    cp -r $BREWDIR/etc inst/
   fi
 fi
 
