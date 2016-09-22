@@ -12,9 +12,16 @@ matrix:
       env: R_CODECOV=true
     - os: osx
       latex: false
+      osx_image: xcode8
+      brew_packages: imagemagick
+    - os: osx
+      latex: false
       osx_image: xcode7.2
       brew_packages: imagemagick --with-fontconfig --with-webp --with-librsvg --with-fftw
-      env: FONTCONFIG_PATH=/opt/X11/lib/X11/fontconfig
+      env:
+        - PKG_CONFIG_PATH = "/opt/X11/lib/pkgconfig"
+        - CPPFLAGS = "-I/opt/X11/include"
+        - LDFLAGS = "-L/opt/X11/lib"
     - os: osx
       latex: false
       osx_image: beta-xcode6.1
