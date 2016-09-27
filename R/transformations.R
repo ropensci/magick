@@ -232,6 +232,14 @@ image_fill <- function(image, color, point = "1x1", fuzz = 0){
 
 #' @export
 #' @rdname transformations
+image_transparent <- function(image, color, fuzz = 0){
+  assert_image(image)
+  magick_image_transparent(image, color, fuzz)
+}
+
+
+#' @export
+#' @rdname transformations
 #' @examples
 #' image_chop(logo, "100x20")
 image_chop <- function(image, geometry){

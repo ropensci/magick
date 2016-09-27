@@ -609,6 +609,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_transparent
+XPtrImage magick_image_transparent(XPtrImage input, const char * color, double fuzz);
+RcppExport SEXP magick_magick_image_transparent(SEXP inputSEXP, SEXP colorSEXP, SEXP fuzzSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< const char * >::type color(colorSEXP);
+    Rcpp::traits::input_parameter< double >::type fuzz(fuzzSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_transparent(input, color, fuzz));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_frame
 XPtrImage magick_image_frame(XPtrImage input, const char * geometry);
 RcppExport SEXP magick_magick_image_frame(SEXP inputSEXP, SEXP geometrySEXP) {

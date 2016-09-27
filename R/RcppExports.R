@@ -205,6 +205,10 @@ magick_image_fill <- function(input, color, point, fuzz) {
     .Call('magick_magick_image_fill', PACKAGE = 'magick', input, color, point, fuzz)
 }
 
+magick_image_transparent <- function(input, color, fuzz) {
+    .Call('magick_magick_image_transparent', PACKAGE = 'magick', input, color, fuzz)
+}
+
 magick_image_frame <- function(input, geometry) {
     .Call('magick_magick_image_frame', PACKAGE = 'magick', input, geometry)
 }

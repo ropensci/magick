@@ -30,6 +30,7 @@
 \alias{image_rotate}
 \alias{image_sample}
 \alias{image_scale}
+\alias{image_transparent}
 \alias{image_trim}
 \alias{transformations}
 \title{Image Transformations}
@@ -77,6 +78,8 @@ image_normalize(image)
 image_rotate(image, degrees)
 
 image_fill(image, color, point = "1x1", fuzz = 0)
+
+image_transparent(image, color, fuzz = 0)
 
 image_chop(image, geometry)
 

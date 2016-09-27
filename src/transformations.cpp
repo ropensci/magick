@@ -160,6 +160,18 @@ XPtrImage magick_image_fill( XPtrImage input, const char * color, const char * p
 }
 
 // [[Rcpp::export]]
+XPtrImage magick_image_transparent( XPtrImage input, const char * color, double fuzz){
+  XPtrImage output = copy(input);
+  if(fuzz != 0)
+    for_each ( output->begin(), output->end(), Magick::colorFuzzImage(fuzz));
+  Rprintf("set fuzz to %f\n", fuzz);
+  for_each ( output->begin(), output->end(), Magick::transparentImage(Color(color)));
+  if(fuzz != 0)
+    for_each ( output->begin(), output->end(), Magick::colorFuzzImage(input->front().colorFuzz()));
+  return output;
+}
+
+// [[Rcpp::export]]
 XPtrImage magick_image_frame( XPtrImage input, const char * geometry){
   XPtrImage output = copy(input);
   for_each ( output->begin(), output->end(), Magick::frameImage(Geom(geometry)));
