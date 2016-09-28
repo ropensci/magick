@@ -176,6 +176,8 @@ image_flatten <- function(image, operator = NULL){
 #' @export
 #' @rdname edit
 image_fft <- function(image){
+  if(!isTRUE(magick_config()$fftw))
+    stop("ImageMagick was configured without FFTW support. Reinstall with: brew install imagemagick --with-fftw")
   assert_image(image)
   magick_image_fft(image)
 }
