@@ -144,7 +144,7 @@ Rcpp::CharacterVector magick_image_as_raster( Rcpp::RawVector data ){
   static std::string sixteen( "0123456789abcdef" ) ;
   Rcpp::String transparent( "transparent" ) ;
 
-  Rcpp::CharacterMatrix out(w,h) ;
+  Rcpp::CharacterMatrix out(h,w) ;
   Rbyte* p = data.begin() ;
   std::string buf( "#000000" ) ;
 
