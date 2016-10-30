@@ -45,6 +45,10 @@ magick_image_info <- function(input) {
     .Call('magick_magick_image_info', PACKAGE = 'magick', input)
 }
 
+magick_image_as_raster <- function(data) {
+    .Call('magick_magick_image_as_raster', PACKAGE = 'magick', data)
+}
+
 magick_image_length <- function(image) {
     .Call('magick_magick_image_length', PACKAGE = 'magick', image)
 }

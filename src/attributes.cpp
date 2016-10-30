@@ -136,3 +136,42 @@ Rcpp::DataFrame magick_image_info( XPtrImage input){
     Rcpp::_["stringsAsFactors"] = false
   );
 }
+
+// [[Rcpp::export]]
+Rcpp::CharacterVector magick_image_as_raster( Rcpp::RawVector data ){
+  Rcpp::IntegerVector dim = data.attr("dim") ;
+  int w = dim[1], h = dim[2] ;
+  static std::string sixteen( "0123456789abcdef" ) ;
+  Rcpp::String transparent( "transparent" ) ;
+
+  Rcpp::CharacterMatrix out(h,w) ;
+  Rbyte* p = data.begin() ;
+  std::string buf( "#000000" ) ;
+
+  for(int i=0; i<h; i++){
+    int k = i*w ;
+    for(int j=0; j<w; j++, p+= 4, k++){
+
+      if( p[3] ){
+        Rbyte red = p[0], green = p[1], blue = p[2] ;
+
+        buf[1] = sixteen[ red >> 4 ] ;
+        buf[2] = sixteen[ red & 0x0F ] ;
+        buf[3] = sixteen[ green >> 4 ] ;
+        buf[4] = sixteen[ green & 0x0F ] ;
+        buf[5] = sixteen[ blue >> 4 ] ;
+        buf[6] = sixteen[ blue & 0x0F ] ;
+
+        out[k] = Rf_mkCharLen( buf.c_str(), 7) ;
+
+      } else {
+        out[k] = transparent ;
+      }
+
+    }
+  }
+
+  out.attr("class") = "raster" ;
+  return out ;
+
+}
