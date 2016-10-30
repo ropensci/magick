@@ -96,8 +96,12 @@
 #' @importFrom grDevices as.raster
 "as.raster.magick-image" <- function(image, ...){
   assert_image(image)
-  buf <- image_info(image)[[1]]
+  buf <- image[[1]]
   magick_image_as_raster(buf)
+}
+
+as_raster_cpp <- function( image, ... ){
+
 }
 
 #' @export
