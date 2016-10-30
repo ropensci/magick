@@ -162,7 +162,7 @@ Rcpp::CharacterVector magick_image_as_raster( Rcpp::RawVector data ){
         buf[5] = sixteen[ blue >> 4 ] ;
         buf[6] = sixteen[ blue & 0x0F ] ;
 
-        out[k] = buf ;
+        out[k] = Rf_mkCharLen( buf.c_str(), 7) ;
 
       } else {
         out[k] = transparent ;
