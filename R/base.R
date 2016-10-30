@@ -92,19 +92,12 @@
   invisible()
 }
 
-## apply is slow, can easily be optimized in c++.
 #' @export
 #' @importFrom grDevices as.raster
 "as.raster.magick-image" <- function(image, ...){
   assert_image(image)
-  info <- image_info(image)
-  buf <- image[[1]]
-  bitmap <- as.character(buf[1:3, , , drop = FALSE])
-  dim(bitmap) <- c(3, info$width, info$height)
-  alpha <- t(buf[4,,] == as.raw(0x00))
-  raster <- apply(bitmap, 3:2, function(z){paste0(c('#', z), collapse = "")})
-  raster[alpha] <- "transparent"
-  as.raster(raster)
+  buf <- image_info(image)[[1]]
+  magick_image_as_raster(buf)
 }
 
 #' @export

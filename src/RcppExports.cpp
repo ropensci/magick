@@ -137,6 +137,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_as_raster
+Rcpp::CharacterVector magick_image_as_raster(Rcpp::RawVector data);
+RcppExport SEXP magick_magick_image_as_raster(SEXP dataSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type data(dataSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_as_raster(data));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_length
 int magick_image_length(XPtrImage image);
 RcppExport SEXP magick_magick_image_length(SEXP imageSEXP) {
