@@ -18,8 +18,9 @@ SystemRequirements: ImageMagick++: ImageMagick-c++-devel (rpm) or libmagick++-de
 VignetteBuilder: knitr
 Imports:
     Rcpp (>= 0.12),
-    curl
-LinkingTo: Rcpp
+    curl, 
+    RcppParallel
+LinkingTo: Rcpp, RcppParallel
 Suggests:
     knitr,
     rmarkdown,

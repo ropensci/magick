@@ -22,3 +22,6 @@ Magick::Geometry Geom(const char * str);
 Magick::Color Color(const char * str);
 Magick::DisposeType Dispose(const char * str);
 Magick::CompositeOperator Composite(const char * str);
+
+// functions used in several .cpp files
+XPtrImage magick_image_bitmap(void * data, Magick::StorageType type, size_t slices, size_t width, size_t height);
