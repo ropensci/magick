@@ -1,5 +1,6 @@
 #include "magick_types.h"
 #include <RcppParallel.h>
+using namespace Rcpp ;
 
 inline void fill_rgba( Rbyte* p, Rbyte r, Rbyte g, Rbyte b, Rbyte a){
   p[0] = r ;
@@ -25,8 +26,7 @@ inline void fill_channel( Rbyte* p, int channel, Rbyte value){
 }
 
 
-void fill_channel_histogram( Rbyte* data, const Rcpp::IntegerVector& counts, int height, int channel){
-  using namespace Rcpp ;
+void fill_channel_histogram( Rbyte* data, const IntegerVector& counts, int height, int channel){
   IntegerVector heights = no_init(256) ;
   int max_height = max(counts) ;
   for( int j=0; j<256; j++){
@@ -49,8 +49,7 @@ void fill_channel_histogram( Rbyte* data, const Rcpp::IntegerVector& counts, int
   }
 }
 
-void fill_grayscale_histogram( Rbyte* data, const Rcpp::IntegerVector& red, const Rcpp::IntegerVector& green, const Rcpp::IntegerVector& blue, int height ){
-  using namespace Rcpp ;
+void fill_grayscale_histogram( Rbyte* data, const IntegerVector& red, const IntegerVector& green, const IntegerVector& blue, int height ){
   IntegerVector gray = red + green + blue ;
   int max_gray = max(gray) ;
 
@@ -86,7 +85,6 @@ void fill_grayscale_histogram( Rbyte* data, const Rcpp::IntegerVector& red, cons
 // [[Rcpp::export]]
 XPtrImage magick_image_histogram( XPtrImage image , int h ){
   using namespace Magick ;
-  using namespace Rcpp ;
 
   Frame frame = image->front() ;
   Blob output;
