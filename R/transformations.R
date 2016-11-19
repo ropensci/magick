@@ -75,6 +75,14 @@ image_border <- function(image, color = "", geometry = ""){
 
 #' @export
 #' @rdname transformations
+#' @examples image_despeckle(logo)
+image_despeckle <- function(image){
+  assert_image(image)
+  magick_image_despeckle(image)
+}
+
+#' @export
+#' @rdname transformations
 #' @param noisetype integer betwee 0 and 5 with
 #' \href{https://www.imagemagick.org/Magick++/Enumerations.html#NoiseType}{noisetype}.
 #' @examples
