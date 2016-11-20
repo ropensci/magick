@@ -851,6 +851,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_reducenoise
+XPtrImage magick_image_reducenoise(XPtrImage input, const size_t radius);
+RcppExport SEXP magick_magick_image_reducenoise(SEXP inputSEXP, SEXP radiusSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< const size_t >::type radius(radiusSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_reducenoise(input, radius));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_annotate
 XPtrImage magick_image_annotate(XPtrImage input, const std::string text, const char * gravity, const char * location, double degrees, Rcpp::IntegerVector size, Rcpp::CharacterVector font, Rcpp::CharacterVector color, Rcpp::CharacterVector strokecolor, Rcpp::CharacterVector boxcolor);
 RcppExport SEXP magick_magick_image_annotate(SEXP inputSEXP, SEXP textSEXP, SEXP gravitySEXP, SEXP locationSEXP, SEXP degreesSEXP, SEXP sizeSEXP, SEXP fontSEXP, SEXP colorSEXP, SEXP strokecolorSEXP, SEXP boxcolorSEXP) {

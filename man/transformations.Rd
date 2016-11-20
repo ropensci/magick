@@ -10,6 +10,7 @@
 \alias{image_border}
 \alias{image_despeckle}
 \alias{image_median}
+\alias{image_reducenoise}
 \alias{image_noise}
 \alias{image_blur}
 \alias{image_charcoal}
@@ -52,6 +53,8 @@ image_border(image, color = "", geometry = "")
 image_despeckle(image, times = 1L)
 
 image_median(image, radius = 1)
+
+image_reducenoise(image, radius = 1)
 
 image_noise(image, noisetype = "gaussian")
 
@@ -200,6 +203,7 @@ image_sample(logo, "200x200")
 image_border(logo, "red", "10x10")
 image_despeckle(logo)
 image_median(logo)
+image_reducenoise(logo)
 image_noise(logo)
 image_blur(logo, 10, 10)
 image_charcoal(logo)

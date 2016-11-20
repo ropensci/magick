@@ -330,6 +330,13 @@ XPtrImage magick_image_median( XPtrImage input, double radius){
   for_each ( output->begin(), output->end(), Magick::medianFilterImage(radius));
   return output;
 }
+
+// [[Rcpp::export]]
+XPtrImage magick_image_reducenoise( XPtrImage input, const size_t radius){
+  XPtrImage output = copy(input);
+  for_each ( output->begin(), output->end(), Magick::reduceNoiseImage(radius));
+  return output;
+}
 /* STL is broken for annotateImage.
  * https://github.com/ImageMagick/ImageMagick/commit/903e501876d405ffd6f9f38f5e72db9acc3d15e8
  */

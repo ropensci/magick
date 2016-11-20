@@ -92,6 +92,14 @@ image_median <- function(image, radius = 1.0){
 
 #' @export
 #' @rdname transformations
+#' @examples image_reducenoise(logo)
+image_reducenoise <- function(image, radius = 1L){
+  assert_image(image)
+  magick_image_reducenoise(image, radius)
+}
+
+#' @export
+#' @rdname transformations
 #' @param noisetype integer betwee 0 and 5 with
 #' \href{https://www.imagemagick.org/Magick++/Enumerations.html#NoiseType}{noisetype}.
 #' @examples
@@ -103,7 +111,7 @@ image_noise <- function(image, noisetype = "gaussian"){
 
 #' @export
 #' @rdname transformations
-#' @param radius radius, in pixels, for \code{image_blur()} and \code{image_median()} transformations.
+#' @param radius radius, in pixels, for various transformations
 #' @param sigma the standard deviation of the Laplacian, in pixels.
 #' @examples
 #' image_blur(logo, 10, 10)
