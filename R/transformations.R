@@ -75,10 +75,11 @@ image_border <- function(image, color = "", geometry = ""){
 
 #' @export
 #' @rdname transformations
+#' @param times number of times to repeat the despeckle operation
 #' @examples image_despeckle(logo)
-image_despeckle <- function(image){
+image_despeckle <- function(image, times = 1L){
   assert_image(image)
-  magick_image_despeckle(image)
+  magick_image_despeckle(image, times)
 }
 
 #' @export

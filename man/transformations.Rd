@@ -48,7 +48,7 @@ image_sample(image, geometry = "")
 
 image_border(image, color = "", geometry = "")
 
-image_despeckle(image)
+image_despeckle(image, times = 1L)
 
 image_noise(image, noisetype = "gaussian")
 
@@ -113,6 +113,8 @@ transparency with background color.}
 
 \item{geometry}{a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
 for example \code{"10x10+5-5"}.}
+
+\item{times}{number of times to repeat the despeckle operation}
 
 \item{noisetype}{integer betwee 0 and 5 with
 \href{https://www.imagemagick.org/Magick++/Enumerations.html#NoiseType}{noisetype}.}

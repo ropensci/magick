@@ -277,8 +277,8 @@ magick_image_border <- function(input, color, geometry) {
     .Call('magick_magick_image_border', PACKAGE = 'magick', input, color, geometry)
 }
 
-magick_image_despeckle <- function(input) {
-    .Call('magick_magick_image_despeckle', PACKAGE = 'magick', input)
+magick_image_despeckle <- function(input, times) {
+    .Call('magick_magick_image_despeckle', PACKAGE = 'magick', input, times)
 }
 
 magick_image_annotate <- function(input, text, gravity, location, degrees, size, font, color, strokecolor, boxcolor) {

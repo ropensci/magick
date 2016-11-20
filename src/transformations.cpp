@@ -316,9 +316,11 @@ XPtrImage magick_image_border( XPtrImage input, const char * color, const char *
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_despeckle( XPtrImage input){
+XPtrImage magick_image_despeckle( XPtrImage input, int times){
   XPtrImage output = copy(input);
-  for_each ( output->begin(), output->end(), Magick::despeckleImage());
+  for (int i=0; i < times; i++) {
+    for_each ( output->begin(), output->end(), Magick::despeckleImage());
+  }
   return output;
 }
 

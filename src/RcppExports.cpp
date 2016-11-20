@@ -828,13 +828,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_despeckle
-XPtrImage magick_image_despeckle(XPtrImage input);
-RcppExport SEXP magick_magick_image_despeckle(SEXP inputSEXP) {
+XPtrImage magick_image_despeckle(XPtrImage input, int times);
+RcppExport SEXP magick_magick_image_despeckle(SEXP inputSEXP, SEXP timesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_despeckle(input));
+    Rcpp::traits::input_parameter< int >::type times(timesSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_despeckle(input, times));
     return rcpp_result_gen;
 END_RCPP
 }
