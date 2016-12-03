@@ -12,11 +12,11 @@ matrix:
       env: R_CODECOV=true
     - os: osx
       latex: false
-      osx_image: xcode8
+      osx_image: xcode8.1
       brew_packages: imagemagick
     - os: osx
       latex: false
-      osx_image: xcode7.2
+      osx_image: xcode8.1
       brew_packages: imagemagick --with-fontconfig --with-webp --with-librsvg --with-fftw
       env:
         - PKG_CONFIG_PATH = "/opt/X11/lib/pkgconfig"
@@ -24,8 +24,8 @@ matrix:
         - LDFLAGS = "-L/opt/X11/lib"
     - os: osx
       latex: false
-      osx_image: beta-xcode6.1
-      brew_packages: imagemagick
+      osx_image: xcode8.1
+      disable_homebrew: true
     - os: osx
       latex: false
       osx_image: beta-xcode6.1
