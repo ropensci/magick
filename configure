@@ -92,7 +92,8 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     rm -f $BREWDIR/lib/*.dylib
 
     # Copy configuration files
-    cp -r $BREWDIR/etc inst/
+    mkdir -p inst/etc
+    cp -r $BREWDIR/etc/fonts inst/etc/
   fi
 fi
 
