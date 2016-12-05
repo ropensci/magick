@@ -70,8 +70,8 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 
     # We have a custom bottle for Mavericks
     HOMEBREW_CACHE="/tmp" $BREW install pkg-config 2>&1 | perl -pe 's/Warning/Note/gi'
-    HOMEBREW_CACHE="/tmp" $BREW install --force-bottle openssl freetype fontconfig gettext glib \
-      cairo python gobject-introspection imagemagick 2>&1 | perl -pe 's/Warning/Note/gi'
+    HOMEBREW_CACHE="/tmp" $BREW install --force-bottle openssl freetype fontconfig gettext glib cairo python \
+      gobject-introspection gdk-pixbuf harfbuzz pango librsvg imagemagick 2>&1 | perl -pe 's/Warning/Note/gi'
 
     # Get the CFLAGS and LIBS
     PKG_CONFIG="$BREWDIR/opt/pkg-config/bin/pkg-config"

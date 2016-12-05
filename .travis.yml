@@ -18,10 +18,6 @@ matrix:
       latex: false
       osx_image: xcode8.1
       brew_packages: imagemagick --with-fontconfig --with-webp --with-librsvg --with-fftw
-      env:
-        - PKG_CONFIG_PATH = "/opt/X11/lib/pkgconfig"
-        - CPPFLAGS = "-I/opt/X11/include"
-        - LDFLAGS = "-L/opt/X11/lib"
     - os: osx
       latex: false
       osx_image: xcode8.1
