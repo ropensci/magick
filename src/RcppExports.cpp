@@ -270,6 +270,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_readbitmap_nativeraster
+XPtrImage magick_image_readbitmap_nativeraster(Rcpp::IntegerVector x);
+RcppExport SEXP magick_magick_image_readbitmap_nativeraster(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_readbitmap_nativeraster(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_readbitmap_double
 XPtrImage magick_image_readbitmap_double(Rcpp::NumericVector x);
 RcppExport SEXP magick_magick_image_readbitmap_double(SEXP xSEXP) {

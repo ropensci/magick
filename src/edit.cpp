@@ -28,6 +28,13 @@ XPtrImage magick_image_readbitmap_raw(Rcpp::RawVector x){
 }
 
 // [[Rcpp::export]]
+XPtrImage magick_image_readbitmap_nativeraster(Rcpp::IntegerVector x){
+  Rcpp::IntegerVector dims(x.attr("dim"));
+  Rcpp::Rcout << dims[0] << " " << dims[1];
+  return magick_image_bitmap(x.begin(), Magick::CharPixel, 4, dims[1], dims[0]);
+}
+
+// [[Rcpp::export]]
 XPtrImage magick_image_readbitmap_double(Rcpp::NumericVector x){
   Rcpp::IntegerVector dims(x.attr("dim"));
   return magick_image_bitmap(x.begin(), Magick::DoublePixel, dims[0], dims[1], dims[2]);
