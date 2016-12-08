@@ -380,7 +380,23 @@ Animations can be saved as GIF of MPEG files:
 ```r
 image_write(animation, "Rlogo-banana.gif")
 ```
+## Capture plot output
 
+You can capture the contents of an R graphics device, allowing you to manipulate
+plots.  The R graphics device must be one of the bitmap devies such as `png()`
+or `jpeg()`.  `Cairo::Cairo(type="raster")` creates in-memory bitmaps without
+ever writing to disk:
+
+```{r, results='hide', fig.show='hide'}
+Cairo::Cairo(type="raster")
+plot(density(rnorm(100)))
+densimage <- image_capture()
+dev.off()
+```
+
+```{r}
+image_flip(densimage)
+```
 
 ## Raster graphics
 

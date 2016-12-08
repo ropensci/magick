@@ -135,11 +135,11 @@ bigdatafrink <- image_scale(image_rotate(image_background(frink, "none"), 300), 
 image_composite(image_scale(bigdata, "x400"), bigdatafrink, offset = "+180+100")
 
 ## ---- eval = FALSE-------------------------------------------------------
-#  manual <- image_read('https://cran.r-project.org/web/packages/magick/magick.pdf', density = "72x72")
-#  image_info(manual)
-#  
-#  # Convert the first page to PNG
-#  image_convert(manual[1], "png", 8)
+## manual <- image_read('https://cran.r-project.org/web/packages/magick/magick.pdf', density = "72x72")
+## image_info(manual)
+## 
+## # Convert the first page to PNG
+## image_convert(manual[1], "png", 8)
 
 ## ------------------------------------------------------------------------
 library(pdftools)
@@ -174,6 +174,15 @@ frames <- lapply(banana, function(frame) {
 # Turn frames into animation
 animation <- image_animate(image_join(frames))
 print(animation)
+
+## ---- results='hide', fig.show='hide'------------------------------------
+Cairo::Cairo(type="raster")
+plot(density(rnorm(100)))
+densimage <- image_capture()
+dev.off()
+
+## ------------------------------------------------------------------------
+image_flip(densimage)
 
 ## ------------------------------------------------------------------------
 plot(as.raster(frink))
