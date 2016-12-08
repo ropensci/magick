@@ -29,5 +29,6 @@ Suggests:
     png,
     pdftools,
     ggplot2,
-    raster
+    raster,
+    Cairo
 RoxygenNote: 5.0.1
