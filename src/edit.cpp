@@ -228,12 +228,24 @@ XPtrImage magick_image_mosaic( XPtrImage input, Rcpp::CharacterVector composite)
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_animate( XPtrImage input, size_t delay, size_t iter, const char * method){
+XPtrImage magick_image_animate( XPtrImage input, Rcpp::IntegerVector delay, size_t iter, Rcpp::CharacterVector method){
   XPtrImage output = copy(input);
-  for_each ( output->begin(), output->end(), Magick::animationDelayImage(delay));
-  for_each ( output->begin(), output->end(), Magick::animationIterationsImage(iter));
-  for_each ( output->begin(), output->end(), Magick::gifDisposeMethodImage(Dispose(method)));
-  for_each ( output->begin(), output->end(), Magick::magickImage("gif"));
+  Iter iimg  = output->begin();
+  Rcpp::IntegerVector::iterator idelay = delay.begin();
+  Rcpp::CharacterVector::iterator imethod = method.begin();
+  for(size_t i=0; i < delay.size(); i++) {
+    iimg->animationDelay( *(idelay++) );
+    iimg->animationIterations(iter);
+    iimg->gifDisposeMethod(Dispose( *(imethod++) ));
+    iimg->magick("gif");
+    iimg++;
+  }
+
+ // Iter x = output->begin();
+  // for_each ( output->begin(), output->end(), Magick::animationDelayImage( * (++idelay) ));
+  // for_each ( output->begin(), output->end(), Magick::animationIterationsImage(iter));
+  // for_each ( output->begin(), output->end(), Magick::gifDisposeMethodImage(Dispose( * (++imethod) )));
+  // for_each ( output->begin(), output->end(), Magick::magickImage("gif"));
   return output;
 }
 
