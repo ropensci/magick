@@ -8,11 +8,11 @@
 XPtrImage magick_image_bitmap(void * data, Magick::StorageType type, size_t slices, size_t width, size_t height){
   const char * format;
   switch ( slices ){
-    case 1 : format = "G"; break;
-    case 2 : format = "GA"; break;
-    case 3 : format = "RGB"; break;
-    case 4 : format = "RGBA"; break;
-    default: throw std::runtime_error("Invalid number of channels (must be 4 or less)");
+  case 1 : format = "G"; break;
+  case 2 : format = "GA"; break;
+  case 3 : format = "RGB"; break;
+  case 4 : format = "RGBA"; break;
+  default: throw std::runtime_error("Invalid number of channels (must be 4 or less)");
   }
   Frame frame(width, height, format, type , data);
   frame.magick("png");
@@ -28,9 +28,21 @@ XPtrImage magick_image_readbitmap_raw(Rcpp::RawVector x){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_readbitmap_nativeraster(Rcpp::IntegerVector x){
-  Rcpp::IntegerVector dims(x.attr("dim"));
-  return magick_image_bitmap(x.begin(), Magick::CharPixel, 4, dims[1], dims[0]);
+XPtrImage magick_image_readbitmap_device(int device){
+  if(device <= 1) {
+    Rcpp::stop("No such graphics device");
+  }
+  pGEDevDesc gdd = GEgetDevice(device - 1);
+  if(!gdd) {
+    Rcpp::stop("No such graphics device");
+  }
+  SEXP raster_sexp = GECap(gdd);
+  if(raster_sexp == R_NilValue) {
+    Rcpp::stop("Graphics device does not support capture.");
+  }
+  Rcpp::IntegerVector raster(raster_sexp);
+  Rcpp::IntegerVector dims(raster.attr("dim"));
+  return magick_image_bitmap(raster.begin(), Magick::CharPixel, 4, dims[1], dims[0]);
 }
 
 // [[Rcpp::export]]
@@ -224,3 +236,4 @@ XPtrImage magick_image_animate( XPtrImage input, size_t delay, size_t iter, cons
   for_each ( output->begin(), output->end(), Magick::magickImage("gif"));
   return output;
 }
+

@@ -93,8 +93,8 @@ magick_image_readbitmap_raw <- function(x) {
     .Call('magick_magick_image_readbitmap_raw', PACKAGE = 'magick', x)
 }
 
-magick_image_readbitmap_nativeraster <- function(x) {
-    .Call('magick_magick_image_readbitmap_nativeraster', PACKAGE = 'magick', x)
+magick_image_readbitmap_device <- function(device) {
+    .Call('magick_magick_image_readbitmap_device', PACKAGE = 'magick', device)
 }
 
 magick_image_readbitmap_double <- function(x) {

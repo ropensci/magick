@@ -7,10 +7,10 @@
 image_capture(device = dev.cur())
 }
 \arguments{
-\item{device}{The graphics device you wish to capture.  It must be a bitmap
-device such as \code{\link[grDevices]{png}}, \code{\link[grDevices]{tiff}},
-or \code{\link[Cairo]{CairoPNG}}. \code{\link[Cairo]{Cairo}(type="raster")}
-is suggested for applications where you wish to avoid any writing to disk.}
+\item{device}{The graphics device you wish to capture.  The graphics device
+must be a bitmap device that supports raster capture, such as Quartz, X11,
+or devices in the Cairo package. Cairo(type="raster") is suggested for
+non-interactive applications where you wish to avoid any writing to disk.}
 }
 \value{
 A magick image pointer
@@ -24,6 +24,6 @@ Cairo(type="raster")
 plot(density(rnorm(100)))
 densimage <- image_capture()
 dev.off()
-densimage
-}
+image_flip(densimage)
 
+}

@@ -270,14 +270,14 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// magick_image_readbitmap_nativeraster
-XPtrImage magick_image_readbitmap_nativeraster(Rcpp::IntegerVector x);
-RcppExport SEXP magick_magick_image_readbitmap_nativeraster(SEXP xSEXP) {
+// magick_image_readbitmap_device
+XPtrImage magick_image_readbitmap_device(int device);
+RcppExport SEXP magick_magick_image_readbitmap_device(SEXP deviceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_readbitmap_nativeraster(x));
+    Rcpp::traits::input_parameter< int >::type device(deviceSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_readbitmap_device(device));
     return rcpp_result_gen;
 END_RCPP
 }
