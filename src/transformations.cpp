@@ -112,11 +112,16 @@ XPtrImage magick_image_edge( XPtrImage input, size_t radius){
   return output;
 }
 
+/* Added in f78d1802df605fe2a0bd2551f4e4a27702e12828 */
 // [[Rcpp::export]]
 XPtrImage magick_image_deskew( XPtrImage input, double treshold){
   XPtrImage output = copy(input);
+#if MagickLibVersion >= 0x686
   for (Iter it = output->begin(); it != output->end(); ++it)
     it->deskew(treshold);
+#else
+  throw std::runtime_error("deskew not supported, ImageMagick too old");
+#endif
   return output;
 }
 
