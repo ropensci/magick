@@ -549,6 +549,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_deskew
+XPtrImage magick_image_deskew(XPtrImage input, double treshold);
+RcppExport SEXP magick_magick_image_deskew(SEXP inputSEXP, SEXP tresholdSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< double >::type treshold(tresholdSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_deskew(input, treshold));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_emboss
 XPtrImage magick_image_emboss(XPtrImage input, const double radius, const double sigma);
 RcppExport SEXP magick_magick_image_emboss(SEXP inputSEXP, SEXP radiusSEXP, SEXP sigmaSEXP) {

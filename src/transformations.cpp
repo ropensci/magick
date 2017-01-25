@@ -113,6 +113,14 @@ XPtrImage magick_image_edge( XPtrImage input, size_t radius){
 }
 
 // [[Rcpp::export]]
+XPtrImage magick_image_deskew( XPtrImage input, double treshold){
+  XPtrImage output = copy(input);
+  for (Iter it = output->begin(); it != output->end(); ++it)
+    it->deskew(treshold);
+  return output;
+}
+
+// [[Rcpp::export]]
 XPtrImage magick_image_emboss( XPtrImage input, const double radius = 1, const double sigma = 0.5){
   XPtrImage output = copy(input);
   for_each ( output->begin(), output->end(), Magick::embossImage(radius, sigma));

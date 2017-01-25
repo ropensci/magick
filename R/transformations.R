@@ -356,3 +356,11 @@ image_compare <- function(image, reference_image, metric = ""){
   metric <- as.character(metric)
   magick_image_compare(image, reference_image, metric)
 }
+
+#' @export
+#' @rdname transformations
+#' @param treshold straightens an image. A threshold of 40 works for most images.
+image_deskew <- function(image, treshold = 40){
+  assert_image(image)
+  magick_image_deskew(image, treshold)
+}

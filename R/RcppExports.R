@@ -185,6 +185,10 @@ magick_image_edge <- function(input, radius) {
     .Call('magick_magick_image_edge', PACKAGE = 'magick', input, radius)
 }
 
+magick_image_deskew <- function(input, treshold) {
+    .Call('magick_magick_image_deskew', PACKAGE = 'magick', input, treshold)
+}
+
 magick_image_emboss <- function(input, radius = 1, sigma = 0.5) {
     .Call('magick_magick_image_emboss', PACKAGE = 'magick', input, radius, sigma)
 }
