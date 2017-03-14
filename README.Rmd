@@ -3,7 +3,7 @@
 ##### *Advanced Image-Processing in R*
 
 [![Build Status](https://travis-ci.org/ropensci/magick.svg?branch=master)](https://travis-ci.org/ropensci/magick)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/magick?branch=master&svg=true)](https://ci.appveyor.com/project/jeroenooms/magick)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/magick?branch=master&svg=true)](https://ci.appveyor.com/project/jeroen/magick)
 [![Coverage Status](https://codecov.io/github/ropensci/magick/coverage.svg?branch=master)](https://codecov.io/github/ropensci/magick?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/magick)](https://cran.r-project.org/package=magick)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/magick)](https://cran.r-project.org/package=magick)
@@ -30,7 +30,7 @@ About the underlying library:
 ```{r eval = FALSE}
 library(magick)
 library(magrittr)
-frink <- image_read("https://jeroenooms.github.io/images/frink.png")
+frink <- image_read("https://jeroen.github.io/images/frink.png")
 image_trim(frink)
 image_scale(frink, "200x200")
 image_flip(frink)
@@ -102,7 +102,7 @@ R logo with dancing banana
 
 ```{r eval = FALSE}
 logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
-banana <- image_read("https://jeroenooms.github.io/images/banana.gif")
+banana <- image_read("https://jeroen.github.io/images/banana.gif")
 front <- image_scale(banana, "300")
 background <- image_scale(logo, "400")
 frames <- lapply(as.list(front), function(x) image_flatten(c(background, x)))

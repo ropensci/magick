@@ -30,7 +30,7 @@
 #' @references Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}
 #' @examples
 #' # Download image from the web
-#' frink <- image_read("https://jeroenooms.github.io/images/frink.png")
+#' frink <- image_read("https://jeroen.github.io/images/frink.png")
 #' worldcup_frink <- image_fill(frink, "orange", "+100+200", 30000)
 #' image_write(worldcup_frink, "output.png")
 #'
@@ -43,10 +43,10 @@
 #' curl::curl_download("https://www.r-project.org/logo/Rlogo.png", "Rlogo.png")
 #' image_read(png::readPNG("Rlogo.png"))
 #'
-#' curl::curl_download("https://jeroenooms.github.io/images/example.webp", "example.webp")
+#' curl::curl_download("https://jeroen.github.io/images/example.webp", "example.webp")
 #' image_read(webp::read_webp("example.webp"))
 #'
-#' curl::curl_download("http://jeroenooms.github.io/images/tiger.svg", "tiger.svg")
+#' curl::curl_download("http://jeroen.github.io/images/tiger.svg", "tiger.svg")
 #' image_read(rsvg::rsvg("tiger.svg"))
 image_read <- function(path, density = NULL, depth = NULL){
   density <- as.character(density)
@@ -137,7 +137,7 @@ image_browse <- function(image, browser = getOption("browser")){
 #' @param stack place images top-to-bottom (TRUE) or left-to-right (FALSE)
 #' @examples
 #' # Create thumbnails from GIF
-#' banana <- image_read("https://jeroenooms.github.io/images/banana.gif")
+#' banana <- image_read("https://jeroen.github.io/images/banana.gif")
 #' length(banana)
 #' image_average(banana)
 #' image_flatten(banana)

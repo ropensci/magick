@@ -12,7 +12,7 @@ str(magick::magick_config())
 
 ## ------------------------------------------------------------------------
 library(magick)
-tiger <- image_read('http://jeroenooms.github.io/images/tiger.svg')
+tiger <- image_read('http://jeroen.github.io/images/tiger.svg')
 image_info(tiger)
 
 ## ------------------------------------------------------------------------
@@ -21,7 +21,7 @@ image_info(tiger_png)
 
 ## ------------------------------------------------------------------------
 # Example image
-frink <- image_read("https://jeroenooms.github.io/images/frink.png")
+frink <- image_read("https://jeroen.github.io/images/frink.png")
 print(frink)
 
 # Add 20px left/right and 10px top/bottom
@@ -72,7 +72,7 @@ image_annotate(frink, "CONFIDENTIAL", size = 30, color = "red", boxcolor = "pink
 try(image_annotate(frink, "The quick brown fox", font = 'times-new-roman', size = 30), silent = T)
 
 ## ------------------------------------------------------------------------
-frink <- image_read("https://jeroenooms.github.io/images/frink.png")
+frink <- image_read("https://jeroen.github.io/images/frink.png")
 frink2 <- image_scale(frink, "100")
 image_info(frink)
 image_info(frink2)
@@ -86,14 +86,14 @@ print(test)
 
 ## ------------------------------------------------------------------------
 library(magrittr)
-image_read("https://jeroenooms.github.io/images/frink.png") %>%
+image_read("https://jeroen.github.io/images/frink.png") %>%
   image_rotate(270) %>%
   image_background("blue", flatten = TRUE) %>%
   image_border("red", "10x10") %>%
   image_annotate("The same thing with pipes", color = "white", size = 30)
 
 ## ------------------------------------------------------------------------
-earth <- image_read("https://jeroenooms.github.io/images/earth.gif")
+earth <- image_read("https://jeroen.github.io/images/earth.gif")
 earth <- image_scale(earth, "200")
 length(earth)
 head(image_info(earth))
@@ -104,8 +104,8 @@ rev(earth) %>%
   image_annotate("meanwhile in Australia", size = 20, color = "white")
 
 ## ------------------------------------------------------------------------
-bigdata <- image_read('https://jeroenooms.github.io/images/bigdata.jpg')
-frink <- image_read("https://jeroenooms.github.io/images/frink.png")
+bigdata <- image_read('https://jeroen.github.io/images/bigdata.jpg')
+frink <- image_read("https://jeroen.github.io/images/frink.png")
 logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
 img <- c(bigdata, logo, frink)
 img <- image_scale(img, "300x300")
@@ -158,7 +158,7 @@ image_animate(frames)
 
 ## ------------------------------------------------------------------------
 # Foreground image
-banana <- image_read("https://jeroenooms.github.io/images/banana.gif")
+banana <- image_read("https://jeroen.github.io/images/banana.gif")
 banana <- image_scale(banana, "150")
 image_info(banana)
 

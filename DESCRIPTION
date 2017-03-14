@@ -3,7 +3,7 @@ Type: Package
 Title: Advanced Image-Processing in R
 Version: 0.3.9000
 Author: Jeroen Ooms
-Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>
+Maintainer: Jeroen Ooms <jeroen@berkeley.edu>
 Description: Bindings to ImageMagick: the most comprehensive open-source image
     processing library available. Supports many common formats (png, jpeg, tiff,
     pdf, etc) and manipulations (rotate, scale, crop, trim, flip, blur, etc).

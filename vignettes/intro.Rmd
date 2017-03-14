@@ -78,7 +78,7 @@ Images can be read directly from a file path, URL, or raw vector with image data
 
 ```{r}
 library(magick)
-tiger <- image_read('http://jeroenooms.github.io/images/tiger.svg')
+tiger <- image_read('http://jeroen.github.io/images/tiger.svg')
 image_info(tiger)
 ```
 
@@ -138,7 +138,7 @@ The full syntax is specified in the [Magick::Geometry](http://www.imagemagick.or
 
 ```{r}
 # Example image
-frink <- image_read("https://jeroenooms.github.io/images/frink.png")
+frink <- image_read("https://jeroen.github.io/images/frink.png")
 print(frink)
 
 # Add 20px left/right and 10px top/bottom
@@ -208,7 +208,7 @@ If your system has difficulty finding a font, you can also specify the full path
 Each of the image transformation functions returns a **modified copy** of the original image. It does not affect the original image.
 
 ```{r}
-frink <- image_read("https://jeroenooms.github.io/images/frink.png")
+frink <- image_read("https://jeroen.github.io/images/frink.png")
 frink2 <- image_scale(frink, "100")
 image_info(frink)
 image_info(frink2)
@@ -228,7 +228,7 @@ Using `magrittr` pipe syntax makes it a bit more readable
 
 ```{r}
 library(magrittr)
-image_read("https://jeroenooms.github.io/images/frink.png") %>%
+image_read("https://jeroen.github.io/images/frink.png") %>%
   image_rotate(270) %>%
   image_background("blue", flatten = TRUE) %>%
   image_border("red", "10x10") %>%
@@ -243,7 +243,7 @@ The examples above concern single images. However all functions in magick have b
 The standard base methods `[` `[[`, `c()` and `length()` are used to manipulate vectors of images which can then be treated as layers or frames. 
 
 ```{r}
-earth <- image_read("https://jeroenooms.github.io/images/earth.gif")
+earth <- image_read("https://jeroen.github.io/images/earth.gif")
 earth <- image_scale(earth, "200")
 length(earth)
 head(image_info(earth))
@@ -259,8 +259,8 @@ rev(earth) %>%
 We can stack layers on top of each other as we would in Photoshop:
 
 ```{r}
-bigdata <- image_read('https://jeroenooms.github.io/images/bigdata.jpg')
-frink <- image_read("https://jeroenooms.github.io/images/frink.png")
+bigdata <- image_read('https://jeroen.github.io/images/bigdata.jpg')
+frink <- image_read("https://jeroen.github.io/images/frink.png")
 logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
 img <- c(bigdata, logo, frink)
 img <- image_scale(img, "300x300")
@@ -354,7 +354,7 @@ If you read in an existing GIF or Video file, each frame becomes a layer:
 
 ```{r}
 # Foreground image
-banana <- image_read("https://jeroenooms.github.io/images/banana.gif")
+banana <- image_read("https://jeroen.github.io/images/banana.gif")
 banana <- image_scale(banana, "150")
 image_info(banana)
 ```
