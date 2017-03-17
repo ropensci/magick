@@ -53,8 +53,8 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     PKG_CFLAGS="-I$INCLUDE_DIR -DMAGICKCORE_QUANTUM_DEPTH=16 -DMAGICKCORE_HDRI_ENABLE=0"
     PKG_LIBS="-L$BREWDIR/opt/$PKG_BREW_NAME/lib $PKG_LIBS"
   else
-    curl -OL https://jeroen.github.io/autobrew/magick.sh
-    source magick.sh
+    curl -sOL https://jeroen.github.io/autobrew/magick
+    source magick
   fi
 fi
 
