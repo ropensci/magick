@@ -1,5 +1,5 @@
 #!/bin/bash
-# Anticonf script by Jeroen Ooms (2016)
+# Anticonf script by Jeroen Ooms (2017)
 # The script will try 'Magick++-config' and 'pkg-config' to find required
 # cflags and ldflags. Make sure this executable is in PATH when installing
 # the package. Alternatively, you can set INCLUDE_DIR and LIB_DIR manually:
@@ -53,8 +53,8 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     PKG_CFLAGS="-I$INCLUDE_DIR -DMAGICKCORE_QUANTUM_DEPTH=16 -DMAGICKCORE_HDRI_ENABLE=0"
     PKG_LIBS="-L$BREWDIR/opt/$PKG_BREW_NAME/lib $PKG_LIBS"
   else
-    curl -sOL https://jeroen.github.io/autobrew/magick
-    source magick
+    curl -sfL "https://jeroen.github.io/autobrew/$PKG_BREW_NAME" > $TMPDIR/autobrew
+    source $TMPDIR/autobrew
   fi
 fi
 
