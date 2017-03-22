@@ -253,17 +253,30 @@ image_info <- function(image){
 
 #' @export
 #' @rdname edit
-#' @param dispose frame disposal method. See
-#' \href{http://www.imagemagick.org/Usage/anim_basics/}{documentation}
+#' @param dispose frame disposal method, one of "background", "previous", or
+#' "none". \href{http://www.imagemagick.org/Usage/anim_basics/}{documentation}.
+#' A vector of disposal methods will apply to each frame, and will be recycled
+#' to the number of frames.
 #' @param fps frames per second
+#' @param delay an alternative to frames per second, specifying the delay in
+#' seconds between each image.  A vector will apply to each frame, and will be
+#' recyled to the number of frames.
 #' @param loop how many times to repeat the animation. Default is infinite.
-image_animate <- function(image, fps = 10, loop = 0, dispose = c("background", "previous", "none")){
+image_animate <- function(image, fps = 10, delay=NULL, loop = 0, dispose = "background"){
   assert_image(image)
-  stopifnot(is.numeric(fps))
+  stopifnot(is.numeric(fps) || is.null(fps))
+  stopifnot(is.numeric(delay) || is.null(delay))
+  stopifnot(!(is.null(fps) & is.null(delay)))
   stopifnot(is.numeric(loop))
-  if(100 %% fps)
-    stop("argument 'fps' must be a factor of 100")
-  delay <- as.integer(100/fps)
-  dispose <- match.arg(dispose)
+  stopifnot(all(dispose %in% c("background", "previous", "none")))
+  dispose <- rep_len(dispose, length.out = length(image))
+  if(is.null(delay)) {
+    if(100 %% fps)
+      stop("argument 'fps' must be a factor of 100")
+    delay <- as.integer(100/fps)
+  } else {
+    delay <- as.integer(delay * 100)
+  }
+  delay <- rep_len(delay, length.out = length(image))
   magick_image_animate(image, delay, as.integer(loop), dispose)
 }

@@ -270,6 +270,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_readbitmap_device
+XPtrImage magick_image_readbitmap_device(int device);
+RcppExport SEXP magick_magick_image_readbitmap_device(SEXP deviceSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type device(deviceSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_readbitmap_device(device));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_readbitmap_double
 XPtrImage magick_image_readbitmap_double(Rcpp::NumericVector x);
 RcppExport SEXP magick_magick_image_readbitmap_double(SEXP xSEXP) {
@@ -461,15 +472,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_animate
-XPtrImage magick_image_animate(XPtrImage input, size_t delay, size_t iter, const char * method);
+XPtrImage magick_image_animate(XPtrImage input, Rcpp::IntegerVector delay, size_t iter, Rcpp::CharacterVector method);
 RcppExport SEXP magick_magick_image_animate(SEXP inputSEXP, SEXP delaySEXP, SEXP iterSEXP, SEXP methodSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< size_t >::type delay(delaySEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type delay(delaySEXP);
     Rcpp::traits::input_parameter< size_t >::type iter(iterSEXP);
-    Rcpp::traits::input_parameter< const char * >::type method(methodSEXP);
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type method(methodSEXP);
     rcpp_result_gen = Rcpp::wrap(magick_image_animate(input, delay, iter, method));
     return rcpp_result_gen;
 END_RCPP

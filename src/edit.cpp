@@ -8,11 +8,11 @@
 XPtrImage magick_image_bitmap(void * data, Magick::StorageType type, size_t slices, size_t width, size_t height){
   const char * format;
   switch ( slices ){
-    case 1 : format = "G"; break;
-    case 2 : format = "GA"; break;
-    case 3 : format = "RGB"; break;
-    case 4 : format = "RGBA"; break;
-    default: throw std::runtime_error("Invalid number of channels (must be 4 or less)");
+  case 1 : format = "G"; break;
+  case 2 : format = "GA"; break;
+  case 3 : format = "RGB"; break;
+  case 4 : format = "RGBA"; break;
+  default: throw std::runtime_error("Invalid number of channels (must be 4 or less)");
   }
   Frame frame(width, height, format, type , data);
   frame.magick("png");
@@ -25,6 +25,24 @@ XPtrImage magick_image_bitmap(void * data, Magick::StorageType type, size_t slic
 XPtrImage magick_image_readbitmap_raw(Rcpp::RawVector x){
   Rcpp::IntegerVector dims(x.attr("dim"));
   return magick_image_bitmap(x.begin(), Magick::CharPixel, dims[0], dims[1], dims[2]);
+}
+
+// [[Rcpp::export]]
+XPtrImage magick_image_readbitmap_device(int device){
+  if(device <= 1) {
+    Rcpp::stop("No such graphics device");
+  }
+  pGEDevDesc gdd = GEgetDevice(device - 1);
+  if(!gdd) {
+    Rcpp::stop("No such graphics device");
+  }
+  SEXP raster_sexp = GECap(gdd);
+  if(raster_sexp == R_NilValue) {
+    Rcpp::stop("Graphics device does not support capture.");
+  }
+  Rcpp::IntegerVector raster(raster_sexp);
+  Rcpp::IntegerVector dims(raster.attr("dim"));
+  return magick_image_bitmap(raster.begin(), Magick::CharPixel, 4, dims[1], dims[0]);
 }
 
 // [[Rcpp::export]]
@@ -210,11 +228,24 @@ XPtrImage magick_image_mosaic( XPtrImage input, Rcpp::CharacterVector composite)
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_animate( XPtrImage input, size_t delay, size_t iter, const char * method){
+XPtrImage magick_image_animate( XPtrImage input, Rcpp::IntegerVector delay, size_t iter, Rcpp::CharacterVector method){
   XPtrImage output = copy(input);
-  for_each ( output->begin(), output->end(), Magick::animationDelayImage(delay));
-  for_each ( output->begin(), output->end(), Magick::animationIterationsImage(iter));
-  for_each ( output->begin(), output->end(), Magick::gifDisposeMethodImage(Dispose(method)));
-  for_each ( output->begin(), output->end(), Magick::magickImage("gif"));
+  Iter iimg  = output->begin();
+  Rcpp::IntegerVector::iterator idelay = delay.begin();
+  Rcpp::CharacterVector::iterator imethod = method.begin();
+  for(size_t i=0; i < delay.size(); i++) {
+    iimg->animationDelay( *(idelay++) );
+    iimg->animationIterations(iter);
+    iimg->gifDisposeMethod(Dispose( *(imethod++) ));
+    iimg->magick("gif");
+    iimg++;
+  }
+
+ // Iter x = output->begin();
+  // for_each ( output->begin(), output->end(), Magick::animationDelayImage( * (++idelay) ));
+  // for_each ( output->begin(), output->end(), Magick::animationIterationsImage(iter));
+  // for_each ( output->begin(), output->end(), Magick::gifDisposeMethodImage(Dispose( * (++imethod) )));
+  // for_each ( output->begin(), output->end(), Magick::magickImage("gif"));
   return output;
 }
+

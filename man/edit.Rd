@@ -2,24 +2,24 @@
 % Please edit documentation in R/edit.R
 \name{editing}
 \alias{editing}
-\alias{image_animate}
+\alias{image_read}
+\alias{magick}
+\alias{imagemagick}
+\alias{image_write}
+\alias{image_display}
+\alias{image_browse}
 \alias{image_append}
 \alias{image_average}
-\alias{image_browse}
 \alias{image_coalesce}
-\alias{image_display}
-\alias{image_fft}
 \alias{image_flatten}
-\alias{image_info}
-\alias{image_join}
+\alias{image_fft}
 \alias{image_map}
 \alias{image_montage}
 \alias{image_morph}
 \alias{image_mosaic}
-\alias{image_read}
-\alias{image_write}
-\alias{imagemagick}
-\alias{magick}
+\alias{image_join}
+\alias{image_info}
+\alias{image_animate}
 \title{Image Editing}
 \usage{
 image_read(path, density = NULL, depth = NULL)
@@ -53,8 +53,8 @@ image_join(...)
 
 image_info(image)
 
-image_animate(image, fps = 10, loop = 0, dispose = c("background",
-  "previous", "none"))
+image_animate(image, fps = 10, delay = NULL, loop = 0,
+  dispose = "background")
 }
 \arguments{
 \item{path}{file path, URL, or raw vector with image data}
@@ -92,10 +92,16 @@ transparency with background color.}
 
 \item{fps}{frames per second}
 
+\item{delay}{an alternative to frames per second, specifying the delay in
+seconds between each image.  A vector will apply to each frame, and will be
+recyled to the number of frames.}
+
 \item{loop}{how many times to repeat the animation. Default is infinite.}
 
-\item{dispose}{frame disposal method. See
-\href{http://www.imagemagick.org/Usage/anim_basics/}{documentation}}
+\item{dispose}{frame disposal method, one of "background", "previous", or
+"none". \href{http://www.imagemagick.org/Usage/anim_basics/}{documentation}.
+A vector of disposal methods will apply to each frame, and will be recycled
+to the number of frames.}
 }
 \description{
 Read, write and join or combine images. All image functions are vectorized,
@@ -168,4 +174,3 @@ Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}
 \seealso{
 Other image: \code{\link{transformations}}
 }
-
