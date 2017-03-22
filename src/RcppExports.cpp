@@ -270,6 +270,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_readbitmap_device
+XPtrImage magick_image_readbitmap_device(int device);
+RcppExport SEXP magick_magick_image_readbitmap_device(SEXP deviceSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type device(deviceSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_readbitmap_device(device));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_readbitmap_double
 XPtrImage magick_image_readbitmap_double(Rcpp::NumericVector x);
 RcppExport SEXP magick_magick_image_readbitmap_double(SEXP xSEXP) {
