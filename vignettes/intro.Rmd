@@ -181,7 +181,6 @@ image_frame(frink, "25x25+10+10")
 # Silly filters
 image_charcoal(frink)
 image_oilpaint(frink)
-image_edge(frink)
 image_negate(frink)
 ```
 
