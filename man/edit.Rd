@@ -2,24 +2,24 @@
 % Please edit documentation in R/edit.R
 \name{editing}
 \alias{editing}
-\alias{image_animate}
+\alias{image_read}
+\alias{magick}
+\alias{imagemagick}
+\alias{image_write}
+\alias{image_display}
+\alias{image_browse}
 \alias{image_append}
 \alias{image_average}
-\alias{image_browse}
 \alias{image_coalesce}
-\alias{image_display}
-\alias{image_fft}
 \alias{image_flatten}
-\alias{image_info}
-\alias{image_join}
+\alias{image_fft}
 \alias{image_map}
 \alias{image_montage}
 \alias{image_morph}
 \alias{image_mosaic}
-\alias{image_read}
-\alias{image_write}
-\alias{imagemagick}
-\alias{magick}
+\alias{image_join}
+\alias{image_info}
+\alias{image_animate}
 \title{Image Editing}
 \usage{
 image_read(path, density = NULL, depth = NULL)
@@ -168,4 +168,3 @@ Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}
 \seealso{
 Other image: \code{\link{transformations}}
 }
-

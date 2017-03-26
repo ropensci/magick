@@ -30,4 +30,3 @@ coder_info("gif")
 \references{
 \url{https://www.imagemagick.org/Magick++/CoderInfo.html}
 }
-
