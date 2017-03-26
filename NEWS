@@ -1,3 +1,6 @@
+0.4
+  - Extract autobrew script
+
 0.3
   - Add [<-.magick-image to support for assigning layers to image by index
   - Revert Windows build to ImageMagick 6 because IM7 is too buggy

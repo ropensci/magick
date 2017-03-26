@@ -53,8 +53,8 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     PKG_CFLAGS="-I$INCLUDE_DIR -DMAGICKCORE_QUANTUM_DEPTH=16 -DMAGICKCORE_HDRI_ENABLE=0"
     PKG_LIBS="-L$BREWDIR/opt/$PKG_BREW_NAME/lib $PKG_LIBS"
   else
-    curl -sfL "https://jeroen.github.io/autobrew/$PKG_BREW_NAME" > $TMPDIR/autobrew
-    source $TMPDIR/autobrew
+    curl -sfL "https://jeroen.github.io/autobrew/$PKG_BREW_NAME" > autobrew
+    source autobrew
   fi
 fi
 
