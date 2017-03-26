@@ -13,7 +13,6 @@ PKG_CSW_NAME="imagemagick_dev"
 PKG_BREW_NAME="imagemagick"
 PKG_TEST_HEADER="<Magick++.h>"
 PKG_LIBS="-lMagick++-6.Q16"
-PKG_TEST_HEADER="<Magick++.h>"
 
 # Use Magick++-config (on Solaris /opt/csw/bin must be in PATH)
 if [ $(command -v pkg-config) ]; then
@@ -49,9 +48,9 @@ elif [ "$PKGCONFIG_CFLAGS" ] || [ "$PKGCONFIG_LIBS" ]; then
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   if [ $(command -v brew) ]; then
     BREWDIR=$(brew --prefix)
-    INCLUDE_DIR=$(echo /usr/local/opt/imagemagick/include/*)
-    PKG_CFLAGS="-I$INCLUDE_DIR -DMAGICKCORE_QUANTUM_DEPTH=16 -DMAGICKCORE_HDRI_ENABLE=0"
-    PKG_LIBS="-L$BREWDIR/opt/$PKG_BREW_NAME/lib $PKG_LIBS"
+    INCLUDE_DIR="$BREWDIR/opt/imagemagick/include/ImageMagick-7"
+    PKG_CFLAGS="-I$INCLUDE_DIR -DMAGICKCORE_QUANTUM_DEPTH=16 -DMAGICKCORE_HDRI_ENABLE=1"
+    PKG_LIBS="-L$BREWDIR/opt/$PKG_BREW_NAME/lib -lMagick++-7.Q16HDRI"
   else
     curl -sfL "https://jeroen.github.io/autobrew/$PKG_BREW_NAME" > autobrew
     source autobrew
