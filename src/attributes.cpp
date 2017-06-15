@@ -9,21 +9,30 @@
 
 // [[Rcpp::export]]
 Rcpp::IntegerVector magick_attr_text_antialias( XPtrImage input, Rcpp::LogicalVector set){
-  for (Iter it = input->begin(); it != input->end(); ++it)
-    it->textAntiAlias(set[0]);
+  if(set.size())
+#if MagickLibVersion >= 0x700
+    for_each ( input->begin(), input->end(), Magick::textAntiAliasImage(set[0]));
+#else
+    for_each ( input->begin(), input->end(), Magick::antiAliasImage(set[0]));
+#endif
   Rcpp::IntegerVector out;
   for (Iter it = input->begin(); it != input->end(); ++it)
-    out.push_back(it->textAntiAlias());
+#if MagickLibVersion >= 0x700
+    out.push_back(it->textAntiAlias();
+#else
+    out.push_back(it->antiAlias());
+#endif
   return out;
 }
 
 // [[Rcpp::export]]
 Rcpp::IntegerVector magick_attr_stroke_antialias( XPtrImage input, Rcpp::LogicalVector set){
-  for (Iter it = input->begin(); it != input->end(); ++it)
-    it->strokeAntiAlias(set[0]);
   Rcpp::IntegerVector out;
-  for (Iter it = input->begin(); it != input->end(); ++it)
+  for (Iter it = input->begin(); it != input->end(); ++it){
+    if(set.size())
+      it->strokeAntiAlias(set[0]);
     out.push_back(it->strokeAntiAlias());
+  }
   return out;
 }
 
