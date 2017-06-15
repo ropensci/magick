@@ -6,6 +6,18 @@
 
 using namespace Rcpp;
 
+// magick_attr_antialias
+Rcpp::IntegerVector magick_attr_antialias(XPtrImage input, Rcpp::LogicalVector set);
+RcppExport SEXP magick_magick_attr_antialias(SEXP inputSEXP, SEXP setSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< Rcpp::LogicalVector >::type set(setSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_attr_antialias(input, set));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_attr_animationdelay
 Rcpp::IntegerVector magick_attr_animationdelay(XPtrImage input, Rcpp::IntegerVector delay);
 RcppExport SEXP magick_magick_attr_animationdelay(SEXP inputSEXP, SEXP delaySEXP) {
@@ -871,4 +883,86 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(magick_image_compare(input, reference_image, metric));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"magick_magick_attr_antialias", (DL_FUNC) &magick_magick_attr_antialias, 2},
+    {"magick_magick_attr_animationdelay", (DL_FUNC) &magick_magick_attr_animationdelay, 2},
+    {"magick_magick_attr_backgroundcolor", (DL_FUNC) &magick_magick_attr_backgroundcolor, 2},
+    {"magick_magick_attr_boxcolor", (DL_FUNC) &magick_magick_attr_boxcolor, 2},
+    {"magick_magick_attr_fillcolor", (DL_FUNC) &magick_magick_attr_fillcolor, 2},
+    {"magick_magick_attr_font", (DL_FUNC) &magick_magick_attr_font, 2},
+    {"magick_magick_attr_fontsize", (DL_FUNC) &magick_magick_attr_fontsize, 2},
+    {"magick_magick_attr_label", (DL_FUNC) &magick_magick_attr_label, 2},
+    {"magick_magick_attr_format", (DL_FUNC) &magick_magick_attr_format, 2},
+    {"magick_magick_attr_quality", (DL_FUNC) &magick_magick_attr_quality, 2},
+    {"magick_magick_attr_quantize", (DL_FUNC) &magick_magick_attr_quantize, 2},
+    {"magick_magick_image_info", (DL_FUNC) &magick_magick_image_info, 1},
+    {"magick_magick_image_as_raster", (DL_FUNC) &magick_magick_image_as_raster, 1},
+    {"magick_magick_image_length", (DL_FUNC) &magick_magick_image_length, 1},
+    {"magick_create", (DL_FUNC) &magick_create, 1},
+    {"magick_copy", (DL_FUNC) &magick_copy, 1},
+    {"magick_magick_image_rev", (DL_FUNC) &magick_magick_image_rev, 1},
+    {"magick_magick_image_join", (DL_FUNC) &magick_magick_image_join, 1},
+    {"magick_magick_image_subset", (DL_FUNC) &magick_magick_image_subset, 2},
+    {"magick_magick_image_replace", (DL_FUNC) &magick_magick_image_replace, 3},
+    {"magick_autobrewed", (DL_FUNC) &magick_autobrewed, 0},
+    {"magick_magick_coder_info", (DL_FUNC) &magick_magick_coder_info, 1},
+    {"magick_magick_config_internal", (DL_FUNC) &magick_magick_config_internal, 0},
+    {"magick_magick_image_readbitmap_raw", (DL_FUNC) &magick_magick_image_readbitmap_raw, 1},
+    {"magick_magick_image_readbitmap_double", (DL_FUNC) &magick_magick_image_readbitmap_double, 1},
+    {"magick_magick_image_readbin", (DL_FUNC) &magick_magick_image_readbin, 3},
+    {"magick_magick_image_readpath", (DL_FUNC) &magick_magick_image_readpath, 3},
+    {"magick_magick_image_read_list", (DL_FUNC) &magick_magick_image_read_list, 1},
+    {"magick_magick_image_write", (DL_FUNC) &magick_magick_image_write, 3},
+    {"magick_magick_image_write_frame", (DL_FUNC) &magick_magick_image_write_frame, 2},
+    {"magick_magick_image_display", (DL_FUNC) &magick_magick_image_display, 2},
+    {"magick_magick_image_append", (DL_FUNC) &magick_magick_image_append, 2},
+    {"magick_magick_image_average", (DL_FUNC) &magick_magick_image_average, 1},
+    {"magick_magick_image_coalesce", (DL_FUNC) &magick_magick_image_coalesce, 1},
+    {"magick_magick_image_flatten", (DL_FUNC) &magick_magick_image_flatten, 2},
+    {"magick_magick_image_fft", (DL_FUNC) &magick_magick_image_fft, 1},
+    {"magick_magick_image_map", (DL_FUNC) &magick_magick_image_map, 3},
+    {"magick_magick_image_montage", (DL_FUNC) &magick_magick_image_montage, 1},
+    {"magick_magick_image_morph", (DL_FUNC) &magick_magick_image_morph, 2},
+    {"magick_magick_image_mosaic", (DL_FUNC) &magick_magick_image_mosaic, 2},
+    {"magick_magick_image_animate", (DL_FUNC) &magick_magick_image_animate, 4},
+    {"magick_magick_image_noise", (DL_FUNC) &magick_magick_image_noise, 2},
+    {"magick_magick_image_blur", (DL_FUNC) &magick_magick_image_blur, 3},
+    {"magick_magick_image_charcoal", (DL_FUNC) &magick_magick_image_charcoal, 3},
+    {"magick_magick_image_chop", (DL_FUNC) &magick_magick_image_chop, 2},
+    {"magick_magick_image_colorize", (DL_FUNC) &magick_magick_image_colorize, 3},
+    {"magick_magick_image_edge", (DL_FUNC) &magick_magick_image_edge, 2},
+    {"magick_magick_image_deskew", (DL_FUNC) &magick_magick_image_deskew, 2},
+    {"magick_magick_image_emboss", (DL_FUNC) &magick_magick_image_emboss, 3},
+    {"magick_magick_image_enhance", (DL_FUNC) &magick_magick_image_enhance, 1},
+    {"magick_magick_image_equalize", (DL_FUNC) &magick_magick_image_equalize, 1},
+    {"magick_magick_image_flip", (DL_FUNC) &magick_magick_image_flip, 1},
+    {"magick_magick_image_flop", (DL_FUNC) &magick_magick_image_flop, 1},
+    {"magick_magick_image_fill", (DL_FUNC) &magick_magick_image_fill, 4},
+    {"magick_magick_image_transparent", (DL_FUNC) &magick_magick_image_transparent, 3},
+    {"magick_magick_image_frame", (DL_FUNC) &magick_magick_image_frame, 2},
+    {"magick_magick_image_negate", (DL_FUNC) &magick_magick_image_negate, 1},
+    {"magick_magick_image_normalize", (DL_FUNC) &magick_magick_image_normalize, 1},
+    {"magick_magick_image_oilpaint", (DL_FUNC) &magick_magick_image_oilpaint, 2},
+    {"magick_magick_image_rotate", (DL_FUNC) &magick_magick_image_rotate, 2},
+    {"magick_magick_image_implode", (DL_FUNC) &magick_magick_image_implode, 2},
+    {"magick_magick_image_format", (DL_FUNC) &magick_magick_image_format, 3},
+    {"magick_magick_image_trim", (DL_FUNC) &magick_magick_image_trim, 1},
+    {"magick_magick_image_composite", (DL_FUNC) &magick_magick_image_composite, 4},
+    {"magick_magick_image_contrast", (DL_FUNC) &magick_magick_image_contrast, 2},
+    {"magick_magick_image_background", (DL_FUNC) &magick_magick_image_background, 2},
+    {"magick_magick_image_page", (DL_FUNC) &magick_magick_image_page, 3},
+    {"magick_magick_image_crop", (DL_FUNC) &magick_magick_image_crop, 2},
+    {"magick_magick_image_scale", (DL_FUNC) &magick_magick_image_scale, 2},
+    {"magick_magick_image_sample", (DL_FUNC) &magick_magick_image_sample, 2},
+    {"magick_magick_image_border", (DL_FUNC) &magick_magick_image_border, 3},
+    {"magick_magick_image_annotate", (DL_FUNC) &magick_magick_image_annotate, 10},
+    {"magick_magick_image_compare", (DL_FUNC) &magick_magick_image_compare, 3},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_magick(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }

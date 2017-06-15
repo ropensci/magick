@@ -8,6 +8,16 @@
 #define Option(type, val) MagickCore::CommandOptionToMnemonic(type, val);
 
 // [[Rcpp::export]]
+Rcpp::IntegerVector magick_attr_antialias( XPtrImage input, Rcpp::LogicalVector set){
+  if(set.size())
+    for_each ( input->begin(), input->end(), Magick::textAntiAliasImage(set[0]));
+  Rcpp::IntegerVector out;
+  for (Iter it = input->begin(); it != input->end(); ++it)
+    out.push_back(it->textAntiAlias());
+  return out;
+}
+
+// [[Rcpp::export]]
 Rcpp::IntegerVector magick_attr_animationdelay( XPtrImage input, Rcpp::IntegerVector delay){
   if(delay.size())
     for_each ( input->begin(), input->end(), Magick::animationDelayImage(delay[0]));
