@@ -106,7 +106,7 @@ Note that size is currently 0 because ImageMagick is lazy (in the good sense) an
 
 IDE's with a built-in web browser (such as RStudio) automatically display magick images in the viewer. This results in a neat interactive image editing environment.
 
-![RStudio Screenshot](https://ropensci.org/assets/blog-images/magick-rstudio.png)
+![RStudio Screenshot](http://www.ropensci.org/assets/blog-images/magick-rstudio.png)
 
 Alternatively, on Linux you can use `image_display` to preview the image in an X11 window. Finally `image_browse` opens the image in your system's default application for a given type.
 

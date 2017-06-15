@@ -139,4 +139,4 @@ brew install imagemagick --with-fontconfig --with-librsvg --with-fftw
 
 There is also a fork of imagemagick called graphicsmagick, but it doesn't work as well. I highly recommend you build with imagemagick.
 
-[![](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
+[![](http://www.ropensci.org/public_images/github_footer.png)](http://ropensci.org)
