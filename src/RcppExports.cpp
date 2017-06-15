@@ -6,15 +6,27 @@
 
 using namespace Rcpp;
 
-// magick_attr_antialias
-Rcpp::IntegerVector magick_attr_antialias(XPtrImage input, Rcpp::LogicalVector set);
-RcppExport SEXP magick_magick_attr_antialias(SEXP inputSEXP, SEXP setSEXP) {
+// magick_attr_text_antialias
+Rcpp::IntegerVector magick_attr_text_antialias(XPtrImage input, Rcpp::LogicalVector set);
+RcppExport SEXP magick_magick_attr_text_antialias(SEXP inputSEXP, SEXP setSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< Rcpp::LogicalVector >::type set(setSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_attr_antialias(input, set));
+    rcpp_result_gen = Rcpp::wrap(magick_attr_text_antialias(input, set));
+    return rcpp_result_gen;
+END_RCPP
+}
+// magick_attr_stroke_antialias
+Rcpp::IntegerVector magick_attr_stroke_antialias(XPtrImage input, Rcpp::LogicalVector set);
+RcppExport SEXP magick_magick_attr_stroke_antialias(SEXP inputSEXP, SEXP setSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< Rcpp::LogicalVector >::type set(setSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_attr_stroke_antialias(input, set));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -886,7 +898,8 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"magick_magick_attr_antialias", (DL_FUNC) &magick_magick_attr_antialias, 2},
+    {"magick_magick_attr_text_antialias", (DL_FUNC) &magick_magick_attr_text_antialias, 2},
+    {"magick_magick_attr_stroke_antialias", (DL_FUNC) &magick_magick_attr_stroke_antialias, 2},
     {"magick_magick_attr_animationdelay", (DL_FUNC) &magick_magick_attr_animationdelay, 2},
     {"magick_magick_attr_backgroundcolor", (DL_FUNC) &magick_magick_attr_backgroundcolor, 2},
     {"magick_magick_attr_boxcolor", (DL_FUNC) &magick_magick_attr_boxcolor, 2},
