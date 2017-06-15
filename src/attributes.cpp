@@ -18,7 +18,7 @@ Rcpp::IntegerVector magick_attr_text_antialias( XPtrImage input, Rcpp::LogicalVe
   Rcpp::IntegerVector out;
   for (Iter it = input->begin(); it != input->end(); ++it)
 #if MagickLibVersion >= 0x700
-    out.push_back(it->textAntiAlias();
+    out.push_back(it->textAntiAlias());
 #else
     out.push_back(it->antiAlias());
 #endif
