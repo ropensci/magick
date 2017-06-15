@@ -5,8 +5,6 @@ latex: false
 matrix:
   include:
     - os: linux
-      dist: precise
-      sudo: required
     - os: linux
       dist: trusty
       sudo: required
