@@ -5,6 +5,15 @@ latex: false
 matrix:
   include:
     - os: linux
+      -addons:
+        apt:
+          packages:
+            - libmagick++-dev
+            - librsvg2-dev
+            - libwebp-dev
+            - libpoppler-cpp-dev
+      r_build_args: '--no-build-vignettes'
+      r_check_args: '--ignore-vignettes'
     - os: linux
       dist: trusty
       sudo: required
