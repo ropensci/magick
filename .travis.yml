@@ -5,7 +5,7 @@ latex: false
 matrix:
   include:
     - os: linux
-      - addons:
+    - addons:
         apt:
           packages:
             - libmagick++-dev
