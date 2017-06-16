@@ -5,7 +5,7 @@ latex: false
 matrix:
   include:
     - env: _R_CHECK_FORCE_SUGGESTS_=0
-    - addons:
+      addons:
         apt:
           packages:
             - libmagick++-dev
