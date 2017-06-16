@@ -29,5 +29,6 @@ Suggests:
     png,
     pdftools,
     ggplot2,
-    raster
+    raster,
+    rgdal
 RoxygenNote: 6.0.1

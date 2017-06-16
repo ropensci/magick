@@ -4,7 +4,7 @@ latex: false
 
 matrix:
   include:
-    - os: linux
+    - env: _R_CHECK_FORCE_SUGGESTS_=0
     - addons:
         apt:
           packages:
@@ -40,9 +40,6 @@ addons:
       - libwebp-dev
       - libpoppler-cpp-dev
       - r-cran-rgdal
-
-r_packages:
-  - rgdal
 
 r_github_packages:
   - jimhester/covr
