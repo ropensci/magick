@@ -87,11 +87,12 @@ XPtrImage magick_image_replace(XPtrImage image, Rcpp::IntegerVector index, XPtrI
     if(x < 1 || x > image->size())
       throw std::runtime_error("subscript out of bounds");
   }
-  if(value->size() != 1 && value->size() != index.size())
+  int len = value->size();
+  if(len != 1 && len != index.size())
     throw std::runtime_error("length of replacement value must be 1 or equal to number of replacements");
   for(int i = 0; i < index.size(); i++){
     size_t x = index[i];
-    image->at(x-1) = (value->size() == 1) ? value->at(0) : value->at(i);
+    image->at(x-1) = (len == 1) ? value->at(0) : value->at(i);
   }
   return image;
 }

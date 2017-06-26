@@ -100,7 +100,7 @@ Rcpp::IntegerVector magick_attr_fontsize( XPtrImage input, Rcpp::IntegerVector p
 Rcpp::CharacterVector magick_attr_label( XPtrImage input, Rcpp::CharacterVector label){
   if(label.size())
     for_each ( input->begin(), input->end(), Magick::labelImage(std::string(label[0])));
-    Rcpp::CharacterVector out;
+  Rcpp::CharacterVector out;
   for (Iter it = input->begin(); it != input->end(); ++it)
     out.push_back(it->label());
   return out;
