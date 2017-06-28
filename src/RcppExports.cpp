@@ -498,6 +498,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_histogram
+XPtrImage magick_image_histogram(XPtrImage image, int h);
+RcppExport SEXP magick_magick_image_histogram(SEXP imageSEXP, SEXP hSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type image(imageSEXP);
+    Rcpp::traits::input_parameter< int >::type h(hSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_histogram(image, h));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_noise
 XPtrImage magick_image_noise(XPtrImage input, const char * noisetype);
 RcppExport SEXP magick_magick_image_noise(SEXP inputSEXP, SEXP noisetypeSEXP) {

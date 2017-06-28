@@ -17,6 +17,7 @@
 #' svg to a png using the \href{https://cran.r-project.org/package=rsvg}{rsvg package}.
 #'
 #' @importFrom Rcpp sourceCpp
+#' @importFrom RcppParallel RcppParallelLibs
 #' @useDynLib magick
 #' @export
 #' @aliases magick imagemagick

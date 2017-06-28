@@ -169,6 +169,10 @@ magick_image_animate <- function(input, delay, iter, method) {
     .Call('magick_magick_image_animate', PACKAGE = 'magick', input, delay, iter, method)
 }
 
+magick_image_histogram <- function(image, h) {
+    .Call('magick_magick_image_histogram', PACKAGE = 'magick', image, h)
+}
+
 magick_image_noise <- function(input, noisetype) {
     .Call('magick_magick_image_noise', PACKAGE = 'magick', input, noisetype)
 }
