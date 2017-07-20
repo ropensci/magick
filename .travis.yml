@@ -57,5 +57,4 @@ after_success:
 
 # Prevents Travis timeout for building magick
 before_install:
-  - R -e 'install.packages("git2r", type = "binary")';
   - (while true; do echo 'Ping? Pong!'; sleep 500; done) &
