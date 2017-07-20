@@ -43,6 +43,7 @@ addons:
 
 r_github_packages:
   - jimhester/covr
+  - ropensci/git2r
 
 warnings_are_errors: true
 #r_check_revdep: true
