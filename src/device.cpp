@@ -26,6 +26,19 @@ inline Frame getcur(pDevDesc dd){
   return image->back();
 }
 
+inline Magick::DrawableStrokeLineCap linecap(R_GE_lineend type){
+  switch(type){
+  case GE_ROUND_CAP:
+    return Magick::RoundCap;
+  case GE_BUTT_CAP:
+    return Magick::ButtCap;
+  case GE_SQUARE_CAP:
+    return Magick::SquareCap;
+  }
+  //default
+  return Magick::RoundCap;
+}
+
 /* TODO: I don't understand what this function does */
 void image_metric_info(int c, const pGEcontext gc, double* ascent,
                      double* descent, double* width, pDevDesc dd) {
@@ -99,6 +112,7 @@ void image_line(double x1, double y1, double x2, double y2, const pGEcontext gc,
   draw.push_back(Magick::DrawableStrokeWidth(lwd));
   draw.push_back(Magick::DrawableDashArray(lty));
   draw.push_back(Magick::DrawableLine(x1, y1, x2, y2));
+  draw.push_back(Magick::DrawableStrokeLineCap(linecap(gc->lend)));
   graph->gamma(gc->gamma);
   graph->draw(draw);
   VOID_END_RCPP
