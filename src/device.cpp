@@ -93,6 +93,7 @@ void image_line(double x1, double y1, double x2, double y2, const pGEcontext gc,
     lty[0] = 5 * lwd;
     lty[1] = 3 * lwd;
     lty[2] = 2 * lwd;
+    lty[3] = 3 * lwd;
     break;
   case LTY_LONGDASH:
     lty[0] = 8 * lwd;
