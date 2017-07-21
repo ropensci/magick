@@ -2,298 +2,302 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 magick_attr_text_antialias <- function(input, set) {
-    .Call('magick_magick_attr_text_antialias', PACKAGE = 'magick', input, set)
+    .Call('_magick_magick_attr_text_antialias', PACKAGE = 'magick', input, set)
 }
 
 magick_attr_stroke_antialias <- function(input, set) {
-    .Call('magick_magick_attr_stroke_antialias', PACKAGE = 'magick', input, set)
+    .Call('_magick_magick_attr_stroke_antialias', PACKAGE = 'magick', input, set)
 }
 
 magick_attr_animationdelay <- function(input, delay) {
-    .Call('magick_magick_attr_animationdelay', PACKAGE = 'magick', input, delay)
+    .Call('_magick_magick_attr_animationdelay', PACKAGE = 'magick', input, delay)
 }
 
 magick_attr_backgroundcolor <- function(input, color) {
-    .Call('magick_magick_attr_backgroundcolor', PACKAGE = 'magick', input, color)
+    .Call('_magick_magick_attr_backgroundcolor', PACKAGE = 'magick', input, color)
 }
 
 magick_attr_boxcolor <- function(input, color) {
-    .Call('magick_magick_attr_boxcolor', PACKAGE = 'magick', input, color)
+    .Call('_magick_magick_attr_boxcolor', PACKAGE = 'magick', input, color)
 }
 
 magick_attr_fillcolor <- function(input, color) {
-    .Call('magick_magick_attr_fillcolor', PACKAGE = 'magick', input, color)
+    .Call('_magick_magick_attr_fillcolor', PACKAGE = 'magick', input, color)
 }
 
 magick_attr_font <- function(input, font) {
-    .Call('magick_magick_attr_font', PACKAGE = 'magick', input, font)
+    .Call('_magick_magick_attr_font', PACKAGE = 'magick', input, font)
 }
 
 magick_attr_fontsize <- function(input, pointsize) {
-    .Call('magick_magick_attr_fontsize', PACKAGE = 'magick', input, pointsize)
+    .Call('_magick_magick_attr_fontsize', PACKAGE = 'magick', input, pointsize)
 }
 
 magick_attr_label <- function(input, label) {
-    .Call('magick_magick_attr_label', PACKAGE = 'magick', input, label)
+    .Call('_magick_magick_attr_label', PACKAGE = 'magick', input, label)
 }
 
 magick_attr_format <- function(input, format) {
-    .Call('magick_magick_attr_format', PACKAGE = 'magick', input, format)
+    .Call('_magick_magick_attr_format', PACKAGE = 'magick', input, format)
 }
 
 magick_attr_quality <- function(input, quality) {
-    .Call('magick_magick_attr_quality', PACKAGE = 'magick', input, quality)
+    .Call('_magick_magick_attr_quality', PACKAGE = 'magick', input, quality)
 }
 
 magick_attr_quantize <- function(input, numcolors) {
-    .Call('magick_magick_attr_quantize', PACKAGE = 'magick', input, numcolors)
+    .Call('_magick_magick_attr_quantize', PACKAGE = 'magick', input, numcolors)
 }
 
 magick_image_info <- function(input) {
-    .Call('magick_magick_image_info', PACKAGE = 'magick', input)
+    .Call('_magick_magick_image_info', PACKAGE = 'magick', input)
 }
 
 magick_image_as_raster <- function(data) {
-    .Call('magick_magick_image_as_raster', PACKAGE = 'magick', data)
+    .Call('_magick_magick_image_as_raster', PACKAGE = 'magick', data)
 }
 
 magick_image_length <- function(image) {
-    .Call('magick_magick_image_length', PACKAGE = 'magick', image)
+    .Call('_magick_magick_image_length', PACKAGE = 'magick', image)
 }
 
 create <- function(len) {
-    .Call('magick_create', PACKAGE = 'magick', len)
+    .Call('_magick_create', PACKAGE = 'magick', len)
 }
 
 copy <- function(image) {
-    .Call('magick_copy', PACKAGE = 'magick', image)
+    .Call('_magick_copy', PACKAGE = 'magick', image)
 }
 
 magick_image_rev <- function(input) {
-    .Call('magick_magick_image_rev', PACKAGE = 'magick', input)
+    .Call('_magick_magick_image_rev', PACKAGE = 'magick', input)
 }
 
 magick_image_join <- function(input) {
-    .Call('magick_magick_image_join', PACKAGE = 'magick', input)
+    .Call('_magick_magick_image_join', PACKAGE = 'magick', input)
 }
 
 magick_image_subset <- function(image, index) {
-    .Call('magick_magick_image_subset', PACKAGE = 'magick', image, index)
+    .Call('_magick_magick_image_subset', PACKAGE = 'magick', image, index)
 }
 
 magick_image_replace <- function(image, index, value) {
-    .Call('magick_magick_image_replace', PACKAGE = 'magick', image, index, value)
+    .Call('_magick_magick_image_replace', PACKAGE = 'magick', image, index, value)
 }
 
 autobrewed <- function() {
-    .Call('magick_autobrewed', PACKAGE = 'magick')
+    .Call('_magick_autobrewed', PACKAGE = 'magick')
 }
 
 magick_coder_info <- function(format) {
-    .Call('magick_magick_coder_info', PACKAGE = 'magick', format)
+    .Call('_magick_magick_coder_info', PACKAGE = 'magick', format)
 }
 
 magick_config_internal <- function() {
-    .Call('magick_magick_config_internal', PACKAGE = 'magick')
+    .Call('_magick_magick_config_internal', PACKAGE = 'magick')
+}
+
+magick_ <- function(bg, width, height, pointsize) {
+    .Call('_magick_magick_', PACKAGE = 'magick', bg, width, height, pointsize)
 }
 
 magick_image_readbitmap_raw <- function(x) {
-    .Call('magick_magick_image_readbitmap_raw', PACKAGE = 'magick', x)
+    .Call('_magick_magick_image_readbitmap_raw', PACKAGE = 'magick', x)
 }
 
 magick_image_readbitmap_double <- function(x) {
-    .Call('magick_magick_image_readbitmap_double', PACKAGE = 'magick', x)
+    .Call('_magick_magick_image_readbitmap_double', PACKAGE = 'magick', x)
 }
 
 magick_image_readbin <- function(x, density, depth) {
-    .Call('magick_magick_image_readbin', PACKAGE = 'magick', x, density, depth)
+    .Call('_magick_magick_image_readbin', PACKAGE = 'magick', x, density, depth)
 }
 
 magick_image_readpath <- function(paths, density, depth) {
-    .Call('magick_magick_image_readpath', PACKAGE = 'magick', paths, density, depth)
+    .Call('_magick_magick_image_readpath', PACKAGE = 'magick', paths, density, depth)
 }
 
 magick_image_read_list <- function(list) {
-    .Call('magick_magick_image_read_list', PACKAGE = 'magick', list)
+    .Call('_magick_magick_image_read_list', PACKAGE = 'magick', list)
 }
 
 magick_image_write <- function(input, format, quality) {
-    .Call('magick_magick_image_write', PACKAGE = 'magick', input, format, quality)
+    .Call('_magick_magick_image_write', PACKAGE = 'magick', input, format, quality)
 }
 
 magick_image_write_frame <- function(input, format) {
-    .Call('magick_magick_image_write_frame', PACKAGE = 'magick', input, format)
+    .Call('_magick_magick_image_write_frame', PACKAGE = 'magick', input, format)
 }
 
 magick_image_display <- function(image, animate) {
-    .Call('magick_magick_image_display', PACKAGE = 'magick', image, animate)
+    .Call('_magick_magick_image_display', PACKAGE = 'magick', image, animate)
 }
 
 magick_image_append <- function(image, stack) {
-    .Call('magick_magick_image_append', PACKAGE = 'magick', image, stack)
+    .Call('_magick_magick_image_append', PACKAGE = 'magick', image, stack)
 }
 
 magick_image_average <- function(image) {
-    .Call('magick_magick_image_average', PACKAGE = 'magick', image)
+    .Call('_magick_magick_image_average', PACKAGE = 'magick', image)
 }
 
 magick_image_coalesce <- function(image) {
-    .Call('magick_magick_image_coalesce', PACKAGE = 'magick', image)
+    .Call('_magick_magick_image_coalesce', PACKAGE = 'magick', image)
 }
 
 magick_image_flatten <- function(input, composite) {
-    .Call('magick_magick_image_flatten', PACKAGE = 'magick', input, composite)
+    .Call('_magick_magick_image_flatten', PACKAGE = 'magick', input, composite)
 }
 
 magick_image_fft <- function(image) {
-    .Call('magick_magick_image_fft', PACKAGE = 'magick', image)
+    .Call('_magick_magick_image_fft', PACKAGE = 'magick', image)
 }
 
 magick_image_map <- function(input, map_image, dither) {
-    .Call('magick_magick_image_map', PACKAGE = 'magick', input, map_image, dither)
+    .Call('_magick_magick_image_map', PACKAGE = 'magick', input, map_image, dither)
 }
 
 magick_image_montage <- function(image) {
-    .Call('magick_magick_image_montage', PACKAGE = 'magick', image)
+    .Call('_magick_magick_image_montage', PACKAGE = 'magick', image)
 }
 
 magick_image_morph <- function(image, frames) {
-    .Call('magick_magick_image_morph', PACKAGE = 'magick', image, frames)
+    .Call('_magick_magick_image_morph', PACKAGE = 'magick', image, frames)
 }
 
 magick_image_mosaic <- function(input, composite) {
-    .Call('magick_magick_image_mosaic', PACKAGE = 'magick', input, composite)
+    .Call('_magick_magick_image_mosaic', PACKAGE = 'magick', input, composite)
 }
 
 magick_image_animate <- function(input, delay, iter, method) {
-    .Call('magick_magick_image_animate', PACKAGE = 'magick', input, delay, iter, method)
+    .Call('_magick_magick_image_animate', PACKAGE = 'magick', input, delay, iter, method)
 }
 
 magick_image_noise <- function(input, noisetype) {
-    .Call('magick_magick_image_noise', PACKAGE = 'magick', input, noisetype)
+    .Call('_magick_magick_image_noise', PACKAGE = 'magick', input, noisetype)
 }
 
 magick_image_blur <- function(input, radius = 1, sigma = 0.5) {
-    .Call('magick_magick_image_blur', PACKAGE = 'magick', input, radius, sigma)
+    .Call('_magick_magick_image_blur', PACKAGE = 'magick', input, radius, sigma)
 }
 
 magick_image_charcoal <- function(input, radius = 1, sigma = 0.5) {
-    .Call('magick_magick_image_charcoal', PACKAGE = 'magick', input, radius, sigma)
+    .Call('_magick_magick_image_charcoal', PACKAGE = 'magick', input, radius, sigma)
 }
 
 magick_image_chop <- function(input, geometry) {
-    .Call('magick_magick_image_chop', PACKAGE = 'magick', input, geometry)
+    .Call('_magick_magick_image_chop', PACKAGE = 'magick', input, geometry)
 }
 
 magick_image_colorize <- function(input, opacity, color) {
-    .Call('magick_magick_image_colorize', PACKAGE = 'magick', input, opacity, color)
+    .Call('_magick_magick_image_colorize', PACKAGE = 'magick', input, opacity, color)
 }
 
 magick_image_edge <- function(input, radius) {
-    .Call('magick_magick_image_edge', PACKAGE = 'magick', input, radius)
+    .Call('_magick_magick_image_edge', PACKAGE = 'magick', input, radius)
 }
 
 magick_image_deskew <- function(input, treshold) {
-    .Call('magick_magick_image_deskew', PACKAGE = 'magick', input, treshold)
+    .Call('_magick_magick_image_deskew', PACKAGE = 'magick', input, treshold)
 }
 
 magick_image_emboss <- function(input, radius = 1, sigma = 0.5) {
-    .Call('magick_magick_image_emboss', PACKAGE = 'magick', input, radius, sigma)
+    .Call('_magick_magick_image_emboss', PACKAGE = 'magick', input, radius, sigma)
 }
 
 magick_image_enhance <- function(input) {
-    .Call('magick_magick_image_enhance', PACKAGE = 'magick', input)
+    .Call('_magick_magick_image_enhance', PACKAGE = 'magick', input)
 }
 
 magick_image_equalize <- function(input) {
-    .Call('magick_magick_image_equalize', PACKAGE = 'magick', input)
+    .Call('_magick_magick_image_equalize', PACKAGE = 'magick', input)
 }
 
 magick_image_flip <- function(input) {
-    .Call('magick_magick_image_flip', PACKAGE = 'magick', input)
+    .Call('_magick_magick_image_flip', PACKAGE = 'magick', input)
 }
 
 magick_image_flop <- function(input) {
-    .Call('magick_magick_image_flop', PACKAGE = 'magick', input)
+    .Call('_magick_magick_image_flop', PACKAGE = 'magick', input)
 }
 
 magick_image_fill <- function(input, color, point, fuzz) {
-    .Call('magick_magick_image_fill', PACKAGE = 'magick', input, color, point, fuzz)
+    .Call('_magick_magick_image_fill', PACKAGE = 'magick', input, color, point, fuzz)
 }
 
 magick_image_transparent <- function(input, color, fuzz) {
-    .Call('magick_magick_image_transparent', PACKAGE = 'magick', input, color, fuzz)
+    .Call('_magick_magick_image_transparent', PACKAGE = 'magick', input, color, fuzz)
 }
 
 magick_image_frame <- function(input, geometry) {
-    .Call('magick_magick_image_frame', PACKAGE = 'magick', input, geometry)
+    .Call('_magick_magick_image_frame', PACKAGE = 'magick', input, geometry)
 }
 
 magick_image_negate <- function(input) {
-    .Call('magick_magick_image_negate', PACKAGE = 'magick', input)
+    .Call('_magick_magick_image_negate', PACKAGE = 'magick', input)
 }
 
 magick_image_normalize <- function(input) {
-    .Call('magick_magick_image_normalize', PACKAGE = 'magick', input)
+    .Call('_magick_magick_image_normalize', PACKAGE = 'magick', input)
 }
 
 magick_image_oilpaint <- function(input, radius) {
-    .Call('magick_magick_image_oilpaint', PACKAGE = 'magick', input, radius)
+    .Call('_magick_magick_image_oilpaint', PACKAGE = 'magick', input, radius)
 }
 
 magick_image_rotate <- function(input, degrees) {
-    .Call('magick_magick_image_rotate', PACKAGE = 'magick', input, degrees)
+    .Call('_magick_magick_image_rotate', PACKAGE = 'magick', input, degrees)
 }
 
 magick_image_implode <- function(input, factor) {
-    .Call('magick_magick_image_implode', PACKAGE = 'magick', input, factor)
+    .Call('_magick_magick_image_implode', PACKAGE = 'magick', input, factor)
 }
 
 magick_image_format <- function(input, format, depth) {
-    .Call('magick_magick_image_format', PACKAGE = 'magick', input, format, depth)
+    .Call('_magick_magick_image_format', PACKAGE = 'magick', input, format, depth)
 }
 
 magick_image_trim <- function(input) {
-    .Call('magick_magick_image_trim', PACKAGE = 'magick', input)
+    .Call('_magick_magick_image_trim', PACKAGE = 'magick', input)
 }
 
 magick_image_composite <- function(input, composite_image, offset, composite) {
-    .Call('magick_magick_image_composite', PACKAGE = 'magick', input, composite_image, offset, composite)
+    .Call('_magick_magick_image_composite', PACKAGE = 'magick', input, composite_image, offset, composite)
 }
 
 magick_image_contrast <- function(input, sharpen) {
-    .Call('magick_magick_image_contrast', PACKAGE = 'magick', input, sharpen)
+    .Call('_magick_magick_image_contrast', PACKAGE = 'magick', input, sharpen)
 }
 
 magick_image_background <- function(input, color) {
-    .Call('magick_magick_image_background', PACKAGE = 'magick', input, color)
+    .Call('_magick_magick_image_background', PACKAGE = 'magick', input, color)
 }
 
 magick_image_page <- function(input, pagesize, density) {
-    .Call('magick_magick_image_page', PACKAGE = 'magick', input, pagesize, density)
+    .Call('_magick_magick_image_page', PACKAGE = 'magick', input, pagesize, density)
 }
 
 magick_image_crop <- function(input, geometry) {
-    .Call('magick_magick_image_crop', PACKAGE = 'magick', input, geometry)
+    .Call('_magick_magick_image_crop', PACKAGE = 'magick', input, geometry)
 }
 
 magick_image_scale <- function(input, geometry) {
-    .Call('magick_magick_image_scale', PACKAGE = 'magick', input, geometry)
+    .Call('_magick_magick_image_scale', PACKAGE = 'magick', input, geometry)
 }
 
 magick_image_sample <- function(input, geometry) {
-    .Call('magick_magick_image_sample', PACKAGE = 'magick', input, geometry)
+    .Call('_magick_magick_image_sample', PACKAGE = 'magick', input, geometry)
 }
 
 magick_image_border <- function(input, color, geometry) {
-    .Call('magick_magick_image_border', PACKAGE = 'magick', input, color, geometry)
+    .Call('_magick_magick_image_border', PACKAGE = 'magick', input, color, geometry)
 }
 
 magick_image_annotate <- function(input, text, gravity, location, degrees, size, font, color, strokecolor, boxcolor) {
-    .Call('magick_magick_image_annotate', PACKAGE = 'magick', input, text, gravity, location, degrees, size, font, color, strokecolor, boxcolor)
+    .Call('_magick_magick_image_annotate', PACKAGE = 'magick', input, text, gravity, location, degrees, size, font, color, strokecolor, boxcolor)
 }
 
 magick_image_compare <- function(input, reference_image, metric) {
-    .Call('magick_magick_image_compare', PACKAGE = 'magick', input, reference_image, metric)
+    .Call('_magick_magick_image_compare', PACKAGE = 'magick', input, reference_image, metric)
 }
 
