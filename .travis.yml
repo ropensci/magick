@@ -7,6 +7,13 @@ matrix:
     - env: _R_CHECK_FORCE_SUGGESTS_=0
       r_build_args: '--no-build-vignettes'
       r_check_args: '--ignore-vignettes'
+      addons:
+        apt:
+          packages:
+            - libmagick++-dev
+            - librsvg2-dev
+            - libwebp-dev
+            - libpoppler-cpp-dev
     - os: linux
       dist: trusty
       sudo: required
