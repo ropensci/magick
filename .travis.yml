@@ -5,13 +5,6 @@ latex: false
 matrix:
   include:
     - env: _R_CHECK_FORCE_SUGGESTS_=0
-      addons:
-        apt:
-          packages:
-            - libmagick++-dev
-            - librsvg2-dev
-            - libwebp-dev
-            - libpoppler-cpp-dev
       r_build_args: '--no-build-vignettes'
       r_check_args: '--ignore-vignettes'
     - os: linux
@@ -57,4 +50,5 @@ after_success:
 
 # Prevents Travis timeout for building magick
 before_install:
+  - if [ "${TRAVIS_OS_NAME}" == "osx" ]; then R -e 'install.packages("git2r", type = "binary")'; fi
   - (while true; do echo 'Ping? Pong!'; sleep 500; done) &
