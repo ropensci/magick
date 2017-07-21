@@ -35,8 +35,19 @@ inline Magick::DrawableStrokeLineCap linecap(R_GE_lineend type){
   case GE_SQUARE_CAP:
     return Magick::SquareCap;
   }
-  //default
   return Magick::RoundCap;
+}
+
+inline Magick::DrawableStrokeLineJoin linejoin(R_GE_linejoin type){
+  switch(type){
+  case GE_ROUND_JOIN:
+    return Magick::RoundJoin;
+  case GE_MITRE_JOIN:
+    return Magick::MiterJoin;
+  case GE_BEVEL_JOIN:
+    return Magick::BevelJoin;
+  }
+  return Magick::RoundJoin;
 }
 
 /* TODO: I don't understand what this function does */
@@ -114,6 +125,7 @@ void image_line(double x1, double y1, double x2, double y2, const pGEcontext gc,
   draw.push_back(Magick::DrawableDashArray(lty));
   draw.push_back(Magick::DrawableLine(x1, y1, x2, y2));
   draw.push_back(Magick::DrawableStrokeLineCap(linecap(gc->lend)));
+  draw.push_back(Magick::DrawableStrokeLineJoin(linejoin(gc->ljoin)));
   graph->gamma(gc->gamma);
   graph->draw(draw);
   VOID_END_RCPP
