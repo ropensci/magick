@@ -1,5 +1,6 @@
-/* Magick Graphics Device
- * Documentation: https://www.imagemagick.org/Magick++/Drawable.html
+/* ImageMagick Graphics Device
+ * R graphics docs: https://svn.r-project.org/R/trunk/src/include/R_ext/GraphicsDevice.h
+ * Magick++ docs: https://www.imagemagick.org/Magick++/Drawable.html
  */
 #include "magick_types.h"
 #include <R_ext/GraphicsEngine.h>
@@ -9,6 +10,13 @@ inline Image * getimage(pDevDesc dd){
   if(image == NULL)
     throw std::runtime_error("Graphics device pointing to NULL image");
   return image;
+}
+
+inline Frame * getgraph(pDevDesc dd){
+  Image * image = getimage(dd);
+  if(image->size() < 1)
+    throw std::runtime_error("Magick device has zero pages");
+  return &image->back();
 }
 
 inline Frame getcur(pDevDesc dd){
@@ -50,11 +58,49 @@ void image_close(pDevDesc dd) {
   //R_ReleaseObject(getimage(dd))
 }
 
-void image_line(double x1, double y1, double x2, double y2,
-              const pGEcontext gc, pDevDesc dd) {
+void image_line(double x1, double y1, double x2, double y2, const pGEcontext gc, pDevDesc dd) {
+  Rprintf("drawling %s line from (%f, %f) to (%f, %f)\n", col2name(gc->col), x1, y1, x2, y2);
   BEGIN_RCPP
-  Frame graphic = getcur(dd);
-  graphic.draw( Magick::DrawableLine(x1, y1, x2, y2));
+  //line width and type
+  int lwd = gc->lwd;
+  double lty[8] = {0};
+  switch(gc->lty){
+  case LTY_BLANK:
+  case LTY_SOLID:
+    break;
+  case LTY_DASHED:
+    lty[0] = 5 * lwd;
+    lty[1] = 3 * lwd;
+    break;
+  case LTY_DOTTED:
+    lty[0] = 1 * lwd;
+    lty[1] = 1 * lwd;
+    break;
+  case LTY_DOTDASH:
+    lty[0] = 5 * lwd;
+    lty[1] = 3 * lwd;
+    lty[2] = 2 * lwd;
+    break;
+  case LTY_LONGDASH:
+    lty[0] = 8 * lwd;
+    lty[1] = 3 * lwd;
+    break;
+  case LTY_TWODASH:
+    lty[0] = 5 * lwd;
+    lty[1] = 2 * lwd;
+    lty[2] = 5 * lwd;
+    lty[3] = 5 * lwd;
+    break;
+  }
+  Frame * graph = getgraph(dd);
+  std::list<Magick::Drawable> draw;
+  draw.push_back(Magick::DrawableStrokeColor(col2name(gc->col)));
+  draw.push_back(Magick::DrawableFillColor(col2name(dd->startfill)));
+  draw.push_back(Magick::DrawableStrokeWidth(lwd));
+  draw.push_back(Magick::DrawableDashArray(lty));
+  draw.push_back(Magick::DrawableLine(x1, y1, x2, y2));
+  graph->gamma(gc->gamma);
+  graph->draw(draw);
   VOID_END_RCPP
 }
 
@@ -172,7 +218,7 @@ pDevDesc magick_driver_new(Image * image, int bg, int width, int height, double 
   dd->circle = image_circle;
   dd->polygon = image_polygon;
   dd->polyline = image_polyline;
-  dd->path = image_path;
+  dd->path = NULL; //image_path;
   dd->mode = NULL;
   dd->metricInfo = image_metric_info;
   dd->cap = NULL;
