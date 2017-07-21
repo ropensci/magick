@@ -6,7 +6,9 @@
 #' @param width in pixels
 #' @param height in pixels
 #' @param bg background color
+#' @rdname device
+#' @name device
 #' @param pointsize size of fonts
-magick <- function(width = 1280, height = 720, bg = "transparent", pointsize = 12) {
+magick_device <- function(width = 1280, height = 720, bg = "transparent", pointsize = 12) {
   magick_(bg, width, height, pointsize)
 }
