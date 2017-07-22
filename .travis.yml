@@ -1,11 +1,11 @@
 language: r
 cache: packages
 latex: false
+r_build_args: '--no-build-vignettes'
 
 matrix:
   include:
     - env: _R_CHECK_FORCE_SUGGESTS_=0
-      r_build_args: '--no-build-vignettes'
       r_check_args: '--ignore-vignettes'
       addons:
         apt:
@@ -28,11 +28,9 @@ matrix:
     - os: osx
       osx_image: xcode8.3
       disable_homebrew: true
-      r_build_args: '--no-build-vignettes'
     - os: osx
       osx_image: xcode7.3
       disable_homebrew: true
-      r_build_args: '--no-build-vignettes'
 
 addons:
   apt:

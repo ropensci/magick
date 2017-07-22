@@ -182,6 +182,7 @@ void image_rect(double x0, double y0, double x1, double y1,
 void image_circle(double x, double y, double r, const pGEcontext gc,
                   pDevDesc dd) {
   BEGIN_RCPP
+  //note: parameter 3 + 4 must denote any point on the circle
   image_draw(Magick::DrawableCircle(x, y, x, y + r), gc, dd);
   VOID_END_RCPP
 }
