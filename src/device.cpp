@@ -101,8 +101,10 @@ void image_draw(std::list<Magick::Drawable> x, const pGEcontext gc, pDevDesc dd)
   double lty[8] = {0};
   Frame * graph = getgraph(dd);
   std::list<Magick::Drawable> draw;
-  draw.push_back(Magick::DrawableStrokeColor(col2name(gc->col)));
-  draw.push_back(Magick::DrawableFillColor(col2name(gc->fill)));
+  if(gc->col != NA_INTEGER)
+    draw.push_back(Magick::DrawableStrokeColor(col2name(gc->col)));
+  if(gc->fill != NA_INTEGER)
+    draw.push_back(Magick::DrawableFillColor(col2name(gc->fill)));
   draw.push_back(Magick::DrawableStrokeWidth(gc->lwd));
   draw.push_back(Magick::DrawableDashArray(linetype(lty, gc->lty, gc->lwd)));
   draw.push_back(Magick::DrawableStrokeLineCap(linecap(gc->lend)));
