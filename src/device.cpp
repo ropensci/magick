@@ -171,7 +171,11 @@ void image_line(double x1, double y1, double x2, double y2, const pGEcontext gc,
 
 void image_polyline(int n, double *x, double *y, const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
-  image_draw(Magick::DrawablePolyline(coord(n, x, y)), gc, dd);
+  std::list<Magick::Drawable> draw;
+  //Note 'fill' must be unset to prevent magick from creating a polygon
+  draw.push_back(Magick::DrawableFillColor(Magick::Color()));
+  draw.push_back(Magick::DrawablePolyline(coord(n, x, y)));
+  image_draw(draw, gc, dd);
   VOID_END_RCPP
 }
 
@@ -212,7 +216,7 @@ void image_text(double x, double y, const char *str, double rot,
                 double hadj, const pGEcontext gc, pDevDesc dd) {
   Rprintf("adding text: '%s' with color '%s' and fill '%s'\n", str, col2name(gc->col), col2name(gc->fill));
   BEGIN_RCPP
-    std::list<Magick::Drawable> draw;
+  std::list<Magick::Drawable> draw;
   //In R there is no separate 'fill'. The 'fill' should match the color.
   draw.push_back(Magick::DrawableFillColor(Color(col2name(gc->col))));
   //draw.push_back(Magick::DrawableRotation(rot));
