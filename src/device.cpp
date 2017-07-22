@@ -1,6 +1,8 @@
 /* ImageMagick Graphics Device
  * R graphics docs: https://svn.r-project.org/R/trunk/src/include/R_ext/GraphicsDevice.h
  * Magick++ docs: https://www.imagemagick.org/Magick++/Drawable.html
+ *
+ * TODO: make everything static?
  */
 #include "magick_types.h"
 #include <R_ext/GraphicsEngine.h>
@@ -24,6 +26,39 @@ inline Frame getcur(pDevDesc dd){
   if(image->size() < 1)
     throw std::runtime_error("Magick device has zero pages");
   return image->back();
+}
+
+inline double * linetype(double * lty, int type, int lwd){
+  switch(type){
+  case LTY_BLANK:
+  case LTY_SOLID:
+    break;
+  case LTY_DASHED:
+    lty[0] = 5 * lwd;
+    lty[1] = 3 * lwd;
+    break;
+  case LTY_DOTTED:
+    lty[0] = 1 * lwd;
+    lty[1] = 2 * lwd;
+    break;
+  case LTY_DOTDASH:
+    lty[0] = 5 * lwd;
+    lty[1] = 3 * lwd;
+    lty[2] = 2 * lwd;
+    lty[3] = 3 * lwd;
+    break;
+  case LTY_LONGDASH:
+    lty[0] = 8 * lwd;
+    lty[1] = 3 * lwd;
+    break;
+  case LTY_TWODASH:
+    lty[0] = 5 * lwd;
+    lty[1] = 2 * lwd;
+    lty[2] = 5 * lwd;
+    lty[3] = 5 * lwd;
+    break;
+  }
+  return lty;
 }
 
 inline Magick::DrawableStrokeLineCap linecap(R_GE_lineend type){
@@ -56,24 +91,24 @@ void image_metric_info(int c, const pGEcontext gc, double* ascent,
 
 }
 
-/* TODO: test if we got the coordinates right  */
-/* TODO: how to unset the clipmask ? */
-void image_clip(double x0, double x1, double y0, double y1, pDevDesc dd) {
-  BEGIN_RCPP
-  Frame graphic = getcur(dd);
-  Frame mask(graphic.size(), Color("white"));
-  mask.fillColor("transparent");
-  mask.draw( Magick::DrawableRectangle(x0, x1, y0, y1));
-  graphic.clipMask(mask);
-  VOID_END_RCPP
-}
-
 void image_new_page(const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
   Image *image = getimage(dd);
   Frame x(Geom(dd->right, dd->bottom), Color(col2name(dd->startfill)));
   x.magick("png"); //TODO: do not do this
   image->push_back(x);
+  VOID_END_RCPP
+}
+
+/* TODO: test if we got the coordinates right  */
+/* TODO: how to unset the clipmask ? */
+void image_clip(double left, double right, double bottom, double top, pDevDesc dd) {
+  Rprintf("Clipping at (%f, %f) to (%f, %f)\n", left, top, right, bottom);
+  BEGIN_RCPP
+  Frame mask(Geom(dd->right, dd->bottom), Color("transparent"));
+  mask.fillColor("transparent");
+  mask.draw( Magick::DrawableRectangle(left, top, right, bottom));
+  getgraph(dd)->clipMask(mask);
   VOID_END_RCPP
 }
 
@@ -86,43 +121,13 @@ void image_line(double x1, double y1, double x2, double y2, const pGEcontext gc,
   Rprintf("drawling %s line from (%f, %f) to (%f, %f)\n", col2name(gc->col), x1, y1, x2, y2);
   BEGIN_RCPP
   //line width and type
-  int lwd = gc->lwd;
   double lty[8] = {0};
-  switch(gc->lty){
-  case LTY_BLANK:
-  case LTY_SOLID:
-    break;
-  case LTY_DASHED:
-    lty[0] = 5 * lwd;
-    lty[1] = 3 * lwd;
-    break;
-  case LTY_DOTTED:
-    lty[0] = 1 * lwd;
-    lty[1] = 1 * lwd;
-    break;
-  case LTY_DOTDASH:
-    lty[0] = 5 * lwd;
-    lty[1] = 3 * lwd;
-    lty[2] = 2 * lwd;
-    lty[3] = 3 * lwd;
-    break;
-  case LTY_LONGDASH:
-    lty[0] = 8 * lwd;
-    lty[1] = 3 * lwd;
-    break;
-  case LTY_TWODASH:
-    lty[0] = 5 * lwd;
-    lty[1] = 2 * lwd;
-    lty[2] = 5 * lwd;
-    lty[3] = 5 * lwd;
-    break;
-  }
   Frame * graph = getgraph(dd);
   std::list<Magick::Drawable> draw;
   draw.push_back(Magick::DrawableStrokeColor(col2name(gc->col)));
   draw.push_back(Magick::DrawableFillColor(col2name(dd->startfill)));
-  draw.push_back(Magick::DrawableStrokeWidth(lwd));
-  draw.push_back(Magick::DrawableDashArray(lty));
+  draw.push_back(Magick::DrawableStrokeWidth(gc->lwd));
+  draw.push_back(Magick::DrawableDashArray(linetype(lty, gc->lty, gc->lwd)));
   draw.push_back(Magick::DrawableLine(x1, y1, x2, y2));
   draw.push_back(Magick::DrawableStrokeLineCap(linecap(gc->lend)));
   draw.push_back(Magick::DrawableStrokeLineJoin(linejoin(gc->ljoin)));
