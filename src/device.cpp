@@ -136,6 +136,7 @@ void image_new_page(const pGEcontext gc, pDevDesc dd) {
 /* TODO: how to unset the clipmask ? */
 void image_clip(double left, double right, double bottom, double top, pDevDesc dd) {
   Rprintf("Clipping at (%f, %f) to (%f, %f)\n", left, top, right, bottom);
+  return;
   BEGIN_RCPP
   Frame mask(Geom(dd->right, dd->bottom), Color("transparent"));
   mask.fillColor("transparent");
@@ -174,15 +175,13 @@ void image_rect(double x0, double y0, double x1, double y1,
   BEGIN_RCPP
   image_draw(Magick::DrawableRectangle(x0, y1, x1, y0), gc, dd);
   VOID_END_RCPP
-
 }
 
 void image_circle(double x, double y, double r, const pGEcontext gc,
                   pDevDesc dd) {
   BEGIN_RCPP
-  //TODO: magick has separate x and y 'perimeter'
+  image_draw(Magick::DrawableCircle(x, y, x, y + r), gc, dd);
   VOID_END_RCPP
-
 }
 
 void image_path(double *x, double *y, int npoly, int *nper, Rboolean winding,
