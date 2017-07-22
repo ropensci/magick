@@ -10,5 +10,7 @@
 #' @name device
 #' @param pointsize size of fonts
 magick_device <- function(width = 1280, height = 720, bg = "transparent", pointsize = 12) {
-  magick_(bg, width, height, pointsize)
+  img <- magick_(bg, width, height, pointsize)
+  class(img) <- c("magick-device", class(img))
+  img
 }
