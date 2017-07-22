@@ -21,13 +21,6 @@ inline Frame * getgraph(pDevDesc dd){
   return &image->back();
 }
 
-inline Frame getcur(pDevDesc dd){
-  Image * image = getimage(dd);
-  if(image->size() < 1)
-    throw std::runtime_error("Magick device has zero pages");
-  return image->back();
-}
-
 inline double * linetype(double * lty, int type, int lwd){
   switch(type){
   case LTY_BLANK:
@@ -156,7 +149,6 @@ void image_polygon(int n, double *x, double *y, const pGEcontext gc, pDevDesc dd
 void image_path(double *x, double *y, int npoly, int *nper, Rboolean winding,
               const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
-  Frame graphic = getcur(dd);
 
   VOID_END_RCPP
 
@@ -164,7 +156,6 @@ void image_path(double *x, double *y, int npoly, int *nper, Rboolean winding,
 
 double image_strwidth(const char *str, const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
-  Frame graphic = getcur(dd);
 
   VOID_END_RCPP
 
@@ -174,8 +165,7 @@ double image_strwidth(const char *str, const pGEcontext gc, pDevDesc dd) {
 void image_rect(double x0, double y0, double x1, double y1,
               const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
-  Frame graphic = getcur(dd);
-  graphic.draw( Magick::DrawableRectangle(x0, y0, x1, y1) );
+
   VOID_END_RCPP
 
 }
@@ -183,9 +173,7 @@ void image_rect(double x0, double y0, double x1, double y1,
 void image_circle(double x, double y, double r, const pGEcontext gc,
                 pDevDesc dd) {
   BEGIN_RCPP
-  Frame graphic = getcur(dd);
   //TODO: magick has separate x and y 'perimeter'
-  graphic.draw( Magick::DrawableCircle(x, y, r, r) );
   VOID_END_RCPP
 
 }
@@ -193,7 +181,6 @@ void image_circle(double x, double y, double r, const pGEcontext gc,
 void image_text(double x, double y, const char *str, double rot,
               double hadj, const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
-  Frame graphic = getcur(dd);
 
   VOID_END_RCPP
 
@@ -214,7 +201,6 @@ void image_raster(unsigned int *raster, int w, int h,
                 Rboolean interpolate,
                 const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
-  Frame graphic = getcur(dd);
 
   VOID_END_RCPP}
 
