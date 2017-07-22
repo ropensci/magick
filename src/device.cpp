@@ -104,6 +104,13 @@ inline int weight(int face){
   return is_bold(face) ? 600 : 400;
 }
 
+inline std::list<Magick::Coordinate> coord(int n, double * x, double * y){
+  std::list<Magick::Coordinate> coordinates;
+  for(int i = 0; i < n; i++)
+    coordinates.push_back(Magick::Coordinate(x[i], y[i]));
+  return coordinates;
+}
+
 /* main drawing function */
 void image_draw(std::list<Magick::Drawable> x, const pGEcontext gc, pDevDesc dd){
   double lty[8] = {0};
@@ -164,19 +171,13 @@ void image_line(double x1, double y1, double x2, double y2, const pGEcontext gc,
 
 void image_polyline(int n, double *x, double *y, const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
-  std::list<Magick::Coordinate> coordinates;
-  for(int i = 0; i < n; i++)
-    coordinates.push_back(Magick::Coordinate(x[i], y[i]));
-  image_draw(Magick::DrawablePolyline(coordinates), gc, dd);
+  image_draw(Magick::DrawablePolyline(coord(n, x, y)), gc, dd);
   VOID_END_RCPP
 }
 
 void image_polygon(int n, double *x, double *y, const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
-  std::list<Magick::Coordinate> coordinates;
-  for(int i = 0; i < n; i++)
-    coordinates.push_back(Magick::Coordinate(x[i], y[i]));
-  image_draw(Magick::DrawablePolygon(coordinates), gc, dd);
+  image_draw(Magick::DrawablePolygon(coord(n, x, y)), gc, dd);
   VOID_END_RCPP
 }
 
@@ -198,9 +199,13 @@ void image_circle(double x, double y, double r, const pGEcontext gc,
 void image_path(double *x, double *y, int npoly, int *nper, Rboolean winding,
               const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
-
+  for (int i = 0; i < npoly; i++) {
+    int n = nper[i];
+    image_polygon(n, x, y, gc, dd);
+    x+=n;
+    y+=n;
+  }
   VOID_END_RCPP
-
 }
 
 void image_text(double x, double y, const char *str, double rot,
@@ -308,7 +313,7 @@ pDevDesc magick_driver_new(Image * image, int bg, int width, int height, double 
   dd->circle = image_circle;
   dd->polygon = image_polygon;
   dd->polyline = image_polyline;
-  dd->path = NULL; //image_path;
+  dd->path = image_path;
   dd->mode = NULL;
   dd->metricInfo = image_metric_info;
   dd->cap = NULL;
@@ -345,7 +350,6 @@ pDevDesc magick_driver_new(Image * image, int bg, int width, int height, double 
   dd->displayListOn = FALSE;
   dd->haveTransparency = 2;
   dd->haveTransparentBg = 2;
-
   dd->deviceSpecific = image;
   return dd;
 }
