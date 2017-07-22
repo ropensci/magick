@@ -145,22 +145,44 @@ void image_clip(double left, double right, double bottom, double top, pDevDesc d
 }
 
 void image_line(double x1, double y1, double x2, double y2, const pGEcontext gc, pDevDesc dd) {
+  BEGIN_RCPP
   Rprintf("drawling %s line from (%f, %f) to (%f, %f)\n", col2name(gc->col), x1, y1, x2, y2);
   image_draw(Magick::DrawableLine(x1, y1, x2, y2), gc, dd);
+  VOID_END_RCPP
 }
 
 void image_polyline(int n, double *x, double *y, const pGEcontext gc, pDevDesc dd) {
+  BEGIN_RCPP
   std::list<Magick::Coordinate> coordinates;
   for(int i = 0; i < n; i++)
     coordinates.push_back(Magick::Coordinate(x[i], y[i]));
   image_draw(Magick::DrawablePolyline(coordinates), gc, dd);
+  VOID_END_RCPP
 }
 
 void image_polygon(int n, double *x, double *y, const pGEcontext gc, pDevDesc dd) {
+  BEGIN_RCPP
   std::list<Magick::Coordinate> coordinates;
   for(int i = 0; i < n; i++)
     coordinates.push_back(Magick::Coordinate(x[i], y[i]));
   image_draw(Magick::DrawablePolygon(coordinates), gc, dd);
+  VOID_END_RCPP
+}
+
+void image_rect(double x0, double y0, double x1, double y1,
+                const pGEcontext gc, pDevDesc dd) {
+  BEGIN_RCPP
+  image_draw(Magick::DrawableRectangle(x0, y1, x1, y0), gc, dd);
+  VOID_END_RCPP
+
+}
+
+void image_circle(double x, double y, double r, const pGEcontext gc,
+                  pDevDesc dd) {
+  BEGIN_RCPP
+  //TODO: magick has separate x and y 'perimeter'
+  VOID_END_RCPP
+
 }
 
 void image_path(double *x, double *y, int npoly, int *nper, Rboolean winding,
@@ -179,27 +201,13 @@ double image_strwidth(const char *str, const pGEcontext gc, pDevDesc dd) {
   return 0;
 }
 
-void image_rect(double x0, double y0, double x1, double y1,
-              const pGEcontext gc, pDevDesc dd) {
-  BEGIN_RCPP
 
-  VOID_END_RCPP
-
-}
-
-void image_circle(double x, double y, double r, const pGEcontext gc,
-                pDevDesc dd) {
-  BEGIN_RCPP
-  //TODO: magick has separate x and y 'perimeter'
-  VOID_END_RCPP
-
-}
 
 void image_text(double x, double y, const char *str, double rot,
               double hadj, const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
   std::list<Magick::Drawable> draw;
-  draw.push_back(Magick::DrawableRotation(rot));
+  draw.push_back(Magick::DrawableRotation(rot));//this is wrong
   draw.push_back(Magick::DrawableText(x, y, str, "UTF-8"));
   image_draw(draw, gc, dd);
   VOID_END_RCPP
