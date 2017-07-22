@@ -2,6 +2,9 @@
  * R graphics docs: https://svn.r-project.org/R/trunk/src/include/R_ext/GraphicsDevice.h
  * Magick++ docs: https://www.imagemagick.org/Magick++/Drawable.html
  *
+ * Constants are defined in https://svn.r-project.org/R/trunk/src/include/R_ext/GraphicsEngine.h
+ * and https://www.imagemagick.org/Magick++/Enumerations.html
+ *
  * TODO: make everything static?
  */
 #include "magick_types.h"
@@ -21,6 +24,21 @@ inline Frame * getgraph(pDevDesc dd){
   return &image->back();
 }
 
+/* from svglite */
+inline bool is_bold(int face) {
+  return face == 2 || face == 4;
+}
+inline bool is_italic(int face) {
+  return face == 3 || face == 4;
+}
+inline bool is_bolditalic(int face) {
+  return face == 4;
+}
+inline bool is_symbol(int face) {
+  return face == 5;
+}
+
+/* magick style linetype spec */
 inline double * linetype(double * lty, int type, int lwd){
   switch(type){
   case LTY_BLANK:
@@ -78,11 +96,32 @@ inline Magick::DrawableStrokeLineJoin linejoin(R_GE_linejoin type){
   return Magick::RoundJoin;
 }
 
-/* TODO: I don't understand what this function does */
-void image_metric_info(int c, const pGEcontext gc, double* ascent,
-                     double* descent, double* width, pDevDesc dd) {
-
+/* main drawing function */
+void image_draw(std::list<Magick::Drawable> x, const pGEcontext gc, pDevDesc dd){
+  double lty[8] = {0};
+  Frame * graph = getgraph(dd);
+  std::list<Magick::Drawable> draw;
+  draw.push_back(Magick::DrawableStrokeColor(col2name(gc->col)));
+  draw.push_back(Magick::DrawableFillColor(col2name(gc->fill)));
+  draw.push_back(Magick::DrawableStrokeWidth(gc->lwd));
+  draw.push_back(Magick::DrawableDashArray(linetype(lty, gc->lty, gc->lwd)));
+  draw.push_back(Magick::DrawableStrokeLineCap(linecap(gc->lend)));
+  draw.push_back(Magick::DrawableStrokeLineJoin(linejoin(gc->ljoin)));
+  draw.push_back(Magick::DrawableMiterLimit(gc->lmitre));
+  draw.push_back(Magick::DrawableFont(gc->fontfamily));
+  draw.push_back(Magick::DrawablePointSize(gc->ps));
+  draw.splice(draw.end(), x);
+  graph->gamma(gc->gamma);
+  graph->draw(draw);
 }
+
+void image_draw(Magick::Drawable x, const pGEcontext gc, pDevDesc dd){
+  std::list<Magick::Drawable> draw;
+  draw.push_back(x);
+  image_draw(draw, gc, dd);
+}
+
+/* ~~~ CALLBACK FUNCTIONS START HERE ~~~ */
 
 void image_new_page(const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
@@ -102,28 +141,6 @@ void image_clip(double left, double right, double bottom, double top, pDevDesc d
   mask.fillColor("transparent");
   mask.draw( Magick::DrawableRectangle(left, top, right, bottom));
   getgraph(dd)->clipMask(mask);
-  VOID_END_RCPP
-}
-
-/* TODO: need to unprotect the XPTR here */
-void image_close(pDevDesc dd) {
-  //R_ReleaseObject(getimage(dd))
-}
-
-void image_draw(Magick::Drawable x, const pGEcontext gc, pDevDesc dd){
-  BEGIN_RCPP
-  double lty[8] = {0};
-  Frame * graph = getgraph(dd);
-  std::list<Magick::Drawable> draw;
-  draw.push_back(Magick::DrawableStrokeColor(col2name(gc->col)));
-  draw.push_back(Magick::DrawableFillColor(col2name(dd->startfill)));
-  draw.push_back(Magick::DrawableStrokeWidth(gc->lwd));
-  draw.push_back(Magick::DrawableDashArray(linetype(lty, gc->lty, gc->lwd)));
-  draw.push_back(Magick::DrawableStrokeLineCap(linecap(gc->lend)));
-  draw.push_back(Magick::DrawableStrokeLineJoin(linejoin(gc->ljoin)));
-  draw.push_back(x);
-  graph->gamma(gc->gamma);
-  graph->draw(draw);
   VOID_END_RCPP
 }
 
@@ -181,9 +198,11 @@ void image_circle(double x, double y, double r, const pGEcontext gc,
 void image_text(double x, double y, const char *str, double rot,
               double hadj, const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
-
+  std::list<Magick::Drawable> draw;
+  draw.push_back(Magick::DrawableRotation(rot));
+  draw.push_back(Magick::DrawableText(x, y, str, "UTF-8"));
+  image_draw(draw, gc, dd);
   VOID_END_RCPP
-
 }
 
 void image_size(double *left, double *right, double *bottom, double *top,
@@ -202,7 +221,20 @@ void image_raster(unsigned int *raster, int w, int h,
                 const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
 
-  VOID_END_RCPP}
+  VOID_END_RCPP
+}
+
+/* TODO: need to unprotect the XPTR here */
+void image_close(pDevDesc dd) {
+  //R_ReleaseObject(getimage(dd))
+}
+
+void image_metric_info(int c, const pGEcontext gc, double* ascent,
+                       double* descent, double* width, pDevDesc dd) {
+  /* TODO: I don't understand what this function does */
+}
+
+
 
 
 pDevDesc magick_driver_new(Image * image, int bg, int width, int height, double pointsize) {
