@@ -96,22 +96,30 @@ inline Magick::DrawableStrokeLineJoin linejoin(R_GE_linejoin type){
   return Magick::RoundJoin;
 }
 
+inline Magick::StyleType style(int face){
+  return is_italic(face) ? Magick::ItalicStyle : Magick::NormalStyle;
+}
+
+inline int weight(int face){
+  return is_bold(face) ? 600 : 400;
+}
+
 /* main drawing function */
 void image_draw(std::list<Magick::Drawable> x, const pGEcontext gc, pDevDesc dd){
   double lty[8] = {0};
   Frame * graph = getgraph(dd);
   std::list<Magick::Drawable> draw;
   if(gc->col != NA_INTEGER)
-    draw.push_back(Magick::DrawableStrokeColor(col2name(gc->col)));
+    draw.push_back(Magick::DrawableStrokeColor(Color(col2name(gc->col))));
   if(gc->fill != NA_INTEGER)
-    draw.push_back(Magick::DrawableFillColor(col2name(gc->fill)));
+    draw.push_back(Magick::DrawableFillColor(Color(col2name(gc->fill))));
   draw.push_back(Magick::DrawableStrokeWidth(gc->lwd));
   draw.push_back(Magick::DrawableDashArray(linetype(lty, gc->lty, gc->lwd)));
   draw.push_back(Magick::DrawableStrokeLineCap(linecap(gc->lend)));
   draw.push_back(Magick::DrawableStrokeLineJoin(linejoin(gc->ljoin)));
   draw.push_back(Magick::DrawableMiterLimit(gc->lmitre));
-  draw.push_back(Magick::DrawableFont(gc->fontfamily));
-  draw.push_back(Magick::DrawablePointSize(gc->ps));
+  draw.push_back(Magick::DrawableFont(gc->fontfamily, style(gc->fontface), weight(gc->fontface), Magick::NormalStretch));
+  draw.push_back(Magick::DrawablePointSize(gc->ps * gc->cex));
   draw.splice(draw.end(), x);
   graph->gamma(gc->gamma);
   graph->draw(draw);
@@ -195,21 +203,14 @@ void image_path(double *x, double *y, int npoly, int *nper, Rboolean winding,
 
 }
 
-double image_strwidth(const char *str, const pGEcontext gc, pDevDesc dd) {
-  BEGIN_RCPP
-
-  VOID_END_RCPP
-
-  return 0;
-}
-
-
-
 void image_text(double x, double y, const char *str, double rot,
-              double hadj, const pGEcontext gc, pDevDesc dd) {
+                double hadj, const pGEcontext gc, pDevDesc dd) {
+  Rprintf("adding text: '%s' with color '%s' and fill '%s'\n", str, col2name(gc->col), col2name(gc->fill));
   BEGIN_RCPP
-  std::list<Magick::Drawable> draw;
-  draw.push_back(Magick::DrawableRotation(rot));//this is wrong
+    std::list<Magick::Drawable> draw;
+  //In R there is no separate 'fill'. The 'fill' should match the color.
+  draw.push_back(Magick::DrawableFillColor(Color(col2name(gc->col))));
+  //draw.push_back(Magick::DrawableRotation(rot));
   draw.push_back(Magick::DrawableText(x, y, str, "UTF-8"));
   image_draw(draw, gc, dd);
   VOID_END_RCPP
@@ -241,11 +242,34 @@ void image_close(pDevDesc dd) {
 
 void image_metric_info(int c, const pGEcontext gc, double* ascent,
                        double* descent, double* width, pDevDesc dd) {
-  /* TODO: I don't understand what this function does */
+  /* DOCS: http://www.imagemagick.org/Magick++/TypeMetric.html */
+  bool is_unicode = mbcslocale;
+  if (c < 0) {
+    is_unicode = true;
+    c = -c;
+  }
+
+  // Convert to string - negative implies unicode code point
+  char str[16];
+  if (is_unicode) {
+    Rf_ucstoutf8(str, (unsigned int) c);
+  } else {
+    str[0] = (char) c;
+    str[1] = '\0';
+  }
+
+  Magick::TypeMetric tm;
+  getgraph(dd)->fontTypeMetrics(str, &tm);
+  *ascent = tm.ascent();
+  *descent = tm.descent();
+  *width = tm.textWidth();
 }
 
-
-
+double image_strwidth(const char *str, const pGEcontext gc, pDevDesc dd) {
+  Magick::TypeMetric tm;
+  getgraph(dd)->fontTypeMetrics(str, &tm);
+  return tm.textWidth();
+}
 
 pDevDesc magick_driver_new(Image * image, int bg, int width, int height, double pointsize) {
 
