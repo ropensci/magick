@@ -117,10 +117,8 @@ void image_close(pDevDesc dd) {
   //R_ReleaseObject(getimage(dd))
 }
 
-void image_line(double x1, double y1, double x2, double y2, const pGEcontext gc, pDevDesc dd) {
-  Rprintf("drawling %s line from (%f, %f) to (%f, %f)\n", col2name(gc->col), x1, y1, x2, y2);
+void image_draw(Magick::Drawable x, const pGEcontext gc, pDevDesc dd){
   BEGIN_RCPP
-  //line width and type
   double lty[8] = {0};
   Frame * graph = getgraph(dd);
   std::list<Magick::Drawable> draw;
@@ -128,12 +126,17 @@ void image_line(double x1, double y1, double x2, double y2, const pGEcontext gc,
   draw.push_back(Magick::DrawableFillColor(col2name(dd->startfill)));
   draw.push_back(Magick::DrawableStrokeWidth(gc->lwd));
   draw.push_back(Magick::DrawableDashArray(linetype(lty, gc->lty, gc->lwd)));
-  draw.push_back(Magick::DrawableLine(x1, y1, x2, y2));
   draw.push_back(Magick::DrawableStrokeLineCap(linecap(gc->lend)));
   draw.push_back(Magick::DrawableStrokeLineJoin(linejoin(gc->ljoin)));
+  draw.push_back(x);
   graph->gamma(gc->gamma);
   graph->draw(draw);
   VOID_END_RCPP
+}
+
+void image_line(double x1, double y1, double x2, double y2, const pGEcontext gc, pDevDesc dd) {
+  Rprintf("drawling %s line from (%f, %f) to (%f, %f)\n", col2name(gc->col), x1, y1, x2, y2);
+  image_draw(Magick::DrawableLine(x1, y1, x2, y2), gc, dd);
 }
 
 void image_polyline(int n, double *x, double *y, const pGEcontext gc, pDevDesc dd) {
