@@ -258,16 +258,26 @@ void image_metric_info(int c, const pGEcontext gc, double* ascent,
     str[1] = '\0';
   }
 
+  Frame * graph = getgraph(dd);
+  graph->fontFamily(gc->fontfamily);
+  graph->fontPointsize(gc->ps * gc->cex);
+  graph->fontWeight(weight(gc->fontface));
+  graph->fontStyle(style(gc->fontface));
   Magick::TypeMetric tm;
-  getgraph(dd)->fontTypeMetrics(str, &tm);
+  graph->fontTypeMetrics(str, &tm);
   *ascent = tm.ascent();
   *descent = tm.descent();
   *width = tm.textWidth();
 }
 
 double image_strwidth(const char *str, const pGEcontext gc, pDevDesc dd) {
+  Frame * graph = getgraph(dd);
+  graph->fontFamily(gc->fontfamily);
+  graph->fontPointsize(gc->ps * gc->cex);
+  graph->fontWeight(weight(gc->fontface));
+  graph->fontStyle(style(gc->fontface));
   Magick::TypeMetric tm;
-  getgraph(dd)->fontTypeMetrics(str, &tm);
+  graph->fontTypeMetrics(str, &tm);
   return tm.textWidth();
 }
 
