@@ -140,24 +140,17 @@ void image_line(double x1, double y1, double x2, double y2, const pGEcontext gc,
 }
 
 void image_polyline(int n, double *x, double *y, const pGEcontext gc, pDevDesc dd) {
-  BEGIN_RCPP
-  Frame graphic = getcur(dd);
   std::list<Magick::Coordinate> coordinates;
   for(int i = 0; i < n; i++)
     coordinates.push_back(Magick::Coordinate(x[i], y[i]));
-  graphic.draw( Magick::DrawablePolyline(coordinates));
-  VOID_END_RCPP
+  image_draw(Magick::DrawablePolyline(coordinates), gc, dd);
 }
 
-void image_polygon(int n, double *x, double *y, const pGEcontext gc,
-                 pDevDesc dd) {
-  BEGIN_RCPP
-  Frame graphic = getcur(dd);
+void image_polygon(int n, double *x, double *y, const pGEcontext gc, pDevDesc dd) {
   std::list<Magick::Coordinate> coordinates;
   for(int i = 0; i < n; i++)
     coordinates.push_back(Magick::Coordinate(x[i], y[i]));
-  graphic.draw( Magick::DrawablePolygon(coordinates));
-  VOID_END_RCPP
+  image_draw(Magick::DrawablePolygon(coordinates), gc, dd);
 }
 
 void image_path(double *x, double *y, int npoly, int *nper, Rboolean winding,
