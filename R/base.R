@@ -86,6 +86,10 @@
     if(length(x) > 1)
       x <- image_animate(x, fps = 1)
     format <- tolower(image_info(x[1])$format)
+    if(format == "xc"){
+      format <- 'png'
+      x <- image_convert(x, format)
+    }
     tmp <- file.path(tempdir(), paste0("preview.", format))
     image_write(x, path = tmp, format = format)
     viewer(tmp)

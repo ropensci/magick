@@ -144,7 +144,7 @@ void image_new_page(const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
   Image *image = getimage(dd);
   Frame x(Geom(dd->right, dd->bottom), Color(col2name(gc->fill)));
-  x.magick("png"); //TODO: do not do this
+  //x.magick("png"); //TODO: do not do this
   image->push_back(x);
   VOID_END_RCPP
 }
