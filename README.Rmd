@@ -21,6 +21,7 @@
 
 About the underlying library:
 
+ - [Magick++ Tutorial](https://www.imagemagick.org/Magick++/tutorial/Magick++_tutorial.pdf)
  - [Magick++ STL Documentation](https://www.imagemagick.org/Magick++/STL.html)
 
 ## Hello World
