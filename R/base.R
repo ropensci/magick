@@ -81,17 +81,18 @@
 
 #' @export
 "print.magick-image" <- function(x, ...){
+  img <- x
   viewer <- getOption("viewer")
-  if(length(x) && is.function(viewer)){
-    if(length(x) > 1)
-      x <- image_animate(x, fps = 1)
-    format <- tolower(image_info(x[1])$format)
+  if(length(img) && is.function(viewer)){
+    if(length(img) > 1)
+      img <- image_animate(img, fps = 1)
+    format <- tolower(image_info(img[1])$format)
     if(format == "xc"){
       format <- 'png'
-      x <- image_convert(x, format)
+      img <- image_convert(img, format)
     }
     tmp <- file.path(tempdir(), paste0("preview.", format))
-    image_write(x, path = tmp, format = format)
+    image_write(img, path = tmp, format = format)
     viewer(tmp)
   }
   print(image_info(x))
