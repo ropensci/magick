@@ -219,15 +219,6 @@ void image_path(double *x, double *y, int npoly, int *nper, Rboolean winding,
   VOID_END_RCPP
 }
 
-void image_text(double x, double y, const char *str, double rot,
-                double hadj, const pGEcontext gc, pDevDesc dd) {
-  Rprintf("adding text: '%s' with color '%s' at (%f,%f)'\n", str, col2name(gc->col), x, y);
-  BEGIN_RCPP
-  Frame * graph = getgraph(dd);
-  graph->annotate(str, Geom(0, 0, x, y), Magick::ForgetGravity, -1 * rot);
-  VOID_END_RCPP
-}
-
 void image_size(double *left, double *right, double *bottom, double *top,
               pDevDesc dd) {
   *left = dd->left;
@@ -251,6 +242,27 @@ void image_raster(unsigned int *raster, int w, int h,
 void image_close(pDevDesc dd) {
   //R_ReleaseObject(getimage(dd))
 }
+
+
+void image_text(double x, double y, const char *str, double rot,
+                double hadj, const pGEcontext gc, pDevDesc dd) {
+  Rprintf("adding text: '%s' with color '%s' at (%f,%f)'\n", str, col2name(gc->col), x, y);
+  BEGIN_RCPP
+  Frame * graph = getgraph(dd);
+#if MagickLibVersion >= 0x692
+  graph->fontFamily(gc->fontfamily);
+  graph->fontWeight(weight(gc->fontface));
+  graph->fontStyle(style(gc->fontface));
+#else
+  graph->font(gc->fontfamily);
+#endif
+  graph->fillColor(Color(col2name(gc->col)));
+  graph->strokeColor(Magick::Color()); //unset: this is really ugly
+  graph->fontPointsize(gc->ps * gc->cex);
+  graph->annotate(str, Geom(0, 0, x, y), Magick::ForgetGravity, -1 * rot);
+  VOID_END_RCPP
+}
+
 
 void image_metric_info(int c, const pGEcontext gc, double* ascent,
                        double* descent, double* width, pDevDesc dd) {
