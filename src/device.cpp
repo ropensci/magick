@@ -200,12 +200,19 @@ void image_circle(double x, double y, double r, const pGEcontext gc,
   VOID_END_RCPP
 }
 
+/* TODO: this is wrong. The outer polygon should not paint over the inner one */
 void image_path(double *x, double *y, int npoly, int *nper, Rboolean winding,
               const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
   for (int i = 0; i < npoly; i++) {
     int n = nper[i];
-    image_polygon(n, x, y, gc, dd);
+    std::list<Magick::Drawable> draw;
+    if(winding || i % 2 == 0)
+      draw.push_back(Magick::DrawableFillColor(Magick::Color(col2name(gc->fill))));
+    else
+      draw.push_back(Magick::DrawableFillColor(Magick::Color("white")));
+    draw.push_back(Magick::DrawablePolygon(coord(n, x, y)));
+    image_draw(draw, gc, dd);
     x+=n;
     y+=n;
   }
