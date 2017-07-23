@@ -221,14 +221,10 @@ void image_path(double *x, double *y, int npoly, int *nper, Rboolean winding,
 
 void image_text(double x, double y, const char *str, double rot,
                 double hadj, const pGEcontext gc, pDevDesc dd) {
-  Rprintf("adding text: '%s' with color '%s' and fill '%s'\n", str, col2name(gc->col), col2name(gc->fill));
+  Rprintf("adding text: '%s' with color '%s' at (%f,%f)'\n", str, col2name(gc->col), x, y);
   BEGIN_RCPP
-  std::list<Magick::Drawable> draw;
-  //In R there is no separate 'fill'. The 'fill' should match the color.
-  draw.push_back(Magick::DrawableFillColor(Color(col2name(gc->col))));
-  //draw.push_back(Magick::DrawableRotation(rot));
-  draw.push_back(Magick::DrawableText(x, y, str, "UTF-8"));
-  image_draw(draw, gc, dd);
+  Frame * graph = getgraph(dd);
+  graph->annotate(str, Geom(0, 0, x, y), Magick::ForgetGravity, -1 * rot);
   VOID_END_RCPP
 }
 
