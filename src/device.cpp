@@ -10,6 +10,17 @@
 #include "magick_types.h"
 #include <R_ext/GraphicsEngine.h>
 
+/* IM7 uses vectors instead of lists */
+#if MagickLibVersion >= 0x700
+typedef std::vector<Magick::Drawable> drawlist;
+typedef std::vector<Magick::Coordinate> coordlist;
+typedef std::vector<Magick::VPath> pathlist;
+#else
+typedef std::list<Magick::Drawable> drawlist;
+typedef std::list<Magick::Coordinate> coordlist;
+typedef std::list<Magick::VPath> pathlist;
+#endif
+
 inline Image * getimage(pDevDesc dd){
   Image *image = (Image*) dd->deviceSpecific;
   if(image == NULL)
@@ -104,8 +115,8 @@ inline int weight(int face){
   return is_bold(face) ? 600 : 400;
 }
 
-inline std::list<Magick::Coordinate> coord(int n, double * x, double * y){
-  std::list<Magick::Coordinate> coordinates;
+inline coordlist coord(int n, double * x, double * y){
+  coordlist coordinates;
   for(int i = 0; i < n; i++)
     coordinates.push_back(Magick::Coordinate(x[i], y[i]));
   return coordinates;
@@ -115,19 +126,24 @@ inline std::list<Magick::Coordinate> coord(int n, double * x, double * y){
 void image_draw(std::list<Magick::Drawable> x, const pGEcontext gc, pDevDesc dd){
   double lty[8] = {0};
   Frame * graph = getgraph(dd);
-  std::list<Magick::Drawable> draw;
+  drawlist draw;
   if(gc->col != NA_INTEGER)
     draw.push_back(Magick::DrawableStrokeColor(Color(col2name(gc->col))));
   if(gc->fill != NA_INTEGER)
     draw.push_back(Magick::DrawableFillColor(Color(col2name(gc->fill))));
   draw.push_back(Magick::DrawableStrokeWidth(gc->lwd));
-  draw.push_back(Magick::DrawableDashArray(linetype(lty, gc->lty, gc->lwd)));
   draw.push_back(Magick::DrawableStrokeLineCap(linecap(gc->lend)));
   draw.push_back(Magick::DrawableStrokeLineJoin(linejoin(gc->ljoin)));
   draw.push_back(Magick::DrawableMiterLimit(gc->lmitre));
   draw.push_back(Magick::DrawableFont(gc->fontfamily, style(gc->fontface), weight(gc->fontface), Magick::NormalStretch));
   draw.push_back(Magick::DrawablePointSize(gc->ps * gc->cex));
+#if MagickLibVersion >= 0x700
+  draw.push_back(Magick::DrawableStrokeDashArray(linetype(lty, gc->lty, gc->lwd)));
+  draw.insert(draw.end(), x.begin(), x.end());
+#else
+  draw.push_back(Magick::DrawableDashArray(linetype(lty, gc->lty, gc->lwd)));
   draw.splice(draw.end(), x);
+#endif
   graph->gamma(gc->gamma);
   graph->draw(draw);
 }
@@ -158,7 +174,7 @@ void image_clip(double left, double right, double bottom, double top, pDevDesc d
   Frame mask(Geom(dd->right, dd->bottom), Color("transparent"));
   mask.fillColor("transparent");
   mask.draw( Magick::DrawableRectangle(left, top, right, bottom));
-  getgraph(dd)->clipMask(mask);
+  //getgraph(dd)->clipMask(mask);
   VOID_END_RCPP
 }
 
@@ -204,7 +220,7 @@ void image_path(double *x, double *y, int npoly, int *nper, Rboolean winding,
               const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
   getgraph(dd)->fillRule(winding ? Magick::NonZeroRule : Magick::EvenOddRule);
-  std::list<Magick::VPath> path;
+  pathlist path;
   for (int i = 0; i < npoly; i++) {
     int n = nper[i];
     path.push_back(Magick::PathMovetoAbs(Magick::Coordinate(x[0], y[0])));
