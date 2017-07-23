@@ -5,7 +5,6 @@
  * Constants are defined in https://svn.r-project.org/R/trunk/src/include/R_ext/GraphicsEngine.h
  * and https://www.imagemagick.org/Magick++/Enumerations.html
  *
- * TODO: make everything static?
  */
 #include "magick_types.h"
 #include <R_ext/GraphicsEngine.h>
@@ -21,14 +20,14 @@ typedef std::list<Magick::Coordinate> coordlist;
 typedef std::list<Magick::VPath> pathlist;
 #endif
 
-inline Image * getimage(pDevDesc dd){
+static inline Image * getimage(pDevDesc dd){
   Image *image = (Image*) dd->deviceSpecific;
   if(image == NULL)
     throw std::runtime_error("Graphics device pointing to NULL image");
   return image;
 }
 
-inline Frame * getgraph(pDevDesc dd){
+static inline Frame * getgraph(pDevDesc dd){
   Image * image = getimage(dd);
   if(image->size() < 1)
     throw std::runtime_error("Magick device has zero pages");
@@ -36,21 +35,16 @@ inline Frame * getgraph(pDevDesc dd){
 }
 
 /* from svglite */
-inline bool is_bold(int face) {
+static inline bool is_bold(int face) {
   return face == 2 || face == 4;
 }
-inline bool is_italic(int face) {
+
+static inline bool is_italic(int face) {
   return face == 3 || face == 4;
-}
-inline bool is_bolditalic(int face) {
-  return face == 4;
-}
-inline bool is_symbol(int face) {
-  return face == 5;
 }
 
 /* magick style linetype spec */
-inline double * linetype(double * lty, int type, int lwd){
+static inline double * linetype(double * lty, int type, int lwd){
   switch(type){
   case LTY_BLANK:
   case LTY_SOLID:
@@ -83,7 +77,7 @@ inline double * linetype(double * lty, int type, int lwd){
   return lty;
 }
 
-inline Magick::DrawableStrokeLineCap linecap(R_GE_lineend type){
+static inline Magick::DrawableStrokeLineCap linecap(R_GE_lineend type){
   switch(type){
   case GE_ROUND_CAP:
     return Magick::RoundCap;
@@ -95,7 +89,7 @@ inline Magick::DrawableStrokeLineCap linecap(R_GE_lineend type){
   return Magick::RoundCap;
 }
 
-inline Magick::DrawableStrokeLineJoin linejoin(R_GE_linejoin type){
+static inline Magick::DrawableStrokeLineJoin linejoin(R_GE_linejoin type){
   switch(type){
   case GE_ROUND_JOIN:
     return Magick::RoundJoin;
@@ -107,15 +101,15 @@ inline Magick::DrawableStrokeLineJoin linejoin(R_GE_linejoin type){
   return Magick::RoundJoin;
 }
 
-inline Magick::StyleType style(int face){
+static inline Magick::StyleType style(int face){
   return is_italic(face) ? Magick::ItalicStyle : Magick::NormalStyle;
 }
 
-inline int weight(int face){
+static inline int weight(int face){
   return is_bold(face) ? 600 : 400;
 }
 
-inline coordlist coord(int n, double * x, double * y){
+static inline coordlist coord(int n, double * x, double * y){
   coordlist coordinates;
   for(int i = 0; i < n; i++)
     coordinates.push_back(Magick::Coordinate(x[i], y[i]));
@@ -123,7 +117,7 @@ inline coordlist coord(int n, double * x, double * y){
 }
 
 /* main drawing function */
-void image_draw(std::list<Magick::Drawable> x, const pGEcontext gc, pDevDesc dd){
+static void image_draw(std::list<Magick::Drawable> x, const pGEcontext gc, pDevDesc dd){
   double lty[8] = {0};
   Frame * graph = getgraph(dd);
   drawlist draw;
@@ -148,7 +142,7 @@ void image_draw(std::list<Magick::Drawable> x, const pGEcontext gc, pDevDesc dd)
   graph->draw(draw);
 }
 
-void image_draw(Magick::Drawable x, const pGEcontext gc, pDevDesc dd){
+static void image_draw(Magick::Drawable x, const pGEcontext gc, pDevDesc dd){
   std::list<Magick::Drawable> draw;
   draw.push_back(x);
   image_draw(draw, gc, dd);
@@ -156,7 +150,7 @@ void image_draw(Magick::Drawable x, const pGEcontext gc, pDevDesc dd){
 
 /* ~~~ CALLBACK FUNCTIONS START HERE ~~~ */
 
-void image_new_page(const pGEcontext gc, pDevDesc dd) {
+static void image_new_page(const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
   Image *image = getimage(dd);
   Frame x(Geom(dd->right, dd->bottom), Color(col2name(gc->fill)));
@@ -167,9 +161,9 @@ void image_new_page(const pGEcontext gc, pDevDesc dd) {
 
 /* TODO: test if we got the coordinates right  */
 /* TODO: how to unset the clipmask ? */
-void image_clip(double left, double right, double bottom, double top, pDevDesc dd) {
-  Rprintf("Clipping at (%f, %f) to (%f, %f)\n", left, top, right, bottom);
+static void image_clip(double left, double right, double bottom, double top, pDevDesc dd) {
   return;
+  Rprintf("Clipping at (%f, %f) to (%f, %f)\n", left, top, right, bottom);
   BEGIN_RCPP
   Frame mask(Geom(dd->right, dd->bottom), Color("transparent"));
   mask.fillColor("transparent");
@@ -178,14 +172,14 @@ void image_clip(double left, double right, double bottom, double top, pDevDesc d
   VOID_END_RCPP
 }
 
-void image_line(double x1, double y1, double x2, double y2, const pGEcontext gc, pDevDesc dd) {
+static void image_line(double x1, double y1, double x2, double y2, const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
   Rprintf("drawling %s line from (%f, %f) to (%f, %f)\n", col2name(gc->col), x1, y1, x2, y2);
   image_draw(Magick::DrawableLine(x1, y1, x2, y2), gc, dd);
   VOID_END_RCPP
 }
 
-void image_polyline(int n, double *x, double *y, const pGEcontext gc, pDevDesc dd) {
+static void image_polyline(int n, double *x, double *y, const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
   std::list<Magick::Drawable> draw;
   //Note 'fill' must be unset to prevent magick from creating a polygon
@@ -195,20 +189,20 @@ void image_polyline(int n, double *x, double *y, const pGEcontext gc, pDevDesc d
   VOID_END_RCPP
 }
 
-void image_polygon(int n, double *x, double *y, const pGEcontext gc, pDevDesc dd) {
+static void image_polygon(int n, double *x, double *y, const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
   image_draw(Magick::DrawablePolygon(coord(n, x, y)), gc, dd);
   VOID_END_RCPP
 }
 
-void image_rect(double x0, double y0, double x1, double y1,
+static void image_rect(double x0, double y0, double x1, double y1,
                 const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
   image_draw(Magick::DrawableRectangle(x0, y1, x1, y0), gc, dd);
   VOID_END_RCPP
 }
 
-void image_circle(double x, double y, double r, const pGEcontext gc,
+static void image_circle(double x, double y, double r, const pGEcontext gc,
                   pDevDesc dd) {
   BEGIN_RCPP
   //note: parameter 3 + 4 must denote any point on the circle
@@ -216,7 +210,7 @@ void image_circle(double x, double y, double r, const pGEcontext gc,
   VOID_END_RCPP
 }
 
-void image_path(double *x, double *y, int npoly, int *nper, Rboolean winding,
+static void image_path(double *x, double *y, int npoly, int *nper, Rboolean winding,
               const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
   getgraph(dd)->fillRule(winding ? Magick::NonZeroRule : Magick::EvenOddRule);
@@ -235,7 +229,7 @@ void image_path(double *x, double *y, int npoly, int *nper, Rboolean winding,
   VOID_END_RCPP
 }
 
-void image_size(double *left, double *right, double *bottom, double *top,
+static void image_size(double *left, double *right, double *bottom, double *top,
               pDevDesc dd) {
   *left = dd->left;
   *right = dd->right;
@@ -243,7 +237,7 @@ void image_size(double *left, double *right, double *bottom, double *top,
   *top = dd->top;
 }
 
-void image_raster(unsigned int *raster, int w, int h,
+static void image_raster(unsigned int *raster, int w, int h,
                 double x, double y,
                 double width, double height,
                 double rot,
@@ -255,12 +249,12 @@ void image_raster(unsigned int *raster, int w, int h,
 }
 
 /* TODO: need to unprotect the XPTR here */
-void image_close(pDevDesc dd) {
+static void image_close(pDevDesc dd) {
   //R_ReleaseObject(getimage(dd))
 }
 
 
-void image_text(double x, double y, const char *str, double rot,
+static void image_text(double x, double y, const char *str, double rot,
                 double hadj, const pGEcontext gc, pDevDesc dd) {
   Rprintf("adding text: '%s' with color '%s' at (%f,%f)'\n", str, col2name(gc->col), x, y);
   BEGIN_RCPP
@@ -280,7 +274,7 @@ void image_text(double x, double y, const char *str, double rot,
 }
 
 
-void image_metric_info(int c, const pGEcontext gc, double* ascent,
+static void image_metric_info(int c, const pGEcontext gc, double* ascent,
                        double* descent, double* width, pDevDesc dd) {
   /* DOCS: http://www.imagemagick.org/Magick++/TypeMetric.html */
   bool is_unicode = mbcslocale;
@@ -314,7 +308,7 @@ void image_metric_info(int c, const pGEcontext gc, double* ascent,
   *width = tm.textWidth();
 }
 
-double image_strwidth(const char *str, const pGEcontext gc, pDevDesc dd) {
+static double image_strwidth(const char *str, const pGEcontext gc, pDevDesc dd) {
   Frame * graph = getgraph(dd);
 #if MagickLibVersion >= 0x692
   graph->fontFamily(gc->fontfamily);
@@ -329,7 +323,7 @@ double image_strwidth(const char *str, const pGEcontext gc, pDevDesc dd) {
   return tm.textWidth();
 }
 
-pDevDesc magick_driver_new(Image * image, int bg, int width, int height, double pointsize) {
+static pDevDesc magick_driver_new(Image * image, int bg, int width, int height, double pointsize) {
 
   pDevDesc dd = (DevDesc*) calloc(1, sizeof(DevDesc));
   if (dd == NULL)
@@ -387,7 +381,7 @@ pDevDesc magick_driver_new(Image * image, int bg, int width, int height, double 
   dd->ipr[1] = 1.0 / 72.0;
 
   // Capabilities
-  dd->canClip = TRUE;
+  dd->canClip = FALSE;
   dd->canHAdj = 0;
   dd->canChangeGamma = FALSE;
   dd->displayListOn = FALSE;
@@ -398,7 +392,7 @@ pDevDesc magick_driver_new(Image * image, int bg, int width, int height, double 
 }
 
 /* Adapted from svglite */
-void makeDevice(Image * image, std::string bg_, int width, int height, double pointsize) {
+static void makeDevice(Image * image, std::string bg_, int width, int height, double pointsize) {
   int bg = R_GE_str2col(bg_.c_str());
   R_GE_checkVersionOrDie(R_GE_version);
   R_CheckDeviceAvailable();
