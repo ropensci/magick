@@ -143,7 +143,7 @@ void image_draw(Magick::Drawable x, const pGEcontext gc, pDevDesc dd){
 void image_new_page(const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
   Image *image = getimage(dd);
-  Frame x(Geom(dd->right, dd->bottom), Color(col2name(dd->startfill)));
+  Frame x(Geom(dd->right, dd->bottom), Color(col2name(gc->fill)));
   x.magick("png"); //TODO: do not do this
   image->push_back(x);
   VOID_END_RCPP
