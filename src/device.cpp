@@ -162,14 +162,13 @@ static void image_new_page(const pGEcontext gc, pDevDesc dd) {
 /* TODO: test if we got the coordinates right  */
 /* TODO: how to unset the clipmask ? */
 static void image_clip(double left, double right, double bottom, double top, pDevDesc dd) {
-  Rprintf("Clipping at (%f, %f) to (%f, %f)\n", left, top, right, bottom);
   BEGIN_RCPP
   pathlist path;
-  path.push_back(Magick::PathMovetoAbs(Magick::Coordinate(left, top)));
-  path.push_back(Magick::PathLinetoAbs(Magick::Coordinate(right, top)));
-  path.push_back(Magick::PathLinetoAbs(Magick::Coordinate(right, bottom)));
-  path.push_back(Magick::PathLinetoAbs(Magick::Coordinate(left, bottom)));
-  path.push_back(Magick::PathLinetoAbs(Magick::Coordinate(left, top)));
+  path.push_back(Magick::PathMovetoAbs(Magick::Coordinate(left + 1, top + 1)));
+  path.push_back(Magick::PathLinetoAbs(Magick::Coordinate(right - 1, top + 1)));
+  path.push_back(Magick::PathLinetoAbs(Magick::Coordinate(right - 1, bottom - 1)));
+  path.push_back(Magick::PathLinetoAbs(Magick::Coordinate(left + 1, bottom - 1)));
+  path.push_back(Magick::PathLinetoAbs(Magick::Coordinate(left + 1, top + 1)));
 
   drawlist draw;
   std::string id("mypath");
@@ -183,7 +182,6 @@ static void image_clip(double left, double right, double bottom, double top, pDe
 
 static void image_line(double x1, double y1, double x2, double y2, const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
-  Rprintf("drawling %s line from (%f, %f) to (%f, %f)\n", col2name(gc->col), x1, y1, x2, y2);
   image_draw(Magick::DrawableLine(x1, y1, x2, y2), gc, dd);
   VOID_END_RCPP
 }
@@ -253,7 +251,10 @@ static void image_raster(unsigned int *raster, int w, int h,
                 Rboolean interpolate,
                 const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
-
+  Frame * graph = getgraph(dd);
+  Frame frame(w, h, std::string("RGBA"), Magick::CharPixel, raster);
+  //frame.scale(Geom(width, height));
+  graph->composite(frame, x, (dd->bottom - y), Magick::OverCompositeOp);
   VOID_END_RCPP
 }
 
@@ -265,7 +266,6 @@ static void image_close(pDevDesc dd) {
 
 static void image_text(double x, double y, const char *str, double rot,
                 double hadj, const pGEcontext gc, pDevDesc dd) {
-  Rprintf("adding text: '%s' with color '%s' at (%f,%f)'\n", str, col2name(gc->col), x, y);
   BEGIN_RCPP
   Frame * graph = getgraph(dd);
 #if MagickLibVersion >= 0x692
