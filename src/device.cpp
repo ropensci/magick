@@ -253,10 +253,16 @@ static void image_raster(unsigned int *raster, int w, int h,
   BEGIN_RCPP
   Frame * graph = getgraph(dd);
   Frame frame(w, h, std::string("RGBA"), Magick::CharPixel, raster);
-  Magick::Geometry size = Geom(width, -1 * height);
+  frame.backgroundColor(Color("transparent"));
+  Magick::Geometry size = Geom(width, -height);
   size.aspect(true); //resize without preserving aspect ratio
   frame.scale(size);
-  graph->composite(frame, x, y + height, Magick::OverCompositeOp);
+  frame.rotate(-rot);
+  //size may change after rotation
+  Magick::Geometry outsize = frame.size();
+  int xoff = (outsize.width() - width) / 2;
+  int yoff = (outsize.height() + height) / 2;
+  graph->composite(frame, x - xoff, y + height - yoff, Magick::OverCompositeOp);
   VOID_END_RCPP
 }
 
