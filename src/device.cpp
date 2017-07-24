@@ -253,8 +253,10 @@ static void image_raster(unsigned int *raster, int w, int h,
   BEGIN_RCPP
   Frame * graph = getgraph(dd);
   Frame frame(w, h, std::string("RGBA"), Magick::CharPixel, raster);
-  //frame.scale(Geom(width, height));
-  graph->composite(frame, x, (dd->bottom - y), Magick::OverCompositeOp);
+  Magick::Geometry size = Geom(width, -1 * height);
+  size.aspect(true); //resize without preserving aspect ratio
+  frame.scale(size);
+  graph->composite(frame, x, y + height, Magick::OverCompositeOp);
   VOID_END_RCPP
 }
 
