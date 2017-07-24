@@ -117,7 +117,7 @@ static inline coordlist coord(int n, double * x, double * y){
 }
 
 /* main drawing function */
-static void image_draw(std::list<Magick::Drawable> x, const pGEcontext gc, pDevDesc dd){
+static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd){
   double lty[8] = {0};
   Frame * graph = getgraph(dd);
   drawlist draw;
@@ -143,7 +143,7 @@ static void image_draw(std::list<Magick::Drawable> x, const pGEcontext gc, pDevD
 }
 
 static void image_draw(Magick::Drawable x, const pGEcontext gc, pDevDesc dd){
-  std::list<Magick::Drawable> draw;
+  drawlist draw;
   draw.push_back(x);
   image_draw(draw, gc, dd);
 }
@@ -162,13 +162,22 @@ static void image_new_page(const pGEcontext gc, pDevDesc dd) {
 /* TODO: test if we got the coordinates right  */
 /* TODO: how to unset the clipmask ? */
 static void image_clip(double left, double right, double bottom, double top, pDevDesc dd) {
-  return;
   Rprintf("Clipping at (%f, %f) to (%f, %f)\n", left, top, right, bottom);
   BEGIN_RCPP
-  Frame mask(Geom(dd->right, dd->bottom), Color("transparent"));
-  mask.fillColor("transparent");
-  mask.draw( Magick::DrawableRectangle(left, top, right, bottom));
-  //getgraph(dd)->clipMask(mask);
+  pathlist path;
+  path.push_back(Magick::PathMovetoAbs(Magick::Coordinate(left, top)));
+  path.push_back(Magick::PathLinetoAbs(Magick::Coordinate(right, top)));
+  path.push_back(Magick::PathLinetoAbs(Magick::Coordinate(right, bottom)));
+  path.push_back(Magick::PathLinetoAbs(Magick::Coordinate(left, bottom)));
+  path.push_back(Magick::PathLinetoAbs(Magick::Coordinate(left, top)));
+
+  drawlist draw;
+  std::string id("mypath");
+  draw.push_back(Magick::DrawablePushClipPath(id));
+  draw.push_back(Magick::DrawablePath(path));
+  draw.push_back(Magick::DrawablePopClipPath());
+  draw.push_back(Magick::DrawableClipPath(id));
+  getgraph(dd)->draw(draw);
   VOID_END_RCPP
 }
 
@@ -181,7 +190,7 @@ static void image_line(double x1, double y1, double x2, double y2, const pGEcont
 
 static void image_polyline(int n, double *x, double *y, const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
-  std::list<Magick::Drawable> draw;
+  drawlist draw;
   //Note 'fill' must be unset to prevent magick from creating a polygon
   draw.push_back(Magick::DrawableFillColor(Magick::Color()));
   draw.push_back(Magick::DrawablePolyline(coord(n, x, y)));
@@ -381,7 +390,7 @@ static pDevDesc magick_driver_new(Image * image, int bg, int width, int height, 
   dd->ipr[1] = 1.0 / 72.0;
 
   // Capabilities
-  dd->canClip = FALSE;
+  dd->canClip = TRUE;
   dd->canHAdj = 0;
   dd->canChangeGamma = FALSE;
   dd->displayListOn = FALSE;
