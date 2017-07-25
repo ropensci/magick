@@ -261,7 +261,7 @@ static void image_raster(unsigned int *raster, int w, int h,
   frame.backgroundColor(Color("transparent"));
   Magick::Geometry size = Geom(width, -height);
   size.aspect(true); //resize without preserving aspect ratio
-  frame.scale(size);
+  interpolate ? frame.resize(size) : frame.scale(size);
   frame.rotate(-rot);
   //size may change after rotation
   Magick::Geometry outsize = frame.size();
