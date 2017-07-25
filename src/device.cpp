@@ -20,11 +20,15 @@ typedef std::list<Magick::Coordinate> coordlist;
 typedef std::list<Magick::VPath> pathlist;
 #endif
 
-static inline Image * getimage(pDevDesc dd){
-  Image *image = (Image*) dd->deviceSpecific;
-  if(image == NULL)
+static inline XPtrImage * getptr(pDevDesc dd){
+  XPtrImage * ptr = (XPtrImage *) dd->deviceSpecific;
+  if(ptr == NULL)
     throw std::runtime_error("Graphics device pointing to NULL image");
-  return image;
+  return ptr;
+}
+
+static inline Image * getimage(pDevDesc dd){
+  return getptr(dd)->get();
 }
 
 static inline Frame * getgraph(pDevDesc dd){
@@ -266,11 +270,11 @@ static void image_raster(unsigned int *raster, int w, int h,
   VOID_END_RCPP
 }
 
-/* TODO: need to unprotect the XPTR here */
+/* TODO: doesn't seem to work? Finalizer never gets called */
 static void image_close(pDevDesc dd) {
-  //R_ReleaseObject(getimage(dd))
+  XPtrImage * ptr = getptr(dd);
+  R_ReleaseObject(*ptr);
 }
-
 
 static void image_text(double x, double y, const char *str, double rot,
                 double hadj, const pGEcontext gc, pDevDesc dd) {
@@ -340,7 +344,7 @@ static double image_strwidth(const char *str, const pGEcontext gc, pDevDesc dd) 
   return tm.textWidth();
 }
 
-static pDevDesc magick_driver_new(Image * image, int bg, int width, int height, double pointsize) {
+static pDevDesc magick_driver_new(XPtrImage * ptr, int bg, int width, int height, double pointsize) {
 
   pDevDesc dd = (DevDesc*) calloc(1, sizeof(DevDesc));
   if (dd == NULL)
@@ -404,17 +408,17 @@ static pDevDesc magick_driver_new(Image * image, int bg, int width, int height, 
   dd->displayListOn = FALSE;
   dd->haveTransparency = 2;
   dd->haveTransparentBg = 2;
-  dd->deviceSpecific = image;
+  dd->deviceSpecific = ptr;
   return dd;
 }
 
 /* Adapted from svglite */
-static void makeDevice(Image * image, std::string bg_, int width, int height, double pointsize) {
+static void makeDevice(XPtrImage * ptr, std::string bg_, int width, int height, double pointsize) {
   int bg = R_GE_str2col(bg_.c_str());
   R_GE_checkVersionOrDie(R_GE_version);
   R_CheckDeviceAvailable();
   BEGIN_SUSPEND_INTERRUPTS {
-    pDevDesc dev = magick_driver_new(image, bg, width, height, pointsize);
+    pDevDesc dev = magick_driver_new(ptr, bg, width, height, pointsize);
     if (dev == NULL)
       throw std::runtime_error("Failed to start Magick device");
     pGEDevDesc dd = GEcreateDevDesc(dev);
@@ -426,8 +430,10 @@ static void makeDevice(Image * image, std::string bg_, int width, int height, do
 
 // [[Rcpp::export]]
 XPtrImage magick_(std::string bg, int width, int height, double pointsize) {
-  XPtrImage image = create(0);
-  R_PreserveObject(image);
-  makeDevice(image.get(), bg, width, height, pointsize);
-  return image;
+  Image *image = new Image();
+  XPtrImage * ptr = new XPtrImage(image);
+  ptr->attr("class") = Rcpp::CharacterVector::create("magick-image");
+  R_PreserveObject(*ptr);
+  makeDevice(ptr, bg, width, height, pointsize);
+  return *ptr;
 }
