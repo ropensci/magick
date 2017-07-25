@@ -9,6 +9,9 @@
 #include "magick_types.h"
 #include <R_ext/GraphicsEngine.h>
 
+//from 'svglite' source: 1 lwd = 1/96", but units in rest of document are 1/72"
+#define xlwd (72.0/96.0)
+
 /* IM7 uses vectors instead of lists */
 #if MagickLibVersion >= 0x700
 typedef std::vector<Magick::Drawable> drawlist;
@@ -123,7 +126,7 @@ static inline coordlist coord(int n, double * x, double * y){
 /* main drawing function */
 static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd){
   double multiplier = 1/dd->ipr[0]/72;
-  double lwd = gc->lwd * multiplier;
+  double lwd = gc->lwd * xlwd * multiplier;
   double lty[8] = {0};
   Frame * graph = getgraph(dd);
   drawlist draw;
@@ -296,7 +299,7 @@ static void image_text(double x, double y, const char *str, double rot,
 #endif
   graph->fillColor(Color(col2name(gc->col)));
   graph->strokeColor(Magick::Color()); //unset: this is really ugly
-  graph->fontPointsize(gc->ps * gc->cex * (96.0/72) * multiplier);
+  graph->fontPointsize(gc->ps * gc->cex * multiplier);
   graph->annotate(str, Geom(0, 0, x, y), Magick::ForgetGravity, -1 * rot);
   VOID_END_RCPP
 }
@@ -323,7 +326,7 @@ static void image_metric_info(int c, const pGEcontext gc, double* ascent,
 
   Frame * graph = getgraph(dd);
   double multiplier = 1/dd->ipr[0]/72;
-  graph->fontPointsize(gc->ps * gc->cex * (96.0/72) * multiplier);
+  graph->fontPointsize(gc->ps * gc->cex * multiplier);
 #if MagickLibVersion >= 0x692
   graph->fontFamily(gc->fontfamily);
   graph->fontWeight(weight(gc->fontface));
@@ -350,7 +353,7 @@ static double image_strwidth(const char *str, const pGEcontext gc, pDevDesc dd) 
   graph->font(gc->fontfamily);
 #endif
   double multiplier = 1/dd->ipr[0]/72;
-  graph->fontPointsize(gc->ps * gc->cex * (96.0/72) * multiplier);
+  graph->fontPointsize(gc->ps * gc->cex * multiplier);
   Magick::TypeMetric tm;
   graph->fontTypeMetrics(str, &tm);
   return tm.textWidth();
