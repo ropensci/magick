@@ -59,6 +59,7 @@ static inline double * linetype(double * out, int lty, int lwd){
   switch (lty) {
   case LTY_BLANK:
   case LTY_SOLID:
+    out[1] = 1;
     break;
   default:
     out[0] = scale_lty(lty, lwd);
