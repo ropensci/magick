@@ -270,9 +270,10 @@ static void image_raster(unsigned int *raster, int w, int h,
   VOID_END_RCPP
 }
 
-/* TODO: doesn't seem to work? Finalizer never gets called */
+/* TODO: somehow R adds another protect */
 static void image_close(pDevDesc dd) {
   XPtrImage * ptr = getptr(dd);
+  R_ReleaseObject(*ptr);
   R_ReleaseObject(*ptr);
 }
 
