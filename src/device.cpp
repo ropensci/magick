@@ -129,17 +129,17 @@ static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd){
     draw.push_back(Magick::DrawableStrokeColor(Color(col2name(gc->col))));
   if(gc->fill != NA_INTEGER)
     draw.push_back(Magick::DrawableFillColor(Color(col2name(gc->fill))));
-  draw.push_back(Magick::DrawableStrokeWidth(gc->lwd));
+  draw.push_back(Magick::DrawableStrokeWidth(gc->lwd / 96.0 * 72));
   draw.push_back(Magick::DrawableStrokeLineCap(linecap(gc->lend)));
   draw.push_back(Magick::DrawableStrokeLineJoin(linejoin(gc->ljoin)));
   draw.push_back(Magick::DrawableMiterLimit(gc->lmitre));
   draw.push_back(Magick::DrawableFont(gc->fontfamily, style(gc->fontface), weight(gc->fontface), Magick::NormalStretch));
   draw.push_back(Magick::DrawablePointSize(gc->ps * gc->cex));
 #if MagickLibVersion >= 0x700
-  draw.push_back(Magick::DrawableStrokeDashArray(linetype(lty, gc->lty, gc->lwd)));
+  draw.push_back(Magick::DrawableStrokeDashArray(linetype(lty, gc->lty, gc->lwd / 96.0 * 72)));
   draw.insert(draw.end(), x.begin(), x.end());
 #else
-  draw.push_back(Magick::DrawableDashArray(linetype(lty, gc->lty, gc->lwd)));
+  draw.push_back(Magick::DrawableDashArray(linetype(lty, gc->lty, gc->lwd / 96.0 * 72)));
   draw.splice(draw.end(), x);
 #endif
   graph->gamma(gc->gamma);
