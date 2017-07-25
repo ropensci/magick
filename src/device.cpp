@@ -14,14 +14,14 @@
 
 /* IM7 uses vectors instead of lists */
 #if MagickLibVersion >= 0x700
-typedef std::vector<Magick::Drawable> drawlist;
-typedef std::vector<Magick::Coordinate> coordlist;
-typedef std::vector<Magick::VPath> pathlist;
+#define container vector
 #else
-typedef std::list<Magick::Drawable> drawlist;
-typedef std::list<Magick::Coordinate> coordlist;
-typedef std::list<Magick::VPath> pathlist;
+#define container list
 #endif
+
+typedef std::container<Magick::Drawable> drawlist;
+typedef std::container<Magick::Coordinate> coordlist;
+typedef std::container<Magick::VPath> pathlist;
 
 static inline XPtrImage * getptr(pDevDesc dd){
   XPtrImage * ptr = (XPtrImage *) dd->deviceSpecific;
