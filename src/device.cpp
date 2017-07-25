@@ -305,6 +305,9 @@ static void image_close(pDevDesc dd) {
   VOID_END_RCPP
 }
 
+/* TODO: maybe port this to drawing as well, need affine transform. See:
+ * https://github.com/ImageMagick/ImageMagick/blob/master/Magick%2B%2B/lib/Image.cpp#L1858
+ */
 static void image_text(double x, double y, const char *str, double rot,
                 double hadj, const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
