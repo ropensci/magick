@@ -248,6 +248,7 @@ static void image_size(double *left, double *right, double *bottom, double *top,
   *top = dd->top;
 }
 
+/* TODO: we rotate around centerpoint whereas png() rotates around (x,y) */
 static void image_raster(unsigned int *raster, int w, int h,
                 double x, double y,
                 double width, double height,
@@ -427,7 +428,6 @@ static void makeDevice(XPtrImage * ptr, std::string bg_, int width, int height, 
     GEinitDisplayList(dd);
   } END_SUSPEND_INTERRUPTS;
 }
-
 
 // [[Rcpp::export]]
 XPtrImage magick_(std::string bg, int width, int height, double pointsize) {
