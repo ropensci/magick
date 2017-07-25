@@ -115,7 +115,7 @@ static inline coordlist coord(int n, double * x, double * y){
 static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd){
   double multiplier = 1/dd->ipr[0]/72;
   double lwd = gc->lwd * xlwd * multiplier;
-  double lty[8] = {0};
+  double lty[10] = {0};
   Frame * graph = getgraph(dd);
   drawlist draw;
   if(gc->col != NA_INTEGER)
