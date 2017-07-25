@@ -6,7 +6,7 @@
 \title{Magick Graphics Device}
 \usage{
 magick_device(width = 800, height = 600, bg = "transparent",
-  pointsize = 12, clipping = FALSE)
+  pointsize = 12, res = 72, clipping = FALSE)
 }
 \arguments{
 \item{width}{in pixels}
@@ -16,6 +16,8 @@ magick_device(width = 800, height = 600, bg = "transparent",
 \item{bg}{background color}
 
 \item{pointsize}{size of fonts}
+
+\item{res}{resolution in pixels}
 
 \item{clipping}{enable clipping support. This id currently disabled by default because
 it slows things down a lot}

@@ -122,6 +122,8 @@ static inline coordlist coord(int n, double * x, double * y){
 
 /* main drawing function */
 static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd){
+  double multiplier = 1/dd->ipr[0]/72;
+  double lwd = gc->lwd * multiplier;
   double lty[8] = {0};
   Frame * graph = getgraph(dd);
   drawlist draw;
@@ -129,17 +131,17 @@ static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd){
     draw.push_back(Magick::DrawableStrokeColor(Color(col2name(gc->col))));
   if(gc->fill != NA_INTEGER)
     draw.push_back(Magick::DrawableFillColor(Color(col2name(gc->fill))));
-  draw.push_back(Magick::DrawableStrokeWidth(gc->lwd / 96.0 * 72));
+  draw.push_back(Magick::DrawableStrokeWidth(lwd));
   draw.push_back(Magick::DrawableStrokeLineCap(linecap(gc->lend)));
   draw.push_back(Magick::DrawableStrokeLineJoin(linejoin(gc->ljoin)));
   draw.push_back(Magick::DrawableMiterLimit(gc->lmitre));
   draw.push_back(Magick::DrawableFont(gc->fontfamily, style(gc->fontface), weight(gc->fontface), Magick::NormalStretch));
-  draw.push_back(Magick::DrawablePointSize(gc->ps * gc->cex));
+  draw.push_back(Magick::DrawablePointSize(gc->ps * gc->cex * multiplier));
 #if MagickLibVersion >= 0x700
-  draw.push_back(Magick::DrawableStrokeDashArray(linetype(lty, gc->lty, gc->lwd / 96.0 * 72)));
+  draw.push_back(Magick::DrawableStrokeDashArray(linetype(lty, gc->lty, lwd)));
   draw.insert(draw.end(), x.begin(), x.end());
 #else
-  draw.push_back(Magick::DrawableDashArray(linetype(lty, gc->lty, gc->lwd / 96.0 * 72)));
+  draw.push_back(Magick::DrawableDashArray(linetype(lty, gc->lty, lwd)));
   draw.splice(draw.end(), x);
 #endif
   graph->gamma(gc->gamma);
@@ -283,6 +285,7 @@ static void image_close(pDevDesc dd) {
 static void image_text(double x, double y, const char *str, double rot,
                 double hadj, const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
+  double multiplier = 1/dd->ipr[0]/72;
   Frame * graph = getgraph(dd);
 #if MagickLibVersion >= 0x692
   graph->fontFamily(gc->fontfamily);
@@ -293,7 +296,7 @@ static void image_text(double x, double y, const char *str, double rot,
 #endif
   graph->fillColor(Color(col2name(gc->col)));
   graph->strokeColor(Magick::Color()); //unset: this is really ugly
-  graph->fontPointsize(gc->ps * gc->cex);
+  graph->fontPointsize(gc->ps * gc->cex * (96.0/72) * multiplier);
   graph->annotate(str, Geom(0, 0, x, y), Magick::ForgetGravity, -1 * rot);
   VOID_END_RCPP
 }
@@ -319,7 +322,8 @@ static void image_metric_info(int c, const pGEcontext gc, double* ascent,
   }
 
   Frame * graph = getgraph(dd);
-  graph->fontPointsize(gc->ps * gc->cex);
+  double multiplier = 1/dd->ipr[0]/72;
+  graph->fontPointsize(gc->ps * gc->cex * (96.0/72) * multiplier);
 #if MagickLibVersion >= 0x692
   graph->fontFamily(gc->fontfamily);
   graph->fontWeight(weight(gc->fontface));
@@ -345,7 +349,8 @@ static double image_strwidth(const char *str, const pGEcontext gc, pDevDesc dd) 
 #else
   graph->font(gc->fontfamily);
 #endif
-  graph->fontPointsize(gc->ps * gc->cex);
+  double multiplier = 1/dd->ipr[0]/72;
+  graph->fontPointsize(gc->ps * gc->cex * (96.0/72) * multiplier);
   Magick::TypeMetric tm;
   graph->fontTypeMetrics(str, &tm);
   return tm.textWidth();
@@ -353,12 +358,18 @@ static double image_strwidth(const char *str, const pGEcontext gc, pDevDesc dd) 
   return 0;
 }
 
-static pDevDesc magick_driver_new(XPtrImage * ptr, int bg, int width, int height, double pointsize, bool canclip) {
+/* See r-base 'BMDeviceDriver' and 'svglite' for other examples */
+static pDevDesc magick_driver_new(XPtrImage * ptr, int bg, int width, int height,
+                                  double ps, int res, bool canclip) {
 
+  /* from r-base BMDeviceDriver */
+  int res0 = (res > 0) ? res : 72;
+
+  /* init */
   pDevDesc dd = (DevDesc*) calloc(1, sizeof(DevDesc));
   dd->startfill = bg;
   dd->startcol = R_RGB(0, 0, 0);
-  dd->startps = pointsize;
+  dd->startps = ps;
   dd->startlty = 0;
   dd->startfont = 1;
   dd->startgamma = 1;
@@ -397,15 +408,16 @@ static pDevDesc magick_driver_new(XPtrImage * ptr, int bg, int width, int height
 
   // Magic constants copied from other graphics devices
   // nominal character sizes in pts
-  dd->cra[0] = 0.9 * pointsize;
-  dd->cra[1] = 1.2 * pointsize;
+  dd->cra[0] = 0.9 * ps * res0/72.0;
+  dd->cra[1] = 1.2 * ps * res0/72.0;
+
   // character alignment offsets
   dd->xCharOffset = 0.4900;
   dd->yCharOffset = 0.3333;
   dd->yLineBias = 0.2;
   // inches per pt
-  dd->ipr[0] = 1.0 / 72.0;
-  dd->ipr[1] = 1.0 / 72.0;
+  dd->ipr[0] = 1.0 / res0;
+  dd->ipr[1] = 1.0 / res0;
 
   // Capabilities
   dd->canClip = (Rboolean) canclip;
@@ -420,12 +432,12 @@ static pDevDesc magick_driver_new(XPtrImage * ptr, int bg, int width, int height
 }
 
 /* Adapted from svglite */
-static void makeDevice(XPtrImage * ptr, std::string bg_, int width, int height, double pointsize, bool canclip) {
+static void makeDevice(XPtrImage * ptr, std::string bg_, int width, int height, double pointsize, int res, bool canclip) {
   int bg = R_GE_str2col(bg_.c_str());
   R_GE_checkVersionOrDie(R_GE_version);
   R_CheckDeviceAvailable();
   BEGIN_SUSPEND_INTERRUPTS {
-    pDevDesc dev = magick_driver_new(ptr, bg, width, height, pointsize, canclip);
+    pDevDesc dev = magick_driver_new(ptr, bg, width, height, pointsize, res, canclip);
     if (dev == NULL)
       throw std::runtime_error("Failed to start Magick device");
     pGEDevDesc dd = GEcreateDevDesc(dev);
@@ -435,11 +447,11 @@ static void makeDevice(XPtrImage * ptr, std::string bg_, int width, int height, 
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_(std::string bg, int width, int height, double pointsize, bool canclip) {
+XPtrImage magick_(std::string bg, int width, int height, double pointsize, int res, bool canclip) {
   Image *image = new Image();
   XPtrImage * ptr = new XPtrImage(image);
   ptr->attr("class") = Rcpp::CharacterVector::create("magick-image");
   R_PreserveObject(*ptr);
-  makeDevice(ptr, bg, width, height, pointsize, canclip);
+  makeDevice(ptr, bg, width, height, pointsize, res, canclip);
   return *ptr;
 }
