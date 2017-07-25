@@ -97,8 +97,8 @@ magick_config_internal <- function() {
     .Call('_magick_magick_config_internal', PACKAGE = 'magick')
 }
 
-magick_ <- function(bg, width, height, pointsize) {
-    .Call('_magick_magick_', PACKAGE = 'magick', bg, width, height, pointsize)
+magick_ <- function(bg, width, height, pointsize, canclip) {
+    .Call('_magick_magick_', PACKAGE = 'magick', bg, width, height, pointsize, canclip)
 }
 
 magick_image_readbitmap_raw <- function(x) {

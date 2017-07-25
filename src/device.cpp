@@ -165,6 +165,7 @@ static void image_new_page(const pGEcontext gc, pDevDesc dd) {
 /* TODO: test if we got the coordinates right  */
 /* TODO: how to unset the clipmask ? */
 static void image_clip(double left, double right, double bottom, double top, pDevDesc dd) {
+  if(!dd->canClip) return;
   BEGIN_RCPP
   pathlist path;
   path.push_back(Magick::PathMovetoAbs(Magick::Coordinate(left + 1, top + 1)));
@@ -351,12 +352,9 @@ static double image_strwidth(const char *str, const pGEcontext gc, pDevDesc dd) 
   VOID_END_RCPP
 }
 
-static pDevDesc magick_driver_new(XPtrImage * ptr, int bg, int width, int height, double pointsize) {
+static pDevDesc magick_driver_new(XPtrImage * ptr, int bg, int width, int height, double pointsize, bool canclip) {
 
   pDevDesc dd = (DevDesc*) calloc(1, sizeof(DevDesc));
-  if (dd == NULL)
-    return dd;
-
   dd->startfill = bg;
   dd->startcol = R_RGB(0, 0, 0);
   dd->startps = pointsize;
@@ -409,7 +407,7 @@ static pDevDesc magick_driver_new(XPtrImage * ptr, int bg, int width, int height
   dd->ipr[1] = 1.0 / 72.0;
 
   // Capabilities
-  dd->canClip = TRUE;
+  dd->canClip = (Rboolean) canclip;
   dd->canHAdj = 0;
   dd->canChangeGamma = FALSE;
   dd->displayListOn = FALSE;
@@ -421,12 +419,12 @@ static pDevDesc magick_driver_new(XPtrImage * ptr, int bg, int width, int height
 }
 
 /* Adapted from svglite */
-static void makeDevice(XPtrImage * ptr, std::string bg_, int width, int height, double pointsize) {
+static void makeDevice(XPtrImage * ptr, std::string bg_, int width, int height, double pointsize, bool canclip) {
   int bg = R_GE_str2col(bg_.c_str());
   R_GE_checkVersionOrDie(R_GE_version);
   R_CheckDeviceAvailable();
   BEGIN_SUSPEND_INTERRUPTS {
-    pDevDesc dev = magick_driver_new(ptr, bg, width, height, pointsize);
+    pDevDesc dev = magick_driver_new(ptr, bg, width, height, pointsize, canclip);
     if (dev == NULL)
       throw std::runtime_error("Failed to start Magick device");
     pGEDevDesc dd = GEcreateDevDesc(dev);
@@ -436,11 +434,11 @@ static void makeDevice(XPtrImage * ptr, std::string bg_, int width, int height, 
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_(std::string bg, int width, int height, double pointsize) {
+XPtrImage magick_(std::string bg, int width, int height, double pointsize, bool canclip) {
   Image *image = new Image();
   XPtrImage * ptr = new XPtrImage(image);
   ptr->attr("class") = Rcpp::CharacterVector::create("magick-image");
   R_PreserveObject(*ptr);
-  makeDevice(ptr, bg, width, height, pointsize);
+  makeDevice(ptr, bg, width, height, pointsize, canclip);
   return *ptr;
 }

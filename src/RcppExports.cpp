@@ -284,8 +284,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_
-XPtrImage magick_(std::string bg, int width, int height, double pointsize);
-RcppExport SEXP _magick_magick_(SEXP bgSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP pointsizeSEXP) {
+XPtrImage magick_(std::string bg, int width, int height, double pointsize, bool canclip);
+RcppExport SEXP _magick_magick_(SEXP bgSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP pointsizeSEXP, SEXP canclipSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -293,7 +293,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type width(widthSEXP);
     Rcpp::traits::input_parameter< int >::type height(heightSEXP);
     Rcpp::traits::input_parameter< double >::type pointsize(pointsizeSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_(bg, width, height, pointsize));
+    Rcpp::traits::input_parameter< bool >::type canclip(canclipSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_(bg, width, height, pointsize, canclip));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -936,7 +937,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_autobrewed", (DL_FUNC) &_magick_autobrewed, 0},
     {"_magick_magick_coder_info", (DL_FUNC) &_magick_magick_coder_info, 1},
     {"_magick_magick_config_internal", (DL_FUNC) &_magick_magick_config_internal, 0},
-    {"_magick_magick_", (DL_FUNC) &_magick_magick_, 4},
+    {"_magick_magick_", (DL_FUNC) &_magick_magick_, 5},
     {"_magick_magick_image_readbitmap_raw", (DL_FUNC) &_magick_magick_image_readbitmap_raw, 1},
     {"_magick_magick_image_readbitmap_double", (DL_FUNC) &_magick_magick_image_readbitmap_double, 1},
     {"_magick_magick_image_readbin", (DL_FUNC) &_magick_magick_image_readbin, 3},
