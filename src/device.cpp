@@ -350,6 +350,7 @@ static double image_strwidth(const char *str, const pGEcontext gc, pDevDesc dd) 
   graph->fontTypeMetrics(str, &tm);
   return tm.textWidth();
   VOID_END_RCPP
+  return 0;
 }
 
 static pDevDesc magick_driver_new(XPtrImage * ptr, int bg, int width, int height, double pointsize, bool canclip) {
