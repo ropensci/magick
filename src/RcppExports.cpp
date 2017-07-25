@@ -913,8 +913,6 @@ BEGIN_RCPP
 END_RCPP
 }
 
-RcppExport SEXP _magick_magick_(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-
 static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_attr_text_antialias", (DL_FUNC) &_magick_magick_attr_text_antialias, 2},
     {"_magick_magick_attr_stroke_antialias", (DL_FUNC) &_magick_magick_attr_stroke_antialias, 2},
@@ -991,7 +989,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_border", (DL_FUNC) &_magick_magick_image_border, 3},
     {"_magick_magick_image_annotate", (DL_FUNC) &_magick_magick_image_annotate, 10},
     {"_magick_magick_image_compare", (DL_FUNC) &_magick_magick_image_compare, 3},
-    {"_magick_magick_",                        (DL_FUNC) &_magick_magick_,                         6},
     {NULL, NULL, 0}
 };
 

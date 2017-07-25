@@ -4,7 +4,8 @@
 .travis.yml$
 appveyor.yml$
 ^windows
-^[^/]+\.(gif|png|jpg|jpeg|pdf|tiff|svg)$
+^[^/]+\.(gif|png|jpg|jpeg|pdf|tiff|svg|webp)$
 ^img$
 ^README\.Rmd$
 ^notes.md$
+^tests$

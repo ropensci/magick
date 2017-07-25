@@ -3,10 +3,13 @@
 \name{device}
 \alias{device}
 \alias{magick_device}
+\alias{image_draw}
 \title{Magick Graphics Device}
 \usage{
 magick_device(width = 800, height = 600, bg = "transparent",
   pointsize = 12, res = 72, clip = TRUE)
+
+image_draw(image, pointsize = 12, res = 72)
 }
 \arguments{
 \item{width}{in pixels}
@@ -21,6 +24,8 @@ magick_device(width = 800, height = 600, bg = "transparent",
 
 \item{clip}{enable clipping in the device. Because clippig can slow things down
 a lot, you can disable it if you don't need it.}
+
+\item{image}{an existing image on which to start drawing}
 }
 \description{
 Graphics device that produces a Magick image type. Works like other graphics
@@ -34,8 +39,17 @@ bit slow, probably because it is rendering too frequently. Perhaps the next
 version will use lazy rendering.
 }
 \examples{
+# Start a new graphics device
 img <- magick_device()
 example(rect)
 dev.off()
 print(img)
+
+# Or paint over an existing image
+frink <- image_read("https://jeroen.github.io/images/frink.png")
+device <- image_draw(frink)
+abline(h = 100, col = 'green', lwd = '10')
+abline(v = 100, col = 'red', lwd = '10', lty = 'dashed')
+dev.off()
+print(device)
 }

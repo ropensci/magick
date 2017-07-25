@@ -1,0 +1,15 @@
+img <- magick::magick_device()
+plot(1)
+abline(0, 1, col = "blue", lwd = 2, lty = "solid")
+abline(0.1, 1, col = "red", lwd = 3, lty = "dotted")
+abline(0.2, 1, col = "green", lwd = 4, lty = "twodash")
+abline(0.3, 1, col = "black", lwd = 5, lty = "dotdash")
+abline(0.4, 1, col = "purple", lwd = 6, lty = "dashed")
+abline(0.5, 1, col = "yellow", lwd = 7, lty = "longdash")
+
+abline(-0.1, 1, col = "blue", lwd = 10, lend = "round", lty = "dashed")
+abline(-0.2, 1, col = "blue", lwd = 10, lend = "butt", lty = "dashed")
+abline(-0.3, 1, col = "blue", lwd = 10, lend = "square", lty = "dashed")
+
+dev.off()
+print(img)

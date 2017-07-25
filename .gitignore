@@ -12,6 +12,7 @@
 *.pdf
 *.tiff
 *.svg
+*.webp
 !inst/*.gif
 !inst/*.png
 !inst/*.svg
@@ -21,4 +22,3 @@ src/Makevars
 windows
 !img/*
 README.md
-
