@@ -50,38 +50,26 @@ static inline bool is_italic(int face) {
   return face == 3 || face == 4;
 }
 
-/* magick style linetype spec */
-static inline double * linetype(double * lty, int type, int lwd){
-  switch(type){
+inline double scale_lty(int lty, double lwd) {
+  return ((lwd > 1) ? lwd : 1) * (lty & 15);
+}
+
+/* From: https://github.com/wch/r-source/blob/tags/R-3-4-1/src/include/R_ext/GraphicsEngine.h#L342-L370 */
+static inline double * linetype(double * out, int lty, int lwd){
+  switch (lty) {
   case LTY_BLANK:
   case LTY_SOLID:
     break;
-  case LTY_DASHED:
-    lty[0] = 5 * lwd;
-    lty[1] = 3 * lwd;
-    break;
-  case LTY_DOTTED:
-    lty[0] = 1 * lwd;
-    lty[1] = 2 * lwd;
-    break;
-  case LTY_DOTDASH:
-    lty[0] = 5 * lwd;
-    lty[1] = 3 * lwd;
-    lty[2] = 2 * lwd;
-    lty[3] = 3 * lwd;
-    break;
-  case LTY_LONGDASH:
-    lty[0] = 8 * lwd;
-    lty[1] = 3 * lwd;
-    break;
-  case LTY_TWODASH:
-    lty[0] = 5 * lwd;
-    lty[1] = 2 * lwd;
-    lty[2] = 5 * lwd;
-    lty[3] = 5 * lwd;
+  default:
+    out[0] = scale_lty(lty, lwd);
+    lty = lty >> 4;
+    for(int i = 1 ; i < 8 && lty & 15; i++) {
+      out[i] = scale_lty(lty, lwd);
+      lty = lty >> 4;
+    }
     break;
   }
-  return lty;
+  return out;
 }
 
 static inline Magick::DrawableStrokeLineCap linecap(R_GE_lineend type){
