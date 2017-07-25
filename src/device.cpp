@@ -415,6 +415,7 @@ static pDevDesc magick_driver_new(XPtrImage * ptr, int bg, int width, int height
   dd->displayListOn = FALSE;
   dd->haveTransparency = 2;
   dd->haveTransparentBg = 2;
+  dd->haveRaster = 2;
   dd->deviceSpecific = ptr;
   return dd;
 }
