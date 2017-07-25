@@ -5,7 +5,7 @@
 \alias{magick_device}
 \title{Magick Graphics Device}
 \usage{
-magick_device(width = 1280, height = 720, bg = "transparent",
+magick_device(width = 800, height = 600, bg = "transparent",
   pointsize = 12, clipping = FALSE)
 }
 \arguments{
@@ -21,5 +21,19 @@ magick_device(width = 1280, height = 720, bg = "transparent",
 it slows things down a lot}
 }
 \description{
-Graphics device that produces a Magick image type.
+Graphics device that produces a Magick image type. Works like other graphics
+devices but instead of writing to a file, the drawings get written to a magick
+image object which can then be treated like any other image object.
+}
+\details{
+The device is a relatively recent feature of the package. It should support all
+operations but there might still be small inaccuracies. Also it is currently a
+bit slow, probably because it is rendering too frequently. Perhaps the next
+version will use lazy rendering.
+}
+\examples{
+img <- magick_device()
+example(rect)
+dev.off()
+print(img)
 }

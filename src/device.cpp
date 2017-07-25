@@ -110,7 +110,7 @@ static inline Magick::StyleType style(int face){
 }
 
 static inline int weight(int face){
-  return is_bold(face) ? 600 : 400;
+  return is_bold(face) ? 700 : 400;
 }
 
 static inline coordlist coord(int n, double * x, double * y){
