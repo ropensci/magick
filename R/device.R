@@ -25,7 +25,7 @@
 #' print(img)
 magick_device <- function(width = 800, height = 600, bg = "transparent",
                           pointsize = 12, res = 72, clip = TRUE) {
-  img <- magick_(bg, width, height, pointsize, res, clip)
+  img <- magick_device_internal(bg, width, height, pointsize, res, clip)
   class(img) <- c("magick-device", class(img))
   img
 }

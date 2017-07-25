@@ -473,7 +473,7 @@ static void makeDevice(MagickDevice * device, std::string bg_, int width, int he
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_(std::string bg, int width, int height, double pointsize, int res, bool canclip) {
+XPtrImage magick_device_internal(std::string bg, int width, int height, double pointsize, int res, bool canclip) {
   MagickDevice * device = new MagickDevice();
   device->ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
   makeDevice(device, bg, width, height, pointsize, res, canclip);
