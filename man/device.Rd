@@ -6,7 +6,7 @@
 \title{Magick Graphics Device}
 \usage{
 magick_device(width = 800, height = 600, bg = "transparent",
-  pointsize = 12, res = 72, clipping = FALSE)
+  pointsize = 12, res = 72, clip = TRUE)
 }
 \arguments{
 \item{width}{in pixels}
@@ -19,8 +19,8 @@ magick_device(width = 800, height = 600, bg = "transparent",
 
 \item{res}{resolution in pixels}
 
-\item{clipping}{enable clipping support. This id currently disabled by default because
-it slows things down a lot}
+\item{clip}{enable clipping in the device. Because clippig can slow things down
+a lot, you can disable it if you don't need it.}
 }
 \description{
 Graphics device that produces a Magick image type. Works like other graphics
