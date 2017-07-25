@@ -158,7 +158,6 @@ static void image_new_page(const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
   Image *image = getimage(dd);
   Frame x(Geom(dd->right, dd->bottom), Color(col2name(gc->fill)));
-  //x.magick("png"); //TODO: do not do this
   image->push_back(x);
   VOID_END_RCPP
 }
@@ -273,9 +272,11 @@ static void image_raster(unsigned int *raster, int w, int h,
 
 /* TODO: somehow R adds another protect */
 static void image_close(pDevDesc dd) {
+  BEGIN_RCPP
   XPtrImage * ptr = getptr(dd);
   R_ReleaseObject(*ptr);
   R_ReleaseObject(*ptr);
+  VOID_END_RCPP
 }
 
 static void image_text(double x, double y, const char *str, double rot,
@@ -300,6 +301,7 @@ static void image_text(double x, double y, const char *str, double rot,
 static void image_metric_info(int c, const pGEcontext gc, double* ascent,
                        double* descent, double* width, pDevDesc dd) {
   /* DOCS: http://www.imagemagick.org/Magick++/TypeMetric.html */
+  BEGIN_RCPP
   bool is_unicode = mbcslocale;
   if (c < 0) {
     is_unicode = true;
@@ -329,9 +331,11 @@ static void image_metric_info(int c, const pGEcontext gc, double* ascent,
   *ascent = tm.ascent();
   *descent = tm.descent();
   *width = tm.textWidth();
+  VOID_END_RCPP
 }
 
 static double image_strwidth(const char *str, const pGEcontext gc, pDevDesc dd) {
+  BEGIN_RCPP
   Frame * graph = getgraph(dd);
 #if MagickLibVersion >= 0x692
   graph->fontFamily(gc->fontfamily);
@@ -344,6 +348,7 @@ static double image_strwidth(const char *str, const pGEcontext gc, pDevDesc dd) 
   Magick::TypeMetric tm;
   graph->fontTypeMetrics(str, &tm);
   return tm.textWidth();
+  VOID_END_RCPP
 }
 
 static pDevDesc magick_driver_new(XPtrImage * ptr, int bg, int width, int height, double pointsize) {
