@@ -1,17 +1,17 @@
 library(magick)
 
 # Test procected from GC while device is open
-image <- magick_device()
+image <- image_device()
 rm(list=ls())
 gc(); gc()
-plot(iris)
+plot(rnorm(100))
 dev.off()
 # This should free the image
 gc();
 
 # Test procected from while image is in scope
-image <- magick_device()
-plot(iris)
+image <- image_device()
+plot(rnorm(100))
 dev.off()
 gc();gc()
 rm(image)
