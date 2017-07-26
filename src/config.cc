@@ -35,7 +35,7 @@ Rcpp::List magick_config_internal(){
 #ifdef MAGICKCORE_FONTCONFIG_DELEGATE
   out["fontconfig"] = true;
 #else
-  out["fontonfig"] = false;
+  out["fontconfig"] = false;
 #endif
 
 #ifdef MAGICKCORE_FREETYPE_DELEGATE
