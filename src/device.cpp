@@ -15,7 +15,8 @@ public:
   XPtrImage ptr;
   double clipleft, clipright, cliptop, clipbottom;
   MagickDevice():
-    MagickDevice(new Image()){}
+    ptr(XPtrImage(new Image())),
+    clipleft(0), clipright(0), cliptop(0), clipbottom(0){}
   MagickDevice(Image * image):
     ptr(XPtrImage(image)),
     clipleft(0), clipright(0), cliptop(0), clipbottom(0){}
