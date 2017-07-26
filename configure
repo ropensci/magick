@@ -48,9 +48,9 @@ elif [ "$PKGCONFIG_CFLAGS" ] || [ "$PKGCONFIG_LIBS" ]; then
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   if [ $(command -v brew) ]; then
     BREWDIR=$(brew --prefix)
-    INCLUDE_DIR="$BREWDIR/opt/imagemagick/include/ImageMagick-7"
-    PKG_CFLAGS="-I$INCLUDE_DIR -DMAGICKCORE_QUANTUM_DEPTH=16 -DMAGICKCORE_HDRI_ENABLE=1"
-    PKG_LIBS="-L$BREWDIR/opt/$PKG_BREW_NAME/lib -lMagick++-7.Q16HDRI"
+    INCLUDE_DIR="$BREWDIR/opt/imagemagick@6/include/ImageMagick-6"
+    PKG_CFLAGS="-I$INCLUDE_DIR -DMAGICKCORE_QUANTUM_DEPTH=16 -DMAGICKCORE_HDRI_ENABLE=0"
+    PKG_LIBS="-L$BREWDIR/opt/imagemagick@6/lib -lMagick++-6.Q16"
   else
     curl -sfL "https://jeroen.github.io/autobrew/$PKG_BREW_NAME" > autobrew
     source autobrew
@@ -73,10 +73,13 @@ echo "#include $PKG_TEST_HEADER" | ${CXXCPP} ${CPPFLAGS} ${PKG_CFLAGS} ${CXXFLAG
 if [ $? -ne 0 ]; then
   echo "------------------------- ANTICONF ERROR ---------------------------"
   echo "Configuration failed because $PKG_CONFIG_NAME was not found. Try installing:"
-  echo " * deb: $PKG_DEB_NAME (Debian, Ubuntu)"
-  echo " * rpm: $PKG_RPM_NAME (Fedora, CentOS, RHEL)"
-  echo " * csw: $PKG_CSW_NAME (Solaris)"
-  echo " * brew: $PKG_BREW_NAME (OSX)"
+  echo " - deb: '$PKG_DEB_NAME' (Debian, Ubuntu)"
+  echo " - rpm: '$PKG_RPM_NAME' (Fedora, CentOS, RHEL)"
+  echo " - csw: '$PKG_CSW_NAME' (Solaris)"
+  echo "On MacOS it is recommended to use homebrew and install ImageMagick-6:"
+  echo "   brew remove imagemagick"
+  echo "   brew reinstall imagemagick@6 --with-fontconfig --with-librsvg"
+  echo "These features are required for high quality font/svg rendering."
   echo "If $PKG_CONFIG_NAME is already installed, check that 'pkg-config' is in your"
   echo "PATH and PKG_CONFIG_PATH contains a $PKG_CONFIG_NAME.pc file. If pkg-config"
   echo "is unavailable you can set INCLUDE_DIR and LIB_DIR manually via:"
