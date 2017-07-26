@@ -97,8 +97,8 @@ magick_config_internal <- function() {
     .Call('_magick_magick_config_internal', PACKAGE = 'magick')
 }
 
-magick_device_internal <- function(bg, width, height, pointsize, res, canclip) {
-    .Call('_magick_magick_device_internal', PACKAGE = 'magick', bg, width, height, pointsize, res, canclip)
+magick_device_internal <- function(bg, width, height, pointsize, res, clip, multipage) {
+    .Call('_magick_magick_device_internal', PACKAGE = 'magick', bg, width, height, pointsize, res, clip, multipage)
 }
 
 magick_image_readbitmap_raw <- function(x) {

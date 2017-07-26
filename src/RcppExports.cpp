@@ -284,8 +284,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_device_internal
-XPtrImage magick_device_internal(std::string bg, int width, int height, double pointsize, int res, bool canclip);
-RcppExport SEXP _magick_magick_device_internal(SEXP bgSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP pointsizeSEXP, SEXP resSEXP, SEXP canclipSEXP) {
+XPtrImage magick_device_internal(std::string bg, int width, int height, double pointsize, int res, bool clip, bool multipage);
+RcppExport SEXP _magick_magick_device_internal(SEXP bgSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP pointsizeSEXP, SEXP resSEXP, SEXP clipSEXP, SEXP multipageSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -294,8 +294,9 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type height(heightSEXP);
     Rcpp::traits::input_parameter< double >::type pointsize(pointsizeSEXP);
     Rcpp::traits::input_parameter< int >::type res(resSEXP);
-    Rcpp::traits::input_parameter< bool >::type canclip(canclipSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_device_internal(bg, width, height, pointsize, res, canclip));
+    Rcpp::traits::input_parameter< bool >::type clip(clipSEXP);
+    Rcpp::traits::input_parameter< bool >::type multipage(multipageSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_device_internal(bg, width, height, pointsize, res, clip, multipage));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -938,7 +939,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_autobrewed", (DL_FUNC) &_magick_autobrewed, 0},
     {"_magick_magick_coder_info", (DL_FUNC) &_magick_magick_coder_info, 1},
     {"_magick_magick_config_internal", (DL_FUNC) &_magick_magick_config_internal, 0},
-    {"_magick_magick_device_internal", (DL_FUNC) &_magick_magick_device_internal, 6},
+    {"_magick_magick_device_internal", (DL_FUNC) &_magick_magick_device_internal, 7},
     {"_magick_magick_image_readbitmap_raw", (DL_FUNC) &_magick_magick_image_readbitmap_raw, 1},
     {"_magick_magick_image_readbitmap_double", (DL_FUNC) &_magick_magick_image_readbitmap_double, 1},
     {"_magick_magick_image_readbin", (DL_FUNC) &_magick_magick_image_readbin, 3},

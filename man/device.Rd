@@ -2,14 +2,14 @@
 % Please edit documentation in R/device.R
 \name{device}
 \alias{device}
-\alias{magick_device}
+\alias{image_device}
 \alias{image_draw}
 \title{Magick Graphics Device}
 \usage{
-magick_device(width = 800, height = 600, bg = "transparent",
+image_device(width = 800, height = 600, bg = "transparent",
   pointsize = 12, res = 72, clip = TRUE)
 
-image_draw(image, pointsize = 12, res = 72)
+image_draw(image, pointsize = 12, res = 72, ...)
 }
 \arguments{
 \item{width}{in pixels}
@@ -26,30 +26,47 @@ image_draw(image, pointsize = 12, res = 72)
 a lot, you can disable it if you don't need it.}
 
 \item{image}{an existing image on which to start drawing}
+
+\item{...}{additional device parameters passed to \link{plot.window} such as
+\code{xlim}, \code{ylim}, or \code{mar}.}
 }
 \description{
-Graphics device that produces a Magick image type. Works like other graphics
-devices but instead of writing to a file, the drawings get written to a magick
-image object which can then be treated like any other image object.
+Graphics device that produces a Magick image. Can either be used like a regular
+device for making plots, or alternatively via \code{image_draw} to open a device
+which draws onto an existing image using pixel coordinates.
 }
 \details{
 The device is a relatively recent feature of the package. It should support all
 operations but there might still be small inaccuracies. Also it is currently a
 bit slow, probably because it is rendering too frequently. Perhaps the next
 version will use lazy rendering.
+
+By default \code{image_draw} disables margins and uses graphics coordinates to
+match device resolution (width x height) where \code{(0,0)} is the top left corner.
+You can override this by passing custom \code{xlim}, \code{ylim} or \code{mar}
+values.
 }
 \examples{
-# Start a new graphics device
-img <- magick_device()
-example(rect)
+# Regular image
+frink <- image_read("https://jeroen.github.io/images/frink.png")
+
+# Produce image using graphics device
+fig <- image_device(res = 96)
+ggplot2::qplot(mpg, wt, data = mtcars, colour = cyl)
 dev.off()
-print(img)
+
+# Combine
+out <- image_composite(fig, frink, offset = "+70+30")
+print(out)
 
 # Or paint over an existing image
-frink <- image_read("https://jeroen.github.io/images/frink.png")
-device <- image_draw(frink)
-abline(h = 100, col = 'green', lwd = '10')
-abline(v = 100, col = 'red', lwd = '10', lty = 'dashed')
+img <- image_draw(frink)
+rect(20, 20, 200, 100, border = "red", lty = "dashed", lwd = 5)
+abline(h = 300, col = 'blue', lwd = '10', lty = "dotted")
+text(10, 250, "Hoiven-Glaven", family = "sans-serif", cex = 4, srt = 90)
+palette(rainbow(11, end = 0.9))
+symbols(rep(200, 11), seq(0, 400, 40), circles = runif(11, 5, 35),
+  bg = 1:11, inches = FALSE, add = TRUE)
 dev.off()
-print(device)
+print(img)
 }

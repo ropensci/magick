@@ -13,12 +13,15 @@
 class MagickDevice {
 public:
   XPtrImage ptr;
+  bool multipage;
   double clipleft, clipright, cliptop, clipbottom;
-  MagickDevice():
+  MagickDevice(bool multipage_):
     ptr(XPtrImage(new Image())),
+    multipage(multipage_),
     clipleft(0), clipright(0), cliptop(0), clipbottom(0){}
-  MagickDevice(Image * image):
+  MagickDevice(bool multipage_, Image * image):
     ptr(XPtrImage(image)),
+    multipage(multipage_),
     clipleft(0), clipright(0), cliptop(0), clipbottom(0){}
 };
 
@@ -172,6 +175,8 @@ static void image_draw(Magick::Drawable x, const pGEcontext gc, pDevDesc dd){
 static void image_new_page(const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
   Image *image = getimage(dd);
+  if(image->size() > 0 && getdev(dd)->multipage == false)
+    throw std::runtime_error("Cannot open a new page on a drawing device");
   Frame x(Geom(dd->right, dd->bottom), Color(col2name(gc->fill)));
   image->push_back(x);
   VOID_END_RCPP
@@ -474,9 +479,10 @@ static void makeDevice(MagickDevice * device, std::string bg_, int width, int he
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_device_internal(std::string bg, int width, int height, double pointsize, int res, bool canclip) {
-  MagickDevice * device = new MagickDevice();
+XPtrImage magick_device_internal(std::string bg, int width, int height, double pointsize,
+                                 int res, bool clip, bool multipage) {
+  MagickDevice * device = new MagickDevice(multipage);
   device->ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
-  makeDevice(device, bg, width, height, pointsize, res, canclip);
+  makeDevice(device, bg, width, height, pointsize, res, clip);
   return device->ptr;
 }
