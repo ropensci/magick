@@ -48,9 +48,9 @@ image_draw <- function(image, pointsize = 12, res = 72){
   device <- magick_device(width = info$width, height = info$height,
                             bg = "transparent", pointsize = pointsize, res = res)
   # Setup 'world' coordinates; taken from: getS3method('plot', 'raster')
-  plot.new()
-  par(mar = c(0,0,0,0))
-  plot.window(xlim = c(0, info$width), ylim = c(0, info$height), xaxs = "i", yaxs = "i")
+  graphics::plot.new()
+  graphics::par(mar = c(0,0,0,0))
+  graphics::plot.window(xlim = c(0, info$width), ylim = c(0, info$height), xaxs = "i", yaxs = "i")
 
   #Load the existing image onto the graphics device
   magick_image_replace(device, 1, image)
