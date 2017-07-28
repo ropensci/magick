@@ -137,7 +137,7 @@ static inline coordlist coord(int n, double * x, double * y){
 }
 
 /* main drawing function */
-static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd, bool join = true){
+static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd, bool join = true, bool fill = true){
   double multiplier = 1/dd->ipr[0]/72;
   double lwd = gc->lwd * xlwd * multiplier;
   double lty[10] = {0};
@@ -145,11 +145,11 @@ static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd, bool join =
   drawlist draw;
   if(gc->col != NA_INTEGER)
     draw.push_back(Magick::DrawableStrokeColor(Color(col2name(gc->col))));
-  if(gc->fill != NA_INTEGER)
+  if(fill == true && gc->fill != NA_INTEGER)
     draw.push_back(Magick::DrawableFillColor(Color(col2name(gc->fill))));
   draw.push_back(Magick::DrawableStrokeWidth(lwd));
   draw.push_back(Magick::DrawableStrokeLineCap(linecap(gc->lend)));
-  if(join)
+  if(join == true)
     draw.push_back(Magick::DrawableStrokeLineJoin(linejoin(gc->ljoin)));
   draw.push_back(Magick::DrawableMiterLimit(gc->lmitre));
   draw.push_back(Magick::DrawableFont(gc->fontfamily, style(gc->fontface), weight(gc->fontface), Magick::NormalStretch));
@@ -165,10 +165,10 @@ static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd, bool join =
   graph->draw(draw);
 }
 
-static void image_draw(Magick::Drawable x, const pGEcontext gc, pDevDesc dd, bool join = true){
+static void image_draw(Magick::Drawable x, const pGEcontext gc, pDevDesc dd, bool join = true, bool fill = true){
   drawlist draw;
   draw.push_back(x);
-  image_draw(draw, gc, dd, join);
+  image_draw(draw, gc, dd, join, fill);
 }
 
 /* ~~~ CALLBACK FUNCTIONS START HERE ~~~ */
@@ -179,6 +179,7 @@ static void image_new_page(const pGEcontext gc, pDevDesc dd) {
   if(image->size() > 0 && getdev(dd)->multipage == false)
     throw std::runtime_error("Cannot open a new page on a drawing device");
   Frame x(Geom(dd->right, dd->bottom), Color(col2name(gc->fill)));
+  x.magick("png");
   image->push_back(x);
   VOID_END_RCPP
 }
@@ -234,7 +235,7 @@ static void image_polyline(int n, double *x, double *y, const pGEcontext gc, pDe
   bool join = true;
 #endif
   draw.push_back(Magick::DrawablePolyline(coord(n, x, y)));
-  image_draw(draw, gc, dd, join);
+  image_draw(draw, gc, dd, join, false);
   VOID_END_RCPP
 }
 
