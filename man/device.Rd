@@ -37,14 +37,15 @@ which draws onto an existing image using pixel coordinates.
 }
 \details{
 The device is a relatively recent feature of the package. It should support all
-operations but there might still be small inaccuracies. Also it is currently a
-bit slow, probably because it is rendering too frequently. Perhaps the next
-version will use lazy rendering.
+operations but there might still be small inaccuracies. Also it a bit slower than
+some of the other devices, in particular for rendering text and clipping. Hopefully
+this can be optimized in the next version.
 
-By default \code{image_draw} disables margins and uses graphics coordinates to
-match device resolution (width x height) where \code{(0,0)} is the top left corner.
-You can override this by passing custom \code{xlim}, \code{ylim} or \code{mar}
-values.
+By default \code{image_draw} sets all margins to 0 and uses graphics coordinates to
+match image size in pixels (width x height) where \code{(0,0)} is the top left corner.
+Note that this means the y axis increases from top to bottom which is the opposite
+of typical graphics coordinates.  You can override all this by passing custom
+\code{xlim}, \code{ylim} or \code{mar} values to \code{image_draw}.
 }
 \examples{
 # Regular image
@@ -63,7 +64,7 @@ print(out)
 img <- image_draw(frink)
 rect(20, 20, 200, 100, border = "red", lty = "dashed", lwd = 5)
 abline(h = 300, col = 'blue', lwd = '10', lty = "dotted")
-text(10, 250, "Hoiven-Glaven", family = "sans-serif", cex = 4, srt = 90)
+text(10, 250, "Hoiven-Glaven", family = "courier", cex = 4, srt = 90)
 palette(rainbow(11, end = 0.9))
 symbols(rep(200, 11), seq(0, 400, 40), circles = runif(11, 5, 35),
   bg = 1:11, inches = FALSE, add = TRUE)
