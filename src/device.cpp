@@ -137,7 +137,7 @@ static inline coordlist coord(int n, double * x, double * y){
 }
 
 /* main drawing function */
-static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd){
+static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd, bool join = true){
   double multiplier = 1/dd->ipr[0]/72;
   double lwd = gc->lwd * xlwd * multiplier;
   double lty[10] = {0};
@@ -149,7 +149,8 @@ static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd){
     draw.push_back(Magick::DrawableFillColor(Color(col2name(gc->fill))));
   draw.push_back(Magick::DrawableStrokeWidth(lwd));
   draw.push_back(Magick::DrawableStrokeLineCap(linecap(gc->lend)));
-  draw.push_back(Magick::DrawableStrokeLineJoin(linejoin(gc->ljoin)));
+  if(join)
+    draw.push_back(Magick::DrawableStrokeLineJoin(linejoin(gc->ljoin)));
   draw.push_back(Magick::DrawableMiterLimit(gc->lmitre));
   draw.push_back(Magick::DrawableFont(gc->fontfamily, style(gc->fontface), weight(gc->fontface), Magick::NormalStretch));
   draw.push_back(Magick::DrawablePointSize(gc->ps * gc->cex * multiplier));
@@ -164,10 +165,10 @@ static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd){
   graph->draw(draw);
 }
 
-static void image_draw(Magick::Drawable x, const pGEcontext gc, pDevDesc dd){
+static void image_draw(Magick::Drawable x, const pGEcontext gc, pDevDesc dd, bool join = true){
   drawlist draw;
   draw.push_back(x);
-  image_draw(draw, gc, dd);
+  image_draw(draw, gc, dd, join);
 }
 
 /* ~~~ CALLBACK FUNCTIONS START HERE ~~~ */
@@ -228,10 +229,12 @@ static void image_polyline(int n, double *x, double *y, const pGEcontext gc, pDe
   draw.push_back(Magick::DrawableFillColor(Magick::Color()));
   //workaround for issue #60
 #if MagickLibVersion < 0x697
-  draw.push_back(Magick::DrawableStrokeLineJoin(Magick::UndefinedJoin));
+  bool join = false;
+#else
+  bool join = true;
 #endif
   draw.push_back(Magick::DrawablePolyline(coord(n, x, y)));
-  image_draw(draw, gc, dd);
+  image_draw(draw, gc, dd, join);
   VOID_END_RCPP
 }
 
