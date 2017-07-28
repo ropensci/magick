@@ -1,8 +1,9 @@
 # Build against imagemagick static website.
-IM_VERSION <- commandArgs(TRUE)
-if(!file.exists("../windows/imagemagick6-6.9.9-3/include/ImageMagick-6/Magick++.h")){
+VERSION <- commandArgs(TRUE)
+IM <- substr(VERSION, 1,1)
+if(!file.exists(sprintf("../windows/imagemagick%s-%s/include/ImageMagick-%s/Magick++.h", IM, VERSION, IM))){
   if(getRversion() < "3.3.0") setInternet2()
-  download.file("https://github.com/rwinlib/imagemagick6/archive/v6.9.9-3.zip", "lib.zip", quiet = TRUE)
+  download.file(sprintf("https://github.com/rwinlib/imagemagick%s/archive/v%s.zip", IM, VERSION), "lib.zip", quiet = TRUE)
   dir.create("../windows", showWarnings = FALSE)
   unzip("lib.zip", exdir = "../windows")
   unlink("lib.zip")
