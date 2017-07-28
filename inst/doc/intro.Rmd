@@ -60,10 +60,10 @@ On Fedora or CentOS/RHEL we need [ImageMagick-c++-devel](https://apps.fedoraproj
 sudo yum install ImageMagick-c++-devel
 ```
 
-To install from source on OS-X you need `imagemagick` from homebrew.
+To install from source on OS-X you need `imagemagick@6` from homebrew.
 
 ```
-brew install imagemagick --with-fontconfig --with-librsvg --with-fftw
+brew reinstall imagemagick@6 --with-fontconfig --with-librsvg
 ```
 
 The default imagemagick configuration on homebrew disables a bunch of features. It is recommended to brew with at least `--with-fontconfig` and `--with-librsvg` to support high quality font / svg rendering (the CRAN OSX binary package enables these as well).
@@ -106,7 +106,14 @@ Note that size is currently 0 because ImageMagick is lazy (in the good sense) an
 
 IDE's with a built-in web browser (such as RStudio) automatically display magick images in the viewer. This results in a neat interactive image editing environment.
 
-![RStudio Screenshot](http://www.ropensci.org/assets/blog-images/magick-rstudio.png)
+<img id="rstudioimg" alt="rstudio">
+<script>
+//this is a hack to prevent pandoc 'self_contained' from embedding this image
+//in future version of pandoc we can use the image and set 'data-external=1' instead
+window.onload = function(){
+  document.getElementById("rstudioimg").src = "https://jeroen.github.io/images/magick-rstudio.png";
+}
+</script>
 
 Alternatively, on Linux you can use `image_display` to preview the image in an X11 window. Finally `image_browse` opens the image in your system's default application for a given type.
 
@@ -380,8 +387,53 @@ Animations can be saved as GIF of MPEG files:
 image_write(animation, "Rlogo-banana.gif")
 ```
 
+## Drawing and Graphics
 
-## Raster graphics
+A relatively recent addition to the package is a native R graphics device which produces a magick image object. This can either be used like a regular device for making plots, or alternatively to open a device which draws onto an existing image using pixel coordinates.
+
+### Graphics device
+
+The `image_device()` function opens a new graphics device similar to e.g. `png()` or `x11()`. It returns an image objec to which the plot(s) will be written. Each "page" in the plotting device will become a frame in the image object.
+
+```{r, results="hide"}
+# Produce image using graphics device
+fig <- image_device(res = 96)
+ggplot2::qplot(mpg, wt, data = mtcars, colour = cyl)
+dev.off()
+```
+
+We can easily postprocess the figure using regular image operations.
+
+```{r}
+# Combine
+out <- image_composite(fig, frink, offset = "+70+30")
+print(out)
+```
+
+### Drawing device
+
+Another way to use the graphics device is to draw on top of an exiting image using pixel coordinates.
+
+```{r, results="hide"}
+# Or paint over an existing image
+img <- image_draw(frink)
+rect(20, 20, 200, 100, border = "red", lty = "dashed", lwd = 5)
+abline(h = 300, col = 'blue', lwd = '10', lty = "dotted")
+text(10, 250, "Hoiven-Glaven", family = "courier", cex = 4, srt = 90)
+palette(rainbow(11, end = 0.9))
+symbols(rep(200, 11), seq(0, 400, 40), circles = runif(11, 5, 35),
+  bg = 1:11, inches = FALSE, add = TRUE)
+dev.off()
+```
+
+```{r}
+print(img)
+```
+
+By default `image_draw()` sets all margins to 0 and uses graphics coordinates to match image size in pixels (width x height) where (0,0) is the top left corner. Note that this means the y axis increases from top to bottom which is the opposite of typical graphics coordinates. You can override all this by passing custom `xlim`, `ylim` or `mar` values to `image_draw`.
+
+
+## Raster Images
 
 Magick images can also be converted to raster objects for use with R's graphics device. Thereby we can combine it with other graphics tools. However do note that R's graphics device is very slow and has a very different coordinate system which reduces the quality of the image.
 
