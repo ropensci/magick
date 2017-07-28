@@ -226,6 +226,10 @@ static void image_polyline(int n, double *x, double *y, const pGEcontext gc, pDe
   drawlist draw;
   //Note 'fill' must be unset to prevent magick from creating a polygon
   draw.push_back(Magick::DrawableFillColor(Magick::Color()));
+  //workaround for issue #60
+#if MagickLibVersion < 0x697
+  draw.push_back(Magick::DrawableStrokeLineJoin(Magick::UndefinedJoin));
+#endif
   draw.push_back(Magick::DrawablePolyline(coord(n, x, y)));
   image_draw(draw, gc, dd);
   VOID_END_RCPP
