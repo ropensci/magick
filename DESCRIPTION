@@ -1,7 +1,7 @@
 Package: magick
 Type: Package
 Title: Advanced Image-Processing in R
-Version: 0.5
+Version: 0.5.9000
 Author: Jeroen Ooms
 Maintainer: Jeroen Ooms <jeroen@berkeley.edu>
 Description: Bindings to 'ImageMagick': the most comprehensive open-source image
@@ -10,7 +10,9 @@ Description: Bindings to 'ImageMagick': the most comprehensive open-source image
     All operations are vectorized via the Magick++ STL meaning they operate either
     on a single frame or a series of frames for working with layers, collages,
     or animation. In RStudio images are automatically previewed when printed to
-    the console, resulting in an interactive editing environment.
+    the console, resulting in an interactive editing environment. The latest 
+    version of the package adds a native graphics device for creating graphics
+    or drawing onto images using pixel coordinates.
 License: MIT + file LICENSE
 URL: https://github.com/ropensci/magick#readme
 BugReports: https://github.com/ropensci/magick/issues
