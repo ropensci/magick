@@ -28,9 +28,11 @@ matrix:
     - os: osx
       osx_image: xcode8.3
       disable_homebrew: true
+      after_success: cat "$(R RHOME)/library/magick/etc/fonts/fonts.conf"
     - os: osx
       osx_image: xcode7.3
       disable_homebrew: true
+      after_success: cat "$(R RHOME)/library/magick/etc/fonts/fonts.conf"
 
 addons:
   apt:
@@ -57,5 +59,4 @@ after_success:
 
 # Prevents Travis timeout for building magick
 before_install:
-  - if [ "${TRAVIS_OS_NAME}" == "osx" ]; then R -e 'install.packages("git2r", type = "binary")'; fi
   - (while true; do echo 'Ping? Pong!'; sleep 500; done) &
