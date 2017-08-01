@@ -8,9 +8,9 @@
 \title{Magick Graphics Device}
 \usage{
 image_graph(width = 800, height = 600, bg = "transparent",
-  pointsize = 12, res = 72, clip = TRUE)
+  pointsize = 12, res = 72, clip = TRUE, antialias = TRUE)
 
-image_draw(image, pointsize = 12, res = 72, ...)
+image_draw(image, pointsize = 12, res = 72, antialias = TRUE, ...)
 }
 \arguments{
 \item{width}{in pixels}
@@ -25,6 +25,8 @@ image_draw(image, pointsize = 12, res = 72, ...)
 
 \item{clip}{enable clipping in the device. Because clippig can slow things down
 a lot, you can disable it if you don't need it.}
+
+\item{antialias}{TRUE/FALSE: enables anti-aliasing for text and strokes}
 
 \item{image}{an existing image on which to start drawing}
 

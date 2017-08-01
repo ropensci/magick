@@ -14,14 +14,17 @@ class MagickDevice {
 public:
   XPtrImage ptr;
   bool drawing;
+  bool antialias;
   double clipleft, clipright, cliptop, clipbottom;
-  MagickDevice(bool drawing_):
+  MagickDevice(bool drawing_, bool antialias_):
     ptr(XPtrImage(new Image())),
     drawing(drawing_),
+    antialias(antialias_),
     clipleft(0), clipright(0), cliptop(0), clipbottom(0){}
-  MagickDevice(bool drawing_, Image * image):
+  MagickDevice(bool drawing_, bool antialias_, Image * image):
     ptr(XPtrImage(image)),
     drawing(drawing_),
+    antialias(antialias_),
     clipleft(0), clipright(0), cliptop(0), clipbottom(0){}
 };
 
@@ -187,6 +190,12 @@ static void image_new_page(const pGEcontext gc, pDevDesc dd) {
   Frame x(Geom(dd->right, dd->bottom), Color(col2name(gc->fill)));
   x.magick("png");
   x.depth(8L);
+  x.strokeAntiAlias(getdev(dd)->antialias);
+#if MagickLibVersion >= 0x700
+  x.textAntiAlias(getdev(dd)->antialias);
+#else
+  x.antiAlias(getdev(dd)->antialias);
+#endif
   image->push_back(x);
   VOID_END_RCPP
 }
@@ -521,8 +530,8 @@ static void makeDevice(MagickDevice * device, std::string bg_, int width, int he
 
 // [[Rcpp::export]]
 XPtrImage magick_device_internal(std::string bg, int width, int height, double pointsize,
-                                 int res, bool clip, bool drawing) {
-  MagickDevice * device = new MagickDevice(drawing);
+                                 int res, bool clip, bool antialias, bool drawing) {
+  MagickDevice * device = new MagickDevice(drawing, antialias);
   device->ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
   makeDevice(device, bg, width, height, pointsize, res, clip);
   return device->ptr;

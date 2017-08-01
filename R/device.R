@@ -25,10 +25,11 @@
 #' @param bg background color
 #' @param pointsize size of fonts
 #' @param res resolution in pixels
-#' @param ... additional device parameters passed to \link{plot.window} such as
-#' \code{xlim}, \code{ylim}, or \code{mar}.
 #' @param clip enable clipping in the device. Because clippig can slow things down
 #' a lot, you can disable it if you don't need it.
+#' @param antialias TRUE/FALSE: enables anti-aliasing for text and strokes
+#' @param ... additional device parameters passed to \link{plot.window} such as
+#' \code{xlim}, \code{ylim}, or \code{mar}.
 #' @examples # Regular image
 #' frink <- image_read("https://jeroen.github.io/images/frink.png")
 #'
@@ -60,9 +61,9 @@
 #' dev.off()
 #' print(img)
 image_graph <- function(width = 800, height = 600, bg = "transparent",
-                          pointsize = 12, res = 72, clip = TRUE) {
+                          pointsize = 12, res = 72, clip = TRUE, antialias = TRUE) {
   img <- magick_device_internal(bg = bg, width = width, height = height, pointsize = pointsize,
-                                res = res, clip = clip, drawing = FALSE)
+                                res = res, clip = clip, antialias = antialias, drawing = FALSE)
   class(img) <- c("magick-device", class(img))
   img
 }
@@ -73,14 +74,18 @@ image_device <- image_graph
 #' @rdname device
 #' @export
 #' @param image an existing image on which to start drawing
-image_draw <- function(image, pointsize = 12, res = 72, ...){
+image_draw <- function(image, pointsize = 12, res = 72, antialias = TRUE, ...){
   assert_image(image)
   width <- max(image_info(image)$width)
   height <- max(image_info(image)$height)
-  device <- magick_device_internal(bg = "transparent", width = width, height = height,
-                                   pointsize = pointsize, res = res, clip = TRUE, drawing = TRUE)
+  antialias <- as.logical(antialias)
+  device <- magick_device_internal(bg = "transparent", width = width, height = height, pointsize = pointsize,
+                                   res = res, clip = TRUE, antialias = antialias, drawing = TRUE)
   setup_device(list(width = width, height = height), ...)
   magick_image_copy(device, image)
+  magick_attr_text_antialias(device, antialias)
+  magick_attr_stroke_antialias(device, antialias)
+  return(device)
 }
 
 setup_device <- function(info, xlim = NULL, ylim = NULL, xaxs = "i", yaxs = "i", mar = c(0,0,0,0), ...){

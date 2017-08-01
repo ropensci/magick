@@ -8,14 +8,14 @@
 #define Option(type, val) MagickCore::CommandOptionToMnemonic(type, val);
 
 // [[Rcpp::export]]
-Rcpp::IntegerVector magick_attr_text_antialias( XPtrImage input, Rcpp::LogicalVector set){
+Rcpp::LogicalVector magick_attr_text_antialias( XPtrImage input, Rcpp::LogicalVector set){
   if(set.size())
 #if MagickLibVersion >= 0x700
     for_each ( input->begin(), input->end(), Magick::textAntiAliasImage(set[0]));
 #else
     for_each ( input->begin(), input->end(), Magick::antiAliasImage(set[0]));
 #endif
-  Rcpp::IntegerVector out;
+  Rcpp::LogicalVector out;
   for (Iter it = input->begin(); it != input->end(); ++it)
 #if MagickLibVersion >= 0x700
     out.push_back(it->textAntiAlias());
@@ -26,8 +26,8 @@ Rcpp::IntegerVector magick_attr_text_antialias( XPtrImage input, Rcpp::LogicalVe
 }
 
 // [[Rcpp::export]]
-Rcpp::IntegerVector magick_attr_stroke_antialias( XPtrImage input, Rcpp::LogicalVector set){
-  Rcpp::IntegerVector out;
+Rcpp::LogicalVector magick_attr_stroke_antialias( XPtrImage input, Rcpp::LogicalVector set){
+  Rcpp::LogicalVector out;
   for (Iter it = input->begin(); it != input->end(); ++it){
     if(set.size())
       it->strokeAntiAlias(set[0]);
@@ -109,7 +109,7 @@ Rcpp::CharacterVector magick_attr_label( XPtrImage input, Rcpp::CharacterVector 
 // [[Rcpp::export]]
 Rcpp::CharacterVector magick_attr_format( XPtrImage input, Rcpp::CharacterVector format){
   if(format.size())
-    for_each ( input->begin(), input->end(), Magick::labelImage(std::string(format[0])));
+    for_each ( input->begin(), input->end(), Magick::magickImage(std::string(format[0])));
   Rcpp::CharacterVector out;
   for (Iter it = input->begin(); it != input->end(); ++it)
     out.push_back(it->magick());
