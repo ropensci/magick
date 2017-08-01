@@ -16,7 +16,6 @@ matrix:
             - libpoppler-cpp-dev
     - os: linux
       dist: trusty
-      sudo: required
       env: R_CODECOV=true
     - os: osx
       osx_image: xcode8.3
