@@ -252,6 +252,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_copy
+XPtrImage magick_image_copy(XPtrImage image, XPtrImage add);
+RcppExport SEXP _magick_magick_image_copy(SEXP imageSEXP, SEXP addSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type image(imageSEXP);
+    Rcpp::traits::input_parameter< XPtrImage >::type add(addSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_copy(image, add));
+    return rcpp_result_gen;
+END_RCPP
+}
 // autobrewed
 bool autobrewed();
 RcppExport SEXP _magick_autobrewed() {
@@ -936,6 +948,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_join", (DL_FUNC) &_magick_magick_image_join, 1},
     {"_magick_magick_image_subset", (DL_FUNC) &_magick_magick_image_subset, 2},
     {"_magick_magick_image_replace", (DL_FUNC) &_magick_magick_image_replace, 3},
+    {"_magick_magick_image_copy", (DL_FUNC) &_magick_magick_image_copy, 2},
     {"_magick_autobrewed", (DL_FUNC) &_magick_autobrewed, 0},
     {"_magick_magick_coder_info", (DL_FUNC) &_magick_magick_coder_info, 1},
     {"_magick_magick_config_internal", (DL_FUNC) &_magick_magick_config_internal, 0},

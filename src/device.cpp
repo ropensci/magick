@@ -141,7 +141,6 @@ static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd, bool join =
   double multiplier = 1/dd->ipr[0]/72;
   double lwd = gc->lwd * xlwd * multiplier;
   double lty[10] = {0};
-  Frame * graph = getgraph(dd);
   drawlist draw;
   if(gc->col != NA_INTEGER)
     draw.push_back(Magick::DrawableStrokeColor(Color(col2name(gc->col))));
@@ -161,8 +160,15 @@ static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd, bool join =
   draw.push_back(Magick::DrawableDashArray(linetype(lty, gc->lty, lwd)));
   draw.splice(draw.end(), x);
 #endif
-  graph->gamma(gc->gamma);
-  graph->draw(draw);
+  if(getdev(dd)->multipage){
+    Frame * graph = getgraph(dd);
+    graph->draw(draw);
+    graph->gamma(gc->gamma);
+  } else {
+    Image * image = getimage(dd);
+    for_each (image->begin(), image->end(), Magick::drawImage(draw));
+    for_each (image->begin(), image->end(), Magick::gammaImage(gc->gamma));
+  }
 }
 
 static void image_draw(Magick::Drawable x, const pGEcontext gc, pDevDesc dd, bool join = true, bool fill = true){
@@ -213,7 +219,13 @@ static void image_clip(double left, double right, double bottom, double top, pDe
   draw.push_back(Magick::DrawablePath(path));
   draw.push_back(Magick::DrawablePopClipPath());
   draw.push_back(Magick::DrawableClipPath(id));
-  getgraph(dd)->draw(draw);
+  if(getdev(dd)->multipage){
+    Frame * graph = getgraph(dd);
+    graph->draw(draw);
+  } else {
+    Image * image = getimage(dd);
+    for_each (image->begin(), image->end(), Magick::drawImage(draw));
+  }
   VOID_END_RCPP
 }
 
@@ -295,7 +307,6 @@ static void image_raster(unsigned int *raster, int w, int h,
                 Rboolean interpolate,
                 const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
-  Frame * graph = getgraph(dd);
   Frame frame(w, h, std::string("RGBA"), Magick::CharPixel, raster);
   frame.backgroundColor(Color("transparent"));
   Magick::Geometry size = Geom(width, -height);
@@ -306,7 +317,13 @@ static void image_raster(unsigned int *raster, int w, int h,
   Magick::Geometry outsize = frame.size();
   int xoff = (outsize.width() - width) / 2;
   int yoff = (outsize.height() + height) / 2;
-  graph->composite(frame, x - xoff, y + height - yoff, Magick::OverCompositeOp);
+  if(getdev(dd)->multipage){
+    Frame * graph = getgraph(dd);
+    graph->composite(frame, x - xoff, y + height - yoff, Magick::OverCompositeOp);
+  } else {
+    Image * image = getimage(dd);
+    for_each (image->begin(), image->end(), Magick::compositeImage(frame, x - xoff, y + height - yoff, Magick::OverCompositeOp));
+  }
   VOID_END_RCPP
 }
 
@@ -322,25 +339,40 @@ static void image_close(pDevDesc dd) {
 /* TODO: maybe port this to drawing as well, need affine transform. See:
  * https://github.com/ImageMagick/ImageMagick/blob/master/Magick%2B%2B/lib/Image.cpp#L1858
  */
+
+static void inline image_annotate(Frame * frame, double x, double y, const char *str, double rot, char * family,
+                                  int ps, int weight, Magick::StyleType style, Magick::Color col){
+#if MagickLibVersion >= 0x692
+  frame->fontFamily(family);
+  frame->fontWeight(weight);
+  frame->fontStyle(style);
+#else
+  graph->font(family);
+#endif
+  frame->fillColor(col);
+  frame->strokeColor(Magick::Color()); //unset: this is really ugly
+  frame->boxColor(Magick::Color());
+  frame->fontPointsize(ps);
+  frame->annotate(str, Geom(0, 0, x, y), Magick::ForgetGravity, -1 * rot);
+}
+
 static void image_text(double x, double y, const char *str, double rot,
                 double hadj, const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
   double multiplier = 1/dd->ipr[0]/72;
-  Frame * graph = getgraph(dd);
-#if MagickLibVersion >= 0x692
-  graph->fontFamily(gc->fontfamily);
-  graph->fontWeight(weight(gc->fontface));
-  graph->fontStyle(style(gc->fontface));
-#else
-  graph->font(gc->fontfamily);
-#endif
-  graph->fillColor(Color(col2name(gc->col)));
-  graph->strokeColor(Magick::Color()); //unset: this is really ugly
-  graph->fontPointsize(gc->ps * gc->cex * multiplier);
-  graph->annotate(str, Geom(0, 0, x, y), Magick::ForgetGravity, -1 * rot);
+  int ps = gc->ps * gc->cex * multiplier;
+  if(getdev(dd)->multipage){
+    image_annotate(getgraph(dd), x, y, str, rot, gc->fontfamily, ps, weight(gc->fontface),
+                  style(gc->fontface), Color(col2name(gc->col)));
+  } else {
+    Image * image = getimage(dd);
+    for (int i = 0; i < image->size(); i++){
+      image_annotate(&image->at(i), x, y, str, rot, gc->fontfamily, ps, weight(gc->fontface),
+                     style(gc->fontface), Color(col2name(gc->col)));
+    }
+  }
   VOID_END_RCPP
 }
-
 
 static void image_metric_info(int c, const pGEcontext gc, double* ascent,
                        double* descent, double* width, pDevDesc dd) {

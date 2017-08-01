@@ -85,6 +85,10 @@ magick_image_replace <- function(image, index, value) {
     .Call('_magick_magick_image_replace', PACKAGE = 'magick', image, index, value)
 }
 
+magick_image_copy <- function(image, add) {
+    .Call('_magick_magick_image_copy', PACKAGE = 'magick', image, add)
+}
+
 autobrewed <- function() {
     .Call('_magick_autobrewed', PACKAGE = 'magick')
 }

@@ -70,7 +70,7 @@ image_draw <- function(image, pointsize = 12, res = 72, ...){
   device <- magick_device_internal(bg = "transparent", width = info$width, height = info$height,
                                    pointsize = pointsize, res = res, clip = TRUE, multipage = FALSE)
   setup_device(info, ...)
-  magick_image_replace(device, 1, image)
+  magick_image_copy(device, image)
 }
 
 setup_device <- function(info, xlim = NULL, ylim = NULL, xaxs = "i", yaxs = "i", mar = c(0,0,0,0), ...){

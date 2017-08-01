@@ -1,7 +1,9 @@
 0.6
-  - Fix performance issue on OSX with font caching
+  - Vectorize image_draw()
   - Rename 'image_device' to 'image_graph'
-  - Add back support for gcc-4.6.3 on Windows
+  - OSX: Fix performance issue with font caching
+  - Windows: Fix performance issue with font rendering
+  - Windows: Add back support for gcc-4.6.3 on Windows
 
 0.5
   - NEW: native graphics device for producing images! See ?magick_device
