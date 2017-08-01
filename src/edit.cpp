@@ -80,7 +80,8 @@ XPtrImage magick_image_read_list(Rcpp::List list){
 }
 
 // [[Rcpp::export]]
-Rcpp::RawVector magick_image_write( XPtrImage input, Rcpp::CharacterVector format, Rcpp::IntegerVector quality){
+Rcpp::RawVector magick_image_write( XPtrImage input, Rcpp::CharacterVector format,
+                                    Rcpp::IntegerVector quality, Rcpp::IntegerVector depth){
   if(!input->size())
     return Rcpp::RawVector(0);
   XPtrImage image = copy(input);
@@ -88,6 +89,8 @@ Rcpp::RawVector magick_image_write( XPtrImage input, Rcpp::CharacterVector forma
     for_each ( image->begin(), image->end(), Magick::magickImage(std::string(format[0])));
   if(quality.size())
     for_each ( image->begin(), image->end(), Magick::qualityImage(quality[0]));
+  if(depth.size())
+    for_each ( image->begin(), image->end(), Magick::depthImage(depth[0]));
   Magick::Blob output;
   writeImages( image->begin(), image->end(),  &output );
   Rcpp::RawVector res(output.length());

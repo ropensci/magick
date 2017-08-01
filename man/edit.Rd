@@ -25,7 +25,7 @@
 image_read(path, density = NULL, depth = NULL)
 
 image_write(image, path = NULL, format = NULL, quality = NULL,
-  flatten = FALSE)
+  depth = NULL, flatten = FALSE)
 
 image_display(image, animate = TRUE)
 
@@ -61,7 +61,7 @@ image_animate(image, fps = 10, loop = 0, dispose = c("background",
 
 \item{density}{resolution to render pdf or svg}
 
-\item{depth}{image depth. Must be 8 or 6.}
+\item{depth}{image depth. Must be 8 or 16}
 
 \item{image}{object returned by \code{image_read}}
 

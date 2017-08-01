@@ -186,6 +186,7 @@ static void image_new_page(const pGEcontext gc, pDevDesc dd) {
     throw std::runtime_error("Cannot open a new page on a drawing device");
   Frame x(Geom(dd->right, dd->bottom), Color(col2name(gc->fill)));
   x.magick("png");
+  x.depth(8L);
   image->push_back(x);
   VOID_END_RCPP
 }

@@ -26,7 +26,7 @@
 #' @param path file path, URL, or raw vector with image data
 #' @param image object returned by \code{image_read}
 #' @param density resolution to render pdf or svg
-#' @param depth image depth. Must be 8 or 6.
+#' @param depth image depth. Must be 8 or 16
 #' @references Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}
 #' @examples
 #' # Download image from the web
@@ -94,7 +94,7 @@ image_rsvg <- function(path, width = NULL, height = NULL){
 #' @param flatten should image be flattened before writing? This also replaces
 #' transparency with background color.
 #' @param quality number between 0 and 100 for jpeg quality. Defaults to 75.
-image_write <- function(image, path = NULL, format = NULL, quality = NULL, flatten = FALSE){
+image_write <- function(image, path = NULL, format = NULL, quality = NULL, depth = NULL, flatten = FALSE){
   assert_image(image)
   if(!length(image))
     warning("Writing image with 0 frames")
@@ -102,7 +102,8 @@ image_write <- function(image, path = NULL, format = NULL, quality = NULL, flatt
     image <- image_flatten(image)
   format <- as.character(format)
   quality <- as.integer(quality)
-  buf <- magick_image_write(image, format, quality)
+  depth <- as.integer(depth)
+  buf <- magick_image_write(image, format, quality, depth)
   if(is.character(path)){
     writeBin(buf, path)
     return(invisible(path))
