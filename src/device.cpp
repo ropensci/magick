@@ -363,7 +363,7 @@ static void image_text(double x, double y, const char *str, double rot,
   int ps = gc->ps * gc->cex * multiplier;
   if(getdev(dd)->drawing){
     Image * image = getimage(dd);
-    for (int i = 0; i < image->size(); i++){
+    for (size_t i = 0; i < image->size(); i++){
       image_annotate(&image->at(i), x, y, str, rot, gc->fontfamily, ps, weight(gc->fontface),
                      style(gc->fontface), Color(col2name(gc->col)));
     }

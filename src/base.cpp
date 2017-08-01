@@ -100,7 +100,7 @@ XPtrImage magick_image_replace(XPtrImage image, Rcpp::IntegerVector index, XPtrI
 // [[Rcpp::export]]
 XPtrImage magick_image_copy(XPtrImage image, XPtrImage add){
   image->resize(add->size());
-  for(int i = 0; i < add->size(); i++){
+  for(size_t i = 0; i < add->size(); i++){
     image->at(i) = add->at(i);
   }
   return image;
