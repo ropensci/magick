@@ -32,5 +32,6 @@ Suggests:
     pdftools,
     ggplot2,
     raster,
-    rgdal
+    rgdal,
+    gapminder
 RoxygenNote: 6.0.1
