@@ -84,12 +84,13 @@
   img <- x
   viewer <- getOption("viewer")
   if(length(img) && is.function(viewer)){
-    if(length(img) > 1)
-      img <- image_animate(img, fps = 1)
     format <- tolower(image_info(img[1])$format)
-    if(format == "xc"){
-      format <- 'png'
+    if(length(img) > 1 && format != "gif"){
+      img <- image_animate(img, fps = 1)
+      format <- "gif"
+    } else if(format == "xc"){
       img <- image_convert(img, format)
+      format <- 'png'
     }
     tmp <- file.path(tempdir(), paste0("preview.", format))
     image_write(img, path = tmp, format = format)
