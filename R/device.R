@@ -5,7 +5,7 @@
 #' which draws onto an existing image using pixel coordinates.
 #'
 #' The device is a relatively recent feature of the package. It should support all
-#' operations but there might still be small inaccuracies. Also it a bit slower than
+#' operations but there might still be small inaccuracies. Also it is a bit slower than
 #' some of the other devices, in particular for rendering text and clipping. Hopefully
 #' this can be optimized in the next version.
 #'
