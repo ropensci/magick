@@ -1,12 +1,13 @@
 # ImageMagick build target
 IM=6
-VERSION=6.9.9-3
+VERSION=6.9.9-4
 
-#Old version with support for gcc-4.6.3
-#VERSION=6.9.5-4
+# Support R < 3.3 with gcc-4.6.3
+R_COMPILED_BY ?= -4.6.3
+ifeq ($(R_COMPILED_BY),-4.9.3)
+VERSION=6.9.5-4
+endif
 
-# Build config
-R_COMPILED_BY ?=-4.6.3
 IMPATH=../windows/imagemagick${IM}-${VERSION}
 LIBBUILD=${subst gcc ,-,${R_COMPILED_BY}}${R_ARCH}
 
@@ -37,6 +38,7 @@ clean:
 	rm -f $(OBJECTS) $(SHLIB)
 
 winlibs:
+	@echo "Linking to imagemagagick-$(VERSION)"
 	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R" ${VERSION}
 
 .PHONY: all winlibs clean

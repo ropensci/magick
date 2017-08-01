@@ -1,6 +1,7 @@
 0.6
   - Fix performance issue on OSX with font caching
   - Rename 'image_device' to 'image_graph'
+  - Add back support for gcc-4.6.3 on Windows
 
 0.5
   - NEW: native graphics device for producing images! See ?magick_device
