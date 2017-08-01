@@ -339,6 +339,7 @@ image_annotate <- function(image, text, gravity = "northwest", location = "+0+0"
 image_convert <- function(image, format, depth = NULL, antialias = NULL){
   assert_image(image)
   depth <- as.integer(depth)
+  antialias <- as.logical(antialias)
   if(length(depth) && is.na(match(depth, c(8, 16))))
     stop('depth must be 8 or 16 bit')
   magick_image_format(image, format, depth, antialias)
