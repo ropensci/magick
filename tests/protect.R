@@ -1,7 +1,7 @@
 library(magick)
 
 # Test procected from GC while device is open
-image <- image_device()
+image <- image_graph()
 rm(list=ls())
 gc(); gc()
 plot(rnorm(100))
@@ -10,7 +10,7 @@ dev.off()
 gc();
 
 # Test procected from while image is in scope
-image <- image_device()
+image <- image_graph()
 plot(rnorm(100))
 dev.off()
 gc();gc()

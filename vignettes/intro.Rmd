@@ -393,11 +393,11 @@ A relatively recent addition to the package is a native R graphics device which 
 
 ### Graphics device
 
-The `image_device()` function opens a new graphics device similar to e.g. `png()` or `x11()`. It returns an image objec to which the plot(s) will be written. Each "page" in the plotting device will become a frame in the image object.
+The `image_graph()` function opens a new graphics device similar to e.g. `png()` or `x11()`. It returns an image objec to which the plot(s) will be written. Each "page" in the plotting device will become a frame in the image object.
 
 ```{r, results="hide"}
 # Produce image using graphics device
-fig <- image_device(res = 96)
+fig <- image_graph(res = 96)
 ggplot2::qplot(mpg, wt, data = mtcars, colour = cyl)
 dev.off()
 ```

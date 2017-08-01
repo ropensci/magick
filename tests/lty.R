@@ -1,4 +1,4 @@
-img <- magick::image_device()
+img <- magick::image_graph()
 plot(1)
 abline(0, 1, col = "blue", lwd = 2, lty = "solid")
 abline(0.1, 1, col = "red", lwd = 3, lty = "dotted")

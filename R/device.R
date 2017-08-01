@@ -16,6 +16,7 @@
 #' \code{xlim}, \code{ylim} or \code{mar} values to \code{image_draw}.
 #'
 #' @export
+#' @aliases image_device
 #' @rdname device
 #' @name device
 #' @param width in pixels
@@ -31,7 +32,7 @@
 #' frink <- image_read("https://jeroen.github.io/images/frink.png")
 #'
 #' # Produce image using graphics device
-#' fig <- image_device(res = 96)
+#' fig <- image_graph(res = 96)
 #' ggplot2::qplot(mpg, wt, data = mtcars, colour = cyl)
 #' dev.off()
 #'
@@ -49,13 +50,16 @@
 #'   bg = 1:11, inches = FALSE, add = TRUE)
 #' dev.off()
 #' print(img)
-image_device <- function(width = 800, height = 600, bg = "transparent",
+image_graph <- function(width = 800, height = 600, bg = "transparent",
                           pointsize = 12, res = 72, clip = TRUE) {
   img <- magick_device_internal(bg = bg, width = width, height = height, pointsize = pointsize,
                                 res = res, clip = clip, multipage = TRUE)
   class(img) <- c("magick-device", class(img))
   img
 }
+
+#' @export
+image_device <- image_graph
 
 #' @rdname device
 #' @export

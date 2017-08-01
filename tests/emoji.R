@@ -7,7 +7,7 @@ d <- data.frame(x=rnorm(20),
                 label=sample(fa, 20, replace=T))
 
 
-img <- magick::image_device(res = 96)
+img <- magick::image_graph(res = 96)
 ggplot(d, aes(x, y, color=label, label=label)) +
   geom_text(family='fontawesome-webfont', size=6)+
   xlab(NULL)+ylab(NULL) +

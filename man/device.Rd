@@ -2,11 +2,12 @@
 % Please edit documentation in R/device.R
 \name{device}
 \alias{device}
+\alias{image_graph}
 \alias{image_device}
 \alias{image_draw}
 \title{Magick Graphics Device}
 \usage{
-image_device(width = 800, height = 600, bg = "transparent",
+image_graph(width = 800, height = 600, bg = "transparent",
   pointsize = 12, res = 72, clip = TRUE)
 
 image_draw(image, pointsize = 12, res = 72, ...)
@@ -52,7 +53,7 @@ of typical graphics coordinates.  You can override all this by passing custom
 frink <- image_read("https://jeroen.github.io/images/frink.png")
 
 # Produce image using graphics device
-fig <- image_device(res = 96)
+fig <- image_graph(res = 96)
 ggplot2::qplot(mpg, wt, data = mtcars, colour = cyl)
 dev.off()
 

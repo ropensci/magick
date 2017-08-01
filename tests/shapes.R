@@ -73,18 +73,18 @@ par(cex = 96/72)
 test_ggplot()
 dev.off()
 
-dev <- magick::image_device(800, 600, bg = 'white')
+dev <- magick::image_graph(800, 600, bg = 'white')
 test_ggplot()
 dev.off()
 image_write(dev, "magick_small.png", format = 'png')
 
-dev <- magick::image_device(1600, 1200, bg = 'white', res = 144)
+dev <- magick::image_graph(1600, 1200, bg = 'white', res = 144)
 test_ggplot()
 dev.off()
 image_write(dev, "magick_large.png", format = 'png')
 
 # Compare in rstudio
-img <- image_device(900, 600, bg = 'white', res = 96)
+img <- image_graph(900, 600, bg = 'white', res = 96)
 test_ggplot()
 dev.off()
 print(img)
