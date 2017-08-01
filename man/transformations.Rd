@@ -97,7 +97,7 @@ image_annotate(image, text, gravity = "northwest", location = "+0+0",
   degrees = 0, size = 10, font = NULL, color = NULL,
   strokecolor = NULL, boxcolor = NULL)
 
-image_convert(image, format, depth = NULL)
+image_convert(image, format, depth = NULL, antialias = NULL)
 
 image_compare(image, reference_image, metric = "")
 
@@ -166,6 +166,8 @@ the image. Specifies an image density when decoding a Postscript or PDF.}
 Can also be a bitmap type such as \code{rgba} or \code{rgb}.}
 
 \item{depth}{color depth, must be 8 or 16}
+
+\item{antialias}{(TRUE/FALSE) enable anti-aliasing for text and strokes}
 
 \item{reference_image}{another image to compare to}
 

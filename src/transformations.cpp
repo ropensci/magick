@@ -241,11 +241,21 @@ XPtrImage magick_image_implode( XPtrImage input, double factor){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_format( XPtrImage input, const char * format, Rcpp::IntegerVector depth){
+XPtrImage magick_image_format( XPtrImage input, const char * format, Rcpp::IntegerVector depth,
+                               Rcpp::LogicalVector antialias){
   XPtrImage output = copy(input);
-  for_each ( output->begin(), output->end(), Magick::magickImage(format));
   if(depth.size())
     for_each ( output->begin(), output->end(), Magick::depthImage(depth.at(0)));
+  if(antialias.size()){
+    for (Iter it = output->begin(); it != output->end(); ++it)
+      it->strokeAntiAlias(antialias.at(0));
+#if MagickLibVersion >= 0x700
+    for_each ( output->begin(), output->end(), Magick::textAntiAliasImage(antialias.at(0)));
+#else
+    for_each ( output->begin(), output->end(), Magick::antiAliasImage(antialias.at(0)));
+#endif
+  }
+  for_each ( output->begin(), output->end(), Magick::magickImage(format));
   return output;
 }
 

@@ -335,12 +335,13 @@ image_annotate <- function(image, text, gravity = "northwest", location = "+0+0"
 #' @param format output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.
 #' Can also be a bitmap type such as \code{rgba} or \code{rgb}.
 #' @param depth color depth, must be 8 or 16
-image_convert <- function(image, format, depth = NULL){
+#' @param antialias (TRUE/FALSE) enable anti-aliasing for text and strokes
+image_convert <- function(image, format, depth = NULL, antialias = NULL){
   assert_image(image)
   depth <- as.integer(depth)
   if(length(depth) && is.na(match(depth, c(8, 16))))
     stop('depth must be 8 or 16 bit')
-  magick_image_format(image, format, depth)
+  magick_image_format(image, format, depth, antialias)
 }
 
 #' @export

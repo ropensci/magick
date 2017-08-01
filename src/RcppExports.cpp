@@ -771,15 +771,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_format
-XPtrImage magick_image_format(XPtrImage input, const char * format, Rcpp::IntegerVector depth);
-RcppExport SEXP _magick_magick_image_format(SEXP inputSEXP, SEXP formatSEXP, SEXP depthSEXP) {
+XPtrImage magick_image_format(XPtrImage input, const char * format, Rcpp::IntegerVector depth, Rcpp::LogicalVector antialias);
+RcppExport SEXP _magick_magick_image_format(SEXP inputSEXP, SEXP formatSEXP, SEXP depthSEXP, SEXP antialiasSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< const char * >::type format(formatSEXP);
     Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type depth(depthSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_format(input, format, depth));
+    Rcpp::traits::input_parameter< Rcpp::LogicalVector >::type antialias(antialiasSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_format(input, format, depth, antialias));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -993,7 +994,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_oilpaint", (DL_FUNC) &_magick_magick_image_oilpaint, 2},
     {"_magick_magick_image_rotate", (DL_FUNC) &_magick_magick_image_rotate, 2},
     {"_magick_magick_image_implode", (DL_FUNC) &_magick_magick_image_implode, 2},
-    {"_magick_magick_image_format", (DL_FUNC) &_magick_magick_image_format, 3},
+    {"_magick_magick_image_format", (DL_FUNC) &_magick_magick_image_format, 4},
     {"_magick_magick_image_trim", (DL_FUNC) &_magick_magick_image_trim, 1},
     {"_magick_magick_image_composite", (DL_FUNC) &_magick_magick_image_composite, 4},
     {"_magick_magick_image_contrast", (DL_FUNC) &_magick_magick_image_contrast, 2},
