@@ -2,7 +2,8 @@
 #'
 #' Graphics device that produces a Magick image. Can either be used like a regular
 #' device for making plots, or alternatively via \code{image_draw} to open a device
-#' which draws onto an existing image using pixel coordinates.
+#' which draws onto an existing image using pixel coordinates. The latter is vectorized,
+#' i.e. drawing operations are applied to each frame in the image.
 #'
 #' The device is a relatively recent feature of the package. It should support all
 #' operations but there might still be small inaccuracies. Also it is a bit slower than
@@ -50,10 +51,18 @@
 #'   bg = 1:11, inches = FALSE, add = TRUE)
 #' dev.off()
 #' print(img)
+#'
+#' # This is vectorized too!
+#' earth <- image_read("https://jeroen.github.io/images/earth.gif")
+#' img <- image_draw(earth)
+#' rect(40, 20, 360, 340, border = "red", lty = "dashed", lwd = 5)
+#' text(200, 360, "Our planet", cex = 3, col = "white")
+#' dev.off()
+#' print(img)
 image_graph <- function(width = 800, height = 600, bg = "transparent",
                           pointsize = 12, res = 72, clip = TRUE) {
   img <- magick_device_internal(bg = bg, width = width, height = height, pointsize = pointsize,
-                                res = res, clip = clip, multipage = TRUE)
+                                res = res, clip = clip, drawing = FALSE)
   class(img) <- c("magick-device", class(img))
   img
 }
@@ -66,10 +75,11 @@ image_device <- image_graph
 #' @param image an existing image on which to start drawing
 image_draw <- function(image, pointsize = 12, res = 72, ...){
   assert_image(image)
-  info <- image_info(utils::tail(image, 1))
-  device <- magick_device_internal(bg = "transparent", width = info$width, height = info$height,
-                                   pointsize = pointsize, res = res, clip = TRUE, multipage = FALSE)
-  setup_device(info, ...)
+  width <- max(image_info(image)$width)
+  height <- max(image_info(image)$height)
+  device <- magick_device_internal(bg = "transparent", width = width, height = height,
+                                   pointsize = pointsize, res = res, clip = TRUE, drawing = TRUE)
+  setup_device(list(width = width, height = height), ...)
   magick_image_copy(device, image)
 }
 

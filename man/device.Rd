@@ -34,11 +34,12 @@ a lot, you can disable it if you don't need it.}
 \description{
 Graphics device that produces a Magick image. Can either be used like a regular
 device for making plots, or alternatively via \code{image_draw} to open a device
-which draws onto an existing image using pixel coordinates.
+which draws onto an existing image using pixel coordinates. The latter is vectorized,
+i.e. drawing operations are applied to each frame in the image.
 }
 \details{
 The device is a relatively recent feature of the package. It should support all
-operations but there might still be small inaccuracies. Also it a bit slower than
+operations but there might still be small inaccuracies. Also it is a bit slower than
 some of the other devices, in particular for rendering text and clipping. Hopefully
 this can be optimized in the next version.
 
@@ -69,6 +70,14 @@ text(10, 250, "Hoiven-Glaven", family = "courier", cex = 4, srt = 90)
 palette(rainbow(11, end = 0.9))
 symbols(rep(200, 11), seq(0, 400, 40), circles = runif(11, 5, 35),
   bg = 1:11, inches = FALSE, add = TRUE)
+dev.off()
+print(img)
+
+# This is vectorized too!
+earth <- image_read("https://jeroen.github.io/images/earth.gif")
+img <- image_draw(earth)
+rect(40, 20, 360, 340, border = "red", lty = "dashed", lwd = 5)
+text(200, 360, "Our planet", cex = 3, col = "white")
 dev.off()
 print(img)
 }

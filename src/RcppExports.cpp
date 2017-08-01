@@ -296,8 +296,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_device_internal
-XPtrImage magick_device_internal(std::string bg, int width, int height, double pointsize, int res, bool clip, bool multipage);
-RcppExport SEXP _magick_magick_device_internal(SEXP bgSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP pointsizeSEXP, SEXP resSEXP, SEXP clipSEXP, SEXP multipageSEXP) {
+XPtrImage magick_device_internal(std::string bg, int width, int height, double pointsize, int res, bool clip, bool drawing);
+RcppExport SEXP _magick_magick_device_internal(SEXP bgSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP pointsizeSEXP, SEXP resSEXP, SEXP clipSEXP, SEXP drawingSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -307,8 +307,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type pointsize(pointsizeSEXP);
     Rcpp::traits::input_parameter< int >::type res(resSEXP);
     Rcpp::traits::input_parameter< bool >::type clip(clipSEXP);
-    Rcpp::traits::input_parameter< bool >::type multipage(multipageSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_device_internal(bg, width, height, pointsize, res, clip, multipage));
+    Rcpp::traits::input_parameter< bool >::type drawing(drawingSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_device_internal(bg, width, height, pointsize, res, clip, drawing));
     return rcpp_result_gen;
 END_RCPP
 }

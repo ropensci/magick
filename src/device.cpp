@@ -13,15 +13,15 @@
 class MagickDevice {
 public:
   XPtrImage ptr;
-  bool multipage;
+  bool drawing;
   double clipleft, clipright, cliptop, clipbottom;
-  MagickDevice(bool multipage_):
+  MagickDevice(bool drawing_):
     ptr(XPtrImage(new Image())),
-    multipage(multipage_),
+    drawing(drawing_),
     clipleft(0), clipright(0), cliptop(0), clipbottom(0){}
-  MagickDevice(bool multipage_, Image * image):
+  MagickDevice(bool drawing_, Image * image):
     ptr(XPtrImage(image)),
-    multipage(multipage_),
+    drawing(drawing_),
     clipleft(0), clipright(0), cliptop(0), clipbottom(0){}
 };
 
@@ -160,14 +160,14 @@ static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd, bool join =
   draw.push_back(Magick::DrawableDashArray(linetype(lty, gc->lty, lwd)));
   draw.splice(draw.end(), x);
 #endif
-  if(getdev(dd)->multipage){
-    Frame * graph = getgraph(dd);
-    graph->draw(draw);
-    graph->gamma(gc->gamma);
-  } else {
+  if(getdev(dd)->drawing){
     Image * image = getimage(dd);
     for_each (image->begin(), image->end(), Magick::drawImage(draw));
     for_each (image->begin(), image->end(), Magick::gammaImage(gc->gamma));
+  } else {
+    Frame * graph = getgraph(dd);
+    graph->draw(draw);
+    graph->gamma(gc->gamma);
   }
 }
 
@@ -182,7 +182,7 @@ static void image_draw(Magick::Drawable x, const pGEcontext gc, pDevDesc dd, boo
 static void image_new_page(const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
   Image *image = getimage(dd);
-  if(image->size() > 0 && getdev(dd)->multipage == false)
+  if(image->size() > 0 && getdev(dd)->drawing)
     throw std::runtime_error("Cannot open a new page on a drawing device");
   Frame x(Geom(dd->right, dd->bottom), Color(col2name(gc->fill)));
   x.magick("png");
@@ -219,12 +219,12 @@ static void image_clip(double left, double right, double bottom, double top, pDe
   draw.push_back(Magick::DrawablePath(path));
   draw.push_back(Magick::DrawablePopClipPath());
   draw.push_back(Magick::DrawableClipPath(id));
-  if(getdev(dd)->multipage){
-    Frame * graph = getgraph(dd);
-    graph->draw(draw);
-  } else {
+  if(getdev(dd)->drawing){
     Image * image = getimage(dd);
     for_each (image->begin(), image->end(), Magick::drawImage(draw));
+  } else {
+    Frame * graph = getgraph(dd);
+    graph->draw(draw);
   }
   VOID_END_RCPP
 }
@@ -317,12 +317,12 @@ static void image_raster(unsigned int *raster, int w, int h,
   Magick::Geometry outsize = frame.size();
   int xoff = (outsize.width() - width) / 2;
   int yoff = (outsize.height() + height) / 2;
-  if(getdev(dd)->multipage){
-    Frame * graph = getgraph(dd);
-    graph->composite(frame, x - xoff, y + height - yoff, Magick::OverCompositeOp);
-  } else {
+  if(getdev(dd)->drawing){
     Image * image = getimage(dd);
     for_each (image->begin(), image->end(), Magick::compositeImage(frame, x - xoff, y + height - yoff, Magick::OverCompositeOp));
+  } else {
+    Frame * graph = getgraph(dd);
+    graph->composite(frame, x - xoff, y + height - yoff, Magick::OverCompositeOp);
   }
   VOID_END_RCPP
 }
@@ -347,7 +347,7 @@ static void inline image_annotate(Frame * frame, double x, double y, const char 
   frame->fontWeight(weight);
   frame->fontStyle(style);
 #else
-  graph->font(family);
+  frame->font(family);
 #endif
   frame->fillColor(col);
   frame->strokeColor(Magick::Color()); //unset: this is really ugly
@@ -361,15 +361,15 @@ static void image_text(double x, double y, const char *str, double rot,
   BEGIN_RCPP
   double multiplier = 1/dd->ipr[0]/72;
   int ps = gc->ps * gc->cex * multiplier;
-  if(getdev(dd)->multipage){
-    image_annotate(getgraph(dd), x, y, str, rot, gc->fontfamily, ps, weight(gc->fontface),
-                  style(gc->fontface), Color(col2name(gc->col)));
-  } else {
+  if(getdev(dd)->drawing){
     Image * image = getimage(dd);
     for (int i = 0; i < image->size(); i++){
       image_annotate(&image->at(i), x, y, str, rot, gc->fontfamily, ps, weight(gc->fontface),
                      style(gc->fontface), Color(col2name(gc->col)));
     }
+  } else {
+    image_annotate(getgraph(dd), x, y, str, rot, gc->fontfamily, ps, weight(gc->fontface),
+                   style(gc->fontface), Color(col2name(gc->col)));
   }
   VOID_END_RCPP
 }
@@ -520,8 +520,8 @@ static void makeDevice(MagickDevice * device, std::string bg_, int width, int he
 
 // [[Rcpp::export]]
 XPtrImage magick_device_internal(std::string bg, int width, int height, double pointsize,
-                                 int res, bool clip, bool multipage) {
-  MagickDevice * device = new MagickDevice(multipage);
+                                 int res, bool clip, bool drawing) {
+  MagickDevice * device = new MagickDevice(drawing);
   device->ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
   makeDevice(device, bg, width, height, pointsize, res, clip);
   return device->ptr;
