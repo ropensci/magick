@@ -54,18 +54,18 @@ image_read <- function(path, density = NULL, depth = NULL){
   image <- if(is.character(path) && all(nchar(path))){
     path <- vapply(path, replace_url, character(1))
     magick_image_readpath(path, density, depth)
+    if(!isTRUE(magick_config()$rsvg)){
+      if(any(grepl("\\.svg$", tolower(path))) || any(grepl("svg|mvg", tolower(image_info(image)$format)))){
+        warning("ImageMagick was built without librsvg which causes poor qualty of SVG rendering.
+                For better results, rebuild ImageMagick --with-librsvg or use the 'rsvg' package in R.", call. = FALSE)
+      }
+    }
   } else if(is.array(path)){
     image_readbitmap(path)
   } else if(is.raw(path)) {
     magick_image_readbin(path, density, depth)
   } else {
     stop("path must be URL, filename or raw vector")
-  }
-  if(!isTRUE(magick_config()$rsvg)){
-    if(any(grepl("\\.svg$", tolower(path))) || any(grepl("svg|mvg", tolower(image_info(image)$format)))){
-      warning("ImageMagick was built without librsvg which causes poor qualty of SVG rendering.
-For better results, rebuild ImageMagick --with-librsvg or use the 'rsvg' package in R.", call. = FALSE)
-    }
   }
   return(image)
 }
