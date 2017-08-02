@@ -158,8 +158,8 @@ image_composite(banana, image_scale(logo, "300"))
 
 # Break down and combine frames
 front <- image_scale(banana, "300")
-background <- image_scale(logo, "400")
-frames <- image_apply(front, function(x){image_flatten(c(background, x))})
+background <- image_background(image_scale(logo, "400"), 'white')
+frames <- image_apply(front, function(x){image_composite(background, x, offset = "+70+30")})
 image_animate(frames, fps = 10)
 }
 \references{
