@@ -38,7 +38,7 @@
 \usage{
 image_trim(image)
 
-image_background(image, color, flatten = FALSE)
+image_background(image, color, flatten = TRUE)
 
 image_crop(image, geometry = "")
 

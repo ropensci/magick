@@ -28,11 +28,11 @@ image_trim <- function(image){
 #' @rdname transformations
 #' @examples
 #' image_background(logo, "pink", flatten = TRUE)
-image_background <- function(image, color, flatten = FALSE){
+image_background <- function(image, color, flatten = TRUE){
   assert_image(image)
   out <- magick_image_background(image, color)
   if(isTRUE(flatten)){
-    image_flatten(out)
+    image_apply(out, image_flatten)
   } else {
     return(out)
   }
