@@ -14,6 +14,7 @@ matrix:
             - librsvg2-dev
             - libwebp-dev
             - libpoppler-cpp-dev
+            - libtesseract-dev
     - os: linux
       dist: trusty
       env: R_CODECOV=true
@@ -38,6 +39,7 @@ addons:
       - librsvg2-dev
       - libwebp-dev
       - libpoppler-cpp-dev
+      - libtesseract-dev
       - r-cran-rgdal
 
 r_github_packages:
