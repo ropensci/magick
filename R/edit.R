@@ -104,6 +104,7 @@ image_write <- function(image, path = NULL, format = NULL, quality = NULL,
   format <- as.character(format)
   quality <- as.integer(quality)
   depth <- as.integer(depth)
+  density <- as.character(density)
   buf <- magick_image_write(image, format, quality, depth, density)
   if(is.character(path)){
     writeBin(buf, path)
