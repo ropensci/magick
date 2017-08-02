@@ -93,7 +93,11 @@ Rcpp::RawVector magick_image_write( XPtrImage input, Rcpp::CharacterVector forma
     for_each ( image->begin(), image->end(), Magick::depthImage(depth[0]));
   if(density.size()){
     for_each ( image->begin(), image->end(), Magick::resolutionUnitsImage(Magick::PixelsPerInchResolution));
+#if MagickLibVersion >= 0x700
+    for_each ( image->begin(), image->end(), Magick::densityImage(Point(density[0])));
+#else
     for_each ( image->begin(), image->end(), Magick::densityImage(Geom(density[0])));
+#endif
   }
   Magick::Blob output;
   writeImages( image->begin(), image->end(),  &output );
