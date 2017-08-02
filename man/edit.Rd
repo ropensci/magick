@@ -25,7 +25,7 @@
 image_read(path, density = NULL, depth = NULL)
 
 image_write(image, path = NULL, format = NULL, quality = NULL,
-  depth = NULL, flatten = FALSE)
+  depth = NULL, density = NULL, flatten = FALSE)
 
 image_display(image, animate = TRUE)
 

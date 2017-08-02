@@ -373,8 +373,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_write
-Rcpp::RawVector magick_image_write(XPtrImage input, Rcpp::CharacterVector format, Rcpp::IntegerVector quality, Rcpp::IntegerVector depth);
-RcppExport SEXP _magick_magick_image_write(SEXP inputSEXP, SEXP formatSEXP, SEXP qualitySEXP, SEXP depthSEXP) {
+Rcpp::RawVector magick_image_write(XPtrImage input, Rcpp::CharacterVector format, Rcpp::IntegerVector quality, Rcpp::IntegerVector depth, Rcpp::CharacterVector density);
+RcppExport SEXP _magick_magick_image_write(SEXP inputSEXP, SEXP formatSEXP, SEXP qualitySEXP, SEXP depthSEXP, SEXP densitySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -382,7 +382,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type format(formatSEXP);
     Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type quality(qualitySEXP);
     Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type depth(depthSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_write(input, format, quality, depth));
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type density(densitySEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_write(input, format, quality, depth, density));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -961,7 +962,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_readbin", (DL_FUNC) &_magick_magick_image_readbin, 3},
     {"_magick_magick_image_readpath", (DL_FUNC) &_magick_magick_image_readpath, 3},
     {"_magick_magick_image_read_list", (DL_FUNC) &_magick_magick_image_read_list, 1},
-    {"_magick_magick_image_write", (DL_FUNC) &_magick_magick_image_write, 4},
+    {"_magick_magick_image_write", (DL_FUNC) &_magick_magick_image_write, 5},
     {"_magick_magick_image_write_frame", (DL_FUNC) &_magick_magick_image_write_frame, 2},
     {"_magick_magick_image_display", (DL_FUNC) &_magick_magick_image_display, 2},
     {"_magick_magick_image_append", (DL_FUNC) &_magick_magick_image_append, 2},

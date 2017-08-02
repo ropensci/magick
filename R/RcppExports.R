@@ -125,8 +125,8 @@ magick_image_read_list <- function(list) {
     .Call('_magick_magick_image_read_list', PACKAGE = 'magick', list)
 }
 
-magick_image_write <- function(input, format, quality, depth) {
-    .Call('_magick_magick_image_write', PACKAGE = 'magick', input, format, quality, depth)
+magick_image_write <- function(input, format, quality, depth, density) {
+    .Call('_magick_magick_image_write', PACKAGE = 'magick', input, format, quality, depth, density)
 }
 
 magick_image_write_frame <- function(input, format) {
