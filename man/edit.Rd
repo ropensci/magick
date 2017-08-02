@@ -159,8 +159,8 @@ image_composite(banana, image_scale(logo, "300"))
 # Break down and combine frames
 front <- image_scale(banana, "300")
 background <- image_scale(logo, "400")
-frames <- lapply(as.list(front), function(x) image_flatten(c(background, x)))
-image_animate(image_join(frames))
+frames <- image_apply(front, function(x){image_flatten(c(background, x))})
+image_animate(frames, fps = 10)
 }
 \references{
 Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}

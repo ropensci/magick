@@ -238,8 +238,8 @@ image_mosaic <- function(image, operator = NULL){
 #' # Break down and combine frames
 #' front <- image_scale(banana, "300")
 #' background <- image_scale(logo, "400")
-#' frames <- lapply(as.list(front), function(x) image_flatten(c(background, x)))
-#' image_animate(image_join(frames))
+#' frames <- image_apply(front, function(x){image_flatten(c(background, x))})
+#' image_animate(frames, fps = 10)
 image_join <- function(...){
   x <- unlist(list(...))
   stopifnot(all(vapply(x, inherits, logical(1), "magick-image")))
