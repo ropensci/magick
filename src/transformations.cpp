@@ -249,11 +249,7 @@ XPtrImage magick_image_format( XPtrImage input, const char * format, Rcpp::Integ
   if(antialias.size()){
     for (Iter it = output->begin(); it != output->end(); ++it)
       it->strokeAntiAlias(antialias.at(0));
-#if MagickLibVersion >= 0x700
-    for_each ( output->begin(), output->end(), Magick::textAntiAliasImage(antialias.at(0)));
-#else
-    for_each ( output->begin(), output->end(), Magick::antiAliasImage(antialias.at(0)));
-#endif
+    for_each ( output->begin(), output->end(), Magick::myAntiAliasImage(antialias.at(0)));
   }
   for_each ( output->begin(), output->end(), Magick::magickImage(format));
   return output;
@@ -297,18 +293,14 @@ XPtrImage magick_image_page( XPtrImage input, Rcpp::CharacterVector pagesize, Rc
   if(pagesize.size())
     for_each (output->begin(), output->end(), Magick::pageImage(Geom(pagesize[0])));
   if(density.size())
-#if MagickLibVersion >= 0x700
-    for_each (output->begin(), output->end(), Magick::densityImage(Point(density[0])));
-#else
-    for_each (output->begin(), output->end(), Magick::densityImage(Geom(density[0])));
-#endif
+  for_each (output->begin(), output->end(), Magick::densityImage(Point(density[0])));
   return output;
 }
 
 // [[Rcpp::export]]
 XPtrImage magick_image_crop( XPtrImage input, const char * geometry){
   XPtrImage output = copy(input);
-  if(strlen(geometry)){
+  if(std::strlen(geometry)){
     for_each (output->begin(), output->end(), Magick::cropImage(Geom(geometry)));
   } else {
     if(input->size())

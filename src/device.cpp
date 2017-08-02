@@ -31,13 +31,6 @@ public:
 //from 'svglite' source: 1 lwd = 1/96", but units in rest of document are 1/72"
 #define xlwd (72.0/96.0)
 
-/* IM7 uses vectors instead of lists */
-#if MagickLibVersion >= 0x700
-#define container vector
-#else
-#define container list
-#endif
-
 typedef std::container<Magick::Drawable> drawlist;
 typedef std::container<Magick::Coordinate> coordlist;
 typedef std::container<Magick::VPath> pathlist;
@@ -156,11 +149,10 @@ static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd, bool join =
   draw.push_back(Magick::DrawableMiterLimit(gc->lmitre));
   draw.push_back(Magick::DrawableFont(gc->fontfamily, style(gc->fontface), weight(gc->fontface), Magick::NormalStretch));
   draw.push_back(Magick::DrawablePointSize(gc->ps * gc->cex * multiplier));
+  draw.push_back(Magick::myDrawableDashArray(linetype(lty, gc->lty, lwd)));
 #if MagickLibVersion >= 0x700
-  draw.push_back(Magick::DrawableStrokeDashArray(linetype(lty, gc->lty, lwd)));
   draw.insert(draw.end(), x.begin(), x.end());
 #else
-  draw.push_back(Magick::DrawableDashArray(linetype(lty, gc->lty, lwd)));
   draw.splice(draw.end(), x);
 #endif
   if(getdev(dd)->drawing){
@@ -191,11 +183,7 @@ static void image_new_page(const pGEcontext gc, pDevDesc dd) {
   x.magick("png");
   x.depth(8L);
   x.strokeAntiAlias(getdev(dd)->antialias);
-#if MagickLibVersion >= 0x700
-  x.textAntiAlias(getdev(dd)->antialias);
-#else
-  x.antiAlias(getdev(dd)->antialias);
-#endif
+  x.myAntiAlias(getdev(dd)->antialias);
   image->push_back(x);
   VOID_END_RCPP
 }

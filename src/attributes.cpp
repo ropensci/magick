@@ -10,18 +10,10 @@
 // [[Rcpp::export]]
 Rcpp::LogicalVector magick_attr_text_antialias( XPtrImage input, Rcpp::LogicalVector set){
   if(set.size())
-#if MagickLibVersion >= 0x700
-    for_each ( input->begin(), input->end(), Magick::textAntiAliasImage(set[0]));
-#else
-    for_each ( input->begin(), input->end(), Magick::antiAliasImage(set[0]));
-#endif
+    for_each ( input->begin(), input->end(), Magick::myAntiAliasImage(set[0]));
   Rcpp::LogicalVector out;
   for (Iter it = input->begin(); it != input->end(); ++it)
-#if MagickLibVersion >= 0x700
-    out.push_back(it->textAntiAlias());
-#else
-    out.push_back(it->antiAlias());
-#endif
+    out.push_back(it->myAntiAlias());
   return out;
 }
 
