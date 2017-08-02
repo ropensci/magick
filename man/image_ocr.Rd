@@ -15,6 +15,8 @@ image_ocr(image, ...)
 Extract text from an image. Requires the 'tesseract' package.
 }
 \examples{
+if(require("tesseract")){
 img <- image_read("http://jeroen.github.io/images/testocr.png")
 image_ocr(img)
+}
 }

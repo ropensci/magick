@@ -6,8 +6,10 @@
 #' @inheritParams editing
 #' @param ... additional parameters passed to \code{tesseract::tesseract()}
 #' @examples
+#' if(require("tesseract")){
 #' img <- image_read("http://jeroen.github.io/images/testocr.png")
 #' image_ocr(img)
+#' }
 image_ocr <- function(image, ...){
   assert_image(image)
   vapply(image, function(x){
