@@ -25,7 +25,7 @@ fi
 
 # Pick up on GraphicsMagick but warn against it
 if [ -z "$PKGCONFIG_LIBS" ] && [ $(command -v GraphicsMagick++-config) ]; then
-  echo "Warning: found GraphicsMagick++ instead of ImageMatick++. Not recommended."
+  echo "Warning: found GraphicsMagick++ instead of ImageMagick++. Not recommended."
   PKGCONFIG_CFLAGS=$(GraphicsMagick++-config --cppflags)
   PKGCONFIG_LIBS=$(GraphicsMagick++-config --libs)
 fi
