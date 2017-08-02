@@ -51,7 +51,7 @@
 image_read <- function(path, density = NULL, depth = NULL){
   density <- as.character(density)
   depth <- as.integer(depth)
-  image <- if(is.character(path)){
+  image <- if(is.character(path) && all(nchar(path))){
     path <- vapply(path, replace_url, character(1))
     magick_image_readpath(path, density, depth)
   } else if(is.array(path)){
