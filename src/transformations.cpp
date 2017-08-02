@@ -344,6 +344,36 @@ XPtrImage magick_image_border( XPtrImage input, const char * color, const char *
   return output;
 }
 
+// [[Rcpp::export]]
+XPtrImage magick_image_circle( XPtrImage input, const double originX, const double originY, const double perimX, const double perimY, 
+                                                 const char * stroke_color, const double stroke_width, const char * fill_color){
+  XPtrImage output = copy(input);
+  
+  /* 
+    Below based on http://www.imagemagick.org/Magick++/Drawable.html and
+    https://charmie11.wordpress.com/2012/07/17/magick-draw-a-circle/
+  */
+  
+  // Construct drawing list 
+  std::list<Magick::Drawable> drawList;
+  
+  drawList.push_back(Magick::DrawableStrokeColor(stroke_color)); // Outline color 
+  drawList.push_back(Magick::DrawableStrokeWidth(stroke_width)); // Stroke width 
+  
+  // Fill color
+  if (strlen(fill_color)) {
+    drawList.push_back(Magick::DrawableFillColor(fill_color));
+  } else {
+    drawList.push_back(Magick::DrawableFillColor("transparent"));
+  }
+  
+  drawList.push_back(Magick::DrawableCircle(originX, originY, perimX, perimY));
+
+  for_each ( output->begin(), output->end(), Magick::drawImage(drawList));
+
+  return output;
+}
+
 
 /* STL is broken for annotateImage.
  * https://github.com/ImageMagick/ImageMagick/commit/903e501876d405ffd6f9f38f5e72db9acc3d15e8
