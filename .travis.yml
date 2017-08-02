@@ -15,6 +15,7 @@ matrix:
             - libwebp-dev
             - libpoppler-cpp-dev
             - libtesseract-dev
+            - libleptonica-dev
     - os: linux
       dist: trusty
       env: R_CODECOV=true
@@ -40,6 +41,7 @@ addons:
       - libwebp-dev
       - libpoppler-cpp-dev
       - libtesseract-dev
+      - libleptonica-dev
       - r-cran-rgdal
 
 r_github_packages:
