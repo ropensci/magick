@@ -334,6 +334,18 @@ static void image_close(pDevDesc dd) {
   VOID_END_RCPP
 }
 
+SEXP image_capture(pDevDesc dd){
+  BEGIN_RCPP
+  Frame * graph = getgraph(dd);
+  Rcpp::IntegerMatrix out(dd->bottom, dd->right);
+  Magick::Blob output;
+  graph->write(&output, "rgba", 8L);
+  std::memcpy(out.begin(), output.data(), output.length());
+  return out;
+  VOID_END_RCPP
+  return R_NilValue;
+}
+
 /* TODO: maybe port this to drawing as well, need affine transform. See:
  * https://github.com/ImageMagick/ImageMagick/blob/master/Magick%2B%2B/lib/Image.cpp#L1858
  */
@@ -461,7 +473,7 @@ static pDevDesc magick_driver_new(MagickDevice * device, int bg, int width, int 
   dd->path = image_path;
   dd->mode = NULL;
   dd->metricInfo = image_metric_info;
-  dd->cap = NULL;
+  dd->cap = image_capture;
   dd->raster = image_raster;
 
   // UTF-8 support
@@ -497,6 +509,7 @@ static pDevDesc magick_driver_new(MagickDevice * device, int bg, int width, int 
   dd->haveTransparency = 2;
   dd->haveTransparentBg = 2;
   dd->haveRaster = 2;
+  dd->haveCapture = 2;
   dd->deviceSpecific = device;
   return dd;
 }
