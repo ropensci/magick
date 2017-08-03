@@ -109,6 +109,10 @@ magick_device_pop <- function() {
     .Call('_magick_magick_device_pop', PACKAGE = 'magick')
 }
 
+magick_image_readbitmap_native <- function(x) {
+    .Call('_magick_magick_image_readbitmap_native', PACKAGE = 'magick', x)
+}
+
 magick_image_readbitmap_raw <- function(x) {
     .Call('_magick_magick_image_readbitmap_raw', PACKAGE = 'magick', x)
 }

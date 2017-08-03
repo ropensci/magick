@@ -54,6 +54,8 @@ image_read <- function(path, density = NULL, depth = NULL){
   image <- if(is.character(path) && all(nchar(path))){
     path <- vapply(path, replace_url, character(1))
     magick_image_readpath(path, density, depth)
+  } else if(inherits(path, "nativeRaster") || (is.matrix(path) && is.integer(path))){
+    image_read_nativeraster(path)
   } else if(is.array(path)){
     image_readbitmap(path)
   } else if(is.raw(path)) {
@@ -80,6 +82,12 @@ image_readbitmap <- function(x){
   } else {
     stop("Unsupported bitmap array type")
   }
+}
+
+# output of dev.caputure(native = TRUE)
+image_read_nativeraster <- function(x){
+  stopifnot(is.matrix(x) && is.integer(x))
+  magick_image_readbitmap_native(x)
 }
 
 # Not exported for now

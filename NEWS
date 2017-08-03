@@ -6,7 +6,8 @@
   - New function image_ocr() for easy text extraction
   - Added image_despeckle(), image_median(), image_reducenoise() (tnx Noam Ross)
   - image_background() now flattens each frame by default
-  - Support dev.capture() for graphics device
+  - Support dev.capture() for in image_graph() and image_draw() device
+  - Support type 'nativeRaster' in image_read()
   - OSX: Fix performance issue with font caching
   - Windows: Fix performance issue with font rendering
   - Windows: Add back support for gcc-4.6.3 on Windows
