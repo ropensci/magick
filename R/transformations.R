@@ -75,6 +75,31 @@ image_border <- function(image, color = "", geometry = ""){
 
 #' @export
 #' @rdname transformations
+#' @param times number of times to repeat the despeckle operation
+#' @examples image_despeckle(logo)
+image_despeckle <- function(image, times = 1L){
+  assert_image(image)
+  magick_image_despeckle(image, times)
+}
+
+#' @export
+#' @rdname transformations
+#' @examples image_median(logo)
+image_median <- function(image, radius = 1.0){
+  assert_image(image)
+  magick_image_median(image, radius)
+}
+
+#' @export
+#' @rdname transformations
+#' @examples image_reducenoise(logo)
+image_reducenoise <- function(image, radius = 1L){
+  assert_image(image)
+  magick_image_reducenoise(image, radius)
+}
+
+#' @export
+#' @rdname transformations
 #' @param noisetype integer betwee 0 and 5 with
 #' \href{https://www.imagemagick.org/Magick++/Enumerations.html#NoiseType}{noisetype}.
 #' @examples
@@ -86,7 +111,7 @@ image_noise <- function(image, noisetype = "gaussian"){
 
 #' @export
 #' @rdname transformations
-#' @param radius the radius of the Gaussian, in pixels, not counting the center pixel.
+#' @param radius radius, in pixels, for various transformations
 #' @param sigma the standard deviation of the Laplacian, in pixels.
 #' @examples
 #' image_blur(logo, 10, 10)
