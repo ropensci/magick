@@ -13,7 +13,7 @@
 image_ocr <- function(image, ...){
   assert_image(image)
   vapply(image, function(x){
-    buf <- image_write(x, format = 'png', density = "72x72")
+    buf <- image_write(x, format = 'PNG', density = "72x72")
     tesseract::ocr(buf, engine = tesseract::tesseract(...))
   }, character(1))
 }

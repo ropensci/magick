@@ -367,7 +367,7 @@ image_convert <- function(image, format, depth = NULL, antialias = NULL){
   antialias <- as.logical(antialias)
   if(length(depth) && is.na(match(depth, c(8, 16))))
     stop('depth must be 8 or 16 bit')
-  magick_image_format(image, format, depth, antialias)
+  magick_image_format(image, toupper(format), depth, antialias)
 }
 
 #' @export

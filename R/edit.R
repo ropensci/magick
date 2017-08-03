@@ -109,7 +109,7 @@ image_write <- function(image, path = NULL, format = NULL, quality = NULL,
     warning("Writing image with 0 frames")
   if(isTRUE(flatten))
     image <- image_flatten(image)
-  format <- as.character(format)
+  format <- toupper(as.character(format))
   quality <- as.integer(quality)
   depth <- as.integer(depth)
   density <- as.character(density)

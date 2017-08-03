@@ -183,7 +183,7 @@ static void image_new_page(const pGEcontext gc, pDevDesc dd) {
   if(image->size() > 0 && getdev(dd)->drawing)
     throw std::runtime_error("Cannot open a new page on a drawing device");
   Frame x(Geom(dd->right, dd->bottom), Color(col2name(gc->fill)));
-  x.magick("png");
+  x.magick("PNG");
   x.depth(8L);
   x.strokeAntiAlias(getdev(dd)->antialias);
   x.myAntiAlias(getdev(dd)->antialias);

@@ -15,7 +15,7 @@ XPtrImage magick_image_bitmap(void * data, Magick::StorageType type, size_t slic
     default: throw std::runtime_error("Invalid number of channels (must be 4 or less)");
   }
   Frame frame(width, height, format, type , data);
-  frame.magick("png");
+  frame.magick("PNG");
   XPtrImage image = create();
   image->push_back(frame);
   return image;

@@ -89,7 +89,7 @@
       img <- image_animate(img, fps = 1)
       format <- "gif"
     } else if(format == "xc"){
-      img <- image_convert(img, format)
+      img <- image_convert(img, "PNG")
       format <- 'png'
     }
     tmp <- file.path(tempdir(), paste0("preview.", format))
