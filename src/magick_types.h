@@ -31,10 +31,12 @@ Magick::Point Point(const char * str);
 #define myAntiAliasImage textAntiAliasImage
 #define myAntiAlias textAntiAlias
 #define myDrawableDashArray DrawableStrokeDashArray
+#define myMedianImage medianConvolveImage
 #else
 #define container list
 #define Point Geom
 #define myAntiAliasImage antiAliasImage
 #define myAntiAlias antiAlias
 #define myDrawableDashArray DrawableDashArray
+#define myMedianImage medianFilterImage
 #endif

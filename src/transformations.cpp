@@ -356,7 +356,7 @@ XPtrImage magick_image_despeckle( XPtrImage input, int times){
 // [[Rcpp::export]]
 XPtrImage magick_image_median( XPtrImage input, double radius){
   XPtrImage output = copy(input);
-  for_each ( output->begin(), output->end(), Magick::medianFilterImage(radius));
+  for_each ( output->begin(), output->end(), Magick::myMedianImage(radius));
   return output;
 }
 
