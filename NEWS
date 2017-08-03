@@ -4,6 +4,7 @@
   - Add 'antialias' parameter to image_graph() and image_draw() and image_convert()
   - New function image_apply() to apply a transformation to each frame individually
   - New function image_ocr() for easy text extraction
+  - Added image_despeckle(), image_median(), image_reducenoise() (tnx Noam Ross)
   - image_background() now flattens each frame by default
   - Support dev.capture() for graphics device
   - OSX: Fix performance issue with font caching

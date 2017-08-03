@@ -906,6 +906,42 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_despeckle
+XPtrImage magick_image_despeckle(XPtrImage input, int times);
+RcppExport SEXP _magick_magick_image_despeckle(SEXP inputSEXP, SEXP timesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< int >::type times(timesSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_despeckle(input, times));
+    return rcpp_result_gen;
+END_RCPP
+}
+// magick_image_median
+XPtrImage magick_image_median(XPtrImage input, double radius);
+RcppExport SEXP _magick_magick_image_median(SEXP inputSEXP, SEXP radiusSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< double >::type radius(radiusSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_median(input, radius));
+    return rcpp_result_gen;
+END_RCPP
+}
+// magick_image_reducenoise
+XPtrImage magick_image_reducenoise(XPtrImage input, const size_t radius);
+RcppExport SEXP _magick_magick_image_reducenoise(SEXP inputSEXP, SEXP radiusSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< const size_t >::type radius(radiusSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_reducenoise(input, radius));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_annotate
 XPtrImage magick_image_annotate(XPtrImage input, const std::string text, const char * gravity, const char * location, double degrees, Rcpp::IntegerVector size, Rcpp::CharacterVector font, Rcpp::CharacterVector color, Rcpp::CharacterVector strokecolor, Rcpp::CharacterVector boxcolor);
 RcppExport SEXP _magick_magick_image_annotate(SEXP inputSEXP, SEXP textSEXP, SEXP gravitySEXP, SEXP locationSEXP, SEXP degreesSEXP, SEXP sizeSEXP, SEXP fontSEXP, SEXP colorSEXP, SEXP strokecolorSEXP, SEXP boxcolorSEXP) {
@@ -1016,6 +1052,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_scale", (DL_FUNC) &_magick_magick_image_scale, 2},
     {"_magick_magick_image_sample", (DL_FUNC) &_magick_magick_image_sample, 2},
     {"_magick_magick_image_border", (DL_FUNC) &_magick_magick_image_border, 3},
+    {"_magick_magick_image_despeckle", (DL_FUNC) &_magick_magick_image_despeckle, 2},
+    {"_magick_magick_image_median", (DL_FUNC) &_magick_magick_image_median, 2},
+    {"_magick_magick_image_reducenoise", (DL_FUNC) &_magick_magick_image_reducenoise, 2},
     {"_magick_magick_image_annotate", (DL_FUNC) &_magick_magick_image_annotate, 10},
     {"_magick_magick_image_compare", (DL_FUNC) &_magick_magick_image_compare, 3},
     {NULL, NULL, 0}

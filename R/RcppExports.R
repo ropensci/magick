@@ -301,6 +301,18 @@ magick_image_border <- function(input, color, geometry) {
     .Call('_magick_magick_image_border', PACKAGE = 'magick', input, color, geometry)
 }
 
+magick_image_despeckle <- function(input, times) {
+    .Call('_magick_magick_image_despeckle', PACKAGE = 'magick', input, times)
+}
+
+magick_image_median <- function(input, radius) {
+    .Call('_magick_magick_image_median', PACKAGE = 'magick', input, radius)
+}
+
+magick_image_reducenoise <- function(input, radius) {
+    .Call('_magick_magick_image_reducenoise', PACKAGE = 'magick', input, radius)
+}
+
 magick_image_annotate <- function(input, text, gravity, location, degrees, size, font, color, strokecolor, boxcolor) {
     .Call('_magick_magick_image_annotate', PACKAGE = 'magick', input, text, gravity, location, degrees, size, font, color, strokecolor, boxcolor)
 }
