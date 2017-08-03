@@ -5,6 +5,7 @@
   - New function image_apply() to apply a transformation to each frame individually
   - New function image_ocr() for easy text extraction
   - image_background() now flattens each frame by default
+  - Support dev.capture() for graphics device
   - OSX: Fix performance issue with font caching
   - Windows: Fix performance issue with font rendering
   - Windows: Add back support for gcc-4.6.3 on Windows
