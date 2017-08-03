@@ -28,6 +28,9 @@ public:
     clipleft(0), clipright(0), cliptop(0), clipbottom(0){}
 };
 
+// Get the 'latest' device
+static MagickDevice * dirty = NULL;
+
 //from 'svglite' source: 1 lwd = 1/96", but units in rest of document are 1/72"
 #define xlwd (72.0/96.0)
 
@@ -328,6 +331,7 @@ static void image_raster(unsigned int *raster, int w, int h,
 /* TODO: somehow R adds another protect */
 static void image_close(pDevDesc dd) {
   BEGIN_RCPP
+  dirty = NULL;
   XPtrImage ptr = getptr(dd);
   MagickDevice * device = (MagickDevice *) dd->deviceSpecific;
   delete device;
@@ -344,6 +348,12 @@ SEXP image_capture(pDevDesc dd){
   return out;
   VOID_END_RCPP
   return R_NilValue;
+}
+
+void image_mode(int mode, pDevDesc dd){
+  if(!mode){
+    dirty = getdev(dd);
+  }
 }
 
 /* TODO: maybe port this to drawing as well, need affine transform. See:
@@ -471,7 +481,7 @@ static pDevDesc magick_driver_new(MagickDevice * device, int bg, int width, int 
   dd->polygon = image_polygon;
   dd->polyline = image_polyline;
   dd->path = image_path;
-  dd->mode = NULL;
+  dd->mode = image_mode;
   dd->metricInfo = image_metric_info;
   dd->cap = image_capture;
   dd->raster = image_raster;
@@ -535,5 +545,14 @@ XPtrImage magick_device_internal(std::string bg, int width, int height, double p
   MagickDevice * device = new MagickDevice(drawing, antialias);
   device->ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
   makeDevice(device, bg, width, height, pointsize, res, clip);
+  return device->ptr;
+}
+
+// [[Rcpp::export]]
+SEXP magick_device_pop(){
+  if(dirty == NULL)
+    return R_NilValue;
+  MagickDevice * device = dirty;
+  dirty = NULL;
   return device->ptr;
 }

@@ -80,7 +80,7 @@
 }
 
 #' @export
-"print.magick-image" <- function(x, ...){
+"print.magick-image" <- function(x, info = TRUE, ...){
   img <- x
   viewer <- getOption("viewer")
   if(length(img) && is.function(viewer)){
@@ -96,7 +96,8 @@
     image_write(img, path = tmp, format = format)
     viewer(tmp)
   }
-  print(image_info(x))
+  if(isTRUE(info))
+    print(image_info(x))
   invisible()
 }
 

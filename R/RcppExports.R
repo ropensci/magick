@@ -105,6 +105,10 @@ magick_device_internal <- function(bg, width, height, pointsize, res, clip, anti
     .Call('_magick_magick_device_internal', PACKAGE = 'magick', bg, width, height, pointsize, res, clip, antialias, drawing)
 }
 
+magick_device_pop <- function() {
+    .Call('_magick_magick_device_pop', PACKAGE = 'magick')
+}
+
 magick_image_readbitmap_raw <- function(x) {
     .Call('_magick_magick_image_readbitmap_raw', PACKAGE = 'magick', x)
 }

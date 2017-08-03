@@ -313,6 +313,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_device_pop
+SEXP magick_device_pop();
+RcppExport SEXP _magick_magick_device_pop() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(magick_device_pop());
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_readbitmap_raw
 XPtrImage magick_image_readbitmap_raw(Rcpp::RawVector x);
 RcppExport SEXP _magick_magick_image_readbitmap_raw(SEXP xSEXP) {
@@ -957,6 +967,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_coder_info", (DL_FUNC) &_magick_magick_coder_info, 1},
     {"_magick_magick_config_internal", (DL_FUNC) &_magick_magick_config_internal, 0},
     {"_magick_magick_device_internal", (DL_FUNC) &_magick_magick_device_internal, 8},
+    {"_magick_magick_device_pop", (DL_FUNC) &_magick_magick_device_pop, 0},
     {"_magick_magick_image_readbitmap_raw", (DL_FUNC) &_magick_magick_image_readbitmap_raw, 1},
     {"_magick_magick_image_readbitmap_double", (DL_FUNC) &_magick_magick_image_readbitmap_double, 1},
     {"_magick_magick_image_readbin", (DL_FUNC) &_magick_magick_image_readbin, 3},
