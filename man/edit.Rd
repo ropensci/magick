@@ -57,7 +57,7 @@ image_animate(image, fps = 10, loop = 0, dispose = c("background",
   "previous", "none"))
 }
 \arguments{
-\item{path}{file path, URL, or raw vector with image data}
+\item{path}{file path, URL, or raw array or \code{nativeRaster} with image data}
 
 \item{density}{resolution to render pdf or svg}
 

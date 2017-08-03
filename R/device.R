@@ -16,6 +16,9 @@
 #' of typical graphics coordinates.  You can override all this by passing custom
 #' \code{xlim}, \code{ylim} or \code{mar} values to \code{image_draw}.
 #'
+#' The \code{image_capture} function returns the current device as an image. This only
+#' works if the current device is a magick device or suppots \link{dev.capture}.
+#'
 #' @export
 #' @aliases image_device
 #' @rdname device
@@ -86,6 +89,22 @@ image_draw <- function(image, pointsize = 12, res = 72, antialias = TRUE, ...){
   magick_attr_text_antialias(device, antialias)
   magick_attr_stroke_antialias(device, antialias)
   return(device)
+}
+
+#' @export
+#' @rdname device
+image_capture <- function(){
+  which <- grDevices::dev.cur()
+  if(which < 2)
+    stop("No current open device")
+  if(identical(names(which), "magick")){
+    magick_device_get(which)
+  } else {
+    capt <- grDevices::dev.capture(TRUE)
+    if(!is.matrix(capt))
+      stop("Current device cannot be captured")
+    image_read(capt)
+  }
 }
 
 setup_device <- function(info, xlim = NULL, ylim = NULL, xaxs = "i", yaxs = "i", mar = c(0,0,0,0), ...){

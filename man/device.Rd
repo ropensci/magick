@@ -5,12 +5,15 @@
 \alias{image_graph}
 \alias{image_device}
 \alias{image_draw}
+\alias{image_capture}
 \title{Magick Graphics Device}
 \usage{
 image_graph(width = 800, height = 600, bg = "transparent",
   pointsize = 12, res = 72, clip = TRUE, antialias = TRUE)
 
 image_draw(image, pointsize = 12, res = 72, antialias = TRUE, ...)
+
+image_capture()
 }
 \arguments{
 \item{width}{in pixels}
@@ -50,6 +53,9 @@ match image size in pixels (width x height) where \code{(0,0)} is the top left c
 Note that this means the y axis increases from top to bottom which is the opposite
 of typical graphics coordinates.  You can override all this by passing custom
 \code{xlim}, \code{ylim} or \code{mar} values to \code{image_draw}.
+
+The \code{image_capture} function returns the current device as an image. This only
+works if the current device is a magick device or suppots \link{dev.capture}.
 }
 \examples{
 # Regular image

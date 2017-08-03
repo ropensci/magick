@@ -548,6 +548,17 @@ XPtrImage magick_device_internal(std::string bg, int width, int height, double p
   return device->ptr;
 }
 
+
+// [[Rcpp::export]]
+XPtrImage magick_device_get(int n){
+  if(n <= 1)
+    throw std::runtime_error("No such graphics device");
+  pGEDevDesc gd = GEgetDevice(n - 1);
+  if(!gd)
+    throw std::runtime_error("No such graphics device");
+  return getptr(gd->dev);
+}
+
 // [[Rcpp::export]]
 SEXP magick_device_pop(){
   if(dirty == NULL)

@@ -23,7 +23,7 @@
 #' @family image
 #' @rdname edit
 #' @name editing
-#' @param path file path, URL, or raw vector with image data
+#' @param path file path, URL, or raw array or \code{nativeRaster} with image data
 #' @param image object returned by \code{image_read}
 #' @param density resolution to render pdf or svg
 #' @param depth image depth. Must be 8 or 16
