@@ -345,6 +345,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_readbitmap_raster
+XPtrImage magick_image_readbitmap_raster(Rcpp::CharacterMatrix x);
+RcppExport SEXP _magick_magick_image_readbitmap_raster(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::CharacterMatrix >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_readbitmap_raster(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_readbitmap_raw
 XPtrImage magick_image_readbitmap_raw(Rcpp::RawVector x);
 RcppExport SEXP _magick_magick_image_readbitmap_raw(SEXP xSEXP) {
@@ -1028,6 +1039,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_device_get", (DL_FUNC) &_magick_magick_device_get, 1},
     {"_magick_magick_device_pop", (DL_FUNC) &_magick_magick_device_pop, 0},
     {"_magick_magick_image_readbitmap_native", (DL_FUNC) &_magick_magick_image_readbitmap_native, 1},
+    {"_magick_magick_image_readbitmap_raster", (DL_FUNC) &_magick_magick_image_readbitmap_raster, 1},
     {"_magick_magick_image_readbitmap_raw", (DL_FUNC) &_magick_magick_image_readbitmap_raw, 1},
     {"_magick_magick_image_readbitmap_double", (DL_FUNC) &_magick_magick_image_readbitmap_double, 1},
     {"_magick_magick_image_readbin", (DL_FUNC) &_magick_magick_image_readbin, 3},

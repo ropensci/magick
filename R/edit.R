@@ -51,15 +51,17 @@
 image_read <- function(path, density = NULL, depth = NULL){
   density <- as.character(density)
   depth <- as.integer(depth)
-  image <- if(is.character(path) && all(nchar(path))){
-    path <- vapply(path, replace_url, character(1))
-    magick_image_readpath(path, density, depth)
-  } else if(inherits(path, "nativeRaster") || (is.matrix(path) && is.integer(path))){
+  image <- if(inherits(path, "nativeRaster") || (is.matrix(path) && is.integer(path))){
     image_read_nativeraster(path)
+  } else if(inherits(path, "raster") || (is.matrix(path) && is.character(path))){
+    image_read_raster(path)
   } else if(is.array(path)){
     image_readbitmap(path)
   } else if(is.raw(path)) {
     magick_image_readbin(path, density, depth)
+  } else if(is.character(path) && all(nchar(path))){
+    path <- vapply(path, replace_url, character(1))
+    magick_image_readpath(path, density, depth)
   } else {
     stop("path must be URL, filename or raw vector")
   }
@@ -88,6 +90,12 @@ image_readbitmap <- function(x){
 image_read_nativeraster <- function(x){
   stopifnot(is.matrix(x) && is.integer(x))
   magick_image_readbitmap_native(x)
+}
+
+# output of dev.caputure(native = FALSE) or as.raster()
+image_read_raster <- function(x){
+  stopifnot(is.matrix(x) && is.character(x))
+  magick_image_readbitmap_raster(t(x))
 }
 
 # Not exported for now

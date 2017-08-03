@@ -28,6 +28,15 @@ XPtrImage magick_image_readbitmap_native(Rcpp::IntegerMatrix x){
 }
 
 // [[Rcpp::export]]
+XPtrImage magick_image_readbitmap_raster(Rcpp::CharacterMatrix x){
+  std::vector<rcolor> y(x.size());
+  for(size_t i = 0; i < x.length(); i++)
+    y[i] = R_GE_str2col(x[i]);
+  Rcpp::IntegerVector dims(x.attr("dim"));
+  return magick_image_bitmap(y.data(), Magick::CharPixel, 4, dims[0], dims[1]);
+}
+
+// [[Rcpp::export]]
 XPtrImage magick_image_readbitmap_raw(Rcpp::RawVector x){
   Rcpp::IntegerVector dims(x.attr("dim"));
   return magick_image_bitmap(x.begin(), Magick::CharPixel, dims[0], dims[1], dims[2]);
