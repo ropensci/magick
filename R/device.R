@@ -97,20 +97,3 @@ setup_device <- function(info, xlim = NULL, ylim = NULL, xaxs = "i", yaxs = "i",
   graphics::par(mar = mar)
   graphics::plot.window(xlim = xlim, ylim = ylim, xaxs = xaxs, yaxs = yaxs, ...)
 }
-
-# Automatically update viewer after graphics events have finished
-autoview <- function(){
-  if(interactive() && is.function(getOption("viewer"))){
-    id <- addTaskCallback(function(...){
-      tryCatch({
-        dirty <- magick_device_pop()
-        if(length(dirty))
-          print(dirty, info = FALSE)
-      }, error = function(...){});
-      return(TRUE)
-    })
-    reg.finalizer(environment(.onAttach), function(...){
-      removeTaskCallback(id)
-    }, TRUE)
-  }
-}
