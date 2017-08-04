@@ -153,7 +153,7 @@ frink <- image_read("https://jeroen.github.io/images/frink.png")
 print(frink)
 
 # Add 20px left/right and 10px top/bottom
-image_border(frink, "red", "20x10")
+image_border(image_background(frink, "hotpink"), "#000080", "20x10")
 
 # Trim margins
 image_trim(frink)
@@ -170,8 +170,7 @@ image_rotate(frink, 45)
 image_flip(frink)
 image_flop(frink)
 
-# Set a background color
-image_background(frink, "pink", flatten = TRUE)
+# Paint the shirt orange
 image_fill(frink, "orange", point = "+100+200", fuzz = 30000)
 ```
 
