@@ -308,23 +308,23 @@ static void image_raster(unsigned int *raster, int w, int h,
                 Rboolean interpolate,
                 const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
+  //normalize
+  rot = fmod(-rot, 360);
+  height = - height;
+
+  //create the raster frame
   Frame frame(w, h, std::string("RGBA"), Magick::CharPixel, raster);
   frame.backgroundColor(Color("transparent"));
-  Magick::Geometry size = Geom(width, -height);
+  Magick::Geometry size = Geom(width, height);
   size.aspect(true); //resize without preserving aspect ratio
   interpolate ? frame.resize(size) : frame.scale(size);
-  frame.rotate(-rot);
-  //size may change after rotation
+  frame.rotate(rot);
   Magick::Geometry outsize = frame.size();
-  int xoff = (outsize.width() - width) / 2;
-  int yoff = (outsize.height() + height) / 2;
-  if(getdev(dd)->drawing){
-    Image * image = getimage(dd);
-    for_each (image->begin(), image->end(), Magick::compositeImage(frame, x - xoff, y + height - yoff, Magick::OverCompositeOp));
-  } else {
-    Frame * graph = getgraph(dd);
-    graph->composite(frame, x - xoff, y + height - yoff, Magick::OverCompositeOp);
-  }
+  int xdiff = outsize.width() - width;
+  int ydiff = outsize.height() - height;
+  Magick::DrawableCompositeImage draw(x - (xdiff / 2), y - height - (ydiff / 2),
+                                      outsize.width(), outsize.height(), frame, Magick::OverCompositeOp);
+  image_draw(draw, gc, dd);
   VOID_END_RCPP
 }
 
