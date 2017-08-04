@@ -53,10 +53,10 @@ image_read <- function(path, density = NULL, depth = NULL){
   depth <- as.integer(depth)
   image <- if(inherits(path, "nativeRaster") || (is.matrix(path) && is.integer(path))){
     image_read_nativeraster(path)
-  } else if (is.raster(path)) {
+  } else if (grDevices::is.raster(path)) {
     image_read_raster2(path)
   } else if (is.matrix(path) && is.character(path)){
-    image_read_raster2(as.raster(path))
+    image_read_raster2(grDevices::as.raster(path))
   } else if(is.array(path)){
     image_readbitmap(path)
   } else if(is.raw(path)) {
