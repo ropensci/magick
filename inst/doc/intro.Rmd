@@ -15,7 +15,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, }
 library(knitr)
 "print.magick-image" <- function(x, ...){
   ext <- ifelse(length(x), tolower(image_info(x[1])$format), "gif")
@@ -27,6 +27,8 @@ library(knitr)
 dev.off <- function(){
   invisible(grDevices::dev.off())
 }
+
+has_tesseract <- isTRUE(require(tesseract, quietly = TRUE))
 ```
 
 The new [magick](https://cran.r-project.org/package=magick) package is an ambitious effort to modernize and simplify high-quality image processing in R. It wraps the [ImageMagick STL](https://www.imagemagick.org/Magick++/STL.html) which is perhaps the most comprehensive open-source image processing library available today.
@@ -511,3 +513,19 @@ raster::plotRGB(rr, asp = 1)
 ```
 
 The raster package also does not seem to support transparency, which perhaps makes sense in the context of spatial imaging.
+
+## OCR text extraction
+
+A recent edition to the package is to extract text from images using OCR. This requires the tesseract package:
+
+```{r eval=FALSE}
+install.packages("tesseract")
+```
+
+```{r, eval = has_tesseract}
+img <- image_read("http://jeroen.github.io/images/testocr.png")
+print(img)
+
+# Extract text
+cat(image_ocr(img))
+```

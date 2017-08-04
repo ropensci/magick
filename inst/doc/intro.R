@@ -11,6 +11,8 @@ dev.off <- function(){
   invisible(grDevices::dev.off())
 }
 
+has_tesseract <- isTRUE(require(tesseract, quietly = TRUE))
+
 ## ------------------------------------------------------------------------
 str(magick::magick_config())
 
@@ -241,4 +243,14 @@ raster::plotRGB(r)
 buf <- as.integer(frink[[1]])
 rr <- raster::brick(buf)
 raster::plotRGB(rr, asp = 1)
+
+## ----eval=FALSE----------------------------------------------------------
+#  install.packages("tesseract")
+
+## ---- eval = has_tesseract-----------------------------------------------
+img <- image_read("http://jeroen.github.io/images/testocr.png")
+print(img)
+
+# Extract text
+cat(image_ocr(img))
 
