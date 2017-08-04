@@ -309,8 +309,9 @@ static void image_raster(unsigned int *raster, int w, int h,
                 const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
   //normalize
-  rot = fmod(-rot, 360);
+  rot = fmod(-rot + 360.0, 360.0);
   height = - height;
+  y = y - height;
 
   //create the raster frame
   Frame frame(w, h, std::string("RGBA"), Magick::CharPixel, raster);
@@ -318,12 +319,18 @@ static void image_raster(unsigned int *raster, int w, int h,
   Magick::Geometry size = Geom(width, height);
   size.aspect(true); //resize without preserving aspect ratio
   interpolate ? frame.resize(size) : frame.scale(size);
-  frame.rotate(rot);
-  Magick::Geometry outsize = frame.size();
-  int xdiff = outsize.width() - width;
-  int ydiff = outsize.height() - height;
-  Magick::DrawableCompositeImage draw(x - (xdiff / 2), y - height - (ydiff / 2),
-                                      outsize.width(), outsize.height(), frame, Magick::OverCompositeOp);
+
+  //rotate minimum 1 degree. Adjust x,y to rotate around center
+  if(rot > 1){
+    frame.rotate(rot);
+    Magick::Geometry outsize = frame.size();
+    x = x - (outsize.width() - width) / 2;
+    y = y - (outsize.height() - height) / 2;
+    width = outsize.width();
+    height = outsize.height();
+  }
+
+  Magick::DrawableCompositeImage draw(x, y, width, height, frame, Magick::OverCompositeOp);
   image_draw(draw, gc, dd);
   VOID_END_RCPP
 }
