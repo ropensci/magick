@@ -1,5 +1,5 @@
 0.6
-  - Vectorize image_draw()
+  - Vectorize image_draw() (all drawing should be applied to each frame)
   - Rename 'image_device' to 'image_graph'
   - Add 'antialias' parameter to image_graph() and image_draw() and image_convert()
   - New function image_apply() to apply a transformation to each frame individually
@@ -7,7 +7,8 @@
   - Added image_despeckle(), image_median(), image_reducenoise() (tnx Noam Ross)
   - image_background() now flattens each frame by default
   - Support dev.capture() for in image_graph() and image_draw() device
-  - Support type 'nativeRaster' in image_read()
+  - Support type nativeRaster, raster, and matrix in image_read()
+  - Drawing rasters reimplemented DrawableCompositeImage()
   - OSX: Fix performance issue with font caching
   - Windows: Fix performance issue with font rendering
   - Windows: Add back support for gcc-4.6.3 on Windows
