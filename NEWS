@@ -1,4 +1,7 @@
-0.6
+1.1
+  - Fix positioning of rasterImage() when rotation != 0
+
+1.0
   - Vectorize image_draw() (all drawing should be applied to each frame)
   - Rename 'image_device' to 'image_graph'
   - Add 'antialias' parameter to image_graph() and image_draw() and image_convert()

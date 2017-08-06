@@ -8,6 +8,7 @@
  */
 #include "magick_types.h"
 #include <R_ext/GraphicsEngine.h>
+#define pi 3.14159265359
 
 // Magick Device Parameters
 class MagickDevice {
@@ -311,7 +312,6 @@ static void image_raster(unsigned int *raster, int w, int h,
   //normalize
   rot = fmod(-rot + 360.0, 360.0);
   height = - height;
-  y = y - height;
 
   //create the raster frame
   Frame frame(w, h, std::string("RGBA"), Magick::CharPixel, raster);
@@ -323,14 +323,16 @@ static void image_raster(unsigned int *raster, int w, int h,
   //rotate minimum 1 degree. Adjust x,y to rotate around center
   if(rot > 1){
     frame.rotate(rot);
-    Magick::Geometry outsize = frame.size();
-    x = x - (outsize.width() - width) / 2;
-    y = y - (outsize.height() - height) / 2;
-    width = outsize.width();
-    height = outsize.height();
+    double rad = (rot * pi) / 180;
+    int x_offset = round(width * fmin(0.0, cos(rad)) + height * fmin(0.0, sin(rad)));
+    int y_offset = round(height * fmin(0.0, cos(rad)) + width * fmin(0.0, sin(-rad)));
+    Rprintf("rad: %f\noffset x %d\noffset y %d\n", rad, x_offset, y_offset);
+    x += x_offset;
+    y -= y_offset;
   }
 
-  Magick::DrawableCompositeImage draw(x, y, width, height, frame, Magick::OverCompositeOp);
+  Magick::Geometry outsize(frame.size());
+  Magick::DrawableCompositeImage draw(x, y - outsize.height(), outsize.width(), outsize.height(), frame, Magick::OverCompositeOp);
   image_draw(draw, gc, dd);
   VOID_END_RCPP
 }
