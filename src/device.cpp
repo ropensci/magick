@@ -325,14 +325,17 @@ static void image_raster(unsigned int *raster, int w, int h,
     frame.rotate(rot);
     double rad = (rot * pi) / 180;
     int x_offset = round(width * fmin(0.0, cos(rad)) + height * fmin(0.0, sin(rad)));
-    int y_offset = round(height * fmin(0.0, cos(rad)) + width * fmin(0.0, sin(-rad)));
-    Rprintf("rad: %f\noffset x %d\noffset y %d\n", rad, x_offset, y_offset);
+    int y_offset = round(height * fmin(0.0, cos(rad)) + width * fmin(0.0, -sin(rad)));
     x += x_offset;
     y -= y_offset;
+
+    //calculate new values
+    Magick::Geometry outsize(frame.size());
+    width = outsize.width();
+    height = outsize.height();
   }
 
-  Magick::Geometry outsize(frame.size());
-  Magick::DrawableCompositeImage draw(x, y - outsize.height(), outsize.width(), outsize.height(), frame, Magick::OverCompositeOp);
+  Magick::DrawableCompositeImage draw(x, y - height, width, height, frame, Magick::OverCompositeOp);
   image_draw(draw, gc, dd);
   VOID_END_RCPP
 }
