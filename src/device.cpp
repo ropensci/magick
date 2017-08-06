@@ -320,19 +320,16 @@ static void image_raster(unsigned int *raster, int w, int h,
   size.aspect(true); //resize without preserving aspect ratio
   interpolate ? frame.resize(size) : frame.scale(size);
 
-  //rotate minimum 1 degree. Adjust x,y to rotate around center
+  //rotate minimum 1 degree. Adjust positioning to rotate around (x,y)
   if(rot > 1){
     frame.rotate(rot);
     double rad = (rot * pi) / 180;
-    int x_offset = round(width * fmin(0.0, cos(rad)) + height * fmin(0.0, sin(rad)));
-    int y_offset = round(height * fmin(0.0, cos(rad)) + width * fmin(0.0, -sin(rad)));
-    x += x_offset;
-    y -= y_offset;
-
-    //calculate new values
-    Magick::Geometry outsize(frame.size());
-    width = outsize.width();
-    height = outsize.height();
+    int oldwidth = width;
+    int oldheight = height;
+    width = abs(oldwidth * cos(rad)) + abs(oldheight * sin(rad));
+    height = abs(oldheight * cos(rad)) + abs(oldwidth * sin(rad));
+    x += round(oldwidth * fmin(0.0, cos(rad)) + oldheight * fmin(0.0, sin(rad)));
+    y -= round(oldheight * fmin(0.0, cos(rad)) + oldwidth * fmin(0.0, -sin(rad)));
   }
 
   Magick::DrawableCompositeImage draw(x, y - height, width, height, frame, Magick::OverCompositeOp);
