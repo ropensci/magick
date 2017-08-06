@@ -318,7 +318,8 @@ static void image_raster(unsigned int *raster, int w, int h,
   frame.backgroundColor(Color("transparent"));
   Magick::Geometry size = Geom(width, height);
   size.aspect(true); //resize without preserving aspect ratio
-  interpolate ? frame.resize(size) : frame.scale(size);
+  frame.filterType(interpolate ? Magick::TriangleFilter : Magick::PointFilter);
+  frame.resize(size);
 
   //rotate minimum 1 degree. Adjust positioning to rotate around (x,y)
   if(rot > 1){
