@@ -1,5 +1,6 @@
 1.1
-  - Fix positioning of rasterImage() when rotation != 0
+  - Fix positioning of rasterImage() when raster image is rotated
+  - Use TriangleFilter for interpolating rasterImage()
 
 1.0
   - Vectorize image_draw() (all drawing should be applied to each frame)
