@@ -32,11 +32,10 @@ download_url <- function(url){
   req <- curl::curl_fetch_memory(url)
   if(req$status >= 400)
     stop(sprintf("Failed to download %s (HTTP %d)", url, req$status))
-  headers <- tolower(curl::parse_headers(req$headers))
-  ctype <- headers[grepl("^content.type", headers)]
-  ctype <- sub("content.type ?:? +", "", ctype)
+  headers <- curl::parse_headers_list(req$headers)
+  ctype <- headers[['content-type']]
   matches <- match(ctype, mimetypes$type)
-  extension <- if(length(matches) && !is.na(matches)){
+  extension <- if(length(matches) && !is.na(matches) && !grepl("(text|octet)", ctype)){
     sub("*.", ".", mimetypes$pattern[matches[1]], fixed = TRUE)
   } else {
     basename(url)
