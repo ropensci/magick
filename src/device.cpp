@@ -392,6 +392,17 @@ static void image_text(double x, double y, const char *str, double rot,
   double deg = fmod(-rot + 360.0, 360.0);
   double ps = gc->ps * gc->cex * multiplier;
 
+  /* there is a bug in IM that prefers these properties over the draw list ones */
+  Frame * graph = getgraph(dd);
+  graph->fontPointsize(ps);
+  graph->strokeColor(Magick::Color());
+  graph->fillColor(Color(col2name(gc->col)));
+#if MagickLibVersion >= 0x692
+  graph->fontFamily(fontname(gc));
+  graph->fontWeight(weight(gc->fontface));
+  graph->fontStyle(style(gc->fontface));
+#endif
+
   drawlist draw;
   draw.push_back(Magick::DrawableStrokeColor(Magick::Color()));
   draw.push_back(Magick::DrawableFillColor(Color(col2name(gc->col))));
@@ -409,7 +420,6 @@ static void image_metric_info(int c, const pGEcontext gc, double* ascent,
   /* DOCS: http://www.imagemagick.org/Magick++/TypeMetric.html */
   BEGIN_RCPP
   bool is_unicode = mbcslocale;
-  std::string font = fontname(gc);
   if (c < 0) {
     is_unicode = true;
     c = -c;
@@ -428,7 +438,7 @@ static void image_metric_info(int c, const pGEcontext gc, double* ascent,
   double multiplier = 1/dd->ipr[0]/72;
   graph->fontPointsize(gc->ps * gc->cex * multiplier);
 #if MagickLibVersion >= 0x692
-  graph->fontFamily(font);
+  graph->fontFamily(fontname(gc));
   graph->fontWeight(weight(gc->fontface));
   graph->fontStyle(style(gc->fontface));
 #endif
@@ -442,10 +452,9 @@ static void image_metric_info(int c, const pGEcontext gc, double* ascent,
 
 static double image_strwidth(const char *str, const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
-  std::string font = fontname(gc);
   Frame * graph = getgraph(dd);
 #if MagickLibVersion >= 0x692
-  graph->fontFamily(font);
+  graph->fontFamily(fontname(gc));
   graph->fontWeight(weight(gc->fontface));
   graph->fontStyle(style(gc->fontface));
 #endif
