@@ -163,8 +163,6 @@ static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd, bool join =
   if(join == true)
     draw.push_back(Magick::DrawableStrokeLineJoin(linejoin(gc->ljoin)));
   draw.push_back(Magick::DrawableMiterLimit(gc->lmitre));
-  draw.push_back(Magick::DrawableFont(fontname(gc), style(gc->fontface), weight(gc->fontface), Magick::NormalStretch));
-  draw.push_back(Magick::DrawablePointSize(gc->ps * gc->cex * multiplier));
   draw.push_back(Magick::myDrawableDashArray(linetype(lty, gc->lty, lwd)));
 #if MagickLibVersion >= 0x700
   draw.insert(draw.end(), x.begin(), x.end());
@@ -379,42 +377,32 @@ void image_mode(int mode, pDevDesc dd){
   }
 }
 
-/* TODO: maybe port this to drawing as well, need affine transform. See:
- * https://github.com/ImageMagick/ImageMagick/blob/master/Magick%2B%2B/lib/Image.cpp#L1858
- */
-
-static void inline image_annotate(Frame * frame, double x, double y, const char *str, double rot, std::string family,
-                                  int ps, int weight, Magick::StyleType style, Magick::Color col){
-#if MagickLibVersion >= 0x692
-  frame->fontFamily(family);
-  frame->fontWeight(weight);
-  frame->fontStyle(style);
-#else
-  frame->font(family);
-#endif
-  frame->fillColor(col);
-  frame->strokeColor(Magick::Color()); //unset: this is really ugly
-  frame->boxColor(Magick::Color());
-  frame->fontPointsize(ps);
-  frame->annotate(str, Geom(0, 0, x, y), Magick::ForgetGravity, -1 * rot);
-}
-
 static void image_text(double x, double y, const char *str, double rot,
                 double hadj, const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
   double multiplier = 1/dd->ipr[0]/72;
   int ps = gc->ps * gc->cex * multiplier;
-  if(getdev(dd)->drawing){
-    Image * image = getimage(dd);
-    for (size_t i = 0; i < image->size(); i++){
 
-      image_annotate(&image->at(i), x, y, str, rot, fontname(gc), ps, weight(gc->fontface),
-                     style(gc->fontface), Color(col2name(gc->col)));
-    }
-  } else {
-    image_annotate(getgraph(dd), x, y, str, rot, fontname(gc), ps, weight(gc->fontface),
-                   style(gc->fontface), Color(col2name(gc->col)));
+  drawlist draw;
+  draw.push_back(Magick::DrawableStrokeColor(Magick::Color()));
+  draw.push_back(Magick::DrawableFillColor(Color(col2name(gc->col))));
+  draw.push_back(Magick::DrawableFont(fontname(gc), style(gc->fontface), weight(gc->fontface), Magick::NormalStretch));
+  draw.push_back(Magick::DrawablePointSize(ps));
+  draw.push_back(Magick::DrawableAffine());
+  draw.push_back(Magick::DrawableText(x, y, std::string(str), "UTF-8"));
+  rot = fmod(-rot + 360.0, 360.0);
+  if(rot > 1){
+    double rad = (rot * pi) / 180;
+    double sx = cos(rad);
+    double sy = cos(rad);
+    double rx = sin(rad);
+    double ry = -sin(rad);
+    double tx = x + x * sx + y * rx;
+    double ty = y + y * sy + x * ry;
+    Magick::DrawableAffine transform(sx, sy, rx, ry, tx, ty);
+    draw.push_back(transform);
   }
+  image_draw(draw, gc, dd);
   VOID_END_RCPP
 }
 
