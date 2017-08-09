@@ -12,12 +12,6 @@ install:
 
 # Adapt as necessary starting from here
 
-environment:
-  matrix:
-    - R_VERSION: devel
-    - R_VERSION: 3.2.5
-      env: _R_CHECK_FORCE_SUGGESTS_=0
-
 build_script:
   - travis-tool.sh install_deps
 

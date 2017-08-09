@@ -434,7 +434,7 @@ static void image_metric_info(int c, const pGEcontext gc, double* ascent,
   graph->fontWeight(weight(gc->fontface));
   graph->fontStyle(style(gc->fontface));
 #else
-  graph->font(font);
+  //graph->font(font);
 #endif
   Magick::TypeMetric tm;
   graph->fontTypeMetrics(str, &tm);
@@ -453,7 +453,7 @@ static double image_strwidth(const char *str, const pGEcontext gc, pDevDesc dd) 
   graph->fontWeight(weight(gc->fontface));
   graph->fontStyle(style(gc->fontface));
 #else
-  graph->font(font);
+  //graph->font(font);
 #endif
   double multiplier = 1/dd->ipr[0]/72;
   graph->fontPointsize(gc->ps * gc->cex * multiplier);
