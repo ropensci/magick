@@ -164,11 +164,8 @@ static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd, bool join =
     draw.push_back(Magick::DrawableStrokeLineJoin(linejoin(gc->ljoin)));
   draw.push_back(Magick::DrawableMiterLimit(gc->lmitre));
   draw.push_back(Magick::myDrawableDashArray(linetype(lty, gc->lty, lwd)));
-#if MagickLibVersion >= 0x700
-  draw.insert(draw.end(), x.begin(), x.end());
-#else
-  draw.splice(draw.end(), x);
-#endif
+  for ( drawlist::iterator it = x.begin(); it!= x.end(); ++it )
+    draw.push_back(*it);
   if(getdev(dd)->drawing){
     Image * image = getimage(dd);
     for_each (image->begin(), image->end(), Magick::drawImage(draw));
@@ -377,31 +374,32 @@ void image_mode(int mode, pDevDesc dd){
   }
 }
 
+static inline Magick::DrawableAffine RotateDrawing(double deg, double x, double y){
+  double rad = (deg * pi) / 180;
+  double sx = cos(rad);
+  double sy = cos(rad);
+  double rx = sin(rad);
+  double ry = -sin(rad);
+  double tx = x + x * sx + y * rx;
+  double ty = y + y * sy + x * ry;
+  return Magick::DrawableAffine(sx, sy, rx, ry, tx, ty);
+}
+
 static void image_text(double x, double y, const char *str, double rot,
                 double hadj, const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
   double multiplier = 1/dd->ipr[0]/72;
-  int ps = gc->ps * gc->cex * multiplier;
+  double deg = fmod(-rot + 360.0, 360.0);
+  double ps = gc->ps * gc->cex * multiplier;
 
   drawlist draw;
   draw.push_back(Magick::DrawableStrokeColor(Magick::Color()));
   draw.push_back(Magick::DrawableFillColor(Color(col2name(gc->col))));
   draw.push_back(Magick::DrawableFont(fontname(gc), style(gc->fontface), weight(gc->fontface), Magick::NormalStretch));
   draw.push_back(Magick::DrawablePointSize(ps));
-  draw.push_back(Magick::DrawableAffine());
   draw.push_back(Magick::DrawableText(x, y, std::string(str), "UTF-8"));
-  rot = fmod(-rot + 360.0, 360.0);
-  if(rot > 1){
-    double rad = (rot * pi) / 180;
-    double sx = cos(rad);
-    double sy = cos(rad);
-    double rx = sin(rad);
-    double ry = -sin(rad);
-    double tx = x + x * sx + y * rx;
-    double ty = y + y * sy + x * ry;
-    Magick::DrawableAffine transform(sx, sy, rx, ry, tx, ty);
-    draw.push_back(transform);
-  }
+  if(deg > 1)
+    draw.push_back(RotateDrawing(deg, x, y));
   image_draw(draw, gc, dd);
   VOID_END_RCPP
 }
