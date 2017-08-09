@@ -74,7 +74,11 @@ static inline bool is_italic(int face) {
   return face == 3 || face == 4;
 }
 
-inline double scale_lty(int lty, double lwd) {
+static inline bool is_symbol(int face) {
+  return face == 5;
+}
+
+static inline double scale_lty(int lty, double lwd) {
   return ((lwd > 1) ? lwd : 1) * (lty & 15);
 }
 
@@ -129,6 +133,14 @@ static inline int weight(int face){
   return is_bold(face) ? 700 : 400;
 }
 
+static inline std::string fontname(const pGEcontext gc){
+  if(is_symbol(gc->fontface))
+    return std::string("symbol");
+  if(!strlen(gc->fontfamily))
+    return std::string("sans");
+  return std::string(gc->fontfamily);
+}
+
 static inline coordlist coord(int n, double * x, double * y){
   coordlist coordinates;
   for(int i = 0; i < n; i++)
@@ -151,7 +163,7 @@ static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd, bool join =
   if(join == true)
     draw.push_back(Magick::DrawableStrokeLineJoin(linejoin(gc->ljoin)));
   draw.push_back(Magick::DrawableMiterLimit(gc->lmitre));
-  draw.push_back(Magick::DrawableFont(gc->fontfamily, style(gc->fontface), weight(gc->fontface), Magick::NormalStretch));
+  draw.push_back(Magick::DrawableFont(fontname(gc), style(gc->fontface), weight(gc->fontface), Magick::NormalStretch));
   draw.push_back(Magick::DrawablePointSize(gc->ps * gc->cex * multiplier));
   draw.push_back(Magick::myDrawableDashArray(linetype(lty, gc->lty, lwd)));
 #if MagickLibVersion >= 0x700
@@ -371,7 +383,7 @@ void image_mode(int mode, pDevDesc dd){
  * https://github.com/ImageMagick/ImageMagick/blob/master/Magick%2B%2B/lib/Image.cpp#L1858
  */
 
-static void inline image_annotate(Frame * frame, double x, double y, const char *str, double rot, char * family,
+static void inline image_annotate(Frame * frame, double x, double y, const char *str, double rot, std::string family,
                                   int ps, int weight, Magick::StyleType style, Magick::Color col){
 #if MagickLibVersion >= 0x692
   frame->fontFamily(family);
@@ -395,11 +407,12 @@ static void image_text(double x, double y, const char *str, double rot,
   if(getdev(dd)->drawing){
     Image * image = getimage(dd);
     for (size_t i = 0; i < image->size(); i++){
-      image_annotate(&image->at(i), x, y, str, rot, gc->fontfamily, ps, weight(gc->fontface),
+
+      image_annotate(&image->at(i), x, y, str, rot, fontname(gc), ps, weight(gc->fontface),
                      style(gc->fontface), Color(col2name(gc->col)));
     }
   } else {
-    image_annotate(getgraph(dd), x, y, str, rot, gc->fontfamily, ps, weight(gc->fontface),
+    image_annotate(getgraph(dd), x, y, str, rot, fontname(gc), ps, weight(gc->fontface),
                    style(gc->fontface), Color(col2name(gc->col)));
   }
   VOID_END_RCPP
@@ -410,6 +423,7 @@ static void image_metric_info(int c, const pGEcontext gc, double* ascent,
   /* DOCS: http://www.imagemagick.org/Magick++/TypeMetric.html */
   BEGIN_RCPP
   bool is_unicode = mbcslocale;
+  std::string font = fontname(gc);
   if (c < 0) {
     is_unicode = true;
     c = -c;
@@ -428,11 +442,11 @@ static void image_metric_info(int c, const pGEcontext gc, double* ascent,
   double multiplier = 1/dd->ipr[0]/72;
   graph->fontPointsize(gc->ps * gc->cex * multiplier);
 #if MagickLibVersion >= 0x692
-  graph->fontFamily(gc->fontfamily);
+  graph->fontFamily(font);
   graph->fontWeight(weight(gc->fontface));
   graph->fontStyle(style(gc->fontface));
 #else
-  graph->font(gc->fontfamily);
+  graph->font(font);
 #endif
   Magick::TypeMetric tm;
   graph->fontTypeMetrics(str, &tm);
@@ -444,13 +458,14 @@ static void image_metric_info(int c, const pGEcontext gc, double* ascent,
 
 static double image_strwidth(const char *str, const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
+  std::string font = fontname(gc);
   Frame * graph = getgraph(dd);
 #if MagickLibVersion >= 0x692
-  graph->fontFamily(gc->fontfamily);
+  graph->fontFamily(font);
   graph->fontWeight(weight(gc->fontface));
   graph->fontStyle(style(gc->fontface));
 #else
-  graph->font(gc->fontfamily);
+  graph->font(font);
 #endif
   double multiplier = 1/dd->ipr[0]/72;
   graph->fontPointsize(gc->ps * gc->cex * multiplier);

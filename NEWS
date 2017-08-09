@@ -1,6 +1,7 @@
 1.1
   - Fix positioning of rasterImage() when raster image is rotated
   - Use TriangleFilter for interpolating rasterImage()
+  - Add support for 'symbol' fonts
 
 1.0
   - Vectorize image_draw() (all drawing should be applied to each frame)
