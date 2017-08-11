@@ -11,7 +11,6 @@ dev.off <- function(){
   invisible(grDevices::dev.off())
 }
 
-has_tesseract <- isTRUE(require(tesseract, quietly = TRUE))
 
 ## ------------------------------------------------------------------------
 str(magick::magick_config())
@@ -204,6 +203,12 @@ dev.off()
 ## ------------------------------------------------------------------------
 print(img)
 
+## ---- echo=FALSE, results="hide"-----------------------------------------
+# Workaround for 'invalid colormap index' bug in old IM versions
+objects <- ls()
+rm(list=objects[objects != "frink"])
+gc()
+
 ## ------------------------------------------------------------------------
 library(gapminder)
 library(ggplot2)
@@ -247,7 +252,7 @@ raster::plotRGB(rr, asp = 1)
 ## ----eval=FALSE----------------------------------------------------------
 #  install.packages("tesseract")
 
-## ---- eval = has_tesseract-----------------------------------------------
+## ---- eval = isTRUE(require(tesseract, quietly = TRUE))------------------
 img <- image_read("http://jeroen.github.io/images/testocr.png")
 print(img)
 

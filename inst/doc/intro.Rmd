@@ -28,7 +28,6 @@ dev.off <- function(){
   invisible(grDevices::dev.off())
 }
 
-has_tesseract <- isTRUE(require(tesseract, quietly = TRUE))
 ```
 
 The new [magick](https://cran.r-project.org/package=magick) package is an ambitious effort to modernize and simplify high-quality image processing in R. It wraps the [ImageMagick STL](https://www.imagemagick.org/Magick++/STL.html) which is perhaps the most comprehensive open-source image processing library available today.
@@ -437,6 +436,13 @@ print(img)
 
 By default `image_draw()` sets all margins to 0 and uses graphics coordinates to match image size in pixels (width x height) where (0,0) is the top left corner. Note that this means the y axis increases from top to bottom which is the opposite of typical graphics coordinates. You can override all this by passing custom `xlim`, `ylim` or `mar` values to `image_draw`.
 
+```{r, echo=FALSE, results="hide"}
+# Workaround for 'invalid colormap index' bug in old IM versions
+objects <- ls()
+rm(list=objects[objects != "frink"])
+gc()
+```
+
 ### Animated Graphics
 
 The graphics device supports multiple frames which makes it easy to create animated graphics. The code below shows how you would implement the example from the very cool [gganimate](https://github.com/dgrtwo/gganimate) package using the magick graphics device.
@@ -522,7 +528,7 @@ A recent edition to the package is to extract text from images using OCR. This r
 install.packages("tesseract")
 ```
 
-```{r, eval = has_tesseract}
+```{r, eval = isTRUE(require(tesseract, quietly = TRUE))}
 img <- image_read("http://jeroen.github.io/images/testocr.png")
 print(img)
 
