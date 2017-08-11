@@ -137,7 +137,11 @@ static inline std::string fontname(const pGEcontext gc){
   if(is_symbol(gc->fontface))
     return std::string("symbol");
   if(!strlen(gc->fontfamily))
-    return std::string("sans");
+    return std::string("sans-serif");
+  if(!strncmp(gc->fontfamily, "sans", 4) || !strncmp(gc->fontfamily, "Sans", 4))
+    return std::string("sans-serif");
+  if(!strncmp(gc->fontfamily, "mono", 4) || !strncmp(gc->fontfamily, "Mono", 4))
+    return std::string("monospace");
   return std::string(gc->fontfamily);
 }
 
