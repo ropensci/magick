@@ -449,7 +449,7 @@ static void image_metric_info(int c, const pGEcontext gc, double* ascent,
   Magick::TypeMetric tm;
   graph->fontTypeMetrics(str, &tm);
   *ascent = tm.ascent();
-  *descent = tm.descent();
+  *descent = std::abs(tm.descent()); //I think this should be positive?
   *width = tm.textWidth();
   VOID_END_RCPP
 }
