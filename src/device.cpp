@@ -392,11 +392,15 @@ static void image_text(double x, double y, const char *str, double rot,
   double deg = fmod(-rot + 360.0, 360.0);
   double ps = gc->ps * gc->cex * multiplier;
 
+  /* text color */
+  Magick::Color fill(col2name(gc->col));
+  Magick::Color stroke;
+
   /* there is a bug in IM that prefers these properties over the draw list ones */
   Frame * graph = getgraph(dd);
   graph->fontPointsize(ps);
-  graph->strokeColor(Magick::Color());
-  graph->fillColor(Color(col2name(gc->col)));
+  graph->strokeColor(stroke);
+  graph->fillColor(fill);
 #if MagickLibVersion >= 0x692
   graph->fontFamily(fontname(gc));
   graph->fontWeight(weight(gc->fontface));
@@ -404,8 +408,8 @@ static void image_text(double x, double y, const char *str, double rot,
 #endif
 
   drawlist draw;
-  draw.push_back(Magick::DrawableStrokeColor(Magick::Color()));
-  draw.push_back(Magick::DrawableFillColor(Color(col2name(gc->col))));
+  draw.push_back(Magick::DrawableStrokeColor(stroke));
+  draw.push_back(Magick::DrawableFillColor(fill));
   draw.push_back(Magick::DrawableFont(fontname(gc), style(gc->fontface), weight(gc->fontface), Magick::NormalStretch));
   draw.push_back(Magick::DrawablePointSize(ps));
   draw.push_back(Magick::DrawableText(x, y, std::string(str), "UTF-8"));
