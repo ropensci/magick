@@ -507,11 +507,11 @@ static pDevDesc magick_driver_new(MagickDevice * device, int bg, int width, int 
   dd->cap = image_capture;
   dd->raster = image_raster;
 
-  // Copied from BMDeviceDriver
-#ifdef _WIN32
-  dd->wantSymbolUTF8 = (Rboolean) NA_LOGICAL;
-#else
+  // See also BMDeviceDriver
+#ifdef __APPLE__
   dd->wantSymbolUTF8 = TRUE;
+#else
+  dd->wantSymbolUTF8 = FALSE;
 #endif
 
   dd->hasTextUTF8 = (Rboolean) 1;
