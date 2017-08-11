@@ -162,7 +162,7 @@ static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd, bool join =
   draw.push_back(Magick::DrawableStrokeLineCap(linecap(gc->lend)));
   if(join == true)
     draw.push_back(Magick::DrawableStrokeLineJoin(linejoin(gc->ljoin)));
-  draw.push_back(Magick::DrawableMiterLimit(gc->lmitre));
+  draw.push_back(Magick::DrawableMiterLimit(gc->lmitre * multiplier));
   draw.push_back(Magick::myDrawableDashArray(linetype(lty, gc->lty, lwd)));
   for ( drawlist::iterator it = x.begin(); it!= x.end(); ++it )
     draw.push_back(*it);

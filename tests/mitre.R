@@ -10,8 +10,8 @@ lines(y+4,lwd=20,type="l")
 dev.off()
 
 # mitre (doesn't work)
-img <- image_graph()
-par(ljoin=1) # lmitre only active for ljoin=1
+img <- image_graph(res = 96)
+par(ljoin=1, lmitre=5, lend=1) # lmitre only active for ljoin=1
 y=c(0,30,0)
 x=c(-1:1)
 plot(x, y,lwd=10,type="l",ylim=c(0,40),xlim=c(-20,20))
