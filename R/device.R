@@ -63,8 +63,8 @@
 #' text(.5, .9, "Our planet", cex = 3, col = "white")
 #' dev.off()
 #' print(img)
-image_graph <- function(width = 800, height = 600, bg = "transparent",
-                          pointsize = 12, res = 72, clip = TRUE, antialias = TRUE) {
+image_graph <- function(width = 800, height = 600, bg = "white", pointsize = 12, res = 72,
+                        clip = TRUE, antialias = TRUE) {
   img <- magick_device_internal(bg = bg, width = width, height = height, pointsize = pointsize,
                                 res = res, clip = clip, antialias = antialias, drawing = FALSE)
   class(img) <- c("magick-device", class(img))

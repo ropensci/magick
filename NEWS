@@ -1,8 +1,9 @@
 1.1
+  - Change default 'bg' in image_graph() to 'white'
   - Fix positioning of rasterImage() when raster image is rotated
   - Use TriangleFilter for interpolating rasterImage()
-  - Add support for 'symbol' fonts
-  - Render text using affine transformations
+  - Improve support for 'symbol' fonts (metrics are still not 100%)
+  - Rotate text using affine transformations
 
 1.0
   - Vectorize image_draw() (all drawing should be applied to each frame)
