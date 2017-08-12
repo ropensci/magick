@@ -301,15 +301,17 @@ image_page <- function(image, pagesize = NULL, density = NULL){
 #' @param operator string with a
 #' \href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}.
 #' @param composite_image composition image
+#' @param compose_args additional arguments needed for some composite operations
 #' @examples # Compose images using one of many operators
 #' oldlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-3.png")
 #' image_composite(logo, oldlogo)
 #' image_composite(logo, oldlogo, operator = "copyred")
 #'
-image_composite <- function(image, composite_image = image[1], operator = "atop", offset = "0x0"){
+image_composite <- function(image, composite_image = image[1], operator = "atop", offset = "0x0", compose_args = ""){
   assert_image(image)
   stopifnot(inherits(composite_image, "magick-image"))
-  magick_image_composite(image, composite_image, offset, operator)
+  compose_args <- as.character(compose_args)
+  magick_image_composite(image, composite_image, offset, operator, compose_args)
 }
 
 #' @export

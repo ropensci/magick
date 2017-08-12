@@ -851,8 +851,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_composite
-XPtrImage magick_image_composite(XPtrImage input, XPtrImage composite_image, const char * offset, const char * composite);
-RcppExport SEXP _magick_magick_image_composite(SEXP inputSEXP, SEXP composite_imageSEXP, SEXP offsetSEXP, SEXP compositeSEXP) {
+XPtrImage magick_image_composite(XPtrImage input, XPtrImage composite_image, const char * offset, const char * composite, Rcpp::CharacterVector args);
+RcppExport SEXP _magick_magick_image_composite(SEXP inputSEXP, SEXP composite_imageSEXP, SEXP offsetSEXP, SEXP compositeSEXP, SEXP argsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -860,7 +860,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrImage >::type composite_image(composite_imageSEXP);
     Rcpp::traits::input_parameter< const char * >::type offset(offsetSEXP);
     Rcpp::traits::input_parameter< const char * >::type composite(compositeSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_composite(input, composite_image, offset, composite));
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type args(argsSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_composite(input, composite_image, offset, composite, args));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1092,7 +1093,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_implode", (DL_FUNC) &_magick_magick_image_implode, 2},
     {"_magick_magick_image_format", (DL_FUNC) &_magick_magick_image_format, 4},
     {"_magick_magick_image_trim", (DL_FUNC) &_magick_magick_image_trim, 1},
-    {"_magick_magick_image_composite", (DL_FUNC) &_magick_magick_image_composite, 4},
+    {"_magick_magick_image_composite", (DL_FUNC) &_magick_magick_image_composite, 5},
     {"_magick_magick_image_contrast", (DL_FUNC) &_magick_magick_image_contrast, 2},
     {"_magick_magick_image_background", (DL_FUNC) &_magick_magick_image_background, 2},
     {"_magick_magick_image_page", (DL_FUNC) &_magick_magick_image_page, 3},

@@ -98,7 +98,7 @@ image_colorize(image, opacity, color)
 image_page(image, pagesize = NULL, density = NULL)
 
 image_composite(image, composite_image = image[1], operator = "atop",
-  offset = "0x0")
+  offset = "0x0", compose_args = "")
 
 image_contrast(image, sharpen = 1)
 
@@ -155,6 +155,8 @@ the image. Specifies an image density when decoding a Postscript or PDF.}
 \href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}.}
 
 \item{offset}{geometry string with offset}
+
+\item{compose_args}{additional arguments needed for some composite operations}
 
 \item{sharpen}{enhance intensity differences in image}
 

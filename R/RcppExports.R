@@ -285,8 +285,8 @@ magick_image_trim <- function(input) {
     .Call('_magick_magick_image_trim', PACKAGE = 'magick', input)
 }
 
-magick_image_composite <- function(input, composite_image, offset, composite) {
-    .Call('_magick_magick_image_composite', PACKAGE = 'magick', input, composite_image, offset, composite)
+magick_image_composite <- function(input, composite_image, offset, composite, args) {
+    .Call('_magick_magick_image_composite', PACKAGE = 'magick', input, composite_image, offset, composite, args)
 }
 
 magick_image_contrast <- function(input, sharpen) {
