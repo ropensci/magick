@@ -164,6 +164,7 @@ static void image_draw(drawlist x, const pGEcontext gc, pDevDesc dd, bool join =
     draw.push_back(Magick::DrawableFillColor(Color(col2name(gc->fill))));
   draw.push_back(Magick::DrawableStrokeWidth(lwd));
   draw.push_back(Magick::DrawableStrokeLineCap(linecap(gc->lend)));
+  draw.push_back(Magick::DrawableStrokeAntialias(getdev(dd)->antialias));
   if(join == true)
     draw.push_back(Magick::DrawableStrokeLineJoin(linejoin(gc->ljoin)));
   draw.push_back(Magick::DrawableMiterLimit(gc->lmitre * multiplier));
@@ -416,6 +417,7 @@ static void image_text(double x, double y, const char *str, double rot,
   draw.push_back(Magick::DrawableFillColor(fill));
   draw.push_back(Magick::DrawableFont(fontname(gc), style(gc->fontface), weight(gc->fontface), Magick::NormalStretch));
   draw.push_back(Magick::DrawablePointSize(ps));
+  draw.push_back(Magick::DrawableTextAntialias(getdev(dd)->antialias));
   draw.push_back(Magick::DrawableText(x, y, std::string(str), "UTF-8"));
   if(deg > 1)
     draw.push_back(RotateDrawing(deg, x, y));
