@@ -10,9 +10,10 @@
 #' @param composite_image composition image
 #' @param compose_args additional arguments needed for some composite operations
 #' @examples # Compose images using one of many operators
-#' oldlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-3.png")
-#' image_composite(logo, oldlogo)
-#' image_composite(logo, oldlogo, operator = "copyred")
+#' imlogo <- image_scale(image_read("logo:"), "x275")
+#' rlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-3.png")
+#' image_composite(imlogo, rlogo)
+#' image_composite(imlogo, rlogo, operator = "blend", compose_args="50")
 image_composite <- function(image, composite_image = image[1], operator = "atop", offset = "0x0", compose_args = ""){
   assert_image(image)
   stopifnot(inherits(composite_image, "magick-image"))

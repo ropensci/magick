@@ -24,7 +24,8 @@ Similar to the ImageMagick `composite` command.
 }
 \examples{
 # Compose images using one of many operators
-oldlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-3.png")
-image_composite(logo, oldlogo)
-image_composite(logo, oldlogo, operator = "copyred")
+imlogo <- image_scale(image_read("logo:"), "x275")
+rlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-3.png")
+image_composite(imlogo, rlogo)
+image_composite(imlogo, rlogo, operator = "blend", compose_args="50")
 }
