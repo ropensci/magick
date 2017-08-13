@@ -263,21 +263,6 @@ XPtrImage magick_image_trim( XPtrImage input){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_composite( XPtrImage input, XPtrImage composite_image,
-                                  const char * offset, const char * composite, Rcpp::CharacterVector args){
-  XPtrImage output = copy(input);
-  if(args.size() && std::string(args.at(0)).length()){
-    for (Iter it = output->begin(); it != output->end(); ++it)
-      it->artifact("compose:args", std::string(args.at(0)));
-  }
-  if(composite_image->size()){
-    for_each(output->begin(), output->end(), Magick::compositeImage(composite_image->front(),
-      Geom(offset), Composite(composite)));
-  }
-  return output;
-}
-
-// [[Rcpp::export]]
 XPtrImage magick_image_contrast( XPtrImage input, size_t sharpen){
   XPtrImage output = copy(input);
   for_each(output->begin(), output->end(), Magick::contrastImage(sharpen));

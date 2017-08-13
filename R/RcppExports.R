@@ -93,6 +93,10 @@ autobrewed <- function() {
     .Call('_magick_autobrewed', PACKAGE = 'magick')
 }
 
+magick_image_composite <- function(input, composite_image, offset, composite, args) {
+    .Call('_magick_magick_image_composite', PACKAGE = 'magick', input, composite_image, offset, composite, args)
+}
+
 magick_coder_info <- function(format) {
     .Call('_magick_magick_coder_info', PACKAGE = 'magick', format)
 }
@@ -283,10 +287,6 @@ magick_image_format <- function(input, format, depth, antialias) {
 
 magick_image_trim <- function(input) {
     .Call('_magick_magick_image_trim', PACKAGE = 'magick', input)
-}
-
-magick_image_composite <- function(input, composite_image, offset, composite, args) {
-    .Call('_magick_magick_image_composite', PACKAGE = 'magick', input, composite_image, offset, composite, args)
 }
 
 magick_image_contrast <- function(input, sharpen) {

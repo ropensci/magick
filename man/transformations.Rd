@@ -31,7 +31,6 @@
 \alias{image_chop}
 \alias{image_colorize}
 \alias{image_page}
-\alias{image_composite}
 \alias{image_contrast}
 \alias{image_annotate}
 \alias{image_convert}
@@ -97,9 +96,6 @@ image_colorize(image, opacity, color)
 
 image_page(image, pagesize = NULL, density = NULL)
 
-image_composite(image, composite_image = image[1], operator = "atop",
-  offset = "0x0", compose_args = "")
-
 image_contrast(image, sharpen = 1)
 
 image_annotate(image, text, gravity = "northwest", location = "+0+0",
@@ -148,15 +144,6 @@ I think max distance (from #000000 to #FFFFFF) is 256^3.}
 
 \item{density}{geometry string with vertical and horizontal resolution in pixels of
 the image. Specifies an image density when decoding a Postscript or PDF.}
-
-\item{composite_image}{composition image}
-
-\item{operator}{string with a
-\href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}.}
-
-\item{offset}{geometry string with offset}
-
-\item{compose_args}{additional arguments needed for some composite operations}
 
 \item{sharpen}{enhance intensity differences in image}
 
@@ -232,11 +219,6 @@ image_fill(image_flatten(logo), "red")
 image_fill(image_flatten(logo), "red", fuzz = 25600)
 image_chop(logo, "100x20")
 image_colorize(logo, 50, "red")
-# Compose images using one of many operators
-oldlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-3.png")
-image_composite(logo, oldlogo)
-image_composite(logo, oldlogo, operator = "copyred")
-
 # Lights up the R logo
 frames <- image_scale(oldlogo, "400x400")
 for(i in 1:7) frames <- c(frames, image_contrast(frames[i]))

@@ -274,6 +274,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_composite
+XPtrImage magick_image_composite(XPtrImage input, XPtrImage composite_image, const char * offset, const char * composite, Rcpp::CharacterVector args);
+RcppExport SEXP _magick_magick_image_composite(SEXP inputSEXP, SEXP composite_imageSEXP, SEXP offsetSEXP, SEXP compositeSEXP, SEXP argsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< XPtrImage >::type composite_image(composite_imageSEXP);
+    Rcpp::traits::input_parameter< const char * >::type offset(offsetSEXP);
+    Rcpp::traits::input_parameter< const char * >::type composite(compositeSEXP);
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type args(argsSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_composite(input, composite_image, offset, composite, args));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_coder_info
 Rcpp::List magick_coder_info(Rcpp::String format);
 RcppExport SEXP _magick_magick_coder_info(SEXP formatSEXP) {
@@ -850,21 +865,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// magick_image_composite
-XPtrImage magick_image_composite(XPtrImage input, XPtrImage composite_image, const char * offset, const char * composite, Rcpp::CharacterVector args);
-RcppExport SEXP _magick_magick_image_composite(SEXP inputSEXP, SEXP composite_imageSEXP, SEXP offsetSEXP, SEXP compositeSEXP, SEXP argsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< XPtrImage >::type composite_image(composite_imageSEXP);
-    Rcpp::traits::input_parameter< const char * >::type offset(offsetSEXP);
-    Rcpp::traits::input_parameter< const char * >::type composite(compositeSEXP);
-    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type args(argsSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_composite(input, composite_image, offset, composite, args));
-    return rcpp_result_gen;
-END_RCPP
-}
 // magick_image_contrast
 XPtrImage magick_image_contrast(XPtrImage input, size_t sharpen);
 RcppExport SEXP _magick_magick_image_contrast(SEXP inputSEXP, SEXP sharpenSEXP) {
@@ -1045,6 +1045,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_replace", (DL_FUNC) &_magick_magick_image_replace, 3},
     {"_magick_magick_image_copy", (DL_FUNC) &_magick_magick_image_copy, 2},
     {"_magick_autobrewed", (DL_FUNC) &_magick_autobrewed, 0},
+    {"_magick_magick_image_composite", (DL_FUNC) &_magick_magick_image_composite, 5},
     {"_magick_magick_coder_info", (DL_FUNC) &_magick_magick_coder_info, 1},
     {"_magick_magick_config_internal", (DL_FUNC) &_magick_magick_config_internal, 0},
     {"_magick_magick_device_internal", (DL_FUNC) &_magick_magick_device_internal, 8},
@@ -1093,7 +1094,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_implode", (DL_FUNC) &_magick_magick_image_implode, 2},
     {"_magick_magick_image_format", (DL_FUNC) &_magick_magick_image_format, 4},
     {"_magick_magick_image_trim", (DL_FUNC) &_magick_magick_image_trim, 1},
-    {"_magick_magick_image_composite", (DL_FUNC) &_magick_magick_image_composite, 5},
     {"_magick_magick_image_contrast", (DL_FUNC) &_magick_magick_image_contrast, 2},
     {"_magick_magick_image_background", (DL_FUNC) &_magick_magick_image_background, 2},
     {"_magick_magick_image_page", (DL_FUNC) &_magick_magick_image_page, 3},
