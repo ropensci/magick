@@ -18,6 +18,7 @@
 !inst/*.svg
 inst/etc
 inst/share
+inst/doc/*.html
 src/Makevars
 windows
 !img/*
