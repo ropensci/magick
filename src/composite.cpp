@@ -19,5 +19,11 @@ XPtrImage magick_image_composite( XPtrImage input, XPtrImage composite_image,
     for_each(output->begin(), output->end(), Magick::compositeImage(composite_image->front(),
                            Geom(offset), Composite(composite)));
   }
+  if(args.size() && std::string(args.at(0)).length()){
+#if MagickLibVersion >= 0x687
+    for (Iter it = output->begin(); it != output->end(); ++it)
+      it->artifact("compose:args", "");
+#endif
+  }
   return output;
 }
