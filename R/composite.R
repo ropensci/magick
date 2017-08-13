@@ -3,6 +3,8 @@
 #' Similar to the ImageMagick `composite` command.
 #'
 #' @export
+#' @rdname composite
+#' @name composite
 #' @inheritParams transformations
 #' @param offset geometry string with offset
 #' @param operator string with a

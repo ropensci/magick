@@ -79,6 +79,9 @@ transparency with background color.}
 
 \item{stack}{place images top-to-bottom (TRUE) or left-to-right (FALSE)}
 
+\item{operator}{string with a
+\href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}.}
+
 \item{map}{reference image to map colors from}
 
 \item{dither}{set TRUE to enable dithering}

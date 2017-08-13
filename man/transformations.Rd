@@ -220,7 +220,7 @@ image_fill(image_flatten(logo), "red", fuzz = 25600)
 image_chop(logo, "100x20")
 image_colorize(logo, 50, "red")
 # Lights up the R logo
-frames <- image_scale(oldlogo, "400x400")
+frames <- image_scale(logo, "400x400")
 for(i in 1:7) frames <- c(frames, image_contrast(frames[i]))
 (blink <- image_animate(c(frames, rev(frames)), fps = 20, loop = 1))
 

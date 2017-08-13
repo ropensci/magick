@@ -193,6 +193,7 @@ image_coalesce <- function(image){
 }
 
 #' @export
+#' @inheritParams composite
 #' @rdname edit
 image_flatten <- function(image, operator = NULL){
   assert_image(image)

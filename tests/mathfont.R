@@ -1,4 +1,5 @@
 img <- image_graph()
+par(cex = 2)
 example(plotmath)
 dev.off()
-print(img)
+print(img[4])

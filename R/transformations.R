@@ -300,7 +300,7 @@ image_page <- function(image, pagesize = NULL, density = NULL){
 #' @param sharpen enhance intensity differences in image
 #' @examples
 #' # Lights up the R logo
-#' frames <- image_scale(oldlogo, "400x400")
+#' frames <- image_scale(logo, "400x400")
 #' for(i in 1:7) frames <- c(frames, image_contrast(frames[i]))
 #' (blink <- image_animate(c(frames, rev(frames)), fps = 20, loop = 1))
 #'
