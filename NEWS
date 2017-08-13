@@ -5,6 +5,7 @@
   - Improve support for 'symbol' fonts (metrics are still not 100%)
   - Rotate text using affine transformations
   - image_composite() gains a 'composite_args' parameter needed for e.g. blend
+  - Fix support for demo images e.g. image_read("wizard:") or image_read("logo:")
 
 1.0
   - Vectorize image_draw() (all drawing should be applied to each frame)
