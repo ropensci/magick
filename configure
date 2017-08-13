@@ -92,4 +92,5 @@ fi
 sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" src/Makevars.in > src/Makevars
 
 # Success
+touch inst/doc/intro.html || true
 exit 0
