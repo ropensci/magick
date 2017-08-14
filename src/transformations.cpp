@@ -191,7 +191,6 @@ XPtrImage magick_image_transparent( XPtrImage input, const char * color, double 
   XPtrImage output = copy(input);
   if(fuzz != 0)
     for_each ( output->begin(), output->end(), Magick::colorFuzzImage(fuzz));
-  Rprintf("set fuzz to %f\n", fuzz);
   for_each ( output->begin(), output->end(), Magick::transparentImage(Color(color)));
   if(fuzz != 0)
     for_each ( output->begin(), output->end(), Magick::colorFuzzImage(input->front().colorFuzz()));
