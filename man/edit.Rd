@@ -70,7 +70,7 @@ Can also be a bitmap type such as \code{rgba} or \code{rgb}.}
 
 \item{quality}{number between 0 and 100 for jpeg quality. Defaults to 75.}
 
-\item{comment}{text comment added to the image metadata for supported formats}
+\item{comment}{text string added to the image metadata for supported formats}
 
 \item{flatten}{should image be flattened before writing? This also replaces
 transparency with background color.}
