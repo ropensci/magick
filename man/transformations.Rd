@@ -93,7 +93,8 @@ image_deskew(image, treshold = 40)
 \arguments{
 \item{image}{object returned by \code{image_read}}
 
-\item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string}}
+\item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
+\code{"navyblue"} or \code{"#000080"}}
 
 \item{flatten}{should image be flattened before writing? This also replaces
 transparency with background color.}

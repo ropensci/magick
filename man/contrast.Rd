@@ -39,7 +39,8 @@ current position corresponding to an argument range of 0 to 200 (100 for no chan
 
 \item{opacity}{percentage of opacity used for coloring}
 
-\item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string}}
+\item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
+\code{"navyblue"} or \code{"#000080"}}
 
 \item{radius}{radius, in pixels, for various transformations}
 }

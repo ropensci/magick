@@ -64,7 +64,8 @@ image_sample <- function(image, geometry = ""){
 
 #' @export
 #' @rdname transformations
-#' @param color a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string}
+#' @param color a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
+#' \code{"navyblue"} or \code{"#000080"}
 #' @param geometry a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
 #' for example \code{"10x10+5-5"}.
 #' @examples image_border(logo, "red", "10x10")
