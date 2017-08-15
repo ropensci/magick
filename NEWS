@@ -1,3 +1,7 @@
+1.2
+  - Added image_modulate() for setting brightness, hue,
+  - Documentation: group manual pages into logical sets
+
 1.1
   - Change default 'bg' in image_graph() to 'white'
   - Fix positioning of rasterImage() when raster image is rotated

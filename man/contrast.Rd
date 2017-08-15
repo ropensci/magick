@@ -15,7 +15,7 @@ image_contrast(image, sharpen = 1)
 
 image_normalize(image)
 
-image_modulate(image, brightness = 1, saturation = 1, hue = 1)
+image_modulate(image, brightness = 100, saturation = 100, hue = 100)
 
 image_colorize(image, opacity, color)
 
@@ -30,12 +30,12 @@ image_median(image, radius = 1)
 
 \item{sharpen}{enhance intensity differences in image}
 
-\item{brightness}{modulation of brightness as a ratio of the current value (1.0 for no change)}
+\item{brightness}{modulation of brightness as percentage of the current value (100 for no change)}
 
-\item{saturation}{modulation of saturation as a ratio of the current value (1.0 for no change)}
+\item{saturation}{modulation of saturation as percentage of the current value (100 for no change)}
 
 \item{hue}{modulation of hue is an absolute rotation of -180 degrees to +180 degrees from the
-current position corresponding to an argument range of 0 to 2.0 (1.0 for no change)}
+current position corresponding to an argument range of 0 to 200 (100 for no change)}
 
 \item{opacity}{percentage of opacity used for coloring}
 
@@ -50,9 +50,9 @@ Functions to adjust constrast and colors.
 logo <- image_read("logo:")
 image_contrast(logo)
 image_normalize(logo)
-image_modulate(logo, 1.1)
-image_modulate(logo, saturation = 0.9)
-image_modulate(logo, hue = 1.1)
+image_modulate(logo, brightness = 200)
+image_modulate(logo, saturation = 150)
+image_modulate(logo, hue = 200)
 image_colorize(logo, 50, "red")
 image_enhance(logo)
 image_equalize(logo)

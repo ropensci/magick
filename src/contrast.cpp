@@ -22,7 +22,6 @@ XPtrImage magick_image_normalize( XPtrImage input){
 // [[Rcpp::export]]
 XPtrImage magick_image_modulate( XPtrImage input, double brightness, double saturation, double hue){
   XPtrImage output = copy(input);
-  Rprintf("modulating %f %f %f\n", brightness, saturation, hue);
   for_each(output->begin(), output->end(), Magick::modulateImage(brightness, saturation, hue));
   return output;
 }

@@ -25,14 +25,14 @@ image_normalize <- function(image){
 
 #' @export
 #' @rdname contrast
-#' @param brightness modulation of brightness as a ratio of the current value (1.0 for no change)
-#' @param saturation modulation of saturation as a ratio of the current value (1.0 for no change)
+#' @param brightness modulation of brightness as percentage of the current value (100 for no change)
+#' @param saturation modulation of saturation as percentage of the current value (100 for no change)
 #' @param hue modulation of hue is an absolute rotation of -180 degrees to +180 degrees from the
-#' current position corresponding to an argument range of 0 to 2.0 (1.0 for no change)
-#' @examples image_modulate(logo, 1.1)
-#' image_modulate(logo, saturation = 0.9)
-#' image_modulate(logo, hue = 1.1)
-image_modulate <- function(image, brightness = 1.0, saturation = 1.0, hue = 1.0){
+#' current position corresponding to an argument range of 0 to 200 (100 for no change)
+#' @examples image_modulate(logo, brightness = 200)
+#' image_modulate(logo, saturation = 150)
+#' image_modulate(logo, hue = 200)
+image_modulate <- function(image, brightness = 100, saturation = 100, hue = 100){
   assert_image(image)
   brightness <- as.numeric(brightness)
   saturation <- as.numeric(saturation)
