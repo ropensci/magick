@@ -41,6 +41,13 @@ Magick::ImageType Type(const char * str){
   return (Magick::ImageType) val;
 }
 
+Magick::ColorspaceType ColorSpace(const char * str){
+  ssize_t val = MagickCore::ParseCommandOption( MagickCore::MagickColorspaceOptions, Magick::MagickFalse, str);
+  if(val < 0)
+    throw std::runtime_error(std::string("Invalid ColorspaceType value: ") + str);
+  return (Magick::ColorspaceType) val;
+}
+
 Magick::NoiseType Noise(const char * str){
   ssize_t val = MagickCore::ParseCommandOption(
     MagickCore::MagickNoiseOptions, Magick::MagickFalse, str);
@@ -220,7 +227,7 @@ XPtrImage magick_image_implode( XPtrImage input, double factor){
 
 // [[Rcpp::export]]
 XPtrImage magick_image_format( XPtrImage input, Rcpp::CharacterVector format, Rcpp::CharacterVector type,
-                               Rcpp::IntegerVector depth, Rcpp::LogicalVector antialias){
+                               Rcpp::CharacterVector space, Rcpp::IntegerVector depth, Rcpp::LogicalVector antialias){
   XPtrImage output = copy(input);
   if(antialias.size()){
     for (Iter it = output->begin(); it != output->end(); ++it)
@@ -229,6 +236,8 @@ XPtrImage magick_image_format( XPtrImage input, Rcpp::CharacterVector format, Rc
   }
   if(type.size())
     for_each ( output->begin(), output->end(), Magick::typeImage(Type(type.at(0))));
+  if(space.size())
+    for_each ( output->begin(), output->end(), Magick::colorSpaceImage(ColorSpace(space.at(0))));
   if(depth.size())
     for_each ( output->begin(), output->end(), Magick::depthImage(depth.at(0)));
   if(format.size())

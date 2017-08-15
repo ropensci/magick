@@ -280,15 +280,18 @@ image_annotate <- function(image, text, gravity = "northwest", location = "+0+0"
 #' @param depth color depth, must be 8 or 16
 #' @param antialias (TRUE/FALSE) enable anti-aliasing for text and strokes
 #' @param type a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ImageType}{ImageType}
-#' classification for example 'grayscale' to convert to black/white.
-image_convert <- function(image, format = NULL, type = NULL, depth = NULL, antialias = NULL){
+#' classification for example 'grayscale' to convert to black/white
+#' @param colorspace a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{ColorspaceType}
+#' for example 'grey' to convert to black/white
+image_convert <- function(image, format = NULL, type = NULL, colorspace = NULL, depth = NULL, antialias = NULL){
   assert_image(image)
   depth <- as.integer(depth)
   antialias <- as.logical(antialias)
   type <- as.character(type)
+  colorspace <- as.character(colorspace)
   if(length(depth) && is.na(match(depth, c(8, 16))))
     stop('depth must be 8 or 16 bit')
-  magick_image_format(image, toupper(format), type, depth, antialias)
+  magick_image_format(image, toupper(format), type, colorspace, depth, antialias)
 }
 
 #' @export

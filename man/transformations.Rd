@@ -81,8 +81,8 @@ image_annotate(image, text, gravity = "northwest", location = "+0+0",
   degrees = 0, size = 10, font = NULL, color = NULL,
   strokecolor = NULL, boxcolor = NULL)
 
-image_convert(image, format = NULL, type = NULL, depth = NULL,
-  antialias = NULL)
+image_convert(image, format = NULL, type = NULL, colorspace = NULL,
+  depth = NULL, antialias = NULL)
 
 image_compare(image, reference_image, metric = "")
 
@@ -143,7 +143,10 @@ the image. Specifies an image density when decoding a Postscript or PDF.}
 Can also be a bitmap type such as \code{rgba} or \code{rgb}.}
 
 \item{type}{a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ImageType}{ImageType}
-classification for example 'grayscale' to convert to black/white.}
+classification for example 'grayscale' to convert to black/white}
+
+\item{colorspace}{a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{ColorspaceType}
+for example 'grey' to convert to black/white}
 
 \item{depth}{color depth, must be 8 or 16}
 
