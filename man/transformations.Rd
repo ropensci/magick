@@ -9,7 +9,6 @@
 \alias{image_sample}
 \alias{image_border}
 \alias{image_despeckle}
-\alias{image_median}
 \alias{image_reducenoise}
 \alias{image_noise}
 \alias{image_blur}
@@ -17,21 +16,16 @@
 \alias{image_edge}
 \alias{image_oilpaint}
 \alias{image_emboss}
-\alias{image_enhance}
-\alias{image_equalize}
 \alias{image_flip}
 \alias{image_flop}
 \alias{image_frame}
 \alias{image_implode}
 \alias{image_negate}
-\alias{image_normalize}
 \alias{image_rotate}
 \alias{image_fill}
 \alias{image_transparent}
 \alias{image_chop}
-\alias{image_colorize}
 \alias{image_page}
-\alias{image_contrast}
 \alias{image_annotate}
 \alias{image_convert}
 \alias{image_compare}
@@ -52,8 +46,6 @@ image_border(image, color = "", geometry = "")
 
 image_despeckle(image, times = 1L)
 
-image_median(image, radius = 1)
-
 image_reducenoise(image, radius = 1L)
 
 image_noise(image, noisetype = "gaussian")
@@ -68,10 +60,6 @@ image_oilpaint(image, radius = 1)
 
 image_emboss(image, radius = 1, sigma = 0.5)
 
-image_enhance(image)
-
-image_equalize(image)
-
 image_flip(image)
 
 image_flop(image)
@@ -82,8 +70,6 @@ image_implode(image, factor = 0.5)
 
 image_negate(image)
 
-image_normalize(image)
-
 image_rotate(image, degrees)
 
 image_fill(image, color, point = "1x1", fuzz = 0)
@@ -92,11 +78,7 @@ image_transparent(image, color, fuzz = 0)
 
 image_chop(image, geometry)
 
-image_colorize(image, opacity, color)
-
 image_page(image, pagesize = NULL, density = NULL)
-
-image_contrast(image, sharpen = 1)
 
 image_annotate(image, text, gravity = "northwest", location = "+0+0",
   degrees = 0, size = 10, font = NULL, color = NULL,
@@ -138,14 +120,10 @@ for example \code{"10x10+5-5"}.}
 Use this option to match colors that are close to the target color in RGB space.
 I think max distance (from #000000 to #FFFFFF) is 256^3.}
 
-\item{opacity}{percentage of transparency}
-
 \item{pagesize}{geometry string with preferred size and location of an image canvas.}
 
 \item{density}{geometry string with vertical and horizontal resolution in pixels of
 the image. Specifies an image density when decoding a Postscript or PDF.}
-
-\item{sharpen}{enhance intensity differences in image}
 
 \item{text}{annotation text}
 
@@ -198,7 +176,6 @@ image_scale(logo, "200x200")
 image_sample(logo, "200x200")
 image_border(logo, "red", "10x10")
 image_despeckle(logo)
-image_median(logo)
 image_reducenoise(logo)
 image_noise(logo)
 image_blur(logo, 10, 10)
@@ -206,24 +183,15 @@ image_charcoal(logo)
 image_edge(logo)
 image_oilpaint(logo)
 image_emboss(logo)
-image_enhance(logo)
-image_equalize(logo)
 image_flip(logo)
 image_flop(logo)
 image_frame(logo)
 image_implode(logo)
 image_negate(logo)
-image_normalize(logo)
 image_rotate(logo, 45)
 image_fill(image_flatten(logo), "red")
 image_fill(image_flatten(logo), "red", fuzz = 25600)
 image_chop(logo, "100x20")
-image_colorize(logo, 50, "red")
-# Lights up the R logo
-frames <- image_scale(logo, "400x400")
-for(i in 1:7) frames <- c(frames, image_contrast(frames[i]))
-(blink <- image_animate(c(frames, rev(frames)), fps = 20, loop = 1))
-
 # Add some text to an image
 image_annotate(logo, "This is a test")
 image_annotate(logo, "CONFIDENTIAL", size = 50, color = "red", boxcolor = "pink",

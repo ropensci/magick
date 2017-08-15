@@ -310,6 +310,90 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_contrast
+XPtrImage magick_image_contrast(XPtrImage input, size_t sharpen);
+RcppExport SEXP _magick_magick_image_contrast(SEXP inputSEXP, SEXP sharpenSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< size_t >::type sharpen(sharpenSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_contrast(input, sharpen));
+    return rcpp_result_gen;
+END_RCPP
+}
+// magick_image_normalize
+XPtrImage magick_image_normalize(XPtrImage input);
+RcppExport SEXP _magick_magick_image_normalize(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_normalize(input));
+    return rcpp_result_gen;
+END_RCPP
+}
+// magick_image_modulate
+XPtrImage magick_image_modulate(XPtrImage input, double brightness, double saturation, double hue);
+RcppExport SEXP _magick_magick_image_modulate(SEXP inputSEXP, SEXP brightnessSEXP, SEXP saturationSEXP, SEXP hueSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< double >::type brightness(brightnessSEXP);
+    Rcpp::traits::input_parameter< double >::type saturation(saturationSEXP);
+    Rcpp::traits::input_parameter< double >::type hue(hueSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_modulate(input, brightness, saturation, hue));
+    return rcpp_result_gen;
+END_RCPP
+}
+// magick_image_colorize
+XPtrImage magick_image_colorize(XPtrImage input, const size_t opacity, const char * color);
+RcppExport SEXP _magick_magick_image_colorize(SEXP inputSEXP, SEXP opacitySEXP, SEXP colorSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< const size_t >::type opacity(opacitySEXP);
+    Rcpp::traits::input_parameter< const char * >::type color(colorSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_colorize(input, opacity, color));
+    return rcpp_result_gen;
+END_RCPP
+}
+// magick_image_enhance
+XPtrImage magick_image_enhance(XPtrImage input);
+RcppExport SEXP _magick_magick_image_enhance(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_enhance(input));
+    return rcpp_result_gen;
+END_RCPP
+}
+// magick_image_equalize
+XPtrImage magick_image_equalize(XPtrImage input);
+RcppExport SEXP _magick_magick_image_equalize(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_equalize(input));
+    return rcpp_result_gen;
+END_RCPP
+}
+// magick_image_median
+XPtrImage magick_image_median(XPtrImage input, double radius);
+RcppExport SEXP _magick_magick_image_median(SEXP inputSEXP, SEXP radiusSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< double >::type radius(radiusSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_median(input, radius));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_device_internal
 XPtrImage magick_device_internal(std::string bg, int width, int height, double pointsize, int res, bool clip, bool antialias, bool drawing);
 RcppExport SEXP _magick_magick_device_internal(SEXP bgSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP pointsizeSEXP, SEXP resSEXP, SEXP clipSEXP, SEXP antialiasSEXP, SEXP drawingSEXP) {
@@ -649,19 +733,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// magick_image_colorize
-XPtrImage magick_image_colorize(XPtrImage input, const size_t opacity, const char * color);
-RcppExport SEXP _magick_magick_image_colorize(SEXP inputSEXP, SEXP opacitySEXP, SEXP colorSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< const size_t >::type opacity(opacitySEXP);
-    Rcpp::traits::input_parameter< const char * >::type color(colorSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_colorize(input, opacity, color));
-    return rcpp_result_gen;
-END_RCPP
-}
 // magick_image_edge
 XPtrImage magick_image_edge(XPtrImage input, size_t radius);
 RcppExport SEXP _magick_magick_image_edge(SEXP inputSEXP, SEXP radiusSEXP) {
@@ -696,28 +767,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const double >::type radius(radiusSEXP);
     Rcpp::traits::input_parameter< const double >::type sigma(sigmaSEXP);
     rcpp_result_gen = Rcpp::wrap(magick_image_emboss(input, radius, sigma));
-    return rcpp_result_gen;
-END_RCPP
-}
-// magick_image_enhance
-XPtrImage magick_image_enhance(XPtrImage input);
-RcppExport SEXP _magick_magick_image_enhance(SEXP inputSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_enhance(input));
-    return rcpp_result_gen;
-END_RCPP
-}
-// magick_image_equalize
-XPtrImage magick_image_equalize(XPtrImage input);
-RcppExport SEXP _magick_magick_image_equalize(SEXP inputSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_equalize(input));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -793,17 +842,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// magick_image_normalize
-XPtrImage magick_image_normalize(XPtrImage input);
-RcppExport SEXP _magick_magick_image_normalize(SEXP inputSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_normalize(input));
-    return rcpp_result_gen;
-END_RCPP
-}
 // magick_image_oilpaint
 XPtrImage magick_image_oilpaint(XPtrImage input, size_t radius);
 RcppExport SEXP _magick_magick_image_oilpaint(SEXP inputSEXP, SEXP radiusSEXP) {
@@ -862,18 +900,6 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     rcpp_result_gen = Rcpp::wrap(magick_image_trim(input));
-    return rcpp_result_gen;
-END_RCPP
-}
-// magick_image_contrast
-XPtrImage magick_image_contrast(XPtrImage input, size_t sharpen);
-RcppExport SEXP _magick_magick_image_contrast(SEXP inputSEXP, SEXP sharpenSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< size_t >::type sharpen(sharpenSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_contrast(input, sharpen));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -963,18 +989,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// magick_image_median
-XPtrImage magick_image_median(XPtrImage input, double radius);
-RcppExport SEXP _magick_magick_image_median(SEXP inputSEXP, SEXP radiusSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< double >::type radius(radiusSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_median(input, radius));
-    return rcpp_result_gen;
-END_RCPP
-}
 // magick_image_reducenoise
 XPtrImage magick_image_reducenoise(XPtrImage input, const size_t radius);
 RcppExport SEXP _magick_magick_image_reducenoise(SEXP inputSEXP, SEXP radiusSEXP) {
@@ -1048,6 +1062,13 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_composite", (DL_FUNC) &_magick_magick_image_composite, 5},
     {"_magick_magick_coder_info", (DL_FUNC) &_magick_magick_coder_info, 1},
     {"_magick_magick_config_internal", (DL_FUNC) &_magick_magick_config_internal, 0},
+    {"_magick_magick_image_contrast", (DL_FUNC) &_magick_magick_image_contrast, 2},
+    {"_magick_magick_image_normalize", (DL_FUNC) &_magick_magick_image_normalize, 1},
+    {"_magick_magick_image_modulate", (DL_FUNC) &_magick_magick_image_modulate, 4},
+    {"_magick_magick_image_colorize", (DL_FUNC) &_magick_magick_image_colorize, 3},
+    {"_magick_magick_image_enhance", (DL_FUNC) &_magick_magick_image_enhance, 1},
+    {"_magick_magick_image_equalize", (DL_FUNC) &_magick_magick_image_equalize, 1},
+    {"_magick_magick_image_median", (DL_FUNC) &_magick_magick_image_median, 2},
     {"_magick_magick_device_internal", (DL_FUNC) &_magick_magick_device_internal, 8},
     {"_magick_magick_device_get", (DL_FUNC) &_magick_magick_device_get, 1},
     {"_magick_magick_device_pop", (DL_FUNC) &_magick_magick_device_pop, 0},
@@ -1076,25 +1097,20 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_blur", (DL_FUNC) &_magick_magick_image_blur, 3},
     {"_magick_magick_image_charcoal", (DL_FUNC) &_magick_magick_image_charcoal, 3},
     {"_magick_magick_image_chop", (DL_FUNC) &_magick_magick_image_chop, 2},
-    {"_magick_magick_image_colorize", (DL_FUNC) &_magick_magick_image_colorize, 3},
     {"_magick_magick_image_edge", (DL_FUNC) &_magick_magick_image_edge, 2},
     {"_magick_magick_image_deskew", (DL_FUNC) &_magick_magick_image_deskew, 2},
     {"_magick_magick_image_emboss", (DL_FUNC) &_magick_magick_image_emboss, 3},
-    {"_magick_magick_image_enhance", (DL_FUNC) &_magick_magick_image_enhance, 1},
-    {"_magick_magick_image_equalize", (DL_FUNC) &_magick_magick_image_equalize, 1},
     {"_magick_magick_image_flip", (DL_FUNC) &_magick_magick_image_flip, 1},
     {"_magick_magick_image_flop", (DL_FUNC) &_magick_magick_image_flop, 1},
     {"_magick_magick_image_fill", (DL_FUNC) &_magick_magick_image_fill, 4},
     {"_magick_magick_image_transparent", (DL_FUNC) &_magick_magick_image_transparent, 3},
     {"_magick_magick_image_frame", (DL_FUNC) &_magick_magick_image_frame, 2},
     {"_magick_magick_image_negate", (DL_FUNC) &_magick_magick_image_negate, 1},
-    {"_magick_magick_image_normalize", (DL_FUNC) &_magick_magick_image_normalize, 1},
     {"_magick_magick_image_oilpaint", (DL_FUNC) &_magick_magick_image_oilpaint, 2},
     {"_magick_magick_image_rotate", (DL_FUNC) &_magick_magick_image_rotate, 2},
     {"_magick_magick_image_implode", (DL_FUNC) &_magick_magick_image_implode, 2},
     {"_magick_magick_image_format", (DL_FUNC) &_magick_magick_image_format, 4},
     {"_magick_magick_image_trim", (DL_FUNC) &_magick_magick_image_trim, 1},
-    {"_magick_magick_image_contrast", (DL_FUNC) &_magick_magick_image_contrast, 2},
     {"_magick_magick_image_background", (DL_FUNC) &_magick_magick_image_background, 2},
     {"_magick_magick_image_page", (DL_FUNC) &_magick_magick_image_page, 3},
     {"_magick_magick_image_crop", (DL_FUNC) &_magick_magick_image_crop, 2},
@@ -1102,7 +1118,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_sample", (DL_FUNC) &_magick_magick_image_sample, 2},
     {"_magick_magick_image_border", (DL_FUNC) &_magick_magick_image_border, 3},
     {"_magick_magick_image_despeckle", (DL_FUNC) &_magick_magick_image_despeckle, 2},
-    {"_magick_magick_image_median", (DL_FUNC) &_magick_magick_image_median, 2},
     {"_magick_magick_image_reducenoise", (DL_FUNC) &_magick_magick_image_reducenoise, 2},
     {"_magick_magick_image_annotate", (DL_FUNC) &_magick_magick_image_annotate, 10},
     {"_magick_magick_image_compare", (DL_FUNC) &_magick_magick_image_compare, 3},

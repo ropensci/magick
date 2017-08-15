@@ -113,13 +113,6 @@ XPtrImage magick_image_chop( XPtrImage input, const char * geometry){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_colorize( XPtrImage input, const size_t opacity, const char * color){
-  XPtrImage output = copy(input);
-  for_each ( output->begin(), output->end(), Magick::colorizeImage(opacity, Color(color)));
-  return output;
-}
-
-// [[Rcpp::export]]
 XPtrImage magick_image_edge( XPtrImage input, size_t radius){
   XPtrImage output = copy(input);
   for_each ( output->begin(), output->end(), Magick::edgeImage(radius));
@@ -143,20 +136,6 @@ XPtrImage magick_image_deskew( XPtrImage input, double treshold){
 XPtrImage magick_image_emboss( XPtrImage input, const double radius = 1, const double sigma = 0.5){
   XPtrImage output = copy(input);
   for_each ( output->begin(), output->end(), Magick::embossImage(radius, sigma));
-  return output;
-}
-
-// [[Rcpp::export]]
-XPtrImage magick_image_enhance( XPtrImage input){
-  XPtrImage output = copy(input);
-  for_each ( output->begin(), output->end(), Magick::enhanceImage());
-  return output;
-}
-
-// [[Rcpp::export]]
-XPtrImage magick_image_equalize( XPtrImage input){
-  XPtrImage output = copy(input);
-  for_each ( output->begin(), output->end(), Magick::equalizeImage());
   return output;
 }
 
@@ -212,13 +191,6 @@ XPtrImage magick_image_negate( XPtrImage input){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_normalize( XPtrImage input){
-  XPtrImage output = copy(input);
-  for_each ( output->begin(), output->end(), Magick::normalizeImage());
-  return output;
-}
-
-// [[Rcpp::export]]
 XPtrImage magick_image_oilpaint( XPtrImage input, size_t radius){
   XPtrImage output = copy(input);
   for_each ( output->begin(), output->end(), Magick::oilPaintImage(radius));
@@ -258,13 +230,6 @@ XPtrImage magick_image_format( XPtrImage input, const char * format, Rcpp::Integ
 XPtrImage magick_image_trim( XPtrImage input){
   XPtrImage output = copy(input);
   for_each ( output->begin(), output->end(), Magick::trimImage());
-  return output;
-}
-
-// [[Rcpp::export]]
-XPtrImage magick_image_contrast( XPtrImage input, size_t sharpen){
-  XPtrImage output = copy(input);
-  for_each(output->begin(), output->end(), Magick::contrastImage(sharpen));
   return output;
 }
 
@@ -338,13 +303,6 @@ XPtrImage magick_image_despeckle( XPtrImage input, int times){
   for (int i=0; i < times; i++) {
     for_each ( output->begin(), output->end(), Magick::despeckleImage());
   }
-  return output;
-}
-
-// [[Rcpp::export]]
-XPtrImage magick_image_median( XPtrImage input, double radius){
-  XPtrImage output = copy(input);
-  for_each ( output->begin(), output->end(), Magick::myMedianImage(radius));
   return output;
 }
 

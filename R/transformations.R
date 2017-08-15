@@ -84,14 +84,6 @@ image_despeckle <- function(image, times = 1L){
 
 #' @export
 #' @rdname transformations
-#' @examples image_median(logo)
-image_median <- function(image, radius = 1.0){
-  assert_image(image)
-  magick_image_median(image, radius)
-}
-
-#' @export
-#' @rdname transformations
 #' @examples image_reducenoise(logo)
 image_reducenoise <- function(image, radius = 1L){
   assert_image(image)
@@ -159,24 +151,6 @@ image_emboss <- function(image, radius = 1, sigma = 0.5){
 #' @export
 #' @rdname transformations
 #' @examples
-#' image_enhance(logo)
-image_enhance <- function(image){
-  assert_image(image)
-  magick_image_enhance(image)
-}
-
-#' @export
-#' @rdname transformations
-#' @examples
-#' image_equalize(logo)
-image_equalize <- function(image){
-  assert_image(image)
-  magick_image_equalize(image)
-}
-
-#' @export
-#' @rdname transformations
-#' @examples
 #' image_flip(logo)
 image_flip <- function(image){
   assert_image(image)
@@ -224,15 +198,6 @@ image_negate <- function(image){
 
 #' @export
 #' @rdname transformations
-#' @examples
-#' image_normalize(logo)
-image_normalize <- function(image){
-  assert_image(image)
-  magick_image_normalize(image)
-}
-
-#' @export
-#' @rdname transformations
 #' @param degrees how many degrees
 #' @examples
 #' image_rotate(logo, 45)
@@ -275,16 +240,6 @@ image_chop <- function(image, geometry){
 
 #' @export
 #' @rdname transformations
-#' @param opacity percentage of transparency
-#' @examples
-#' image_colorize(logo, 50, "red")
-image_colorize <- function(image, opacity, color){
-  assert_image(image)
-  magick_image_colorize(image, opacity, color)
-}
-
-#' @export
-#' @rdname transformations
 #' @param pagesize geometry string with preferred size and location of an image canvas.
 #' @param density geometry string with vertical and horizontal resolution in pixels of
 #' the image. Specifies an image density when decoding a Postscript or PDF.
@@ -295,19 +250,6 @@ image_page <- function(image, pagesize = NULL, density = NULL){
   magick_image_page(image, pagesize, density)
 }
 
-#' @export
-#' @rdname transformations
-#' @param sharpen enhance intensity differences in image
-#' @examples
-#' # Lights up the R logo
-#' frames <- image_scale(logo, "400x400")
-#' for(i in 1:7) frames <- c(frames, image_contrast(frames[i]))
-#' (blink <- image_animate(c(frames, rev(frames)), fps = 20, loop = 1))
-#'
-image_contrast <- function(image, sharpen = 1){
-  assert_image(image)
-  magick_image_contrast(image, sharpen)
-}
 
 #' @export
 #' @rdname transformations
