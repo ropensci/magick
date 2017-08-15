@@ -25,7 +25,7 @@
 image_read(path, density = NULL, depth = NULL)
 
 image_write(image, path = NULL, format = NULL, quality = NULL,
-  depth = NULL, density = NULL, flatten = FALSE)
+  depth = NULL, density = NULL, comment = NULL, flatten = FALSE)
 
 image_display(image, animate = TRUE)
 
@@ -69,6 +69,8 @@ image_animate(image, fps = 10, loop = 0, dispose = c("background",
 Can also be a bitmap type such as \code{rgba} or \code{rgb}.}
 
 \item{quality}{number between 0 and 100 for jpeg quality. Defaults to 75.}
+
+\item{comment}{text comment added to the image metadata for supported formats}
 
 \item{flatten}{should image be flattened before writing? This also replaces
 transparency with background color.}

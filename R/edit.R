@@ -118,8 +118,9 @@ image_rsvg <- function(path, width = NULL, height = NULL){
 #' @param flatten should image be flattened before writing? This also replaces
 #' transparency with background color.
 #' @param quality number between 0 and 100 for jpeg quality. Defaults to 75.
+#' @param comment text comment added to the image metadata for supported formats
 image_write <- function(image, path = NULL, format = NULL, quality = NULL,
-                        depth = NULL, density = NULL, flatten = FALSE){
+                        depth = NULL, density = NULL, comment = NULL, flatten = FALSE){
   assert_image(image)
   if(!length(image))
     warning("Writing image with 0 frames")
@@ -129,7 +130,7 @@ image_write <- function(image, path = NULL, format = NULL, quality = NULL,
   quality <- as.integer(quality)
   depth <- as.integer(depth)
   density <- as.character(density)
-  buf <- magick_image_write(image, format, quality, depth, density)
+  buf <- magick_image_write(image, format, quality, depth, density, comment)
   if(is.character(path)){
     writeBin(buf, path)
     return(invisible(path))

@@ -2,6 +2,7 @@
   - Added image_modulate() for setting brightness, saturation, hue
   - image_border() now takes a operator parameter, fixes transparency bug
   - Documentation: group manual pages into logical sets
+  - image_write() gains a parameter 'comment' to add metadata to the file
 
 1.1
   - Change default 'bg' in image_graph() to 'white'
