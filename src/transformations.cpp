@@ -290,6 +290,7 @@ XPtrImage magick_image_sample( XPtrImage input, const char * geometry){
 XPtrImage magick_image_border( XPtrImage input, const char * color, const char * geometry){
   XPtrImage output = copy(input);
   //need to set color before adding the border!
+  for_each ( output->begin(), output->end(), Magick::composeImage(Magick::CopyCompositeOp));
   if(strlen(color))
     for_each ( output->begin(), output->end(), Magick::borderColorImage(color));
   if(strlen(geometry))
