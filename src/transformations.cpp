@@ -34,6 +34,13 @@ Magick::GravityType Gravity(const char * str){
   return (Magick::GravityType) val;
 }
 
+Magick::ImageType Type(const char * str){
+  ssize_t val = MagickCore::ParseCommandOption( MagickCore::MagickTypeOptions, Magick::MagickFalse, str);
+  if(val < 0)
+    throw std::runtime_error(std::string("Invalid ImageType value: ") + str);
+  return (Magick::ImageType) val;
+}
+
 Magick::NoiseType Noise(const char * str){
   ssize_t val = MagickCore::ParseCommandOption(
     MagickCore::MagickNoiseOptions, Magick::MagickFalse, str);
@@ -212,17 +219,20 @@ XPtrImage magick_image_implode( XPtrImage input, double factor){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_format( XPtrImage input, const char * format, Rcpp::IntegerVector depth,
-                               Rcpp::LogicalVector antialias){
+XPtrImage magick_image_format( XPtrImage input, Rcpp::CharacterVector format, Rcpp::CharacterVector type,
+                               Rcpp::IntegerVector depth, Rcpp::LogicalVector antialias){
   XPtrImage output = copy(input);
-  if(depth.size())
-    for_each ( output->begin(), output->end(), Magick::depthImage(depth.at(0)));
   if(antialias.size()){
     for (Iter it = output->begin(); it != output->end(); ++it)
       it->strokeAntiAlias(antialias.at(0));
     for_each ( output->begin(), output->end(), Magick::myAntiAliasImage(antialias.at(0)));
   }
-  for_each ( output->begin(), output->end(), Magick::magickImage(format));
+  if(type.size())
+    for_each ( output->begin(), output->end(), Magick::typeImage(Type(type.at(0))));
+  if(depth.size())
+    for_each ( output->begin(), output->end(), Magick::depthImage(depth.at(0)));
+  if(format.size())
+    for_each ( output->begin(), output->end(), Magick::magickImage(std::string(format.at(0))));
   return output;
 }
 

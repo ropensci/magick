@@ -9,6 +9,9 @@
 #' @param sharpen enhance intensity differences in image
 #' @examples logo <- image_read("logo:")
 #' image_contrast(logo)
+#'
+#' # Convert to black-white
+#' image_convert(logo, type = 'grayscale')
 image_contrast <- function(image, sharpen = 1){
   assert_image(image)
   magick_image_contrast(image, sharpen)

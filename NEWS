@@ -3,6 +3,7 @@
   - image_border() now takes a operator parameter, fixes transparency bug
   - Documentation: group manual pages into logical sets
   - image_write() gains a parameter 'comment' to add metadata to the file
+  - image_convert() gains a 'type' parameter e.g. to convert to grayscale
 
 1.1
   - Change default 'bg' in image_graph() to 'white'

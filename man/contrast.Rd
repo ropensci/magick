@@ -50,6 +50,9 @@ Functions to adjust constrast and colors.
 \examples{
 logo <- image_read("logo:")
 image_contrast(logo)
+
+# Convert to black-white
+image_convert(logo, type = 'grayscale')
 image_normalize(logo)
 image_modulate(logo, brightness = 200)
 image_modulate(logo, saturation = 150)
