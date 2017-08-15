@@ -141,7 +141,7 @@ Rcpp::DataFrame magick_image_info( XPtrImage input){
   Rcpp::IntegerVector filesize(len);
   for(int i = 0; i < len; i++){
     Frame frame = input->at(i);
-    colorspace[i] = Option(MagickCore::MagickColorspaceOptions, frame.colorSpace());
+    //colorspace[i] = Option(MagickCore::MagickColorspaceOptions, frame.colorSpace());
     Magick::Geometry geom(frame.size());
     format[i] = std::string(frame.magick());
     width[i] = geom.width();
