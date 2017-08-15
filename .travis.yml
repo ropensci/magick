@@ -16,10 +16,11 @@ matrix:
             - libpoppler-cpp-dev
     - os: linux
       dist: trusty
-      env: R_CODECOV=true
+      r_check_args: '--ignore-vignettes'
     - os: osx
       osx_image: xcode8.3
       brew_packages: imagemagick
+      env: R_CODECOV=true
     - os: osx
       latex: false
       osx_image: xcode8.3
