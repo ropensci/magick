@@ -25,6 +25,7 @@ image_normalize <- function(image){
 
 #' @export
 #' @rdname contrast
+#' @family image
 #' @param brightness modulation of brightness as percentage of the current value (100 for no change)
 #' @param saturation modulation of saturation as percentage of the current value (100 for no change)
 #' @param hue modulation of hue is an absolute rotation of -180 degrees to +180 degrees from the

@@ -166,5 +166,6 @@ image_animate(frames, fps = 10)
 Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}
 }
 \seealso{
-Other image: \code{\link{transformations}}
+Other image: \code{\link{contrast}},
+  \code{\link{transformations}}
 }

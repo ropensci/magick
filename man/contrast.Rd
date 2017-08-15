@@ -58,3 +58,7 @@ image_enhance(logo)
 image_equalize(logo)
 image_median(logo)
 }
+\seealso{
+Other image: \code{\link{editing}},
+  \code{\link{transformations}}
+}
