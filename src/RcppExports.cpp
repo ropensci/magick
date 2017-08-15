@@ -289,6 +289,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_border
+XPtrImage magick_image_border(XPtrImage input, const char * color, const char * geometry, const char * composite);
+RcppExport SEXP _magick_magick_image_border(SEXP inputSEXP, SEXP colorSEXP, SEXP geometrySEXP, SEXP compositeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< const char * >::type color(colorSEXP);
+    Rcpp::traits::input_parameter< const char * >::type geometry(geometrySEXP);
+    Rcpp::traits::input_parameter< const char * >::type composite(compositeSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_border(input, color, geometry, composite));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_coder_info
 Rcpp::List magick_coder_info(Rcpp::String format);
 RcppExport SEXP _magick_magick_coder_info(SEXP formatSEXP) {
@@ -964,19 +978,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// magick_image_border
-XPtrImage magick_image_border(XPtrImage input, const char * color, const char * geometry);
-RcppExport SEXP _magick_magick_image_border(SEXP inputSEXP, SEXP colorSEXP, SEXP geometrySEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< const char * >::type color(colorSEXP);
-    Rcpp::traits::input_parameter< const char * >::type geometry(geometrySEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_border(input, color, geometry));
-    return rcpp_result_gen;
-END_RCPP
-}
 // magick_image_despeckle
 XPtrImage magick_image_despeckle(XPtrImage input, int times);
 RcppExport SEXP _magick_magick_image_despeckle(SEXP inputSEXP, SEXP timesSEXP) {
@@ -1060,6 +1061,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_copy", (DL_FUNC) &_magick_magick_image_copy, 2},
     {"_magick_autobrewed", (DL_FUNC) &_magick_autobrewed, 0},
     {"_magick_magick_image_composite", (DL_FUNC) &_magick_magick_image_composite, 5},
+    {"_magick_magick_image_border", (DL_FUNC) &_magick_magick_image_border, 4},
     {"_magick_magick_coder_info", (DL_FUNC) &_magick_magick_coder_info, 1},
     {"_magick_magick_config_internal", (DL_FUNC) &_magick_magick_config_internal, 0},
     {"_magick_magick_image_contrast", (DL_FUNC) &_magick_magick_image_contrast, 2},
@@ -1116,7 +1118,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_crop", (DL_FUNC) &_magick_magick_image_crop, 2},
     {"_magick_magick_image_scale", (DL_FUNC) &_magick_magick_image_scale, 2},
     {"_magick_magick_image_sample", (DL_FUNC) &_magick_magick_image_sample, 2},
-    {"_magick_magick_image_border", (DL_FUNC) &_magick_magick_image_border, 3},
     {"_magick_magick_image_despeckle", (DL_FUNC) &_magick_magick_image_despeckle, 2},
     {"_magick_magick_image_reducenoise", (DL_FUNC) &_magick_magick_image_reducenoise, 2},
     {"_magick_magick_image_annotate", (DL_FUNC) &_magick_magick_image_annotate, 10},

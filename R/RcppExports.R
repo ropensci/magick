@@ -97,6 +97,10 @@ magick_image_composite <- function(input, composite_image, offset, composite, ar
     .Call('_magick_magick_image_composite', PACKAGE = 'magick', input, composite_image, offset, composite, args)
 }
 
+magick_image_border <- function(input, color, geometry, composite) {
+    .Call('_magick_magick_image_border', PACKAGE = 'magick', input, color, geometry, composite)
+}
+
 magick_coder_info <- function(format) {
     .Call('_magick_magick_coder_info', PACKAGE = 'magick', format)
 }
@@ -319,10 +323,6 @@ magick_image_scale <- function(input, geometry) {
 
 magick_image_sample <- function(input, geometry) {
     .Call('_magick_magick_image_sample', PACKAGE = 'magick', input, geometry)
-}
-
-magick_image_border <- function(input, color, geometry) {
-    .Call('_magick_magick_image_border', PACKAGE = 'magick', input, color, geometry)
 }
 
 magick_image_despeckle <- function(input, times) {

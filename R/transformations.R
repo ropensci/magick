@@ -26,6 +26,8 @@ image_trim <- function(image){
 
 #' @export
 #' @rdname transformations
+#' @param color a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
+#' \code{"navyblue"} or \code{"#000080"}
 #' @examples
 #' image_background(logo, "pink", flatten = TRUE)
 image_background <- function(image, color, flatten = TRUE){
@@ -40,6 +42,8 @@ image_background <- function(image, color, flatten = TRUE){
 
 #' @export
 #' @rdname transformations
+#' @param geometry a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
+#' for example \code{"10x10+5-5"}
 #' @examples image_crop(logo, "400x400+200+200")
 image_crop <- function(image, geometry = ""){
   assert_image(image)
@@ -60,18 +64,6 @@ image_scale <- function(image, geometry = ""){
 image_sample <- function(image, geometry = ""){
   assert_image(image)
   magick_image_sample(image, geometry)
-}
-
-#' @export
-#' @rdname transformations
-#' @param color a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
-#' \code{"navyblue"} or \code{"#000080"}
-#' @param geometry a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
-#' for example \code{"10x10+5-5"}.
-#' @examples image_border(logo, "red", "10x10")
-image_border <- function(image, color = "", geometry = ""){
-  assert_image(image)
-  magick_image_border(image, color, geometry)
 }
 
 #' @export

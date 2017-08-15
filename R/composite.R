@@ -22,3 +22,12 @@ image_composite <- function(image, composite_image = image[1], operator = "atop"
   compose_args <- as.character(compose_args)
   magick_image_composite(image, composite_image, offset, operator, compose_args)
 }
+
+
+#' @export
+#' @rdname composite
+#' @examples image_border(imlogo, "red", "10x10")
+image_border <- function(image, color = "", geometry = "", operator = "copy"){
+  assert_image(image)
+  magick_image_border(image, color, geometry, operator)
+}

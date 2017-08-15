@@ -27,3 +27,16 @@ XPtrImage magick_image_composite( XPtrImage input, XPtrImage composite_image,
   }
   return output;
 }
+
+
+// [[Rcpp::export]]
+XPtrImage magick_image_border( XPtrImage input, const char * color, const char * geometry, const char * composite){
+  XPtrImage output = copy(input);
+  //need to set color before adding the border!
+  for_each ( output->begin(), output->end(), Magick::composeImage(Composite(composite)));
+  if(strlen(color))
+    for_each ( output->begin(), output->end(), Magick::borderColorImage(color));
+  if(strlen(geometry))
+    for_each ( output->begin(), output->end(), Magick::borderImage(Geom(geometry)));
+  return output;
+}

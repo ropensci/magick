@@ -3,10 +3,13 @@
 \name{composite}
 \alias{composite}
 \alias{image_composite}
+\alias{image_border}
 \title{Magick Composite}
 \usage{
 image_composite(image, composite_image = image[1], operator = "atop",
   offset = "0x0", compose_args = "")
+
+image_border(image, color = "", geometry = "", operator = "copy")
 }
 \arguments{
 \item{image}{object returned by \code{image_read}}
@@ -19,6 +22,12 @@ image_composite(image, composite_image = image[1], operator = "atop",
 \item{offset}{geometry string with offset}
 
 \item{compose_args}{additional arguments needed for some composite operations}
+
+\item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
+\code{"navyblue"} or \code{"#000080"}}
+
+\item{geometry}{a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
+for example \code{"10x10+5-5"}}
 }
 \description{
 Similar to the ImageMagick `composite` command.
@@ -29,4 +38,5 @@ imlogo <- image_scale(image_read("logo:"), "x275")
 rlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-3.png")
 image_composite(imlogo, rlogo)
 image_composite(imlogo, rlogo, operator = "blend", compose_args="50")
+image_border(imlogo, "red", "10x10")
 }

@@ -287,18 +287,6 @@ XPtrImage magick_image_sample( XPtrImage input, const char * geometry){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_border( XPtrImage input, const char * color, const char * geometry){
-  XPtrImage output = copy(input);
-  //need to set color before adding the border!
-  for_each ( output->begin(), output->end(), Magick::composeImage(Magick::CopyCompositeOp));
-  if(strlen(color))
-    for_each ( output->begin(), output->end(), Magick::borderColorImage(color));
-  if(strlen(geometry))
-    for_each ( output->begin(), output->end(), Magick::borderImage(Geom(geometry)));
-  return output;
-}
-
-// [[Rcpp::export]]
 XPtrImage magick_image_despeckle( XPtrImage input, int times){
   XPtrImage output = copy(input);
   for (int i=0; i < times; i++) {

@@ -7,7 +7,6 @@
 \alias{image_crop}
 \alias{image_scale}
 \alias{image_sample}
-\alias{image_border}
 \alias{image_despeckle}
 \alias{image_reducenoise}
 \alias{image_noise}
@@ -41,8 +40,6 @@ image_crop(image, geometry = "")
 image_scale(image, geometry = "")
 
 image_sample(image, geometry = "")
-
-image_border(image, color = "", geometry = "")
 
 image_despeckle(image, times = 1L)
 
@@ -100,7 +97,7 @@ image_deskew(image, treshold = 40)
 transparency with background color.}
 
 \item{geometry}{a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
-for example \code{"10x10+5-5"}.}
+for example \code{"10x10+5-5"}}
 
 \item{times}{number of times to repeat the despeckle operation}
 
@@ -175,7 +172,6 @@ image_background(logo, "pink", flatten = TRUE)
 image_crop(logo, "400x400+200+200")
 image_scale(logo, "200x200")
 image_sample(logo, "200x200")
-image_border(logo, "red", "10x10")
 image_despeckle(logo)
 image_reducenoise(logo)
 image_noise(logo)
