@@ -1,5 +1,6 @@
 1.2
   - Added image_modulate() for setting brightness, saturation, hue
+  - Added image_quantize() option for reducing number of colors in an image
   - image_border() now takes a operator parameter, fixes transparency bug
   - Documentation: group manual pages into logical sets
   - image_write() gains a parameter 'comment' to add metadata to the file

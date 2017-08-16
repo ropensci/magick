@@ -83,7 +83,7 @@
 "print.magick-image" <- function(x, info = TRUE, ...){
   img <- x
   viewer <- getOption("viewer")
-  if(length(img) && is.function(viewer)){
+  if(is.function(viewer) && !magick_image_dead(x) && length(img)){
     format <- tolower(image_info(img[1])$format)
     if(length(img) > 1 && format != "gif"){
       img <- image_animate(img, fps = 1)

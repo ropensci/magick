@@ -431,6 +431,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_quantize
+XPtrImage magick_image_quantize(XPtrImage input, size_t max, Rcpp::CharacterVector space, Rcpp::LogicalVector dither, Rcpp::IntegerVector depth);
+RcppExport SEXP _magick_magick_image_quantize(SEXP inputSEXP, SEXP maxSEXP, SEXP spaceSEXP, SEXP ditherSEXP, SEXP depthSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< size_t >::type max(maxSEXP);
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type space(spaceSEXP);
+    Rcpp::traits::input_parameter< Rcpp::LogicalVector >::type dither(ditherSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type depth(depthSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_quantize(input, max, space, dither, depth));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_device_internal
 XPtrImage magick_device_internal(std::string bg, int width, int height, double pointsize, int res, bool clip, bool antialias, bool drawing);
 RcppExport SEXP _magick_magick_device_internal(SEXP bgSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP pointsizeSEXP, SEXP resSEXP, SEXP clipSEXP, SEXP antialiasSEXP, SEXP drawingSEXP) {
@@ -1099,6 +1114,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_enhance", (DL_FUNC) &_magick_magick_image_enhance, 1},
     {"_magick_magick_image_equalize", (DL_FUNC) &_magick_magick_image_equalize, 1},
     {"_magick_magick_image_median", (DL_FUNC) &_magick_magick_image_median, 2},
+    {"_magick_magick_image_quantize", (DL_FUNC) &_magick_magick_image_quantize, 5},
     {"_magick_magick_device_internal", (DL_FUNC) &_magick_magick_device_internal, 8},
     {"_magick_magick_device_get", (DL_FUNC) &_magick_magick_device_get, 1},
     {"_magick_magick_device_pop", (DL_FUNC) &_magick_magick_device_pop, 0},

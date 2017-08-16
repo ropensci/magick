@@ -9,6 +9,7 @@
 \alias{image_enhance}
 \alias{image_equalize}
 \alias{image_median}
+\alias{image_quantize}
 \title{Image Contrast and Colors}
 \usage{
 image_contrast(image, sharpen = 1)
@@ -24,6 +25,9 @@ image_enhance(image)
 image_equalize(image)
 
 image_median(image, radius = 1)
+
+image_quantize(image, max = 256, colorspace = NULL, dither = NULL,
+  treedepth = NULL)
 }
 \arguments{
 \item{image}{object returned by \code{image_read}}
@@ -43,6 +47,19 @@ current position corresponding to an argument range of 0 to 200 (100 for no chan
 \code{"navyblue"} or \code{"#000080"}}
 
 \item{radius}{radius, in pixels, for various transformations}
+
+\item{max}{preferred number of colors in the image. The actual number of colors in the image may
+be less than your request, but never more.}
+
+\item{colorspace}{a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{ColorspaceType}
+for example 'grey' to convert to black/white}
+
+\item{dither}{apply Floyd/Steinberg error diffusion to the image: averages intensities of sseveral
+neighboring pixels}
+
+\item{treedepth}{depth of the quantization color classification tree. Values of 0 or 1 allow
+selection of the optimal tree depth for the color reduction algorithm. Values between 2 and 8
+may be used to manually adjust the tree depth.}
 }
 \description{
 Functions to adjust constrast and colors.
@@ -61,6 +78,7 @@ image_colorize(logo, 50, "red")
 image_enhance(logo)
 image_equalize(logo)
 image_median(logo)
+image_quantize(logo, max = 16, colorspace = 'gray')
 }
 \seealso{
 Other image: \code{\link{attributes}},

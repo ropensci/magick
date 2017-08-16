@@ -53,3 +53,20 @@ XPtrImage magick_image_median( XPtrImage input, double radius){
   for_each ( output->begin(), output->end(), Magick::myMedianImage(radius));
   return output;
 }
+
+// [[Rcpp::export]]
+XPtrImage magick_image_quantize( XPtrImage input, size_t max, Rcpp::CharacterVector space,
+                                 Rcpp::LogicalVector dither, Rcpp::IntegerVector depth){
+  XPtrImage output = copy(input);
+  if(space.size())
+    for_each ( output->begin(), output->end(), Magick::quantizeColorSpaceImage(ColorSpace(space.at(0))));
+  if(dither.size())
+    for_each ( output->begin(), output->end(), Magick::quantizeDitherImage(dither.at(0)));
+  if(depth.size())
+    for_each ( output->begin(), output->end(), Magick::quantizeTreeDepthImage(depth.at(0)));
+
+  //quantize!
+  for_each ( output->begin(), output->end(), Magick::quantizeColorsImage(max));
+  for_each ( output->begin(), output->end(), Magick::quantizeImage(false));
+  return output;
+}

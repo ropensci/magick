@@ -145,6 +145,10 @@ magick_image_median <- function(input, radius) {
     .Call('_magick_magick_image_median', PACKAGE = 'magick', input, radius)
 }
 
+magick_image_quantize <- function(input, max, space, dither, depth) {
+    .Call('_magick_magick_image_quantize', PACKAGE = 'magick', input, max, space, dither, depth)
+}
+
 magick_device_internal <- function(bg, width, height, pointsize, res, clip, antialias, drawing) {
     .Call('_magick_magick_device_internal', PACKAGE = 'magick', bg, width, height, pointsize, res, clip, antialias, drawing)
 }

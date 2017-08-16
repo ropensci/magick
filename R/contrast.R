@@ -79,3 +79,22 @@ image_median <- function(image, radius = 1.0){
   assert_image(image)
   magick_image_median(image, radius)
 }
+
+#' @export
+#' @rdname contrast
+#' @param max preferred number of colors in the image. The actual number of colors in the image may
+#' be less than your request, but never more.
+#' @param dither apply Floyd/Steinberg error diffusion to the image: averages intensities of sseveral
+#' neighboring pixels
+#' @param treedepth depth of the quantization color classification tree. Values of 0 or 1 allow
+#' selection of the optimal tree depth for the color reduction algorithm. Values between 2 and 8
+#' may be used to manually adjust the tree depth.
+#' @examples image_quantize(logo, max = 16, colorspace = 'gray')
+image_quantize <- function(image, max = 256, colorspace = NULL, dither = NULL, treedepth = NULL){
+  assert_image(image)
+  max <- as.integer(max)
+  colorspace <- as.character(colorspace)
+  dither <- as.logical(dither)
+  treedepth <- as.integer(treedepth)
+  magick_image_quantize(image, max, colorspace, dither, treedepth)
+}
