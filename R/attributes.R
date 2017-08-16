@@ -6,6 +6,7 @@
 #'
 #' @export
 #' @family image
+#' @inheritParams editing
 #' @name attributes
 #' @rdname attributes
 #' @param comment string to set an image comment

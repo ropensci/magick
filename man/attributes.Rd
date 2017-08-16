@@ -8,6 +8,8 @@
 image_comment(image, comment = NULL)
 }
 \arguments{
+\item{image}{object returned by \code{image_read}}
+
 \item{comment}{string to set an image comment}
 }
 \description{
