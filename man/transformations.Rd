@@ -209,5 +209,6 @@ if(magick_config()$version >= "6.8.7")
  image_compare(logo, logo2, metric = "phash")
 }
 \seealso{
-Other image: \code{\link{contrast}}, \code{\link{editing}}
+Other image: \code{\link{attributes}},
+  \code{\link{contrast}}, \code{\link{editing}}
 }

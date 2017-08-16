@@ -6,6 +6,18 @@
 
 using namespace Rcpp;
 
+// magick_attr_comment
+Rcpp::CharacterVector magick_attr_comment(XPtrImage input, Rcpp::CharacterVector set);
+RcppExport SEXP _magick_magick_attr_comment(SEXP inputSEXP, SEXP setSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type set(setSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_attr_comment(input, set));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_attr_text_antialias
 Rcpp::LogicalVector magick_attr_text_antialias(XPtrImage input, Rcpp::LogicalVector set);
 RcppExport SEXP _magick_magick_attr_text_antialias(SEXP inputSEXP, SEXP setSEXP) {
@@ -1040,6 +1052,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_magick_magick_attr_comment", (DL_FUNC) &_magick_magick_attr_comment, 2},
     {"_magick_magick_attr_text_antialias", (DL_FUNC) &_magick_magick_attr_text_antialias, 2},
     {"_magick_magick_attr_stroke_antialias", (DL_FUNC) &_magick_magick_attr_stroke_antialias, 2},
     {"_magick_magick_attr_animationdelay", (DL_FUNC) &_magick_magick_attr_animationdelay, 2},

@@ -63,6 +63,6 @@ image_equalize(logo)
 image_median(logo)
 }
 \seealso{
-Other image: \code{\link{editing}},
-  \code{\link{transformations}}
+Other image: \code{\link{attributes}},
+  \code{\link{editing}}, \code{\link{transformations}}
 }
