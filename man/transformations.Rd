@@ -145,8 +145,8 @@ Can also be a bitmap type such as \code{rgba} or \code{rgb}.}
 \item{type}{a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ImageType}{ImageType}
 classification for example 'grayscale' to convert to black/white}
 
-\item{colorspace}{a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{ColorspaceType}
-for example 'grey' to convert to black/white}
+\item{colorspace}{string with a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{ColorspaceType}
+for example 'grey' or 'rgb' or 'cmyk'}
 
 \item{depth}{color depth, must be 8 or 16}
 

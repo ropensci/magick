@@ -281,8 +281,8 @@ image_annotate <- function(image, text, gravity = "northwest", location = "+0+0"
 #' @param antialias (TRUE/FALSE) enable anti-aliasing for text and strokes
 #' @param type a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ImageType}{ImageType}
 #' classification for example 'grayscale' to convert to black/white
-#' @param colorspace a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{ColorspaceType}
-#' for example 'grey' to convert to black/white
+#' @param colorspace string with a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{ColorspaceType}
+#' for example 'grey' or 'rgb' or 'cmyk'
 image_convert <- function(image, format = NULL, type = NULL, colorspace = NULL, depth = NULL, antialias = NULL){
   assert_image(image)
   depth <- as.integer(depth)

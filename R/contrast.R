@@ -89,7 +89,10 @@ image_median <- function(image, radius = 1.0){
 #' @param treedepth depth of the quantization color classification tree. Values of 0 or 1 allow
 #' selection of the optimal tree depth for the color reduction algorithm. Values between 2 and 8
 #' may be used to manually adjust the tree depth.
-#' @examples image_quantize(logo, max = 16, colorspace = 'gray')
+#' @examples # Quantize into 10 colors, using various spaces
+#' image_quantize(logo, max = 10, colorspace = 'gray')
+#' image_quantize(logo, max = 10, colorspace = 'rgb')
+#' image_quantize(logo, max = 10, colorspace = 'cmyk')
 image_quantize <- function(image, max = 256, colorspace = NULL, dither = NULL, treedepth = NULL){
   assert_image(image)
   max <- as.integer(max)

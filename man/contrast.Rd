@@ -51,8 +51,8 @@ current position corresponding to an argument range of 0 to 200 (100 for no chan
 \item{max}{preferred number of colors in the image. The actual number of colors in the image may
 be less than your request, but never more.}
 
-\item{colorspace}{a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{ColorspaceType}
-for example 'grey' to convert to black/white}
+\item{colorspace}{string with a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{ColorspaceType}
+for example 'grey' or 'rgb' or 'cmyk'}
 
 \item{dither}{apply Floyd/Steinberg error diffusion to the image: averages intensities of sseveral
 neighboring pixels}
@@ -78,7 +78,10 @@ image_colorize(logo, 50, "red")
 image_enhance(logo)
 image_equalize(logo)
 image_median(logo)
-image_quantize(logo, max = 16, colorspace = 'gray')
+# Quantize into 10 colors, using various spaces
+image_quantize(logo, max = 10, colorspace = 'gray')
+image_quantize(logo, max = 10, colorspace = 'rgb')
+image_quantize(logo, max = 10, colorspace = 'cmyk')
 }
 \seealso{
 Other image: \code{\link{attributes}},
