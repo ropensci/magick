@@ -11,6 +11,11 @@ void finalize_image( Image *image ){
 }
 
 // [[Rcpp::export]]
+int magick_image_dead(XPtrImage image){
+  return image.get() == NULL;
+}
+
+// [[Rcpp::export]]
 int magick_image_length(XPtrImage image){
   return image->size();
 }

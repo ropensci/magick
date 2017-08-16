@@ -184,6 +184,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_dead
+int magick_image_dead(XPtrImage image);
+RcppExport SEXP _magick_magick_image_dead(SEXP imageSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type image(imageSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_dead(image));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_length
 int magick_image_length(XPtrImage image);
 RcppExport SEXP _magick_magick_image_length(SEXP imageSEXP) {
@@ -1067,6 +1078,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_attr_quantize", (DL_FUNC) &_magick_magick_attr_quantize, 2},
     {"_magick_magick_image_info", (DL_FUNC) &_magick_magick_image_info, 1},
     {"_magick_magick_image_as_raster", (DL_FUNC) &_magick_magick_image_as_raster, 1},
+    {"_magick_magick_image_dead", (DL_FUNC) &_magick_magick_image_dead, 1},
     {"_magick_magick_image_length", (DL_FUNC) &_magick_magick_image_length, 1},
     {"_magick_create", (DL_FUNC) &_magick_create, 1},
     {"_magick_copy", (DL_FUNC) &_magick_copy, 1},
