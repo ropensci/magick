@@ -338,7 +338,7 @@ manual <- image_read('https://cran.r-project.org/web/packages/magick/magick.pdf'
 image_info(manual)
 
 # Convert the first page to PNG
-image_convert(manual[1], "png", 8)
+image_convert(manual[1], "png", depth = 8)
 ```
 
 Magick requires ghostscript to render the PDF. An alternative method to read pdf is render it via the pdftools package:
