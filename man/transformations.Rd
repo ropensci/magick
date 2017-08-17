@@ -2,11 +2,7 @@
 % Please edit documentation in R/transformations.R
 \name{transformations}
 \alias{transformations}
-\alias{image_trim}
 \alias{image_background}
-\alias{image_crop}
-\alias{image_scale}
-\alias{image_sample}
 \alias{image_despeckle}
 \alias{image_reducenoise}
 \alias{image_noise}
@@ -15,15 +11,10 @@
 \alias{image_edge}
 \alias{image_oilpaint}
 \alias{image_emboss}
-\alias{image_flip}
-\alias{image_flop}
 \alias{image_frame}
 \alias{image_implode}
 \alias{image_negate}
-\alias{image_rotate}
 \alias{image_fill}
-\alias{image_transparent}
-\alias{image_chop}
 \alias{image_page}
 \alias{image_annotate}
 \alias{image_convert}
@@ -31,15 +22,7 @@
 \alias{image_deskew}
 \title{Image Transformations}
 \usage{
-image_trim(image)
-
 image_background(image, color, flatten = TRUE)
-
-image_crop(image, geometry = "")
-
-image_scale(image, geometry = "")
-
-image_sample(image, geometry = "")
 
 image_despeckle(image, times = 1L)
 
@@ -57,23 +40,13 @@ image_oilpaint(image, radius = 1)
 
 image_emboss(image, radius = 1, sigma = 0.5)
 
-image_flip(image)
-
-image_flop(image)
-
 image_frame(image, geometry = "25x25+6+6")
 
 image_implode(image, factor = 0.5)
 
 image_negate(image)
 
-image_rotate(image, degrees)
-
 image_fill(image, color, point = "1x1", fuzz = 0)
-
-image_transparent(image, color, fuzz = 0)
-
-image_chop(image, geometry)
 
 image_page(image, pagesize = NULL, density = NULL)
 
@@ -97,9 +70,6 @@ image_deskew(image, treshold = 40)
 \item{flatten}{should image be flattened before writing? This also replaces
 transparency with background color.}
 
-\item{geometry}{a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
-for example \code{"10x10+5-5"}}
-
 \item{times}{number of times to repeat the despeckle operation}
 
 \item{radius}{radius, in pixels, for various transformations}
@@ -109,9 +79,10 @@ for example \code{"10x10+5-5"}}
 
 \item{sigma}{the standard deviation of the Laplacian, in pixels.}
 
-\item{factor}{image implode factor (special effect)}
+\item{geometry}{a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
+for example \code{"10x10+5-5"}}
 
-\item{degrees}{how many degrees}
+\item{factor}{image implode factor (special effect)}
 
 \item{point}{string indicating the flood-fill starting point}
 
@@ -130,6 +101,8 @@ the image. Specifies an image density when decoding a Postscript or PDF.}
 \href{https://www.imagemagick.org/Magick++/Enumerations.html#GravityType}{gravity type}}
 
 \item{location}{geometry string with location relative to \code{gravity}}
+
+\item{degrees}{value between 0 and 360 for how many degrees to rotate}
 
 \item{size}{font-size in pixels}
 
@@ -173,12 +146,7 @@ into that kind of stuff.
 }
 \examples{
 logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
-logo <- image_scale(logo, "400")
-image_trim(logo)
 image_background(logo, "pink", flatten = TRUE)
-image_crop(logo, "400x400+200+200")
-image_scale(logo, "200x200")
-image_sample(logo, "200x200")
 image_despeckle(logo)
 image_reducenoise(logo)
 image_noise(logo)
@@ -187,15 +155,11 @@ image_charcoal(logo)
 image_edge(logo)
 image_oilpaint(logo)
 image_emboss(logo)
-image_flip(logo)
-image_flop(logo)
 image_frame(logo)
 image_implode(logo)
 image_negate(logo)
-image_rotate(logo, 45)
 image_fill(image_flatten(logo), "red")
 image_fill(image_flatten(logo), "red", fuzz = 25600)
-image_chop(logo, "100x20")
 # Add some text to an image
 image_annotate(logo, "This is a test")
 image_annotate(logo, "CONFIDENTIAL", size = 50, color = "red", boxcolor = "pink",
@@ -210,5 +174,6 @@ if(magick_config()$version >= "6.8.7")
 }
 \seealso{
 Other image: \code{\link{attributes}},
-  \code{\link{contrast}}, \code{\link{editing}}
+  \code{\link{contrast}}, \code{\link{editing}},
+  \code{\link{resize}}
 }

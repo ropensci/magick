@@ -10,6 +10,7 @@
 \alias{image_equalize}
 \alias{image_median}
 \alias{image_quantize}
+\alias{image_transparent}
 \title{Image Contrast and Colors}
 \usage{
 image_contrast(image, sharpen = 1)
@@ -28,6 +29,8 @@ image_median(image, radius = 1)
 
 image_quantize(image, max = 256, colorspace = NULL, dither = NULL,
   treedepth = NULL)
+
+image_transparent(image, color, fuzz = 0)
 }
 \arguments{
 \item{image}{object returned by \code{image_read}}
@@ -60,6 +63,10 @@ neighboring pixels}
 \item{treedepth}{depth of the quantization color classification tree. Values of 0 or 1 allow
 selection of the optimal tree depth for the color reduction algorithm. Values between 2 and 8
 may be used to manually adjust the tree depth.}
+
+\item{fuzz}{Colors within this distance are considered equal.
+Use this option to match colors that are close to the target color in RGB space.
+I think max distance (from #000000 to #FFFFFF) is 256^3.}
 }
 \description{
 Functions to adjust constrast and colors.
@@ -85,5 +92,6 @@ image_quantize(logo, max = 10, colorspace = 'cmyk')
 }
 \seealso{
 Other image: \code{\link{attributes}},
-  \code{\link{editing}}, \code{\link{transformations}}
+  \code{\link{editing}}, \code{\link{resize}},
+  \code{\link{transformations}}
 }

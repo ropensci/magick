@@ -15,20 +15,9 @@
 #' @family image
 #' @export
 #' @rdname transformations
-#' @examples
-#' logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
-#' logo <- image_scale(logo, "400")
-#' image_trim(logo)
-image_trim <- function(image){
-  assert_image(image)
-  magick_image_trim(image)
-}
-
-#' @export
-#' @rdname transformations
 #' @param color a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
 #' \code{"navyblue"} or \code{"#000080"}
-#' @examples
+#' @examples logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
 #' image_background(logo, "pink", flatten = TRUE)
 image_background <- function(image, color, flatten = TRUE){
   assert_image(image)
@@ -38,32 +27,6 @@ image_background <- function(image, color, flatten = TRUE){
   } else {
     return(out)
   }
-}
-
-#' @export
-#' @rdname transformations
-#' @param geometry a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
-#' for example \code{"10x10+5-5"}
-#' @examples image_crop(logo, "400x400+200+200")
-image_crop <- function(image, geometry = ""){
-  assert_image(image)
-  magick_image_crop(image, geometry)
-}
-
-#' @export
-#' @rdname transformations
-#' @examples image_scale(logo, "200x200")
-image_scale <- function(image, geometry = ""){
-  assert_image(image)
-  magick_image_scale(image, geometry)
-}
-
-#' @export
-#' @rdname transformations
-#' @examples image_sample(logo, "200x200")
-image_sample <- function(image, geometry = ""){
-  assert_image(image)
-  magick_image_sample(image, geometry)
 }
 
 #' @export
@@ -141,27 +104,12 @@ image_emboss <- function(image, radius = 1, sigma = 0.5){
   magick_image_emboss(image, radius, sigma)
 }
 
-#' @export
-#' @rdname transformations
-#' @examples
-#' image_flip(logo)
-image_flip <- function(image){
-  assert_image(image)
-  magick_image_flip(image)
-}
-
-#' @export
-#' @rdname transformations
-#' @examples
-#' image_flop(logo)
-image_flop <- function(image){
-  assert_image(image)
-  magick_image_flop(image)
-}
 
 # lol this is so ugly it should be illegal
 #' @export
 #' @rdname transformations
+#' @param geometry a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
+#' for example \code{"10x10+5-5"}
 #' @examples
 #' image_frame(logo)
 image_frame <- function(image, geometry = "25x25+6+6"){
@@ -191,16 +139,6 @@ image_negate <- function(image){
 
 #' @export
 #' @rdname transformations
-#' @param degrees how many degrees
-#' @examples
-#' image_rotate(logo, 45)
-image_rotate <- function(image, degrees){
-  assert_image(image)
-  magick_image_rotate(image, degrees)
-}
-
-#' @export
-#' @rdname transformations
 #' @param point string indicating the flood-fill starting point
 #' @param fuzz Colors within this distance are considered equal.
 #' Use this option to match colors that are close to the target color in RGB space.
@@ -211,24 +149,6 @@ image_rotate <- function(image, degrees){
 image_fill <- function(image, color, point = "1x1", fuzz = 0){
   assert_image(image)
   magick_image_fill(image, color, point, fuzz)
-}
-
-#' @export
-#' @rdname transformations
-image_transparent <- function(image, color, fuzz = 0){
-  assert_image(image)
-  magick_image_transparent(image, color, fuzz)
-}
-
-
-#' @export
-#' @rdname transformations
-#' @examples
-#' image_chop(logo, "100x20")
-image_chop <- function(image, geometry){
-  assert_image(image)
-  stopifnot(is.character(geometry))
-  magick_image_chop(image, geometry)
 }
 
 #' @export
@@ -247,6 +167,7 @@ image_page <- function(image, pagesize = NULL, density = NULL){
 #' @export
 #' @rdname transformations
 #' @param text annotation text
+#' @param degrees value between 0 and 360 for how many degrees to rotate
 #' @param gravity string with
 #' \href{https://www.imagemagick.org/Magick++/Enumerations.html#GravityType}{gravity type}
 #' @param location geometry string with location relative to \code{gravity}

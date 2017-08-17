@@ -25,6 +25,7 @@ Magick::Color Color(const char * str);
 Magick::DisposeType Dispose(const char * str);
 Magick::CompositeOperator Composite(const char * str);
 Magick::ColorspaceType ColorSpace(const char * str);
+Magick::FilterTypes Filter(const char * str);
 
 #if MagickLibVersion >= 0x700
 Magick::Point Point(const char * str);

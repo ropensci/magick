@@ -19,5 +19,5 @@ set with the same function.
 }
 \seealso{
 Other image: \code{\link{contrast}}, \code{\link{editing}},
-  \code{\link{transformations}}
+  \code{\link{resize}}, \code{\link{transformations}}
 }

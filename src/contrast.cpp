@@ -70,3 +70,14 @@ XPtrImage magick_image_quantize( XPtrImage input, size_t max, Rcpp::CharacterVec
   for_each ( output->begin(), output->end(), Magick::quantizeImage(false));
   return output;
 }
+
+// [[Rcpp::export]]
+XPtrImage magick_image_transparent( XPtrImage input, const char * color, double fuzz){
+  XPtrImage output = copy(input);
+  if(fuzz != 0)
+    for_each ( output->begin(), output->end(), Magick::colorFuzzImage(fuzz));
+  for_each ( output->begin(), output->end(), Magick::transparentImage(Color(color)));
+  if(fuzz != 0)
+    for_each ( output->begin(), output->end(), Magick::colorFuzzImage(input->front().colorFuzz()));
+  return output;
+}

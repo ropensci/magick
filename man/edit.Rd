@@ -169,5 +169,6 @@ Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}
 }
 \seealso{
 Other image: \code{\link{attributes}},
-  \code{\link{contrast}}, \code{\link{transformations}}
+  \code{\link{contrast}}, \code{\link{resize}},
+  \code{\link{transformations}}
 }

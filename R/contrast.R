@@ -101,3 +101,10 @@ image_quantize <- function(image, max = 256, colorspace = NULL, dither = NULL, t
   treedepth <- as.integer(treedepth)
   magick_image_quantize(image, max, colorspace, dither, treedepth)
 }
+
+#' @export
+#' @rdname contrast
+image_transparent <- function(image, color, fuzz = 0){
+  assert_image(image)
+  magick_image_transparent(image, color, fuzz)
+}
