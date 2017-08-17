@@ -89,7 +89,8 @@ image_median <- function(image, radius = 1.0){
 #' @param treedepth depth of the quantization color classification tree. Values of 0 or 1 allow
 #' selection of the optimal tree depth for the color reduction algorithm. Values between 2 and 8
 #' may be used to manually adjust the tree depth.
-#' @examples # Quantize into 10 colors, using various spaces
+#' @examples
+#' # Quantize into 10 colors, using various spaces
 #' image_quantize(logo, max = 10, colorspace = 'gray')
 #' image_quantize(logo, max = 10, colorspace = 'rgb')
 #' image_quantize(logo, max = 10, colorspace = 'cmyk')
@@ -107,4 +108,24 @@ image_quantize <- function(image, max = 256, colorspace = NULL, dither = NULL, t
 image_transparent <- function(image, color, fuzz = 0){
   assert_image(image)
   magick_image_transparent(image, color, fuzz)
+}
+
+#' @export
+#' @rdname contrast
+#' @inheritParams editing
+#' @examples
+#' # Change background color
+#' translogo <- image_transparent(logo, 'white')
+#' image_background(translogo, "pink", flatten = TRUE)
+#'
+#' # Let's try another method
+#' image_fill(logo, "pink", fuzz = 10000)
+image_background <- function(image, color, flatten = TRUE){
+  assert_image(image)
+  out <- magick_image_background(image, color)
+  if(isTRUE(flatten)){
+    image_apply(out, image_flatten)
+  } else {
+    return(out)
+  }
 }

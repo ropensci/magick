@@ -9,30 +9,14 @@
 #' Each function returns a copy of the manipulated image; the input image will
 #' be unaffected. Therefore operations can be piped with magrittr if you're
 #' into that kind of stuff.
-#'
 #' @name transformations
 #' @inheritParams editing
 #' @family image
-#' @export
 #' @rdname transformations
-#' @param color a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
-#' \code{"navyblue"} or \code{"#000080"}
-#' @examples logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
-#' image_background(logo, "pink", flatten = TRUE)
-image_background <- function(image, color, flatten = TRUE){
-  assert_image(image)
-  out <- magick_image_background(image, color)
-  if(isTRUE(flatten)){
-    image_apply(out, image_flatten)
-  } else {
-    return(out)
-  }
-}
-
 #' @export
-#' @rdname transformations
 #' @param times number of times to repeat the despeckle operation
-#' @examples image_despeckle(logo)
+#' @examples logo <- image_read("logo:")
+#' image_despeckle(logo)
 image_despeckle <- function(image, times = 1L){
   assert_image(image)
   magick_image_despeckle(image, times)
@@ -139,6 +123,8 @@ image_negate <- function(image){
 
 #' @export
 #' @rdname transformations
+#' @param color a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
+#' \code{"navyblue"} or \code{"#000080"}
 #' @param point string indicating the flood-fill starting point
 #' @param fuzz Colors within this distance are considered equal.
 #' Use this option to match colors that are close to the target color in RGB space.

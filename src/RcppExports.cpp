@@ -459,6 +459,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_background
+XPtrImage magick_image_background(XPtrImage input, const char * color);
+RcppExport SEXP _magick_magick_image_background(SEXP inputSEXP, SEXP colorSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< const char * >::type color(colorSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_background(input, color));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_device_internal
 XPtrImage magick_device_internal(std::string bg, int width, int height, double pointsize, int res, bool clip, bool antialias, bool drawing);
 RcppExport SEXP _magick_magick_device_internal(SEXP bgSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP pointsizeSEXP, SEXP resSEXP, SEXP clipSEXP, SEXP antialiasSEXP, SEXP drawingSEXP) {
@@ -1007,18 +1019,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// magick_image_background
-XPtrImage magick_image_background(XPtrImage input, const char * color);
-RcppExport SEXP _magick_magick_image_background(SEXP inputSEXP, SEXP colorSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< const char * >::type color(colorSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_background(input, color));
-    return rcpp_result_gen;
-END_RCPP
-}
 // magick_image_page
 XPtrImage magick_image_page(XPtrImage input, Rcpp::CharacterVector pagesize, Rcpp::CharacterVector density);
 RcppExport SEXP _magick_magick_image_page(SEXP inputSEXP, SEXP pagesizeSEXP, SEXP densitySEXP) {
@@ -1129,6 +1129,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_median", (DL_FUNC) &_magick_magick_image_median, 2},
     {"_magick_magick_image_quantize", (DL_FUNC) &_magick_magick_image_quantize, 5},
     {"_magick_magick_image_transparent", (DL_FUNC) &_magick_magick_image_transparent, 3},
+    {"_magick_magick_image_background", (DL_FUNC) &_magick_magick_image_background, 2},
     {"_magick_magick_device_internal", (DL_FUNC) &_magick_magick_device_internal, 8},
     {"_magick_magick_device_get", (DL_FUNC) &_magick_magick_device_get, 1},
     {"_magick_magick_device_pop", (DL_FUNC) &_magick_magick_device_pop, 0},
@@ -1174,7 +1175,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_oilpaint", (DL_FUNC) &_magick_magick_image_oilpaint, 2},
     {"_magick_magick_image_implode", (DL_FUNC) &_magick_magick_image_implode, 2},
     {"_magick_magick_image_format", (DL_FUNC) &_magick_magick_image_format, 6},
-    {"_magick_magick_image_background", (DL_FUNC) &_magick_magick_image_background, 2},
     {"_magick_magick_image_page", (DL_FUNC) &_magick_magick_image_page, 3},
     {"_magick_magick_image_despeckle", (DL_FUNC) &_magick_magick_image_despeckle, 2},
     {"_magick_magick_image_reducenoise", (DL_FUNC) &_magick_magick_image_reducenoise, 2},

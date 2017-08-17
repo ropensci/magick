@@ -11,6 +11,7 @@
 \alias{image_median}
 \alias{image_quantize}
 \alias{image_transparent}
+\alias{image_background}
 \title{Image Contrast and Colors}
 \usage{
 image_contrast(image, sharpen = 1)
@@ -31,6 +32,8 @@ image_quantize(image, max = 256, colorspace = NULL, dither = NULL,
   treedepth = NULL)
 
 image_transparent(image, color, fuzz = 0)
+
+image_background(image, color, flatten = TRUE)
 }
 \arguments{
 \item{image}{object returned by \code{image_read}}
@@ -67,6 +70,9 @@ may be used to manually adjust the tree depth.}
 \item{fuzz}{Colors within this distance are considered equal.
 Use this option to match colors that are close to the target color in RGB space.
 I think max distance (from #000000 to #FFFFFF) is 256^3.}
+
+\item{flatten}{should image be flattened before writing? This also replaces
+transparency with background color.}
 }
 \description{
 Functions to adjust constrast and colors.
@@ -89,6 +95,12 @@ image_median(logo)
 image_quantize(logo, max = 10, colorspace = 'gray')
 image_quantize(logo, max = 10, colorspace = 'rgb')
 image_quantize(logo, max = 10, colorspace = 'cmyk')
+# Change background color
+translogo <- image_transparent(logo, 'white')
+image_background(translogo, "pink", flatten = TRUE)
+
+# Let's try another method
+image_fill(logo, "pink", fuzz = 10000)
 }
 \seealso{
 Other image: \code{\link{attributes}},

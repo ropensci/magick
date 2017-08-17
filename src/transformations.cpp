@@ -215,13 +215,6 @@ XPtrImage magick_image_format( XPtrImage input, Rcpp::CharacterVector format, Rc
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_background( XPtrImage input, const char * color){
-  XPtrImage output = copy(input);
-  for_each (output->begin(), output->end(), Magick::backgroundColorImage(Color(color)));
-  return output;
-}
-
-// [[Rcpp::export]]
 XPtrImage magick_image_page( XPtrImage input, Rcpp::CharacterVector pagesize, Rcpp::CharacterVector density){
   XPtrImage output = copy(input);
   if(pagesize.size())

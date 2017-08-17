@@ -62,6 +62,8 @@
 
 #' @export
 "length.magick-image" <- function(x){
+  if(magick_image_dead(x))
+    return(NULL)
   assert_image(x)
   magick_image_length(x)
 }

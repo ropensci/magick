@@ -153,6 +153,10 @@ magick_image_transparent <- function(input, color, fuzz) {
     .Call('_magick_magick_image_transparent', PACKAGE = 'magick', input, color, fuzz)
 }
 
+magick_image_background <- function(input, color) {
+    .Call('_magick_magick_image_background', PACKAGE = 'magick', input, color)
+}
+
 magick_device_internal <- function(bg, width, height, pointsize, res, clip, antialias, drawing) {
     .Call('_magick_magick_device_internal', PACKAGE = 'magick', bg, width, height, pointsize, res, clip, antialias, drawing)
 }
@@ -331,10 +335,6 @@ magick_image_implode <- function(input, factor) {
 
 magick_image_format <- function(input, format, type, space, depth, antialias) {
     .Call('_magick_magick_image_format', PACKAGE = 'magick', input, format, type, space, depth, antialias)
-}
-
-magick_image_background <- function(input, color) {
-    .Call('_magick_magick_image_background', PACKAGE = 'magick', input, color)
 }
 
 magick_image_page <- function(input, pagesize, density) {

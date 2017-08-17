@@ -2,7 +2,6 @@
 % Please edit documentation in R/transformations.R
 \name{transformations}
 \alias{transformations}
-\alias{image_background}
 \alias{image_despeckle}
 \alias{image_reducenoise}
 \alias{image_noise}
@@ -22,8 +21,6 @@
 \alias{image_deskew}
 \title{Image Transformations}
 \usage{
-image_background(image, color, flatten = TRUE)
-
 image_despeckle(image, times = 1L)
 
 image_reducenoise(image, radius = 1L)
@@ -64,12 +61,6 @@ image_deskew(image, treshold = 40)
 \arguments{
 \item{image}{object returned by \code{image_read}}
 
-\item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
-\code{"navyblue"} or \code{"#000080"}}
-
-\item{flatten}{should image be flattened before writing? This also replaces
-transparency with background color.}
-
 \item{times}{number of times to repeat the despeckle operation}
 
 \item{radius}{radius, in pixels, for various transformations}
@@ -83,6 +74,9 @@ transparency with background color.}
 for example \code{"10x10+5-5"}}
 
 \item{factor}{image implode factor (special effect)}
+
+\item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
+\code{"navyblue"} or \code{"#000080"}}
 
 \item{point}{string indicating the flood-fill starting point}
 
@@ -145,8 +139,7 @@ be unaffected. Therefore operations can be piped with magrittr if you're
 into that kind of stuff.
 }
 \examples{
-logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
-image_background(logo, "pink", flatten = TRUE)
+logo <- image_read("logo:")
 image_despeckle(logo)
 image_reducenoise(logo)
 image_noise(logo)

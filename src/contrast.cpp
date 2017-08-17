@@ -81,3 +81,10 @@ XPtrImage magick_image_transparent( XPtrImage input, const char * color, double 
     for_each ( output->begin(), output->end(), Magick::colorFuzzImage(input->front().colorFuzz()));
   return output;
 }
+
+// [[Rcpp::export]]
+XPtrImage magick_image_background( XPtrImage input, const char * color){
+  XPtrImage output = copy(input);
+  for_each (output->begin(), output->end(), Magick::backgroundColorImage(Color(color)));
+  return output;
+}
