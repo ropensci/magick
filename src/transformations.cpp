@@ -56,12 +56,12 @@ Magick::NoiseType Noise(const char * str){
   return (Magick::NoiseType) val;
 }
 
-Magick::FilterTypes Filter(const char * str){
+Magick::myFilterType Filter(const char * str){
   ssize_t val = MagickCore::ParseCommandOption(
     MagickCore::MagickFilterOptions, Magick::MagickFalse, str);
   if(val < 0)
     throw std::runtime_error(std::string("Invalid FilterType value: ") + str);
-  return (Magick::FilterTypes) val;
+  return (Magick::myFilterType) val;
 }
 
 #if MagickLibVersion >= 0x687

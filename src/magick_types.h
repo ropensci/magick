@@ -17,6 +17,25 @@ XPtrImage create ();
 XPtrImage create (int len);
 XPtrImage copy (XPtrImage image);
 
+//IM 6~7 compatiblity
+#if MagickLibVersion >= 0x700
+Magick::Point Point(const char * str);
+#define container vector
+#define myAntiAliasImage textAntiAliasImage
+#define myAntiAlias textAntiAlias
+#define myDrawableDashArray DrawableStrokeDashArray
+#define myMedianImage medianConvolveImage
+#define myFilterType FilterType
+#else
+#define container list
+#define Point Geom
+#define myAntiAliasImage antiAliasImage
+#define myAntiAlias antiAlias
+#define myDrawableDashArray DrawableDashArray
+#define myMedianImage medianFilterImage
+#define myFilterType FilterTypes
+#endif
+
 // Option parsers
 Magick::Geometry Geom(size_t width, size_t height, size_t x, size_t y);
 Magick::Geometry Geom(size_t width, size_t height);
@@ -25,20 +44,4 @@ Magick::Color Color(const char * str);
 Magick::DisposeType Dispose(const char * str);
 Magick::CompositeOperator Composite(const char * str);
 Magick::ColorspaceType ColorSpace(const char * str);
-Magick::FilterTypes Filter(const char * str);
-
-#if MagickLibVersion >= 0x700
-Magick::Point Point(const char * str);
-#define container vector
-#define myAntiAliasImage textAntiAliasImage
-#define myAntiAlias textAntiAlias
-#define myDrawableDashArray DrawableStrokeDashArray
-#define myMedianImage medianConvolveImage
-#else
-#define container list
-#define Point Geom
-#define myAntiAliasImage antiAliasImage
-#define myAntiAlias antiAlias
-#define myDrawableDashArray DrawableDashArray
-#define myMedianImage medianFilterImage
-#endif
+Magick::myFilterType Filter(const char * str);
