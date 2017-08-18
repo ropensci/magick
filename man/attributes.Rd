@@ -18,7 +18,9 @@ and might affect image manipualation methods. Each attribute can be get and
 set with the same function.
 }
 \seealso{
-Other image: \code{\link{animation}},
-  \code{\link{contrast}}, \code{\link{editing}},
-  \code{\link{resize}}, \code{\link{transformations}}
+Other image: \code{\link{animation}}, \code{\link{color}},
+  \code{\link{composite}}, \code{\link{device}},
+  \code{\link{editing}}, \code{\link{effects}},
+  \code{\link{image_compare}}, \code{\link{painting}},
+  \code{\link{resize}}
 }

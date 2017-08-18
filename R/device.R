@@ -21,6 +21,7 @@
 #'
 #' @export
 #' @aliases image_device
+#' @family image
 #' @rdname device
 #' @name device
 #' @param width in pixels

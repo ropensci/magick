@@ -5,7 +5,9 @@
 #' @export
 #' @rdname composite
 #' @name composite
-#' @inheritParams transformations
+#' @family image
+#' @inheritParams editing
+#' @inheritParams painting
 #' @param offset geometry string with offset
 #' @param operator string with a
 #' \href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}.
@@ -14,7 +16,11 @@
 #' @examples # Compose images using one of many operators
 #' imlogo <- image_scale(image_read("logo:"), "x275")
 #' rlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-3.png")
+#'
+#' # Standard is atop
 #' image_composite(imlogo, rlogo)
+#'
+#' # Same as 'blend 50' in the command line
 #' image_composite(imlogo, rlogo, operator = "blend", compose_args="50")
 image_composite <- function(image, composite_image = image[1], operator = "atop", offset = "0x0", compose_args = ""){
   assert_image(image)
@@ -26,8 +32,28 @@ image_composite <- function(image, composite_image = image[1], operator = "atop"
 
 #' @export
 #' @rdname composite
-#' @examples image_border(imlogo, "red", "10x10")
-image_border <- function(image, color = "", geometry = "", operator = "copy"){
+#' @param geometry a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
+#' to set height and width (e.g. \code{"10x5"}) of the border. In addition \link{image_frame} allows for adding
+#' left and right shadow for example \code{"20x10+7+2"}.
+#' @examples
+#'
+#' # Add a border frame around the image
+#' image_border(imlogo, "red", "10x10")
+image_border <- function(image, color = "lightgray", geometry = "10x10", operator = "copy"){
   assert_image(image)
+  color <- as.character(color)
+  geometry <- as.character(geometry)
+  operator <- as.character(operator)
   magick_image_border(image, color, geometry, operator)
+}
+
+#' @export
+#' @rdname composite
+#' @examples
+#' image_frame(imlogo)
+image_frame <- function(image, color = "lightgray", geometry = "25x25+6+6"){
+  assert_image(image)
+  color <- as.character(color)
+  geometry <- as.character(geometry)
+  magick_image_frame(image, color, geometry)
 }

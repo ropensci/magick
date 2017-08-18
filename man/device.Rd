@@ -89,3 +89,10 @@ text(.5, .9, "Our planet", cex = 3, col = "white")
 dev.off()
 print(img)
 }
+\seealso{
+Other image: \code{\link{animation}},
+  \code{\link{attributes}}, \code{\link{color}},
+  \code{\link{composite}}, \code{\link{editing}},
+  \code{\link{effects}}, \code{\link{image_compare}},
+  \code{\link{painting}}, \code{\link{resize}}
+}

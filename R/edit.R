@@ -9,8 +9,6 @@
 #' Besides these functions also R-base functions such as \code{c()}, \code{[},
 #' \code{as.list()}, \code{as.raster()}, \code{rev}, \code{length}, and \code{print}
 #' can be used to work with image frames.
-#' See \link{transformations} for vectorized
-#' image manipulation functions such as cutting and applying effects.
 #'
 #' Some configurations of ImageMagick++ support reading SVG files but the rendering
 #' is not always very pleasing. Better results can be obtained by first rendering
@@ -21,12 +19,11 @@
 #' @export
 #' @aliases magick imagemagick
 #' @family image
-#' @rdname edit
+#' @rdname editing
 #' @name editing
 #' @param path file path, URL, or raw array or \code{nativeRaster} with image data
 #' @param image object returned by \code{image_read}
 #' @param density resolution to render pdf or svg
-#' @param depth image depth. Must be 8 or 16
 #' @references Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}
 #' @examples
 #' # Download image from the web
@@ -113,8 +110,8 @@ image_rsvg <- function(path, width = NULL, height = NULL){
 }
 
 #' @export
-#' @inheritParams transformations
-#' @rdname edit
+#' @inheritParams effects
+#' @rdname editing
 #' @param flatten should image be flattened before writing? This also replaces
 #' transparency with background color.
 #' @param quality number between 0 and 100 for jpeg quality. Defaults to 75.
@@ -139,9 +136,29 @@ image_write <- function(image, path = NULL, format = NULL, quality = NULL,
   return(buf)
 }
 
+#' @export
+#' @rdname editing
+#' @param format output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.
+#' Can also be a bitmap type such as \code{rgba} or \code{rgb}.
+#' @param depth color depth, must be 8 or 16
+#' @param antialias (TRUE/FALSE) enable anti-aliasing for text and strokes
+#' @param type a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ImageType}{ImageType}
+#' classification for example 'grayscale' to convert to black/white
+#' @param colorspace string with a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{ColorspaceType}
+#' for example 'grey' or 'rgb' or 'cmyk'
+image_convert <- function(image, format = NULL, type = NULL, colorspace = NULL, depth = NULL, antialias = NULL){
+  assert_image(image)
+  depth <- as.integer(depth)
+  antialias <- as.logical(antialias)
+  type <- as.character(type)
+  colorspace <- as.character(colorspace)
+  if(length(depth) && is.na(match(depth, c(8, 16))))
+    stop('depth must be 8 or 16 bit')
+  magick_image_format(image, toupper(format), type, colorspace, depth, antialias)
+}
 
 #' @export
-#' @rdname edit
+#' @rdname editing
 #' @param ... images or lists of images to be combined into a image
 image_join <- function(...){
   x <- unlist(list(...))
@@ -156,14 +173,14 @@ image_write_frame <- function(image, format = "rgb"){
 
 #' @export
 #' @param animate support animations in the X11 display
-#' @rdname edit
+#' @rdname editing
 image_display <- function(image, animate = TRUE){
   magick_image_display(image, animate)
 }
 
 #' @export
 #' @param browser argument passed to \link[utils:browseURL]{browseURL}
-#' @rdname edit
+#' @rdname editing
 image_browse <- function(image, browser = getOption("browser")){
   ext <- ifelse(length(image), tolower(image_info(image[1])$format), "gif")
   tmp <- tempfile(fileext = paste0(".", ext))
@@ -172,7 +189,7 @@ image_browse <- function(image, browser = getOption("browser")){
 }
 
 #' @export
-#' @rdname edit
+#' @rdname editing
 image_fft <- function(image){
   if(!isTRUE(magick_config()$fftw))
     stop("ImageMagick was configured without FFTW support. Reinstall with: brew install imagemagick --with-fftw")
@@ -181,7 +198,7 @@ image_fft <- function(image){
 }
 
 #' @export
-#' @rdname edit
+#' @rdname editing
 #' @param map reference image to map colors from
 #' @param dither set TRUE to enable dithering
 image_map <- function(image, map, dither = FALSE){
@@ -191,7 +208,7 @@ image_map <- function(image, map, dither = FALSE){
 }
 
 #' @export
-#' @rdname edit
+#' @rdname editing
 image_info <- function(image){
   assert_image(image)
   magick_image_info(image)

@@ -4,12 +4,16 @@
 \alias{composite}
 \alias{image_composite}
 \alias{image_border}
+\alias{image_frame}
 \title{Magick Composite}
 \usage{
 image_composite(image, composite_image = image[1], operator = "atop",
   offset = "0x0", compose_args = "")
 
-image_border(image, color = "", geometry = "", operator = "copy")
+image_border(image, color = "lightgray", geometry = "10x10",
+  operator = "copy")
+
+image_frame(image, color = "lightgray", geometry = "25x25+6+6")
 }
 \arguments{
 \item{image}{object returned by \code{image_read}}
@@ -27,7 +31,8 @@ image_border(image, color = "", geometry = "", operator = "copy")
 \code{"navyblue"} or \code{"#000080"}}
 
 \item{geometry}{a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
-for example \code{"10x10+5-5"}}
+to set height and width (e.g. \code{"10x5"}) of the border. In addition \link{image_frame} allows for adding
+left and right shadow for example \code{"20x10+7+2"}.}
 }
 \description{
 Similar to the ImageMagick `composite` command.
@@ -36,7 +41,21 @@ Similar to the ImageMagick `composite` command.
 # Compose images using one of many operators
 imlogo <- image_scale(image_read("logo:"), "x275")
 rlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-3.png")
+
+# Standard is atop
 image_composite(imlogo, rlogo)
+
+# Same as 'blend 50' in the command line
 image_composite(imlogo, rlogo, operator = "blend", compose_args="50")
+
+# Add a border frame around the image
 image_border(imlogo, "red", "10x10")
+image_frame(imlogo)
+}
+\seealso{
+Other image: \code{\link{animation}},
+  \code{\link{attributes}}, \code{\link{color}},
+  \code{\link{device}}, \code{\link{editing}},
+  \code{\link{effects}}, \code{\link{image_compare}},
+  \code{\link{painting}}, \code{\link{resize}}
 }

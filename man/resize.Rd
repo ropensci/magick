@@ -41,7 +41,7 @@ image_page(image, pagesize = NULL, density = NULL)
 \item{image}{object returned by \code{image_read}}
 
 \item{geometry}{a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
-for example \code{"10x10+5-5"}}
+specifying width+height and/or position offset.}
 
 \item{degrees}{value between 0 and 360 for how many degrees to rotate}
 
@@ -96,6 +96,8 @@ image_flop(logo)
 }
 \seealso{
 Other image: \code{\link{animation}},
-  \code{\link{attributes}}, \code{\link{contrast}},
-  \code{\link{editing}}, \code{\link{transformations}}
+  \code{\link{attributes}}, \code{\link{color}},
+  \code{\link{composite}}, \code{\link{device}},
+  \code{\link{editing}}, \code{\link{effects}},
+  \code{\link{image_compare}}, \code{\link{painting}}
 }

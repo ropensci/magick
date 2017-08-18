@@ -11,7 +11,7 @@
 #'
 #' @name resize
 #' @rdname resize
-#' @inheritParams transformations
+#' @inheritParams effects
 #' @family image
 #' @export
 #' @examples
@@ -25,6 +25,8 @@ image_trim <- function(image){
 
 #' @export
 #' @rdname resize
+#' @param geometry a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
+#' specifying width+height and/or position offset.
 #' @examples
 #' image_chop(logo, "100x20")
 image_chop <- function(image, geometry){
@@ -35,6 +37,7 @@ image_chop <- function(image, geometry){
 
 #' @export
 #' @rdname resize
+#' @param degrees value between 0 and 360 for how many degrees to rotate
 #' @examples
 #' image_rotate(logo, 45)
 image_rotate <- function(image, degrees){

@@ -6,6 +6,7 @@
 \alias{magick}
 \alias{imagemagick}
 \alias{image_write}
+\alias{image_convert}
 \alias{image_join}
 \alias{image_display}
 \alias{image_browse}
@@ -18,6 +19,9 @@ image_read(path, density = NULL, depth = NULL)
 
 image_write(image, path = NULL, format = NULL, quality = NULL,
   depth = NULL, density = NULL, comment = NULL, flatten = FALSE)
+
+image_convert(image, format = NULL, type = NULL, colorspace = NULL,
+  depth = NULL, antialias = NULL)
 
 image_join(...)
 
@@ -36,7 +40,7 @@ image_info(image)
 
 \item{density}{resolution to render pdf or svg}
 
-\item{depth}{image depth. Must be 8 or 16}
+\item{depth}{color depth, must be 8 or 16}
 
 \item{image}{object returned by \code{image_read}}
 
@@ -49,6 +53,14 @@ Can also be a bitmap type such as \code{rgba} or \code{rgb}.}
 
 \item{flatten}{should image be flattened before writing? This also replaces
 transparency with background color.}
+
+\item{type}{a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ImageType}{ImageType}
+classification for example 'grayscale' to convert to black/white}
+
+\item{colorspace}{string with a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{ColorspaceType}
+for example 'grey' or 'rgb' or 'cmyk'}
+
+\item{antialias}{(TRUE/FALSE) enable anti-aliasing for text and strokes}
 
 \item{...}{images or lists of images to be combined into a image}
 
@@ -71,8 +83,6 @@ explains meaning of each function and parameter.
 Besides these functions also R-base functions such as \code{c()}, \code{[},
 \code{as.list()}, \code{as.raster()}, \code{rev}, \code{length}, and \code{print}
 can be used to work with image frames.
-See \link{transformations} for vectorized
-image manipulation functions such as cutting and applying effects.
 
 Some configurations of ImageMagick++ support reading SVG files but the rendering
 is not always very pleasing. Better results can be obtained by first rendering
@@ -104,6 +114,8 @@ Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}
 }
 \seealso{
 Other image: \code{\link{animation}},
-  \code{\link{attributes}}, \code{\link{contrast}},
-  \code{\link{resize}}, \code{\link{transformations}}
+  \code{\link{attributes}}, \code{\link{color}},
+  \code{\link{composite}}, \code{\link{device}},
+  \code{\link{effects}}, \code{\link{image_compare}},
+  \code{\link{painting}}, \code{\link{resize}}
 }

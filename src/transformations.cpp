@@ -167,13 +167,6 @@ XPtrImage magick_image_fill( XPtrImage input, const char * color, const char * p
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_frame( XPtrImage input, const char * geometry){
-  XPtrImage output = copy(input);
-  for_each ( output->begin(), output->end(), Magick::frameImage(Geom(geometry)));
-  return output;
-}
-
-// [[Rcpp::export]]
 XPtrImage magick_image_negate( XPtrImage input){
   XPtrImage output = copy(input);
   for_each ( output->begin(), output->end(), Magick::negateImage());

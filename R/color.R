@@ -1,10 +1,10 @@
-#' Image Contrast and Colors
+#' Image Color
 #'
-#' Functions to adjust constrast and colors.
+#' Functions to adjust contrast, brightness, colors of the image.
 #'
-#' @name contrast
-#' @rdname contrast
-#' @inheritParams transformations
+#' @name color
+#' @rdname color
+#' @inheritParams painting
 #' @export
 #' @param sharpen enhance intensity differences in image
 #' @examples logo <- image_read("logo:")
@@ -18,7 +18,7 @@ image_contrast <- function(image, sharpen = 1){
 }
 
 #' @export
-#' @rdname contrast
+#' @rdname color
 #' @examples
 #' image_normalize(logo)
 image_normalize <- function(image){
@@ -27,7 +27,7 @@ image_normalize <- function(image){
 }
 
 #' @export
-#' @rdname contrast
+#' @rdname color
 #' @family image
 #' @param brightness modulation of brightness as percentage of the current value (100 for no change)
 #' @param saturation modulation of saturation as percentage of the current value (100 for no change)
@@ -45,7 +45,7 @@ image_modulate <- function(image, brightness = 100, saturation = 100, hue = 100)
 }
 
 #' @export
-#' @rdname contrast
+#' @rdname color
 #' @param opacity percentage of opacity used for coloring
 #' @examples
 #' image_colorize(logo, 50, "red")
@@ -55,7 +55,7 @@ image_colorize <- function(image, opacity, color){
 }
 
 #' @export
-#' @rdname contrast
+#' @rdname color
 #' @examples
 #' image_enhance(logo)
 image_enhance <- function(image){
@@ -64,7 +64,7 @@ image_enhance <- function(image){
 }
 
 #' @export
-#' @rdname contrast
+#' @rdname color
 #' @examples
 #' image_equalize(logo)
 image_equalize <- function(image){
@@ -73,7 +73,8 @@ image_equalize <- function(image){
 }
 
 #' @export
-#' @rdname contrast
+#' @rdname color
+#' @param radius replace each pixel with the median color in a circular neighborhood
 #' @examples image_median(logo)
 image_median <- function(image, radius = 1.0){
   assert_image(image)
@@ -81,7 +82,7 @@ image_median <- function(image, radius = 1.0){
 }
 
 #' @export
-#' @rdname contrast
+#' @rdname color
 #' @param max preferred number of colors in the image. The actual number of colors in the image may
 #' be less than your request, but never more.
 #' @param dither apply Floyd/Steinberg error diffusion to the image: averages intensities of sseveral
@@ -104,14 +105,14 @@ image_quantize <- function(image, max = 256, colorspace = NULL, dither = NULL, t
 }
 
 #' @export
-#' @rdname contrast
+#' @rdname color
 image_transparent <- function(image, color, fuzz = 0){
   assert_image(image)
   magick_image_transparent(image, color, fuzz)
 }
 
 #' @export
-#' @rdname contrast
+#' @rdname color
 #' @inheritParams editing
 #' @examples
 #' # Change background color

@@ -28,15 +28,24 @@ XPtrImage magick_image_composite( XPtrImage input, XPtrImage composite_image,
   return output;
 }
 
+// [[Rcpp::export]]
+XPtrImage magick_image_border( XPtrImage input, Rcpp::CharacterVector color, Rcpp::CharacterVector geometry,
+                               Rcpp::CharacterVector composite){
+  XPtrImage output = copy(input);
+  for_each ( output->begin(), output->end(), Magick::composeImage(Composite(composite.at(0))));
+  if(color.size())
+    for_each ( output->begin(), output->end(), Magick::borderColorImage(Color(color.at(0))));
+  if(geometry.size())
+    for_each ( output->begin(), output->end(), Magick::borderImage(Geom(geometry.at(0))));
+  return output;
+}
 
 // [[Rcpp::export]]
-XPtrImage magick_image_border( XPtrImage input, const char * color, const char * geometry, const char * composite){
+XPtrImage magick_image_frame( XPtrImage input, Rcpp::CharacterVector color, Rcpp::CharacterVector geometry){
   XPtrImage output = copy(input);
-  //need to set color before adding the border!
-  for_each ( output->begin(), output->end(), Magick::composeImage(Composite(composite)));
-  if(strlen(color))
-    for_each ( output->begin(), output->end(), Magick::borderColorImage(color));
-  if(strlen(geometry))
-    for_each ( output->begin(), output->end(), Magick::borderImage(Geom(geometry)));
+  if(color.size())
+    for_each ( output->begin(), output->end(), Magick::matteColorImage(Color(color.at(0))));
+  if(geometry.size())
+    for_each ( output->begin(), output->end(), Magick::frameImage(Geom(geometry.at(0))));
   return output;
 }

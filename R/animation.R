@@ -41,6 +41,7 @@ image_apply <- function(image, FUN, ...){
 
 #' @export
 #' @rdname animation
+#' @inheritParams composite
 image_mosaic <- function(image, operator = NULL){
   assert_image(image)
   operator <- as.character(operator)
@@ -74,7 +75,6 @@ image_morph <- function(image, frames){
 
 
 #' @export
-#' @inheritParams composite
 #' @rdname animation
 image_flatten <- function(image, operator = NULL){
   assert_image(image)

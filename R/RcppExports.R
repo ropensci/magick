@@ -101,22 +101,6 @@ autobrewed <- function() {
     .Call('_magick_autobrewed', PACKAGE = 'magick')
 }
 
-magick_image_composite <- function(input, composite_image, offset, composite, args) {
-    .Call('_magick_magick_image_composite', PACKAGE = 'magick', input, composite_image, offset, composite, args)
-}
-
-magick_image_border <- function(input, color, geometry, composite) {
-    .Call('_magick_magick_image_border', PACKAGE = 'magick', input, color, geometry, composite)
-}
-
-magick_coder_info <- function(format) {
-    .Call('_magick_magick_coder_info', PACKAGE = 'magick', format)
-}
-
-magick_config_internal <- function() {
-    .Call('_magick_magick_config_internal', PACKAGE = 'magick')
-}
-
 magick_image_contrast <- function(input, sharpen) {
     .Call('_magick_magick_image_contrast', PACKAGE = 'magick', input, sharpen)
 }
@@ -155,6 +139,26 @@ magick_image_transparent <- function(input, color, fuzz) {
 
 magick_image_background <- function(input, color) {
     .Call('_magick_magick_image_background', PACKAGE = 'magick', input, color)
+}
+
+magick_image_composite <- function(input, composite_image, offset, composite, args) {
+    .Call('_magick_magick_image_composite', PACKAGE = 'magick', input, composite_image, offset, composite, args)
+}
+
+magick_image_border <- function(input, color, geometry, composite) {
+    .Call('_magick_magick_image_border', PACKAGE = 'magick', input, color, geometry, composite)
+}
+
+magick_image_frame <- function(input, color, geometry) {
+    .Call('_magick_magick_image_frame', PACKAGE = 'magick', input, color, geometry)
+}
+
+magick_coder_info <- function(format) {
+    .Call('_magick_magick_coder_info', PACKAGE = 'magick', format)
+}
+
+magick_config_internal <- function() {
+    .Call('_magick_magick_config_internal', PACKAGE = 'magick')
 }
 
 magick_device_internal <- function(bg, width, height, pointsize, res, clip, antialias, drawing) {
@@ -315,10 +319,6 @@ magick_image_emboss <- function(input, radius = 1, sigma = 0.5) {
 
 magick_image_fill <- function(input, color, point, fuzz) {
     .Call('_magick_magick_image_fill', PACKAGE = 'magick', input, color, point, fuzz)
-}
-
-magick_image_frame <- function(input, geometry) {
-    .Call('_magick_magick_image_frame', PACKAGE = 'magick', input, geometry)
 }
 
 magick_image_negate <- function(input) {

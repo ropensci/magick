@@ -91,7 +91,9 @@ frames <- image_apply(front, function(x){image_composite(background, x, offset =
 image_animate(frames, fps = 10)
 }
 \seealso{
-Other image: \code{\link{attributes}},
-  \code{\link{contrast}}, \code{\link{editing}},
-  \code{\link{resize}}, \code{\link{transformations}}
+Other image: \code{\link{attributes}}, \code{\link{color}},
+  \code{\link{composite}}, \code{\link{device}},
+  \code{\link{editing}}, \code{\link{effects}},
+  \code{\link{image_compare}}, \code{\link{painting}},
+  \code{\link{resize}}
 }
