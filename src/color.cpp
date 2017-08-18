@@ -27,6 +27,14 @@ XPtrImage magick_image_modulate( XPtrImage input, double brightness, double satu
 }
 
 // [[Rcpp::export]]
+XPtrImage magick_image_map( XPtrImage input, XPtrImage map_image, bool dither){
+  XPtrImage output = copy(input);
+  if(map_image->size())
+    mapImages(output->begin(), output->end(), map_image->front(), dither);
+  return output;
+}
+
+// [[Rcpp::export]]
 XPtrImage magick_image_colorize( XPtrImage input, const size_t opacity, const char * color){
   XPtrImage output = copy(input);
   for_each ( output->begin(), output->end(), Magick::colorizeImage(opacity, Color(color)));

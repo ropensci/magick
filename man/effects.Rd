@@ -35,14 +35,14 @@ image_implode(image, factor = 0.5)
 image_negate(image)
 }
 \arguments{
-\item{image}{object returned by \code{image_read}}
+\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}}}
 
 \item{times}{number of times to repeat the despeckle operation}
 
 \item{radius}{radius, in pixels, for various transformations}
 
 \item{noisetype}{integer betwee 0 and 5 with
-\href{https://www.imagemagick.org/Magick++/Enumerations.html#NoiseType}{noisetype}.}
+\href{https://www.imagemagick.org/Magick++/Enumerations.html#NoiseType}{noisetype}}
 
 \item{sigma}{the standard deviation of the Laplacian, in pixels.}
 
@@ -66,9 +66,10 @@ image_implode(logo)
 image_negate(logo)
 }
 \seealso{
-Other image: \code{\link{animation}},
-  \code{\link{attributes}}, \code{\link{color}},
-  \code{\link{composite}}, \code{\link{device}},
-  \code{\link{editing}}, \code{\link{image_compare}},
-  \code{\link{painting}}, \code{\link{resize}}
+Other image: \code{\link{analysis}},
+  \code{\link{animation}}, \code{\link{attributes}},
+  \code{\link{color}}, \code{\link{composite}},
+  \code{\link{device}}, \code{\link{editing}},
+  \code{\link{ocr}}, \code{\link{painting}},
+  \code{\link{resize}}
 }

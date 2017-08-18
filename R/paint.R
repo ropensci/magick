@@ -1,19 +1,23 @@
 #' Image Painting
 #'
-#' Annotating and drawing on images. Note that more sophisticated drawing mechanisms
-#' are available by starting a graphics device using \link{image_draw}.
+#' The [image_fill()] function performs flood-fill by painting starting point and all
+#' neighboring pixels of approximately the same color. Annotate simply prints some
+#' text on the image.
+#'
+#' Note that more sophisticated drawing mechanisms are available via the graphics
+#' device using [image_draw].
 #'
 #' @export
 #' @name painting
 #' @rdname painting
 #' @family image
 #' @inheritParams editing
-#' @param color a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
-#' \code{"navyblue"} or \code{"#000080"}
+#' @param color a valid [color string](https://www.imagemagick.org/Magick++/Color.html) such as
+#' `"navyblue"` or `"#000080"`
 #' @param point string indicating the flood-fill starting point
 #' @param fuzz Colors within this distance are considered equal.
 #' Use this option to match colors that are close to the target color in RGB space.
-#' I think max distance (from #000000 to #FFFFFF) is 256^3.
+#' I think max distance (from #000000 to #FFFFFF) is 256^2.
 #' @examples
 #' logo <- image_read("logo:")
 #' logo <- image_transparent(logo, 'white')
@@ -29,8 +33,8 @@ image_fill <- function(image, color, point = "1x1", fuzz = 0){
 #' @param text annotation text
 #' @param degrees rotates text around center point
 #' @param gravity string with
-#' \href{https://www.imagemagick.org/Magick++/Enumerations.html#GravityType}{gravity type}
-#' @param location geometry string with location relative to \code{gravity}
+#' [gravity type](https://www.imagemagick.org/Magick++/Enumerations.html#GravityType)
+#' @param location geometry string with location relative to `gravity`
 #' @param size font-size in pixels
 #' @param strokecolor adds a stroke (border around the text)
 #' @param boxcolor background color that annotation text is rendered on.

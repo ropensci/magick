@@ -1,14 +1,32 @@
-#' Animation and Frames
+#' Image Frames and Animation
 #'
-#' Operations specifically for images with multiple frames.
+#' Operations to manipulate or combine multiple frames of an image. Details below.
+#'
+#' For details see [Magick++ STL](https://www.imagemagick.org/Magick++/STL.html)
+#' documentation. Short descriptions:
+#'
+#'  - [image_animate] coalesces frames by playing the sequence and converting to `gif` format.
+#'  - [image_morph] expands number of frames by interpolating intermediate frames to blend
+#'  into each other when played as an animation.
+#'  - [image_mosaic] inlays images to form a single coherent picture.
+#'  - [image_montage] creates a composite image by combining frames.
+#'  - [image_flatten] merges frames as layers into a single frame using a given operator.
+#'  - [image_average] averages frames into single frame.
+#'  - [image_append] stack images left-to-right (default) or top-to-bottom.
+#'  - [image_apply] applies a function to each frame
+#'
+#' The [image_apply] function calls an image function to each frame and joins
+#' results back into a single image. Because most operations are already vectorized
+#' this is often not needed. Note that `FUN()` should return an image. To apply other
+#' kinds of functions to image frames simply use [lapply], [vapply], etc.
 #'
 #' @export
 #' @inheritParams editing
 #' @rdname animation
 #' @name animation
 #' @family image
-#' @param dispose frame disposal method. See
-#' \href{http://www.imagemagick.org/Usage/anim_basics/}{documentation}
+#' @aliases image_coalesce
+#' @param dispose frame [disposal method](http://www.imagemagick.org/Usage/anim_basics/#dispose)
 #' @param fps frames per second
 #' @param loop how many times to repeat the animation. Default is infinite.
 image_animate <- function(image, fps = 10, loop = 0, dispose = c("background", "previous", "none")){
@@ -22,21 +40,25 @@ image_animate <- function(image, fps = 10, loop = 0, dispose = c("background", "
   magick_image_animate(image, delay, as.integer(loop), dispose)
 }
 
-#' \code{image_apply} calls a transformation function to each frame of the image and
-#' joints the result back into a single image. Because most operations are already
-#' vectorized this is often not needed. Note that \code{FUN} should return an image.
-#' To apply other kinds of functions simply use \link{lapply} or \link{vapply}, etc.
-#'
-#' @rdname animation
+image_coalesce <- image_animate
+
 #' @export
-#' @param FUN a function to be called on each frame in the image
-#' @param ... additional parameters for \code{FUN}
-image_apply <- function(image, FUN, ...){
+#' @rdname animation
+#' @param frames number of frames to use in output animation
+#' @examples
+#' # Combine images
+#' logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
+#' oldlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-3.png")
+#'
+#' # Create morphing animation
+#' both <- image_scale(c(oldlogo, logo), "400")
+#' image_average(image_crop(both))
+#' image_animate(image_morph(both, 10))
+#'
+image_morph <- function(image, frames = 8){
   assert_image(image)
-  out <- lapply(image, FUN, ...)
-  if(!all(sapply(out, inherits, "magick-image")))
-    stop("Function %s did not return a valid image")
-  image_join(out)
+  stopifnot(is.numeric(frames))
+  magick_image_morph(image, frames)
 }
 
 #' @export
@@ -54,25 +76,6 @@ image_montage <- function(image){
   assert_image(image)
   magick_image_montage(image)
 }
-
-#' @export
-#' @rdname animation
-#' @examples
-#' # Combine with another image
-#' logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
-#' oldlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-3.png")
-#'
-#' # Create morphing animation
-#' both <- image_scale(c(oldlogo, logo), "400")
-#' image_average(image_crop(both))
-#' image_animate(image_morph(both, 10))
-#' @param frames number of frames to use in output animation
-image_morph <- function(image, frames){
-  assert_image(image)
-  stopifnot(is.numeric(frames))
-  magick_image_morph(image, frames)
-}
-
 
 #' @export
 #' @rdname animation
@@ -117,10 +120,14 @@ image_append <- function(image, stack = FALSE){
   magick_image_append(image, stack)
 }
 
-#' @export
 #' @rdname animation
-image_coalesce <- function(image){
+#' @export
+#' @param FUN a function to be called on each frame in the image
+#' @param ... additional parameters for \code{FUN}
+image_apply <- function(image, FUN, ...){
   assert_image(image)
-  magick_image_coalesce(image)
+  out <- lapply(image, FUN, ...)
+  if(!all(sapply(out, inherits, "magick-image")))
+    stop("Function %s did not return a valid image")
+  image_join(out)
 }
-

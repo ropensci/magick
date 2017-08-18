@@ -13,7 +13,7 @@ image_annotate(image, text, gravity = "northwest", location = "+0+0",
   strokecolor = NULL, boxcolor = NULL)
 }
 \arguments{
-\item{image}{object returned by \code{image_read}}
+\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}}}
 
 \item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
 \code{"navyblue"} or \code{"#000080"}}
@@ -22,7 +22,7 @@ image_annotate(image, text, gravity = "northwest", location = "+0+0",
 
 \item{fuzz}{Colors within this distance are considered equal.
 Use this option to match colors that are close to the target color in RGB space.
-I think max distance (from #000000 to #FFFFFF) is 256^3.}
+I think max distance (from #000000 to #FFFFFF) is 256^2.}
 
 \item{text}{annotation text}
 
@@ -42,8 +42,13 @@ I think max distance (from #000000 to #FFFFFF) is 256^3.}
 \item{boxcolor}{background color that annotation text is rendered on.}
 }
 \description{
-Annotating and drawing on images. Note that more sophisticated drawing mechanisms
-are available by starting a graphics device using \link{image_draw}.
+The \code{\link[=image_fill]{image_fill()}} function performs flood-fill by painting starting point and all
+neighboring pixels of approximately the same color. Annotate simply prints some
+text on the image.
+}
+\details{
+Note that more sophisticated drawing mechanisms are available via the graphics
+device using \link{image_draw}.
 }
 \examples{
 logo <- image_read("logo:")
@@ -60,9 +65,10 @@ myfont <- ifelse(identical("windows", .Platform$OS.type), "courier-new", "courie
 try(image_annotate(logo, "The quick brown fox", font = myfont, size = 50))
 }
 \seealso{
-Other image: \code{\link{animation}},
-  \code{\link{attributes}}, \code{\link{color}},
-  \code{\link{composite}}, \code{\link{device}},
-  \code{\link{editing}}, \code{\link{effects}},
-  \code{\link{image_compare}}, \code{\link{resize}}
+Other image: \code{\link{analysis}},
+  \code{\link{animation}}, \code{\link{attributes}},
+  \code{\link{color}}, \code{\link{composite}},
+  \code{\link{device}}, \code{\link{editing}},
+  \code{\link{effects}}, \code{\link{ocr}},
+  \code{\link{resize}}
 }

@@ -3,29 +3,39 @@
 \name{ocr}
 \alias{ocr}
 \alias{image_ocr}
-\title{Text OCR}
+\title{Image Text OCR}
 \usage{
 image_ocr(image, language = "eng", ...)
 }
 \arguments{
-\item{image}{object returned by \code{image_read}}
+\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}}}
 
 \item{language}{passed to \link[tesseract:tesseract]{tesseract}. To install additional languages see
-instructions in \link[tesseract:tesseract_download]{tesseract_download}.}
+instructions in \link[tesseract:tesseract_download]{tesseract_download()}.}
 
 \item{...}{additional parameters passed to \link[tesseract:tesseract]{tesseract}}
 }
 \description{
-Extract text from an image using the \link[tesseract:tesseract]{tesseract} package. To use this function
-you need to tesseract first using: \code{install.packages("tesseract")}.
+Extract text from an image using the \link[tesseract:tesseract]{tesseract} package.
 }
 \details{
+To use this function you need to tesseract first:\preformatted{  install.packages("tesseract")
+}
+
 Best results are obtained if you set the correct language in \link[tesseract:tesseract]{tesseract}.
-To install additional languages see instructions in \link[tesseract:tesseract_download]{tesseract_download}.
+To install additional languages see instructions in \link[tesseract:tesseract_download]{tesseract_download()}.
 }
 \examples{
 if(require("tesseract")){
 img <- image_read("http://jeroen.github.io/images/testocr.png")
 image_ocr(img)
 }
+}
+\seealso{
+Other image: \code{\link{analysis}},
+  \code{\link{animation}}, \code{\link{attributes}},
+  \code{\link{color}}, \code{\link{composite}},
+  \code{\link{device}}, \code{\link{editing}},
+  \code{\link{effects}}, \code{\link{painting}},
+  \code{\link{resize}}
 }

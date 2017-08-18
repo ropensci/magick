@@ -7,12 +7,9 @@
 \alias{imagemagick}
 \alias{image_write}
 \alias{image_convert}
-\alias{image_join}
 \alias{image_display}
 \alias{image_browse}
-\alias{image_fft}
-\alias{image_map}
-\alias{image_info}
+\alias{image_join}
 \title{Image Editing}
 \usage{
 image_read(path, density = NULL, depth = NULL)
@@ -23,29 +20,22 @@ image_write(image, path = NULL, format = NULL, quality = NULL,
 image_convert(image, format = NULL, type = NULL, colorspace = NULL,
   depth = NULL, antialias = NULL)
 
-image_join(...)
-
 image_display(image, animate = TRUE)
 
 image_browse(image, browser = getOption("browser"))
 
-image_fft(image)
-
-image_map(image, map, dither = FALSE)
-
-image_info(image)
+image_join(...)
 }
 \arguments{
-\item{path}{file path, URL, or raw array or \code{nativeRaster} with image data}
+\item{path}{a file, url, or raster object or bitmap array}
 
 \item{density}{resolution to render pdf or svg}
 
-\item{depth}{color depth, must be 8 or 16}
+\item{depth}{color depth (either 8 or 16)}
 
-\item{image}{object returned by \code{image_read}}
+\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}}}
 
-\item{format}{output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.
-Can also be a bitmap type such as \code{rgba} or \code{rgb}.}
+\item{format}{output format such as \code{"png"}, \code{"jpeg"}, \code{"gif"}, \code{"rgb"} or \code{"rgba"}.}
 
 \item{quality}{number between 0 and 100 for jpeg quality. Defaults to 75.}
 
@@ -55,38 +45,38 @@ Can also be a bitmap type such as \code{rgba} or \code{rgb}.}
 transparency with background color.}
 
 \item{type}{a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ImageType}{ImageType}
-classification for example 'grayscale' to convert to black/white}
+classification for example \code{grayscale} to convert image to black/white}
 
 \item{colorspace}{string with a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{ColorspaceType}
-for example 'grey' or 'rgb' or 'cmyk'}
+for example \code{"gray"}, \code{"rgb"} or \code{"cmyk"}}
 
-\item{antialias}{(TRUE/FALSE) enable anti-aliasing for text and strokes}
-
-\item{...}{images or lists of images to be combined into a image}
+\item{antialias}{enable anti-aliasing for text and strokes}
 
 \item{animate}{support animations in the X11 display}
 
 \item{browser}{argument passed to \link[utils:browseURL]{browseURL}}
 
-\item{map}{reference image to map colors from}
-
-\item{dither}{set TRUE to enable dithering}
+\item{...}{several images or lists of images to be combined}
 }
 \description{
-Read, write and join or combine images. All image functions are vectorized,
-meaning they operate either on a single frame or a series of frames (e.g. a
-collage, video, or animation).
-The \href{https://www.imagemagick.org/Magick++/STL.html}{Magick++ documentation}
-explains meaning of each function and parameter.
+Read, write and join or combine images.
+All image functions are vectorized, meaning they operate either on a single frame
+or a series of frames (e.g. a collage, video, or animation).
+Besides paths and URLs, the \code{\link[=image_read]{image_read()}} function supports all commonly used bitmap
+and raster types.
 }
 \details{
-Besides these functions also R-base functions such as \code{c()}, \code{[},
-\code{as.list()}, \code{as.raster()}, \code{rev}, \code{length}, and \code{print}
-can be used to work with image frames.
+Besides functions
+above, all standard base vector methods such as \link{[}, \link{[[}, \code{\link[=c]{c()}}, \code{\link[=as.list]{as.list()}},
+\code{\link[=as.raster]{as.raster()}}, \code{\link[=rev]{rev()}}, \code{\link[=length]{length()}}, and \code{\link[=print]{print()}}  can be used with magick images.
 
-Some configurations of ImageMagick++ support reading SVG files but the rendering
-is not always very pleasing. Better results can be obtained by first rendering
-svg to a png using the \href{https://cran.r-project.org/package=rsvg}{rsvg package}.
+Use the standard \code{img[i]} syntax to extract a subset of the frames from an image.
+The \code{img[[i]]} method is used to extract a single frame as a bitmap object, i.e.
+a raw matrix with pixel values.
+
+X11 is required for \code{image_display()} which is only works on some platforms. A more
+portable method is \code{image_browse()} which opens the image in a browser. RStudio has
+an embedded viewer that does this automatically which is quite nice.
 }
 \examples{
 # Download image from the web
@@ -109,13 +99,11 @@ image_read(webp::read_webp("example.webp"))
 curl::curl_download("http://jeroen.github.io/images/tiger.svg", "tiger.svg")
 image_read(rsvg::rsvg("tiger.svg"))
 }
-\references{
-Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}
-}
 \seealso{
-Other image: \code{\link{animation}},
-  \code{\link{attributes}}, \code{\link{color}},
-  \code{\link{composite}}, \code{\link{device}},
-  \code{\link{effects}}, \code{\link{image_compare}},
-  \code{\link{painting}}, \code{\link{resize}}
+Other image: \code{\link{analysis}},
+  \code{\link{animation}}, \code{\link{attributes}},
+  \code{\link{color}}, \code{\link{composite}},
+  \code{\link{device}}, \code{\link{effects}},
+  \code{\link{ocr}}, \code{\link{painting}},
+  \code{\link{resize}}
 }

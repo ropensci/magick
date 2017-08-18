@@ -3,26 +3,24 @@
 \name{animation}
 \alias{animation}
 \alias{image_animate}
-\alias{image_apply}
+\alias{image_coalesce}
+\alias{image_morph}
 \alias{image_mosaic}
 \alias{image_montage}
-\alias{image_morph}
 \alias{image_flatten}
 \alias{image_average}
 \alias{image_append}
-\alias{image_coalesce}
-\title{Animation and Frames}
+\alias{image_apply}
+\title{Image Frames and Animation}
 \usage{
 image_animate(image, fps = 10, loop = 0, dispose = c("background",
   "previous", "none"))
 
-image_apply(image, FUN, ...)
+image_morph(image, frames = 8)
 
 image_mosaic(image, operator = NULL)
 
 image_montage(image)
-
-image_morph(image, frames)
 
 image_flatten(image, operator = NULL)
 
@@ -30,39 +28,53 @@ image_average(image)
 
 image_append(image, stack = FALSE)
 
-image_coalesce(image)
+image_apply(image, FUN, ...)
 }
 \arguments{
-\item{image}{object returned by \code{image_read}}
+\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}}}
 
 \item{fps}{frames per second}
 
 \item{loop}{how many times to repeat the animation. Default is infinite.}
 
-\item{dispose}{frame disposal method. See
-\href{http://www.imagemagick.org/Usage/anim_basics/}{documentation}}
+\item{dispose}{frame \href{http://www.imagemagick.org/Usage/anim_basics/#dispose}{disposal method}}
+
+\item{frames}{number of frames to use in output animation}
+
+\item{operator}{string with a
+\href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}}
+
+\item{stack}{place images top-to-bottom (TRUE) or left-to-right (FALSE)}
 
 \item{FUN}{a function to be called on each frame in the image}
 
 \item{...}{additional parameters for \code{FUN}}
-
-\item{operator}{string with a
-\href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}.}
-
-\item{frames}{number of frames to use in output animation}
-
-\item{stack}{place images top-to-bottom (TRUE) or left-to-right (FALSE)}
 }
 \description{
-Operations specifically for images with multiple frames.
+Operations to manipulate or combine multiple frames of an image. Details below.
+}
+\details{
+For details see \href{https://www.imagemagick.org/Magick++/STL.html}{Magick++ STL}
+documentation. Short descriptions:
+\itemize{
+\item \link{image_animate} coalesces frames by playing the sequence and converting to \code{gif} format.
+\item \link{image_morph} expands number of frames by interpolating intermediate frames to blend
+into each other when played as an animation.
+\item \link{image_mosaic} inlays images to form a single coherent picture.
+\item \link{image_montage} creates a composite image by combining frames.
+\item \link{image_flatten} merges frames as layers into a single frame using a given operator.
+\item \link{image_average} averages frames into single frame.
+\item \link{image_append} stack images left-to-right (default) or top-to-bottom.
+\item \link{image_apply} applies a function to each frame
+}
 
-\code{image_apply} calls a transformation function to each frame of the image and
-joints the result back into a single image. Because most operations are already
-vectorized this is often not needed. Note that \code{FUN} should return an image.
-To apply other kinds of functions simply use \link{lapply} or \link{vapply}, etc.
+The \link{image_apply} function calls an image function to each frame and joins
+results back into a single image. Because most operations are already vectorized
+this is often not needed. Note that \code{FUN()} should return an image. To apply other
+kinds of functions to image frames simply use \link{lapply}, \link{vapply}, etc.
 }
 \examples{
-# Combine with another image
+# Combine images
 logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
 oldlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-3.png")
 
@@ -70,6 +82,7 @@ oldlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-3.png")
 both <- image_scale(c(oldlogo, logo), "400")
 image_average(image_crop(both))
 image_animate(image_morph(both, 10))
+
 # Create thumbnails from GIF
 banana <- image_read("https://jeroen.github.io/images/banana.gif")
 length(banana)
@@ -91,9 +104,10 @@ frames <- image_apply(front, function(x){image_composite(background, x, offset =
 image_animate(frames, fps = 10)
 }
 \seealso{
-Other image: \code{\link{attributes}}, \code{\link{color}},
+Other image: \code{\link{analysis}},
+  \code{\link{attributes}}, \code{\link{color}},
   \code{\link{composite}}, \code{\link{device}},
   \code{\link{editing}}, \code{\link{effects}},
-  \code{\link{image_compare}}, \code{\link{painting}},
+  \code{\link{ocr}}, \code{\link{painting}},
   \code{\link{resize}}
 }

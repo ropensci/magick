@@ -1,18 +1,23 @@
 #' Image Editing
 #'
-#' Read, write and join or combine images. All image functions are vectorized,
-#' meaning they operate either on a single frame or a series of frames (e.g. a
-#' collage, video, or animation).
-#' The \href{https://www.imagemagick.org/Magick++/STL.html}{Magick++ documentation}
-#' explains meaning of each function and parameter.
+#' Read, write and join or combine images.
+#' All image functions are vectorized, meaning they operate either on a single frame
+#' or a series of frames (e.g. a collage, video, or animation).
+#' Besides paths and URLs, the [image_read()] function supports all commonly used bitmap
+#' and raster types.
 #'
-#' Besides these functions also R-base functions such as \code{c()}, \code{[},
-#' \code{as.list()}, \code{as.raster()}, \code{rev}, \code{length}, and \code{print}
-#' can be used to work with image frames.
+#' Besides functions
+#' above, all standard base vector methods such as \link{[}, \link{[[}, [c()], [as.list()],
+#' [as.raster()], [rev()], [length()], and [print()]  can be used with magick images.
 #'
-#' Some configurations of ImageMagick++ support reading SVG files but the rendering
-#' is not always very pleasing. Better results can be obtained by first rendering
-#' svg to a png using the \href{https://cran.r-project.org/package=rsvg}{rsvg package}.
+#' Use the standard \code{img[i]} syntax to extract a subset of the frames from an image.
+#' The \code{img[[i]]} method is used to extract a single frame as a bitmap object, i.e.
+#' a raw matrix with pixel values.
+#'
+#'
+#' X11 is required for `image_display()` which is only works on some platforms. A more
+#' portable method is `image_browse()` which opens the image in a browser. RStudio has
+#' an embedded viewer that does this automatically which is quite nice.
 #'
 #' @importFrom Rcpp sourceCpp
 #' @useDynLib magick
@@ -21,10 +26,9 @@
 #' @family image
 #' @rdname editing
 #' @name editing
-#' @param path file path, URL, or raw array or \code{nativeRaster} with image data
-#' @param image object returned by \code{image_read}
+#' @param path a file, url, or raster object or bitmap array
+#' @param image magick image object returned by [image_read()]
 #' @param density resolution to render pdf or svg
-#' @references Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}
 #' @examples
 #' # Download image from the web
 #' frink <- image_read("https://jeroen.github.io/images/frink.png")
@@ -138,14 +142,13 @@ image_write <- function(image, path = NULL, format = NULL, quality = NULL,
 
 #' @export
 #' @rdname editing
-#' @param format output format such as \code{png}, \code{jpeg}, \code{gif} or \code{pdf}.
-#' Can also be a bitmap type such as \code{rgba} or \code{rgb}.
-#' @param depth color depth, must be 8 or 16
-#' @param antialias (TRUE/FALSE) enable anti-aliasing for text and strokes
-#' @param type a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ImageType}{ImageType}
-#' classification for example 'grayscale' to convert to black/white
-#' @param colorspace string with a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{ColorspaceType}
-#' for example 'grey' or 'rgb' or 'cmyk'
+#' @param format output format such as `"png"`, `"jpeg"`, `"gif"`, `"rgb"` or `"rgba"`.
+#' @param depth color depth (either 8 or 16)
+#' @param antialias enable anti-aliasing for text and strokes
+#' @param type a magick [ImageType](https://www.imagemagick.org/Magick++/Enumerations.html#ImageType)
+#' classification for example `grayscale` to convert image to black/white
+#' @param colorspace string with a magick [ColorspaceType](https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType)
+#' for example `"gray"`, `"rgb"` or `"cmyk"`
 image_convert <- function(image, format = NULL, type = NULL, colorspace = NULL, depth = NULL, antialias = NULL){
   assert_image(image)
   depth <- as.integer(depth)
@@ -155,15 +158,6 @@ image_convert <- function(image, format = NULL, type = NULL, colorspace = NULL, 
   if(length(depth) && is.na(match(depth, c(8, 16))))
     stop('depth must be 8 or 16 bit')
   magick_image_format(image, toupper(format), type, colorspace, depth, antialias)
-}
-
-#' @export
-#' @rdname editing
-#' @param ... images or lists of images to be combined into a image
-image_join <- function(...){
-  x <- unlist(list(...))
-  stopifnot(all(vapply(x, inherits, logical(1), "magick-image")))
-  magick_image_join(x)
 }
 
 image_write_frame <- function(image, format = "rgb"){
@@ -179,7 +173,7 @@ image_display <- function(image, animate = TRUE){
 }
 
 #' @export
-#' @param browser argument passed to \link[utils:browseURL]{browseURL}
+#' @param browser argument passed to [browseURL][utils::browseURL]
 #' @rdname editing
 image_browse <- function(image, browser = getOption("browser")){
   ext <- ifelse(length(image), tolower(image_info(image[1])$format), "gif")
@@ -190,27 +184,9 @@ image_browse <- function(image, browser = getOption("browser")){
 
 #' @export
 #' @rdname editing
-image_fft <- function(image){
-  if(!isTRUE(magick_config()$fftw))
-    stop("ImageMagick was configured without FFTW support. Reinstall with: brew install imagemagick --with-fftw")
-  assert_image(image)
-  magick_image_fft(image)
+#' @param ... several images or lists of images to be combined
+image_join <- function(...){
+  x <- unlist(list(...))
+  stopifnot(all(vapply(x, inherits, logical(1), "magick-image")))
+  magick_image_join(x)
 }
-
-#' @export
-#' @rdname editing
-#' @param map reference image to map colors from
-#' @param dither set TRUE to enable dithering
-image_map <- function(image, map, dither = FALSE){
-  assert_image(image)
-  stopifnot(inherits(map, "magick-image"))
-  magick_image_map(image, map, dither)
-}
-
-#' @export
-#' @rdname editing
-image_info <- function(image){
-  assert_image(image)
-  magick_image_info(image)
-}
-

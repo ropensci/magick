@@ -6,6 +6,7 @@
   - Documentation: group manual pages into logical sets
   - image_write() gains a parameter 'comment' to add metadata to the file
   - image_convert() gain 'type' and 'colorspace' parameters e.g. to convert to grayscale
+  - image_animate() has been merged with image_coalesce()
 
 1.1
   - Change default 'bg' in image_graph() to 'white'

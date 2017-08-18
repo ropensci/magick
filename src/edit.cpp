@@ -154,47 +154,6 @@ XPtrImage magick_image_display( XPtrImage image, bool animate){
   return image;
 }
 
-// [[Rcpp::export]]
-XPtrImage magick_image_append( XPtrImage image, bool stack){
-  Frame frame;
-  appendImages( &frame, image->begin(), image->end(), stack);
-  Image *out = new Image;
-  out->push_back(frame);
-  XPtrImage ptr(out);
-  ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
-  return ptr;
-}
-
-// [[Rcpp::export]]
-XPtrImage magick_image_average( XPtrImage image){
-  Frame frame;
-  averageImages( &frame, image->begin(), image->end());
-  XPtrImage out = create();
-  out->push_back(frame);
-  return out;
-}
-
-// [[Rcpp::export]]
-XPtrImage magick_image_coalesce( XPtrImage image){
-  XPtrImage out = create();
-  coalesceImages( out.get(), image->begin(), image->end());
-  return out;
-}
-
-// [[Rcpp::export]]
-XPtrImage magick_image_flatten( XPtrImage input, Rcpp::CharacterVector composite){
-  Frame frame;
-  XPtrImage image = copy(input);
-  if(composite.size()){
-    for_each ( image->begin(), image->end(), Magick::commentImage("")); //required to force copy; weird bug in IM?
-    for_each ( image->begin(), image->end(), Magick::composeImage(Composite(std::string(composite[0]).c_str())));
-  }
-  flattenImages( &frame, image->begin(), image->end());
-  XPtrImage out = create();
-  out->push_back(frame);
-  return out;
-}
-
 /* Not very useful. Requires imagemagick configuration with --enable-fftw=yes */
 // [[Rcpp::export]]
 XPtrImage magick_image_fft( XPtrImage image){
@@ -205,48 +164,9 @@ XPtrImage magick_image_fft( XPtrImage image){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_map( XPtrImage input, XPtrImage map_image, bool dither){
-  XPtrImage output = copy(input);
-  if(map_image->size())
-    mapImages(output->begin(), output->end(), map_image->front(), dither);
-  return output;
-}
-
-// [[Rcpp::export]]
 XPtrImage magick_image_montage( XPtrImage image){
   XPtrImage out = create();
   Magick::Montage montageOpts = Magick::Montage();
   montageImages(out.get(), image->begin(), image->end(), montageOpts);
   return out;
-}
-
-// [[Rcpp::export]]
-XPtrImage magick_image_morph( XPtrImage image, int frames){
-  XPtrImage out = create();
-  morphImages( out.get(), image->begin(), image->end(), frames);
-  return out;
-}
-
-// [[Rcpp::export]]
-XPtrImage magick_image_mosaic( XPtrImage input, Rcpp::CharacterVector composite){
-  XPtrImage image = copy(input);
-  if(composite.size()){
-    for_each ( image->begin(), image->end(), Magick::commentImage("")); //required to force copy; weird bug in IM?
-    for_each ( image->begin(), image->end(), Magick::composeImage(Composite(std::string(composite[0]).c_str())));
-  }
-  Frame frame;
-  mosaicImages( &frame, image->begin(), image->end());
-  XPtrImage out = create();
-  out->push_back(frame);
-  return out;
-}
-
-// [[Rcpp::export]]
-XPtrImage magick_image_animate( XPtrImage input, size_t delay, size_t iter, const char * method){
-  XPtrImage output = copy(input);
-  for_each ( output->begin(), output->end(), Magick::animationDelayImage(delay));
-  for_each ( output->begin(), output->end(), Magick::animationIterationsImage(iter));
-  for_each ( output->begin(), output->end(), Magick::gifDisposeMethodImage(Dispose(method)));
-  for_each ( output->begin(), output->end(), Magick::magickImage("gif"));
-  return output;
 }

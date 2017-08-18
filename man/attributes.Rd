@@ -3,24 +3,31 @@
 \name{attributes}
 \alias{attributes}
 \alias{image_comment}
+\alias{image_info}
 \title{Image Attributes}
 \usage{
 image_comment(image, comment = NULL)
+
+image_info(image)
 }
 \arguments{
-\item{image}{object returned by \code{image_read}}
+\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}}}
 
 \item{comment}{string to set an image comment}
 }
 \description{
 Attributes are properties of the image that might be present on some images
-and might affect image manipualation methods. Each attribute can be get and
-set with the same function.
+and might affect image manipualation methods.
+}
+\details{
+Each attribute can be get and set with the same function. The \code{\link[=image_info]{image_info()}}
+function returns a data frame with some commonly used attributes.
 }
 \seealso{
-Other image: \code{\link{animation}}, \code{\link{color}},
+Other image: \code{\link{analysis}},
+  \code{\link{animation}}, \code{\link{color}},
   \code{\link{composite}}, \code{\link{device}},
   \code{\link{editing}}, \code{\link{effects}},
-  \code{\link{image_compare}}, \code{\link{painting}},
+  \code{\link{ocr}}, \code{\link{painting}},
   \code{\link{resize}}
 }

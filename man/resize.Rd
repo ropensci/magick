@@ -38,7 +38,7 @@ image_deskew(image, treshold = 40)
 image_page(image, pagesize = NULL, density = NULL)
 }
 \arguments{
-\item{image}{object returned by \code{image_read}}
+\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}}}
 
 \item{geometry}{a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
 specifying width+height and/or position offset.}
@@ -95,9 +95,10 @@ image_flip(logo)
 image_flop(logo)
 }
 \seealso{
-Other image: \code{\link{animation}},
-  \code{\link{attributes}}, \code{\link{color}},
-  \code{\link{composite}}, \code{\link{device}},
-  \code{\link{editing}}, \code{\link{effects}},
-  \code{\link{image_compare}}, \code{\link{painting}}
+Other image: \code{\link{analysis}},
+  \code{\link{animation}}, \code{\link{attributes}},
+  \code{\link{color}}, \code{\link{composite}},
+  \code{\link{device}}, \code{\link{editing}},
+  \code{\link{effects}}, \code{\link{ocr}},
+  \code{\link{painting}}
 }
