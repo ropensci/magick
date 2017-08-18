@@ -112,3 +112,23 @@ image_flop <- function(image){
   assert_image(image)
   magick_image_flop(image)
 }
+
+#' @export
+#' @rdname resize
+#' @param treshold straightens an image. A threshold of 40 works for most images.
+image_deskew <- function(image, treshold = 40){
+  assert_image(image)
+  magick_image_deskew(image, treshold)
+}
+
+#' @export
+#' @rdname resize
+#' @param pagesize geometry string with preferred size and location of an image canvas
+#' @param density geometry string with vertical and horizontal resolution in pixels of
+#' the image. Specifies an image density when decoding a Postscript or PDF.
+image_page <- function(image, pagesize = NULL, density = NULL){
+  assert_image(image)
+  pagesize <- as.character(pagesize)
+  density <- as.character(density)
+  magick_image_page(image, pagesize, density)
+}

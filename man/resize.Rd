@@ -11,6 +11,8 @@
 \alias{image_crop}
 \alias{image_flip}
 \alias{image_flop}
+\alias{image_deskew}
+\alias{image_page}
 \title{Resize, Cut, Crop, Rotate}
 \usage{
 image_trim(image)
@@ -30,6 +32,10 @@ image_crop(image, geometry = NULL)
 image_flip(image)
 
 image_flop(image)
+
+image_deskew(image, treshold = 40)
+
+image_page(image, pagesize = NULL, density = NULL)
 }
 \arguments{
 \item{image}{object returned by \code{image_read}}
@@ -40,6 +46,13 @@ for example \code{"10x10+5-5"}}
 \item{degrees}{value between 0 and 360 for how many degrees to rotate}
 
 \item{filter}{string with a \href{https://www.imagemagick.org/Magick++/Enumerations.html#FilterTypes}{filtertype}.}
+
+\item{treshold}{straightens an image. A threshold of 40 works for most images.}
+
+\item{pagesize}{geometry string with preferred size and location of an image canvas}
+
+\item{density}{geometry string with vertical and horizontal resolution in pixels of
+the image. Specifies an image density when decoding a Postscript or PDF.}
 }
 \description{
 Basic transformation and cutting operations.

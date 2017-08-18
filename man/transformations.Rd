@@ -14,11 +14,9 @@
 \alias{image_implode}
 \alias{image_negate}
 \alias{image_fill}
-\alias{image_page}
 \alias{image_annotate}
 \alias{image_convert}
 \alias{image_compare}
-\alias{image_deskew}
 \title{Image Transformations}
 \usage{
 image_despeckle(image, times = 1L)
@@ -45,8 +43,6 @@ image_negate(image)
 
 image_fill(image, color, point = "1x1", fuzz = 0)
 
-image_page(image, pagesize = NULL, density = NULL)
-
 image_annotate(image, text, gravity = "northwest", location = "+0+0",
   degrees = 0, size = 10, font = NULL, color = NULL,
   strokecolor = NULL, boxcolor = NULL)
@@ -55,8 +51,6 @@ image_convert(image, format = NULL, type = NULL, colorspace = NULL,
   depth = NULL, antialias = NULL)
 
 image_compare(image, reference_image, metric = "")
-
-image_deskew(image, treshold = 40)
 }
 \arguments{
 \item{image}{object returned by \code{image_read}}
@@ -83,11 +77,6 @@ for example \code{"10x10+5-5"}}
 \item{fuzz}{Colors within this distance are considered equal.
 Use this option to match colors that are close to the target color in RGB space.
 I think max distance (from #000000 to #FFFFFF) is 256^3.}
-
-\item{pagesize}{geometry string with preferred size and location of an image canvas.}
-
-\item{density}{geometry string with vertical and horizontal resolution in pixels of
-the image. Specifies an image density when decoding a Postscript or PDF.}
 
 \item{text}{annotation text}
 
@@ -123,8 +112,6 @@ for example 'grey' or 'rgb' or 'cmyk'}
 
 \item{metric}{string with a
 \href{http://www.imagemagick.org/script/command-line-options.php#metric}{metric type}}
-
-\item{treshold}{straightens an image. A threshold of 40 works for most images.}
 }
 \description{
 Vectorized functions for transforming images. These functions apply

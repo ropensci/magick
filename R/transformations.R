@@ -139,19 +139,6 @@ image_fill <- function(image, color, point = "1x1", fuzz = 0){
 
 #' @export
 #' @rdname transformations
-#' @param pagesize geometry string with preferred size and location of an image canvas.
-#' @param density geometry string with vertical and horizontal resolution in pixels of
-#' the image. Specifies an image density when decoding a Postscript or PDF.
-image_page <- function(image, pagesize = NULL, density = NULL){
-  assert_image(image)
-  pagesize <- as.character(pagesize)
-  density <- as.character(density)
-  magick_image_page(image, pagesize, density)
-}
-
-
-#' @export
-#' @rdname transformations
 #' @param text annotation text
 #' @param degrees value between 0 and 360 for how many degrees to rotate
 #' @param gravity string with
@@ -215,10 +202,3 @@ image_compare <- function(image, reference_image, metric = ""){
   magick_image_compare(image, reference_image, metric)
 }
 
-#' @export
-#' @rdname transformations
-#' @param treshold straightens an image. A threshold of 40 works for most images.
-image_deskew <- function(image, treshold = 40){
-  assert_image(image)
-  magick_image_deskew(image, treshold)
-}
