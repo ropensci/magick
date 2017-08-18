@@ -6,20 +6,12 @@
 \alias{magick}
 \alias{imagemagick}
 \alias{image_write}
+\alias{image_join}
 \alias{image_display}
 \alias{image_browse}
-\alias{image_append}
-\alias{image_average}
-\alias{image_coalesce}
-\alias{image_flatten}
 \alias{image_fft}
 \alias{image_map}
-\alias{image_montage}
-\alias{image_morph}
-\alias{image_mosaic}
-\alias{image_join}
 \alias{image_info}
-\alias{image_animate}
 \title{Image Editing}
 \usage{
 image_read(path, density = NULL, depth = NULL)
@@ -27,34 +19,17 @@ image_read(path, density = NULL, depth = NULL)
 image_write(image, path = NULL, format = NULL, quality = NULL,
   depth = NULL, density = NULL, comment = NULL, flatten = FALSE)
 
+image_join(...)
+
 image_display(image, animate = TRUE)
 
 image_browse(image, browser = getOption("browser"))
-
-image_append(image, stack = FALSE)
-
-image_average(image)
-
-image_coalesce(image)
-
-image_flatten(image, operator = NULL)
 
 image_fft(image)
 
 image_map(image, map, dither = FALSE)
 
-image_montage(image)
-
-image_morph(image, frames)
-
-image_mosaic(image, operator = NULL)
-
-image_join(...)
-
 image_info(image)
-
-image_animate(image, fps = 10, loop = 0, dispose = c("background",
-  "previous", "none"))
 }
 \arguments{
 \item{path}{file path, URL, or raw array or \code{nativeRaster} with image data}
@@ -75,29 +50,15 @@ Can also be a bitmap type such as \code{rgba} or \code{rgb}.}
 \item{flatten}{should image be flattened before writing? This also replaces
 transparency with background color.}
 
+\item{...}{images or lists of images to be combined into a image}
+
 \item{animate}{support animations in the X11 display}
 
 \item{browser}{argument passed to \link[utils:browseURL]{browseURL}}
 
-\item{stack}{place images top-to-bottom (TRUE) or left-to-right (FALSE)}
-
-\item{operator}{string with a
-\href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}.}
-
 \item{map}{reference image to map colors from}
 
 \item{dither}{set TRUE to enable dithering}
-
-\item{frames}{number of frames to use in output animation}
-
-\item{...}{images or lists of images to be combined into a image}
-
-\item{fps}{frames per second}
-
-\item{loop}{how many times to repeat the animation. Default is infinite.}
-
-\item{dispose}{frame disposal method. See
-\href{http://www.imagemagick.org/Usage/anim_basics/}{documentation}}
 }
 \description{
 Read, write and join or combine images. All image functions are vectorized,
@@ -137,38 +98,12 @@ image_read(webp::read_webp("example.webp"))
 
 curl::curl_download("http://jeroen.github.io/images/tiger.svg", "tiger.svg")
 image_read(rsvg::rsvg("tiger.svg"))
-# Create thumbnails from GIF
-banana <- image_read("https://jeroen.github.io/images/banana.gif")
-length(banana)
-image_average(banana)
-image_flatten(banana)
-image_append(banana)
-image_append(banana, stack = TRUE)
-
-# Append images together
-image_append(image_scale(c(image_append(banana[c(1,3)], stack = TRUE), frink)))
-# Combine with another image
-logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
-oldlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-3.png")
-
-# Create morphing animation
-both <- image_scale(c(oldlogo, logo), "400")
-image_average(image_crop(both))
-image_animate(image_morph(both, 10))
-# Basic compositions
-image_composite(banana, image_scale(logo, "300"))
-
-# Break down and combine frames
-front <- image_scale(banana, "300")
-background <- image_background(image_scale(logo, "400"), 'white')
-frames <- image_apply(front, function(x){image_composite(background, x, offset = "+70+30")})
-image_animate(frames, fps = 10)
 }
 \references{
 Magick++ Image STL: \url{https://www.imagemagick.org/Magick++/STL.html}
 }
 \seealso{
-Other image: \code{\link{attributes}},
-  \code{\link{contrast}}, \code{\link{resize}},
-  \code{\link{transformations}}
+Other image: \code{\link{animation}},
+  \code{\link{attributes}}, \code{\link{contrast}},
+  \code{\link{resize}}, \code{\link{transformations}}
 }

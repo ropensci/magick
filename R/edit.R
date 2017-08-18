@@ -139,6 +139,16 @@ image_write <- function(image, path = NULL, format = NULL, quality = NULL,
   return(buf)
 }
 
+
+#' @export
+#' @rdname edit
+#' @param ... images or lists of images to be combined into a image
+image_join <- function(...){
+  x <- unlist(list(...))
+  stopifnot(all(vapply(x, inherits, logical(1), "magick-image")))
+  magick_image_join(x)
+}
+
 image_write_frame <- function(image, format = "rgb"){
   assert_image(image)
   magick_image_write_frame(image, format)
@@ -163,48 +173,6 @@ image_browse <- function(image, browser = getOption("browser")){
 
 #' @export
 #' @rdname edit
-#' @param stack place images top-to-bottom (TRUE) or left-to-right (FALSE)
-#' @examples
-#' # Create thumbnails from GIF
-#' banana <- image_read("https://jeroen.github.io/images/banana.gif")
-#' length(banana)
-#' image_average(banana)
-#' image_flatten(banana)
-#' image_append(banana)
-#' image_append(banana, stack = TRUE)
-#'
-#' # Append images together
-#' image_append(image_scale(c(image_append(banana[c(1,3)], stack = TRUE), frink)))
-image_append <- function(image, stack = FALSE){
-  assert_image(image)
-  magick_image_append(image, stack)
-}
-
-#' @export
-#' @rdname edit
-image_average <- function(image){
-  assert_image(image)
-  magick_image_average(image)
-}
-
-#' @export
-#' @rdname edit
-image_coalesce <- function(image){
-  assert_image(image)
-  magick_image_coalesce(image)
-}
-
-#' @export
-#' @inheritParams composite
-#' @rdname edit
-image_flatten <- function(image, operator = NULL){
-  assert_image(image)
-  operator <- as.character(operator)
-  magick_image_flatten(image, operator)
-}
-
-#' @export
-#' @rdname edit
 image_fft <- function(image){
   if(!isTRUE(magick_config()$fftw))
     stop("ImageMagick was configured without FFTW support. Reinstall with: brew install imagemagick --with-fftw")
@@ -224,76 +192,8 @@ image_map <- function(image, map, dither = FALSE){
 
 #' @export
 #' @rdname edit
-image_montage <- function(image){
-  assert_image(image)
-  magick_image_montage(image)
-}
-
-#' @export
-#' @rdname edit
-#' @examples
-#' # Combine with another image
-#' logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
-#' oldlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-3.png")
-#'
-#' # Create morphing animation
-#' both <- image_scale(c(oldlogo, logo), "400")
-#' image_average(image_crop(both))
-#' image_animate(image_morph(both, 10))
-#' @param frames number of frames to use in output animation
-image_morph <- function(image, frames){
-  assert_image(image)
-  stopifnot(is.numeric(frames))
-  magick_image_morph(image, frames)
-}
-
-#' @export
-#' @rdname edit
-image_mosaic <- function(image, operator = NULL){
-  assert_image(image)
-  operator <- as.character(operator)
-  magick_image_mosaic(image, operator)
-}
-
-#' @export
-#' @rdname edit
-#' @param ... images or lists of images to be combined into a image
-#' @examples
-#' # Basic compositions
-#' image_composite(banana, image_scale(logo, "300"))
-#'
-#' # Break down and combine frames
-#' front <- image_scale(banana, "300")
-#' background <- image_background(image_scale(logo, "400"), 'white')
-#' frames <- image_apply(front, function(x){image_composite(background, x, offset = "+70+30")})
-#' image_animate(frames, fps = 10)
-image_join <- function(...){
-  x <- unlist(list(...))
-  stopifnot(all(vapply(x, inherits, logical(1), "magick-image")))
-  magick_image_join(x)
-}
-
-#' @export
-#' @rdname edit
 image_info <- function(image){
   assert_image(image)
   magick_image_info(image)
 }
 
-
-#' @export
-#' @rdname edit
-#' @param dispose frame disposal method. See
-#' \href{http://www.imagemagick.org/Usage/anim_basics/}{documentation}
-#' @param fps frames per second
-#' @param loop how many times to repeat the animation. Default is infinite.
-image_animate <- function(image, fps = 10, loop = 0, dispose = c("background", "previous", "none")){
-  assert_image(image)
-  stopifnot(is.numeric(fps))
-  stopifnot(is.numeric(loop))
-  if(100 %% fps)
-    stop("argument 'fps' must be a factor of 100")
-  delay <- as.integer(100/fps)
-  dispose <- match.arg(dispose)
-  magick_image_animate(image, delay, as.integer(loop), dispose)
-}

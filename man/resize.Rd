@@ -95,7 +95,7 @@ image_flip(logo)
 image_flop(logo)
 }
 \seealso{
-Other image: \code{\link{attributes}},
-  \code{\link{contrast}}, \code{\link{editing}},
-  \code{\link{transformations}}
+Other image: \code{\link{animation}},
+  \code{\link{attributes}}, \code{\link{contrast}},
+  \code{\link{editing}}, \code{\link{transformations}}
 }

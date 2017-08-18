@@ -103,7 +103,7 @@ image_background(translogo, "pink", flatten = TRUE)
 image_fill(logo, "pink", fuzz = 10000)
 }
 \seealso{
-Other image: \code{\link{attributes}},
-  \code{\link{editing}}, \code{\link{resize}},
-  \code{\link{transformations}}
+Other image: \code{\link{animation}},
+  \code{\link{attributes}}, \code{\link{editing}},
+  \code{\link{resize}}, \code{\link{transformations}}
 }

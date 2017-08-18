@@ -201,4 +201,3 @@ image_compare <- function(image, reference_image, metric = ""){
   metric <- as.character(metric)
   magick_image_compare(image, reference_image, metric)
 }
-
