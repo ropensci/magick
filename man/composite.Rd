@@ -64,5 +64,5 @@ Other image: \code{\link{analysis}},
   \code{\link{color}}, \code{\link{device}},
   \code{\link{editing}}, \code{\link{effects}},
   \code{\link{ocr}}, \code{\link{painting}},
-  \code{\link{resize}}
+  \code{\link{transform}}
 }

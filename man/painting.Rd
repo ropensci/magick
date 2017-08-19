@@ -70,5 +70,5 @@ Other image: \code{\link{analysis}},
   \code{\link{color}}, \code{\link{composite}},
   \code{\link{device}}, \code{\link{editing}},
   \code{\link{effects}}, \code{\link{ocr}},
-  \code{\link{resize}}
+  \code{\link{transform}}
 }

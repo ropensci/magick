@@ -213,7 +213,7 @@ XPtrImage magick_image_page( XPtrImage input, Rcpp::CharacterVector pagesize, Rc
   if(pagesize.size())
     for_each (output->begin(), output->end(), Magick::pageImage(Geom(pagesize[0])));
   if(density.size())
-  for_each (output->begin(), output->end(), Magick::densityImage(Point(density[0])));
+    for_each (output->begin(), output->end(), Magick::densityImage(Point(density[0])));
   return output;
 }
 

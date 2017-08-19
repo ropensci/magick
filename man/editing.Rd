@@ -112,5 +112,5 @@ Other image: \code{\link{analysis}},
   \code{\link{color}}, \code{\link{composite}},
   \code{\link{device}}, \code{\link{effects}},
   \code{\link{ocr}}, \code{\link{painting}},
-  \code{\link{resize}}
+  \code{\link{transform}}
 }
