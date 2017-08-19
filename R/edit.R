@@ -27,13 +27,20 @@
 #' @rdname editing
 #' @name editing
 #' @param path a file, url, or raster object or bitmap array
-#' @param image magick image object returned by [image_read()]
+#' @param image magick image object returned by [image_read()] or [image_graph()]
 #' @param density resolution to render pdf or svg
 #' @examples
 #' # Download image from the web
 #' frink <- image_read("https://jeroen.github.io/images/frink.png")
 #' worldcup_frink <- image_fill(frink, "orange", "+100+200", 30000)
 #' image_write(worldcup_frink, "output.png")
+#'
+#' # extract raw bitmap array
+#' bitmap <- frink[[1]]
+#'
+#' # replace pixels with #FF69B4 ('hot pink') and convert back to image
+#' bitmap[,50:100, 50:100] <- as.raw(c(0xff, 0x69, 0xb4, 0xff))
+#' image_read(bitmap)
 #'
 #' # Plot to graphics device via legacy raster format
 #' raster <- as.raster(frink)

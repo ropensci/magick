@@ -31,7 +31,7 @@ image_append(image, stack = FALSE)
 image_apply(image, FUN, ...)
 }
 \arguments{
-\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}}}
+\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
 \item{fps}{frames per second}
 

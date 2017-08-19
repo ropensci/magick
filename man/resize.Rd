@@ -38,7 +38,7 @@ image_deskew(image, treshold = 40)
 image_page(image, pagesize = NULL, density = NULL)
 }
 \arguments{
-\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}}}
+\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
 \item{geometry}{a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
 specifying width+height and/or position offset.}

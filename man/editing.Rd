@@ -33,7 +33,7 @@ image_join(...)
 
 \item{depth}{color depth (either 8 or 16)}
 
-\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}}}
+\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
 \item{format}{output format such as \code{"png"}, \code{"jpeg"}, \code{"gif"}, \code{"rgb"} or \code{"rgba"}.}
 
@@ -83,6 +83,13 @@ an embedded viewer that does this automatically which is quite nice.
 frink <- image_read("https://jeroen.github.io/images/frink.png")
 worldcup_frink <- image_fill(frink, "orange", "+100+200", 30000)
 image_write(worldcup_frink, "output.png")
+
+# extract raw bitmap array
+bitmap <- frink[[1]]
+
+# replace pixels with #FF69B4 ('hot pink') and convert back to image
+bitmap[,50:100, 50:100] <- as.raw(c(0xff, 0x69, 0xb4, 0xff))
+image_read(bitmap)
 
 # Plot to graphics device via legacy raster format
 raster <- as.raster(frink)

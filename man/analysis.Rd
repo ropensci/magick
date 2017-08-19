@@ -11,7 +11,7 @@ image_compare(image, reference_image, metric = "")
 image_fft(image)
 }
 \arguments{
-\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}}}
+\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
 \item{reference_image}{another image to compare to}
 

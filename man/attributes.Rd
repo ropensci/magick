@@ -11,7 +11,7 @@ image_comment(image, comment = NULL)
 image_info(image)
 }
 \arguments{
-\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}}}
+\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
 \item{comment}{string to set an image comment}
 }

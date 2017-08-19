@@ -8,7 +8,7 @@
 image_ocr(image, language = "eng", ...)
 }
 \arguments{
-\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}}}
+\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
 \item{language}{passed to \link[tesseract:tesseract]{tesseract}. To install additional languages see
 instructions in \link[tesseract:tesseract_download]{tesseract_download()}.}

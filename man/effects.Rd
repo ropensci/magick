@@ -35,7 +35,7 @@ image_implode(image, factor = 0.5)
 image_negate(image)
 }
 \arguments{
-\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}}}
+\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
 \item{times}{number of times to repeat the despeckle operation}
 

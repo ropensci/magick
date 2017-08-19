@@ -39,7 +39,7 @@ image_equalize(image)
 image_median(image, radius = 1)
 }
 \arguments{
-\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}}}
+\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
 \item{brightness}{modulation of brightness as percentage of the current value (100 for no change)}
 

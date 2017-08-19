@@ -16,7 +16,7 @@ image_border(image, color = "lightgray", geometry = "10x10",
 image_frame(image, color = "lightgray", geometry = "25x25+6+6")
 }
 \arguments{
-\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}}}
+\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
 \item{composite_image}{composition image}
 

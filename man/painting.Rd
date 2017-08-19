@@ -13,7 +13,7 @@ image_annotate(image, text, gravity = "northwest", location = "+0+0",
   strokecolor = NULL, boxcolor = NULL)
 }
 \arguments{
-\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}}}
+\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
 \item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
 \code{"navyblue"} or \code{"#000080"}}
