@@ -108,6 +108,6 @@ Other image: \code{\link{analysis}},
   \code{\link{attributes}}, \code{\link{color}},
   \code{\link{composite}}, \code{\link{device}},
   \code{\link{editing}}, \code{\link{effects}},
-  \code{\link{ocr}}, \code{\link{painting}},
-  \code{\link{transform}}
+  \code{\link{index}}, \code{\link{ocr}},
+  \code{\link{painting}}, \code{\link{transform}}
 }

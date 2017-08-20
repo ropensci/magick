@@ -22,7 +22,6 @@
 #' @importFrom Rcpp sourceCpp
 #' @useDynLib magick
 #' @export
-#' @aliases magick imagemagick
 #' @family image
 #' @rdname editing
 #' @name editing

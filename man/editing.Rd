@@ -3,8 +3,6 @@
 \name{editing}
 \alias{editing}
 \alias{image_read}
-\alias{magick}
-\alias{imagemagick}
 \alias{image_write}
 \alias{image_convert}
 \alias{image_display}
@@ -111,6 +109,6 @@ Other image: \code{\link{analysis}},
   \code{\link{animation}}, \code{\link{attributes}},
   \code{\link{color}}, \code{\link{composite}},
   \code{\link{device}}, \code{\link{effects}},
-  \code{\link{ocr}}, \code{\link{painting}},
-  \code{\link{transform}}
+  \code{\link{index}}, \code{\link{ocr}},
+  \code{\link{painting}}, \code{\link{transform}}
 }
