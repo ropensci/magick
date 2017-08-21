@@ -1,10 +1,10 @@
 # ImageMagick build target
 IM=6
-VERSION=6.9.9-4
+VERSION=6.9.9
 
-# Support R < 3.3 with gcc-4.6.3
+# Legacy support for R < 3.3
 R_COMPILED_BY ?= -4.6.3
-ifeq ($(R_COMPILED_BY),-4.9.3)
+ifeq ($(R_COMPILED_BY),-4.6.3)
 VERSION=6.9.5-4
 endif
 
