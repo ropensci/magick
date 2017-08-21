@@ -1,7 +1,7 @@
 #' Magick Image Processing
 #'
 #' The `magick` package for graphics and image processing in R. Important resources:
-#' - [R introduction vignette](https://cran.r-project.org/web/packages/magick/vignettes/intro.html): getting started
+#' - [R introduction vignette](https://bit.ly/magickintro): getting started
 #' - [Magick++ API](https://www.imagemagick.org/Magick++/Image++.html) and
 #'     [Magick++ STL](https://www.imagemagick.org/Magick++/STL.html) detailed descriptions of methods and parameters
 #'
