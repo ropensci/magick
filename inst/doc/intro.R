@@ -225,6 +225,7 @@ out <- lapply(datalist, function(data){
   print(p)
 })
 dev.off()
+img <- image_background(image_trim(img), 'white')
 animation <- image_animate(img, fps = 2)
 print(animation)
 
