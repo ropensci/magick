@@ -134,7 +134,7 @@ Rcpp::List magick_config_internal(){
   out["xml"] = false;
 #endif
 
-#ifdef ZERO_CONFIGURATION_SUPPORT
+#ifdef MAGICKCORE_ZERO_CONFIGURATION_SUPPORT
   out["zero-configuration"] = true;
 #else
   out["zero-configuration"] = false;

@@ -1,3 +1,6 @@
+1.3
+  - Fix 'zero-configuration' in magick_config() to use the proper macro
+
 1.2
   - Documentation! Split manuals into meaningful pages
   - Windows / MacOS: update ImageMagick to 6.9.9-9 (fixes a png bug and one for linejoins)
