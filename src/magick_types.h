@@ -26,6 +26,7 @@ Magick::Point Point(const char * str);
 #define myDrawableDashArray DrawableStrokeDashArray
 #define myMedianImage medianConvolveImage
 #define myFilterType FilterType
+#define myUndefinedMetric UndefinedErrorMetric
 #else
 #define container list
 #define Point Geom
@@ -34,6 +35,7 @@ Magick::Point Point(const char * str);
 #define myDrawableDashArray DrawableDashArray
 #define myMedianImage medianFilterImage
 #define myFilterType FilterTypes
+#define myUndefinedMetric UndefinedMetric
 #endif
 
 // Option parsers

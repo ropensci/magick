@@ -274,7 +274,7 @@ XPtrImage magick_image_compare( XPtrImage input, XPtrImage reference_image, cons
 #else
   XPtrImage out = create();
   double distortion;
-  Magick::MetricType compare_metric = strlen(metric) ? Metric(metric) : Magick::UndefinedMetric;
+  Magick::MetricType compare_metric = strlen(metric) ? Metric(metric) : Magick::myUndefinedMetric;
   out->push_back(input->front().compare(reference_image->front(), compare_metric, &distortion));
   out.attr("distortion") = distortion;
   return out;

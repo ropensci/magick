@@ -6,6 +6,7 @@ r_build_args: '--no-build-vignettes'
 matrix:
   include:
     - env: _R_CHECK_FORCE_SUGGESTS_=0
+      dist: precise
       r_check_args: '--ignore-vignettes'
       addons:
         apt:
