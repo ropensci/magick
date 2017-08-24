@@ -1067,7 +1067,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_compare
-double magick_image_compare(XPtrImage input, XPtrImage reference_image, const char  * metric);
+XPtrImage magick_image_compare(XPtrImage input, XPtrImage reference_image, const char  * metric);
 RcppExport SEXP _magick_magick_image_compare(SEXP inputSEXP, SEXP reference_imageSEXP, SEXP metricSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
