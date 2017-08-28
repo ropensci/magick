@@ -105,10 +105,10 @@ curl::curl_download("http://jeroen.github.io/images/tiger.svg", "tiger.svg")
 image_read(rsvg::rsvg("tiger.svg"))
 }
 \seealso{
-Other image: \code{\link{analysis}},
+Other image: \code{\link{_index_}}, \code{\link{analysis}},
   \code{\link{animation}}, \code{\link{attributes}},
   \code{\link{color}}, \code{\link{composite}},
   \code{\link{device}}, \code{\link{effects}},
-  \code{\link{index}}, \code{\link{ocr}},
-  \code{\link{painting}}, \code{\link{transform}}
+  \code{\link{ocr}}, \code{\link{painting}},
+  \code{\link{transform}}
 }

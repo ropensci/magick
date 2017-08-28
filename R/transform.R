@@ -45,7 +45,7 @@ image_trim <- function(image){
 #' @export
 #' @rdname transform
 #' @param geometry a string with [geometry syntax](https://www.imagemagick.org/Magick++/Geometry.html)
-#' specifying width+height and/or position offset.
+#' specifying width+height and/or position offset. See details and examples below.
 #' @examples
 #' image_chop(logo, "100x20")
 image_chop <- function(image, geometry){

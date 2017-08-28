@@ -24,10 +24,10 @@ Each attribute can be get and set with the same function. The \code{\link[=image
 function returns a data frame with some commonly used attributes.
 }
 \seealso{
-Other image: \code{\link{analysis}},
+Other image: \code{\link{_index_}}, \code{\link{analysis}},
   \code{\link{animation}}, \code{\link{color}},
   \code{\link{composite}}, \code{\link{device}},
   \code{\link{editing}}, \code{\link{effects}},
-  \code{\link{index}}, \code{\link{ocr}},
-  \code{\link{painting}}, \code{\link{transform}}
+  \code{\link{ocr}}, \code{\link{painting}},
+  \code{\link{transform}}
 }

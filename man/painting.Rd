@@ -65,10 +65,10 @@ myfont <- ifelse(identical("windows", .Platform$OS.type), "courier-new", "courie
 try(image_annotate(logo, "The quick brown fox", font = myfont, size = 50))
 }
 \seealso{
-Other image: \code{\link{analysis}},
+Other image: \code{\link{_index_}}, \code{\link{analysis}},
   \code{\link{animation}}, \code{\link{attributes}},
   \code{\link{color}}, \code{\link{composite}},
   \code{\link{device}}, \code{\link{editing}},
-  \code{\link{effects}}, \code{\link{index}},
-  \code{\link{ocr}}, \code{\link{transform}}
+  \code{\link{effects}}, \code{\link{ocr}},
+  \code{\link{transform}}
 }

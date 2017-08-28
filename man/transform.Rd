@@ -41,7 +41,7 @@ image_page(image, pagesize = NULL, density = NULL)
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
 \item{geometry}{a string with \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry syntax}
-specifying width+height and/or position offset.}
+specifying width+height and/or position offset. See details and examples below.}
 
 \item{degrees}{value between 0 and 360 for how many degrees to rotate}
 
@@ -116,10 +116,10 @@ image_flip(logo)
 image_flop(logo)
 }
 \seealso{
-Other image: \code{\link{analysis}},
+Other image: \code{\link{_index_}}, \code{\link{analysis}},
   \code{\link{animation}}, \code{\link{attributes}},
   \code{\link{color}}, \code{\link{composite}},
   \code{\link{device}}, \code{\link{editing}},
-  \code{\link{effects}}, \code{\link{index}},
-  \code{\link{ocr}}, \code{\link{painting}}
+  \code{\link{effects}}, \code{\link{ocr}},
+  \code{\link{painting}}
 }

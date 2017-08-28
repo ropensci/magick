@@ -41,10 +41,10 @@ if(magick_config()$version >= "6.8.7"){
 }
 }
 \seealso{
-Other image: \code{\link{animation}},
-  \code{\link{attributes}}, \code{\link{color}},
-  \code{\link{composite}}, \code{\link{device}},
-  \code{\link{editing}}, \code{\link{effects}},
-  \code{\link{index}}, \code{\link{ocr}},
+Other image: \code{\link{_index_}},
+  \code{\link{animation}}, \code{\link{attributes}},
+  \code{\link{color}}, \code{\link{composite}},
+  \code{\link{device}}, \code{\link{editing}},
+  \code{\link{effects}}, \code{\link{ocr}},
   \code{\link{painting}}, \code{\link{transform}}
 }

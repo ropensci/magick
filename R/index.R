@@ -22,7 +22,7 @@
 #' - [transform] - shape operations: `trim`, `chop`, `rotate`, `resize`, `scale`, `sample`
 #'   `crop`, `flip`, `flop`, `deskew`, `page`
 #'
-#' @name index
+#' @name _index_
 #' @rdname magick
 #' @family image
 #' @aliases magick magick-package imagemagick
