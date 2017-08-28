@@ -17,6 +17,15 @@
 #' The most powerful resize function is [image_resize] which allows for setting
 #' a custom resize filter. Outut of [image_scale] is similar to `image_resize(img, filter = "point")`.
 #'
+#' Examples of `geometry` strings:
+#'  - __`"500x300"`__       -- *Resize image keeping aspect ratio, such that width does not exceed 500 and the height does not exceed 300.*
+#'  - __`"500x300!"`__      -- *Resize image to 500 by 300, ignoring aspect ratio*
+#'  - __`"500x"`__          -- *Resize width to 500 keep aspect ratio*
+#'  - __`"x300"`__          -- *Resize height to 300 keep aspect ratio*
+#'  - __\code{"50\%x20\%"}__ -- *Resize width to 50 percent and height to 20 percent of original*
+#'  - __`"500x300#"`__      -- *Resize image to 500 by 300, but crop either top or bottom to keep aspect ratio*
+#'  - __`"500x300+10+20"`__ -- *Crop image to 500 by 300 at position 10,20*
+#'
 #' For resize operations it holds that if no `geometry` is specified, all frames
 #' are rescaled to match the top frame.
 #'

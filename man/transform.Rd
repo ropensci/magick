@@ -74,6 +74,17 @@ documentation. Short descriptions:
 The most powerful resize function is \link{image_resize} which allows for setting
 a custom resize filter. Outut of \link{image_scale} is similar to \code{image_resize(img, filter = "point")}.
 
+Examples of \code{geometry} strings:
+\itemize{
+\item \strong{\code{"500x300"}}       -- \emph{Resize image keeping aspect ratio, such that width does not exceed 500 and the height does not exceed 300.}
+\item \strong{\code{"500x300!"}}      -- \emph{Resize image to 500 by 300, ignoring aspect ratio}
+\item \strong{\code{"500x"}}          -- \emph{Resize width to 500 keep aspect ratio}
+\item \strong{\code{"x300"}}          -- \emph{Resize height to 300 keep aspect ratio}
+\item \strong{\code{"50\%x20\%"}} -- \emph{Resize width to 50 percent and height to 20 percent of original}
+\item \strong{\code{"500x300#"}}      -- \emph{Resize image to 500 by 300, but crop either top or bottom to keep aspect ratio}
+\item \strong{\code{"500x300+10+20"}} -- \emph{Crop image to 500 by 300 at position 10,20}
+}
+
 For resize operations it holds that if no \code{geometry} is specified, all frames
 are rescaled to match the top frame.
 }
