@@ -20,12 +20,12 @@ SystemRequirements: ImageMagick++: ImageMagick-c++-devel (rpm) or libmagick++-de
 VignetteBuilder: knitr
 Imports:
     Rcpp (>= 0.12.12),
+    magrittr,
     curl
 LinkingTo: Rcpp
 Suggests:
     knitr,
     rmarkdown,
-    magrittr,
     rsvg,
     webp,
     png,

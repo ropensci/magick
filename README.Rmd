@@ -35,7 +35,6 @@ About the underlying library:
 
 ```{r eval = FALSE}
 library(magick)
-library(magrittr)
 frink <- image_read("https://jeroen.github.io/images/frink.png")
 image_trim(frink)
 image_scale(frink, "200x200")
@@ -65,7 +64,6 @@ image_edge(frink)
 ```
 
 ```{r eval = FALSE, include = FALSE}
-library(magrittr)
 image_charcoal(frink) %>% image_write("img/frink-charcoal.png")
 ```
 

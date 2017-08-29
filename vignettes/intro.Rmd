@@ -243,7 +243,6 @@ print(test)
 Using `magrittr` pipe syntax makes it a bit more readable
 
 ```{r}
-library(magrittr)
 image_read("https://jeroen.github.io/images/frink.png") %>%
   image_rotate(270) %>%
   image_background("blue", flatten = TRUE) %>%

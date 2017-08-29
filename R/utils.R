@@ -1,3 +1,7 @@
+#' @importFrom magrittr %>%
+#' @export
+magrittr::`%>%`
+
 read_path <- function(path){
   image <- if(is.character(path)){
     if(is_url(path)){
