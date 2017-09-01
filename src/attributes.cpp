@@ -14,10 +14,14 @@ std::string col_to_str(Magick::Color col){
   Magick::Quantum green(col.myGreenQ());
   Magick::Quantum blue(col.myBlueQ());
   Magick::Quantum alpha(col.myAlphaQ());
-  snprintf(&output[1], 3, "%02x", (unsigned int) red);
-  snprintf(&output[3], 3, "%02x", (unsigned int) green);
-  snprintf(&output[5], 3, "%02x", (unsigned int) blue);
-  snprintf(&output[7], 3, "%02x", (unsigned int) alpha);
+  snprintf(&output[1], 3, "%02x", (unsigned char) red);
+  snprintf(&output[3], 3, "%02x", (unsigned char) green);
+  snprintf(&output[5], 3, "%02x", (unsigned char) blue);
+#if MagickLibVersion >= 0x700
+  snprintf(&output[7], 3, "%02x", (unsigned char) alpha);
+#else //NOTE: alpha scale is reverse on IM6
+  snprintf(&output[7], 3, "%02x", 255 - (unsigned char) alpha);
+#endif
   return std::string(output);
 }
 
