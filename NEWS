@@ -2,6 +2,7 @@
   - Automatically import + export magrittr::`%>%` for easy pipelining
   - Fix 'zero-configuration' in magick_config() to use the proper macro
   - BREAKING: image_compare() now returns an image with a 'distortion' attribute
+  - Workaround for broken std::string(Magick::Color) in GCC-7
 
 1.2
   - Documentation! Split manuals into meaningful pages
