@@ -27,6 +27,10 @@ Magick::Point Point(const char * str);
 #define myMedianImage medianConvolveImage
 #define myFilterType FilterType
 #define myUndefinedMetric UndefinedErrorMetric
+#define myRedQ quantumRed
+#define myGreenQ quantumGreen
+#define myBlueQ quantumBlue
+#define myAlphaQ quantumAlpha
 #else
 #define container list
 #define Point Geom
@@ -36,6 +40,10 @@ Magick::Point Point(const char * str);
 #define myMedianImage medianFilterImage
 #define myFilterType FilterTypes
 #define myUndefinedMetric UndefinedMetric
+#define myRedQ redQuantum
+#define myGreenQ greenQuantum
+#define myBlueQ blueQuantum
+#define myAlphaQ alphaQuantum
 #endif
 
 // Option parsers

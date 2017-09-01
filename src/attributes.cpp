@@ -10,10 +10,10 @@
 //Workaround for GCC-7: https://github.com/ImageMagick/ImageMagick/issues/707
 std::string col_to_str(Magick::Color col){
   char output[10] = "#";
-  Magick::Quantum red(col.quantumRed());
-  Magick::Quantum green(col.quantumGreen());
-  Magick::Quantum blue(col.quantumBlue());
-  Magick::Quantum alpha(col.quantumAlpha());
+  Magick::Quantum red(col.myRedQ());
+  Magick::Quantum green(col.myGreenQ());
+  Magick::Quantum blue(col.myBlueQ());
+  Magick::Quantum alpha(col.myAlphaQ());
   snprintf(&output[1], 3, "%02x", (unsigned int) red);
   snprintf(&output[3], 3, "%02x", (unsigned int) green);
   snprintf(&output[5], 3, "%02x", (unsigned int) blue);
