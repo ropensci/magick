@@ -1,3 +1,6 @@
+1.4
+  - Set MAGICK_TMPDIR to match R session tempdir() instead of global TMPDIR
+
 1.3
   - Automatically import + export magrittr::`%>%` for easy pipelining
   - Fix 'zero-configuration' in magick_config() to use the proper macro

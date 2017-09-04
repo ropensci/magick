@@ -16,6 +16,7 @@
 }
 
 .onLoad <- function(lib, pkg){
+  Sys.setenv(MAGICK_TMPDIR = tempdir())
   if(autobrewed()){
     fontdir <- normalizePath(file.path(lib, pkg, "etc/fonts"), mustWork = FALSE)
     if(file.exists(fontdir)){
