@@ -137,10 +137,10 @@ image_flop <- function(image){
 
 #' @export
 #' @rdname transform
-#' @param treshold straightens an image. A threshold of 40 works for most images.
-image_deskew <- function(image, treshold = 40){
+#' @param threshold straightens an image. A threshold of 40 works for most images.
+image_deskew <- function(image, threshold = 40){
   assert_image(image)
-  magick_image_deskew(image, treshold)
+  magick_image_deskew(image, threshold)
 }
 
 #' @export
