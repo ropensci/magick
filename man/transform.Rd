@@ -33,7 +33,7 @@ image_flip(image)
 
 image_flop(image)
 
-image_deskew(image, treshold = 40)
+image_deskew(image, threshold = 40)
 
 image_page(image, pagesize = NULL, density = NULL)
 }
@@ -47,7 +47,7 @@ specifying width+height and/or position offset. See details and examples below.}
 
 \item{filter}{string with a \href{https://www.imagemagick.org/Magick++/Enumerations.html#FilterTypes}{filtertype}.}
 
-\item{treshold}{straightens an image. A threshold of 40 works for most images.}
+\item{threshold}{straightens an image. A threshold of 40 works for most images.}
 
 \item{pagesize}{geometry string with preferred size and location of an image canvas}
 
