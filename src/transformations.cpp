@@ -169,7 +169,8 @@ XPtrImage magick_image_fill( XPtrImage input, const char * color, const char * p
 // [[Rcpp::export]]
 XPtrImage magick_image_negate( XPtrImage input){
   XPtrImage output = copy(input);
-  for_each ( output->begin(), output->end(), Magick::negateImage());
+  for(size_t i = 0; i < output->size(); i++)
+    output->at(i).negateChannel(Magick::ChannelType(Magick::CompositeChannels ^ Magick::AlphaChannel));
   return output;
 }
 
