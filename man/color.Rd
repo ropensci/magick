@@ -5,6 +5,7 @@
 \alias{image_modulate}
 \alias{image_quantize}
 \alias{image_map}
+\alias{image_channel}
 \alias{image_transparent}
 \alias{image_background}
 \alias{image_colorize}
@@ -21,6 +22,8 @@ image_quantize(image, max = 256, colorspace = NULL, dither = NULL,
   treedepth = NULL)
 
 image_map(image, map, dither = FALSE)
+
+image_channel(image, channel = "lightness")
 
 image_transparent(image, color, fuzz = 0)
 
@@ -63,6 +66,10 @@ may be used to manually adjust the tree depth.}
 
 \item{map}{reference image to map colors from}
 
+\item{channel}{a string with a magick
+\href{https://www.imagemagick.org/Magick++/Enumerations.html#ChannelType}{channel} for example
+\code{"alpha"} or \code{"hue"} or \code{"cyan"}}
+
 \item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
 \code{"navyblue"} or \code{"#000080"}}
 
@@ -89,6 +96,7 @@ documentation. Short descriptions:
 \item \link{image_modulate} adjusts brighness, saturation and hue of image relative to current.
 \item \link{image_quantize} reduces number of unique colors in the image.
 \item \link{image_map} replaces colors of image with the closest color from a reference image.
+\item \link{image_channel} extracts a single channel from an image and returns as grayscale.
 \item \link{image_transparent} sets pixels approximately matching given color to transparent.
 \item \link{image_background} sets background color. When image is flattened, transparent pixels get background color.
 \item \link{image_colorize} overlays a solid color frame using specified opacity.

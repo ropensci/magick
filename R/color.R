@@ -8,6 +8,7 @@
 #'  - [image_modulate] adjusts brighness, saturation and hue of image relative to current.
 #'  - [image_quantize] reduces number of unique colors in the image.
 #'  - [image_map] replaces colors of image with the closest color from a reference image.
+#'  - [image_channel] extracts a single channel from an image and returns as grayscale.
 #'  - [image_transparent] sets pixels approximately matching given color to transparent.
 #'  - [image_background] sets background color. When image is flattened, transparent pixels get background color.
 #'  - [image_colorize] overlays a solid color frame using specified opacity.
@@ -79,6 +80,15 @@ image_map <- function(image, map, dither = FALSE){
   assert_image(map)
   dither <- as.logical(dither)
   magick_image_map(image, map, dither)
+}
+
+#' @export
+#' @rdname color
+#' @param channel a string with a magick
+#' [channel](https://www.imagemagick.org/Magick++/Enumerations.html#ChannelType) for example
+#' `"alpha"` or `"hue"` or `"cyan"`
+image_channel <- function(image, channel = 'lightness'){
+  magick_image_channel(image, channel)
 }
 
 #' @export

@@ -21,9 +21,15 @@
   assert_image(x)
   image <- x[i]
   info <- image_info(image)
-  bitmap <- image_write_frame(image, format = "rgba")
-  dim(bitmap) <- c(4, info$width, info$height)
-  class(bitmap) <- c("bitmap", "rgba")
+  if(tolower(info$colorspace) == "gray"){
+    bitmap <- image_write_frame(image, format = "gray")
+    dim(bitmap) <- c(1, info$width, info$height)
+    class(bitmap) <- c("bitmap", "grey")
+  } else {
+    bitmap <- image_write_frame(image, format = "rgba")
+    dim(bitmap) <- c(4, info$width, info$height)
+    class(bitmap) <- c("bitmap", "rgba")
+  }
   return(bitmap)
 }
 

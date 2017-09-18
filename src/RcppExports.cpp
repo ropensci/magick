@@ -420,6 +420,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_channel
+XPtrImage magick_image_channel(XPtrImage input, const char * channel);
+RcppExport SEXP _magick_magick_image_channel(SEXP inputSEXP, SEXP channelSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< const char * >::type channel(channelSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_channel(input, channel));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_colorize
 XPtrImage magick_image_colorize(XPtrImage input, const size_t opacity, const char * color);
 RcppExport SEXP _magick_magick_image_colorize(SEXP inputSEXP, SEXP opacitySEXP, SEXP colorSEXP) {
@@ -1116,6 +1128,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_normalize", (DL_FUNC) &_magick_magick_image_normalize, 1},
     {"_magick_magick_image_modulate", (DL_FUNC) &_magick_magick_image_modulate, 4},
     {"_magick_magick_image_map", (DL_FUNC) &_magick_magick_image_map, 3},
+    {"_magick_magick_image_channel", (DL_FUNC) &_magick_magick_image_channel, 2},
     {"_magick_magick_image_colorize", (DL_FUNC) &_magick_magick_image_colorize, 3},
     {"_magick_magick_image_enhance", (DL_FUNC) &_magick_magick_image_enhance, 1},
     {"_magick_magick_image_equalize", (DL_FUNC) &_magick_magick_image_equalize, 1},

@@ -141,6 +141,10 @@ magick_image_map <- function(input, map_image, dither) {
     .Call('_magick_magick_image_map', PACKAGE = 'magick', input, map_image, dither)
 }
 
+magick_image_channel <- function(input, channel) {
+    .Call('_magick_magick_image_channel', PACKAGE = 'magick', input, channel)
+}
+
 magick_image_colorize <- function(input, opacity, color) {
     .Call('_magick_magick_image_colorize', PACKAGE = 'magick', input, opacity, color)
 }

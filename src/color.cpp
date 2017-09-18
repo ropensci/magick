@@ -35,6 +35,13 @@ XPtrImage magick_image_map( XPtrImage input, XPtrImage map_image, bool dither){
 }
 
 // [[Rcpp::export]]
+XPtrImage magick_image_channel( XPtrImage input, const char * channel){
+  XPtrImage output = copy(input);
+  for_each ( output->begin(), output->end(), Magick::channelImage(Channel(channel)));
+  return output;
+}
+
+// [[Rcpp::export]]
 XPtrImage magick_image_colorize( XPtrImage input, const size_t opacity, const char * color){
   XPtrImage output = copy(input);
   for_each ( output->begin(), output->end(), Magick::colorizeImage(opacity, Color(color)));

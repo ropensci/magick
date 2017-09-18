@@ -166,7 +166,7 @@ image_convert <- function(image, format = NULL, type = NULL, colorspace = NULL, 
   magick_image_format(image, toupper(format), type, colorspace, depth, antialias)
 }
 
-image_write_frame <- function(image, format = "rgb"){
+image_write_frame <- function(image, format = "rgba"){
   assert_image(image)
   magick_image_write_frame(image, format)
 }

@@ -56,6 +56,14 @@ Magick::NoiseType Noise(const char * str){
   return (Magick::NoiseType) val;
 }
 
+Magick::ChannelType Channel(const char * str){
+  ssize_t val = MagickCore::ParseCommandOption(
+    MagickCore::MagickChannelOptions, Magick::MagickFalse, str);
+  if(val < 0)
+    throw std::runtime_error(std::string("Invalid ChannelType value: ") + str);
+  return (Magick::ChannelType) val;
+}
+
 Magick::myFilterType Filter(const char * str){
   ssize_t val = MagickCore::ParseCommandOption(
     MagickCore::MagickFilterOptions, Magick::MagickFalse, str);

@@ -1,6 +1,7 @@
 1.4
   - Set MAGICK_TMPDIR to match R session tempdir() instead of global TMPDIR
   - Explicitly set channels in image_negate() for IM7 compatibility
+  - Added image_channel() to extract a single channel from an image
 
 1.3
   - Automatically import + export magrittr::`%>%` for easy pipelining
