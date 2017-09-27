@@ -882,8 +882,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_convolve
-XPtrImage magick_image_convolve(XPtrImage input, const char * kernel, const char * args, size_t iter);
-RcppExport SEXP _magick_magick_image_convolve(SEXP inputSEXP, SEXP kernelSEXP, SEXP argsSEXP, SEXP iterSEXP) {
+XPtrImage magick_image_convolve(XPtrImage input, const char * kernel, const char * args, size_t iter, Rcpp::CharacterVector scaling);
+RcppExport SEXP _magick_magick_image_convolve(SEXP inputSEXP, SEXP kernelSEXP, SEXP argsSEXP, SEXP iterSEXP, SEXP scalingSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -891,7 +891,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const char * >::type kernel(kernelSEXP);
     Rcpp::traits::input_parameter< const char * >::type args(argsSEXP);
     Rcpp::traits::input_parameter< size_t >::type iter(iterSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_convolve(input, kernel, args, iter));
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type scaling(scalingSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_convolve(input, kernel, args, iter, scaling));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1180,7 +1181,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_flip", (DL_FUNC) &_magick_magick_image_flip, 1},
     {"_magick_magick_image_flop", (DL_FUNC) &_magick_magick_image_flop, 1},
     {"_magick_magick_image_crop", (DL_FUNC) &_magick_magick_image_crop, 2},
-    {"_magick_magick_image_convolve", (DL_FUNC) &_magick_magick_image_convolve, 4},
+    {"_magick_magick_image_convolve", (DL_FUNC) &_magick_magick_image_convolve, 5},
     {"_magick_magick_image_noise", (DL_FUNC) &_magick_magick_image_noise, 2},
     {"_magick_magick_image_blur", (DL_FUNC) &_magick_magick_image_blur, 3},
     {"_magick_magick_image_charcoal", (DL_FUNC) &_magick_magick_image_charcoal, 3},

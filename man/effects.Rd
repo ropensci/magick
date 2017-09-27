@@ -35,7 +35,8 @@ image_implode(image, factor = 0.5)
 
 image_negate(image)
 
-image_convolve(image, kernel = "Gaussian", args = "", iterations = 1)
+image_convolve(image, kernel = "Gaussian", args = "", iterations = 1,
+  scaling = NULL)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
@@ -55,7 +56,9 @@ image_convolve(image, kernel = "Gaussian", args = "", iterations = 1)
 
 \item{args}{additional kernel parameters}
 
-\item{iterations}{number of iterations
+\item{iterations}{number of iterations}
+
+\item{scaling}{string with kernel scaling. The special flag \code{!`` automatically scales to full dynamic range, for example:}"50%!"`
 image_convolve(logo)}
 }
 \description{

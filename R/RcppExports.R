@@ -293,8 +293,8 @@ magick_image_crop <- function(input, geometry) {
     .Call('_magick_magick_image_crop', PACKAGE = 'magick', input, geometry)
 }
 
-magick_image_convolve <- function(input, kernel, args, iter) {
-    .Call('_magick_magick_image_convolve', PACKAGE = 'magick', input, kernel, args, iter)
+magick_image_convolve <- function(input, kernel, args, iter, scaling) {
+    .Call('_magick_magick_image_convolve', PACKAGE = 'magick', input, kernel, args, iter, scaling)
 }
 
 magick_image_noise <- function(input, noisetype) {

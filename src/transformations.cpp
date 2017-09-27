@@ -123,8 +123,17 @@ Magick::Point Point(const char * str){
 #endif
 
 // [[Rcpp::export]]
-XPtrImage magick_image_convolve( XPtrImage input, const char * kernel, const char * args, size_t iter){
+XPtrImage magick_image_convolve( XPtrImage input, const char * kernel, const char * args, size_t iter,
+                                 Rcpp::CharacterVector scaling){
   XPtrImage output = copy(input);
+  if(scaling.length()){
+#if MagickLibVersion >= 0x687
+    for (Iter it = output->begin(); it != output->end(); ++it)
+      it->artifact("convolve:scale", std::string(scaling.at(0)));
+#else
+    Rcpp::warning("ImageMagick too old to support convolve:scale (requires >= 6.8.7)");
+#endif
+  }
   for(size_t i = 0; i < output->size(); i++)
     output->at(i).morphology(Magick::ConvolveMorphology, Kernel(kernel), args, iter);
   return output;

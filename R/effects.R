@@ -106,8 +106,14 @@ image_negate <- function(image){
 #' @param kernel string with kernel type for example `"DoG"` or `"Diamond"`
 #' @param args additional kernel parameters
 #' @param iterations number of iterations
+#' @param scaling string with kernel scaling. The special flag `!`` automatically scales to full
+#' dynamic range, for example: `"50%!"`
 #' image_convolve(logo)
-image_convolve <- function(image, kernel = 'Gaussian', args = "", iterations = 1){
+image_convolve <- function(image, kernel = 'Gaussian', args = "", iterations = 1, scaling = NULL){
   assert_image(image)
-  magick_image_convolve(image, kernel, args, iterations)
+  kernel <- as.character(kernel)
+  args <- as.character(args)
+  iterations <- as.integer(iterations)
+  scaling <- as.character(scaling)
+  magick_image_convolve(image, kernel, args, iterations, scaling)
 }
