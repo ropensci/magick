@@ -72,6 +72,14 @@ Magick::myFilterType Filter(const char * str){
   return (Magick::myFilterType) val;
 }
 
+Magick::KernelInfoType Kernel(const char * str){
+  ssize_t val = MagickCore::ParseCommandOption(
+    MagickCore::MagickKernelOptions, Magick::MagickFalse, str);
+  if(val < 0)
+    throw std::runtime_error(std::string("Invalid KernelType value: ") + str);
+  return (Magick::KernelInfoType) val;
+}
+
 #if MagickLibVersion >= 0x687
 Magick::MetricType Metric(const char * str){
   ssize_t val = MagickCore::ParseCommandOption(
@@ -113,6 +121,14 @@ Magick::Point Point(const char * str){
   return point;
 }
 #endif
+
+// [[Rcpp::export]]
+XPtrImage magick_image_convolve( XPtrImage input, const char * kernel, const char * args, size_t iter){
+  XPtrImage output = copy(input);
+  for(size_t i = 0; i < output->size(); i++)
+    output->at(i).morphology(Magick::ConvolveMorphology, Kernel(kernel), args, iter);
+  return output;
+}
 
 // [[Rcpp::export]]
 XPtrImage magick_image_noise( XPtrImage input, const char * noisetype){

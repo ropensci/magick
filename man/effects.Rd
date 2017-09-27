@@ -12,6 +12,7 @@
 \alias{image_emboss}
 \alias{image_implode}
 \alias{image_negate}
+\alias{image_convolve}
 \title{Image Effects}
 \usage{
 image_despeckle(image, times = 1L)
@@ -33,6 +34,8 @@ image_emboss(image, radius = 1, sigma = 0.5)
 image_implode(image, factor = 0.5)
 
 image_negate(image)
+
+image_convolve(image, kernel = "Gaussian", args = "", iterations = 1)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
@@ -47,6 +50,13 @@ image_negate(image)
 \item{sigma}{the standard deviation of the Laplacian, in pixels.}
 
 \item{factor}{image implode factor (special effect)}
+
+\item{kernel}{string with kernel type for example \code{"DoG"} or \code{"Diamond"}}
+
+\item{args}{additional kernel parameters}
+
+\item{iterations}{number of iterations
+image_convolve(logo)}
 }
 \description{
 High level effects applied to an entire image.

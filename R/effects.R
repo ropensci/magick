@@ -100,3 +100,14 @@ image_negate <- function(image){
   assert_image(image)
   magick_image_negate(image)
 }
+
+#' @export
+#' @rdname effects
+#' @param kernel string with kernel type for example `"DoG"` or `"Diamond"`
+#' @param args additional kernel parameters
+#' @param iterations number of iterations
+#' image_convolve(logo)
+image_convolve <- function(image, kernel = 'Gaussian', args = "", iterations = 1){
+  assert_image(image)
+  magick_image_convolve(image, kernel, args, iterations)
+}
