@@ -36,14 +36,6 @@ XPtrImage magick_image_convolve_kernel( XPtrImage input, std::string kernel, siz
   return output;
 }
 
-#else
-XPtrImage magick_image_convolve_kernel( XPtrImage input, std::string kernel, std::string args, size_t iter,
-                                 Rcpp::CharacterVector scaling, Rcpp::CharacterVector bias){
-  throw std::runtime_error("ImageMagick too old. Convolve requires at least version  6.8.8");
-}
-#endif
-
-
 // [[Rcpp::export]]
 XPtrImage magick_image_convolve_matrix( XPtrImage input, Rcpp::NumericMatrix matrix, size_t iter,
                                  Rcpp::CharacterVector scaling, Rcpp::CharacterVector bias){
@@ -61,3 +53,15 @@ XPtrImage magick_image_convolve_matrix( XPtrImage input, Rcpp::NumericMatrix mat
       output->at(i).convolve(matrix.nrow(), matrix.begin());
   return output;
 }
+
+#else
+XPtrImage magick_image_convolve_kernel( XPtrImage input, std::string kernel, size_t iter,
+                                        Rcpp::CharacterVector scaling, Rcpp::CharacterVector bias){
+  throw std::runtime_error("ImageMagick too old. Convolve requires at least version  6.8.8");
+}
+
+XPtrImage magick_image_convolve_matrix( XPtrImage input, Rcpp::NumericMatrix matrix, size_t iter,
+                                        Rcpp::CharacterVector scaling, Rcpp::CharacterVector bias){
+  throw std::runtime_error("ImageMagick too old. Convolve requires at least version  6.8.8");
+}
+#endif
