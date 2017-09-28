@@ -35,8 +35,8 @@ image_implode(image, factor = 0.5)
 
 image_negate(image)
 
-image_convolve(image, kernel = "Gaussian", args = "", iterations = 1,
-  scaling = NULL, bias = NULL)
+image_convolve(image, kernel = "Gaussian", iterations = 1, scaling = NULL,
+  bias = NULL)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
@@ -52,9 +52,7 @@ image_convolve(image, kernel = "Gaussian", args = "", iterations = 1,
 
 \item{factor}{image implode factor (special effect)}
 
-\item{kernel}{string with kernel type for example \code{"DoG"} or \code{"Diamond"}}
-
-\item{args}{additional kernel parameters}
+\item{kernel}{matrix or string with kernel type for example: \code{"DoG:0,0,2"} or \code{"Diamond"}}
 
 \item{iterations}{number of iterations}
 

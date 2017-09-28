@@ -20,7 +20,7 @@ Magick::KernelInfoType Kernel(const char * str){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_convolve( XPtrImage input, std::string kernel, std::string args, size_t iter,
+XPtrImage magick_image_convolve_kernel( XPtrImage input, std::string kernel, size_t iter,
                                  Rcpp::CharacterVector scaling, Rcpp::CharacterVector bias){
   XPtrImage output = copy(input);
   if(scaling.length()){
@@ -32,13 +32,32 @@ XPtrImage magick_image_convolve( XPtrImage input, std::string kernel, std::strin
       it->artifact("convolve:bias", std::string(bias.at(0)));
   }
   for(size_t i = 0; i < output->size(); i++)
-    output->at(i).morphology(Magick::ConvolveMorphology, Kernel(kernel.c_str()), args, iter);
+    output->at(i).morphology(Magick::ConvolveMorphology, kernel, iter);
   return output;
 }
 
 #else
-XPtrImage magick_image_convolve( XPtrImage input, std::string kernel, std::string args, size_t iter,
+XPtrImage magick_image_convolve_kernel( XPtrImage input, std::string kernel, std::string args, size_t iter,
                                  Rcpp::CharacterVector scaling, Rcpp::CharacterVector bias){
   throw std::runtime_error("ImageMagick too old. Convolve requires at least version  6.8.8");
 }
 #endif
+
+
+// [[Rcpp::export]]
+XPtrImage magick_image_convolve_matrix( XPtrImage input, Rcpp::NumericMatrix matrix, size_t iter,
+                                 Rcpp::CharacterVector scaling, Rcpp::CharacterVector bias){
+  XPtrImage output = copy(input);
+  if(scaling.length()){
+    for (Iter it = output->begin(); it != output->end(); ++it)
+      it->artifact("convolve:scale", std::string(scaling.at(0)));
+  }
+  if(bias.length()){
+    for (Iter it = output->begin(); it != output->end(); ++it)
+      it->artifact("convolve:bias", std::string(bias.at(0)));
+  }
+  for(size_t i = 0; i < output->size(); i++)
+    for(size_t j = 0; j < iter; j++)
+      output->at(i).convolve(matrix.nrow(), matrix.begin());
+  return output;
+}
