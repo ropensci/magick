@@ -79,6 +79,7 @@ image_oilpaint(logo, radius = 3)
 image_emboss(logo)
 image_implode(logo)
 image_negate(logo)
+if(magick_config()$version > "6.8.8")
 image_convolve(logo)
 }
 \seealso{

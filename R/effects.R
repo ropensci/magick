@@ -109,7 +109,7 @@ image_negate <- function(image){
 #' @param scaling string with kernel scaling. The special flag `"!"` automatically scales to full
 #' dynamic range, for example: \code{"50\%!"}
 #' @param bias output bias string, for example \code{"50\%"}
-#' @examples
+#' @examples if(magick_config()$version > "6.8.8")
 #' image_convolve(logo)
 image_convolve <- function(image, kernel = 'Gaussian', args = "", iterations = 1, scaling = NULL, bias = NULL){
   assert_image(image)
@@ -117,5 +117,6 @@ image_convolve <- function(image, kernel = 'Gaussian', args = "", iterations = 1
   args <- as.character(args)
   iterations <- as.integer(iterations)
   scaling <- as.character(scaling)
+  bias <- as.character(bias)
   magick_image_convolve(image, kernel, args, iterations, scaling, bias)
 }
