@@ -72,14 +72,6 @@ Magick::myFilterType Filter(const char * str){
   return (Magick::myFilterType) val;
 }
 
-Magick::KernelInfoType Kernel(const char * str){
-  ssize_t val = MagickCore::ParseCommandOption(
-    MagickCore::MagickKernelOptions, Magick::MagickFalse, str);
-  if(val < 0)
-    throw std::runtime_error(std::string("Invalid KernelType value: ") + str);
-  return (Magick::KernelInfoType) val;
-}
-
 #if MagickLibVersion >= 0x687
 Magick::MetricType Metric(const char * str){
   ssize_t val = MagickCore::ParseCommandOption(
@@ -121,31 +113,6 @@ Magick::Point Point(const char * str){
   return point;
 }
 #endif
-
-// [[Rcpp::export]]
-XPtrImage magick_image_convolve( XPtrImage input, const char * kernel, const char * args, size_t iter,
-                                 Rcpp::CharacterVector scaling, Rcpp::CharacterVector bias){
-  XPtrImage output = copy(input);
-  if(scaling.length()){
-#if MagickLibVersion >= 0x687
-    for (Iter it = output->begin(); it != output->end(); ++it)
-      it->artifact("convolve:scale", std::string(scaling.at(0)));
-#else
-    Rcpp::warning("ImageMagick too old to support convolve:scale (requires >= 6.8.7)");
-#endif
-  }
-  if(bias.length()){
-#if MagickLibVersion >= 0x687
-    for (Iter it = output->begin(); it != output->end(); ++it)
-      it->artifact("convolve:bias", std::string(bias.at(0)));
-#else
-    Rcpp::warning("ImageMagick too old to support convolve:bias (requires >= 6.8.7)");
-#endif
-  }
-  for(size_t i = 0; i < output->size(); i++)
-    output->at(i).morphology(Magick::ConvolveMorphology, Kernel(kernel), args, iter);
-  return output;
-}
 
 // [[Rcpp::export]]
 XPtrImage magick_image_noise( XPtrImage input, const char * noisetype){

@@ -582,6 +582,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_convolve
+XPtrImage magick_image_convolve(XPtrImage input, std::string kernel, std::string args, size_t iter, Rcpp::CharacterVector scaling, Rcpp::CharacterVector bias);
+RcppExport SEXP _magick_magick_image_convolve(SEXP inputSEXP, SEXP kernelSEXP, SEXP argsSEXP, SEXP iterSEXP, SEXP scalingSEXP, SEXP biasSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< std::string >::type kernel(kernelSEXP);
+    Rcpp::traits::input_parameter< std::string >::type args(argsSEXP);
+    Rcpp::traits::input_parameter< size_t >::type iter(iterSEXP);
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type scaling(scalingSEXP);
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type bias(biasSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_convolve(input, kernel, args, iter, scaling, bias));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_device_internal
 XPtrImage magick_device_internal(std::string bg, int width, int height, double pointsize, int res, bool clip, bool antialias, bool drawing);
 RcppExport SEXP _magick_magick_device_internal(SEXP bgSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP pointsizeSEXP, SEXP resSEXP, SEXP clipSEXP, SEXP antialiasSEXP, SEXP drawingSEXP) {
@@ -881,22 +897,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// magick_image_convolve
-XPtrImage magick_image_convolve(XPtrImage input, const char * kernel, const char * args, size_t iter, Rcpp::CharacterVector scaling, Rcpp::CharacterVector bias);
-RcppExport SEXP _magick_magick_image_convolve(SEXP inputSEXP, SEXP kernelSEXP, SEXP argsSEXP, SEXP iterSEXP, SEXP scalingSEXP, SEXP biasSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< const char * >::type kernel(kernelSEXP);
-    Rcpp::traits::input_parameter< const char * >::type args(argsSEXP);
-    Rcpp::traits::input_parameter< size_t >::type iter(iterSEXP);
-    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type scaling(scalingSEXP);
-    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type bias(biasSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_convolve(input, kernel, args, iter, scaling, bias));
-    return rcpp_result_gen;
-END_RCPP
-}
 // magick_image_noise
 XPtrImage magick_image_noise(XPtrImage input, const char * noisetype);
 RcppExport SEXP _magick_magick_image_noise(SEXP inputSEXP, SEXP noisetypeSEXP) {
@@ -1157,6 +1157,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_frame", (DL_FUNC) &_magick_magick_image_frame, 3},
     {"_magick_magick_coder_info", (DL_FUNC) &_magick_magick_coder_info, 1},
     {"_magick_magick_config_internal", (DL_FUNC) &_magick_magick_config_internal, 0},
+    {"_magick_magick_image_convolve", (DL_FUNC) &_magick_magick_image_convolve, 6},
     {"_magick_magick_device_internal", (DL_FUNC) &_magick_magick_device_internal, 8},
     {"_magick_magick_device_get", (DL_FUNC) &_magick_magick_device_get, 1},
     {"_magick_magick_device_pop", (DL_FUNC) &_magick_magick_device_pop, 0},
@@ -1182,7 +1183,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_flip", (DL_FUNC) &_magick_magick_image_flip, 1},
     {"_magick_magick_image_flop", (DL_FUNC) &_magick_magick_image_flop, 1},
     {"_magick_magick_image_crop", (DL_FUNC) &_magick_magick_image_crop, 2},
-    {"_magick_magick_image_convolve", (DL_FUNC) &_magick_magick_image_convolve, 6},
     {"_magick_magick_image_noise", (DL_FUNC) &_magick_magick_image_noise, 2},
     {"_magick_magick_image_blur", (DL_FUNC) &_magick_magick_image_blur, 3},
     {"_magick_magick_image_charcoal", (DL_FUNC) &_magick_magick_image_charcoal, 3},
