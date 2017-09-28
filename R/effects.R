@@ -106,9 +106,10 @@ image_negate <- function(image){
 #' @param kernel string with kernel type for example `"DoG"` or `"Diamond"`
 #' @param args additional kernel parameters
 #' @param iterations number of iterations
-#' @param scaling string with kernel scaling. The special flag `!`` automatically scales to full
-#' dynamic range, for example: `"50%!"`
-#' @param bias output bias string, for example `"50%"`
+#' @param scaling string with kernel scaling. The special flag `"!"` automatically scales to full
+#' dynamic range, for example: \code{"50\%!"}
+#' @param bias output bias string, for example \code{"50\%"}
+#' @examples
 #' image_convolve(logo)
 image_convolve <- function(image, kernel = 'Gaussian', args = "", iterations = 1, scaling = NULL, bias = NULL){
   assert_image(image)

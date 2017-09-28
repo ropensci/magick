@@ -58,10 +58,10 @@ image_convolve(image, kernel = "Gaussian", args = "", iterations = 1,
 
 \item{iterations}{number of iterations}
 
-\item{scaling}{string with kernel scaling. The special flag \code{!`` automatically scales to full dynamic range, for example:}"50%!"`}
+\item{scaling}{string with kernel scaling. The special flag \code{"!"} automatically scales to full
+dynamic range, for example: \code{"50\%!"}}
 
-\item{bias}{output bias string, for example \code{"50%"}
-image_convolve(logo)}
+\item{bias}{output bias string, for example \code{"50\%"}}
 }
 \description{
 High level effects applied to an entire image.
@@ -79,6 +79,7 @@ image_oilpaint(logo, radius = 3)
 image_emboss(logo)
 image_implode(logo)
 image_negate(logo)
+image_convolve(logo)
 }
 \seealso{
 Other image: \code{\link{_index_}}, \code{\link{analysis}},
