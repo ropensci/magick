@@ -127,7 +127,7 @@ image_append <- function(image, stack = FALSE){
 image_apply <- function(image, FUN, ...){
   assert_image(image)
   out <- lapply(image, FUN, ...)
-  if(!all(sapply(out, inherits, "magick-image")))
-    stop("Function %s did not return a valid image")
+  if(!all(vapply(out, inherits, logical(1), what = "magick-image")))
+    stop(sprintf("Function %s did not return a valid image.", deparse(substitute(FUN))))
   image_join(out)
 }
