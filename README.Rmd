@@ -31,7 +31,7 @@ About the underlying library:
 
 ## Hello World
 
-**Run examples in RStudio** to see a live previews of the images! If you do not use RStudio, use `image_browse` to open images. On Linux you can also use `image_display` to get an X11 preview.
+**Run examples in RStudio** to see live previews of the images! If you do not use RStudio, use `image_browse` to open images. On Linux you can also use `image_display` to get an X11 preview.
 
 ```{r eval = FALSE}
 library(magick)
