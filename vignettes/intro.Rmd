@@ -16,14 +16,6 @@ vignette: >
 ---
 
 ```{r, echo = FALSE, }
-library(knitr)
-"print.magick-image" <- function(x, ...){
-  ext <- ifelse(length(x), tolower(image_info(x[1])$format), "gif")
-  tmp <- tempfile(fileext = paste0(".", ext))
-  image_write(x, path = tmp)
-  knitr::include_graphics(tmp)
-}
-
 dev.off <- function(){
   invisible(grDevices::dev.off())
 }
@@ -261,8 +253,8 @@ The standard base methods `[` `[[`, `c()` and `length()` are used to manipulate 
 earth <- image_read("https://jeroen.github.io/images/earth.gif")
 earth <- image_scale(earth, "200")
 length(earth)
+earth
 head(image_info(earth))
-print(earth)
 
 rev(earth) %>% 
   image_flip() %>% 
@@ -526,7 +518,7 @@ The raster package also does not seem to support transparency, which perhaps mak
 
 ## OCR text extraction
 
-A recent edition to the package is to extract text from images using OCR. This requires the tesseract package:
+A recent addition to the package is to extract text from images using OCR. This requires the tesseract package:
 
 ```{r eval=FALSE}
 install.packages("tesseract")

@@ -91,7 +91,8 @@
 "print.magick-image" <- function(x, info = TRUE, ...){
   img <- x
   viewer <- getOption("viewer")
-  if(is.function(viewer) && !magick_image_dead(x) && length(img)){
+  is_knit_image <- isTRUE(getOption('knitr.in.progress'))
+  if(!is_knit_image && is.function(viewer) && !magick_image_dead(x) && length(img)){
     format <- tolower(image_info(img[1])$format)
     if(length(img) > 1 && format != "gif"){
       img <- image_animate(img, fps = 1)
@@ -106,7 +107,22 @@
   }
   if(isTRUE(info))
     print(image_info(x))
-  invisible()
+  if(is_knit_image)
+    `knit_print.magick-image`(x)
+  else
+    invisible()
+}
+
+#' @export
+#' @method knit_print magick-image
+#' @importFrom knitr knit_print
+"knit_print.magick-image" <- function(x, ...){
+  if(!length(x))
+    return(invisible())
+  ext <- ifelse(all(tolower(image_info(x)$format) == "gif"), "gif", "png")
+  tmp <- tempfile(fileext = paste0(".", ext))
+  image_write(x, path = tmp, format = ext)
+  knitr::include_graphics(tmp)
 }
 
 #' @export
