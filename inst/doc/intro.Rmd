@@ -15,15 +15,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, echo = FALSE, }
-library(knitr)
-"print.magick-image" <- function(x, ...){
-  ext <- ifelse(length(x), tolower(image_info(x[1])$format), "gif")
-  tmp <- tempfile(fileext = paste0(".", ext))
-  image_write(x, path = tmp)
-  knitr::include_graphics(tmp)
-}
-
+```{r, echo = FALSE}
 dev.off <- function(){
   invisible(grDevices::dev.off())
 }
@@ -107,7 +99,7 @@ If `path` is a filename, `image_write` returns `path` on success such that the r
 
 ### Converting formats
 
-Magick keeps the image in memory in it's original format. Specify the `format` parmeter `image_write` to convert to another format. You can also internally convert the image to another format earlier, before applying transformations. This can be useful if your original format is lossy.
+Magick keeps the image in memory in it's original format. Specify the `format` parameter `image_write` to convert to another format. You can also internally convert the image to another format earlier, before applying transformations. This can be useful if your original format is lossy.
 
 ```{r}
 tiger_png <- image_convert(tiger, "png")
@@ -160,6 +152,16 @@ The full syntax is specified in the [Magick::Geometry](http://www.imagemagick.or
 ```{r}
 # Example image
 frink <- image_read("https://jeroen.github.io/images/frink.png")
+```
+
+
+```{r echo = FALSE}
+# Reduce color depth because vignette is too large :/
+frink <- image_quantize(frink)
+```
+
+```{r}
+
 print(frink)
 
 # Add 20px left/right and 10px top/bottom
@@ -180,6 +182,9 @@ image_rotate(frink, 45)
 image_flip(frink)
 image_flop(frink)
 
+# Brightness, Saturation, Hue
+image_modulate(frink, brightness = 80, saturation = 120, hue = 90)
+
 # Paint the shirt orange
 image_fill(frink, "orange", point = "+100+200", fuzz = 30000)
 ```
@@ -199,6 +204,34 @@ image_noise(frink)
 image_charcoal(frink)
 image_oilpaint(frink)
 image_negate(frink)
+```
+
+### Kernel convolution
+
+The `image_convolve()` function applies a [kernel](https://en.wikipedia.org/wiki/Kernel_(image_processing)) over the image. Kernel convolution means that each pixel value is recalculated using the weighted neighborhood sum defined in the kernel matrix. For example lets look at this simple kernel:
+
+
+```{r}
+kern <- matrix(0, ncol = 3, nrow = 3)
+kern[1, 2] <- 0.25
+kern[2, c(1, 3)] <- 0.25
+kern[3, 2] <- 0.25
+kern
+```
+
+This kernel changes each pixel to the mean of its horizontal and vertical neighboring pixels, which results in a slight blurring effect in the right-hand image below:
+
+```{r}
+img <- image_resize(image_read('logo:'), "300x300")
+img_blurred <- image_convolve(img, kern)
+image_append(c(img, img_blurred))
+```
+
+Or use any of the [standard kernels](http://www.imagemagick.org/Usage/convolve/)
+
+```{r}
+img %>% image_convolve('Sobel') %>% image_negate()
+img %>% image_convolve('DoG:0,0,2') %>% image_negate()
 ```
 
 ### Text annotation
@@ -243,7 +276,6 @@ print(test)
 Using `magrittr` pipe syntax makes it a bit more readable
 
 ```{r}
-library(magrittr)
 image_read("https://jeroen.github.io/images/frink.png") %>%
   image_rotate(270) %>%
   image_background("blue", flatten = TRUE) %>%
@@ -262,8 +294,8 @@ The standard base methods `[` `[[`, `c()` and `length()` are used to manipulate 
 earth <- image_read("https://jeroen.github.io/images/earth.gif")
 earth <- image_scale(earth, "200")
 length(earth)
+earth
 head(image_info(earth))
-print(earth)
 
 rev(earth) %>% 
   image_flip() %>% 
@@ -527,7 +559,7 @@ The raster package also does not seem to support transparency, which perhaps mak
 
 ## OCR text extraction
 
-A recent edition to the package is to extract text from images using OCR. This requires the tesseract package:
+A recent addition to the package is to extract text from images using OCR. This requires the tesseract package:
 
 ```{r eval=FALSE}
 install.packages("tesseract")

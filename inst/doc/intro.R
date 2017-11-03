@@ -1,12 +1,4 @@
 ## ---- echo = FALSE-------------------------------------------------------
-library(knitr)
-"print.magick-image" <- function(x, ...){
-  ext <- ifelse(length(x), tolower(image_info(x[1])$format), "gif")
-  tmp <- tempfile(fileext = paste0(".", ext))
-  image_write(x, path = tmp)
-  knitr::include_graphics(tmp)
-}
-
 dev.off <- function(){
   invisible(grDevices::dev.off())
 }
@@ -36,6 +28,13 @@ image_info(tiger_png)
 ## ------------------------------------------------------------------------
 # Example image
 frink <- image_read("https://jeroen.github.io/images/frink.png")
+
+## ----echo = FALSE--------------------------------------------------------
+# Reduce color depth because vignette is too large :/
+frink <- image_quantize(frink)
+
+## ------------------------------------------------------------------------
+
 print(frink)
 
 # Add 20px left/right and 10px top/bottom
@@ -56,6 +55,9 @@ image_rotate(frink, 45)
 image_flip(frink)
 image_flop(frink)
 
+# Brightness, Saturation, Hue
+image_modulate(frink, brightness = 80, saturation = 120, hue = 90)
+
 # Paint the shirt orange
 image_fill(frink, "orange", point = "+100+200", fuzz = 30000)
 
@@ -68,6 +70,22 @@ image_noise(frink)
 image_charcoal(frink)
 image_oilpaint(frink)
 image_negate(frink)
+
+## ------------------------------------------------------------------------
+kern <- matrix(0, ncol = 3, nrow = 3)
+kern[1, 2] <- 0.25
+kern[2, c(1, 3)] <- 0.25
+kern[3, 2] <- 0.25
+kern
+
+## ------------------------------------------------------------------------
+img <- image_resize(image_read('logo:'), "300x300")
+img_blurred <- image_convolve(img, kern)
+image_append(c(img, img_blurred))
+
+## ------------------------------------------------------------------------
+img %>% image_convolve('Sobel') %>% image_negate()
+img %>% image_convolve('DoG:0,0,2') %>% image_negate()
 
 ## ------------------------------------------------------------------------
 # Add some text
@@ -94,7 +112,6 @@ test <- image_annotate(test, "This is how we combine transformations", color = "
 print(test)
 
 ## ------------------------------------------------------------------------
-library(magrittr)
 image_read("https://jeroen.github.io/images/frink.png") %>%
   image_rotate(270) %>%
   image_background("blue", flatten = TRUE) %>%
@@ -105,8 +122,8 @@ image_read("https://jeroen.github.io/images/frink.png") %>%
 earth <- image_read("https://jeroen.github.io/images/earth.gif")
 earth <- image_scale(earth, "200")
 length(earth)
+earth
 head(image_info(earth))
-print(earth)
 
 rev(earth) %>% 
   image_flip() %>% 

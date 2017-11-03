@@ -15,7 +15,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, echo = FALSE, }
+```{r, echo = FALSE}
 dev.off <- function(){
   invisible(grDevices::dev.off())
 }
@@ -152,6 +152,16 @@ The full syntax is specified in the [Magick::Geometry](http://www.imagemagick.or
 ```{r}
 # Example image
 frink <- image_read("https://jeroen.github.io/images/frink.png")
+```
+
+
+```{r echo = FALSE}
+# Reduce color depth because vignette is too large :/
+frink <- image_quantize(frink)
+```
+
+```{r}
+
 print(frink)
 
 # Add 20px left/right and 10px top/bottom
@@ -172,6 +182,9 @@ image_rotate(frink, 45)
 image_flip(frink)
 image_flop(frink)
 
+# Brightness, Saturation, Hue
+image_modulate(frink, brightness = 80, saturation = 120, hue = 90)
+
 # Paint the shirt orange
 image_fill(frink, "orange", point = "+100+200", fuzz = 30000)
 ```
@@ -191,6 +204,34 @@ image_noise(frink)
 image_charcoal(frink)
 image_oilpaint(frink)
 image_negate(frink)
+```
+
+### Kernel convolution
+
+The `image_convolve()` function applies a [kernel](https://en.wikipedia.org/wiki/Kernel_(image_processing)) over the image. Kernel convolution means that each pixel value is recalculated using the weighted neighborhood sum defined in the kernel matrix. For example lets look at this simple kernel:
+
+
+```{r}
+kern <- matrix(0, ncol = 3, nrow = 3)
+kern[1, 2] <- 0.25
+kern[2, c(1, 3)] <- 0.25
+kern[3, 2] <- 0.25
+kern
+```
+
+This kernel changes each pixel to the mean of its horizontal and vertical neighboring pixels, which results in a slight blurring effect in the right-hand image below:
+
+```{r}
+img <- image_resize(image_read('logo:'), "300x300")
+img_blurred <- image_convolve(img, kern)
+image_append(c(img, img_blurred))
+```
+
+Or use any of the [standard kernels](http://www.imagemagick.org/Usage/convolve/)
+
+```{r}
+img %>% image_convolve('Sobel') %>% image_negate()
+img %>% image_convolve('DoG:0,0,2') %>% image_negate()
 ```
 
 ### Text annotation
