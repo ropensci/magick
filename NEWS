@@ -1,5 +1,6 @@
 1.5
   - Add knit_print.magick-image() method so that images automatically appear in knitr docs
+  - Adding vignette examples for image_modulate() and image_convolve()
 
 1.4
   - Windows/OSX: update imagemagick fixes a rare png writing bug
