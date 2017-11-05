@@ -19,16 +19,6 @@ vignette: >
 dev.off <- function(){
   invisible(grDevices::dev.off())
 }
-
-cleanup_images <- function(){
-  lapply(ls(globalenv()), function(name){
-    if(name %in% c("frink"))
-      return()
-    if(inherits(get(name, globalenv()), "magick-image"))
-      rm(list = name, envir = globalenv())
-  })
-  invisible(gc())
-}
 ```
 
 The new [magick](https://cran.r-project.org/package=magick) package is an ambitious effort to modernize and simplify high-quality image processing in R. It wraps the [ImageMagick STL](https://www.imagemagick.org/Magick++/STL.html) which is perhaps the most comprehensive open-source image processing library available today.
@@ -473,11 +463,6 @@ print(img)
 ```
 
 By default `image_draw()` sets all margins to 0 and uses graphics coordinates to match image size in pixels (width x height) where (0,0) is the top left corner. Note that this means the y axis increases from top to bottom which is the opposite of typical graphics coordinates. You can override all this by passing custom `xlim`, `ylim` or `mar` values to `image_draw`.
-
-```{r, echo=FALSE, results="hide"}
-# Workaround for 'invalid colormap index' bug in old IM versions
-cleanup_images()
-```
 
 ### Animated Graphics
 
