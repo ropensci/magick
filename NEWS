@@ -1,3 +1,6 @@
+1.6
+  - image_composite() now vectorizes over both 1st and 2nd argument
+
 1.5
   - Add knit_print.magick-image() method so that images automatically appear in knitr docs
   - Adding vignette examples for image_modulate() and image_convolve()
