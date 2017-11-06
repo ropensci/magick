@@ -32,10 +32,15 @@ image_composite <- function(image, composite_image = image[1], operator = "atop"
   assert_image(composite_image)
   compose_args <- as.character(compose_args)
 
-  # vectorize over both 1st and 2nd argument
-  image_apply(composite_image, function(x){
-    magick_image_composite(image, x, offset, operator, compose_args)
-  })
+  # avoid some overhead
+  if(length(composite_image) == 1){
+    magick_image_composite(image, composite_image, offset, operator, compose_args)
+  } else {
+    # vectorize over both 1st and 2nd argument
+    image_apply(composite_image, function(x){
+      magick_image_composite(image, x, offset, operator, compose_args)
+    })
+  }
 }
 
 
