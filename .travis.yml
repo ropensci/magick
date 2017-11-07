@@ -1,6 +1,7 @@
 language: r
 cache: packages
 latex: false
+fortran: false
 r_build_args: '--no-build-vignettes'
 
 matrix:
