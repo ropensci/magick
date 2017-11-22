@@ -58,7 +58,9 @@
 image_read <- function(path, density = NULL, depth = NULL){
   density <- as.character(density)
   depth <- as.integer(depth)
-  image <- if(inherits(path, "nativeRaster") || (is.matrix(path) && is.integer(path))){
+  image <- if(isS4(path) && is(path, "Image")){
+    convert_EBImage(path)
+  } else if(inherits(path, "nativeRaster") || (is.matrix(path) && is.integer(path))){
     image_read_nativeraster(path)
   } else if (grDevices::is.raster(path)) {
     image_read_raster2(path)
@@ -117,6 +119,22 @@ image_read_raster2 <- function(x){
 image_rsvg <- function(path, width = NULL, height = NULL){
   bitmap <- rsvg::rsvg_raw(path, width = width, height = height)
   magick_image_readbitmap_raw(bitmap)
+}
+
+#EBImage BioConductor class
+convert_EBImage <- function(x){
+  if(length(dim(x@.Data)) == 2)
+    dim(x@.Data) <- c(dim(x@.Data), 1L)
+  img <- if(x@colormode == 2L){
+    image_read(x@.Data)
+  } else if(x@colormode == 0L){
+    image_convert(image_join(lapply(seq_len(dim(x@.Data)[3]), function(i){
+      image_read(x@.Data[,,i,drop = FALSE])
+    })), type = "grayscale")
+  } else {
+    stop("Unknown colormode in EBImage class")
+  }
+  image_flop(image_rotate(img, 90))
 }
 
 #' @export
