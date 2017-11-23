@@ -3,7 +3,7 @@ PKG_CXXFLAGS=$(C_VISIBILITY)
 PKG_LIBS=@libs@
 CXX_STD=CXX11
 
-all: clean
+all:
 
 clean:
 	rm -f $(SHLIB) $(OBJECTS)

@@ -7,14 +7,16 @@
 
 XPtrImage magick_image_bitmap(void * data, Magick::StorageType type, size_t slices, size_t width, size_t height){
   const char * format;
-  switch ( slices ){
-    case 1 : format = "G"; break;
-    case 2 : format = "GA"; break;
+  switch ( slices ){ //TODO: K is blackchannel, there should be a 'graychannel' instead? (G = Green!)
+    case 1 : format = "K"; break;
+    case 2 : format = "KA"; break;
     case 3 : format = "RGB"; break;
     case 4 : format = "RGBA"; break;
     default: throw std::runtime_error("Invalid number of channels (must be 4 or less)");
   }
   Frame frame(width, height, format, type , data);
+  if(slices == 1) //Workaround for using 'K' above
+    frame.channel(Magick::BlackChannel);
   frame.magick("PNG");
   XPtrImage image = create();
   image->push_back(frame);

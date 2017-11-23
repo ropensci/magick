@@ -128,9 +128,9 @@ convert_EBImage <- function(x){
   img <- if(x@colormode == 2L){
     image_read(x@.Data)
   } else if(x@colormode == 0L){
-    image_convert(image_join(lapply(seq_len(dim(x@.Data)[3]), function(i){
+    image_join(lapply(seq_len(dim(x@.Data)[3]), function(i){
       image_read(x@.Data[,,i,drop = FALSE])
-    })), type = "grayscale")
+    }))
   } else {
     stop("Unknown colormode in EBImage class")
   }
