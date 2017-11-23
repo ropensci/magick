@@ -11,7 +11,7 @@ install:
   ps: Bootstrap
 
 environment:
-  - _R_CHECK_FORCE_SUGGESTS_: false
+  _R_CHECK_FORCE_SUGGESTS_: false
 
 # Adapt as necessary starting from here
 
