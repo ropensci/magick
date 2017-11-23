@@ -195,14 +195,14 @@ Rcpp::CharacterVector magick_image_as_raster( Rcpp::RawVector data ){
 
   Rcpp::CharacterMatrix out(h,w) ;
   Rbyte* p = data.begin() ;
-  std::string buf( "#000000" ) ;
+  std::string buf( "#00000000" ) ;
 
   for(int i=0; i<h; i++){
     int k = i*w ;
     for(int j=0; j<w; j++, p+= 4, k++){
 
       if( p[3] ){
-        Rbyte red = p[0], green = p[1], blue = p[2] ;
+        Rbyte red = p[0], green = p[1], blue = p[2], alpha = p[3];
 
         buf[1] = sixteen[ red >> 4 ] ;
         buf[2] = sixteen[ red & 0x0F ] ;
@@ -210,13 +210,14 @@ Rcpp::CharacterVector magick_image_as_raster( Rcpp::RawVector data ){
         buf[4] = sixteen[ green & 0x0F ] ;
         buf[5] = sixteen[ blue >> 4 ] ;
         buf[6] = sixteen[ blue & 0x0F ] ;
+        buf[7] = sixteen[ alpha >> 4 ] ;
+        buf[8] = sixteen[ alpha & 0x0F ] ;
 
-        out[k] = Rf_mkCharLen( buf.c_str(), 7) ;
+        out[k] = Rf_mkCharLen( buf.c_str(), 9) ;
 
       } else {
         out[k] = transparent ;
       }
-
     }
   }
 
