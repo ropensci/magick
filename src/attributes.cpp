@@ -166,6 +166,7 @@ Rcpp::DataFrame magick_image_info( XPtrImage input){
   Rcpp::CharacterVector colorspace(len);
   Rcpp::IntegerVector width(len);
   Rcpp::IntegerVector height(len);
+  Rcpp::LogicalVector matte(len);
   Rcpp::IntegerVector filesize(len);
   for(int i = 0; i < len; i++){
     Frame frame = input->at(i);
@@ -174,6 +175,7 @@ Rcpp::DataFrame magick_image_info( XPtrImage input){
     format[i] = std::string(frame.magick());
     width[i] = geom.width();
     height[i] = geom.height();
+    matte[i] = frame.matte();
     filesize[i] = frame.fileSize();
   }
   return Rcpp::DataFrame::create(
@@ -181,6 +183,7 @@ Rcpp::DataFrame magick_image_info( XPtrImage input){
     Rcpp::_["width"] = width,
     Rcpp::_["height"] = height,
     Rcpp::_["colorspace"] = colorspace,
+    Rcpp::_["matte"] = matte,
     Rcpp::_["filesize"] = filesize,
     Rcpp::_["stringsAsFactors"] = false
   );
