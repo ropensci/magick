@@ -11,5 +11,5 @@ as_EBImage(image)
 }
 \description{
 Convert a Magck image to \href{https://bioconductor.org/packages/release/bioc/html/EBImage.html}{EBImage}
-class.
+class. Note that EBImage only supports multi-frame images in greyscale.
 }

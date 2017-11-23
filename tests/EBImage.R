@@ -9,6 +9,8 @@ if(require("EBImage")){
     buf1 <- image_data(img1, 'rgba')
     buf2 <- image_data(img2, 'rgba')
     stopifnot(all.equal(buf1, buf2))
+    buf3 <- image_read(buf1)[[1]]
+    stopifnot(all.equal(buf1, buf3))
 
     eb2 <- as_EBImage(img2)
     dimnames(eb2@.Data) <- dimnames(eb1@.Data)
