@@ -46,6 +46,9 @@ addons:
       - tesseract-ocr-eng
       - r-cran-rgdal
 
+bioc_packages:
+  - EBImage
+
 r_github_packages:
   - jimhester/covr
 
