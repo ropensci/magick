@@ -1,6 +1,7 @@
 1.6
   - image_composite() now vectorizes over both 1st and 2nd argument
-  - Add image_read() method for EBImage 'Image' class
+  - Support EBImage S4 Image class in image_read()
+  - Fix a bug where 1 channel image array would read as 'Green' instead of 'Gray'
 
 1.5
   - Add knit_print.magick-image() method so that images automatically appear in knitr docs
