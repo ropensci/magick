@@ -31,6 +31,7 @@ Magick::Point Point(const char * str);
 #define myGreenQ quantumGreen
 #define myBlueQ quantumBlue
 #define myAlphaQ quantumAlpha
+#define hasMatte() hasChannel(Magick::PixelChannel::AlphaPixelChannel)
 #else
 #define container list
 #define Point Geom
@@ -44,6 +45,7 @@ Magick::Point Point(const char * str);
 #define myGreenQ greenQuantum
 #define myBlueQ blueQuantum
 #define myAlphaQ alphaQuantum
+#define hasMatte() matte()
 #endif
 
 // Option parsers

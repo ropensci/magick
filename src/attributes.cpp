@@ -175,7 +175,7 @@ Rcpp::DataFrame magick_image_info( XPtrImage input){
     format[i] = std::string(frame.magick());
     width[i] = geom.width();
     height[i] = geom.height();
-    matte[i] = frame.matte();
+    matte[i] = frame.hasMatte();
     filesize[i] = frame.fileSize();
   }
   return Rcpp::DataFrame::create(
