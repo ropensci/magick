@@ -19,7 +19,7 @@ image_write(image, path = NULL, format = NULL, quality = NULL,
 image_convert(image, format = NULL, type = NULL, colorspace = NULL,
   depth = NULL, antialias = NULL)
 
-image_data(image, channels = "rgba")
+image_data(image, channels = NULL)
 
 image_display(image, animate = TRUE)
 
@@ -53,8 +53,9 @@ for example \code{"gray"}, \code{"rgb"} or \code{"cmyk"}}
 
 \item{antialias}{enable anti-aliasing for text and strokes}
 
-\item{channels}{string with image channel(s) to dump, example \code{"rgb"}, \code{"rgba"},
-\code{"cmyk"},\code{"gray"}, or \code{"ycbcr"}}
+\item{channels}{string with image channel(s) for example \code{"rgb"}, \code{"rgba"},
+\code{"cmyk"},\code{"gray"}, or \code{"ycbcr"}. Default is either \code{"gray"}, \code{"rgb"} or \code{"rgba"}
+depending on the image}
 
 \item{animate}{support animations in the X11 display}
 

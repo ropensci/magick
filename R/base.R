@@ -19,13 +19,7 @@
 #' @export
 "[[.magick-image" <- function(x, i){
   assert_image(x)
-  image <- x[i]
-  info <- image_info(image)
-  if(tolower(info$colorspace) == "gray"){
-    image_write_frame(image, format = "gray")
-  } else {
-    image_write_frame(image, format = "rgba")
-  }
+  image_data(x[i])
 }
 
 #' @export

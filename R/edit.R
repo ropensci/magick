@@ -201,12 +201,24 @@ image_write_frame <- function(image, format = "rgba", i = 1){
 
 #' @export
 #' @rdname editing
-#' @param channels string with image channel(s) to dump, example `"rgb"`, `"rgba"`,
-#' `"cmyk"`,`"gray"`, or `"ycbcr"`
-image_data <- function(image, channels = 'rgba'){
-  stopifnot(length(channels) && is.character(channels))
+#' @param channels string with image channel(s) for example `"rgb"`, `"rgba"`,
+#' `"cmyk"`,`"gray"`, or `"ycbcr"`. Default is either `"gray"`, `"rgb"` or `"rgba"`
+#' depending on the image
+image_data <- function(image, channels = NULL){
+  if(length(image) > 1)
+    image <- image[1]
+  info <- image_info(image)
+  if(!length(channels)){
+    channels <- if(tolower(info$colorspace) == "gray"){
+      "gray"
+    } else if(isTRUE(info$matte)){
+      "rgba"
+    } else {
+      "rgb"
+    }
+  }
   if(!grepl("a$", channels)) #output has no transparency channel
-    image <- image_flatten(image[1])
+    image <- image_flatten(image)
   image_write_frame(image, format = channels)
 }
 
