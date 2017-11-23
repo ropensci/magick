@@ -5,6 +5,7 @@
 \alias{image_read}
 \alias{image_write}
 \alias{image_convert}
+\alias{image_data}
 \alias{image_display}
 \alias{image_browse}
 \alias{image_join}
@@ -17,6 +18,8 @@ image_write(image, path = NULL, format = NULL, quality = NULL,
 
 image_convert(image, format = NULL, type = NULL, colorspace = NULL,
   depth = NULL, antialias = NULL)
+
+image_data(image, channels = "rgba")
 
 image_display(image, animate = TRUE)
 
@@ -49,6 +52,9 @@ classification for example \code{grayscale} to convert image to black/white}
 for example \code{"gray"}, \code{"rgb"} or \code{"cmyk"}}
 
 \item{antialias}{enable anti-aliasing for text and strokes}
+
+\item{channels}{string with image channel(s) to dump, example \code{"rgb"}, \code{"rgba"},
+\code{"cmyk"},\code{"gray"}, or \code{"ycbcr"}}
 
 \item{animate}{support animations in the X11 display}
 

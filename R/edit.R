@@ -58,7 +58,7 @@
 image_read <- function(path, density = NULL, depth = NULL){
   density <- as.character(density)
   depth <- as.integer(depth)
-  image <- if(isS4(path) && is(path, "Image")){
+  image <- if(isS4(path) && methods::is(path, "Image")){
     convert_EBImage(path)
   } else if(inherits(path, "nativeRaster") || (is.matrix(path) && is.integer(path))){
     image_read_nativeraster(path)
@@ -184,9 +184,30 @@ image_convert <- function(image, format = NULL, type = NULL, colorspace = NULL, 
   magick_image_format(image, toupper(format), type, colorspace, depth, antialias)
 }
 
-image_write_frame <- function(image, format = "rgba"){
+image_write_frame <- function(image, format = "rgba", i = 1){
   assert_image(image)
-  magick_image_write_frame(image, format)
+  image <- image[i]
+  info <- image_info(image)
+  bitmap <- magick_image_write_frame(image, format = format)
+  if(!length(bitmap))
+    stop(sprintf("Unsupported raw format: '%s'", format))
+  if(length(bitmap) %% (info$width * info$height))
+    stop(sprintf("Dimensions do not add up, '%s' may not be a raw format", format))
+  channels <- length(bitmap) / (info$width * info$height)
+  dim(bitmap) <- c(channels, info$width, info$height)
+  class(bitmap) <- c("bitmap", format)
+  bitmap
+}
+
+#' @export
+#' @rdname editing
+#' @param channels string with image channel(s) to dump, example `"rgb"`, `"rgba"`,
+#' `"cmyk"`,`"gray"`, or `"ycbcr"`
+image_data <- function(image, channels = 'rgba'){
+  stopifnot(length(channels) && is.character(channels))
+  if(!grepl("a$", channels)) #output has no transparency channel
+    image <- image_flatten(image[1])
+  image_write_frame(image, format = channels)
 }
 
 #' @export

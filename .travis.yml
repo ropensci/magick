@@ -45,6 +45,7 @@ addons:
       - libleptonica-dev
       - tesseract-ocr-eng
       - r-cran-rgdal
+      - fftw-dev
 
 bioc_packages:
   - EBImage

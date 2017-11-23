@@ -22,15 +22,10 @@
   image <- x[i]
   info <- image_info(image)
   if(tolower(info$colorspace) == "gray"){
-    bitmap <- image_write_frame(image, format = "gray")
-    dim(bitmap) <- c(1, info$width, info$height)
-    class(bitmap) <- c("bitmap", "grey")
+    image_write_frame(image, format = "gray")
   } else {
-    bitmap <- image_write_frame(image, format = "rgba")
-    dim(bitmap) <- c(4, info$width, info$height)
-    class(bitmap) <- c("bitmap", "rgba")
+    image_write_frame(image, format = "rgba")
   }
-  return(bitmap)
 }
 
 #' @export
@@ -129,9 +124,7 @@
 #' @importFrom grDevices as.raster
 "as.raster.magick-image" <- function(image, ...){
   assert_image(image)
-  info <- image_info(image)
   bitmap <- image_write_frame(image, format = "rgba")
-  dim(bitmap) <- c(4, info$width, info$height)
   magick_image_as_raster(bitmap)
 }
 
