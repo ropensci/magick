@@ -129,9 +129,11 @@
 #' @importFrom grDevices as.raster
 "as.raster.magick-image" <- function(image, ...){
   assert_image(image)
-  magick_image_as_raster(image[[1]])
+  info <- image_info(image)
+  bitmap <- image_write_frame(image, format = "rgba")
+  dim(bitmap) <- c(4, info$width, info$height)
+  magick_image_as_raster(bitmap)
 }
-
 
 #' @export
 #' @importFrom graphics plot
