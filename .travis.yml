@@ -16,6 +16,7 @@ matrix:
             - librsvg2-dev
             - libwebp-dev
             - libpoppler-cpp-dev
+            - libfftw3-dev
     - os: linux
       dist: trusty
       r_check_args: '--ignore-vignettes'

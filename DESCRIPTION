@@ -25,6 +25,7 @@ Imports:
     curl
 LinkingTo: Rcpp
 Suggests:
+    methods,
     rmarkdown,
     rsvg,
     webp,
