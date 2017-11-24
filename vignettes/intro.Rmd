@@ -330,15 +330,13 @@ image_flatten(img, 'Minus')
 Appending means simply putting the frames next to each other:
 
 ```{r}
-left_to_right <- image_append(image_scale(img, "x200"))
-image_background(left_to_right, "white", flatten = TRUE)
+image_append(image_scale(img, "x200"))
 ```
 
 Use `stack = TRUE` to position them on top of each other:
 
 ```{r}
-top_to_bottom <- image_append(image_scale(img, "100"), stack = TRUE)
-image_background(top_to_bottom, "white", flatten = TRUE)
+image_append(image_scale(img, "100"), stack = TRUE)
 ```
 
 Composing allows for combining two images on a specific position:
