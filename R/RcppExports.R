@@ -349,6 +349,10 @@ magick_image_page <- function(input, pagesize, density) {
     .Call('_magick_magick_image_page', PACKAGE = 'magick', input, pagesize, density)
 }
 
+magick_image_repage <- function(input) {
+    .Call('_magick_magick_image_repage', PACKAGE = 'magick', input)
+}
+
 magick_image_despeckle <- function(input, times) {
     .Call('_magick_magick_image_despeckle', PACKAGE = 'magick', input, times)
 }

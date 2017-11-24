@@ -13,6 +13,7 @@
 \alias{image_flop}
 \alias{image_deskew}
 \alias{image_page}
+\alias{image_repage}
 \title{Image Transform}
 \usage{
 image_trim(image)
@@ -36,6 +37,8 @@ image_flop(image)
 image_deskew(image, threshold = 40)
 
 image_page(image, pagesize = NULL, density = NULL)
+
+image_repage(image)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}

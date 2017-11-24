@@ -27,6 +27,7 @@ XPtrImage magick_image_mosaic( XPtrImage input, Rcpp::CharacterVector composite)
   }
   Frame frame;
   mosaicImages( &frame, image->begin(), image->end());
+  frame.myRepage();
   XPtrImage out = create();
   out->push_back(frame);
   return out;
@@ -41,6 +42,7 @@ XPtrImage magick_image_flatten( XPtrImage input, Rcpp::CharacterVector composite
     for_each ( image->begin(), image->end(), Magick::composeImage(Composite(std::string(composite[0]).c_str())));
   }
   flattenImages( &frame, image->begin(), image->end());
+  frame.myRepage();
   XPtrImage out = create();
   out->push_back(frame);
   return out;
@@ -50,6 +52,7 @@ XPtrImage magick_image_flatten( XPtrImage input, Rcpp::CharacterVector composite
 XPtrImage magick_image_average( XPtrImage image){
   Frame frame;
   averageImages( &frame, image->begin(), image->end());
+  frame.myRepage();
   XPtrImage out = create();
   out->push_back(frame);
   return out;
@@ -59,10 +62,10 @@ XPtrImage magick_image_average( XPtrImage image){
 XPtrImage magick_image_append( XPtrImage image, bool stack){
   Frame frame;
   appendImages( &frame, image->begin(), image->end(), stack);
+  frame.myRepage();
   Image *out = new Image;
   out->push_back(frame);
   XPtrImage ptr(out);
   ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");
   return ptr;
 }
-

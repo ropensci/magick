@@ -17,6 +17,13 @@ XPtrImage create ();
 XPtrImage create (int len);
 XPtrImage copy (XPtrImage image);
 
+// Repage was introduced in 6.9.0-7 https://github.com/ImageMagick/ImageMagick/commit/919cb01
+#if MagickLibVersion >= 0x691
+#define myRepage() repage()
+#else
+#define myRepage() page(Magick::Geometry())
+#endif
+
 //IM 6~7 compatiblity
 #if MagickLibVersion >= 0x700
 Magick::Point Point(const char * str);

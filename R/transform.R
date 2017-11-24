@@ -154,3 +154,9 @@ image_page <- function(image, pagesize = NULL, density = NULL){
   density <- as.character(density)
   magick_image_page(image, pagesize, density)
 }
+
+#' @export
+#' @rdname transform
+image_repage <- function(image){
+  magick_image_repage(image)
+}

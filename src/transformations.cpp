@@ -231,6 +231,13 @@ XPtrImage magick_image_page( XPtrImage input, Rcpp::CharacterVector pagesize, Rc
 }
 
 // [[Rcpp::export]]
+XPtrImage magick_image_repage( XPtrImage input){
+  XPtrImage output = copy(input);
+  for_each (output->begin(), output->end(), Magick::pageImage(Magick::Geometry()));
+  return output;
+}
+
+// [[Rcpp::export]]
 XPtrImage magick_image_despeckle( XPtrImage input, int times){
   XPtrImage output = copy(input);
   for (int i=0; i < times; i++) {

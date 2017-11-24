@@ -1,4 +1,6 @@
 1.6
+  - Automatically repage transformations that may modify image size
+  - Added image_repage() to be consistent with command line tool
   - image_composite() now vectorizes over both 1st and 2nd argument
   - Support EBImage S4 Image class in image_read() and as_EBImage()
   - Fix a bug where 1 channel image array would read as 'Green' instead of 'Gray'

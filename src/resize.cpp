@@ -53,6 +53,7 @@ XPtrImage magick_image_chop( XPtrImage input, const char * geometry){
 XPtrImage magick_image_trim( XPtrImage input){
   XPtrImage output = copy(input);
   for_each ( output->begin(), output->end(), Magick::trimImage());
+  for_each ( output->begin(), output->end(), Magick::pageImage(Magick::Geometry()));
   return output;
 }
 
