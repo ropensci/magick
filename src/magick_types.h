@@ -10,7 +10,7 @@ typedef std::vector<Frame> Image;
 //void finalize_frame(Frame *frame);
 
 void finalize_image(Image *image);
-typedef Rcpp::XPtr<Image, Rcpp::PreserveStorage, finalize_image, true> XPtrImage;
+typedef Rcpp::XPtr<Image, Rcpp::PreserveStorage, finalize_image, false> XPtrImage;
 typedef Image::iterator Iter;
 
 XPtrImage create ();

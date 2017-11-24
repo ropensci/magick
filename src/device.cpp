@@ -364,9 +364,9 @@ static void image_raster(unsigned int *raster, int w, int h,
 static void image_close(pDevDesc dd) {
   BEGIN_RCPP
   dirty = NULL;
-  MagickDevice * device = (MagickDevice *) dd->deviceSpecific;
-  if(device && device->ptr && device->ptr->size() && dd->canClip) //Reset clipping area, R doesn't do that
+  if(dd->canClip) //Reset clipping area, R doesn't do that
     image_clip(dd->left, dd->right, dd->bottom, dd->top, dd);
+  MagickDevice * device = (MagickDevice *) dd->deviceSpecific;
   delete device;
   VOID_END_RCPP
 }
