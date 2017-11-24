@@ -196,8 +196,8 @@ image_write_frame <- function(image, format = "rgba", i = 1){
 image_data <- function(image, channels = NULL){
   if(length(image) > 1)
     image <- image[1]
-  info <- image_info(image)
-  if(!length(channels)){
+  if(!length(channels) || !nchar(channels)){
+    info <- image_info(image)
     channels <- if(tolower(info$colorspace) == "gray"){
       "gray"
     } else if(isTRUE(info$matte)){
