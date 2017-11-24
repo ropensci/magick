@@ -214,6 +214,15 @@ static void image_clip(double left, double right, double bottom, double top, pDe
   MagickDevice * dev = getdev(dd);
   if(same(dev->clipleft, left) && same(dev->clipright, right) && same(dev->clipbottom, bottom) && same(dev->cliptop, top))
     return;
+
+  //This seems to correspond to other devices
+  left = ceil(left);
+  right = floor(right);
+  top = ceil(top);
+  bottom = floor(bottom);
+
+  //Rprintf("Clipping at %f-%f x %fx%f\n", left, right, top, bottom);
+
   dev->clipleft = left;
   dev->clipright = right;
   dev->clipbottom = bottom;
@@ -221,11 +230,11 @@ static void image_clip(double left, double right, double bottom, double top, pDe
 
   BEGIN_RCPP
   pathlist path;
-  path.push_back(Magick::PathMovetoAbs(Magick::Coordinate(left + 1, top + 1)));
-  path.push_back(Magick::PathLinetoAbs(Magick::Coordinate(right - 1, top + 1)));
-  path.push_back(Magick::PathLinetoAbs(Magick::Coordinate(right - 1, bottom - 1)));
-  path.push_back(Magick::PathLinetoAbs(Magick::Coordinate(left + 1, bottom - 1)));
-  path.push_back(Magick::PathLinetoAbs(Magick::Coordinate(left + 1, top + 1)));
+  path.push_back(Magick::PathMovetoAbs(Magick::Coordinate(left, top)));
+  path.push_back(Magick::PathLinetoAbs(Magick::Coordinate(right, top)));
+  path.push_back(Magick::PathLinetoAbs(Magick::Coordinate(right, bottom)));
+  path.push_back(Magick::PathLinetoAbs(Magick::Coordinate(left, bottom)));
+  path.push_back(Magick::PathLinetoAbs(Magick::Coordinate(left, top)));
 
   drawlist draw;
   std::string id("mypath");
