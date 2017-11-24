@@ -3,16 +3,6 @@ dev.off <- function(){
   invisible(grDevices::dev.off())
 }
 
-cleanup_images <- function(){
-  lapply(ls(globalenv()), function(name){
-    if(name %in% c("frink"))
-      return()
-    if(inherits(get(name, globalenv()), "magick-image"))
-      rm(list = name, envir = globalenv())
-  })
-  invisible(gc())
-}
-
 ## ------------------------------------------------------------------------
 str(magick::magick_config())
 
@@ -149,12 +139,10 @@ image_flatten(img, 'Modulate')
 image_flatten(img, 'Minus')
 
 ## ------------------------------------------------------------------------
-left_to_right <- image_append(image_scale(img, "x200"))
-image_background(left_to_right, "white", flatten = TRUE)
+image_append(image_scale(img, "x200"))
 
 ## ------------------------------------------------------------------------
-top_to_bottom <- image_append(image_scale(img, "100"), stack = TRUE)
-image_background(top_to_bottom, "white", flatten = TRUE)
+image_append(image_scale(img, "100"), stack = TRUE)
 
 ## ------------------------------------------------------------------------
 bigdatafrink <- image_scale(image_rotate(image_background(frink, "none"), 300), "x200")
@@ -226,10 +214,6 @@ dev.off()
 ## ------------------------------------------------------------------------
 print(img)
 
-## ---- echo=FALSE, results="hide"-----------------------------------------
-# Workaround for 'invalid colormap index' bug in old IM versions
-cleanup_images()
-
 ## ------------------------------------------------------------------------
 library(gapminder)
 library(ggplot2)
@@ -242,7 +226,6 @@ out <- lapply(datalist, function(data){
   print(p)
 })
 dev.off()
-img <- image_background(image_trim(img), 'white')
 animation <- image_animate(img, fps = 2)
 print(animation)
 
