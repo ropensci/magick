@@ -8,6 +8,7 @@
 //External R pointer finalizer
 void finalize_image( Image *image ){
   delete image;
+  image = NULL;
 }
 
 // [[Rcpp::export]]
