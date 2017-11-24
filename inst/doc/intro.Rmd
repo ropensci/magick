@@ -60,6 +60,7 @@ To install from source on OS-X you need `imagemagick@6` from homebrew.
 
 ```
 brew reinstall imagemagick@6 --with-fontconfig --with-librsvg
+brew link --force imagemagick@6
 ```
 
 The default imagemagick configuration on homebrew disables a bunch of features. It is recommended to brew with at least `--with-fontconfig` and `--with-librsvg` to support high quality font / svg rendering (the CRAN OSX binary package enables these as well).

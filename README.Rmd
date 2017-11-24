@@ -139,6 +139,7 @@ On __OS-X__ use [imagemagick@6](https://github.com/Homebrew/homebrew-core/blob/m
 
 ```
 brew reinstall imagemagick@6 --with-fontconfig --with-librsvg 
+brew link --force imagemagick@6
 ```
 
 There is also a fork of imagemagick called graphicsmagick, but it doesn't work as well. I highly recommend you build with imagemagick.

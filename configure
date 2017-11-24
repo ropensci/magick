@@ -79,6 +79,7 @@ if [ $? -ne 0 ]; then
   echo "On MacOS it is recommended to use homebrew and install ImageMagick-6:"
   echo "   brew remove imagemagick"
   echo "   brew reinstall imagemagick@6 --with-fontconfig --with-librsvg"
+  echo "   brew link --force imagemagick@6"
   echo "These features are required for high quality font/svg rendering."
   echo "If $PKG_CONFIG_NAME is already installed, check that 'pkg-config' is in your"
   echo "PATH and PKG_CONFIG_PATH contains a $PKG_CONFIG_NAME.pc file. If pkg-config"
