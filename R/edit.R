@@ -185,18 +185,7 @@ image_convert <- function(image, format = NULL, type = NULL, colorspace = NULL, 
 }
 
 image_write_frame <- function(image, format = "rgba", i = 1){
-  assert_image(image)
-  image <- image[i]
-  info <- image_info(image)
-  bitmap <- magick_image_write_frame(image, format = format)
-  if(!length(bitmap))
-    stop(sprintf("Unsupported raw format: '%s'", format))
-  if(length(bitmap) %% (info$width * info$height))
-    stop(sprintf("Dimensions do not add up, '%s' may not be a raw format", format))
-  channels <- length(bitmap) / (info$width * info$height)
-  dim(bitmap) <- c(channels, info$width, info$height)
-  class(bitmap) <- c("bitmap", format)
-  bitmap
+  magick_image_write_frame(image, format = format, i = i)
 }
 
 #' @export

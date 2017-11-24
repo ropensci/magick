@@ -249,8 +249,8 @@ magick_image_write <- function(input, format, quality, depth, density, comment) 
     .Call('_magick_magick_image_write', PACKAGE = 'magick', input, format, quality, depth, density, comment)
 }
 
-magick_image_write_frame <- function(input, format) {
-    .Call('_magick_magick_image_write_frame', PACKAGE = 'magick', input, format)
+magick_image_write_frame <- function(input, format, i = 1L) {
+    .Call('_magick_magick_image_write_frame', PACKAGE = 'magick', input, format, i)
 }
 
 magick_image_display <- function(image, animate) {

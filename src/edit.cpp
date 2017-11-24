@@ -131,13 +131,24 @@ Rcpp::RawVector magick_image_write( XPtrImage input, Rcpp::CharacterVector forma
 }
 
 // [[Rcpp::export]]
-Rcpp::RawVector magick_image_write_frame(XPtrImage input, const char * format){
+Rcpp::RawVector magick_image_write_frame(XPtrImage input, const char * format, size_t i = 1){
   if(input->size() < 1)
     throw std::runtime_error("Image must have at least 1 frame to write a bitmap");
+  Frame frame = input->at(i-1); //zero indexing!
+  Magick::Geometry size(frame.size());
+  size_t width = size.width();
+  size_t height = size.height();
   Magick::Blob output;
-  input->front().write(&output, format, 8L);
+  frame.write(&output, format, 8L);
+  if(output.length() == 0)
+    throw std::runtime_error("Unsupported raw format: " + std::string(format));
+  if(output.length() % (width * height))
+    throw std::runtime_error("Dimensions do not add up, '" + std::string(format) + "' may not be a raw format");
+  size_t slices = output.length() / (width * height);
   Rcpp::RawVector res(output.length());
   memcpy(res.begin(), output.data(), output.length());
+  res.attr("class") = Rcpp::CharacterVector::create("bitmap", format);
+  res.attr("dim") = Rcpp::NumericVector::create(slices, width, height);
   return res;
 }
 

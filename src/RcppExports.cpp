@@ -760,14 +760,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_write_frame
-Rcpp::RawVector magick_image_write_frame(XPtrImage input, const char * format);
-RcppExport SEXP _magick_magick_image_write_frame(SEXP inputSEXP, SEXP formatSEXP) {
+Rcpp::RawVector magick_image_write_frame(XPtrImage input, const char * format, size_t i);
+RcppExport SEXP _magick_magick_image_write_frame(SEXP inputSEXP, SEXP formatSEXP, SEXP iSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< const char * >::type format(formatSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_write_frame(input, format));
+    Rcpp::traits::input_parameter< size_t >::type i(iSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_write_frame(input, format, i));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1185,7 +1186,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_readpath", (DL_FUNC) &_magick_magick_image_readpath, 3},
     {"_magick_magick_image_read_list", (DL_FUNC) &_magick_magick_image_read_list, 1},
     {"_magick_magick_image_write", (DL_FUNC) &_magick_magick_image_write, 6},
-    {"_magick_magick_image_write_frame", (DL_FUNC) &_magick_magick_image_write_frame, 2},
+    {"_magick_magick_image_write_frame", (DL_FUNC) &_magick_magick_image_write_frame, 3},
     {"_magick_magick_image_display", (DL_FUNC) &_magick_magick_image_display, 2},
     {"_magick_magick_image_fft", (DL_FUNC) &_magick_magick_image_fft, 1},
     {"_magick_magick_image_montage", (DL_FUNC) &_magick_magick_image_montage, 1},
