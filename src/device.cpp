@@ -210,16 +210,16 @@ static void image_clip(double left, double right, double bottom, double top, pDe
   if(!dd->canClip)
     return;
 
-  //avoid duplications
-  MagickDevice * dev = getdev(dd);
-  if(same(dev->clipleft, left) && same(dev->clipright, right) && same(dev->clipbottom, bottom) && same(dev->cliptop, top))
-    return;
-
   //This seems to correspond to other devices
   left = ceil(left);
   right = floor(right);
   top = ceil(top);
   bottom = floor(bottom);
+
+  //avoid duplications
+  MagickDevice * dev = getdev(dd);
+  if(same(dev->clipleft, left) && same(dev->clipright, right) && same(dev->clipbottom, bottom) && same(dev->cliptop, top))
+    return;
 
   //Rprintf("Clipping at %f-%f x %fx%f\n", left, right, top, bottom);
 
