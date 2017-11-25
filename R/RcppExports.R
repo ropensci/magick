@@ -233,11 +233,11 @@ magick_image_readbitmap_double <- function(x) {
     .Call('_magick_magick_image_readbitmap_double', PACKAGE = 'magick', x)
 }
 
-magick_image_readbin <- function(x, density, depth, strip) {
+magick_image_readbin <- function(x, density, depth, strip = FALSE) {
     .Call('_magick_magick_image_readbin', PACKAGE = 'magick', x, density, depth, strip)
 }
 
-magick_image_readpath <- function(paths, density, depth, strip) {
+magick_image_readpath <- function(paths, density, depth, strip = FALSE) {
     .Call('_magick_magick_image_readpath', PACKAGE = 'magick', paths, density, depth, strip)
 }
 
