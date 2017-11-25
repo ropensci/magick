@@ -7,7 +7,7 @@
   - Include alpha channel in as.raster() for magick images
   - Export image_data() function to export raw bitmap data
   - Round the clipping coordinates to fix problem with 1px edge around graphics
-  - Reset clipping area when magick graphics device is closed
+  - Reset clipping area when magick graphics device is closed or starts new page
 
 1.5
   - Add knit_print.magick-image() method so that images automatically appear in knitr docs
