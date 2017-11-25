@@ -19,7 +19,6 @@ matrix:
             - libfftw3-dev
     - os: linux
       dist: trusty
-      r_check_args: '--ignore-vignettes'
     - os: osx
       osx_image: xcode9.1
       brew_packages: imagemagick
@@ -37,6 +36,8 @@ matrix:
 
 addons:
   apt:
+    sources:
+      - sourceline: 'ppa:opencpu/imagemagick'
     packages:
       - libmagick++-dev
       - librsvg2-dev
