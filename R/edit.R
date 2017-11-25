@@ -28,6 +28,7 @@
 #' @param path a file, url, or raster object or bitmap array
 #' @param image magick image object returned by [image_read()] or [image_graph()]
 #' @param density resolution to render pdf or svg
+#' @param strip drop image comments and metadata
 #' @examples
 #' # Download image from the web
 #' frink <- image_read("https://jeroen.github.io/images/frink.png")
@@ -55,7 +56,7 @@
 #'
 #' curl::curl_download("http://jeroen.github.io/images/tiger.svg", "tiger.svg")
 #' image_read(rsvg::rsvg("tiger.svg"))
-image_read <- function(path, density = NULL, depth = NULL){
+image_read <- function(path, density = NULL, depth = NULL, strip = FALSE){
   density <- as.character(density)
   depth <- as.integer(depth)
   image <- if(isS4(path) && methods::is(path, "Image")){
@@ -69,10 +70,10 @@ image_read <- function(path, density = NULL, depth = NULL){
   } else if(is.array(path)){
     image_readbitmap(path)
   } else if(is.raw(path)) {
-    magick_image_readbin(path, density, depth)
+    magick_image_readbin(path, density, depth, strip)
   } else if(is.character(path) && all(nchar(path))){
     path <- vapply(path, replace_url, character(1))
-    magick_image_readpath(path, density, depth)
+    magick_image_readpath(path, density, depth, strip)
   } else {
     stop("path must be URL, filename or raw vector")
   }
@@ -226,6 +227,13 @@ image_browse <- function(image, browser = getOption("browser")){
   tmp <- tempfile(fileext = paste0(".", ext))
   image_write(image, path = tmp)
   utils::browseURL(tmp)
+}
+
+#' @export
+#' @rdname editing
+image_strip <- function(image){
+  assert_image(image)
+  magick_image_strip(image)
 }
 
 #' @export

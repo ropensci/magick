@@ -60,7 +60,7 @@ XPtrImage magick_image_readbitmap_double(Rcpp::NumericVector x){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_readbin(Rcpp::RawVector x, Rcpp::CharacterVector density, Rcpp::IntegerVector depth){
+XPtrImage magick_image_readbin(Rcpp::RawVector x, Rcpp::CharacterVector density, Rcpp::IntegerVector depth, bool strip = FALSE){
   XPtrImage image = create();
 #if MagickLibVersion >= 0x689
   Magick::ReadOptions opts = Magick::ReadOptions();
@@ -72,11 +72,13 @@ XPtrImage magick_image_readbin(Rcpp::RawVector x, Rcpp::CharacterVector density,
 #else
   Magick::readImages(image.get(), Magick::Blob(x.begin(), x.length()));
 #endif
+  if(strip)
+    for_each (image->begin(), image->end(), Magick::stripImage());
   return image;
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_readpath(Rcpp::CharacterVector paths, Rcpp::CharacterVector density, Rcpp::IntegerVector depth){
+XPtrImage magick_image_readpath(Rcpp::CharacterVector paths, Rcpp::CharacterVector density, Rcpp::IntegerVector depth, bool strip = FALSE){
   XPtrImage image = create();
 #if MagickLibVersion >= 0x689
   Magick::ReadOptions opts = Magick::ReadOptions();
@@ -90,6 +92,8 @@ XPtrImage magick_image_readpath(Rcpp::CharacterVector paths, Rcpp::CharacterVect
   for(int i = 0; i < paths.size(); i++)
     Magick::readImages(image.get(), std::string(paths[i]));
 #endif
+  if(strip)
+    for_each (image->begin(), image->end(), Magick::stripImage());
   return image;
 }
 
@@ -182,4 +186,11 @@ XPtrImage magick_image_montage( XPtrImage image){
   Magick::Montage montageOpts = Magick::Montage();
   montageImages(out.get(), image->begin(), image->end(), montageOpts);
   return out;
+}
+
+// [[Rcpp::export]]
+XPtrImage magick_image_strip( XPtrImage input){
+  XPtrImage output = copy(input);
+  for_each (output->begin(), output->end(), Magick::stripImage());
+  return output;
 }

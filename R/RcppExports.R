@@ -233,12 +233,12 @@ magick_image_readbitmap_double <- function(x) {
     .Call('_magick_magick_image_readbitmap_double', PACKAGE = 'magick', x)
 }
 
-magick_image_readbin <- function(x, density, depth) {
-    .Call('_magick_magick_image_readbin', PACKAGE = 'magick', x, density, depth)
+magick_image_readbin <- function(x, density, depth, strip) {
+    .Call('_magick_magick_image_readbin', PACKAGE = 'magick', x, density, depth, strip)
 }
 
-magick_image_readpath <- function(paths, density, depth) {
-    .Call('_magick_magick_image_readpath', PACKAGE = 'magick', paths, density, depth)
+magick_image_readpath <- function(paths, density, depth, strip) {
+    .Call('_magick_magick_image_readpath', PACKAGE = 'magick', paths, density, depth, strip)
 }
 
 magick_image_read_list <- function(list) {
@@ -263,6 +263,10 @@ magick_image_fft <- function(image) {
 
 magick_image_montage <- function(image) {
     .Call('_magick_magick_image_montage', PACKAGE = 'magick', image)
+}
+
+magick_image_strip <- function(input) {
+    .Call('_magick_magick_image_strip', PACKAGE = 'magick', input)
 }
 
 magick_image_scale <- function(input, geometry) {

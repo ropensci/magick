@@ -707,28 +707,30 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_readbin
-XPtrImage magick_image_readbin(Rcpp::RawVector x, Rcpp::CharacterVector density, Rcpp::IntegerVector depth);
-RcppExport SEXP _magick_magick_image_readbin(SEXP xSEXP, SEXP densitySEXP, SEXP depthSEXP) {
+XPtrImage magick_image_readbin(Rcpp::RawVector x, Rcpp::CharacterVector density, Rcpp::IntegerVector depth, bool strip);
+RcppExport SEXP _magick_magick_image_readbin(SEXP xSEXP, SEXP densitySEXP, SEXP depthSEXP, SEXP stripSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::RawVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type density(densitySEXP);
     Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type depth(depthSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_readbin(x, density, depth));
+    Rcpp::traits::input_parameter< bool >::type strip(stripSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_readbin(x, density, depth, strip));
     return rcpp_result_gen;
 END_RCPP
 }
 // magick_image_readpath
-XPtrImage magick_image_readpath(Rcpp::CharacterVector paths, Rcpp::CharacterVector density, Rcpp::IntegerVector depth);
-RcppExport SEXP _magick_magick_image_readpath(SEXP pathsSEXP, SEXP densitySEXP, SEXP depthSEXP) {
+XPtrImage magick_image_readpath(Rcpp::CharacterVector paths, Rcpp::CharacterVector density, Rcpp::IntegerVector depth, bool strip);
+RcppExport SEXP _magick_magick_image_readpath(SEXP pathsSEXP, SEXP densitySEXP, SEXP depthSEXP, SEXP stripSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type paths(pathsSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type density(densitySEXP);
     Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type depth(depthSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_readpath(paths, density, depth));
+    Rcpp::traits::input_parameter< bool >::type strip(stripSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_readpath(paths, density, depth, strip));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -803,6 +805,17 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type image(imageSEXP);
     rcpp_result_gen = Rcpp::wrap(magick_image_montage(image));
+    return rcpp_result_gen;
+END_RCPP
+}
+// magick_image_strip
+XPtrImage magick_image_strip(XPtrImage input);
+RcppExport SEXP _magick_magick_image_strip(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_strip(input));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1193,14 +1206,15 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_readbitmap_raster2", (DL_FUNC) &_magick_magick_image_readbitmap_raster2, 1},
     {"_magick_magick_image_readbitmap_raw", (DL_FUNC) &_magick_magick_image_readbitmap_raw, 1},
     {"_magick_magick_image_readbitmap_double", (DL_FUNC) &_magick_magick_image_readbitmap_double, 1},
-    {"_magick_magick_image_readbin", (DL_FUNC) &_magick_magick_image_readbin, 3},
-    {"_magick_magick_image_readpath", (DL_FUNC) &_magick_magick_image_readpath, 3},
+    {"_magick_magick_image_readbin", (DL_FUNC) &_magick_magick_image_readbin, 4},
+    {"_magick_magick_image_readpath", (DL_FUNC) &_magick_magick_image_readpath, 4},
     {"_magick_magick_image_read_list", (DL_FUNC) &_magick_magick_image_read_list, 1},
     {"_magick_magick_image_write", (DL_FUNC) &_magick_magick_image_write, 6},
     {"_magick_magick_image_write_frame", (DL_FUNC) &_magick_magick_image_write_frame, 3},
     {"_magick_magick_image_display", (DL_FUNC) &_magick_magick_image_display, 2},
     {"_magick_magick_image_fft", (DL_FUNC) &_magick_magick_image_fft, 1},
     {"_magick_magick_image_montage", (DL_FUNC) &_magick_magick_image_montage, 1},
+    {"_magick_magick_image_strip", (DL_FUNC) &_magick_magick_image_strip, 1},
     {"_magick_magick_image_scale", (DL_FUNC) &_magick_magick_image_scale, 2},
     {"_magick_magick_image_sample", (DL_FUNC) &_magick_magick_image_sample, 2},
     {"_magick_magick_image_resize", (DL_FUNC) &_magick_magick_image_resize, 3},

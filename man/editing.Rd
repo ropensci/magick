@@ -8,10 +8,11 @@
 \alias{image_data}
 \alias{image_display}
 \alias{image_browse}
+\alias{image_strip}
 \alias{image_join}
 \title{Image Editing}
 \usage{
-image_read(path, density = NULL, depth = NULL)
+image_read(path, density = NULL, depth = NULL, strip = FALSE)
 
 image_write(image, path = NULL, format = NULL, quality = NULL,
   depth = NULL, density = NULL, comment = NULL, flatten = FALSE)
@@ -25,6 +26,8 @@ image_display(image, animate = TRUE)
 
 image_browse(image, browser = getOption("browser"))
 
+image_strip(image)
+
 image_join(...)
 }
 \arguments{
@@ -33,6 +36,8 @@ image_join(...)
 \item{density}{resolution to render pdf or svg}
 
 \item{depth}{color depth (either 8 or 16)}
+
+\item{strip}{drop image comments and metadata}
 
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
