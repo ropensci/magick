@@ -63,7 +63,7 @@ image_modulate <- function(image, brightness = 100, saturation = 100, hue = 100)
 #' image_quantize(logo, max = 10, colorspace = 'rgb')
 #' image_quantize(logo, max = 10, colorspace = 'cmyk')
 #'
-image_quantize <- function(image, max = 256, colorspace = NULL, dither = NULL, treedepth = NULL){
+image_quantize <- function(image, max = 256, colorspace = 'rgb', dither = NULL, treedepth = NULL){
   assert_image(image)
   max <- as.integer(max)
   colorspace <- as.character(colorspace)

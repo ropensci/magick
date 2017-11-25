@@ -18,7 +18,7 @@
 \usage{
 image_modulate(image, brightness = 100, saturation = 100, hue = 100)
 
-image_quantize(image, max = 256, colorspace = NULL, dither = NULL,
+image_quantize(image, max = 256, colorspace = "rgb", dither = NULL,
   treedepth = NULL)
 
 image_map(image, map, dither = FALSE)
