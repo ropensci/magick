@@ -190,20 +190,6 @@ static void image_draw(Magick::Drawable x, const pGEcontext gc, pDevDesc dd, boo
 
 /* ~~~ CALLBACK FUNCTIONS START HERE ~~~ */
 
-static void image_new_page(const pGEcontext gc, pDevDesc dd) {
-  BEGIN_RCPP
-  Image *image = getimage(dd);
-  if(image->size() > 0 && getdev(dd)->drawing)
-    throw std::runtime_error("Cannot open a new page on a drawing device");
-  Frame x(Geom(dd->right, dd->bottom), Color(col2name(gc->fill)));
-  x.magick("PNG");
-  x.depth(8L);
-  x.strokeAntiAlias(getdev(dd)->antialias);
-  x.myAntiAlias(getdev(dd)->antialias);
-  image->push_back(x);
-  VOID_END_RCPP
-}
-
 /* TODO: test if we got the coordinates right  */
 /* TODO: how to unset the clipmask ? */
 static void image_clip(double left, double right, double bottom, double top, pDevDesc dd) {
@@ -249,6 +235,25 @@ static void image_clip(double left, double right, double bottom, double top, pDe
     Frame * graph = getgraph(dd);
     graph->draw(draw);
   }
+  VOID_END_RCPP
+}
+
+static void image_new_page(const pGEcontext gc, pDevDesc dd) {
+  BEGIN_RCPP
+  Image *image = getimage(dd);
+  if(image->size() > 0 && getdev(dd)->drawing)
+    throw std::runtime_error("Cannot open a new page on a drawing device");
+  if(image->size() && dd->canClip){
+    //reset clipping before advancing
+    Magick::Geometry oldsize(getgraph(dd)->size());
+    image_clip(0, oldsize.width(), oldsize.height(), 0, dd);
+  }
+  Frame x(Geom(dd->right, dd->bottom), Color(col2name(gc->fill)));
+  x.magick("PNG");
+  x.depth(8L);
+  x.strokeAntiAlias(getdev(dd)->antialias);
+  x.myAntiAlias(getdev(dd)->antialias);
+  image->push_back(x);
   VOID_END_RCPP
 }
 
