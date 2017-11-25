@@ -8,6 +8,8 @@
   - Export image_data() function to export raw bitmap data
   - Round the clipping coordinates to fix problem with 1px edge around graphics
   - Reset clipping area when magick graphics device is closed or starts new page
+  - Change default colorspace for image_quantize() to RGB which is safer
+  - Breaking: 'fuzz' parameter rescaled to be a percentage (0-100)
 
 1.5
   - Add knit_print.magick-image() method so that images automatically appear in knitr docs

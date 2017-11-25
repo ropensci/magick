@@ -24,6 +24,9 @@ XPtrImage copy (XPtrImage image);
 #define myRepage() page(Magick::Geometry())
 #endif
 
+// Fuzz factor
+#define fuzz_pct_to_abs(x) ((x / 100 ) * (pow(MAGICKCORE_QUANTUM_DEPTH, 4) + 1))
+
 //IM 6~7 compatiblity
 #if MagickLibVersion >= 0x700
 Magick::Point Point(const char * str);

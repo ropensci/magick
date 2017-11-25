@@ -163,10 +163,11 @@ XPtrImage magick_image_emboss( XPtrImage input, const double radius = 1, const d
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_fill( XPtrImage input, const char * color, const char * point, double fuzz){
+XPtrImage magick_image_fill( XPtrImage input, const char * color, const char * point, double fuzz_percent){
   XPtrImage output = copy(input);
+  double fuzz = fuzz_pct_to_abs(fuzz_percent);
   if(fuzz != 0)
-    for_each ( output->begin(), output->end(), Magick::colorFuzzImage(fuzz));
+    for_each ( output->begin(), output->end(), Magick::colorFuzzImage( fuzz ));
   for_each ( output->begin(), output->end(), Magick::floodFillColorImage(
       Magick::Geometry(Geom(point)), Color(color)));
   if(fuzz != 0)

@@ -15,9 +15,8 @@
 #' @param color a valid [color string](https://www.imagemagick.org/Magick++/Color.html) such as
 #' `"navyblue"` or `"#000080"`
 #' @param point string indicating the flood-fill starting point
-#' @param fuzz Colors within this distance are considered equal.
-#' Use this option to match colors that are close to the target color in RGB space.
-#' I think max distance (from #000000 to #FFFFFF) is 256^2.
+#' @param fuzz Fuzz percentage: value between 0 and 100. Relative distance between
+#' colors to be considered similar in the filling algorithm.
 #' @examples
 #' logo <- image_read("logo:")
 #' logo <- image_transparent(logo, 'white')

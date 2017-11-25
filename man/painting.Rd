@@ -20,9 +20,8 @@ image_annotate(image, text, gravity = "northwest", location = "+0+0",
 
 \item{point}{string indicating the flood-fill starting point}
 
-\item{fuzz}{Colors within this distance are considered equal.
-Use this option to match colors that are close to the target color in RGB space.
-I think max distance (from #000000 to #FFFFFF) is 256^2.}
+\item{fuzz}{Fuzz percentage: value between 0 and 100. Relative distance between
+colors to be considered similar in the filling algorithm.}
 
 \item{text}{annotation text}
 

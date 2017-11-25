@@ -495,15 +495,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_transparent
-XPtrImage magick_image_transparent(XPtrImage input, const char * color, double fuzz);
-RcppExport SEXP _magick_magick_image_transparent(SEXP inputSEXP, SEXP colorSEXP, SEXP fuzzSEXP) {
+XPtrImage magick_image_transparent(XPtrImage input, const char * color, double fuzz_percent);
+RcppExport SEXP _magick_magick_image_transparent(SEXP inputSEXP, SEXP colorSEXP, SEXP fuzz_percentSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< const char * >::type color(colorSEXP);
-    Rcpp::traits::input_parameter< double >::type fuzz(fuzzSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_transparent(input, color, fuzz));
+    Rcpp::traits::input_parameter< double >::type fuzz_percent(fuzz_percentSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_transparent(input, color, fuzz_percent));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -988,16 +988,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_fill
-XPtrImage magick_image_fill(XPtrImage input, const char * color, const char * point, double fuzz);
-RcppExport SEXP _magick_magick_image_fill(SEXP inputSEXP, SEXP colorSEXP, SEXP pointSEXP, SEXP fuzzSEXP) {
+XPtrImage magick_image_fill(XPtrImage input, const char * color, const char * point, double fuzz_percent);
+RcppExport SEXP _magick_magick_image_fill(SEXP inputSEXP, SEXP colorSEXP, SEXP pointSEXP, SEXP fuzz_percentSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< const char * >::type color(colorSEXP);
     Rcpp::traits::input_parameter< const char * >::type point(pointSEXP);
-    Rcpp::traits::input_parameter< double >::type fuzz(fuzzSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_fill(input, color, point, fuzz));
+    Rcpp::traits::input_parameter< double >::type fuzz_percent(fuzz_percentSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_fill(input, color, point, fuzz_percent));
     return rcpp_result_gen;
 END_RCPP
 }

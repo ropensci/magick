@@ -165,8 +165,8 @@ magick_image_quantize <- function(input, max, space, dither, depth) {
     .Call('_magick_magick_image_quantize', PACKAGE = 'magick', input, max, space, dither, depth)
 }
 
-magick_image_transparent <- function(input, color, fuzz) {
-    .Call('_magick_magick_image_transparent', PACKAGE = 'magick', input, color, fuzz)
+magick_image_transparent <- function(input, color, fuzz_percent) {
+    .Call('_magick_magick_image_transparent', PACKAGE = 'magick', input, color, fuzz_percent)
 }
 
 magick_image_background <- function(input, color) {
@@ -325,8 +325,8 @@ magick_image_emboss <- function(input, radius = 1, sigma = 0.5) {
     .Call('_magick_magick_image_emboss', PACKAGE = 'magick', input, radius, sigma)
 }
 
-magick_image_fill <- function(input, color, point, fuzz) {
-    .Call('_magick_magick_image_fill', PACKAGE = 'magick', input, color, point, fuzz)
+magick_image_fill <- function(input, color, point, fuzz_percent) {
+    .Call('_magick_magick_image_fill', PACKAGE = 'magick', input, color, point, fuzz_percent)
 }
 
 magick_image_negate <- function(input) {
