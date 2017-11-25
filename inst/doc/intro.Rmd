@@ -177,7 +177,7 @@ image_flop(frink)
 image_modulate(frink, brightness = 80, saturation = 120, hue = 90)
 
 # Paint the shirt orange
-image_fill(frink, "orange", point = "+100+200", fuzz = 125^2)
+image_fill(frink, "orange", point = "+100+200", fuzz = 20)
 ```
 
 With `image_fill` we can flood fill starting at pixel `point`. The `fuzz` parameter allows for the fill to cross for adjecent pixels with similarish colors. Its value must be between 0 and 256^2 specifying the max geometric distance between colors to be considered equal. Here we give professor frink an orange shirt for the World Cup.

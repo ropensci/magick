@@ -49,7 +49,7 @@ image_flop(frink)
 image_modulate(frink, brightness = 80, saturation = 120, hue = 90)
 
 # Paint the shirt orange
-image_fill(frink, "orange", point = "+100+200", fuzz = 125^2)
+image_fill(frink, "orange", point = "+100+200", fuzz = 20)
 
 ## ------------------------------------------------------------------------
 # Add randomness
