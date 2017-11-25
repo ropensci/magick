@@ -126,3 +126,4 @@ Other image: \code{\link{_index_}}, \code{\link{analysis}},
   \code{\link{effects}}, \code{\link{ocr}},
   \code{\link{painting}}
 }
+\concept{image}

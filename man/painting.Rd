@@ -71,3 +71,4 @@ Other image: \code{\link{_index_}}, \code{\link{analysis}},
   \code{\link{effects}}, \code{\link{ocr}},
   \code{\link{transform}}
 }
+\concept{image}

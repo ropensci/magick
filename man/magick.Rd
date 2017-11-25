@@ -42,3 +42,4 @@ Other image: \code{\link{analysis}},
   \code{\link{effects}}, \code{\link{ocr}},
   \code{\link{painting}}, \code{\link{transform}}
 }
+\concept{image}
