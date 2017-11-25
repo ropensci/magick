@@ -25,7 +25,7 @@ Documentation is split into the following pages:
 \code{background}, \code{colorize}, \code{contrast}, \code{normalize}, \code{enhance}, \code{equalize}, \code{median}
 \item \link{composite} - advanced joining: \code{composite}, \code{border}, \code{frame}
 \item \link{device} - creating graphics and drawing on images
-\item \link{editing} - basice image IO: \code{read}, \code{write}, \code{convert}, \code{join}, \code{display}, \code{brose}
+\item \link{editing} - basic image IO: \code{read}, \code{write}, \code{convert}, \code{join}, \code{display}, \code{brose}
 \item \link{effects} - fun effects: \code{despecle}, \code{reducenoise}, \code{noise}, \code{blur}, \code{charcoal},
 \code{edge}, \code{oilpaint}, \code{emboss}, \code{implode}, \code{negate}
 \item \link{ocr} - extract text from image using \link[tesseract:tesseract]{tesseract} package

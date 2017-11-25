@@ -14,7 +14,7 @@
 #'  `background`, `colorize`, `contrast`, `normalize`, `enhance`, `equalize`, `median`
 #' - [composite] - advanced joining: `composite`, `border`, `frame`
 #' - [device] - creating graphics and drawing on images
-#' - [editing] - basice image IO: `read`, `write`, `convert`, `join`, `display`, `brose`
+#' - [editing] - basic image IO: `read`, `write`, `convert`, `join`, `display`, `brose`
 #' - [effects] - fun effects: `despecle`, `reducenoise`, `noise`, `blur`, `charcoal`,
 #'   `edge`, `oilpaint`, `emboss`, `implode`, `negate`
 #' - [ocr] - extract text from image using [tesseract][tesseract::tesseract] package

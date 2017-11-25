@@ -26,7 +26,7 @@ image_capture()
 
 \item{res}{resolution in pixels}
 
-\item{clip}{enable clipping in the device. Because clippig can slow things down
+\item{clip}{enable clipping in the device. Because clipping can slow things down
 a lot, you can disable it if you don't need it.}
 
 \item{antialias}{TRUE/FALSE: enables anti-aliasing for text and strokes}
@@ -55,7 +55,7 @@ of typical graphics coordinates.  You can override all this by passing custom
 \code{xlim}, \code{ylim} or \code{mar} values to \code{image_draw}.
 
 The \code{image_capture} function returns the current device as an image. This only
-works if the current device is a magick device or suppots \link{dev.capture}.
+works if the current device is a magick device or supports \link{dev.capture}.
 }
 \examples{
 # Regular image

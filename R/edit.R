@@ -172,7 +172,7 @@ image_write <- function(image, path = NULL, format = NULL, quality = NULL,
 #' @param antialias enable anti-aliasing for text and strokes
 #' @param type a magick [ImageType](https://www.imagemagick.org/Magick++/Enumerations.html#ImageType)
 #' classification for example `grayscale` to convert image to black/white
-#' @param colorspace string with a magick [ColorspaceType](https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType)
+#' @param colorspace string with a magick [`ColorspaceType`](https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType)
 #' for example `"gray"`, `"rgb"` or `"cmyk"`
 image_convert <- function(image, format = NULL, type = NULL, colorspace = NULL, depth = NULL, antialias = NULL){
   assert_image(image)

@@ -17,7 +17,7 @@ image_info(image)
 }
 \description{
 Attributes are properties of the image that might be present on some images
-and might affect image manipualation methods.
+and might affect image manipulation methods.
 }
 \details{
 Each attribute can be get and set with the same function. The \code{\link[=image_info]{image_info()}}

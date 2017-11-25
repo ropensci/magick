@@ -180,7 +180,7 @@ image_modulate(frink, brightness = 80, saturation = 120, hue = 90)
 image_fill(frink, "orange", point = "+100+200", fuzz = 20)
 ```
 
-With `image_fill` we can flood fill starting at pixel `point`. The `fuzz` parameter allows for the fill to cross for adjecent pixels with similarish colors. Its value must be between 0 and 256^2 specifying the max geometric distance between colors to be considered equal. Here we give professor frink an orange shirt for the World Cup.
+With `image_fill` we can flood fill starting at pixel `point`. The `fuzz` parameter allows for the fill to cross for adjacent pixels with similarish colors. Its value must be between 0 and 256^2 specifying the max geometric distance between colors to be considered equal. Here we give professor frink an orange shirt for the World Cup.
 
 ### Filters and effects
 
@@ -424,7 +424,7 @@ A relatively recent addition to the package is a native R graphics device which 
 
 ### Graphics device
 
-The `image_graph()` function opens a new graphics device similar to e.g. `png()` or `x11()`. It returns an image objec to which the plot(s) will be written. Each "page" in the plotting device will become a frame in the image object.
+The `image_graph()` function opens a new graphics device similar to e.g. `png()` or `x11()`. It returns an image object to which the plot(s) will be written. Each "page" in the plotting device will become a frame in the image object.
 
 ```{r}
 # Produce image using graphics device
@@ -433,7 +433,7 @@ ggplot2::qplot(mpg, wt, data = mtcars, colour = cyl)
 dev.off()
 ```
 
-We can easily postprocess the figure using regular image operations.
+We can easily post-process the figure using regular image operations.
 
 ```{r}
 # Combine

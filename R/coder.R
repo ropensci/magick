@@ -1,7 +1,7 @@
 #' Magick Configuration
 #'
 #' ImageMagick can be configured to support various additional tool and formats
-#' via external libraries. These funtions show which features ImageMagick supports
+#' via external libraries. These functions show which features ImageMagick supports
 #' on your system.
 #'
 #' Note that \code{coder_info} raises an error for unsupported formats.

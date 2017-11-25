@@ -5,7 +5,7 @@
 #' For details see [Magick++ STL](https://www.imagemagick.org/Magick++/STL.html)
 #' documentation. Short descriptions:
 #'
-#'  - [image_modulate] adjusts brighness, saturation and hue of image relative to current.
+#'  - [image_modulate] adjusts brightness, saturation and hue of image relative to current.
 #'  - [image_quantize] reduces number of unique colors in the image.
 #'  - [image_map] replaces colors of image with the closest color from a reference image.
 #'  - [image_channel] extracts a single channel from an image and returns as grayscale.
@@ -22,7 +22,7 @@
 #' colors are also determined by image properties
 #' [imagetype](https://www.imagemagick.org/Magick++/Enumerations.html#ImageType) and
 #' [colorspace](https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType)
-#' which can be modifie via [image_convert()].
+#' which can be modified via [image_convert()].
 #'
 #' @export
 #' @name color
@@ -52,7 +52,7 @@ image_modulate <- function(image, brightness = 100, saturation = 100, hue = 100)
 #' @rdname color
 #' @param max preferred number of colors in the image. The actual number of colors in the image may
 #' be less than your request, but never more.
-#' @param dither apply Floyd/Steinberg error diffusion to the image: averages intensities of sseveral
+#' @param dither apply Floyd/Steinberg error diffusion to the image: averages intensities of several
 #' neighboring pixels
 #' @param treedepth depth of the quantization color classification tree. Values of 0 or 1 allow
 #' selection of the optimal tree depth for the color reduction algorithm. Values between 2 and 8

@@ -57,7 +57,7 @@ be less than your request, but never more.}
 \item{colorspace}{string with a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{ColorspaceType}
 for example \code{"gray"}, \code{"rgb"} or \code{"cmyk"}}
 
-\item{dither}{apply Floyd/Steinberg error diffusion to the image: averages intensities of sseveral
+\item{dither}{apply Floyd/Steinberg error diffusion to the image: averages intensities of several
 neighboring pixels}
 
 \item{treedepth}{depth of the quantization color classification tree. Values of 0 or 1 allow
@@ -92,7 +92,7 @@ Functions to adjust contrast, brightness, colors of the image. Details below.
 For details see \href{https://www.imagemagick.org/Magick++/STL.html}{Magick++ STL}
 documentation. Short descriptions:
 \itemize{
-\item \link{image_modulate} adjusts brighness, saturation and hue of image relative to current.
+\item \link{image_modulate} adjusts brightness, saturation and hue of image relative to current.
 \item \link{image_quantize} reduces number of unique colors in the image.
 \item \link{image_map} replaces colors of image with the closest color from a reference image.
 \item \link{image_channel} extracts a single channel from an image and returns as grayscale.
@@ -110,7 +110,7 @@ Note that
 colors are also determined by image properties
 \href{https://www.imagemagick.org/Magick++/Enumerations.html#ImageType}{imagetype} and
 \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{colorspace}
-which can be modifie via \code{\link[=image_convert]{image_convert()}}.
+which can be modified via \code{\link[=image_convert]{image_convert()}}.
 }
 \examples{
 # manually adjust colors

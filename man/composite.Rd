@@ -39,7 +39,7 @@ Similar to the ImageMagick \code{composite} utility: compose an image on top of 
 \href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{CompositeOperator}.
 }
 \details{
-Basically \link{image_border} creates a slighly larger solid color frame and then composes the
+Basically \link{image_border} creates a slightly larger solid color frame and then composes the
 image frame on top. The \link{image_frame} function is similar but has an additional feature to
 create a shadow effect on the border (which is really ugly).
 }

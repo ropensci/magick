@@ -45,7 +45,7 @@ image_convolve(image, kernel = "Gaussian", iterations = 1, scaling = NULL,
 
 \item{radius}{radius, in pixels, for various transformations}
 
-\item{noisetype}{integer betwee 0 and 5 with
+\item{noisetype}{integer between 0 and 5 with
 \href{https://www.imagemagick.org/Magick++/Enumerations.html#NoiseType}{noisetype}}
 
 \item{sigma}{the standard deviation of the Laplacian, in pixels.}

@@ -1,7 +1,7 @@
 #' Image Attributes
 #'
 #' Attributes are properties of the image that might be present on some images
-#' and might affect image manipualation methods.
+#' and might affect image manipulation methods.
 #'
 #' Each attribute can be get and set with the same function. The [image_info()]
 #' function returns a data frame with some commonly used attributes.
