@@ -20,7 +20,6 @@ matrix:
     - os: linux
       dist: trusty
       before_install:
-        - sudo rm -Rf /usr/share/doc/*magick*
         - sudo add-apt-repository -y ppa:opencpu/imdev
         - sudo apt-get update -y
         - sudo apt-get install libmagick++-dev -y
