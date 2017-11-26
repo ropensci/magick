@@ -129,7 +129,7 @@ translogo <- image_transparent(logo, 'white')
 image_background(translogo, "pink", flatten = TRUE)
 
 # Compare to flood-fill method:
-image_fill(logo, "pink", fuzz = 10000)
+image_fill(logo, "pink", fuzz = 20)
 
 # Other color tweaks
 image_colorize(logo, 50, "red")

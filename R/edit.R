@@ -32,7 +32,7 @@
 #' @examples
 #' # Download image from the web
 #' frink <- image_read("https://jeroen.github.io/images/frink.png")
-#' worldcup_frink <- image_fill(frink, "orange", "+100+200", 30000)
+#' worldcup_frink <- image_fill(frink, "orange", "+100+200", 20)
 #' image_write(worldcup_frink, "output.png")
 #'
 #' # extract raw bitmap array

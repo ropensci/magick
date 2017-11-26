@@ -95,6 +95,8 @@ image_channel <- function(image, channel = 'lightness'){
 #' @rdname color
 image_transparent <- function(image, color, fuzz = 0){
   assert_image(image)
+  if(fuzz > 100)
+    stop("Parameter 'fuzz' must be percentage value (0-100)")
   magick_image_transparent(image, color, fuzz)
 }
 
@@ -107,7 +109,7 @@ image_transparent <- function(image, color, fuzz = 0){
 #' image_background(translogo, "pink", flatten = TRUE)
 #'
 #' # Compare to flood-fill method:
-#' image_fill(logo, "pink", fuzz = 10000)
+#' image_fill(logo, "pink", fuzz = 20)
 #'
 image_background <- function(image, color, flatten = TRUE){
   assert_image(image)

@@ -19,11 +19,15 @@
 #' colors to be considered similar in the filling algorithm.
 #' @examples
 #' logo <- image_read("logo:")
-#' logo <- image_transparent(logo, 'white')
-#' image_fill(image_flatten(logo), "red")
-#' image_fill(image_flatten(logo), "red", fuzz = 25600)
+#' logo <- image_background(logo, 'white')
+#' image_fill(logo, "pink", point = "+450+400")
+#' image_fill(logo, "pink", point = "+450+400", fuzz = 25)
 image_fill <- function(image, color, point = "1x1", fuzz = 0){
   assert_image(image)
+  color <- as.character(color)
+  point <- as.character(point)
+  if(fuzz > 100)
+    stop("Parameter 'fuzz' must be percentage value (0-100)")
   magick_image_fill(image, color, point, fuzz)
 }
 

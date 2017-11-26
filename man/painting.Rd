@@ -51,9 +51,9 @@ device using \link{image_draw}.
 }
 \examples{
 logo <- image_read("logo:")
-logo <- image_transparent(logo, 'white')
-image_fill(image_flatten(logo), "red")
-image_fill(image_flatten(logo), "red", fuzz = 25600)
+logo <- image_background(logo, 'white')
+image_fill(logo, "pink", point = "+450+400")
+image_fill(logo, "pink", point = "+450+400", fuzz = 25)
 # Add some text to an image
 image_annotate(logo, "This is a test")
 image_annotate(logo, "CONFIDENTIAL", size = 50, color = "red", boxcolor = "pink",
