@@ -17,6 +17,12 @@ matrix:
             - libwebp-dev
             - libpoppler-cpp-dev
             - libfftw3-dev
+      before_install:
+        - sudo rm -f /usr/share/doc/libmagick++-dev
+        - sudo rm -f /usr/share/doc/imagemagick-common
+        - sudo add-apt-repository -y ppa:opencpu/imdev
+        - sudo apt-get update -y
+        - sudo apt-get install libmagick++-dev -y
     - os: linux
       dist: trusty
     - os: osx
@@ -36,10 +42,7 @@ matrix:
 
 addons:
   apt:
-    sources:
-      - sourceline: 'ppa:opencpu/imdev'
     packages:
-      - libmagick++-dev
       - librsvg2-dev
       - libwebp-dev
       - libpoppler-cpp-dev
