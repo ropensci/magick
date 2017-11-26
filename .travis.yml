@@ -21,6 +21,8 @@ matrix:
       dist: trusty
       sudo: required
       before_install:
+        - sudo apt-get remove -y libmagick++-dev
+        - sudo apt-get autoremove --purge -y
         - sudo add-apt-repository -y ppa:opencpu/imagemagick
         - sudo apt-get update -y
         - sudo apt-get install libmagick++-dev -y
