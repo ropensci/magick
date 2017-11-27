@@ -12,6 +12,7 @@
   - Breaking: 'fuzz' parameter rescaled to be a percentage (0-100)
   - Add image_strip() as well as 'strip = TRUE' paremeter to image_read()
   - Adding image_blank() to create empty images
+  - Graphics device: hardcode font aliases for families used by R, issue #80
 
 1.5
   - Add knit_print.magick-image() method so that images automatically appear in knitr docs

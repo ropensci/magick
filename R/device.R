@@ -50,7 +50,7 @@
 #' img <- image_draw(frink)
 #' rect(20, 20, 200, 100, border = "red", lty = "dashed", lwd = 5)
 #' abline(h = 300, col = 'blue', lwd = '10', lty = "dotted")
-#' text(10, 250, "Hoiven-Glaven", family = "courier", cex = 4, srt = 90)
+#' text(10, 250, "Hoiven-Glaven", family = "monospace", cex = 4, srt = 90)
 #' palette(rainbow(11, end = 0.9))
 #' symbols(rep(200, 11), seq(0, 400, 40), circles = runif(11, 5, 35),
 #'   bg = 1:11, inches = FALSE, add = TRUE)
