@@ -133,7 +133,8 @@ static inline int weight(int face){
   return is_bold(face) ? 700 : 400;
 }
 
-//Resolve some font aliases, see: https://github.com/r-lib/svglite/blob/master/R/fonts.R
+//Normalize common font aliases
+//See also: https://github.com/r-lib/svglite/blob/master/R/fonts.R
 static inline std::string fontname(const pGEcontext gc){
   //Alias: "Symbol"
   if(is_symbol(gc->fontface)){
@@ -152,8 +153,12 @@ static inline std::string fontname(const pGEcontext gc){
   if(!strncmp(gc->fontfamily, "mono", 4) || !strncmp(gc->fontfamily, "Mono", 4))
     return std::string("Courier New");
 
+  //Alias: "Comic Sans"
+  if(!strncmp(gc->fontfamily, "comic", 5) || !strncmp(gc->fontfamily, "Comic", 5))
+    return std::string("Comic Sans MS");
+
   //Alias: Serif
-  if(!strncmp(gc->fontfamily, "serif", 4) || !strncmp(gc->fontfamily, "Serif", 4)){
+  if(!strncmp(gc->fontfamily, "serif", 5) || !strncmp(gc->fontfamily, "Serif", 5)){
 #ifdef _WIN32
     return std::string("Times New Roman");
 #else
