@@ -236,6 +236,20 @@ image_strip <- function(image){
   magick_image_strip(image)
 }
 
+
+#' @export
+#' @rdname editing
+#' @inheritParams device
+#' @inheritParams painting
+#' @examples # create a solid canvas
+#' image_blank(600, 400, "green")
+image_blank <- function(width, height, color = "transparent"){
+  width <- as.numeric(width)
+  height <- as.numeric(height)
+  color <- as.character(color)
+  magick_image_blank(width, height, color)
+}
+
 #' @export
 #' @rdname editing
 #' @param ... several images or lists of images to be combined

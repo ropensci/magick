@@ -9,6 +9,7 @@
 \alias{image_display}
 \alias{image_browse}
 \alias{image_strip}
+\alias{image_blank}
 \alias{image_join}
 \title{Image Editing}
 \usage{
@@ -27,6 +28,8 @@ image_display(image, animate = TRUE)
 image_browse(image, browser = getOption("browser"))
 
 image_strip(image)
+
+image_blank(width, height, color = "transparent")
 
 image_join(...)
 }
@@ -65,6 +68,13 @@ depending on the image}
 \item{animate}{support animations in the X11 display}
 
 \item{browser}{argument passed to \link[utils:browseURL]{browseURL}}
+
+\item{width}{in pixels}
+
+\item{height}{in pixels}
+
+\item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
+\code{"navyblue"} or \code{"#000080"}}
 
 \item{...}{several images or lists of images to be combined}
 }
@@ -115,6 +125,8 @@ image_read(webp::read_webp("example.webp"))
 
 curl::curl_download("http://jeroen.github.io/images/tiger.svg", "tiger.svg")
 image_read(rsvg::rsvg("tiger.svg"))
+# create a solid canvas
+image_blank(600, 400, "green")
 }
 \seealso{
 Other image: \code{\link{_index_}}, \code{\link{analysis}},

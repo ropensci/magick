@@ -11,6 +11,7 @@
   - Change default colorspace for image_quantize() to RGB which is safer
   - Breaking: 'fuzz' parameter rescaled to be a percentage (0-100)
   - Add image_strip() as well as 'strip = TRUE' paremeter to image_read()
+  - Adding image_blank() to create empty images
 
 1.5
   - Add knit_print.magick-image() method so that images automatically appear in knitr docs

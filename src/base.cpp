@@ -37,6 +37,15 @@ XPtrImage create (){
 }
 
 // [[Rcpp::export]]
+XPtrImage magick_image_blank(size_t width, size_t height, const char * color){
+  Frame x(Geom(width, height), Color(color));
+  x.magick("png");
+  XPtrImage image = create(1);
+  image->push_back(x);
+  return image;
+}
+
+// [[Rcpp::export]]
 XPtrImage copy (XPtrImage image){
   if(!Rf_inherits(image, "magick-image"))
     throw std::runtime_error("Image is not a magick-image object");
