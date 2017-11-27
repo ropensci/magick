@@ -136,14 +136,10 @@ static inline int weight(int face){
 //Normalize common font aliases
 //See also: https://github.com/r-lib/svglite/blob/master/R/fonts.R
 static inline std::string fontname(const pGEcontext gc){
-  //Symbols from text(font = 5) are a special case
-  if(is_symbol(gc->fontface) || !strncmp(gc->fontfamily, "symbol", 6) || !strncmp(gc->fontfamily, "Symbol", 6)){
-#ifdef _WIN32
-    return std::string("Standard Symbols L");
-#else
+  // Symbols from text(font = 5) are a special case.
+  // Windows: "Standard Symbols L" does NOT work with IM. Just use "Symbol".
+  if(is_symbol(gc->fontface))
     return std::string("Symbol");
-#endif
-  }
 
   //Alias: "Sans" or "" (default)
   if(!strlen(gc->fontfamily) || !strncmp(gc->fontfamily, "sans", 4) || !strncmp(gc->fontfamily, "Sans", 4))
