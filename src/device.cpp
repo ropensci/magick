@@ -136,8 +136,8 @@ static inline int weight(int face){
 //Normalize common font aliases
 //See also: https://github.com/r-lib/svglite/blob/master/R/fonts.R
 static inline std::string fontname(const pGEcontext gc){
-  //Alias: "Symbol"
-  if(is_symbol(gc->fontface)){
+  //Symbols from text(font = 5) are a special case
+  if(is_symbol(gc->fontface) || !strncmp(gc->fontfamily, "symbol", 6) || !strncmp(gc->fontfamily, "Symbol", 6)){
 #ifdef _WIN32
     return std::string("Standard Symbols L");
 #else
@@ -167,18 +167,6 @@ static inline std::string fontname(const pGEcontext gc){
   }
 
   //Alias: custom family
-  return std::string(gc->fontfamily);
-}
-
-static inline std::string font_alias(const pGEcontext gc){
-  if(is_symbol(gc->fontface))
-    return std::string("symbol");
-  if(!strlen(gc->fontfamily))
-    return std::string("sans-serif");
-  if(!strncmp(gc->fontfamily, "sans", 4) || !strncmp(gc->fontfamily, "Sans", 4))
-    return std::string("sans-serif");
-  if(!strncmp(gc->fontfamily, "mono", 4) || !strncmp(gc->fontfamily, "Mono", 4))
-    return std::string("monospace");
   return std::string(gc->fontfamily);
 }
 
@@ -565,7 +553,7 @@ static pDevDesc magick_driver_new(MagickDevice * device, int bg, int width, int 
   dd->cap = image_capture;
   dd->raster = image_raster;
 
-  // See also BMDeviceDriver
+  // Converts text() with fontface = 5 (adobe symbols) to UTF-8, see also BMDeviceDriver
 #ifdef __APPLE__
   dd->wantSymbolUTF8 = TRUE;
 #else

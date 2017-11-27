@@ -19,7 +19,6 @@ text(0.95, 0.9, "abcdefg - Monospace (Courier New)", pos = 4, family = "Monospac
 text(0.95, 1.1, "abcdefg - Courier", pos = 4, family = "Courier")
 
 #SYMBOL (both methods)
-text(0.95, 1.3, "abcdefg - Symbol Family", pos = 4, family = "Symbol")
-text(0.95, 1.5, "ABCDEF - Symbol Face", pos = 4, font = 5)
+text(0.95, 1.3, "abcdefg - Symbol Face", pos = 4, font = 5)
 
 dev.off()
