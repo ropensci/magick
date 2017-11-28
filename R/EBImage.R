@@ -6,9 +6,9 @@
 #' @export
 #' @inheritParams editing
 as_EBImage <- function(image){
-  Grayscale <- getFromNamespace('Grayscale', 'EBImage')
-  Color <- getFromNamespace('Color', 'EBImage')
-  Image <- getFromNamespace('Image', 'EBImage')
+  Grayscale <- utils::getFromNamespace('Grayscale', 'EBImage')
+  Color <- utils::getFromNamespace('Color', 'EBImage')
+  Image <- utils::getFromNamespace('Image', 'EBImage')
   assert_image(image)
   info <- image_info(image)
   if(length(image) > 1){
