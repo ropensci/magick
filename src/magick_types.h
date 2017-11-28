@@ -24,6 +24,9 @@ XPtrImage copy (XPtrImage image);
 #define myRepage() page(Magick::Geometry())
 #endif
 
+// Font utilities
+std::string normalize_font(const char * family);
+
 // Fuzz factor
 #define fuzz_pct_to_abs(x) ((x / 100 ) * (pow(MAGICKCORE_QUANTUM_DEPTH, 4) + 1))
 

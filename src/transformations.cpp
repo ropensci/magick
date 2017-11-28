@@ -270,7 +270,7 @@ XPtrImage magick_image_annotate( XPtrImage input, const std::string text, const 
   if(boxcolor.size())
     for_each ( output->begin(), output->end(), Magick::boxColorImage(Color(boxcolor[0])));
   if(font.size())
-    for_each ( output->begin(), output->end(), Magick::fontImage(std::string(font[0])));
+    for_each ( output->begin(), output->end(), Magick::fontImage(normalize_font(font[0])));
   if(size.size())
     for_each ( output->begin(), output->end(), Magick::fontPointsizeImage(size[0]));
   for (Iter it = output->begin(); it != output->end(); ++it)

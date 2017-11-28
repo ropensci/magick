@@ -140,30 +140,7 @@ static inline std::string fontname(const pGEcontext gc){
   // Windows: "Standard Symbols L" does NOT work with IM. Just use "Symbol".
   if(is_symbol(gc->fontface))
     return std::string("Symbol");
-
-  //Alias: "Sans" or "" (default)
-  if(!strlen(gc->fontfamily) || !strncmp(gc->fontfamily, "sans", 4) || !strncmp(gc->fontfamily, "Sans", 4))
-    return std::string("Arial");
-
-  //Alias: "Mono" or "Monospace"
-  if(!strncmp(gc->fontfamily, "mono", 4) || !strncmp(gc->fontfamily, "Mono", 4))
-    return std::string("Courier New");
-
-  //Alias: "Comic Sans"
-  if(!strncmp(gc->fontfamily, "comic", 5) || !strncmp(gc->fontfamily, "Comic", 5))
-    return std::string("Comic Sans MS");
-
-  //Alias: Serif
-  if(!strncmp(gc->fontfamily, "serif", 5) || !strncmp(gc->fontfamily, "Serif", 5)){
-#ifdef _WIN32
-    return std::string("Times New Roman");
-#else
-    return std::string("Times");
-#endif
-  }
-
-  //Alias: custom family
-  return std::string(gc->fontfamily);
+  return normalize_font(gc->fontfamily);
 }
 
 static inline coordlist coord(int n, double * x, double * y){
