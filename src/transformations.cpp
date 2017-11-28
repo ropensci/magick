@@ -269,9 +269,14 @@ XPtrImage magick_image_annotate( XPtrImage input, const std::string text, const 
     for_each ( output->begin(), output->end(), Magick::strokeColorImage(Color(strokecolor[0])));
   if(boxcolor.size())
     for_each ( output->begin(), output->end(), Magick::boxColorImage(Color(boxcolor[0])));
-  if(font.size())
+  if(font.size()){
+#if MagickLibVersion >= 0x692
     for(size_t i = 0; i < output->size(); i++)
       output->at(i).fontFamily(normalize_font(font[0]));
+#else
+    for_each ( output->begin(), output->end(), Magick::fontImage(std::string(font[0])));
+#endif
+  }
   if(size.size())
     for_each ( output->begin(), output->end(), Magick::fontPointsizeImage(size[0]));
   for (Iter it = output->begin(); it != output->end(); ++it)
@@ -282,9 +287,14 @@ XPtrImage magick_image_annotate( XPtrImage input, const std::string text, const 
     for_each ( output->begin(), output->end(), Magick::strokeColorImage(input->front().strokeColor()));
   if(boxcolor.size())
     for_each ( output->begin(), output->end(), Magick::boxColorImage(input->front().boxColor()));
-  if(font.size())
+  if(font.size()){
+#if MagickLibVersion >= 0x692
     for(size_t i = 0; i < output->size(); i++)
       output->at(i).fontFamily(input->front().fontFamily());
+#else
+    for_each ( output->begin(), output->end(), Magick::fontImage(input->front().font()));
+#endif
+  }
   if(size.size())
     for_each ( output->begin(), output->end(), Magick::fontPointsizeImage(fmin(10, input->front().fontPointsize())));
   return output;

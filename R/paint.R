@@ -43,6 +43,7 @@ image_fill <- function(image, color, point = "1x1", fuzz = 0){
 #' @param boxcolor background color that annotation text is rendered on.
 #' @param font string with font family, for example `"sans"`, `"mono"`, `"serif"`,
 #' `"Times"`, `"Helvetica"`, `"Trebuchet"`, `"Georgia"`, `"Palatino"` or `"Comic Sans"`.
+#' This requires at least ImageMagick 6.9.2.
 #' @examples # Add some text to an image
 #' image_annotate(logo, "This is a test")
 #' image_annotate(logo, "CONFIDENTIAL", size = 50, color = "red", boxcolor = "pink",

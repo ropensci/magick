@@ -35,7 +35,8 @@ colors to be considered similar in the filling algorithm.}
 \item{size}{font-size in pixels}
 
 \item{font}{string with font family, for example \code{"sans"}, \code{"mono"}, \code{"serif"},
-\code{"Times"}, \code{"Helvetica"}, \code{"Trebuchet"}, \code{"Georgia"}, \code{"Palatino"} or \code{"Comic Sans"}.}
+\code{"Times"}, \code{"Helvetica"}, \code{"Trebuchet"}, \code{"Georgia"}, \code{"Palatino"} or \code{"Comic Sans"}.
+This requires at least ImageMagick 6.9.2.}
 
 \item{strokecolor}{adds a stroke (border around the text)}
 
