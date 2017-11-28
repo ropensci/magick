@@ -493,6 +493,8 @@ static void image_metric_info(int c, const pGEcontext gc, double* ascent,
   *ascent = tm.ascent();
   *descent = std::abs(tm.descent()); //I think this should be positive?
   *width = tm.textWidth();
+  //See base-r function PangoCairo_MetricInfo
+  //Rprintf("c = %d, '%s', face %d %f %f %f\n",  c, str, gc->fontface, *width, *ascent, *descent);
   VOID_END_RCPP
 }
 
