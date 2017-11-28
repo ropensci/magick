@@ -6,6 +6,9 @@
 #' @export
 #' @inheritParams editing
 as_EBImage <- function(image){
+  Grayscale <- getFromNamespace('Grayscale', 'EBImage')
+  Color <- getFromNamespace('Color', 'EBImage')
+  Image <- getFromNamespace('Image', 'EBImage')
   assert_image(image)
   info <- image_info(image)
   if(length(image) > 1){
@@ -14,13 +17,13 @@ as_EBImage <- function(image){
     bitmap <- vapply(image, function(x){
       image_data(x, channels = 'gray')[1,,]
     }, matrix(raw(1), info$width, info$height))
-    EBImage::Image(as.double(bitmap) / 255, dim(bitmap), EBImage::Grayscale)
+    Image(as.double(bitmap) / 255, dim(bitmap), Grayscale)
   } else {
     bitmap <- aperm(image_data(image), c(2,3,1))
     if(tolower(info$colorspace) == 'gray') {
-      EBImage::Image(as.double(bitmap) / 255, dim(bitmap)[1:2], EBImage::Grayscale)
+      Image(as.double(bitmap) / 255, dim(bitmap)[1:2], Grayscale)
     } else {
-      EBImage::Image(as.double(bitmap) / 255, dim(bitmap), EBImage::Color)
+      Image(as.double(bitmap) / 255, dim(bitmap), Color)
     }
   }
 }
