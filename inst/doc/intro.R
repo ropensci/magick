@@ -21,7 +21,7 @@ frink <- image_read("https://jeroen.github.io/images/frink.png")
 
 ## ----echo = FALSE--------------------------------------------------------
 # Reduce color depth because vignette is too large :/
-frink <- image_quantize(frink)
+frink <- image_quantize(frink, 128, colorspace = "cmyk")
 
 ## ------------------------------------------------------------------------
 
