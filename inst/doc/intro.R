@@ -181,9 +181,7 @@ image_info(banana)
 background <- image_background(image_scale(logo, "200"), "white", flatten = TRUE)
 
 # Combine and flatten frames
-frames <- image_apply(banana, function(frame) {
-  image_composite(background, frame, offset = "+70+30")
-})
+frames <- image_composite(background, banana, offset = "+70+30")
 
 # Turn frames into animation
 animation <- image_animate(frames, fps = 10)
@@ -217,7 +215,7 @@ print(img)
 ## ------------------------------------------------------------------------
 library(gapminder)
 library(ggplot2)
-img <- image_graph(600, 400, res = 96)
+img <- image_graph(600, 340, res = 96)
 datalist <- split(gapminder, gapminder$year)
 out <- lapply(datalist, function(data){
   p <- ggplot(data, aes(gdpPercap, lifeExp, size = pop, color = continent)) +
