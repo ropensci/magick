@@ -41,15 +41,15 @@ image_fill <- function(image, color, point = "1x1", fuzz = 0){
 #' @param size font-size in pixels
 #' @param strokecolor adds a stroke (border around the text)
 #' @param boxcolor background color that annotation text is rendered on.
-#' @param font rendering font. To use a TrueType font, precede the TrueType filename with an @.
+#' @param font string with font family, for example `"sans"`, `"mono"`, `"serif"`,
+#' `"Times"`, `"Helvetica"`, `"Trebuchet"`, `"Georgia"`, `"Palatino"` or `"Comic Sans"`.
 #' @examples # Add some text to an image
 #' image_annotate(logo, "This is a test")
 #' image_annotate(logo, "CONFIDENTIAL", size = 50, color = "red", boxcolor = "pink",
 #'  degrees = 30, location = "+100+100")
 #'
 #' # Setting fonts requires fontconfig support (and that you have the font)
-#' myfont <- ifelse(identical("windows", .Platform$OS.type), "courier-new", "courier")
-#' try(image_annotate(logo, "The quick brown fox", font = myfont, size = 50))
+#' image_annotate(logo, "The quick brown fox", font = "monospace", size = 50)
 image_annotate <- function(image, text, gravity = "northwest", location = "+0+0", degrees = 0,
                            size = 10, font = NULL, color = NULL, strokecolor = NULL, boxcolor = NULL){
   assert_image(image)

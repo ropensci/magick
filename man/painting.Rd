@@ -34,7 +34,8 @@ colors to be considered similar in the filling algorithm.}
 
 \item{size}{font-size in pixels}
 
-\item{font}{rendering font. To use a TrueType font, precede the TrueType filename with an @.}
+\item{font}{string with font family, for example \code{"sans"}, \code{"mono"}, \code{"serif"},
+\code{"Times"}, \code{"Helvetica"}, \code{"Trebuchet"}, \code{"Georgia"}, \code{"Palatino"} or \code{"Comic Sans"}.}
 
 \item{strokecolor}{adds a stroke (border around the text)}
 
@@ -60,8 +61,7 @@ image_annotate(logo, "CONFIDENTIAL", size = 50, color = "red", boxcolor = "pink"
  degrees = 30, location = "+100+100")
 
 # Setting fonts requires fontconfig support (and that you have the font)
-myfont <- ifelse(identical("windows", .Platform$OS.type), "courier-new", "courier")
-try(image_annotate(logo, "The quick brown fox", font = myfont, size = 50))
+image_annotate(logo, "The quick brown fox", font = "monospace", size = 50)
 }
 \seealso{
 Other image: \code{\link{_index_}}, \code{\link{analysis}},

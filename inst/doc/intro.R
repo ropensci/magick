@@ -85,8 +85,8 @@ image_annotate(frink, "I like R!", size = 70, gravity = "southwest", color = "gr
 image_annotate(frink, "CONFIDENTIAL", size = 30, color = "red", boxcolor = "pink",
   degrees = 60, location = "+50+100")
 
-# Only works if ImageMagick has fontconfig
-try(image_annotate(frink, "The quick brown fox", font = 'times-new-roman', size = 30), silent = T)
+# Fonts may require ImageMagick has fontconfig
+image_annotate(frink, "The quick brown fox", font = 'Times New Roman', size = 30)
 
 ## ------------------------------------------------------------------------
 frink <- image_read("https://jeroen.github.io/images/frink.png")
