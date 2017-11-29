@@ -346,19 +346,14 @@ static void image_raster(unsigned int *raster, int w, int h,
   frame.resize(size);
 
   //rotate minimum 1 degree. Adjust positioning to rotate around (x,y)
-  if(rot > 1){
-    frame.rotate(rot);
-    double rad = (rot * pi) / 180;
-    x += round(width * fmin(0.0, cos(rad)) + height * fmin(0.0, sin(rad)));
-    y -= round(height * fmin(0.0, cos(rad)) + width * fmin(0.0, -sin(rad)));
-
-    //calculate new values
-    Magick::Geometry outsize(frame.size());
-    width = outsize.width();
-    height = outsize.height();
+  drawlist draw;
+  if(rot){
+    //temorary move center for rotation and then back
+    draw.push_back(Magick::DrawableTranslation(x, y));
+    draw.push_back(Magick::DrawableRotation(rot));
+    draw.push_back(Magick::DrawableTranslation(-x, -y));
   }
-
-  Magick::DrawableCompositeImage draw(x, y - height, width, height, frame, Magick::OverCompositeOp);
+  draw.push_back(Magick::DrawableCompositeImage(x, y - height, width, height, frame, Magick::OverCompositeOp));
   image_draw(draw, gc, dd);
   VOID_END_RCPP
 }
@@ -392,17 +387,6 @@ void image_mode(int mode, pDevDesc dd){
   }
 }
 
-static inline Magick::DrawableAffine RotateDrawing(double deg, double x, double y){
-  double rad = (deg * pi) / 180;
-  double sx = cos(rad);
-  double sy = cos(rad);
-  double rx = sin(rad);
-  double ry = -sin(rad);
-  double tx = x + x * sx + y * rx;
-  double ty = y + y * sy + x * ry;
-  return Magick::DrawableAffine(sx, sy, rx, ry, tx, ty);
-}
-
 static void image_text(double x, double y, const char *str, double rot,
                 double hadj, const pGEcontext gc, pDevDesc dd) {
   BEGIN_RCPP
@@ -431,9 +415,15 @@ static void image_text(double x, double y, const char *str, double rot,
   draw.push_back(Magick::DrawableFont(fontname(gc), style(gc->fontface), weight(gc->fontface), Magick::NormalStretch));
   draw.push_back(Magick::DrawablePointSize(ps));
   draw.push_back(Magick::DrawableTextAntialias(getdev(dd)->antialias));
+
+  if(deg){
+    //temorary move center for rotation and then back
+    draw.push_back(Magick::DrawableTranslation(x, y));
+    draw.push_back(Magick::DrawableRotation(deg));
+    draw.push_back(Magick::DrawableTranslation(-x, -y));
+  }
+
   draw.push_back(Magick::DrawableText(x, y, std::string(str), "UTF-8"));
-  if(deg > 1)
-    draw.push_back(RotateDrawing(deg, x, y));
   image_draw(draw, gc, dd);
   VOID_END_RCPP
 }
