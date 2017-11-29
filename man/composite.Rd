@@ -7,8 +7,8 @@
 \alias{image_frame}
 \title{Image Composite}
 \usage{
-image_composite(image, composite_image = image[1], operator = "atop",
-  offset = "0x0", compose_args = "")
+image_composite(image, composite_image, operator = "atop", offset = "0x0",
+  compose_args = "")
 
 image_border(image, color = "lightgray", geometry = "10x10",
   operator = "copy")
@@ -39,8 +39,11 @@ Similar to the ImageMagick \code{composite} utility: compose an image on top of 
 \href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{CompositeOperator}.
 }
 \details{
-Basically \link{image_border} creates a slightly larger solid color frame and then composes the
-image frame on top. The \link{image_frame} function is similar but has an additional feature to
+The \code{image_compose} function is vectorized over both image arguments: if the first image has
+\code{n} frames and the second \code{m} frames, the output image will contain \code{n} * \code{m} frames.
+
+The \link{image_border} function creates a slightly larger solid color frame and then composes the
+original frame on top. The \link{image_frame} function is similar but has an additional feature to
 create a shadow effect on the border (which is really ugly).
 }
 \examples{
