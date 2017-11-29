@@ -1127,8 +1127,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_annotate
-XPtrImage magick_image_annotate(XPtrImage input, const std::string text, const char * gravity, const char * location, double degrees, Rcpp::IntegerVector size, Rcpp::CharacterVector font, Rcpp::CharacterVector color, Rcpp::CharacterVector strokecolor, Rcpp::CharacterVector boxcolor);
-RcppExport SEXP _magick_magick_image_annotate(SEXP inputSEXP, SEXP textSEXP, SEXP gravitySEXP, SEXP locationSEXP, SEXP degreesSEXP, SEXP sizeSEXP, SEXP fontSEXP, SEXP colorSEXP, SEXP strokecolorSEXP, SEXP boxcolorSEXP) {
+XPtrImage magick_image_annotate(XPtrImage input, const std::string text, const char * gravity, const char * location, double rot, double size, const char * font, Rcpp::CharacterVector color, Rcpp::CharacterVector strokecolor, Rcpp::CharacterVector boxcolor);
+RcppExport SEXP _magick_magick_image_annotate(SEXP inputSEXP, SEXP textSEXP, SEXP gravitySEXP, SEXP locationSEXP, SEXP rotSEXP, SEXP sizeSEXP, SEXP fontSEXP, SEXP colorSEXP, SEXP strokecolorSEXP, SEXP boxcolorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -1136,13 +1136,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const std::string >::type text(textSEXP);
     Rcpp::traits::input_parameter< const char * >::type gravity(gravitySEXP);
     Rcpp::traits::input_parameter< const char * >::type location(locationSEXP);
-    Rcpp::traits::input_parameter< double >::type degrees(degreesSEXP);
-    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type size(sizeSEXP);
-    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type font(fontSEXP);
+    Rcpp::traits::input_parameter< double >::type rot(rotSEXP);
+    Rcpp::traits::input_parameter< double >::type size(sizeSEXP);
+    Rcpp::traits::input_parameter< const char * >::type font(fontSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type color(colorSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type strokecolor(strokecolorSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type boxcolor(boxcolorSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_annotate(input, text, gravity, location, degrees, size, font, color, strokecolor, boxcolor));
+    rcpp_result_gen = Rcpp::wrap(magick_image_annotate(input, text, gravity, location, rot, size, font, color, strokecolor, boxcolor));
     return rcpp_result_gen;
 END_RCPP
 }

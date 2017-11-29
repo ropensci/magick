@@ -259,42 +259,35 @@ XPtrImage magick_image_reducenoise( XPtrImage input, const size_t radius){
 
 // [[Rcpp::export]]
 XPtrImage magick_image_annotate( XPtrImage input, const std::string text, const char * gravity,
-                                 const char * location, double degrees, Rcpp::IntegerVector size,
-                                 Rcpp::CharacterVector font, Rcpp::CharacterVector color,
-                                 Rcpp::CharacterVector strokecolor, Rcpp::CharacterVector boxcolor){
+                                 const char * location, double rot, double size, const char * font,
+                                 Rcpp::CharacterVector color, Rcpp::CharacterVector strokecolor,
+                                 Rcpp::CharacterVector boxcolor){
   XPtrImage output = copy(input);
-  if(color.size())
-    for_each ( output->begin(), output->end(), Magick::fillColorImage(Color(color[0])));
+  typedef std::container<Magick::Drawable> drawlist;
+  double deg = fmod(-rot + 360.0, 360.0);
+  Magick::Geometry pos(location);
+  double x = pos.xOff();
+  double y = pos.yOff();
+  drawlist draw;
+  draw.push_back(Magick::DrawableGravity(Gravity(gravity)));
+  draw.push_back(Magick::DrawableTextAntialias(true));
   if(strokecolor.size())
-    for_each ( output->begin(), output->end(), Magick::strokeColorImage(Color(strokecolor[0])));
-  if(boxcolor.size())
-    for_each ( output->begin(), output->end(), Magick::boxColorImage(Color(boxcolor[0])));
-  if(font.size()){
-#if MagickLibVersion >= 0x692
-    for(size_t i = 0; i < output->size(); i++)
-      output->at(i).fontFamily(normalize_font(font[0]));
-#else
-    Rcpp::warning("ImageMagick too old to set family; requires at leat 6.9.2");
-#endif
-  }
-  if(size.size())
-    for_each ( output->begin(), output->end(), Magick::fontPointsizeImage(size[0]));
-  for (Iter it = output->begin(); it != output->end(); ++it)
-    it->annotate(text, Geom(location), Gravity(gravity), degrees);
+    draw.push_back(Magick::DrawableStrokeColor(Color(strokecolor[0])));
   if(color.size())
-    for_each ( output->begin(), output->end(), Magick::fillColorImage(input->front().fillColor()));
-  if(strokecolor.size())
-    for_each ( output->begin(), output->end(), Magick::strokeColorImage(input->front().strokeColor()));
+    draw.push_back(Magick::DrawableFillColor(Color(color[0])));
   if(boxcolor.size())
-    for_each ( output->begin(), output->end(), Magick::boxColorImage(input->front().boxColor()));
-#if MagickLibVersion >= 0x692
-  if(font.size()){
-    for(size_t i = 0; i < output->size(); i++)
-      output->at(i).fontFamily(input->front().fontFamily());
+    draw.push_back(Magick::DrawableTextUnderColor(Color(boxcolor[0])));
+  draw.push_back(Magick::DrawablePointSize(size));
+  draw.push_back(Magick::DrawableFont(normalize_font(font), Magick::NormalStyle, 400, Magick::NormalStretch));
+  if(rot){
+    //temorary move center for rotation and then back
+    draw.push_back(Magick::DrawableTranslation(x, y));
+    draw.push_back(Magick::DrawableRotation(rot));
+    draw.push_back(Magick::DrawableTranslation(-x, -y));
   }
-#endif
-  if(size.size())
-    for_each ( output->begin(), output->end(), Magick::fontPointsizeImage(fmin(10, input->front().fontPointsize())));
+
+  draw.push_back(Magick::DrawableText(x, y, text, "UTF-8"));
+  for_each (output->begin(), output->end(), Magick::drawImage(draw));
   return output;
 }
 

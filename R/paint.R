@@ -52,7 +52,7 @@ image_fill <- function(image, color, point = "1x1", fuzz = 0){
 #' # Setting fonts requires fontconfig support (and that you have the font)
 #' image_annotate(logo, "The quick brown fox", font = "monospace", size = 50)
 image_annotate <- function(image, text, gravity = "northwest", location = "+0+0", degrees = 0,
-                           size = 10, font = NULL, color = NULL, strokecolor = NULL, boxcolor = NULL){
+                           size = 10, font = "", color = NULL, strokecolor = NULL, boxcolor = NULL){
   assert_image(image)
   font <- as.character(font)
   size <- as.integer(size)
