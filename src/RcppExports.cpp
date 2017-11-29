@@ -938,14 +938,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_crop
-XPtrImage magick_image_crop(XPtrImage input, Rcpp::CharacterVector geometry);
-RcppExport SEXP _magick_magick_image_crop(SEXP inputSEXP, SEXP geometrySEXP) {
+XPtrImage magick_image_crop(XPtrImage input, Rcpp::CharacterVector geometry, bool repage);
+RcppExport SEXP _magick_magick_image_crop(SEXP inputSEXP, SEXP geometrySEXP, SEXP repageSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type geometry(geometrySEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_crop(input, geometry));
+    Rcpp::traits::input_parameter< bool >::type repage(repageSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_crop(input, geometry, repage));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1249,7 +1250,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_trim", (DL_FUNC) &_magick_magick_image_trim, 1},
     {"_magick_magick_image_flip", (DL_FUNC) &_magick_magick_image_flip, 1},
     {"_magick_magick_image_flop", (DL_FUNC) &_magick_magick_image_flop, 1},
-    {"_magick_magick_image_crop", (DL_FUNC) &_magick_magick_image_crop, 2},
+    {"_magick_magick_image_crop", (DL_FUNC) &_magick_magick_image_crop, 3},
     {"_magick_magick_image_noise", (DL_FUNC) &_magick_magick_image_noise, 2},
     {"_magick_magick_image_blur", (DL_FUNC) &_magick_magick_image_blur, 3},
     {"_magick_magick_image_charcoal", (DL_FUNC) &_magick_magick_image_charcoal, 3},

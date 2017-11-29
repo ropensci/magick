@@ -28,7 +28,7 @@ image_scale(image, geometry = NULL)
 
 image_sample(image, geometry = NULL)
 
-image_crop(image, geometry = NULL)
+image_crop(image, geometry = NULL, repage = TRUE)
 
 image_flip(image)
 
@@ -49,6 +49,8 @@ specifying width+height and/or position offset. See details and examples below.}
 \item{degrees}{value between 0 and 360 for how many degrees to rotate}
 
 \item{filter}{string with a \href{https://www.imagemagick.org/Magick++/Enumerations.html#FilterTypes}{filtertype}.}
+
+\item{repage}{resize the canvas to the cropped area}
 
 \item{threshold}{straightens an image. A threshold of 40 works for most images.}
 

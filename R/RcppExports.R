@@ -309,8 +309,8 @@ magick_image_flop <- function(input) {
     .Call('_magick_magick_image_flop', PACKAGE = 'magick', input)
 }
 
-magick_image_crop <- function(input, geometry) {
-    .Call('_magick_magick_image_crop', PACKAGE = 'magick', input, geometry)
+magick_image_crop <- function(input, geometry, repage) {
+    .Call('_magick_magick_image_crop', PACKAGE = 'magick', input, geometry, repage)
 }
 
 magick_image_noise <- function(input, noisetype) {
