@@ -16,6 +16,7 @@
   - Better font family lookup in graphics and image_annotate()
   - Switch to DrawableRotation() api for rotation in text and graphics
   - Autobrew: build gdk-pixbuf without modules (for rendering svg with rasters)
+  - New functions option_types() and option_values() to list possible options
 
 1.5
   - Add knit_print.magick-image() method so that images automatically appear in knitr docs
