@@ -25,7 +25,6 @@ details about each options see
 # Check possible values:
 option_values("Compose")
 option_values("Morphology")
-
 }
 \references{
 ImageMagick Manual: \href{https://www.imagemagick.org/Magick++/Enumerations.html}{Enumerations}
