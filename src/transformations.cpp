@@ -264,7 +264,6 @@ XPtrImage magick_image_annotate( XPtrImage input, const std::string text, const 
                                  Rcpp::CharacterVector boxcolor){
   XPtrImage output = copy(input);
   typedef std::container<Magick::Drawable> drawlist;
-  double deg = fmod(-rot + 360.0, 360.0);
   Magick::Geometry pos(location);
   double x = pos.xOff();
   double y = pos.yOff();
