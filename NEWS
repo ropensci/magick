@@ -13,7 +13,9 @@
   - Add image_strip() as well as 'strip = TRUE' paremeter to image_read()
   - Adding image_blank() to create empty images
   - Graphics device: hardcode font aliases for families used by R, issue #80
-  - Breaking: 'font' param in image_annotate() is now intepreted as font family
+  - Better font family lookup in graphics and image_annotate()
+  - Switch to DrawableRotation() api for rotation in text and graphics
+  - Autobrew: build gdk-pixbuf without modules (for rendering svg with rasters)
 
 1.5
   - Add knit_print.magick-image() method so that images automatically appear in knitr docs
