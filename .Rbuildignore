@@ -8,4 +8,4 @@ appveyor.yml$
 ^img$
 ^README\.Rmd$
 ^notes.md$
-^tests$
+^testsuite$
