@@ -14,7 +14,7 @@ option_types()
 option_dump()
 }
 \arguments{
-\item{types}{a string with any of the \code{option_types()}}
+\item{type}{a string with any of the \code{option_types()}}
 }
 \description{
 List option types and option values supported in your version of ImageMagick. For
