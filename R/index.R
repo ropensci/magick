@@ -18,6 +18,7 @@
 #' - [effects] - fun effects: `despecle`, `reducenoise`, `noise`, `blur`, `charcoal`,
 #'   `edge`, `oilpaint`, `emboss`, `implode`, `negate`
 #' - [ocr] - extract text from image using [tesseract][tesseract::tesseract] package
+#' - [options] - list option types and values supported in your version of ImageMagick
 #' - [painting] - flood fill and annotating text
 #' - [transform] - shape operations: `trim`, `chop`, `rotate`, `resize`, `scale`, `sample`
 #'   `crop`, `flip`, `flop`, `deskew`, `page`

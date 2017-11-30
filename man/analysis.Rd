@@ -47,6 +47,7 @@ Other image: \code{\link{_index_}},
   \code{\link{color}}, \code{\link{composite}},
   \code{\link{device}}, \code{\link{editing}},
   \code{\link{effects}}, \code{\link{ocr}},
-  \code{\link{painting}}, \code{\link{transform}}
+  \code{\link{options}}, \code{\link{painting}},
+  \code{\link{transform}}
 }
 \concept{image}

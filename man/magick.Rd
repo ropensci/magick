@@ -29,6 +29,7 @@ Documentation is split into the following pages:
 \item \link{effects} - fun effects: \code{despecle}, \code{reducenoise}, \code{noise}, \code{blur}, \code{charcoal},
 \code{edge}, \code{oilpaint}, \code{emboss}, \code{implode}, \code{negate}
 \item \link{ocr} - extract text from image using \link[tesseract:tesseract]{tesseract} package
+\item \link{options} - list option types and values supported in your version of ImageMagick
 \item \link{painting} - flood fill and annotating text
 \item \link{transform} - shape operations: \code{trim}, \code{chop}, \code{rotate}, \code{resize}, \code{scale}, \code{sample}
 \code{crop}, \code{flip}, \code{flop}, \code{deskew}, \code{page}
@@ -40,6 +41,7 @@ Other image: \code{\link{analysis}},
   \code{\link{color}}, \code{\link{composite}},
   \code{\link{device}}, \code{\link{editing}},
   \code{\link{effects}}, \code{\link{ocr}},
-  \code{\link{painting}}, \code{\link{transform}}
+  \code{\link{options}}, \code{\link{painting}},
+  \code{\link{transform}}
 }
 \concept{image}

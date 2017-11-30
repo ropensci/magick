@@ -5,7 +5,8 @@
 #' [ImageMagick Enumerations](https://www.imagemagick.org/Magick++/Enumerations.html).
 #'
 #' @rdname options
-#' @name magick_options
+#' @family image
+#' @name options
 #' @export
 #' @references ImageMagick Manual: [Enumerations](https://www.imagemagick.org/Magick++/Enumerations.html)
 magick_options <- function(){
