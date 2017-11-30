@@ -12,8 +12,8 @@
 magick_options <- function(){
   types <- option_types()
   types <- types[types != "Undefined"]
-  out <- lapply(types, list_options)
-  structure(out, names = types)
+  types <- types[types != "Command"]
+  Filter(length, sapply(types, list_options))
 }
 
 #' @export
