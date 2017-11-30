@@ -50,10 +50,15 @@ XPtrImage magick_image_chop( XPtrImage input, const char * geometry){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_trim( XPtrImage input){
+XPtrImage magick_image_trim( XPtrImage input, double fuzz_percent){
   XPtrImage output = copy(input);
+  double fuzz = fuzz_pct_to_abs(fuzz_percent);
+  if(fuzz != 0)
+    for_each ( output->begin(), output->end(), Magick::colorFuzzImage( fuzz ));
   for_each ( output->begin(), output->end(), Magick::trimImage());
   for_each ( output->begin(), output->end(), Magick::pageImage(Magick::Geometry()));
+  if(fuzz != 0)
+    for_each ( output->begin(), output->end(), Magick::colorFuzzImage(input->front().colorFuzz()));
   return output;
 }
 

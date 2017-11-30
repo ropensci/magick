@@ -905,13 +905,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_trim
-XPtrImage magick_image_trim(XPtrImage input);
-RcppExport SEXP _magick_magick_image_trim(SEXP inputSEXP) {
+XPtrImage magick_image_trim(XPtrImage input, double fuzz_percent);
+RcppExport SEXP _magick_magick_image_trim(SEXP inputSEXP, SEXP fuzz_percentSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_trim(input));
+    Rcpp::traits::input_parameter< double >::type fuzz_percent(fuzz_percentSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_trim(input, fuzz_percent));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1247,7 +1248,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_resize", (DL_FUNC) &_magick_magick_image_resize, 3},
     {"_magick_magick_image_rotate", (DL_FUNC) &_magick_magick_image_rotate, 2},
     {"_magick_magick_image_chop", (DL_FUNC) &_magick_magick_image_chop, 2},
-    {"_magick_magick_image_trim", (DL_FUNC) &_magick_magick_image_trim, 1},
+    {"_magick_magick_image_trim", (DL_FUNC) &_magick_magick_image_trim, 2},
     {"_magick_magick_image_flip", (DL_FUNC) &_magick_magick_image_flip, 1},
     {"_magick_magick_image_flop", (DL_FUNC) &_magick_magick_image_flop, 1},
     {"_magick_magick_image_crop", (DL_FUNC) &_magick_magick_image_crop, 3},

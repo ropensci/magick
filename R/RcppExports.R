@@ -297,8 +297,8 @@ magick_image_chop <- function(input, geometry) {
     .Call('_magick_magick_image_chop', PACKAGE = 'magick', input, geometry)
 }
 
-magick_image_trim <- function(input) {
-    .Call('_magick_magick_image_trim', PACKAGE = 'magick', input)
+magick_image_trim <- function(input, fuzz_percent) {
+    .Call('_magick_magick_image_trim', PACKAGE = 'magick', input, fuzz_percent)
 }
 
 magick_image_flip <- function(input) {

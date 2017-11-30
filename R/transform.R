@@ -23,15 +23,17 @@
 #' @name transform
 #' @rdname transform
 #' @inheritParams effects
+#' @inheritParams painting
 #' @family image
 #' @export
 #' @examples
 #' logo <- image_read("logo:")
 #' logo <- image_scale(logo, "400")
 #' image_trim(logo)
-image_trim <- function(image){
+image_trim <- function(image, fuzz = 0){
   assert_image(image)
-  magick_image_trim(image)
+  fuzz <- as.numeric(fuzz)
+  magick_image_trim(image, fuzz)
 }
 
 #' @export
