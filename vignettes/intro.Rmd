@@ -145,12 +145,6 @@ The full syntax is specified in the [Magick::Geometry](http://www.imagemagick.or
 frink <- image_read("https://jeroen.github.io/images/frink.png")
 ```
 
-
-```{r echo = FALSE}
-# Reduce color depth because vignette is too large :/
-frink <- image_quantize(frink, 128, colorspace = "cmyk")
-```
-
 ```{r}
 
 print(frink)
@@ -238,10 +232,10 @@ image_annotate(frink, "CONFIDENTIAL", size = 30, color = "red", boxcolor = "pink
   degrees = 60, location = "+50+100")
 
 # Fonts may require ImageMagick has fontconfig
-image_annotate(frink, "The quick brown fox", font = 'Times New Roman', size = 30)
+image_annotate(frink, "The quick brown fox", font = 'Times', size = 30)
 ```
 
-If your system has difficulty finding a font, you can also specify the full path to the font file in the `font` parameter.
+Fonts that are supported on most platforms include `"sans"`, `"mono"`, `"serif"`, `"Times"`, `"Helvetica"`, `"Trebuchet"`, `"Georgia"`, `"Palatino"`or `"Comic Sans"`.
 
 ### Combining with pipes
 
@@ -282,8 +276,11 @@ The examples above concern single images. However all functions in magick have b
 The standard base methods `[` `[[`, `c()` and `length()` are used to manipulate vectors of images which can then be treated as layers or frames. 
 
 ```{r}
-earth <- image_read("https://jeroen.github.io/images/earth.gif")
-earth <- image_scale(earth, "200")
+# Download earth gif and make it a bit smaller for vignette
+earth <- image_read("https://jeroen.github.io/images/earth.gif") %>%
+  image_scale("200x") %>%
+  image_quantize(128)
+
 length(earth)
 earth
 head(image_info(earth))

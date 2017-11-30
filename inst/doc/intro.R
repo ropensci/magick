@@ -19,10 +19,6 @@ image_info(tiger_png)
 # Example image
 frink <- image_read("https://jeroen.github.io/images/frink.png")
 
-## ----echo = FALSE--------------------------------------------------------
-# Reduce color depth because vignette is too large :/
-frink <- image_quantize(frink, 128, colorspace = "cmyk")
-
 ## ------------------------------------------------------------------------
 
 print(frink)
@@ -86,7 +82,7 @@ image_annotate(frink, "CONFIDENTIAL", size = 30, color = "red", boxcolor = "pink
   degrees = 60, location = "+50+100")
 
 # Fonts may require ImageMagick has fontconfig
-image_annotate(frink, "The quick brown fox", font = 'Times New Roman', size = 30)
+image_annotate(frink, "The quick brown fox", font = 'Times', size = 30)
 
 ## ------------------------------------------------------------------------
 frink <- image_read("https://jeroen.github.io/images/frink.png")
@@ -109,8 +105,11 @@ image_read("https://jeroen.github.io/images/frink.png") %>%
   image_annotate("The same thing with pipes", color = "white", size = 30)
 
 ## ------------------------------------------------------------------------
-earth <- image_read("https://jeroen.github.io/images/earth.gif")
-earth <- image_scale(earth, "200")
+# Download earth gif and make it a bit smaller for vignette
+earth <- image_read("https://jeroen.github.io/images/earth.gif") %>%
+  image_scale("200x") %>%
+  image_quantize(128)
+
 length(earth)
 earth
 head(image_info(earth))
