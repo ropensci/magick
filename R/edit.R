@@ -170,10 +170,10 @@ image_write <- function(image, path = NULL, format = NULL, quality = NULL,
 #' @param format output format such as `"png"`, `"jpeg"`, `"gif"`, `"rgb"` or `"rgba"`.
 #' @param depth color depth (either 8 or 16)
 #' @param antialias enable anti-aliasing for text and strokes
-#' @param type a magick [ImageType](https://www.imagemagick.org/Magick++/Enumerations.html#ImageType)
-#' classification for example `grayscale` to convert image to black/white
-#' @param colorspace string with a magick [`ColorspaceType`](https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType)
-#' for example `"gray"`, `"rgb"` or `"cmyk"`
+#' @param type string with [imagetype](https://www.imagemagick.org/Magick++/Enumerations.html#ImageType)
+#' value from [image_types][image_types] for example `grayscale` to convert into black/white
+#' @param colorspace string with a [`colorspace`](https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType)
+#' from [colorspace_types][colorspace_types] for example `"gray"`, `"rgb"` or `"cmyk"`
 image_convert <- function(image, format = NULL, type = NULL, colorspace = NULL, depth = NULL, antialias = NULL){
   assert_image(image)
   depth <- as.integer(depth)

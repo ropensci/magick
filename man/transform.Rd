@@ -47,8 +47,8 @@ image_repage(image)
 
 \item{degrees}{value between 0 and 360 for how many degrees to rotate}
 
-\item{filter}{string specifying a \href{https://www.imagemagick.org/Magick++/Enumerations.html#FilterTypes}{filter}
-from: \code{filter_types()}}
+\item{filter}{string with \href{https://www.imagemagick.org/Magick++/Enumerations.html#FilterTypes}{filter}
+type from: \link{filter_types}}
 
 \item{repage}{resize the canvas to the cropped area}
 

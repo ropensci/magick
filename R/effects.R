@@ -26,8 +26,9 @@ image_reducenoise <- function(image, radius = 1L){
 
 #' @export
 #' @rdname effects
-#' @param noisetype integer between 0 and 5 with
-#' [noisetype](https://www.imagemagick.org/Magick++/Enumerations.html#NoiseType)
+#' @param noisetype string with a
+#' [noisetype](https://www.imagemagick.org/Magick++/Enumerations.html#NoiseType) value
+#' from [noise_types][noise_types].
 #' @examples
 #' image_noise(logo)
 image_noise <- function(image, noisetype = "gaussian"){
@@ -103,7 +104,8 @@ image_negate <- function(image){
 
 #' @export
 #' @rdname effects
-#' @param kernel matrix or string with kernel type for example: `"DoG:0,0,2"` or `"Diamond"`
+#' @param kernel either a matrix or a string with parameterized [kerneltype][kernel_types] such as:
+#' `"DoG:0,0,2"` or `"Diamond"`
 #' @param iterations number of iterations
 #' @param scaling string with kernel scaling. The special flag `"!"` automatically scales to full
 #' dynamic range, for example: \code{"50\%!"}

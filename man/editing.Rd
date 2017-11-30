@@ -53,11 +53,11 @@ image_join(...)
 \item{flatten}{should image be flattened before writing? This also replaces
 transparency with background color.}
 
-\item{type}{a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ImageType}{ImageType}
-classification for example \code{grayscale} to convert image to black/white}
+\item{type}{string with \href{https://www.imagemagick.org/Magick++/Enumerations.html#ImageType}{imagetype}
+value from \link{image_types} for example \code{grayscale} to convert into black/white}
 
-\item{colorspace}{string with a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{ColorspaceType}
-for example \code{"gray"}, \code{"rgb"} or \code{"cmyk"}}
+\item{colorspace}{string with a \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{colorspace}
+from \link{colorspace_types} for example \code{"gray"}, \code{"rgb"} or \code{"cmyk"}}
 
 \item{antialias}{enable anti-aliasing for text and strokes}
 

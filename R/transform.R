@@ -57,8 +57,8 @@ image_rotate <- function(image, degrees){
 
 #' @export
 #' @rdname transform
-#' @param filter string specifying a [filter](https://www.imagemagick.org/Magick++/Enumerations.html#FilterTypes)
-#' from: `filter_types()`
+#' @param filter string with [filter](https://www.imagemagick.org/Magick++/Enumerations.html#FilterTypes)
+#' type from: [filter_types][filter_types]
 #' @examples # Small image
 #' rose <- image_convert(image_read("rose:"), "png")
 #'

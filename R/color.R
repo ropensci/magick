@@ -84,9 +84,9 @@ image_map <- function(image, map, dither = FALSE){
 
 #' @export
 #' @rdname color
-#' @param channel a string with a magick
-#' [channel](https://www.imagemagick.org/Magick++/Enumerations.html#ChannelType) for example
-#' `"alpha"` or `"hue"` or `"cyan"`
+#' @param channel a string with a
+#' [channel](https://www.imagemagick.org/Magick++/Enumerations.html#ChannelType) from
+#' [channel_types][channel_types] for example `"alpha"` or `"hue"` or `"cyan"`
 image_channel <- function(image, channel = 'lightness'){
   magick_image_channel(image, channel)
 }

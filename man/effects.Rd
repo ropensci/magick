@@ -45,14 +45,16 @@ image_convolve(image, kernel = "Gaussian", iterations = 1, scaling = NULL,
 
 \item{radius}{radius, in pixels, for various transformations}
 
-\item{noisetype}{integer between 0 and 5 with
-\href{https://www.imagemagick.org/Magick++/Enumerations.html#NoiseType}{noisetype}}
+\item{noisetype}{string with a
+\href{https://www.imagemagick.org/Magick++/Enumerations.html#NoiseType}{noisetype} value
+from \link{noise_types}.}
 
 \item{sigma}{the standard deviation of the Laplacian, in pixels.}
 
 \item{factor}{image implode factor (special effect)}
 
-\item{kernel}{matrix or string with kernel type for example: \code{"DoG:0,0,2"} or \code{"Diamond"}}
+\item{kernel}{either a matrix or a string with parameterized \link[=kernel_types]{kerneltype} such as:
+\code{"DoG:0,0,2"} or \code{"Diamond"}}
 
 \item{iterations}{number of iterations}
 

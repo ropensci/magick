@@ -1,57 +1,82 @@
 #' Magick Options
 #'
-#' List option types and option values supported in your version of ImageMagick. For
-#' details about each options see
+#' List option types and values supported in your version of ImageMagick. For
+#' descriptions see
 #' [ImageMagick Enumerations](https://www.imagemagick.org/Magick++/Enumerations.html).
 #'
 #' @rdname options
-#' @name options
+#' @name magick_options
+#' @export
 #' @references ImageMagick Manual: [Enumerations](https://www.imagemagick.org/Magick++/Enumerations.html)
-#' @export
-#' @param type a string with any of the `option_types()`
-#' @examples # Check possible values:
-#' option_values("Compose")
-#' option_values("Morphology")
-option_values <- function(type){
-  stopifnot(is.character(type))
-  list_options(type)
-}
-
-#' @export
-#' @rdname options
-option_types <- function(){
-  option_values("List")
-}
-
-#' @export
-#' @rdname options
-option_dump <- function(){
+magick_options <- function(){
   types <- option_types()
   types <- types[types != "Undefined"]
-  out <- lapply(types, option_values)
+  out <- lapply(types, list_options)
   structure(out, names = types)
 }
 
 #' @export
 #' @rdname options
+option_types <- function(){
+  list_options("List")
+}
+
+#' @export
+#' @rdname options
 filter_types <- function(){
-  option_values('filter')
+  list_options('filter')
 }
 
 #' @export
 #' @rdname options
 metric_types <- function(){
-  option_values('metric')
+  list_options('metric')
 }
 
 #' @export
 #' @rdname options
 dispose_types <- function(){
-  option_values('dispose')
+  list_options('dispose')
 }
 
 #' @export
 #' @rdname options
 compose_types <- function(){
-  option_values('compose')
+  list_options('compose')
+}
+
+#' @export
+#' @rdname options
+colorspace_types <- function(){
+  list_options('colorspace')
+}
+
+#' @export
+#' @rdname options
+channel_types <- function(){
+  list_options('channel')
+}
+
+#' @export
+#' @rdname options
+image_types <- function(){
+  list_options('type')
+}
+
+#' @export
+#' @rdname options
+kernel_types <- function(){
+  list_options('kernel')
+}
+
+#' @export
+#' @rdname options
+noise_types <- function(){
+  list_options('noise')
+}
+
+#' @export
+#' @rdname options
+gravity_types <- function(){
+  list_options('gravity')
 }

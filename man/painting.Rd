@@ -18,7 +18,7 @@ image_annotate(image, text, gravity = "northwest", location = "+0+0",
 \item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
 \code{"navyblue"} or \code{"#000080"}}
 
-\item{point}{string indicating the flood-fill starting point}
+\item{point}{a \link{geometry_point} string indicating the starting point of the flood-fill}
 
 \item{fuzz}{Fuzz percentage: value between 0 and 100. Relative distance between
 colors to be considered similar in the filling algorithm.}
@@ -26,7 +26,8 @@ colors to be considered similar in the filling algorithm.}
 \item{text}{annotation text}
 
 \item{gravity}{string with
-\href{https://www.imagemagick.org/Magick++/Enumerations.html#GravityType}{gravity type}}
+\href{https://www.imagemagick.org/Magick++/Enumerations.html#GravityType}{gravity}
+value from \link{gravity_types}.}
 
 \item{location}{geometry string with location relative to \code{gravity}}
 
@@ -34,13 +35,14 @@ colors to be considered similar in the filling algorithm.}
 
 \item{size}{font-size in pixels}
 
-\item{font}{string with font family, for example \code{"sans"}, \code{"mono"}, \code{"serif"},
-\code{"Times"}, \code{"Helvetica"}, \code{"Trebuchet"}, \code{"Georgia"}, \code{"Palatino"} or \code{"Comic Sans"}.
-This requires at least ImageMagick 6.9.2.}
+\item{font}{string with font family such as \code{"sans"}, \code{"mono"}, \code{"serif"},
+\code{"Times"}, \code{"Helvetica"}, \code{"Trebuchet"}, \code{"Georgia"}, \code{"Palatino"} or \code{"Comic Sans"}.}
 
-\item{strokecolor}{adds a stroke (border around the text)}
+\item{strokecolor}{a \href{https://www.imagemagick.org/Magick++/Color.html}{color string}
+adds a stroke (border around the text)}
 
-\item{boxcolor}{background color that annotation text is rendered on.}
+\item{boxcolor}{a \href{https://www.imagemagick.org/Magick++/Color.html}{color string}
+for background color that annotation text is rendered on.}
 }
 \description{
 The \code{\link[=image_fill]{image_fill()}} function performs flood-fill by painting starting point and all

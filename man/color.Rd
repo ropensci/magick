@@ -54,8 +54,8 @@ current position corresponding to an argument range of 0 to 200 (100 for no chan
 \item{max}{preferred number of colors in the image. The actual number of colors in the image may
 be less than your request, but never more.}
 
-\item{colorspace}{string with a magick \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{ColorspaceType}
-for example \code{"gray"}, \code{"rgb"} or \code{"cmyk"}}
+\item{colorspace}{string with a \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{colorspace}
+from \link{colorspace_types} for example \code{"gray"}, \code{"rgb"} or \code{"cmyk"}}
 
 \item{dither}{apply Floyd/Steinberg error diffusion to the image: averages intensities of several
 neighboring pixels}
@@ -66,9 +66,9 @@ may be used to manually adjust the tree depth.}
 
 \item{map}{reference image to map colors from}
 
-\item{channel}{a string with a magick
-\href{https://www.imagemagick.org/Magick++/Enumerations.html#ChannelType}{channel} for example
-\code{"alpha"} or \code{"hue"} or \code{"cyan"}}
+\item{channel}{a string with a
+\href{https://www.imagemagick.org/Magick++/Enumerations.html#ChannelType}{channel} from
+\link{channel_types} for example \code{"alpha"} or \code{"hue"} or \code{"cyan"}}
 
 \item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
 \code{"navyblue"} or \code{"#000080"}}
