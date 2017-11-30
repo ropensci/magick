@@ -69,3 +69,13 @@ image_resize(logo, geometry_size_percent(50))
 image_resize(logo, geometry_size_percent(50, 20))
 
 }
+\seealso{
+Other image: \code{\link{_index_}}, \code{\link{analysis}},
+  \code{\link{animation}}, \code{\link{attributes}},
+  \code{\link{color}}, \code{\link{composite}},
+  \code{\link{device}}, \code{\link{editing}},
+  \code{\link{effects}}, \code{\link{ocr}},
+  \code{\link{options}}, \code{\link{painting}},
+  \code{\link{transform}}
+}
+\concept{image}

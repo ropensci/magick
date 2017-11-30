@@ -17,6 +17,7 @@
 #' - [editing] - basic image IO: `read`, `write`, `convert`, `join`, `display`, `brose`
 #' - [effects] - fun effects: `despecle`, `reducenoise`, `noise`, `blur`, `charcoal`,
 #'   `edge`, `oilpaint`, `emboss`, `implode`, `negate`
+#' - [geometry] - specify points, areas and sizes using geometry syntax
 #' - [ocr] - extract text from image using [tesseract][tesseract::tesseract] package
 #' - [options] - list option types and values supported in your version of ImageMagick
 #' - [painting] - flood fill and annotating text

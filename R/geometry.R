@@ -15,6 +15,7 @@
 #'  - __`"500x300+10+20"`__ -- *Crop image to 500 by 300 at position 10,20*
 #'
 #' @export
+#' @family image
 #' @rdname geometry
 #' @name geometry
 #' @param x left offset in pixels
