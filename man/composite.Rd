@@ -7,7 +7,7 @@
 \alias{image_frame}
 \title{Image Composite}
 \usage{
-image_composite(image, composite_image, operator = "atop", offset = "0x0",
+image_composite(image, composite_image, operator = "atop", offset = "+0+0",
   compose_args = "")
 
 image_border(image, color = "lightgray", geometry = "10x10",
@@ -21,9 +21,10 @@ image_frame(image, color = "lightgray", geometry = "25x25+6+6")
 \item{composite_image}{composition image}
 
 \item{operator}{string with a
-\href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}}
+\href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}
+from \link[=compose_types]{compose_types()}}
 
-\item{offset}{geometry string with offset}
+\item{offset}{a \link{geometry_point} string to set x/y offset of top image}
 
 \item{compose_args}{additional arguments needed for some composite operations}
 

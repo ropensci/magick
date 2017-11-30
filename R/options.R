@@ -31,3 +31,27 @@ option_dump <- function(){
   out <- lapply(types, option_values)
   structure(out, names = types)
 }
+
+#' @export
+#' @rdname options
+filter_types <- function(){
+  option_values('filter')
+}
+
+#' @export
+#' @rdname options
+metric_types <- function(){
+  option_values('metric')
+}
+
+#' @export
+#' @rdname options
+dispose_types <- function(){
+  option_values('dispose')
+}
+
+#' @export
+#' @rdname options
+compose_types <- function(){
+  option_values('compose')
+}

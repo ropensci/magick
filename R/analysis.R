@@ -17,7 +17,8 @@
 #' @rdname analysis
 #' @inheritParams editing
 #' @param reference_image another image to compare to
-#' @param metric string with [metric type](http://www.imagemagick.org/script/command-line-options.php#metric)
+#' @param metric string with a [metric](http://www.imagemagick.org/script/command-line-options.php#metric)
+#' from [metric_types()][metric_types].
 #' @examples
 #' logo <- image_read("logo:")
 #' logo2 <- image_blur(logo, 3)

@@ -5,6 +5,10 @@
 \alias{option_values}
 \alias{option_types}
 \alias{option_dump}
+\alias{filter_types}
+\alias{metric_types}
+\alias{dispose_types}
+\alias{compose_types}
 \title{Magick Options}
 \usage{
 option_values(type)
@@ -12,6 +16,14 @@ option_values(type)
 option_types()
 
 option_dump()
+
+filter_types()
+
+metric_types()
+
+dispose_types()
+
+compose_types()
 }
 \arguments{
 \item{type}{a string with any of the \code{option_types()}}

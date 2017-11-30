@@ -37,12 +37,14 @@ image_apply(image, FUN, ...)
 
 \item{loop}{how many times to repeat the animation. Default is infinite.}
 
-\item{dispose}{frame \href{http://www.imagemagick.org/Usage/anim_basics/#dispose}{disposal method}}
+\item{dispose}{a frame \href{http://www.imagemagick.org/Usage/anim_basics/#dispose}{disposal method}
+from \link[=dispose_types]{dispose_types()}}
 
 \item{frames}{number of frames to use in output animation}
 
 \item{operator}{string with a
-\href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}}
+\href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}
+from \link[=compose_types]{compose_types()}}
 
 \item{stack}{place images top-to-bottom (TRUE) or left-to-right (FALSE)}
 

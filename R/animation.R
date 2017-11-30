@@ -26,7 +26,8 @@
 #' @name animation
 #' @family image
 #' @aliases image_coalesce
-#' @param dispose frame [disposal method](http://www.imagemagick.org/Usage/anim_basics/#dispose)
+#' @param dispose a frame [disposal method](http://www.imagemagick.org/Usage/anim_basics/#dispose)
+#' from [dispose_types()][dispose_types]
 #' @param fps frames per second
 #' @param loop how many times to repeat the animation. Default is infinite.
 image_animate <- function(image, fps = 10, loop = 0, dispose = c("background", "previous", "none")){

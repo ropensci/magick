@@ -2,13 +2,19 @@
 % Please edit documentation in R/geometry.R
 \name{geometry}
 \alias{geometry}
-\alias{coordinate}
+\alias{geometry_point}
+\alias{geometry_area}
+\alias{geometry_size_pixels}
+\alias{geometry_size_percent}
 \title{Geometry Helpers}
 \usage{
-coordinate(x, y)
+geometry_point(x, y)
 
-geometry(width, height, x_off = 0, y_off = 0, percent = FALSE,
-  preserve_aspect = TRUE)
+geometry_area(width = NULL, height = NULL, x_off = 0, y_off = 0)
+
+geometry_size_pixels(width = NULL, height = NULL, preserve_aspect = TRUE)
+
+geometry_size_percent(width = 100, height = NULL)
 }
 \arguments{
 \item{x}{left offset in pixels}
@@ -23,24 +29,43 @@ geometry(width, height, x_off = 0, y_off = 0, percent = FALSE,
 
 \item{y_off}{offset in pixels on y axis}
 
-\item{percent}{interpret width and height as a percentage of the current size.}
-
-\item{preserve_aspect}{if FALSE, resize to width and height exactly, loosing original aspect ratio.}
+\item{preserve_aspect}{if FALSE, resize to width and height exactly, loosing original
+aspect ratio. Only one of \code{percent} and \code{preserve_aspect} may be \code{TRUE}.}
 }
 \description{
-ImageMagick uses a special geometry syntax to specify coordinates and shapes.
-You can simply specify these as strings but you can also use these functions
-to construct them.
+ImageMagick uses a handy geometry syntax to specify coordinates and shapes
+for use in image transformations. You can either specify these manually as
+strings or use the helper functions below.
 }
 \details{
 See \href{http://www.imagemagick.org/Magick++/Geometry.html}{ImageMagick Manual}
-for syntax specification.
+for details about the syntax specification.
+Examples of \code{geometry} strings:
+\itemize{
+\item \strong{\code{"500x300"}}       -- \emph{Resize image keeping aspect ratio, such that width does not exceed 500 and the height does not exceed 300.}
+\item \strong{\code{"500x300!"}}      -- \emph{Resize image to 500 by 300, ignoring aspect ratio}
+\item \strong{\code{"500x"}}          -- \emph{Resize width to 500 keep aspect ratio}
+\item \strong{\code{"x300"}}          -- \emph{Resize height to 300 keep aspect ratio}
+\item \strong{\code{"50\%x20\%"}} -- \emph{Resize width to 50 percent and height to 20 percent of original}
+\item \strong{\code{"500x300+10+20"}} -- \emph{Crop image to 500 by 300 at position 10,20}
+}
 }
 \examples{
-coordinate(50, 80)
-geometry(100, 200)
-geometry(100, 200, 10, 10)
-}
-\references{
-\href{http://www.imagemagick.org/Magick++/Geometry.html}{ImageMagick Manual}
+# Specify a point
+logo <- image_read("logo:")
+image_annotate(logo, "Some text", location = geometry_point(100, 200), size = 24)
+
+# Specify image area
+image_crop(logo, geometry_area(300, 300), repage = FALSE)
+image_crop(logo, geometry_area(300, 300, 100, 100), repage = FALSE)
+
+# Specify image size
+image_resize(logo, geometry_size_pixels(300))
+image_resize(logo, geometry_size_pixels(height = 300))
+image_resize(logo, geometry_size_pixels(300, 300, preserve_aspect = FALSE))
+
+# resize relative to current size
+image_resize(logo, geometry_size_percent(50))
+image_resize(logo, geometry_size_percent(50, 20))
+
 }

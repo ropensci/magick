@@ -16,9 +16,10 @@
 #' @family image
 #' @inheritParams editing
 #' @inheritParams painting
-#' @param offset geometry string with offset
+#' @param offset a [geometry_point][geometry_point] string to set x/y offset of top image
 #' @param operator string with a
 #' [composite operator](https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator)
+#' from [compose_types()][compose_types]
 #' @param composite_image composition image
 #' @param compose_args additional arguments needed for some composite operations
 #' @examples # Compose images using one of many operators
@@ -30,7 +31,7 @@
 #'
 #' # Same as 'blend 50' in the command line
 #' image_composite(imlogo, rlogo, operator = "blend", compose_args="50")
-image_composite <- function(image, composite_image, operator = "atop", offset = "0x0", compose_args = ""){
+image_composite <- function(image, composite_image, operator = "atop", offset = "+0+0", compose_args = ""){
   assert_image(image)
   assert_image(composite_image)
   compose_args <- as.character(compose_args)
