@@ -194,9 +194,10 @@ image_write_frame <- function(image, format = "rgba", i = 1){
 #' @param channels string with image channel(s) for example `"rgb"`, `"rgba"`,
 #' `"cmyk"`,`"gray"`, or `"ycbcr"`. Default is either `"gray"`, `"rgb"` or `"rgba"`
 #' depending on the image
-image_data <- function(image, channels = NULL){
-  if(length(image) > 1)
-    image <- image[1]
+#' @param frame integer setting which frame to extract from the image
+image_data <- function(image, channels = NULL, frame = 1){
+  if(length(image) > 1 || frame > 1)
+    image <- image[frame]
   if(!length(channels) || !nchar(channels)){
     info <- image_info(image)
     channels <- if(tolower(info$colorspace) == "gray"){
