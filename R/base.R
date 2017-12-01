@@ -80,13 +80,14 @@
 "print.magick-image" <- function(x, info = TRUE, ...){
   img <- x
   viewer <- getOption("viewer")
+  viewer_supported <- c("bmp", "png", "jpeg", "jpg", "svg", "gif", "webp")
   is_knit_image <- isTRUE(getOption('knitr.in.progress'))
   if(!is_knit_image && is.function(viewer) && !magick_image_dead(x) && length(img)){
     format <- tolower(image_info(img[1])$format)
     if(length(img) > 1 && format != "gif"){
       img <- image_animate(img, fps = 1)
       format <- "gif"
-    } else if(format == "xc"){
+    } else if(is.na(match(format, viewer_supported))){
       img <- image_convert(img, "PNG")
       format <- 'png'
     }
