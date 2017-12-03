@@ -28,7 +28,8 @@ XPtrImage copy (XPtrImage image);
 std::string normalize_font(const char * family);
 
 // Fuzz factor
-#define fuzz_pct_to_abs(x) ((x / 100 ) * (pow(MAGICKCORE_QUANTUM_DEPTH, 4) + 1))
+#define MQD MAGICKCORE_QUANTUM_DEPTH
+#define fuzz_pct_to_abs(x) ((x / 100 ) * (MQD * MQD * MQD * MQD + 1))
 
 //IM 6~7 compatiblity
 #if MagickLibVersion >= 0x700
