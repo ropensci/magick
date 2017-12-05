@@ -7,7 +7,9 @@
 
 #define Option(type, val) MagickCore::CommandOptionToMnemonic(type, val);
 
-//Workaround for GCC-7: https://github.com/ImageMagick/ImageMagick/issues/707
+//Workaround for GCC-7:
+// - https://github.com/ImageMagick/ImageMagick/issues/707
+// - https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=871300
 std::string col_to_str(Magick::Color col){
   char output[10] = "#";
   Magick::Quantum red(col.myRedQ());
