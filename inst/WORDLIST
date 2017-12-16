@@ -1,13 +1,11 @@
 AutoViewer
 CentOS
 colorspace
-ColorspaceType
 CompositeOperator
 despeckle
 dev
 DFT
 EBImage
-filtertype
 filterType
 frink
 gganimate
@@ -15,10 +13,10 @@ ghostscript
 grayscale
 greyscale
 homebrew
+IDE's
 imagemagick
 ImageMagick
 imagetype
-ImageType
 jpeg
 knitr
 Laplacian
@@ -46,7 +44,6 @@ subregion
 svg
 tesseract
 toc
-TrueType
 vapply
 vectorized
 VignetteEncoding
