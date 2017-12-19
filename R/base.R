@@ -94,6 +94,8 @@
     tmp <- file.path(tempdir(), paste0("preview.", format))
     image_write(img, path = tmp, format = format)
     viewer(tmp)
+  } else if(isTRUE(getOption('jupyter.in_kernel'))){
+    jupyter_print_image(img)
   }
   if(isTRUE(info))
     print(image_info(x))
@@ -127,4 +129,19 @@
 #' @importFrom graphics plot
 "plot.magick-image" <- function(x, ...){
   plot(as.raster(x), ...)
+}
+
+jupyter_print_image <- function(img){
+  if(!length(img))
+    return()
+  format <- tolower(image_info(img[1])$format)
+  if(!(format %in% c("png", "jpg", "jpeg", "svg")))
+    format <- "png"
+  tmp <- image_write(img, format = format)
+  switch (format,
+    png = IRdisplay::display_png(tmp),
+    jpg = IRdisplay::display_jpeg(tmp),
+    jpeg = IRdisplay::display_jpeg(tmp),
+    svg = IRdisplay::display_svg(rawToChar(tmp))
+  )
 }

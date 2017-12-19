@@ -36,6 +36,7 @@ Suggests:
     raster,
     rgdal,
     gapminder,
+    IRdisplay,
     tesseract
 RoxygenNote: 6.0.1.9000
 Roxygen: list(markdown = TRUE)

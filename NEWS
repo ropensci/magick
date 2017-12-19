@@ -1,3 +1,6 @@
+1.7
+  - Add support for displaying images in Jupyter notebook
+
 1.6
   - Automatically repage transformations that may modify image size
   - Added image_repage() to be consistent with command line tool
