@@ -135,13 +135,20 @@ jupyter_print_image <- function(img){
   if(!length(img))
     return()
   format <- tolower(image_info(img[1])$format)
-  if(!(format %in% c("png", "jpg", "jpeg", "svg")))
+  if(!(format %in% c("png", "jpg", "jpeg", "svg", "gif")))
     format <- "png"
   tmp <- image_write(img, format = format)
   switch (format,
     png = IRdisplay::display_png(tmp),
     jpg = IRdisplay::display_jpeg(tmp),
     jpeg = IRdisplay::display_jpeg(tmp),
+    gif = display_gif(tmp),
     svg = IRdisplay::display_svg(rawToChar(tmp))
   )
+}
+
+## Placeholder until IRdisplay::display_gif() is available
+display_gif <- function(buf){
+  contents <- jsonlite::base64_enc(buf)
+  IRdisplay::display_html(sprintf('<img src="data:image/gif;base64,%s">', contents))
 }
