@@ -26,6 +26,7 @@ Imports:
 LinkingTo: Rcpp
 Suggests:
     spelling,
+    jsonlite,
     methods,
     rmarkdown,
     rsvg,
