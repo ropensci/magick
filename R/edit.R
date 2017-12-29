@@ -47,15 +47,12 @@
 #' par(ask=FALSE)
 #' plot(raster)
 #'
-#' # Read bitmap arrays
-#' curl::curl_download("https://www.r-project.org/logo/Rlogo.png", "Rlogo.png")
-#' image_read(png::readPNG("Rlogo.png"))
-#'
+#' # Read bitmap arrays from from other image packages
 #' curl::curl_download("https://jeroen.github.io/images/example.webp", "example.webp")
-#' image_read(webp::read_webp("example.webp"))
+#' if(require(webp)) image_read(webp::read_webp("example.webp"))
 #'
 #' curl::curl_download("http://jeroen.github.io/images/tiger.svg", "tiger.svg")
-#' image_read(rsvg::rsvg("tiger.svg"))
+#' if(require(rsvg)) image_read(rsvg::rsvg("tiger.svg"))
 image_read <- function(path, density = NULL, depth = NULL, strip = FALSE){
   density <- as.character(density)
   depth <- as.integer(depth)
