@@ -207,7 +207,7 @@ kern
 This kernel changes each pixel to the mean of its horizontal and vertical neighboring pixels, which results in a slight blurring effect in the right-hand image below:
 
 ```{r}
-img <- image_resize(image_read('logo:'), "300x300")
+img <- image_resize(logo, "300x300")
 img_blurred <- image_convolve(img, kern)
 image_append(c(img, img_blurred))
 ```
@@ -358,7 +358,7 @@ image_convert(manual[1], "png", 8)
 
 Magick requires ghostscript to render the PDF. An alternative method to read pdf is render it via the pdftools package:
 
-```{r}
+```{r, eval = require(pdftools, quietly = TRUE)}
 library(pdftools)
 bitmap <- pdf_render_page('https://cran.r-project.org/web/packages/magick/magick.pdf',
   page = 1, dpi = 72, numeric = FALSE)
@@ -543,7 +543,7 @@ A recent addition to the package is to extract text from images using OCR. This 
 install.packages("tesseract")
 ```
 
-```{r, eval = isTRUE(require(tesseract, quietly = TRUE))}
+```{r, eval = require(tesseract, quietly = TRUE)}
 img <- image_read("http://jeroen.github.io/images/testocr.png")
 print(img)
 

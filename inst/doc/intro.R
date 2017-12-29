@@ -65,7 +65,7 @@ kern[3, 2] <- 0.25
 kern
 
 ## ------------------------------------------------------------------------
-img <- image_resize(image_read('logo:'), "300x300")
+img <- image_resize(logo, "300x300")
 img_blurred <- image_convolve(img, kern)
 image_append(c(img, img_blurred))
 
@@ -154,7 +154,7 @@ image_composite(image_scale(bigdata, "x400"), bigdatafrink, offset = "+180+100")
 #  # Convert the first page to PNG
 #  image_convert(manual[1], "png", 8)
 
-## ------------------------------------------------------------------------
+## ---- eval = require(pdftools, quietly = TRUE)---------------------------
 library(pdftools)
 bitmap <- pdf_render_page('https://cran.r-project.org/web/packages/magick/magick.pdf',
   page = 1, dpi = 72, numeric = FALSE)
@@ -254,7 +254,7 @@ raster::plotRGB(rr, asp = 1)
 ## ----eval=FALSE----------------------------------------------------------
 #  install.packages("tesseract")
 
-## ---- eval = isTRUE(require(tesseract, quietly = TRUE))------------------
+## ---- eval = require(tesseract, quietly = TRUE)--------------------------
 img <- image_read("http://jeroen.github.io/images/testocr.png")
 print(img)
 

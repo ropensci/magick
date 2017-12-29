@@ -207,7 +207,7 @@ kern
 This kernel changes each pixel to the mean of its horizontal and vertical neighboring pixels, which results in a slight blurring effect in the right-hand image below:
 
 ```{r}
-img <- image_resize(image_read('logo:'), "300x300")
+img <- image_resize(logo, "300x300")
 img_blurred <- image_convolve(img, kern)
 image_append(c(img, img_blurred))
 ```

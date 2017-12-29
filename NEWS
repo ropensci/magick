@@ -1,5 +1,7 @@
 1.7
   - Add support for displaying images in Jupyter notebook
+  - Export example images: logo, wizard, rose, granite
+  - Fixes for Solaris
 
 1.6
   - Automatically repage transformations that may modify image size

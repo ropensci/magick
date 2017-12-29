@@ -1,7 +1,7 @@
 Package: magick
 Type: Package
 Title: Advanced Graphics and Image-Processing in R
-Version: 1.6.9000
+Version: 1.7
 Author: Jeroen Ooms
 Maintainer: Jeroen Ooms <jeroen@berkeley.edu>
 Description: Bindings to 'ImageMagick': the most comprehensive open-source image
@@ -41,3 +41,4 @@ Suggests:
     tesseract
 RoxygenNote: 6.0.1.9000
 Roxygen: list(markdown = TRUE)
+Language: en-US
