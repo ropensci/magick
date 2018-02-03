@@ -12,7 +12,6 @@ matrix:
       osx_image: xcode9.2
       brew_packages: imagemagick
       env: R_CODECOV=true
-      before_install: sudo apt-get update -y && sudo apt-get dist-upgrade -y
     - os: osx
       latex: false
       osx_image: xcode9.2
