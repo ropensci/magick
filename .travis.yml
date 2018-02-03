@@ -8,10 +8,6 @@ matrix:
   include:
     - os: linux
       dist: trusty
-      addons:
-        apt:
-          sources:
-            - sourceline: 'ppa:opencpu/imagemagick'
     - os: osx
       osx_image: xcode9.2
       brew_packages: imagemagick
@@ -28,6 +24,9 @@ matrix:
       disable_homebrew: true
 
 addons:
+    apt:
+      sources:
+        - sourceline: 'ppa:opencpu/imagemagick'
     packages:
       - libmagick++-dev
       - librsvg2-dev
