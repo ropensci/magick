@@ -24,9 +24,9 @@ matrix:
       disable_homebrew: true
 
 addons:
-    apt:
-      sources:
-        - sourceline: 'ppa:opencpu/imagemagick'
+  apt:
+    sources:
+      - sourceline: 'ppa:opencpu/imagemagick'
     packages:
       - libmagick++-dev
       - librsvg2-dev
