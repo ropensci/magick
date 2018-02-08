@@ -112,8 +112,14 @@
   if(!length(x))
     return(invisible())
   ext <- ifelse(all(tolower(image_info(x)$format) == "gif"), "gif", "png")
-  tmp <- tempfile(fileext = paste0(".", ext))
-  image_write(x, path = tmp, format = ext)
+  fig.cur <- knitr:::plot_counter()
+  tmp <- knitr::fig_path(ext, number = fig.cur)
+  knitr:::in_base_dir({
+    if (!file_test("-d", dirname(tmp))) {
+      dir.create(dirname(tmp), recursive = TRUE)
+    }
+    image_write(x, path = tmp, format = ext)
+  })
   knitr::include_graphics(tmp)
 }
 
