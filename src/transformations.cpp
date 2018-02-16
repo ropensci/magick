@@ -131,7 +131,12 @@ XPtrImage magick_image_blur( XPtrImage input, const double radius = 1, const dou
 // [[Rcpp::export]]
 XPtrImage magick_image_charcoal( XPtrImage input, const double radius = 1, const double sigma = 0.5){
   XPtrImage output = copy(input);
+#if MagickLibVersion >= 0x700
+  for(size_t i = 0; i < output->size(); i++)
+    output->at(i).charcoalChannel(Magick::ChannelType(Magick::CompositeChannels ^ Magick::AlphaChannel), radius, sigma);
+#else
   for_each ( output->begin(), output->end(), Magick::charcoalImage(radius, sigma));
+#endif
   return output;
 }
 
