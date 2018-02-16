@@ -11,8 +11,8 @@
 #define pi 3.14159265359
 
 Magick::Color col2magick(rcolor col){
-  char str[100];
-  snprintf(str, 10, "#%02x%02x%02x%02x%c", R_RED(col), R_GREEN(col), R_BLUE(col), R_ALPHA(col), 0);
+  char str[10];
+  snprintf(str, 10, "#%02x%02x%02x%02x", R_RED(col), R_GREEN(col), R_BLUE(col), R_ALPHA(col));
   return Magick::Color(str);
 }
 
