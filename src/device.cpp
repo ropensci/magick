@@ -9,14 +9,11 @@
 #include "magick_types.h"
 #include <R_ext/GraphicsEngine.h>
 #define pi 3.14159265359
-#define qrx (QuantumRange / 255)
 
 Magick::Color col2magick(rcolor col){
-  return Magick::Color(
-    R_RED(col) * qrx,
-    R_GREEN(col) * qrx,
-    R_BLUE(col) * qrx,
-    R_ALPHA(col) * qrx);
+  char str[100] = {0};
+  snprintf(str, 100, "rgba(%u,%u,%u,%f)", R_RED(col), R_GREEN(col), R_BLUE(col), R_ALPHA(col) / 255.0);
+  return Magick::Color(str);
 }
 
 // Magick Device Parameters
