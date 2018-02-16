@@ -396,7 +396,7 @@ static void image_text(double x, double y, const char *str, double rot,
 
   /* text color */
   Magick::Color fill(col2name(gc->col));
-  Magick::Color stroke;
+  Magick::Color stroke("none");
 
   /* there is a bug in IM that prefers these properties over the draw list ones */
   Frame * graph = getgraph(dd);
