@@ -1,6 +1,8 @@
 1.7
+  - Several fixes for IM7, mostly related to alpha channels
   - Add support for displaying images in Jupyter notebook
   - Export example images: logo, wizard, rose, granite
+  - Better mapping of R internal colors to proper RGB strings
   - Fixes for Solaris
 
 1.6
