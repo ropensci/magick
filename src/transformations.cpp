@@ -262,7 +262,12 @@ XPtrImage magick_image_orient( XPtrImage input, Rcpp::CharacterVector orientatio
     if(orientation.length()){
       output->at(i).orientation(Orientation(orientation.at(0)));
     } else {
+      //https://github.com/ImageMagick/ImageMagick/commit/b559cab
+#if MagickLibVersion >= 0x686
       output->at(i).autoOrient();
+#else
+      Rcpp::warning("ImageMagick too old to support autoOrient (requires >= 6.8.6)");
+#endif
     }
   }
   return output;
