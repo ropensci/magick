@@ -65,7 +65,7 @@ type from: \link{filter_types}}
 \item{density}{geometry string with vertical and horizontal resolution in pixels of
 the image. Specifies an image density when decoding a Postscript or PDF.}
 
-\item{orientation}{string to set image orientationto one of the \link{orientation_types}.
+\item{orientation}{string to set image orientation one of the \link{orientation_types}.
 If \code{NULL} it applies auto-orientation which guesses the correct orientation from the EXIF.}
 }
 \description{
@@ -120,7 +120,8 @@ image_sample(rose, "400x")
 image_crop(logo, "400x400+200+200")
 image_flip(logo)
 image_flop(logo)
-image_orient(logo)
+if(magick_config()$version > "6.8.6")
+  image_orient(logo)
 }
 \seealso{
 Other image: \code{\link{_index_}}, \code{\link{analysis}},
