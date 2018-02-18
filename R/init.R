@@ -7,9 +7,6 @@
 
   packageStartupMessage(sprintf("Linking to ImageMagick %s\nEnabled features: %s\nDisabled features: %s",
                                 as.character(magick_config()$version), has, not))
-  if(magick_config()$version >= 7)
-    packageStartupMessage(c("Attention: the 'magick' package has been compiled with ImageMagick-7 which is known to have problems.\n",
-"Rebuilding against ImageMagick-6 is recommended."))
 
   # For RStudio
   autoviewer_enable()
