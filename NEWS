@@ -3,6 +3,7 @@
   - Add support for displaying images in Jupyter notebook
   - Export example images: logo, wizard, rose, granite
   - Better mapping of R internal colors to proper RGB strings
+  - Added image_orient() to (auto) orient image
   - Fixes for Solaris
 
 1.6

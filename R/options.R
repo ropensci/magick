@@ -81,3 +81,9 @@ noise_types <- function(){
 gravity_types <- function(){
   list_options('gravity')
 }
+
+#' @export
+#' @rdname options
+orientation_types <- function(){
+  list_options('orientation')
+}

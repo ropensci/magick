@@ -14,6 +14,7 @@
 \alias{kernel_types}
 \alias{noise_types}
 \alias{gravity_types}
+\alias{orientation_types}
 \title{Magick Options}
 \usage{
 magick_options()
@@ -39,6 +40,8 @@ kernel_types()
 noise_types()
 
 gravity_types()
+
+orientation_types()
 }
 \description{
 List option types and values supported in your version of ImageMagick. For

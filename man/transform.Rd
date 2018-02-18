@@ -14,6 +14,7 @@
 \alias{image_deskew}
 \alias{image_page}
 \alias{image_repage}
+\alias{image_orient}
 \title{Image Transform}
 \usage{
 image_trim(image, fuzz = 0)
@@ -39,6 +40,8 @@ image_deskew(image, threshold = 40)
 image_page(image, pagesize = NULL, density = NULL)
 
 image_repage(image)
+
+image_orient(image, orientation = NULL)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
@@ -61,6 +64,9 @@ type from: \link{filter_types}}
 
 \item{density}{geometry string with vertical and horizontal resolution in pixels of
 the image. Specifies an image density when decoding a Postscript or PDF.}
+
+\item{orientation}{string to set image orientationto one of the \link{orientation_types}.
+If \code{NULL} it applies auto-orientation which guesses the correct orientation from the EXIF.}
 }
 \description{
 Basic transformations like rotate, resize, crop and flip. The \link{geometry} syntax
@@ -114,6 +120,7 @@ image_sample(rose, "400x")
 image_crop(logo, "400x400+200+200")
 image_flip(logo)
 image_flop(logo)
+image_orient(logo)
 }
 \seealso{
 Other image: \code{\link{_index_}}, \code{\link{analysis}},

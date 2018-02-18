@@ -1115,6 +1115,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_orient
+XPtrImage magick_image_orient(XPtrImage input, Rcpp::CharacterVector orientation);
+RcppExport SEXP _magick_magick_image_orient(SEXP inputSEXP, SEXP orientationSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type orientation(orientationSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_orient(input, orientation));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_despeckle
 XPtrImage magick_image_despeckle(XPtrImage input, int times);
 RcppExport SEXP _magick_magick_image_despeckle(SEXP inputSEXP, SEXP timesSEXP) {
@@ -1265,6 +1277,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_format", (DL_FUNC) &_magick_magick_image_format, 6},
     {"_magick_magick_image_page", (DL_FUNC) &_magick_magick_image_page, 3},
     {"_magick_magick_image_repage", (DL_FUNC) &_magick_magick_image_repage, 1},
+    {"_magick_magick_image_orient", (DL_FUNC) &_magick_magick_image_orient, 2},
     {"_magick_magick_image_despeckle", (DL_FUNC) &_magick_magick_image_despeckle, 2},
     {"_magick_magick_image_reducenoise", (DL_FUNC) &_magick_magick_image_reducenoise, 2},
     {"_magick_magick_image_annotate", (DL_FUNC) &_magick_magick_image_annotate, 10},

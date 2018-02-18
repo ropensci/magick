@@ -105,6 +105,14 @@ Magick::Color Color(const char * str){
   return val;
 }
 
+Magick::OrientationType Orientation(const char * str){
+  ssize_t val = MagickCore::ParseCommandOption(
+    MagickCore::MagickOrientationOptions, Magick::MagickFalse, str);
+  if(val < 0)
+    throw std::runtime_error(std::string("Invalid OrientationType value: ") + str);
+  return (Magick::OrientationType) val;
+}
+
 #if MagickLibVersion >= 0x700
 Magick::Point Point(const char * str){
   Magick::Point point(str);
@@ -244,6 +252,19 @@ XPtrImage magick_image_page( XPtrImage input, Rcpp::CharacterVector pagesize, Rc
 XPtrImage magick_image_repage( XPtrImage input){
   XPtrImage output = copy(input);
   for_each (output->begin(), output->end(), Magick::pageImage(Magick::Geometry()));
+  return output;
+}
+
+// [[Rcpp::export]]
+XPtrImage magick_image_orient( XPtrImage input, Rcpp::CharacterVector orientation){
+  XPtrImage output = copy(input);
+  for(size_t i = 0; i < output->size(); i++){
+    if(orientation.length()){
+      output->at(i).orientation(Orientation(orientation.at(0)));
+    } else {
+      output->at(i).autoOrient();
+    }
+  }
   return output;
 }
 

@@ -365,6 +365,10 @@ magick_image_repage <- function(input) {
     .Call('_magick_magick_image_repage', PACKAGE = 'magick', input)
 }
 
+magick_image_orient <- function(input, orientation) {
+    .Call('_magick_magick_image_orient', PACKAGE = 'magick', input, orientation)
+}
+
 magick_image_despeckle <- function(input, times) {
     .Call('_magick_magick_image_despeckle', PACKAGE = 'magick', input, times)
 }
