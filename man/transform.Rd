@@ -66,7 +66,8 @@ type from: \link{filter_types}}
 the image. Specifies an image density when decoding a Postscript or PDF.}
 
 \item{orientation}{string to set image orientation one of the \link{orientation_types}.
-If \code{NULL} it applies auto-orientation which guesses the correct orientation from the EXIF.}
+If \code{NULL} it applies auto-orientation which tries to infer the correct orientation
+from the Exif data.}
 }
 \description{
 Basic transformations like rotate, resize, crop and flip. The \link{geometry} syntax

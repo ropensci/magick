@@ -159,7 +159,8 @@ image_repage <- function(image){
 #' @export
 #' @rdname transform
 #' @param orientation string to set image orientation one of the [orientation_types].
-#' If `NULL` it applies auto-orientation which guesses the correct orientation from the EXIF.
+#' If `NULL` it applies auto-orientation which tries to infer the correct orientation
+#' from the Exif data.
 #' @examples
 #' if(magick_config()$version > "6.8.6")
 #'   image_orient(logo)
