@@ -1,9 +1,11 @@
 1.7
   - Several fixes for IM7, mostly related to alpha channels
+  - Images rendered in knitr/rmarkdown are now stored in 'figures' (#108)
   - Add support for displaying images in Jupyter notebook
   - Export example images: logo, wizard, rose, granite
   - Better mapping of R internal colors to proper RGB strings
   - Added image_orient() to (auto) orient image
+  - Add 'density' to image_info()
   - Fixes for Solaris
 
 1.6
