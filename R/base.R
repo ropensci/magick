@@ -111,11 +111,16 @@
 "knit_print.magick-image" <- function(x, ...){
   if(!length(x))
     return(invisible())
-  ext <- ifelse(all(tolower(image_info(x)$format) == "gif"), "gif", "png")
   plot_counter <- getFromNamespace('plot_counter', 'knitr')
+  in_base_dir <- getFromNamespace('in_base_dir', 'knitr')
+  ext <- ifelse(all(tolower(image_info(x)$format) == "gif"), "gif", "png")
   tmp <- knitr::fig_path(ext, number = plot_counter())
-  dir.create(dirname(tmp), showWarnings = FALSE, recursive = TRUE)
-  image_write(x, path = tmp, format = ext)
+
+  # save relative to 'base' directory, see discussion in #110
+  in_base_dir({
+    dir.create(dirname(tmp), showWarnings = FALSE, recursive = TRUE)
+    image_write(x, path = tmp, format = ext)
+  })
   knitr::include_graphics(tmp)
 }
 
