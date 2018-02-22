@@ -111,8 +111,8 @@
 "knit_print.magick-image" <- function(x, ...){
   if(!length(x))
     return(invisible())
-  plot_counter <- getFromNamespace('plot_counter', 'knitr')
-  in_base_dir <- getFromNamespace('in_base_dir', 'knitr')
+  plot_counter <- utils::getFromNamespace('plot_counter', 'knitr')
+  in_base_dir <- utils::getFromNamespace('in_base_dir', 'knitr')
   ext <- ifelse(all(tolower(image_info(x)$format) == "gif"), "gif", "png")
   tmp <- knitr::fig_path(ext, number = plot_counter())
 
