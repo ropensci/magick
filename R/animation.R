@@ -48,7 +48,7 @@ image_coalesce <- image_animate
 #' @param frames number of frames to use in output animation
 #' @examples
 #' # Combine images
-#' logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
+#' logo <- image_read("https://jeroen.github.io/images/Rlogo.png")
 #' oldlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-3.png")
 #'
 #' # Create morphing animation
