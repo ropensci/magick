@@ -115,7 +115,10 @@ Rcpp::RawVector magick_image_write( XPtrImage input, Rcpp::CharacterVector forma
   if(!input->size())
     return Rcpp::RawVector(0);
   XPtrImage image = copy(input);
-  image->front().quiet(true); //suppress write warnings see #74 and #116
+#if MagickLibVersion >= 0x691
+  //suppress write warnings see #74 and #116
+  image->front().quiet(true);
+#endif
   if(format.size())
     for_each ( image->begin(), image->end(), Magick::magickImage(std::string(format[0])));
   if(quality.size())
