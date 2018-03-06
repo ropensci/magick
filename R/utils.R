@@ -67,5 +67,5 @@ assert_image <- function(image){
   if(!inherits(image, "magick-image"))
     stop("The 'image' argument is not a magick image object.", call. = FALSE)
   if(magick_image_dead(image))
-    stop("Image pointer is dead. You cannot save image objects between R sessions.", call. = FALSE)
+    stop("Image pointer is dead. You cannot save or cache image objects between R sessions.", call. = FALSE)
 }
