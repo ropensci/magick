@@ -3,6 +3,8 @@
 \name{editing}
 \alias{editing}
 \alias{image_read}
+\alias{image_read_svg}
+\alias{image_read_pdf}
 \alias{image_write}
 \alias{image_convert}
 \alias{image_data}
@@ -14,6 +16,10 @@
 \title{Image Editing}
 \usage{
 image_read(path, density = NULL, depth = NULL, strip = FALSE)
+
+image_read_svg(path, width = NULL, height = NULL)
+
+image_read_pdf(path, pages = NULL, density = 300, password = "")
 
 image_write(image, path = NULL, format = NULL, quality = NULL,
   depth = NULL, density = NULL, comment = NULL, flatten = FALSE)
@@ -41,6 +47,14 @@ image_join(...)
 \item{depth}{color depth (either 8 or 16)}
 
 \item{strip}{drop image comments and metadata}
+
+\item{width}{in pixels}
+
+\item{height}{in pixels}
+
+\item{pages}{integer vector with page numbers. Defaults to all pages.}
+
+\item{password}{user \link[pdftools:pdf_render_page]{password} to open protected pdf files}
 
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
@@ -71,30 +85,28 @@ depending on the image}
 
 \item{browser}{argument passed to \link[utils:browseURL]{browseURL}}
 
-\item{width}{in pixels}
-
-\item{height}{in pixels}
-
 \item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
 \code{"navyblue"} or \code{"#000080"}}
 
 \item{...}{several images or lists of images to be combined}
 }
 \description{
-Read, write and join or combine images.
-All image functions are vectorized, meaning they operate either on a single frame
-or a series of frames (e.g. a collage, video, or animation).
-Besides paths and URLs, the \code{\link[=image_read]{image_read()}} function supports all commonly used bitmap
-and raster types.
+Read, write and join or combine images. All image functions are vectorized, meaning
+they operate either on a single frame or a series of frames (e.g. a collage, video,
+or animation). Besides paths and URLs, \code{\link[=image_read]{image_read()}} supports commonly used bitmap
+and raster object types.
 }
 \details{
-Besides functions
-above, all standard base vector methods such as \link{[}, \link{[[}, \code{\link[=c]{c()}}, \code{\link[=as.list]{as.list()}},
-\code{\link[=as.raster]{as.raster()}}, \code{\link[=rev]{rev()}}, \code{\link[=length]{length()}}, and \code{\link[=print]{print()}}  can be used with magick images.
+All standard base vector methods such as \link{[}, \link{[[}, \code{\link[=c]{c()}}, \code{\link[=as.list]{as.list()}},
+\code{\link[=as.raster]{as.raster()}}, \code{\link[=rev]{rev()}}, \code{\link[=length]{length()}}, and \code{\link[=print]{print()}} can be used to work with magick
+image objects. Use the standard \code{img[i]} syntax to extract a subset of the frames
+from an image. The \code{img[[i]]} method is an alias for \code{\link[=image_data]{image_data()}} which extracts
+a single frame as a raw bitmap matrix with pixel values.
 
-Use the standard \code{img[i]} syntax to extract a subset of the frames from an image.
-The \code{img[[i]]} method is used to extract a single frame as a bitmap object, i.e.
-a raw matrix with pixel values.
+For reading svg or pdf it is recommended to use \code{image_read_svg()} and \code{image_read_pdf()}
+if the \link[rsvg:rsvg]{rsvg} and \link[pdftools:pdf_render_page]{pdftools} R packages are available.
+These functions provide more rendering options and better quality than built-in svg/pdf
+rendering delegates from imagemagick itself.
 
 X11 is required for \code{image_display()} which is only works on some platforms. A more
 portable method is \code{image_browse()} which opens the image in a browser. RStudio has
@@ -121,9 +133,10 @@ plot(raster)
 # Read bitmap arrays from from other image packages
 curl::curl_download("https://jeroen.github.io/images/example.webp", "example.webp")
 if(require(webp)) image_read(webp::read_webp("example.webp"))
-
-curl::curl_download("http://jeroen.github.io/images/tiger.svg", "tiger.svg")
-if(require(rsvg)) image_read(rsvg::rsvg("tiger.svg"))
+if(require(rsvg))
+tiger <- image_read_svg("http://jeroen.github.io/images/tiger.svg")
+if(require(pdftools))
+image_read_pdf(R.home('doc/NEWS.pdf'), pages = 1, density = 100)
 # create a solid canvas
 image_blank(600, 400, "green")
 }

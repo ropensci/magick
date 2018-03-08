@@ -1,19 +1,20 @@
 #' Image Editing
 #'
-#' Read, write and join or combine images.
-#' All image functions are vectorized, meaning they operate either on a single frame
-#' or a series of frames (e.g. a collage, video, or animation).
-#' Besides paths and URLs, the [image_read()] function supports all commonly used bitmap
-#' and raster types.
+#' Read, write and join or combine images. All image functions are vectorized, meaning
+#' they operate either on a single frame or a series of frames (e.g. a collage, video,
+#' or animation). Besides paths and URLs, [image_read()] supports commonly used bitmap
+#' and raster object types.
 #'
-#' Besides functions
-#' above, all standard base vector methods such as \link{[}, \link{[[}, [c()], [as.list()],
-#' [as.raster()], [rev()], [length()], and [print()]  can be used with magick images.
+#' All standard base vector methods such as \link{[}, \link{[[}, [c()], [as.list()],
+#' [as.raster()], [rev()], [length()], and [print()] can be used to work with magick
+#' image objects. Use the standard \code{img[i]} syntax to extract a subset of the frames
+#' from an image. The \code{img[[i]]} method is an alias for [image_data()] which extracts
+#' a single frame as a raw bitmap matrix with pixel values.
 #'
-#' Use the standard \code{img[i]} syntax to extract a subset of the frames from an image.
-#' The \code{img[[i]]} method is used to extract a single frame as a bitmap object, i.e.
-#' a raw matrix with pixel values.
-#'
+#' For reading svg or pdf it is recommended to use `image_read_svg()` and `image_read_pdf()`
+#' if the [rsvg][rsvg::rsvg] and [pdftools][pdftools::pdf_render_page] R packages are available.
+#' These functions provide more rendering options and better quality than built-in svg/pdf
+#' rendering delegates from imagemagick itself.
 #'
 #' X11 is required for `image_display()` which is only works on some platforms. A more
 #' portable method is `image_browse()` which opens the image in a browser. RStudio has
@@ -50,10 +51,9 @@
 #' # Read bitmap arrays from from other image packages
 #' curl::curl_download("https://jeroen.github.io/images/example.webp", "example.webp")
 #' if(require(webp)) image_read(webp::read_webp("example.webp"))
-#'
-#' curl::curl_download("http://jeroen.github.io/images/tiger.svg", "tiger.svg")
-#' if(require(rsvg)) image_read(rsvg::rsvg("tiger.svg"))
 image_read <- function(path, density = NULL, depth = NULL, strip = FALSE){
+  if(is.numeric(density))
+    density <- paste0(density, "x", density)
   density <- as.character(density)
   depth <- as.integer(depth)
   image <- if(isS4(path) && methods::is(path, "Image")){
@@ -77,10 +77,40 @@ image_read <- function(path, density = NULL, depth = NULL, strip = FALSE){
   if(is.character(path) && !isTRUE(magick_config()$rsvg)){
     if(any(grepl("\\.svg$", tolower(path))) || any(grepl("svg|mvg", tolower(image_info(image)$format)))){
       warning("ImageMagick was built without librsvg which causes poor qualty of SVG rendering.
-For better results, rebuild ImageMagick --with-librsvg or use the 'rsvg' package in R.", call. = FALSE)
+For better results use image_read_svg() which uses the rsvg package.", call. = FALSE)
     }
   }
   return(image)
+}
+
+#' @export
+#' @rdname editing
+#' @examples if(require(rsvg))
+#' tiger <- image_read_svg("http://jeroen.github.io/images/tiger.svg")
+image_read_svg <- function(path, width = NULL, height = NULL){
+  path <- vapply(path, replace_url, character(1))
+  images <- lapply(path, function(x){
+    bitmap <- rsvg::rsvg_raw(x, width = width, height = height)
+    magick_image_readbitmap_raw(bitmap)
+  })
+  image_join(images)
+}
+
+#' @export
+#' @rdname editing
+#' @param pages integer vector with page numbers. Defaults to all pages.
+#' @param password user [password][pdftools::pdf_render_page] to open protected pdf files
+#' @examples if(require(pdftools))
+#' image_read_pdf(R.home('doc/NEWS.pdf'), pages = 1, density = 100)
+image_read_pdf <- function(path, pages = NULL, density = 300, password = ""){
+  path <- replace_url(path)
+  if(!length(pages))
+    pages <- seq_len(pdftools::pdf_info(path, opw = password)$pages)
+  images <- lapply(pages, function(page){
+    bitmap <- pdftools::pdf_render_page(path, page = page, dpi = density, opw = password)
+    magick_image_readbitmap_raw(bitmap)
+  })
+  image_join(images)
 }
 
 image_readbitmap <- function(x){
@@ -111,12 +141,6 @@ image_read_raster1 <- function(x){
 image_read_raster2 <- function(x){
   stopifnot(is.matrix(x) && is.character(x))
   magick_image_readbitmap_raster2(x)
-}
-
-# Not exported for now
-image_rsvg <- function(path, width = NULL, height = NULL){
-  bitmap <- rsvg::rsvg_raw(path, width = width, height = height)
-  magick_image_readbitmap_raw(bitmap)
 }
 
 #EBImage BioConductor class
