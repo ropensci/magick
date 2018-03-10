@@ -26,7 +26,7 @@
 #' grid.raster(image)
 image_ggplot <- function(image){
   rasterdata <- image_raster(image)
-  ggplot2::ggplot(rasterdata) + ggplot2::geom_raster(ggplot2::aes(x, y, fill = col)) +
+  ggplot2::ggplot(rasterdata) + ggplot2::geom_raster(ggplot2::aes_(~x, ~y, fill = ~col)) +
     ggplot2::coord_fixed(expand = FALSE) + ggplot2::scale_y_reverse() +
     ggplot2::scale_fill_identity() + ggplot2::theme_void()
 }
