@@ -9,7 +9,6 @@
 \alias{image_convert}
 \alias{image_data}
 \alias{image_raster}
-\alias{image_tidyraster}
 \alias{image_display}
 \alias{image_browse}
 \alias{image_strip}
@@ -31,9 +30,7 @@ image_convert(image, format = NULL, type = NULL, colorspace = NULL,
 
 image_data(image, channels = NULL, frame = 1)
 
-image_raster(image)
-
-image_tidyraster(image)
+image_raster(image, frame = 1, tidy = TRUE)
 
 image_display(image, animate = TRUE)
 
@@ -86,6 +83,9 @@ from \link{colorspace_types} for example \code{"gray"}, \code{"rgb"} or \code{"c
 depending on the image}
 
 \item{frame}{integer setting which frame to extract from the image}
+
+\item{tidy}{converts raster data to long form for use with \link[ggplot2:geom_raster]{geom_raster}.
+If \code{FALSE} output is the same as \code{as.raster()}.}
 
 \item{animate}{support animations in the X11 display}
 
