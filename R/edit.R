@@ -235,6 +235,22 @@ image_data <- function(image, channels = NULL, frame = 1){
 }
 
 #' @export
+#' @rdname editing
+image_raster <- function(image){
+  as.raster(image)
+}
+
+#' @export
+#' @rdname editing
+image_tidyraster <- function(image) {
+  raster <- image_raster(image)
+  data.frame(x = rep(seq_len(ncol(raster)), nrow(raster)),
+             y = rep(seq_len(nrow(raster)), each = ncol(raster)),
+             colour = as.vector(raster),
+             stringsAsFactors = FALSE)
+}
+
+#' @export
 #' @param animate support animations in the X11 display
 #' @rdname editing
 image_display <- function(image, animate = TRUE){

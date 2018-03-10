@@ -8,6 +8,8 @@
 \alias{image_write}
 \alias{image_convert}
 \alias{image_data}
+\alias{image_raster}
+\alias{image_tidyraster}
 \alias{image_display}
 \alias{image_browse}
 \alias{image_strip}
@@ -28,6 +30,10 @@ image_convert(image, format = NULL, type = NULL, colorspace = NULL,
   depth = NULL, antialias = NULL)
 
 image_data(image, channels = NULL, frame = 1)
+
+image_raster(image)
+
+image_tidyraster(image)
 
 image_display(image, animate = TRUE)
 

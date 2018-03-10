@@ -1,5 +1,6 @@
 1.8
   - Export image_read_svg() and image_read_pdf()
+  - Add image_raster() and image_tidyraster() (thanks Thomas)
 
 1.7
   - Several fixes for IM7, mostly related to alpha channels
