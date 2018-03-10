@@ -3,9 +3,12 @@
 \name{ocr}
 \alias{ocr}
 \alias{image_ocr}
+\alias{image_ocr_data}
 \title{Image Text OCR}
 \usage{
 image_ocr(image, language = "eng", ...)
+
+image_ocr_data(image, language = "eng", ...)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
@@ -29,6 +32,7 @@ To install additional languages see instructions in \link[tesseract:tesseract_do
 if(require("tesseract")){
 img <- image_read("http://jeroen.github.io/images/testocr.png")
 image_ocr(img)
+image_ocr_data(img)
 }
 }
 \seealso{

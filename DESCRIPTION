@@ -38,7 +38,7 @@ Suggests:
     rgdal,
     gapminder,
     IRdisplay,
-    tesseract
+    tesseract (>= 2.0)
 Encoding: UTF-8
 RoxygenNote: 6.0.1.9000
 Roxygen: list(markdown = TRUE)
