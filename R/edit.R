@@ -244,7 +244,7 @@ image_raster <- function(image, frame = 1, tidy = TRUE){
     return(raster)
   data.frame(x = rep(seq_len(ncol(raster)), nrow(raster)),
              y = rep(seq_len(nrow(raster)), each = ncol(raster)),
-             colour = as.vector(raster),
+             col = as.vector(raster),
              stringsAsFactors = FALSE)
 }
 
