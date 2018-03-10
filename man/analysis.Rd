@@ -3,10 +3,13 @@
 \name{analysis}
 \alias{analysis}
 \alias{image_compare}
+\alias{image_compare_dist}
 \alias{image_fft}
 \title{Image Analysis}
 \usage{
-image_compare(image, reference_image, metric = "")
+image_compare(image, reference_image, metric = "", fuzz = 0)
+
+image_compare_dist(image, reference_image, metric = "", fuzz = 0)
 
 image_fft(image)
 }
@@ -16,7 +19,10 @@ image_fft(image)
 \item{reference_image}{another image to compare to}
 
 \item{metric}{string with a \href{http://www.imagemagick.org/script/command-line-options.php#metric}{metric}
-from \link[=metric_types]{metric_types()}.}
+from \link[=metric_types]{metric_types()} such as \code{"AE"} or \code{"phash"}}
+
+\item{fuzz}{Fuzz percentage: value between 0 and 100. Relative distance between
+colors to be considered similar in the filling algorithm.}
 }
 \description{
 Functions for image calculations and analysis. This part of the package needs more work.
@@ -30,15 +36,16 @@ documentation. Short descriptions:
 magnitude / phase image pair. I wish I knew what this means.
 }
 
-Other analysis functions will be added in future versions!
+Here \code{image_compare()} is vectorized over the first argument and returns the diff image
+with the calculated distortion value as an attribute.
 }
 \examples{
-logo <- image_read("logo:")
-logo2 <- image_blur(logo, 3)
-logo3 <- image_oilpaint(logo, 3)
+out1 <- image_blur(logo, 3)
+out2 <- image_oilpaint(logo, 3)
+input <- c(logo, out1, out2, logo)
 if(magick_config()$version >= "6.8.7"){
-  image_compare(logo, logo2, metric = "phash")
-  image_compare(logo, logo3, metric = "phash")
+  diff_img <- image_compare(input, logo, metric = "AE")
+  attributes(diff_img)
 }
 }
 \seealso{

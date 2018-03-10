@@ -9,27 +9,37 @@
 #'  - [image_fft] returns Discrete Fourier Transform (DFT) of the image as a
 #'  magnitude / phase image pair. I wish I knew what this means.
 #'
-#' Other analysis functions will be added in future versions!
+#' Here `image_compare()` is vectorized over the first argument and returns the diff image
+#' with the calculated distortion value as an attribute.
 #'
 #' @export
 #' @family image
 #' @name analysis
 #' @rdname analysis
 #' @inheritParams editing
+#' @inheritParams painting
 #' @param reference_image another image to compare to
 #' @param metric string with a [metric](http://www.imagemagick.org/script/command-line-options.php#metric)
-#' from [metric_types()][metric_types].
+#' from [metric_types()][metric_types] such as `"AE"` or `"phash"`
 #' @examples
-#' logo <- image_read("logo:")
-#' logo2 <- image_blur(logo, 3)
-#' logo3 <- image_oilpaint(logo, 3)
+#' out1 <- image_blur(logo, 3)
+#' out2 <- image_oilpaint(logo, 3)
+#' input <- c(logo, out1, out2, logo)
 #' if(magick_config()$version >= "6.8.7"){
-#'   image_compare(logo, logo2, metric = "phash")
-#'   image_compare(logo, logo3, metric = "phash")
+#'   diff_img <- image_compare(input, logo, metric = "AE")
+#'   attributes(diff_img)
 #' }
-image_compare <- function(image, reference_image, metric = ""){
+image_compare <- function(image, reference_image, metric = "", fuzz = 0){
   metric <- as.character(metric)
-  magick_image_compare(image, reference_image, metric)
+  magick_image_compare(image, reference_image, metric, fuzz)
+}
+
+#' @rdname analysis
+#' @export
+image_compare_dist <- function(image, reference_image, metric = "", fuzz = 0){
+  out <- attributes(image_compare(image, reference_image, metric, fuzz))
+  out$class = NULL
+  out
 }
 
 #' @export

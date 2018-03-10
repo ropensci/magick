@@ -1,6 +1,7 @@
 1.8
   - Export image_read_svg() and image_read_pdf()
   - Add image_raster() (thanks Thomas for the hint)
+  - Vectorize and add 'fuzz' parameter to image_compare()
 
 1.7
   - Several fixes for IM7, mostly related to alpha channels

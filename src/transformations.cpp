@@ -326,15 +326,21 @@ XPtrImage magick_image_annotate( XPtrImage input, const std::string text, const 
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_compare( XPtrImage input, XPtrImage reference_image, const char  * metric){
+XPtrImage magick_image_compare( XPtrImage input, XPtrImage reference_image, const char  * metric, double fuzz_percent){
 #if MagickLibVersion < 0x687
   throw std::runtime_error("imagemagick too old does not support compare metrics");
 #else
-  XPtrImage out = create();
-  double distortion;
+  XPtrImage output = copy(input);
+  Rcpp::NumericVector distortion(input->size());
   Magick::MetricType compare_metric = strlen(metric) ? Metric(metric) : Magick::myUndefinedMetric;
-  out->push_back(input->front().compare(reference_image->front(), compare_metric, &distortion));
-  out.attr("distortion") = distortion;
-  return out;
+  for_each ( output->begin(), output->end(), Magick::colorFuzzImage( fuzz_pct_to_abs(fuzz_percent) ));
+  for(size_t i = 0; i < input->size(); i++){
+    double val = 0;
+    output->at(i) = output->at(i).compare(reference_image->front(), compare_metric, &val);
+    distortion.at(i) = val;
+  }
+  for_each ( output->begin(), output->end(), Magick::colorFuzzImage( 0 ));
+  output.attr("distortion") = distortion;
+  return output;
 #endif
 }
