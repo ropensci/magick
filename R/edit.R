@@ -278,7 +278,8 @@ image_strip <- function(image){
 #' @rdname editing
 #' @inheritParams device
 #' @inheritParams painting
-#' @param pseudo_image string with pseudo image for example `"radial-gradient:purple-yellow"`
+#' @param pseudo_image string with [pseudo image](http://www.imagemagick.org/script/formats.php#pseudo)
+#' specification for example `"radial-gradient:purple-yellow"`
 #' @examples # create a solid canvas
 #' image_blank(600, 400, "green")
 #' image_blank(600, 400, pseudo_image = "radial-gradient:purple-yellow")

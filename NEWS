@@ -3,6 +3,7 @@
   - Add image_raster() (thanks Thomas for the hint)
   - Vectorize and add 'fuzz' parameter to image_compare()
   - Added image_ggplot() with examples of using magick + ggplot2
+  - Added 'pseudo_image' parameter to image_blank()
 
 1.7
   - Several fixes for IM7, mostly related to alpha channels

@@ -94,7 +94,8 @@ If \code{FALSE} output is the same as \code{as.raster()}.}
 \item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
 \code{"navyblue"} or \code{"#000080"}}
 
-\item{pseudo_image}{string with pseudo image for example \code{"radial-gradient:purple-yellow"}}
+\item{pseudo_image}{string with \href{http://www.imagemagick.org/script/formats.php#pseudo}{pseudo image}
+specification for example \code{"radial-gradient:purple-yellow"}}
 
 \item{...}{several images or lists of images to be combined}
 }
