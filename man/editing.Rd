@@ -38,7 +38,7 @@ image_browse(image, browser = getOption("browser"))
 
 image_strip(image)
 
-image_blank(width, height, color = "transparent")
+image_blank(width, height, color = "none", pseudo_image = "")
 
 image_join(...)
 }
@@ -94,6 +94,8 @@ If \code{FALSE} output is the same as \code{as.raster()}.}
 \item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
 \code{"navyblue"} or \code{"#000080"}}
 
+\item{pseudo_image}{string with pseudo image for example \code{"radial-gradient:purple-yellow"}}
+
 \item{...}{several images or lists of images to be combined}
 }
 \description{
@@ -145,6 +147,7 @@ if(require(pdftools))
 image_read_pdf(R.home('doc/NEWS.pdf'), pages = 1, density = 100)
 # create a solid canvas
 image_blank(600, 400, "green")
+image_blank(600, 400, pseudo_image = "radial-gradient:purple-yellow")
 }
 \seealso{
 Other image: \code{\link{_index_}}, \code{\link{analysis}},

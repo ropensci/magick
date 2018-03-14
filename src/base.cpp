@@ -37,9 +37,11 @@ XPtrImage create (){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_blank(size_t width, size_t height, const char * color){
+XPtrImage magick_image_blank(size_t width, size_t height, const char * color, const char * pseudo_image){
   Frame x(Geom(width, height), Color(color));
   x.magick("png");
+  if(strlen(pseudo_image))
+    x.read(pseudo_image);
   XPtrImage image = create(1);
   image->push_back(x);
   return image;

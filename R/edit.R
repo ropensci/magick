@@ -278,13 +278,15 @@ image_strip <- function(image){
 #' @rdname editing
 #' @inheritParams device
 #' @inheritParams painting
+#' @param pseudo_image string with pseudo image for example `"radial-gradient:purple-yellow"`
 #' @examples # create a solid canvas
 #' image_blank(600, 400, "green")
-image_blank <- function(width, height, color = "transparent"){
+#' image_blank(600, 400, pseudo_image = "radial-gradient:purple-yellow")
+image_blank <- function(width, height, color = "none", pseudo_image = ""){
   width <- as.numeric(width)
   height <- as.numeric(height)
   color <- as.character(color)
-  magick_image_blank(width, height, color)
+  magick_image_blank(width, height, color, pseudo_image)
 }
 
 #' @export
