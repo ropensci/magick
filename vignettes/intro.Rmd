@@ -75,8 +75,8 @@ Images can be read directly from a file path, URL, or raw vector with image data
 
 ```{r}
 library(magick)
-tiger <- image_read('http://jeroen.github.io/images/tiger.svg')
-image_info(tiger)
+tiger <- image_read_svg('http://jeroen.github.io/images/tiger.svg', width = 400)
+print(tiger)
 ```
 
 We use `image_write` to export an image in any format to a file on disk, or in memory if `path = NULL`.
@@ -348,23 +348,11 @@ image_composite(image_scale(bigdata, "x400"), bigdatafrink, offset = "+180+100")
 
 When reading a PDF document, each page becomes an element of the vector. Note that PDF gets rendered while reading so you need to specify the density immediately.
 
-```{r, eval = FALSE}
-manual <- image_read('https://cloud.r-project.org/web/packages/magick/magick.pdf', density = "72x72")
-image_info(manual)
-
-# Convert the first page to PNG
-image_convert(manual[1], "png", 8)
-```
-
-Magick requires ghostscript to render the PDF. An alternative method to read pdf is render it via the pdftools package:
-
 ```{r, eval = require(pdftools, quietly = TRUE)}
-library(pdftools)
-bitmap <- pdf_render_page('https://cloud.r-project.org/web/packages/magick/magick.pdf',
-  page = 1, dpi = 72, numeric = FALSE)
-image_read(bitmap)
+manual <- image_read_pdf('https://cloud.r-project.org/web/packages/magick/magick.pdf', density = 72)
+image_info(manual)
+manual[1]
 ```
-
 
 ### Animation
 
