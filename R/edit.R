@@ -101,7 +101,7 @@ image_read_svg <- function(path, width = NULL, height = NULL){
 #' @param pages integer vector with page numbers. Defaults to all pages.
 #' @param password user [password][pdftools::pdf_render_page] to open protected pdf files
 #' @examples if(require(pdftools))
-#' image_read_pdf(R.home('doc/NEWS.pdf'), pages = 1, density = 100)
+#' image_read_pdf(file.path(R.home('doc'), 'NEWS.pdf'), pages = 1, density = 100)
 image_read_pdf <- function(path, pages = NULL, density = 300, password = ""){
   path <- replace_url(path)
   if(!length(pages))
