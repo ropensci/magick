@@ -844,6 +844,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_properties
+Rcpp::DataFrame magick_image_properties(XPtrImage input);
+RcppExport SEXP _magick_magick_image_properties(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_properties(input));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_scale
 XPtrImage magick_image_scale(XPtrImage input, Rcpp::CharacterVector geometry);
 RcppExport SEXP _magick_magick_image_scale(SEXP inputSEXP, SEXP geometrySEXP) {
@@ -1257,6 +1268,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_montage", (DL_FUNC) &_magick_magick_image_montage, 1},
     {"_magick_magick_image_strip", (DL_FUNC) &_magick_magick_image_strip, 1},
     {"_magick_list_options", (DL_FUNC) &_magick_list_options, 1},
+    {"_magick_magick_image_properties", (DL_FUNC) &_magick_magick_image_properties, 1},
     {"_magick_magick_image_scale", (DL_FUNC) &_magick_magick_image_scale, 2},
     {"_magick_magick_image_sample", (DL_FUNC) &_magick_magick_image_sample, 2},
     {"_magick_magick_image_resize", (DL_FUNC) &_magick_magick_image_resize, 3},

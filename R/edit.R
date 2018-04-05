@@ -298,3 +298,10 @@ image_join <- function(...){
   stopifnot(all(vapply(x, inherits, logical(1), "magick-image")))
   magick_image_join(x)
 }
+
+#' @export
+#' @rdname editing
+image_attributes <- function(image){
+  assert_image(image)
+  magick_image_properties(image)
+}
