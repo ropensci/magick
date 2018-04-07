@@ -8,7 +8,6 @@
  */
 #include "magick_types.h"
 #include <R_ext/GraphicsEngine.h>
-#define pi 3.14159265359
 
 Magick::Color col2magick(rcolor col){
   char str[10];
