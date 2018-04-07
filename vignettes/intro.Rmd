@@ -73,7 +73,7 @@ What makes magick so magical is that it automatically converts and renders all c
 
 Images can be read directly from a file path, URL, or raw vector with image data with `image_read`. The `image_info` function shows some meta data about the image, similar to the imagemagick `identify` command line utility.
 
-```{r}
+```{r, eval = require(rsvg, quietly = TRUE)}
 library(magick)
 tiger <- image_read_svg('http://jeroen.github.io/images/tiger.svg', width = 400)
 print(tiger)
@@ -92,7 +92,7 @@ If `path` is a filename, `image_write` returns `path` on success such that the r
 
 Magick keeps the image in memory in it's original format. Specify the `format` parameter `image_write` to convert to another format. You can also internally convert the image to another format earlier, before applying transformations. This can be useful if your original format is lossy.
 
-```{r}
+```{r, eval = require(rsvg, quietly = TRUE)}
 tiger_png <- image_convert(tiger, "png")
 image_info(tiger_png)
 ```

@@ -6,12 +6,12 @@ dev.off <- function(){
 ## ------------------------------------------------------------------------
 str(magick::magick_config())
 
-## ------------------------------------------------------------------------
+## ---- eval = require(rsvg, quietly = TRUE)-------------------------------
 library(magick)
-tiger <- image_read('http://jeroen.github.io/images/tiger.svg')
-image_info(tiger)
+tiger <- image_read_svg('http://jeroen.github.io/images/tiger.svg', width = 400)
+print(tiger)
 
-## ------------------------------------------------------------------------
+## ---- eval = require(rsvg, quietly = TRUE)-------------------------------
 tiger_png <- image_convert(tiger, "png")
 image_info(tiger_png)
 
@@ -121,7 +121,7 @@ rev(earth) %>%
 ## ------------------------------------------------------------------------
 bigdata <- image_read('https://jeroen.github.io/images/bigdata.jpg')
 frink <- image_read("https://jeroen.github.io/images/frink.png")
-logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
+logo <- image_read("https://jeroen.github.io/images/Rlogo.png")
 img <- c(bigdata, logo, frink)
 img <- image_scale(img, "300x300")
 image_info(img)
@@ -147,24 +147,16 @@ image_append(image_scale(img, "100"), stack = TRUE)
 bigdatafrink <- image_scale(image_rotate(image_background(frink, "none"), 300), "x200")
 image_composite(image_scale(bigdata, "x400"), bigdatafrink, offset = "+180+100")
 
-## ---- eval = FALSE-------------------------------------------------------
-#  manual <- image_read('https://cran.r-project.org/web/packages/magick/magick.pdf', density = "72x72")
-#  image_info(manual)
-#  
-#  # Convert the first page to PNG
-#  image_convert(manual[1], "png", 8)
-
 ## ---- eval = require(pdftools, quietly = TRUE)---------------------------
-library(pdftools)
-bitmap <- pdf_render_page('https://cran.r-project.org/web/packages/magick/magick.pdf',
-  page = 1, dpi = 72, numeric = FALSE)
-image_read(bitmap)
+manual <- image_read_pdf('https://cloud.r-project.org/web/packages/magick/magick.pdf', density = 72)
+image_info(manual)
+manual[1]
 
 ## ------------------------------------------------------------------------
 image_animate(image_scale(img, "200x200"), fps = 1, dispose = "previous")
 
 ## ------------------------------------------------------------------------
-newlogo <- image_scale(image_read("https://www.r-project.org/logo/Rlogo.png"), "x150")
+newlogo <- image_scale(image_read("https://jeroen.github.io/images/Rlogo.png"), "x150")
 oldlogo <- image_scale(image_read("https://developer.r-project.org/Logo/Rlogo-3.png"), "x150")
 frames <- image_morph(c(oldlogo, newlogo), frames = 10)
 image_animate(frames)
