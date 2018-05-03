@@ -14,7 +14,6 @@ matrix:
       brew_packages: imagemagick
       env: R_CODECOV=true
     - os: osx
-      latex: false
       osx_image: xcode9.3
       brew_packages: imagemagick@6 --with-fontconfig --with-webp --with-librsvg
     - os: osx
