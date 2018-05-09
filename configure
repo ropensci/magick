@@ -29,7 +29,7 @@ if [ -z "$PKGCONFIG_LIBS" ] && [ $(command -v GraphicsMagick++-config) ]; then
 fi
 
 # Hack for CRAN server
-if [ -e "/Builds/CRAN-QA-Simon" ]; then
+if [ -e "/Builds/CRAN-QA-Simon" ] || [ -e "/Volumes/SSD-Data/Builds" ]; then
   unset PKGCONFIG_CFLAGS
   unset PKGCONFIG_LIBS
 fi
