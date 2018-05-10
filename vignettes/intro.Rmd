@@ -38,6 +38,7 @@ Use `magick_config` to see which features and formats are supported by your vers
 
 
 ```{r}
+library(magick)
 str(magick::magick_config())
 ```
 
