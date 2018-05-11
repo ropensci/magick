@@ -1,5 +1,6 @@
 1.9
   - New function image_attributes()
+  - MacOS: new autobrew script uses prebuilt static bottle
 
 1.8
   - Export image_read_svg() and image_read_pdf()
