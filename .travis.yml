@@ -4,8 +4,6 @@ latex: false
 fortran: false
 r_build_args: '--no-build-vignettes'
 
-r: 3.4
-
 matrix:
   include:
     - os: linux
