@@ -63,7 +63,7 @@ XPtrImage magick_image_append( XPtrImage image, bool stack){
   Frame frame;
   appendImages( &frame, image->begin(), image->end(), stack);
   frame.myRepage();
-  Image *out = new Image;
+  Image *out = new Image();
   out->push_back(frame);
   XPtrImage ptr(out);
   ptr.attr("class") = Rcpp::CharacterVector::create("magick-image");

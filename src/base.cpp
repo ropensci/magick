@@ -23,7 +23,7 @@ int magick_image_length(XPtrImage image){
 
 // [[Rcpp::export]]
 XPtrImage create (int len){
-  Image *image = new Image;
+  Image *image = new Image();
   if(len > 0){
     image->reserve(len);
   }
