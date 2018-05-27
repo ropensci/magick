@@ -25,6 +25,8 @@ matrix:
       addons:
         apt:
           update: true
+          sources:
+            - sourceline: 'ppa:ubuntugis/ppa'
           packages:
             - libmagick++-dev
             - librsvg2-dev
