@@ -177,6 +177,10 @@ magick_image_background <- function(input, color) {
     .Call('_magick_magick_image_background', PACKAGE = 'magick', input, color)
 }
 
+magick_image_treshold <- function(input, width, height, offset) {
+    .Call('_magick_magick_image_treshold', PACKAGE = 'magick', input, width, height, offset)
+}
+
 magick_image_composite <- function(input, composite_image, offset, composite, args) {
     .Call('_magick_magick_image_composite', PACKAGE = 'magick', input, composite_image, offset, composite, args)
 }

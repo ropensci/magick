@@ -104,3 +104,10 @@ XPtrImage magick_image_background( XPtrImage input, const char * color){
   for_each (output->begin(), output->end(), Magick::backgroundColorImage(Color(color)));
   return output;
 }
+
+// [[Rcpp::export]]
+XPtrImage magick_image_treshold( XPtrImage input,  size_t width, size_t height, size_t offset){
+  XPtrImage output = copy(input);
+  for_each (output->begin(), output->end(), Magick::adaptiveThresholdImage(width, height, offset));
+  return output;
+}
