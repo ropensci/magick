@@ -60,4 +60,3 @@ Other image: \code{\link{_index_}}, \code{\link{analysis}},
   \code{\link{ocr}}, \code{\link{painting}},
   \code{\link{transform}}
 }
-\concept{image}

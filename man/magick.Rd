@@ -45,4 +45,3 @@ Other image: \code{\link{analysis}},
   \code{\link{ocr}}, \code{\link{options}},
   \code{\link{painting}}, \code{\link{transform}}
 }
-\concept{image}

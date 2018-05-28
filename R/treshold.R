@@ -4,6 +4,7 @@
 #' is a constant to subtract from pixel neighborhood mean.
 #'
 #' @export
+#' @inheritParams editing
 #' @param width size of the pixel neighborhood
 #' @param height size of the pixel neighborhood
 #' @param offset a constant to subtract from pixel neighborhood mean

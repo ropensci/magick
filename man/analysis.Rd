@@ -57,4 +57,3 @@ Other image: \code{\link{_index_}},
   \code{\link{ocr}}, \code{\link{options}},
   \code{\link{painting}}, \code{\link{transform}}
 }
-\concept{image}

@@ -7,6 +7,8 @@
 image_treshold(image, width, height, offset = 0)
 }
 \arguments{
+\item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
+
 \item{width}{size of the pixel neighborhood}
 
 \item{height}{size of the pixel neighborhood}
