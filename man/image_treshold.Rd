@@ -4,16 +4,12 @@
 \alias{image_treshold}
 \title{Local Adaptive Thresholding}
 \usage{
-image_treshold(image, width, height, offset = 0)
+image_treshold(image, geometry = "5x5+2\%")
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
-\item{width}{size of the pixel neighborhood}
-
-\item{height}{size of the pixel neighborhood}
-
-\item{offset}{a constant to subtract from pixel neighborhood mean}
+\item{geometry}{pixel window plus offset for LAT algorithm}
 }
 \description{
 Width x height define the size of the pixel neighborhood and offset

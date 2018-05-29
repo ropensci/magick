@@ -106,7 +106,13 @@ XPtrImage magick_image_background( XPtrImage input, const char * color){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_treshold( XPtrImage input,  size_t width, size_t height, size_t offset){
+XPtrImage magick_image_treshold( XPtrImage input, const char * geomstr){
+  Magick::Geometry geom = Geom(geomstr);
+  size_t width = geom.width();
+  size_t height = geom.height();
+  double offset =  geom.xOff();
+  if(geom.percent())
+    offset = fuzz_pct_to_abs(offset);
   XPtrImage output = copy(input);
   for_each (output->begin(), output->end(), Magick::adaptiveThresholdImage(width, height, offset));
   return output;

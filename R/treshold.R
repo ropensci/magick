@@ -5,10 +5,8 @@
 #'
 #' @export
 #' @inheritParams editing
-#' @param width size of the pixel neighborhood
-#' @param height size of the pixel neighborhood
-#' @param offset a constant to subtract from pixel neighborhood mean
-image_treshold <- function(image, width, height, offset = 0){
+#' @param geometry pixel window plus offset for LAT algorithm
+image_treshold <- function(image, geometry = '5x5+2%'){
   assert_image(image)
-  magick_image_treshold(image, width, height, offset)
+  magick_image_treshold(image, geometry)
 }
