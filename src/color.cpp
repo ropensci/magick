@@ -106,7 +106,7 @@ XPtrImage magick_image_background( XPtrImage input, const char * color){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_treshold( XPtrImage input, const char * geomstr){
+XPtrImage magick_image_lat( XPtrImage input, const char * geomstr){
   Magick::Geometry geom = Geom(geomstr);
   size_t width = geom.width();
   size_t height = geom.height();

@@ -6,7 +6,7 @@
 #' @export
 #' @inheritParams editing
 #' @param geometry pixel window plus offset for LAT algorithm
-image_treshold <- function(image, geometry = '5x5+2%'){
+image_lat <- function(image, geometry = '5x5+2%'){
   assert_image(image)
-  magick_image_treshold(image, geometry)
+  magick_image_lat(image, geometry)
 }
