@@ -23,13 +23,15 @@ as well as local adaptive thresholding.
 }
 \details{
 \itemize{
-\item type = black: Forces all pixels below the threshold into black while leaving all pixels at or above the threshold unchanged
-\item type = white: Forces all pixels above the threshold into white while leaving all pixels at or below the threshold unchanged
-\item type = lat: Local Adaptive Thresholding. Looks in a box (width x height) around the pixel neighborhood if the pixel value is bigger than the average minus an offset
+\item \code{type = black}: Forces all pixels below the threshold into black while leaving all pixels
+at or above the threshold unchanged
+\item \code{type = white}: Forces all pixels above the threshold into white while leaving all pixels
+at or below the threshold unchanged
+\item \code{type = lat}: Local Adaptive Thresholding. Looks in a box (width x height) around the
+pixel neighborhood if the pixel value is bigger than the average minus an offset
 }
 }
 \examples{
-logo <- image_read("logo:")
 logo <- image_convert(logo, colorspace = "Gray")
 image_threshold(logo, type = "lat", geometry = "5x5+10")
 image_threshold(logo, type = "black", threshold = "50\%")
