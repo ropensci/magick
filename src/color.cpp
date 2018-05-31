@@ -117,3 +117,19 @@ XPtrImage magick_image_lat( XPtrImage input, const char * geomstr){
   for_each (output->begin(), output->end(), Magick::adaptiveThresholdImage(width, height, offset));
   return output;
 }
+
+// [[Rcpp::export]]
+XPtrImage magick_image_threshold_black( XPtrImage input,  const std::string threshold){
+  XPtrImage output = copy(input);
+  for(size_t i = 0; i < output->size(); i++)
+    output->at(i).blackThreshold(threshold);
+  return output;
+}
+
+// [[Rcpp::export]]
+XPtrImage magick_image_threshold_white( XPtrImage input,  const std::string threshold){
+  XPtrImage output = copy(input);
+  for(size_t i = 0; i < output->size(); i++)
+    output->at(i).whiteThreshold(threshold);
+  return output;
+}
