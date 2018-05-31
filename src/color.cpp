@@ -118,18 +118,29 @@ XPtrImage magick_image_lat( XPtrImage input, const char * geomstr){
   return output;
 }
 
+/* black/white threshold introduced Aug 1, 2013:
+ * https://github.com/ImageMagick/ImageMagick6/commit/b6e7716bc753d9b4ee05823eb532a1df73f719d0
+ */
 // [[Rcpp::export]]
 XPtrImage magick_image_threshold_black( XPtrImage input,  const std::string threshold){
   XPtrImage output = copy(input);
+#if MagickLibVersion >= 0x687
   for(size_t i = 0; i < output->size(); i++)
     output->at(i).blackThreshold(threshold);
+#else
+  Rcpp::warning("ImageMagick too old to support blackThreshold (requires >= 6.8.7)");
+#endif
   return output;
 }
 
 // [[Rcpp::export]]
 XPtrImage magick_image_threshold_white( XPtrImage input,  const std::string threshold){
   XPtrImage output = copy(input);
+#if MagickLibVersion >= 0x687
   for(size_t i = 0; i < output->size(); i++)
     output->at(i).whiteThreshold(threshold);
+#else
+  Rcpp::warning("ImageMagick too old to support whiteThreshold (requires >= 6.8.7)");
+#endif
   return output;
 }
