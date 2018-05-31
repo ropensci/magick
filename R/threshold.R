@@ -32,8 +32,6 @@ image_threshold <- function(image, type = c("lat", "black", "white"), geometry =
     magick_image_threshold_black(image, as.character(threshold))
   }else if(type == "white"){
     magick_image_threshold_white(image, as.character(threshold))
-  }else if(type == "blackwhite"){
-    magick_image_threshold(image, as.numeric(threshold))
   }
 }
 
