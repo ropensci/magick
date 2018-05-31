@@ -546,26 +546,28 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_threshold_black
-XPtrImage magick_image_threshold_black(XPtrImage input, const std::string threshold);
-RcppExport SEXP _magick_magick_image_threshold_black(SEXP inputSEXP, SEXP thresholdSEXP) {
+XPtrImage magick_image_threshold_black(XPtrImage input, const std::string threshold, Rcpp::CharacterVector channel);
+RcppExport SEXP _magick_magick_image_threshold_black(SEXP inputSEXP, SEXP thresholdSEXP, SEXP channelSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< const std::string >::type threshold(thresholdSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_threshold_black(input, threshold));
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type channel(channelSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_threshold_black(input, threshold, channel));
     return rcpp_result_gen;
 END_RCPP
 }
 // magick_image_threshold_white
-XPtrImage magick_image_threshold_white(XPtrImage input, const std::string threshold);
-RcppExport SEXP _magick_magick_image_threshold_white(SEXP inputSEXP, SEXP thresholdSEXP) {
+XPtrImage magick_image_threshold_white(XPtrImage input, const std::string threshold, Rcpp::CharacterVector channel);
+RcppExport SEXP _magick_magick_image_threshold_white(SEXP inputSEXP, SEXP thresholdSEXP, SEXP channelSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< const std::string >::type threshold(thresholdSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_threshold_white(input, threshold));
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type channel(channelSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_threshold_white(input, threshold, channel));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1280,8 +1282,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_transparent", (DL_FUNC) &_magick_magick_image_transparent, 3},
     {"_magick_magick_image_background", (DL_FUNC) &_magick_magick_image_background, 2},
     {"_magick_magick_image_lat", (DL_FUNC) &_magick_magick_image_lat, 2},
-    {"_magick_magick_image_threshold_black", (DL_FUNC) &_magick_magick_image_threshold_black, 2},
-    {"_magick_magick_image_threshold_white", (DL_FUNC) &_magick_magick_image_threshold_white, 2},
+    {"_magick_magick_image_threshold_black", (DL_FUNC) &_magick_magick_image_threshold_black, 3},
+    {"_magick_magick_image_threshold_white", (DL_FUNC) &_magick_magick_image_threshold_white, 3},
     {"_magick_magick_image_composite", (DL_FUNC) &_magick_magick_image_composite, 5},
     {"_magick_magick_image_border", (DL_FUNC) &_magick_magick_image_border, 4},
     {"_magick_magick_image_frame", (DL_FUNC) &_magick_magick_image_frame, 3},

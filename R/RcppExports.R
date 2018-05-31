@@ -181,12 +181,12 @@ magick_image_lat <- function(input, geomstr) {
     .Call('_magick_magick_image_lat', PACKAGE = 'magick', input, geomstr)
 }
 
-magick_image_threshold_black <- function(input, threshold) {
-    .Call('_magick_magick_image_threshold_black', PACKAGE = 'magick', input, threshold)
+magick_image_threshold_black <- function(input, threshold, channel) {
+    .Call('_magick_magick_image_threshold_black', PACKAGE = 'magick', input, threshold, channel)
 }
 
-magick_image_threshold_white <- function(input, threshold) {
-    .Call('_magick_magick_image_threshold_white', PACKAGE = 'magick', input, threshold)
+magick_image_threshold_white <- function(input, threshold, channel) {
+    .Call('_magick_magick_image_threshold_white', PACKAGE = 'magick', input, threshold, channel)
 }
 
 magick_image_composite <- function(input, composite_image, offset, composite, args) {
