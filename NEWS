@@ -1,3 +1,6 @@
+2.0
+  - image_read() does not error for read warnings (fixes #134)
+
 1.9
   - New function image_attributes()
   - MacOS: new autobrew script uses prebuilt static bottle
