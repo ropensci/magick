@@ -82,6 +82,7 @@ XPtrImage magick_image_readpath(Rcpp::CharacterVector paths, Rcpp::CharacterVect
   XPtrImage image = create();
 #if MagickLibVersion >= 0x689
   Magick::ReadOptions opts = Magick::ReadOptions();
+  opts.quiet(1);
   if(density.size())
     opts.density(std::string(density.at(0)).c_str());
   if(depth.size())
