@@ -118,7 +118,7 @@ image_write(image_animate(image_join(frames)), "img/Rlogo-banana.gif")
 
 ## Installation
 
-Binary packages for __OS-X__ or __Windows__ can be installed directly from CRAN:
+Binary packages for __macOS__ or __Windows__ can be installed directly from CRAN:
 
 ```r
 install.packages("magick")
@@ -144,7 +144,7 @@ On __Fedora__,  __CentOS or RHEL__ we need [ImageMagick-c++-devel](https://apps.
 sudo yum install ImageMagick-c++-devel
 ````
 
-On __OS-X__ use [imagemagick@6](https://github.com/Homebrew/homebrew-core/blob/master/Formula/imagemagick@6.rb) from Homebrew. Note that we need to build `--with-fontconfig` to support text features such as annotation and svg rendering.
+On __macOS__ use [imagemagick@6](https://github.com/Homebrew/homebrew-core/blob/master/Formula/imagemagick@6.rb) from Homebrew. Note that we need to build `--with-fontconfig` to support text features such as annotation and svg rendering.
 
 ```
 brew reinstall imagemagick@6 --with-fontconfig --with-librsvg 
