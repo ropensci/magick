@@ -118,7 +118,6 @@ image_crop <- function(image, geometry = NULL, repage = TRUE){
 #' @param top Number of pixels to crop to the top
 #' @param right Number of pixels to crop to the right
 #' @param bottom Number of pixels to crop to the bottom
-#' @param repage resize the canvas to the cropped area
 #' @examples image_crop2(logo, left = 80, right = 80)
 image_crop2 <- function(image, left = 0, top = 0, right = 0, bottom = 0, repage = TRUE){
   d <- dim(image[[1]])
