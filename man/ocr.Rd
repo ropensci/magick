@@ -6,7 +6,7 @@
 \alias{image_ocr_data}
 \title{Image Text OCR}
 \usage{
-image_ocr(image, language = "eng", ...)
+image_ocr(image, language = "eng", HOCR = FALSE, ...)
 
 image_ocr_data(image, language = "eng", ...)
 }
@@ -15,6 +15,8 @@ image_ocr_data(image, language = "eng", ...)
 
 \item{language}{passed to \link[tesseract:tesseract]{tesseract}. To install additional languages see
 instructions in \link[tesseract:tesseract_download]{tesseract_download()}.}
+
+\item{HOCR}{if \code{TRUE} return results as HOCR xml instead of plain text}
 
 \item{...}{additional parameters passed to \link[tesseract:tesseract]{tesseract}}
 }
