@@ -154,4 +154,3 @@ brew link --force imagemagick@6
 There is also a fork of imagemagick called graphicsmagick, but it doesn't work as well. I highly recommend you build with imagemagick.
 
 [![](http://www.ropensci.org/public_images/github_footer.png)](http://ropensci.org)
-
