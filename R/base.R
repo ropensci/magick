@@ -105,9 +105,7 @@
     invisible()
 }
 
-#' @export
-#' @method knit_print magick-image
-#' @importFrom knitr knit_print
+# This is registered as an S3 method in .onLoad()
 "knit_print.magick-image" <- function(x, ...){
   if(!length(x))
     return(invisible())

@@ -1,6 +1,7 @@
 2.0
   - Ignore attribute warnings in image_read() instead of error (fixes #134)
   - New functions image_threshold() and image_lat(), tnx Jan Wijffels
+  - Knitr is now a Suggests package instead of Imports (#150)
 
 1.9
   - New function image_attributes()

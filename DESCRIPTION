@@ -21,13 +21,13 @@ VignetteBuilder: knitr
 Imports:
     Rcpp (>= 0.12.12),
     magrittr,
-    knitr,
     curl
 LinkingTo: Rcpp
 Suggests:
     spelling,
     jsonlite,
     methods,
+    knitr,
     rmarkdown,
     rsvg,
     webp,
