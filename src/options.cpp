@@ -29,7 +29,9 @@ Rcpp::String set_magick_tempdir(const char * tmpdir){
   exception=DestroyExceptionInfo(exception);
 
   char path[4000] = "";
+#if MagickLibVersion >= 0x681
   MagickCore::GetPathTemplate(path);
+#endif
 
   /* Remove file template except for the leading "/path/to/magick-" */
   if(strlen(path) < 24)
