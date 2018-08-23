@@ -13,7 +13,12 @@
 }
 
 .onLoad <- function(lib, pkg){
+  # Set tempdir to R session
+  set_magick_tempdir(tempdir())
+
+  # Needed by older versions of IM:
   Sys.setenv(MAGICK_TMPDIR = tempdir())
+
   if(autobrewed()){
     fontdir <- normalizePath(file.path(lib, pkg, "etc/fonts"), mustWork = FALSE)
     if(file.exists(fontdir)){

@@ -882,6 +882,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// set_magick_tempdir
+Rcpp::String set_magick_tempdir(const char * tmpdir);
+RcppExport SEXP _magick_set_magick_tempdir(SEXP tmpdirSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const char * >::type tmpdir(tmpdirSEXP);
+    rcpp_result_gen = Rcpp::wrap(set_magick_tempdir(tmpdir));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_properties
 Rcpp::DataFrame magick_image_properties(XPtrImage input);
 RcppExport SEXP _magick_magick_image_properties(SEXP inputSEXP) {
@@ -1309,6 +1320,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_montage", (DL_FUNC) &_magick_magick_image_montage, 1},
     {"_magick_magick_image_strip", (DL_FUNC) &_magick_magick_image_strip, 1},
     {"_magick_list_options", (DL_FUNC) &_magick_list_options, 1},
+    {"_magick_set_magick_tempdir", (DL_FUNC) &_magick_set_magick_tempdir, 1},
     {"_magick_magick_image_properties", (DL_FUNC) &_magick_magick_image_properties, 1},
     {"_magick_magick_image_scale", (DL_FUNC) &_magick_magick_image_scale, 2},
     {"_magick_magick_image_sample", (DL_FUNC) &_magick_magick_image_sample, 2},

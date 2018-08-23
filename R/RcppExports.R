@@ -289,6 +289,10 @@ list_options <- function(str) {
     .Call('_magick_list_options', PACKAGE = 'magick', str)
 }
 
+set_magick_tempdir <- function(tmpdir) {
+    .Call('_magick_set_magick_tempdir', PACKAGE = 'magick', tmpdir)
+}
+
 magick_image_properties <- function(input) {
     .Call('_magick_magick_image_properties', PACKAGE = 'magick', input)
 }
