@@ -22,5 +22,6 @@ image_comment <- function(image, comment = NULL){
 #' @rdname attributes
 image_info <- function(image){
   assert_image(image)
-  magick_image_info(image)
+  df <- magick_image_info(image)
+  df_to_tibble(df)
 }

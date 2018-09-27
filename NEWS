@@ -3,6 +3,7 @@
   - New functions image_threshold() and image_lat(), tnx Jan Wijffels
   - Knitr is now a Suggests package instead of Imports (#150)
   - Set magick temp dir via C instead of env vars
+  - Add 'tibble' class to df returned by image_info()
 
 1.9
   - New function image_attributes()
