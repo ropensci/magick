@@ -4,16 +4,12 @@
 \alias{image_write_gif}
 \title{Write to GIF}
 \usage{
-image_write_gif(image, path = NULL, width = NULL, height = NULL, ...)
+image_write_gif(image, path = NULL, ...)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
 \item{path}{filename of the output gif. This is also the return value of the function.}
-
-\item{width}{output width in pixels. Defaults to first frame of input image.}
-
-\item{height}{output height in pixels.}
 
 \item{...}{extra parameters passed to \link[gifski:gifski]{gifski}}
 }

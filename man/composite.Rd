@@ -7,8 +7,8 @@
 \alias{image_frame}
 \title{Image Composite}
 \usage{
-image_composite(image, composite_image, operator = "atop", offset = "+0+0",
-  compose_args = "")
+image_composite(image, composite_image, operator = "atop",
+  offset = "+0+0", compose_args = "")
 
 image_border(image, color = "lightgray", geometry = "10x10",
   operator = "copy")
@@ -71,3 +71,4 @@ Other image: \code{\link{_index_}}, \code{\link{analysis}},
   \code{\link{options}}, \code{\link{painting}},
   \code{\link{transform}}
 }
+\concept{image}

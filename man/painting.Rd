@@ -9,8 +9,8 @@
 image_fill(image, color, point = "1x1", fuzz = 0)
 
 image_annotate(image, text, gravity = "northwest", location = "+0+0",
-  degrees = 0, size = 10, font = "", color = NULL, strokecolor = NULL,
-  boxcolor = NULL)
+  degrees = 0, size = 10, font = "", color = NULL,
+  strokecolor = NULL, boxcolor = NULL)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
@@ -75,3 +75,4 @@ Other image: \code{\link{_index_}}, \code{\link{analysis}},
   \code{\link{ocr}}, \code{\link{options}},
   \code{\link{transform}}
 }
+\concept{image}

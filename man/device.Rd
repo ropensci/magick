@@ -8,8 +8,8 @@
 \alias{image_capture}
 \title{Magick Graphics Device}
 \usage{
-image_graph(width = 800, height = 600, bg = "white", pointsize = 12,
-  res = 72, clip = TRUE, antialias = TRUE)
+image_graph(width = 800, height = 600, bg = "white",
+  pointsize = 12, res = 72, clip = TRUE, antialias = TRUE)
 
 image_draw(image, pointsize = 12, res = 72, antialias = TRUE, ...)
 
@@ -98,3 +98,4 @@ Other image: \code{\link{_index_}}, \code{\link{analysis}},
   \code{\link{options}}, \code{\link{painting}},
   \code{\link{transform}}
 }
+\concept{image}

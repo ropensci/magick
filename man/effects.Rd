@@ -35,8 +35,8 @@ image_implode(image, factor = 0.5)
 
 image_negate(image)
 
-image_convolve(image, kernel = "Gaussian", iterations = 1, scaling = NULL,
-  bias = NULL)
+image_convolve(image, kernel = "Gaussian", iterations = 1,
+  scaling = NULL, bias = NULL)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
@@ -91,3 +91,4 @@ Other image: \code{\link{_index_}}, \code{\link{analysis}},
   \code{\link{options}}, \code{\link{painting}},
   \code{\link{transform}}
 }
+\concept{image}

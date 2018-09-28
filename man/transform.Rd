@@ -133,3 +133,4 @@ Other image: \code{\link{_index_}}, \code{\link{analysis}},
   \code{\link{ocr}}, \code{\link{options}},
   \code{\link{painting}}
 }
+\concept{image}

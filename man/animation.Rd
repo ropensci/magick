@@ -114,3 +114,4 @@ Other image: \code{\link{_index_}}, \code{\link{analysis}},
   \code{\link{options}}, \code{\link{painting}},
   \code{\link{transform}}
 }
+\concept{image}
