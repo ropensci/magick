@@ -7,7 +7,6 @@
 \alias{image_noise}
 \alias{image_blur}
 \alias{image_charcoal}
-\alias{image_edge}
 \alias{image_oilpaint}
 \alias{image_emboss}
 \alias{image_implode}
@@ -23,8 +22,6 @@ image_noise(image, noisetype = "gaussian")
 image_blur(image, radius = 1, sigma = 0.5)
 
 image_charcoal(image, radius = 1, sigma = 0.5)
-
-image_edge(image, radius = 1)
 
 image_oilpaint(image, radius = 1)
 
@@ -60,7 +57,6 @@ image_reducenoise(logo)
 image_noise(logo)
 image_blur(logo, 10, 10)
 image_charcoal(logo)
-image_edge(logo)
 image_oilpaint(logo, radius = 3)
 image_emboss(logo)
 image_implode(logo)

@@ -59,15 +59,6 @@ image_charcoal <- function(image, radius = 1, sigma = 0.5){
 #' @export
 #' @rdname effects
 #' @examples
-#' image_edge(logo)
-image_edge <- function(image, radius = 1){
-  assert_image(image)
-  magick_image_edge(image, radius)
-}
-
-#' @export
-#' @rdname effects
-#' @examples
 #' image_oilpaint(logo, radius = 3)
 image_oilpaint <- function(image, radius = 1){
   assert_image(image)

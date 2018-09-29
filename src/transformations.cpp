@@ -159,6 +159,20 @@ XPtrImage magick_image_edge( XPtrImage input, size_t radius){
   return output;
 }
 
+// [[Rcpp::export]]
+XPtrImage magick_image_houghline( XPtrImage input, std::string geomstr,
+                                  std::string col, std::string bg, double lwd){
+  Magick::Geometry geom(Geom(geomstr.c_str()));
+  XPtrImage output = copy(input);
+  for(size_t i = 0; i < output->size(); i++){
+    output->at(i).strokeColor(Magick::Color(col.c_str()));
+    output->at(i).backgroundColor(Magick::Color(bg.c_str()));
+    output->at(i).strokeWidth(lwd);
+    output->at(i).houghLine(geom.width(), geom.height(), geom.xOff());
+  }
+  return output;
+}
+
 /* Added in f78d1802df605fe2a0bd2551f4e4a27702e12828 */
 // [[Rcpp::export]]
 XPtrImage magick_image_deskew( XPtrImage input, double treshold){

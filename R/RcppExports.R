@@ -353,6 +353,10 @@ magick_image_edge <- function(input, radius) {
     .Call('_magick_magick_image_edge', PACKAGE = 'magick', input, radius)
 }
 
+magick_image_houghline <- function(input, geomstr, col, bg, lwd) {
+    .Call('_magick_magick_image_houghline', PACKAGE = 'magick', input, geomstr, col, bg, lwd)
+}
+
 magick_image_deskew <- function(input, treshold) {
     .Call('_magick_magick_image_deskew', PACKAGE = 'magick', input, treshold)
 }
