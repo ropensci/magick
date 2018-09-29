@@ -101,27 +101,3 @@ image_negate <- function(image){
   assert_image(image)
   magick_image_negate(image)
 }
-
-#' @export
-#' @rdname effects
-#' @param kernel either a matrix or a string with parameterized [kerneltype][kernel_types] such as:
-#' `"DoG:0,0,2"` or `"Diamond"`
-#' @param iterations number of iterations
-#' @param scaling string with kernel scaling. The special flag `"!"` automatically scales to full
-#' dynamic range, for example: \code{"50\%!"}
-#' @param bias output bias string, for example \code{"50\%"}
-#' @examples if(magick_config()$version > "6.8.8")
-#' image_convolve(logo)
-image_convolve <- function(image, kernel = 'Gaussian', iterations = 1, scaling = NULL, bias = NULL){
-  assert_image(image)
-  iterations <- as.integer(iterations)
-  scaling <- as.character(scaling)
-  bias <- as.character(bias)
-  if(is.character(kernel)){
-    magick_image_convolve_kernel(image, kernel, iterations, scaling, bias)
-  } else if(is.matrix(kernel)) {
-    magick_image_convolve_matrix(image, kernel, iterations, scaling, bias)
-  } else {
-    stop("Argument 'kernel' must either be a string or matrix")
-  }
-}

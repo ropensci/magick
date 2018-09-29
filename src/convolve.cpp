@@ -19,6 +19,27 @@ Magick::KernelInfoType Kernel(const char * str){
   return (Magick::KernelInfoType) val;
 }
 
+Magick::MorphologyMethod Method(const char * str){
+  ssize_t val = MagickCore::ParseCommandOption(
+    MagickCore::MagickMorphologyOptions, Magick::MagickFalse, str);
+  if(val < 0)
+    throw std::runtime_error(std::string("Invalid MorphologyMethod value: ") + str);
+  return (Magick::MorphologyMethod) val;
+}
+
+// [[Rcpp::export]]
+XPtrImage magick_image_morphology( XPtrImage input, std::string method, std::string kernel, size_t iter,
+                                   Rcpp::CharacterVector opt_names, Rcpp::CharacterVector opt_values){
+  XPtrImage output = copy(input);
+  for (int i = 0; i < opt_values.length(); i++){
+    for (Iter it = output->begin(); it != output->end(); ++it)
+      it->artifact(std::string(opt_names.at(i)), std::string(opt_values.at(i)));
+  }
+  for(size_t i = 0; i < output->size(); i++)
+    output->at(i).morphology(Method(method.c_str()), kernel, iter);
+  return output;
+}
+
 // [[Rcpp::export]]
 XPtrImage magick_image_convolve_kernel( XPtrImage input, std::string kernel, size_t iter,
                                  Rcpp::CharacterVector scaling, Rcpp::CharacterVector bias){
@@ -55,6 +76,11 @@ XPtrImage magick_image_convolve_matrix( XPtrImage input, Rcpp::NumericMatrix mat
 }
 
 #else
+XPtrImage magick_image_morphology( XPtrImage input, std::string method, std::string kernel, size_t iter,
+                                   Rcpp::CharacterVector opt_names, Rcpp::CharacterVector opt_values){
+  throw std::runtime_error("ImageMagick too old. Morphology requires at least version  6.8.8");
+}
+
 XPtrImage magick_image_convolve_kernel( XPtrImage input, std::string kernel, size_t iter,
                                         Rcpp::CharacterVector scaling, Rcpp::CharacterVector bias){
   throw std::runtime_error("ImageMagick too old. Convolve requires at least version  6.8.8");

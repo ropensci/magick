@@ -209,6 +209,10 @@ magick_config_internal <- function() {
     .Call('_magick_magick_config_internal', PACKAGE = 'magick')
 }
 
+magick_image_morphology <- function(input, method, kernel, iter, opt_names, opt_values) {
+    .Call('_magick_magick_image_morphology', PACKAGE = 'magick', input, method, kernel, iter, opt_names, opt_values)
+}
+
 magick_image_convolve_kernel <- function(input, kernel, iter, scaling, bias) {
     .Call('_magick_magick_image_convolve_kernel', PACKAGE = 'magick', input, kernel, iter, scaling, bias)
 }
