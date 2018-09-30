@@ -2,11 +2,14 @@
 % Please edit documentation in R/edges.R
 \name{image_edge}
 \alias{image_edge}
+\alias{image_canny}
 \alias{image_hough_draw}
 \alias{image_hough_txt}
 \title{Edge / Line Detection}
 \usage{
 image_edge(image, radius = 1)
+
+image_canny(image, geom = "0x1+10\%+30\%")
 
 image_hough_draw(image, geom = "5x5+20", color = "red", bg = "black",
   size = 3)
@@ -18,8 +21,7 @@ image_hough_txt(image, geom = "5x5+20", format = c("mvg", "svg"))
 
 \item{radius}{edge size in pixels}
 
-\item{geom}{geometry string \code{{W}x{H}+{threshold}} defining the size and threshold of
-the filter used to find 'peaks' in the intermediate search image}
+\item{geom}{geometry string, see details.}
 
 \item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
 \code{"navyblue"} or \code{"#000080"}}
@@ -33,9 +35,16 @@ the filter used to find 'peaks' in the intermediate search image}
 \description{
 Tools to find edges and try to calculate lines.
 }
+\details{
+For Hough-line detection, the geometry format is \code{{W}x{H}+{threshold}}
+defining the size and threshold of the filter used to find 'peaks' in
+the intermediate search image. For canny edge detection the format is
+\code{{radius}x{sigma}+{lower\%}+{upper\%}}. More details and examples are
+available at the \href{https://www.imagemagick.org/Usage/transform}{imagemagick website}.
+}
 \examples{
 shape <- image_read('http://www.imagemagick.org/Usage/transform/shape_rectangle.gif')
-rectangle <- image_edge(shape)
+rectangle <- image_canny(shape)
 rectangle \%>\% image_hough_draw('5x5+20')
 rectangle \%>\% image_hough_txt(format = 'svg') \%>\% cat()
 }

@@ -12,6 +12,24 @@ XPtrImage magick_image_edge( XPtrImage input, size_t radius){
   return output;
 }
 
+
+// https://github.com/ImageMagick/ImageMagick6/commit/acfd403ca7ca38c3a06bdd81ca5b4e41b12e11bf
+
+// [[Rcpp::export]]
+XPtrImage magick_image_canny( XPtrImage input, std::string geomstr){
+  Magick::Geometry geom(Geom(geomstr.c_str()));
+  if(!geom.percent())
+    throw std::runtime_error("Canny edge upper/lower must be specified in percentage");
+  double radius = geom.width();
+  double sigma = geom.height();
+  double lower = geom.xOff() / 100.0;
+  double upper = geom.yOff() / 100.0;
+  XPtrImage output = copy(input);
+  for(size_t i = 0; i < output->size(); i++)
+    output->at(i).cannyEdge(radius, sigma, lower, upper);
+  return output;
+}
+
 // [[Rcpp::export]]
 XPtrImage magick_image_houghline( XPtrImage input, std::string geomstr,
                                   std::string col, std::string bg, double lwd){

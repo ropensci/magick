@@ -237,6 +237,10 @@ magick_image_edge <- function(input, radius) {
     .Call('_magick_magick_image_edge', PACKAGE = 'magick', input, radius)
 }
 
+magick_image_canny <- function(input, geomstr) {
+    .Call('_magick_magick_image_canny', PACKAGE = 'magick', input, geomstr)
+}
+
 magick_image_houghline <- function(input, geomstr, col, bg, lwd) {
     .Call('_magick_magick_image_houghline', PACKAGE = 'magick', input, geomstr, col, bg, lwd)
 }

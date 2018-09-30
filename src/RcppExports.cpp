@@ -731,6 +731,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_canny
+XPtrImage magick_image_canny(XPtrImage input, std::string geomstr);
+RcppExport SEXP _magick_magick_image_canny(SEXP inputSEXP, SEXP geomstrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< std::string >::type geomstr(geomstrSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_canny(input, geomstr));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_houghline
 XPtrImage magick_image_houghline(XPtrImage input, std::string geomstr, std::string col, std::string bg, double lwd);
 RcppExport SEXP _magick_magick_image_houghline(SEXP inputSEXP, SEXP geomstrSEXP, SEXP colSEXP, SEXP bgSEXP, SEXP lwdSEXP) {
@@ -1338,6 +1350,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_device_get", (DL_FUNC) &_magick_magick_device_get, 1},
     {"_magick_magick_device_pop", (DL_FUNC) &_magick_magick_device_pop, 0},
     {"_magick_magick_image_edge", (DL_FUNC) &_magick_magick_image_edge, 2},
+    {"_magick_magick_image_canny", (DL_FUNC) &_magick_magick_image_canny, 2},
     {"_magick_magick_image_houghline", (DL_FUNC) &_magick_magick_image_houghline, 5},
     {"_magick_magick_image_readbitmap_native", (DL_FUNC) &_magick_magick_image_readbitmap_native, 1},
     {"_magick_magick_image_readbitmap_raster1", (DL_FUNC) &_magick_magick_image_readbitmap_raster1, 1},
