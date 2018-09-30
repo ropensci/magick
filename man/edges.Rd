@@ -11,8 +11,8 @@ image_edge(image, radius = 1)
 
 image_canny(image, geom = "0x1+10\%+30\%")
 
-image_hough_draw(image, geom = "5x5+20", color = "red", bg = "black",
-  size = 3)
+image_hough_draw(image, geom = "5x5+20", color = "red",
+  bg = "transparent", size = 3, overlay = FALSE)
 
 image_hough_txt(image, geom = "5x5+20", format = c("mvg", "svg"))
 }
@@ -30,10 +30,12 @@ image_hough_txt(image, geom = "5x5+20", format = c("mvg", "svg"))
 
 \item{size}{size in points to draw the line}
 
+\item{overlay}{composite the drawing atop the input image. Only for \code{bg = 'transparent'}.}
+
 \item{format}{output format of the text, either \code{svg} or \code{mvg}}
 }
 \description{
-Tools to find edges and try to calculate lines.
+Tools to find edges and detect lines.
 }
 \details{
 For Hough-line detection, the geometry format is \code{{W}x{H}+{threshold}}

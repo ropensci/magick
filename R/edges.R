@@ -1,6 +1,6 @@
 #' Edge / Line Detection
 #'
-#' Tools to find edges and try to calculate lines.
+#' Tools to find edges and detect lines.
 #'
 #' For Hough-line detection, the geometry format is `{W}x{H}+{threshold}`
 #' defining the size and threshold of the filter used to find 'peaks' in
@@ -37,13 +37,18 @@ image_canny <- function(image, geom = '0x1+10%+30%'){
 
 #' @export
 #' @rdname edges
-image_hough_draw <- function(image, geom = "5x5+20", color = 'red', bg = 'black', size = 3){
+#' @param overlay composite the drawing atop the input image. Only for `bg = 'transparent'`.
+image_hough_draw <- function(image, geom = "5x5+20", color = 'red',
+                             bg = 'transparent', size = 3, overlay = FALSE){
   assert_image(image)
   geom <- as.character(geom)
   color <- as.character(color)
   bg <- as.character(bg)
   size <- as.numeric(size)
-  magick_image_houghline(image, geom, color, bg, size)
+  out <- magick_image_houghline(image, geom, color, bg, size)
+  if(isTRUE(overlay))
+    out <- image_composite(image, out)
+  out
 }
 
 #' @export
