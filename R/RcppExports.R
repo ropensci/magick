@@ -233,6 +233,14 @@ magick_device_pop <- function() {
     .Call('_magick_magick_device_pop', PACKAGE = 'magick')
 }
 
+magick_image_edge <- function(input, radius) {
+    .Call('_magick_magick_image_edge', PACKAGE = 'magick', input, radius)
+}
+
+magick_image_houghline <- function(input, geomstr, col, bg, lwd) {
+    .Call('_magick_magick_image_houghline', PACKAGE = 'magick', input, geomstr, col, bg, lwd)
+}
+
 magick_image_readbitmap_native <- function(x) {
     .Call('_magick_magick_image_readbitmap_native', PACKAGE = 'magick', x)
 }
@@ -347,14 +355,6 @@ magick_image_blur <- function(input, radius = 1, sigma = 0.5) {
 
 magick_image_charcoal <- function(input, radius = 1, sigma = 0.5) {
     .Call('_magick_magick_image_charcoal', PACKAGE = 'magick', input, radius, sigma)
-}
-
-magick_image_edge <- function(input, radius) {
-    .Call('_magick_magick_image_edge', PACKAGE = 'magick', input, radius)
-}
-
-magick_image_houghline <- function(input, geomstr, col, bg, lwd) {
-    .Call('_magick_magick_image_houghline', PACKAGE = 'magick', input, geomstr, col, bg, lwd)
 }
 
 magick_image_deskew <- function(input, treshold) {

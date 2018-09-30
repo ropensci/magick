@@ -719,6 +719,33 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_edge
+XPtrImage magick_image_edge(XPtrImage input, size_t radius);
+RcppExport SEXP _magick_magick_image_edge(SEXP inputSEXP, SEXP radiusSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< size_t >::type radius(radiusSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_edge(input, radius));
+    return rcpp_result_gen;
+END_RCPP
+}
+// magick_image_houghline
+XPtrImage magick_image_houghline(XPtrImage input, std::string geomstr, std::string col, std::string bg, double lwd);
+RcppExport SEXP _magick_magick_image_houghline(SEXP inputSEXP, SEXP geomstrSEXP, SEXP colSEXP, SEXP bgSEXP, SEXP lwdSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< std::string >::type geomstr(geomstrSEXP);
+    Rcpp::traits::input_parameter< std::string >::type col(colSEXP);
+    Rcpp::traits::input_parameter< std::string >::type bg(bgSEXP);
+    Rcpp::traits::input_parameter< double >::type lwd(lwdSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_houghline(input, geomstr, col, bg, lwd));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_readbitmap_native
 XPtrImage magick_image_readbitmap_native(Rcpp::IntegerMatrix x);
 RcppExport SEXP _magick_magick_image_readbitmap_native(SEXP xSEXP) {
@@ -1066,33 +1093,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// magick_image_edge
-XPtrImage magick_image_edge(XPtrImage input, size_t radius);
-RcppExport SEXP _magick_magick_image_edge(SEXP inputSEXP, SEXP radiusSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< size_t >::type radius(radiusSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_edge(input, radius));
-    return rcpp_result_gen;
-END_RCPP
-}
-// magick_image_houghline
-XPtrImage magick_image_houghline(XPtrImage input, std::string geomstr, std::string col, std::string bg, double lwd);
-RcppExport SEXP _magick_magick_image_houghline(SEXP inputSEXP, SEXP geomstrSEXP, SEXP colSEXP, SEXP bgSEXP, SEXP lwdSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< std::string >::type geomstr(geomstrSEXP);
-    Rcpp::traits::input_parameter< std::string >::type col(colSEXP);
-    Rcpp::traits::input_parameter< std::string >::type bg(bgSEXP);
-    Rcpp::traits::input_parameter< double >::type lwd(lwdSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_houghline(input, geomstr, col, bg, lwd));
-    return rcpp_result_gen;
-END_RCPP
-}
 // magick_image_deskew
 XPtrImage magick_image_deskew(XPtrImage input, double treshold);
 RcppExport SEXP _magick_magick_image_deskew(SEXP inputSEXP, SEXP tresholdSEXP) {
@@ -1337,6 +1337,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_device_internal", (DL_FUNC) &_magick_magick_device_internal, 8},
     {"_magick_magick_device_get", (DL_FUNC) &_magick_magick_device_get, 1},
     {"_magick_magick_device_pop", (DL_FUNC) &_magick_magick_device_pop, 0},
+    {"_magick_magick_image_edge", (DL_FUNC) &_magick_magick_image_edge, 2},
+    {"_magick_magick_image_houghline", (DL_FUNC) &_magick_magick_image_houghline, 5},
     {"_magick_magick_image_readbitmap_native", (DL_FUNC) &_magick_magick_image_readbitmap_native, 1},
     {"_magick_magick_image_readbitmap_raster1", (DL_FUNC) &_magick_magick_image_readbitmap_raster1, 1},
     {"_magick_magick_image_readbitmap_raster2", (DL_FUNC) &_magick_magick_image_readbitmap_raster2, 1},
@@ -1366,8 +1368,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_noise", (DL_FUNC) &_magick_magick_image_noise, 2},
     {"_magick_magick_image_blur", (DL_FUNC) &_magick_magick_image_blur, 3},
     {"_magick_magick_image_charcoal", (DL_FUNC) &_magick_magick_image_charcoal, 3},
-    {"_magick_magick_image_edge", (DL_FUNC) &_magick_magick_image_edge, 2},
-    {"_magick_magick_image_houghline", (DL_FUNC) &_magick_magick_image_houghline, 5},
     {"_magick_magick_image_deskew", (DL_FUNC) &_magick_magick_image_deskew, 2},
     {"_magick_magick_image_emboss", (DL_FUNC) &_magick_magick_image_emboss, 3},
     {"_magick_magick_image_fill", (DL_FUNC) &_magick_magick_image_fill, 4},
