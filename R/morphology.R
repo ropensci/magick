@@ -86,6 +86,9 @@ image_convolve <- function(image, kernel = 'Gaussian', iterations = 1, scaling =
   if(is.character(kernel)){
     magick_image_convolve_kernel(image, kernel, iterations, scaling, bias)
   } else if(is.matrix(kernel)) {
+    if(nrow(kernel) != ncol(kernel))
+      stop("Kernel matrix must be squared")
+    kernel <- t(kernel) #See issue #126
     magick_image_convolve_matrix(image, kernel, iterations, scaling, bias)
   } else {
     stop("Argument 'kernel' must either be a string or matrix")
