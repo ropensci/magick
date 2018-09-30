@@ -17,6 +17,7 @@ XPtrImage magick_image_edge( XPtrImage input, size_t radius){
 
 // [[Rcpp::export]]
 XPtrImage magick_image_canny( XPtrImage input, std::string geomstr){
+#if MagickLibVersion >= 0x689
   Magick::Geometry geom(Geom(geomstr.c_str()));
   if(!geom.percent())
     throw std::runtime_error("Canny edge upper/lower must be specified in percentage");
@@ -28,11 +29,15 @@ XPtrImage magick_image_canny( XPtrImage input, std::string geomstr){
   for(size_t i = 0; i < output->size(); i++)
     output->at(i).cannyEdge(radius, sigma, lower, upper);
   return output;
+#else
+  throw std::runtime_error("cany edge not supported, ImageMagick too old");
+#endif
 }
 
 // [[Rcpp::export]]
 XPtrImage magick_image_houghline( XPtrImage input, std::string geomstr,
                                   std::string col, std::string bg, double lwd){
+#if MagickLibVersion >= 0x689
   Magick::Geometry geom(Geom(geomstr.c_str()));
   XPtrImage output = copy(input);
   for(size_t i = 0; i < output->size(); i++){
@@ -42,4 +47,7 @@ XPtrImage magick_image_houghline( XPtrImage input, std::string geomstr,
     output->at(i).houghLine(geom.width(), geom.height(), geom.xOff());
   }
   return output;
+#else
+  throw std::runtime_error("houghline not supported, ImageMagick too old");
+#endif
 }
