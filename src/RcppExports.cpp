@@ -635,13 +635,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_fx
-XPtrImage magick_image_fx(XPtrImage input, const std::string expression, Rcpp::CharacterVector channel);
+XPtrImage magick_image_fx(XPtrImage input, std::string expression, Rcpp::CharacterVector channel);
 RcppExport SEXP _magick_magick_image_fx(SEXP inputSEXP, SEXP expressionSEXP, SEXP channelSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< const std::string >::type expression(expressionSEXP);
+    Rcpp::traits::input_parameter< std::string >::type expression(expressionSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type channel(channelSEXP);
     rcpp_result_gen = Rcpp::wrap(magick_image_fx(input, expression, channel));
     return rcpp_result_gen;

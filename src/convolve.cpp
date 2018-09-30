@@ -28,7 +28,7 @@ Magick::MorphologyMethod Method(const char * str){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_fx( XPtrImage input, const std::string expression, Rcpp::CharacterVector channel){
+XPtrImage magick_image_fx( XPtrImage input, std::string expression, Rcpp::CharacterVector channel){
   XPtrImage output = copy(input);
   if(channel.length()){
     Magick::ChannelType chan = Channel(std::string(channel.at(0)).c_str());
