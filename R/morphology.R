@@ -46,6 +46,18 @@
 #'
 #' # Thinning down to a Skeleton
 #' man %>% image_morphology('Thinning', 'Skeleton', iterations = -1)
+#'
+#' # Show image_fx() expression
+#' img <- image_convert(logo, colorspace = "Gray")
+#' image_fx(img, expression = "pow(p, 0.5)")
+#' image_fx(img, expression = "random()")
+#' gradient_x <- image_convolve(img, kernel = "Prewitt")
+#' gradient_y <- image_convolve(img, kernel = "Prewitt:90")
+#' gradient <- c(image_fx(gradient_x, expression = "p^2"),
+#'                 image_fx(gradient_y, expression = "p^2"))
+#' gradient <- image_flatten(gradient, operator = "Plus")
+#' gradient <- image_fx(gradient, expression = "sqrt(p)")
+#' gradient
 #' }
 image_morphology <- function(image, method = "convolve", kernel = "Gaussian",
                              iterations = 1, opts = list()){
@@ -83,17 +95,6 @@ image_convolve <- function(image, kernel = 'Gaussian', iterations = 1, scaling =
 #' @inheritParams thresholding
 #' @rdname morphology
 #' @param expression string with an [fx expression](https://www.imagemagick.org/script/fx.php)
-#' @examples
-#' img <- image_convert(logo, colorspace = "Gray")
-#' image_fx(img, expression = "pow(p, 0.5)")
-#' image_fx(img, expression = "random()")
-#' gradient_x <- image_convolve(img, kernel = "Prewitt")
-#' gradient_y <- image_convolve(img, kernel = "Prewitt:90")
-#' gradient <- c(image_fx(gradient_x, expression = "p^2"),
-#'                 image_fx(gradient_y, expression = "p^2"))
-#' gradient <- image_flatten(gradient, operator = "Plus")
-#' gradient <- image_fx(gradient, expression = "sqrt(p)")
-#' gradient
 image_fx <- function(image, expression = "p", channel = NULL){
   assert_image(image)
   expression <- as.character(expression)

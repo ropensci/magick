@@ -77,7 +77,8 @@ man \%>\% image_morphology('Edge', 'Octagon')
 
 # Thinning down to a Skeleton
 man \%>\% image_morphology('Thinning', 'Skeleton', iterations = -1)
-}
+
+# Show image_fx() expression
 img <- image_convert(logo, colorspace = "Gray")
 image_fx(img, expression = "pow(p, 0.5)")
 image_fx(img, expression = "random()")
@@ -88,6 +89,7 @@ gradient <- c(image_fx(gradient_x, expression = "p^2"),
 gradient <- image_flatten(gradient, operator = "Plus")
 gradient <- image_fx(gradient, expression = "sqrt(p)")
 gradient
+}
 }
 \seealso{
 Other image: \code{\link{_index_}}, \code{\link{analysis}},
