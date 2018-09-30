@@ -9,6 +9,20 @@
  * https://github.com/ImageMagick/ImageMagick/commit/018006bb3daced97350baecc5d172e6561a873cb
  */
 
+// [[Rcpp::export]]
+XPtrImage magick_image_fx( XPtrImage input, std::string expression, Rcpp::CharacterVector channel){
+  XPtrImage output = copy(input);
+  if(channel.length()){
+    Magick::ChannelType chan = Channel(std::string(channel.at(0)).c_str());
+    for(size_t i = 0; i < output->size(); i++)
+      output->at(i).fx(expression, chan);
+  } else {
+    for(size_t i = 0; i < output->size(); i++)
+      output->at(i).fx(expression);
+  }
+  return output;
+}
+
 #if MagickLibVersion >= 0x688
 
 Magick::KernelInfoType Kernel(const char * str){
@@ -25,20 +39,6 @@ Magick::MorphologyMethod Method(const char * str){
   if(val < 0)
     throw std::runtime_error(std::string("Invalid MorphologyMethod value: ") + str);
   return (Magick::MorphologyMethod) val;
-}
-
-// [[Rcpp::export]]
-XPtrImage magick_image_fx( XPtrImage input, std::string expression, Rcpp::CharacterVector channel){
-  XPtrImage output = copy(input);
-  if(channel.length()){
-    Magick::ChannelType chan = Channel(std::string(channel.at(0)).c_str());
-    for(size_t i = 0; i < output->size(); i++)
-      output->at(i).fx(expression, chan);
-  } else {
-    for(size_t i = 0; i < output->size(); i++)
-      output->at(i).fx(expression);
-  }
-  return output;
 }
 
 // [[Rcpp::export]]
