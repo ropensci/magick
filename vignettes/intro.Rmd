@@ -27,7 +27,7 @@ The ImageMagick library has an overwhelming amount of functionality. The current
 
 ## Installing `magick`
 
-On Windows or OS-X the package is most easily installed via CRAN.
+On Windows or macOS the package is most easily installed via CRAN.
 
 ```r
 install.packages("magick")
@@ -57,7 +57,7 @@ On Fedora or CentOS/RHEL we need [ImageMagick-c++-devel](https://apps.fedoraproj
 sudo yum install ImageMagick-c++-devel
 ```
 
-To install from source on OS-X you need `imagemagick@6` from homebrew.
+To install from source on macOS you need `imagemagick@6` from homebrew.
 
 ```
 brew reinstall imagemagick@6 --with-fontconfig --with-librsvg
