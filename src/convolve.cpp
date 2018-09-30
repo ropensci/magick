@@ -28,6 +28,20 @@ Magick::MorphologyMethod Method(const char * str){
 }
 
 // [[Rcpp::export]]
+XPtrImage magick_image_fx( XPtrImage input, const std::string expression, Rcpp::CharacterVector channel){
+  XPtrImage output = copy(input);
+  if(channel.length()){
+    Magick::ChannelType chan = Channel(std::string(channel.at(0)).c_str());
+    for(size_t i = 0; i < output->size(); i++)
+      output->at(i).fx(expression, chan);
+  } else {
+    for(size_t i = 0; i < output->size(); i++)
+      output->at(i).fx(expression);
+  }
+  return output;
+}
+
+// [[Rcpp::export]]
 XPtrImage magick_image_morphology( XPtrImage input, std::string method, std::string kernel, size_t iter,
                                    Rcpp::CharacterVector opt_names, Rcpp::CharacterVector opt_values){
   XPtrImage output = copy(input);

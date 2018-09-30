@@ -4,6 +4,7 @@
 \alias{morphology}
 \alias{image_morphology}
 \alias{image_convolve}
+\alias{image_fx}
 \title{Morphology}
 \usage{
 image_morphology(image, method = "convolve", kernel = "Gaussian",
@@ -11,6 +12,8 @@ image_morphology(image, method = "convolve", kernel = "Gaussian",
 
 image_convolve(image, kernel = "Gaussian", iterations = 1,
   scaling = NULL, bias = NULL)
+
+image_fx(image, expression = "p", channel = NULL)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
@@ -28,6 +31,10 @@ image_convolve(image, kernel = "Gaussian", iterations = 1,
 dynamic range, for example: \code{"50\%!"}}
 
 \item{bias}{output bias string, for example \code{"50\%"}}
+
+\item{expression}{string with an \href{https://www.imagemagick.org/script/fx.php}{fx expression}}
+
+\item{channel}{a value of \code{\link[=channel_types]{channel_types()}} specifying which channel(s) to set}
 }
 \description{
 Apply a morphology method. This is a very flexible function which
@@ -71,6 +78,16 @@ man \%>\% image_morphology('Edge', 'Octagon')
 # Thinning down to a Skeleton
 man \%>\% image_morphology('Thinning', 'Skeleton', iterations = -1)
 }
+img <- image_convert(logo, colorspace = "Gray")
+image_fx(img, expression = "pow(p, 0.5)")
+image_fx(img, expression = "random()")
+gradient_x <- image_convolve(img, kernel = "Prewitt")
+gradient_y <- image_convolve(img, kernel = "Prewitt:90")
+gradient <- c(image_fx(gradient_x, expression = "p^2"),
+                image_fx(gradient_y, expression = "p^2"))
+gradient <- image_flatten(gradient, operator = "Plus")
+gradient <- image_fx(gradient, expression = "sqrt(p)")
+gradient
 }
 \seealso{
 Other image: \code{\link{_index_}}, \code{\link{analysis}},

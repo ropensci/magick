@@ -209,6 +209,10 @@ magick_config_internal <- function() {
     .Call('_magick_magick_config_internal', PACKAGE = 'magick')
 }
 
+magick_image_fx <- function(input, expression, channel) {
+    .Call('_magick_magick_image_fx', PACKAGE = 'magick', input, expression, channel)
+}
+
 magick_image_morphology <- function(input, method, kernel, iter, opt_names, opt_values) {
     .Call('_magick_magick_image_morphology', PACKAGE = 'magick', input, method, kernel, iter, opt_names, opt_values)
 }

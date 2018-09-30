@@ -3,6 +3,7 @@
   - New functions image_threshold() and image_lat(), tnx Jan Wijffels
   - New functions image_hough_draw() and image_hough_txt()
   - New function image_morphology()
+  - New function image_fx() (Jan Wijffels #138)
   - Knitr is now a Suggests package instead of Imports (#150)
   - Set magick temp dir via C instead of env vars
   - Add 'tibble' class to df returned by image_info()
