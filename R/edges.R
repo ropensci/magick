@@ -18,7 +18,7 @@
 #' @param format output format of the text, either `svg` or `mvg`
 #' @param size size in points to draw the line
 #' @examples
-#' shape <- image_read('http://www.imagemagick.org/Usage/transform/shape_rectangle.gif')
+#' shape <- image_read(system.file("images/shape_rectangle.gif", package = "magick"))
 #' rectangle <- image_canny(shape)
 #' rectangle %>% image_hough_draw('5x5+20')
 #' rectangle %>% image_hough_txt(format = 'svg') %>% cat()

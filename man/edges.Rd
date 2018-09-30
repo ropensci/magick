@@ -46,7 +46,7 @@ the intermediate search image. For canny edge detection the format is
 available at the \href{https://www.imagemagick.org/Usage/transform/#hough}{imagemagick website}.
 }
 \examples{
-shape <- image_read('http://www.imagemagick.org/Usage/transform/shape_rectangle.gif')
+shape <- image_read(system.file("images/shape_rectangle.gif", package = "magick"))
 rectangle <- image_canny(shape)
 rectangle \%>\% image_hough_draw('5x5+20')
 rectangle \%>\% image_hough_txt(format = 'svg') \%>\% cat()
