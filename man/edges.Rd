@@ -35,14 +35,15 @@ image_hough_txt(image, geom = "5x5+20", format = c("mvg", "svg"))
 \item{format}{output format of the text, either \code{svg} or \code{mvg}}
 }
 \description{
-Tools to find edges and detect lines.
+Best results are obtained by finding edges with \code{\link[=image_canny]{image_canny()}} and
+then performing Hough-line detection on the edge image.
 }
 \details{
 For Hough-line detection, the geometry format is \code{{W}x{H}+{threshold}}
 defining the size and threshold of the filter used to find 'peaks' in
 the intermediate search image. For canny edge detection the format is
 \code{{radius}x{sigma}+{lower\%}+{upper\%}}. More details and examples are
-available at the \href{https://www.imagemagick.org/Usage/transform}{imagemagick website}.
+available at the \href{https://www.imagemagick.org/Usage/transform/#hough}{imagemagick website}.
 }
 \examples{
 shape <- image_read('http://www.imagemagick.org/Usage/transform/shape_rectangle.gif')

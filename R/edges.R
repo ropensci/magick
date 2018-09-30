@@ -1,12 +1,13 @@
 #' Edge / Line Detection
 #'
-#' Tools to find edges and detect lines.
+#' Best results are obtained by finding edges with [image_canny()] and
+#' then performing Hough-line detection on the edge image.
 #'
 #' For Hough-line detection, the geometry format is `{W}x{H}+{threshold}`
 #' defining the size and threshold of the filter used to find 'peaks' in
 #' the intermediate search image. For canny edge detection the format is
 #' `{radius}x{sigma}+{lower%}+{upper%}`. More details and examples are
-#' available at the [imagemagick website](https://www.imagemagick.org/Usage/transform).
+#' available at the [imagemagick website](https://www.imagemagick.org/Usage/transform/#hough).
 #'
 #' @export
 #' @inheritParams editing
