@@ -9,6 +9,7 @@ EBImage
 Exif
 filterType
 frink
+fx
 gganimate
 ggplot
 gifski
@@ -27,6 +28,7 @@ Laplacian
 lapply
 libmagick
 lossy
+macOS
 Magck
 Murrell
 noisetype

@@ -15,6 +15,7 @@
 \alias{image_blank}
 \alias{image_join}
 \alias{image_attributes}
+\alias{demo_image}
 \title{Image Editing}
 \usage{
 image_read(path, density = NULL, depth = NULL, strip = FALSE)
@@ -44,6 +45,8 @@ image_blank(width, height, color = "none", pseudo_image = "")
 image_join(...)
 
 image_attributes(image)
+
+demo_image(path)
 }
 \arguments{
 \item{path}{a file, url, or raster object or bitmap array}

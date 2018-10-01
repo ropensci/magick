@@ -34,7 +34,7 @@
 #' rose %>% image_morphology('CloseI', 'Octagon', iter = 3)
 #'
 #' # Edge detection
-#' man <- image_read(system.file('images/man.gif', package = 'magick'))
+#' man <- demo_image('man.gif')
 #' man %>% image_morphology('EdgeIn', 'Octagon')
 #' man %>% image_morphology('EdgeOut', 'Octagon')
 #' man %>% image_morphology('Edge', 'Octagon')
@@ -58,6 +58,15 @@
 #' gradient <- image_flatten(gradient, operator = "Plus")
 #' gradient <- image_fx(gradient, expression = "sqrt(p)")
 #' gradient
+#'
+#' # Specify custom kernel matrix usingn a string:
+#' img <- demo_image("test_mag.gif")
+#' i <- image_convolve(img, kernel = '4x5:
+#'        0 -1  0  0
+#'       -1 +1 -1  0
+#'       -1 +1 -1  0
+#'       -1 +1 +1 -1
+#'        0 -1 -1  0 ', bias = "50%")
 #' }
 image_morphology <- function(image, method = "convolve", kernel = "Gaussian",
                              iterations = 1, opts = list()){
@@ -72,8 +81,9 @@ image_morphology <- function(image, method = "convolve", kernel = "Gaussian",
 
 #' @export
 #' @rdname morphology
-#' @param kernel either a matrix or a string with parameterized [kerneltype][kernel_types] such as:
-#' `"DoG:0,0,2"` or `"Diamond"`
+#' @param kernel either a square matrix or a string. The string can either be a
+#' parameterized [kerneltype][kernel_types] such as: `"DoG:0,0,2"` or `"Diamond"`
+#' or it can contain a custom matrix (see examples)
 #' @param iterations number of iterations
 #' @param scaling string with kernel scaling. The special flag `"!"` automatically scales to full
 #' dynamic range, for example: \code{"50\%!"}

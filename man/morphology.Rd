@@ -20,8 +20,9 @@ image_fx(image, expression = "p", channel = NULL)
 
 \item{method}{a string with a valid method from \code{\link[=morphology_types]{morphology_types()}}}
 
-\item{kernel}{either a matrix or a string with parameterized \link[=kernel_types]{kerneltype} such as:
-\code{"DoG:0,0,2"} or \code{"Diamond"}}
+\item{kernel}{either a square matrix or a string. The string can either be a
+parameterized \link[=kernel_types]{kerneltype} such as: \code{"DoG:0,0,2"} or \code{"Diamond"}
+or it can contain a custom matrix (see examples)}
 
 \item{iterations}{number of iterations}
 
@@ -65,7 +66,7 @@ rose \%>\% image_morphology('OpenI', 'Octagon', iter = 3)
 rose \%>\% image_morphology('CloseI', 'Octagon', iter = 3)
 
 # Edge detection
-man <- image_read(system.file('images/man.gif', package = 'magick'))
+man <- demo_image('man.gif')
 man \%>\% image_morphology('EdgeIn', 'Octagon')
 man \%>\% image_morphology('EdgeOut', 'Octagon')
 man \%>\% image_morphology('Edge', 'Octagon')
@@ -89,6 +90,15 @@ gradient <- c(image_fx(gradient_x, expression = "p^2"),
 gradient <- image_flatten(gradient, operator = "Plus")
 gradient <- image_fx(gradient, expression = "sqrt(p)")
 gradient
+
+# Specify custom kernel matrix usingn a string:
+img <- demo_image("test_mag.gif")
+i <- image_convolve(img, kernel = '4x5:
+       0 -1  0  0
+      -1 +1 -1  0
+      -1 +1 -1  0
+      -1 +1 +1 -1
+       0 -1 -1  0 ', bias = "50\%")
 }
 }
 \seealso{
