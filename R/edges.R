@@ -12,7 +12,7 @@
 #' @export
 #' @inheritParams editing
 #' @rdname edges
-#' @param geom geometry string, see details.
+#' @param geometry geometry string, see details.
 #' @param bg background color
 #' @param radius edge size in pixels
 #' @param format output format of the text, either `svg` or `mvg`
@@ -31,23 +31,30 @@ image_edge <- function(image, radius = 1){
 
 #' @export
 #' @rdname edges
-image_canny <- function(image, geom = '0x1+10%+30%'){
+image_canny <- function(image, geometry = '0x1+10%+30%'){
   assert_image(image)
-  geom <- as.character(geom)
-  magick_image_canny(image, geom)
+  geometry <- as.character(geometry)
+  magick_image_canny(image, geometry)
 }
 
 #' @export
 #' @rdname edges
 #' @param overlay composite the drawing atop the input image. Only for `bg = 'transparent'`.
-image_hough_draw <- function(image, geom = "5x5+20", color = 'red',
+image_hough_draw <- function(image, geometry = NULL, color = 'red',
                              bg = 'transparent', size = 3, overlay = FALSE){
   assert_image(image)
-  geom <- as.character(geom)
+  geometry <- as.character(geometry)
+  if(!length(geometry)){
+    info <- image_info(image)
+    w <- ceiling(info$width * 0.05)
+    h <- ceiling(info$height * 0.05)
+    tres <- ceiling(min(info$width, info$height) * 0.20)
+    geometry <- sprintf('%dx%d+%d', w, h, tres)
+  }
   color <- as.character(color)
   bg <- as.character(bg)
   size <- as.numeric(size)
-  out <- magick_image_houghline(image, geom, color, bg, size)
+  out <- magick_image_houghline(image, geometry, color, bg, size)
   if(isTRUE(overlay))
     out <- image_composite(image, out)
   out
@@ -55,8 +62,8 @@ image_hough_draw <- function(image, geom = "5x5+20", color = 'red',
 
 #' @export
 #' @rdname edges
-image_hough_txt <- function(image, geom = "5x5+20", format = c("mvg", "svg")){
+image_hough_txt <- function(image, geometry = NULL, format = c("mvg", "svg")){
   format <- match.arg(format)
-  out <- image_hough_draw(image, geom = geom)
+  out <- image_hough_draw(image, geometry = geometry)
   rawToChar(image_write(out, format = format))
 }

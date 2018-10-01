@@ -9,19 +9,19 @@
 \usage{
 image_edge(image, radius = 1)
 
-image_canny(image, geom = "0x1+10\%+30\%")
+image_canny(image, geometry = "0x1+10\%+30\%")
 
-image_hough_draw(image, geom = "5x5+20", color = "red",
+image_hough_draw(image, geometry = NULL, color = "red",
   bg = "transparent", size = 3, overlay = FALSE)
 
-image_hough_txt(image, geom = "5x5+20", format = c("mvg", "svg"))
+image_hough_txt(image, geometry = NULL, format = c("mvg", "svg"))
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
 \item{radius}{edge size in pixels}
 
-\item{geom}{geometry string, see details.}
+\item{geometry}{geometry string, see details.}
 
 \item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
 \code{"navyblue"} or \code{"#000080"}}
