@@ -15,6 +15,7 @@
 \alias{noise_types}
 \alias{gravity_types}
 \alias{orientation_types}
+\alias{morphology_types}
 \title{Magick Options}
 \usage{
 magick_options()
@@ -42,6 +43,8 @@ noise_types()
 gravity_types()
 
 orientation_types()
+
+morphology_types()
 }
 \description{
 List option types and values supported in your version of ImageMagick. For
@@ -57,6 +60,7 @@ Other image: \code{\link{_index_}}, \code{\link{analysis}},
   \code{\link{color}}, \code{\link{composite}},
   \code{\link{device}}, \code{\link{editing}},
   \code{\link{effects}}, \code{\link{geometry}},
-  \code{\link{ocr}}, \code{\link{painting}},
-  \code{\link{transform}}
+  \code{\link{morphology}}, \code{\link{ocr}},
+  \code{\link{painting}}, \code{\link{transform}}
 }
+\concept{image}

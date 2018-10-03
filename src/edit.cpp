@@ -1,4 +1,4 @@
-/* Jeroen Ooms (2017)
+/* Jeroen Ooms (2018)
  * Bindings to vectorized image manipulations.
  * See API: https://www.imagemagick.org/Magick++/STL.html
  */
@@ -64,6 +64,9 @@ XPtrImage magick_image_readbin(Rcpp::RawVector x, Rcpp::CharacterVector density,
   XPtrImage image = create();
 #if MagickLibVersion >= 0x689
   Magick::ReadOptions opts = Magick::ReadOptions();
+#if MagickLibVersion >= 0x690
+  opts.quiet(1);
+#endif
   if(density.size())
     opts.density(std::string(density.at(0)).c_str());
   if(depth.size())
@@ -82,6 +85,9 @@ XPtrImage magick_image_readpath(Rcpp::CharacterVector paths, Rcpp::CharacterVect
   XPtrImage image = create();
 #if MagickLibVersion >= 0x689
   Magick::ReadOptions opts = Magick::ReadOptions();
+#if MagickLibVersion >= 0x690
+  opts.quiet(1);
+#endif
   if(density.size())
     opts.density(std::string(density.at(0)).c_str());
   if(depth.size())

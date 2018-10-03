@@ -1,7 +1,7 @@
 Package: magick
 Type: Package
 Title: Advanced Graphics and Image-Processing in R
-Version: 1.9
+Version: 1.9000
 Authors@R: person("Jeroen", "Ooms", role = c("aut", "cre"), email = "jeroen@berkeley.edu",
     comment = c(ORCID = "0000-0002-4035-0289"))
 Description: Bindings to 'ImageMagick': the most comprehensive open-source image
@@ -21,13 +21,13 @@ VignetteBuilder: knitr
 Imports:
     Rcpp (>= 0.12.12),
     magrittr,
-    knitr,
     curl
 LinkingTo: Rcpp
 Suggests:
     spelling,
     jsonlite,
     methods,
+    knitr,
     rmarkdown,
     rsvg,
     webp,
@@ -38,8 +38,9 @@ Suggests:
     rgdal,
     gapminder,
     IRdisplay,
-    tesseract (>= 2.0)
+    tesseract (>= 2.0),
+    gifski
 Encoding: UTF-8
-RoxygenNote: 6.0.1.9000
+RoxygenNote: 6.1.0
 Roxygen: list(markdown = TRUE)
 Language: en-US

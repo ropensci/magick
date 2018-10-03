@@ -87,3 +87,9 @@ gravity_types <- function(){
 orientation_types <- function(){
   list_options('orientation')
 }
+
+#' @export
+#' @rdname options
+morphology_types <- function(){
+  list_options('morphology')
+}

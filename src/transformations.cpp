@@ -1,4 +1,4 @@
-/* Jeroen Ooms (2017)
+/* Jeroen Ooms (2018)
  * Bindings to vectorized image manipulations.
  * See API: https://www.imagemagick.org/Magick++/STL.html
  */
@@ -149,13 +149,6 @@ XPtrImage magick_image_charcoal( XPtrImage input, const double radius = 1, const
 #else
   for_each ( output->begin(), output->end(), Magick::charcoalImage(radius, sigma));
 #endif
-  return output;
-}
-
-// [[Rcpp::export]]
-XPtrImage magick_image_edge( XPtrImage input, size_t radius){
-  XPtrImage output = copy(input);
-  for_each ( output->begin(), output->end(), Magick::edgeImage(radius));
   return output;
 }
 

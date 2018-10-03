@@ -7,12 +7,10 @@
 \alias{image_noise}
 \alias{image_blur}
 \alias{image_charcoal}
-\alias{image_edge}
 \alias{image_oilpaint}
 \alias{image_emboss}
 \alias{image_implode}
 \alias{image_negate}
-\alias{image_convolve}
 \title{Image Effects}
 \usage{
 image_despeckle(image, times = 1L)
@@ -25,8 +23,6 @@ image_blur(image, radius = 1, sigma = 0.5)
 
 image_charcoal(image, radius = 1, sigma = 0.5)
 
-image_edge(image, radius = 1)
-
 image_oilpaint(image, radius = 1)
 
 image_emboss(image, radius = 1, sigma = 0.5)
@@ -34,9 +30,6 @@ image_emboss(image, radius = 1, sigma = 0.5)
 image_implode(image, factor = 0.5)
 
 image_negate(image)
-
-image_convolve(image, kernel = "Gaussian", iterations = 1, scaling = NULL,
-  bias = NULL)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
@@ -52,16 +45,6 @@ from \link{noise_types}.}
 \item{sigma}{the standard deviation of the Laplacian, in pixels.}
 
 \item{factor}{image implode factor (special effect)}
-
-\item{kernel}{either a matrix or a string with parameterized \link[=kernel_types]{kerneltype} such as:
-\code{"DoG:0,0,2"} or \code{"Diamond"}}
-
-\item{iterations}{number of iterations}
-
-\item{scaling}{string with kernel scaling. The special flag \code{"!"} automatically scales to full
-dynamic range, for example: \code{"50\%!"}}
-
-\item{bias}{output bias string, for example \code{"50\%"}}
 }
 \description{
 High level effects applied to an entire image.
@@ -74,20 +57,18 @@ image_reducenoise(logo)
 image_noise(logo)
 image_blur(logo, 10, 10)
 image_charcoal(logo)
-image_edge(logo)
 image_oilpaint(logo, radius = 3)
 image_emboss(logo)
 image_implode(logo)
 image_negate(logo)
-if(magick_config()$version > "6.8.8")
-image_convolve(logo)
 }
 \seealso{
 Other image: \code{\link{_index_}}, \code{\link{analysis}},
   \code{\link{animation}}, \code{\link{attributes}},
   \code{\link{color}}, \code{\link{composite}},
   \code{\link{device}}, \code{\link{editing}},
-  \code{\link{geometry}}, \code{\link{ocr}},
-  \code{\link{options}}, \code{\link{painting}},
-  \code{\link{transform}}
+  \code{\link{geometry}}, \code{\link{morphology}},
+  \code{\link{ocr}}, \code{\link{options}},
+  \code{\link{painting}}, \code{\link{transform}}
 }
+\concept{image}
