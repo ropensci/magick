@@ -9,7 +9,7 @@
 \usage{
 image_connect(image, connectivity = 4)
 
-image_split(image)
+image_split(image, keep_color = TRUE)
 
 image_fuzzycmeans(image, min_pixels = 1, smoothing = 1.5)
 }
@@ -17,6 +17,9 @@ image_fuzzycmeans(image, min_pixels = 1, smoothing = 1.5)
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
 \item{connectivity}{number neighbor colors which are considered part of a unique object}
+
+\item{keep_color}{if TRUE the output images retain the color of the input pixel.
+If FALSE all matxingn pixels are set black to retain only the image mask.}
 
 \item{min_pixels}{the minimum number of pixels contained in a hexahedra before it can be considered valid (expressed as a percentage)}
 

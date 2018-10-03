@@ -44,12 +44,15 @@ image_connect <- function(image, connectivity = 4){
 
 #' @export
 #' @rdname segmentation
-image_split <- function(image){
+#' @param keep_color if TRUE the output images retain the color of the input pixel.
+#' If FALSE all matxingn pixels are set black to retain only the image mask.
+image_split <- function(image, keep_color = TRUE){
   assert_image(image)
   pixels <- as.integer(image)
   colors <- sort(unique(c(pixels)))
-  blobs <- lapply(colors, function(col){
-    image_read((pixels == col) * col)
+  blobs <- lapply(colors, function(col){ #-256^3 = solid black
+    val <- ifelse(isTRUE(keep_color), col, -16777216L)
+    image_read((pixels == col) * val)
   })
   image_join(blobs)
 }
