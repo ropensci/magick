@@ -1,4 +1,4 @@
-/* Jeroen Ooms (2017)
+/* Jeroen Ooms (2018)
  * Bindings to vectorized image manipulations.
  * See API: https://www.imagemagick.org/Magick++/STL.html
  */
@@ -64,6 +64,9 @@ XPtrImage magick_image_readbin(Rcpp::RawVector x, Rcpp::CharacterVector density,
   XPtrImage image = create();
 #if MagickLibVersion >= 0x689
   Magick::ReadOptions opts = Magick::ReadOptions();
+#if MagickLibVersion >= 0x690
+  opts.quiet(1);
+#endif
   if(density.size())
     opts.density(std::string(density.at(0)).c_str());
   if(depth.size())
@@ -82,6 +85,9 @@ XPtrImage magick_image_readpath(Rcpp::CharacterVector paths, Rcpp::CharacterVect
   XPtrImage image = create();
 #if MagickLibVersion >= 0x689
   Magick::ReadOptions opts = Magick::ReadOptions();
+#if MagickLibVersion >= 0x690
+  opts.quiet(1);
+#endif
   if(density.size())
     opts.density(std::string(density.at(0)).c_str());
   if(depth.size())
@@ -157,6 +163,23 @@ Rcpp::RawVector magick_image_write_frame(XPtrImage input, const char * format, s
   memcpy(res.begin(), output.data(), output.length());
   res.attr("class") = Rcpp::CharacterVector::create("bitmap", format);
   res.attr("dim") = Rcpp::NumericVector::create(slices, width, height);
+  return res;
+}
+
+// [[Rcpp::export]]
+Rcpp::IntegerVector magick_image_write_integer(XPtrImage input){
+  if(input->size() != 1)
+    throw std::runtime_error("Image must have single frame to write a native raster");
+  Frame frame = input->front();
+  Magick::Geometry size(frame.size());
+  size_t width = size.width();
+  size_t height = size.height();
+  Magick::Blob output;
+  frame.write(&output, "RGBA", 8L);
+  Rcpp::IntegerVector res(output.length() / 4);
+  memcpy(res.begin(), output.data(), output.length());
+  res.attr("class") = Rcpp::CharacterVector::create("nativeRaster");
+  res.attr("dim") = Rcpp::NumericVector::create(height, width);
   return res;
 }
 

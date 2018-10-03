@@ -1,3 +1,13 @@
+2.0
+  - Ignore attribute warnings in image_read() instead of error (fixes #134)
+  - New functions image_threshold() and image_lat(), tnx Jan Wijffels
+  - New functions image_hough_draw() and image_hough_txt()
+  - New function image_morphology()
+  - New function image_fx() (Jan Wijffels #138)
+  - Knitr is now a Suggests package instead of Imports (#150)
+  - Set magick temp dir via C instead of env vars
+  - Add 'tibble' class to df returned by image_info()
+
 1.9
   - New function image_attributes()
   - MacOS: new autobrew script uses prebuilt static bottle
@@ -117,7 +127,7 @@
   - Try to fix the mac binary package
 
 0.2
-  - Build binary package on OS-X --with-zero-configuation (fixes "config xml file" errors).
+  - Build binary package on macOS --with-zero-configuation (fixes "config xml file" errors).
   - image_read now reads straight from disk rather than via R.
   - Add as.raster() method for images
   - image_write gains a 'flatten' argument

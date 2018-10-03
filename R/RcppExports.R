@@ -209,6 +209,14 @@ magick_config_internal <- function() {
     .Call('_magick_magick_config_internal', PACKAGE = 'magick')
 }
 
+magick_image_fx <- function(input, expression, channel) {
+    .Call('_magick_magick_image_fx', PACKAGE = 'magick', input, expression, channel)
+}
+
+magick_image_morphology <- function(input, method, kernel, iter, opt_names, opt_values) {
+    .Call('_magick_magick_image_morphology', PACKAGE = 'magick', input, method, kernel, iter, opt_names, opt_values)
+}
+
 magick_image_convolve_kernel <- function(input, kernel, iter, scaling, bias) {
     .Call('_magick_magick_image_convolve_kernel', PACKAGE = 'magick', input, kernel, iter, scaling, bias)
 }
@@ -227,6 +235,18 @@ magick_device_get <- function(n) {
 
 magick_device_pop <- function() {
     .Call('_magick_magick_device_pop', PACKAGE = 'magick')
+}
+
+magick_image_edge <- function(input, radius) {
+    .Call('_magick_magick_image_edge', PACKAGE = 'magick', input, radius)
+}
+
+magick_image_canny <- function(input, geomstr) {
+    .Call('_magick_magick_image_canny', PACKAGE = 'magick', input, geomstr)
+}
+
+magick_image_houghline <- function(input, geomstr, col, bg, lwd) {
+    .Call('_magick_magick_image_houghline', PACKAGE = 'magick', input, geomstr, col, bg, lwd)
 }
 
 magick_image_readbitmap_native <- function(x) {
@@ -269,6 +289,10 @@ magick_image_write_frame <- function(input, format, i = 1L) {
     .Call('_magick_magick_image_write_frame', PACKAGE = 'magick', input, format, i)
 }
 
+magick_image_write_integer <- function(input) {
+    .Call('_magick_magick_image_write_integer', PACKAGE = 'magick', input)
+}
+
 magick_image_display <- function(image, animate) {
     .Call('_magick_magick_image_display', PACKAGE = 'magick', image, animate)
 }
@@ -287,6 +311,10 @@ magick_image_strip <- function(input) {
 
 list_options <- function(str) {
     .Call('_magick_list_options', PACKAGE = 'magick', str)
+}
+
+set_magick_tempdir <- function(tmpdir) {
+    .Call('_magick_set_magick_tempdir', PACKAGE = 'magick', tmpdir)
 }
 
 magick_image_properties <- function(input) {
@@ -347,10 +375,6 @@ magick_image_blur <- function(input, radius = 1, sigma = 0.5) {
 
 magick_image_charcoal <- function(input, radius = 1, sigma = 0.5) {
     .Call('_magick_magick_image_charcoal', PACKAGE = 'magick', input, radius, sigma)
-}
-
-magick_image_edge <- function(input, radius) {
-    .Call('_magick_magick_image_edge', PACKAGE = 'magick', input, radius)
 }
 
 magick_image_deskew <- function(input, treshold) {

@@ -18,6 +18,7 @@
 #' @inheritParams editing
 #' @param language passed to [tesseract][tesseract::tesseract]. To install additional languages see
 #' instructions in [tesseract_download()][tesseract::tesseract_download].
+#' @param HOCR if `TRUE` return results as HOCR xml instead of plain text
 #' @param ... additional parameters passed to [tesseract][tesseract::tesseract]
 #' @examples
 #' if(require("tesseract")){
@@ -25,9 +26,9 @@
 #' image_ocr(img)
 #' image_ocr_data(img)
 #' }
-image_ocr <- function(image, language = "eng", ...){
+image_ocr <- function(image, language = "eng", HOCR = FALSE, ...){
   assert_image(image)
-  tesseract::ocr(image, engine = tesseract::tesseract(language, ...))
+  tesseract::ocr(image, engine = tesseract::tesseract(language, ...), HOCR = HOCR)
 }
 
 

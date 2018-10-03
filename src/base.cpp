@@ -1,4 +1,4 @@
-/* Jeroen Ooms (2017)
+/* Jeroen Ooms (2018)
  * Bindings to vectorized image manipulations.
  * See API: https://www.imagemagick.org/Magick++/STL.html
  */

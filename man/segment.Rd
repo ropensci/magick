@@ -36,12 +36,20 @@ Basic image segmentation like connected components labelling, blob extraction an
 where regions of adjacent pixels which share the same set of intensity values get combined
 }
 \examples{
-img <- image_read("https://www.imagemagick.org/image/objects.gif")
-img <- image_convert(img, colorspace = "Gray")
-img
+# Split an image by color
+img <- image_quantize(logo, 4)
+layers <- image_split(img)
+layers
+
+# This returns the original image
+image_flatten(layers)
+
+# From the IM website
+objects <- image_convert(demo_image("objects.gif"), colorspace = "Gray")
+objects
 
 # Split image in blobs of connected pixel levels
-img \%>\%
+objects \%>\%
   image_connect(connectivity = 4) \%>\%
   image_split()
 

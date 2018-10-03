@@ -69,3 +69,9 @@ assert_image <- function(image){
   if(magick_image_dead(image))
     stop("Image pointer is dead. You cannot save or cache image objects between R sessions.", call. = FALSE)
 }
+
+df_to_tibble <- function(df){
+  stopifnot(inherits(df, 'data.frame'))
+  class(df) <- c("tbl_df", "tbl", "data.frame")
+  df
+}

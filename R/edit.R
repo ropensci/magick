@@ -305,3 +305,9 @@ image_attributes <- function(image){
   assert_image(image)
   magick_image_properties(image)
 }
+
+#' @export
+#' @rdname editing
+demo_image <- function(path){
+  image_read(system.file('images', path, package = 'magick'))
+}
