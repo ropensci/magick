@@ -3,14 +3,24 @@
 \name{segmentation}
 \alias{segmentation}
 \alias{image_connect}
+\alias{image_split}
+\alias{image_fuzzycmeans}
 \title{Image Segmentation}
 \usage{
 image_connect(image, connectivity = 4)
+
+image_split(image)
+
+image_fuzzycmeans(image, min_pixels = 1, smoothing = 1.5)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
 \item{connectivity}{number neighbor colors which are considered part of a unique object}
+
+\item{min_pixels}{the minimum number of pixels contained in a hexahedra before it can be considered valid (expressed as a percentage)}
+
+\item{smoothing}{the smoothing threshold which eliminates noise in the second derivative of the histogram (higher values gives smoother second derivative)}
 }
 \description{
 Basic image segmentation like connected components labelling, blob extraction and fuzzy c-means
@@ -45,6 +55,12 @@ objects \%>\%
   image_connect(connectivity = 4) \%>\%
   image_split()
 }
+# Fuzzy c-means
+image_fuzzycmeans(logo)
+
+logo \%>\%
+  image_convert(colorspace = "HCL") \%>\%
+  image_fuzzycmeans(smoothing = 5)
 }
 \seealso{
 Other image: \code{\link{_index_}}, \code{\link{analysis}},

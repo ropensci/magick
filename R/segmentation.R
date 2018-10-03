@@ -43,7 +43,7 @@ image_connect <- function(image, connectivity = 4){
 }
 
 #' @export
-#' @rdname segment
+#' @rdname segmentation
 image_split <- function(image){
   assert_image(image)
   pixels <- as.integer(image)
@@ -55,7 +55,7 @@ image_split <- function(image){
 }
 
 #' @export
-#' @rdname segment
+#' @rdname segmentation
 #' @param min_pixels the minimum number of pixels contained in a hexahedra before it can be considered valid (expressed as a percentage)
 #' @param smoothing the smoothing threshold which eliminates noise in the second derivative of the histogram (higher values gives smoother second derivative)
 #' @examples # Fuzzy c-means
