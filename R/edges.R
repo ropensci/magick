@@ -12,6 +12,8 @@
 #' @export
 #' @inheritParams editing
 #' @rdname edges
+#' @name edges
+#' @family image
 #' @param geometry geometry string, see details.
 #' @param bg background color
 #' @param radius edge size in pixels

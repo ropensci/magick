@@ -128,9 +128,10 @@ if(magick_config()$version > "6.8.6")
 Other image: \code{\link{_index_}}, \code{\link{analysis}},
   \code{\link{animation}}, \code{\link{attributes}},
   \code{\link{color}}, \code{\link{composite}},
-  \code{\link{device}}, \code{\link{editing}},
-  \code{\link{effects}}, \code{\link{geometry}},
-  \code{\link{morphology}}, \code{\link{ocr}},
-  \code{\link{options}}, \code{\link{painting}}
+  \code{\link{device}}, \code{\link{edges}},
+  \code{\link{editing}}, \code{\link{effects}},
+  \code{\link{geometry}}, \code{\link{morphology}},
+  \code{\link{ocr}}, \code{\link{options}},
+  \code{\link{painting}}, \code{\link{segmentation}}
 }
 \concept{image}

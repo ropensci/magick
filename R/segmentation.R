@@ -1,4 +1,4 @@
-#' Image segmentation
+#' Image Segmentation
 #'
 #' Basic image segmentation like connected components labelling, blob extraction and fuzzy c-means
 #'
@@ -6,12 +6,15 @@
 #' - [image_split] Splits the image according to pixel intensities
 #' - [image_fuzzycmeans] Fuzzy c-means segmentation of the histogram of color components
 #'
-#' @name segment
-#' @rdname segment
+#' [image_connected] performs blob extraction by scanning the image, pixel-by-pixel from top-left
+#' to bottom-right where regions of adjacent pixels which share the same set of intensity values
+#' get combined.
+#'
+#' @name segmentation
+#' @rdname segmentation
 #' @export
+#' @family image
 #' @details
-#' \code{image_connected} does blob extraction by scanning the image, pixel-by-pixel from top-left to bottom-right
-#' where regions of adjacent pixels which share the same set of intensity values get combined
 #' @inheritParams editing
 #' @param connectivity number neighbor colors which are considered part of a unique object
 #' @examples # Split an image by color
@@ -55,9 +58,7 @@ image_split <- function(image){
 #' @rdname segment
 #' @param min_pixels the minimum number of pixels contained in a hexahedra before it can be considered valid (expressed as a percentage)
 #' @param smoothing the smoothing threshold which eliminates noise in the second derivative of the histogram (higher values gives smoother second derivative)
-#' @examples
-#'
-#' # Fuzzy c-means
+#' @examples # Fuzzy c-means
 #' image_fuzzycmeans(logo)
 #'
 #' logo %>%
@@ -69,4 +70,3 @@ image_fuzzycmeans <- function(image, min_pixels = 1, smoothing = 1.5){
   smoothing <- as.numeric(smoothing)
   magick_image_fuzzycmeans(image, min_pixels, smoothing)
 }
-
