@@ -27,9 +27,11 @@
 #' objects
 #'
 #' # Split image in blobs of connected pixel levels
+#' if(magick_config()$version > "6.9.0"){
 #' objects %>%
 #'   image_connect(connectivity = 4) %>%
 #'   image_split()
+#' }
 image_connect <- function(image, connectivity = 4){
   assert_image(image)
   connectivity <- as.integer(connectivity)

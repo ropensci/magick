@@ -49,9 +49,11 @@ objects <- image_convert(demo_image("objects.gif"), colorspace = "Gray")
 objects
 
 # Split image in blobs of connected pixel levels
+if(magick_config()$version > "6.9.0"){
 objects \%>\%
   image_connect(connectivity = 4) \%>\%
   image_split()
+}
 
 # Fuzzy c-means
 image_fuzzycmeans(logo)
