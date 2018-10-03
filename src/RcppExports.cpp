@@ -894,6 +894,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_write_integer
+Rcpp::IntegerVector magick_image_write_integer(XPtrImage input);
+RcppExport SEXP _magick_magick_image_write_integer(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_write_integer(input));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_display
 XPtrImage magick_image_display(XPtrImage image, bool animate);
 RcppExport SEXP _magick_magick_image_display(SEXP imageSEXP, SEXP animateSEXP) {
@@ -1077,6 +1088,31 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type geometry(geometrySEXP);
     Rcpp::traits::input_parameter< bool >::type repage(repageSEXP);
     rcpp_result_gen = Rcpp::wrap(magick_image_crop(input, geometry, repage));
+    return rcpp_result_gen;
+END_RCPP
+}
+// magick_image_fuzzycmeans
+XPtrImage magick_image_fuzzycmeans(XPtrImage input, const double min_pixels, const double smoothing);
+RcppExport SEXP _magick_magick_image_fuzzycmeans(SEXP inputSEXP, SEXP min_pixelsSEXP, SEXP smoothingSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< const double >::type min_pixels(min_pixelsSEXP);
+    Rcpp::traits::input_parameter< const double >::type smoothing(smoothingSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_fuzzycmeans(input, min_pixels, smoothing));
+    return rcpp_result_gen;
+END_RCPP
+}
+// magick_image_connect
+XPtrImage magick_image_connect(XPtrImage input, const size_t connectivity);
+RcppExport SEXP _magick_magick_image_connect(SEXP inputSEXP, SEXP connectivitySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< const size_t >::type connectivity(connectivitySEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_connect(input, connectivity));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1376,6 +1412,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_read_list", (DL_FUNC) &_magick_magick_image_read_list, 1},
     {"_magick_magick_image_write", (DL_FUNC) &_magick_magick_image_write, 6},
     {"_magick_magick_image_write_frame", (DL_FUNC) &_magick_magick_image_write_frame, 3},
+    {"_magick_magick_image_write_integer", (DL_FUNC) &_magick_magick_image_write_integer, 1},
     {"_magick_magick_image_display", (DL_FUNC) &_magick_magick_image_display, 2},
     {"_magick_magick_image_fft", (DL_FUNC) &_magick_magick_image_fft, 1},
     {"_magick_magick_image_montage", (DL_FUNC) &_magick_magick_image_montage, 1},
@@ -1392,6 +1429,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_flip", (DL_FUNC) &_magick_magick_image_flip, 1},
     {"_magick_magick_image_flop", (DL_FUNC) &_magick_magick_image_flop, 1},
     {"_magick_magick_image_crop", (DL_FUNC) &_magick_magick_image_crop, 3},
+    {"_magick_magick_image_fuzzycmeans", (DL_FUNC) &_magick_magick_image_fuzzycmeans, 3},
+    {"_magick_magick_image_connect", (DL_FUNC) &_magick_magick_image_connect, 2},
     {"_magick_magick_image_noise", (DL_FUNC) &_magick_magick_image_noise, 2},
     {"_magick_magick_image_blur", (DL_FUNC) &_magick_magick_image_blur, 3},
     {"_magick_magick_image_charcoal", (DL_FUNC) &_magick_magick_image_charcoal, 3},

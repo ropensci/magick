@@ -167,6 +167,23 @@ Rcpp::RawVector magick_image_write_frame(XPtrImage input, const char * format, s
 }
 
 // [[Rcpp::export]]
+Rcpp::IntegerVector magick_image_write_integer(XPtrImage input){
+  if(input->size() != 1)
+    throw std::runtime_error("Image must have single frame to write a native raster");
+  Frame frame = input->front();
+  Magick::Geometry size(frame.size());
+  size_t width = size.width();
+  size_t height = size.height();
+  Magick::Blob output;
+  frame.write(&output, "RGBA", 8L);
+  Rcpp::IntegerVector res(output.length() / 4);
+  memcpy(res.begin(), output.data(), output.length());
+  res.attr("class") = Rcpp::CharacterVector::create("nativeRaster");
+  res.attr("dim") = Rcpp::NumericVector::create(height, width);
+  return res;
+}
+
+// [[Rcpp::export]]
 XPtrImage magick_image_display( XPtrImage image, bool animate){
 #ifndef MAGICKCORE_X11_DELEGATE
   throw std::runtime_error("ImageMagick was built without X11 support");

@@ -289,6 +289,10 @@ magick_image_write_frame <- function(input, format, i = 1L) {
     .Call('_magick_magick_image_write_frame', PACKAGE = 'magick', input, format, i)
 }
 
+magick_image_write_integer <- function(input) {
+    .Call('_magick_magick_image_write_integer', PACKAGE = 'magick', input)
+}
+
 magick_image_display <- function(image, animate) {
     .Call('_magick_magick_image_display', PACKAGE = 'magick', image, animate)
 }
@@ -351,6 +355,14 @@ magick_image_flop <- function(input) {
 
 magick_image_crop <- function(input, geometry, repage) {
     .Call('_magick_magick_image_crop', PACKAGE = 'magick', input, geometry, repage)
+}
+
+magick_image_fuzzycmeans <- function(input, min_pixels = 1.0, smoothing = 1.5) {
+    .Call('_magick_magick_image_fuzzycmeans', PACKAGE = 'magick', input, min_pixels, smoothing)
+}
+
+magick_image_connect <- function(input, connectivity = 4L) {
+    .Call('_magick_magick_image_connect', PACKAGE = 'magick', input, connectivity)
 }
 
 magick_image_noise <- function(input, noisetype) {
