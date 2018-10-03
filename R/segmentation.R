@@ -6,7 +6,7 @@
 #' - [image_split] Splits the image according to pixel intensities
 #' - [image_fuzzycmeans] Fuzzy c-means segmentation of the histogram of color components
 #'
-#' [image_connected] performs blob extraction by scanning the image, pixel-by-pixel from top-left
+#' [image_connect] performs blob extraction by scanning the image, pixel-by-pixel from top-left
 #' to bottom-right where regions of adjacent pixels which share the same set of intensity values
 #' get combined.
 #'
@@ -45,7 +45,7 @@ image_connect <- function(image, connectivity = 4){
 #' @export
 #' @rdname segmentation
 #' @param keep_color if TRUE the output images retain the color of the input pixel.
-#' If FALSE all matxingn pixels are set black to retain only the image mask.
+#' If FALSE all matching pixels are set black to retain only the image mask.
 image_split <- function(image, keep_color = TRUE){
   assert_image(image)
   pixels <- as.integer(image)

@@ -19,7 +19,7 @@ image_fuzzycmeans(image, min_pixels = 1, smoothing = 1.5)
 \item{connectivity}{number neighbor colors which are considered part of a unique object}
 
 \item{keep_color}{if TRUE the output images retain the color of the input pixel.
-If FALSE all matxingn pixels are set black to retain only the image mask.}
+If FALSE all matching pixels are set black to retain only the image mask.}
 
 \item{min_pixels}{the minimum number of pixels contained in a hexahedra before it can be considered valid (expressed as a percentage)}
 
@@ -35,7 +35,7 @@ Basic image segmentation like connected components labelling, blob extraction an
 \item \link{image_fuzzycmeans} Fuzzy c-means segmentation of the histogram of color components
 }
 
-\link{image_connected} performs blob extraction by scanning the image, pixel-by-pixel from top-left
+\link{image_connect} performs blob extraction by scanning the image, pixel-by-pixel from top-left
 to bottom-right where regions of adjacent pixels which share the same set of intensity values
 get combined.
 }
