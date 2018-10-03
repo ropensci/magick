@@ -51,6 +51,12 @@
 }
 
 #' @export
+"as.integer.magick-image" <- function(x, ...){
+  x <- image_data(x, ...)
+  as.integer(x)
+}
+
+#' @export
 "c.magick-image" <- function(...){
   image_join(...)
 }
