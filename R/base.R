@@ -82,6 +82,14 @@
 }
 
 #' @export
+"rep.magick-image" <- function(x, times){
+  assert_image(x)
+  image_join(lapply(seq_len(times), function(...){
+    x
+  }))
+}
+
+#' @export
 "print.magick-image" <- function(x, info = TRUE, ...){
   img <- x
   viewer <- getOption("viewer")
