@@ -62,6 +62,7 @@ Other image: \code{\link{_index_}}, \code{\link{analysis}},
   \code{\link{editing}}, \code{\link{effects}},
   \code{\link{geometry}}, \code{\link{morphology}},
   \code{\link{ocr}}, \code{\link{painting}},
-  \code{\link{segmentation}}, \code{\link{transform}}
+  \code{\link{segmentation}}, \code{\link{transform}},
+  \code{\link{video}}
 }
 \concept{image}
