@@ -82,8 +82,12 @@
 }
 
 #' @export
-"rep.magick-image" <- function(x, times){
+"rep.magick-image" <- function(x, ...){
   assert_image(x)
+  rep_magick_image(x, ...)
+}
+
+rep_magick_image <- function(x, times){
   image_join(lapply(seq_len(times), function(...){
     x
   }))
