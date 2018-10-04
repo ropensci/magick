@@ -42,9 +42,10 @@ Other image: \code{\link{analysis}},
   \code{\link{color}}, \code{\link{composite}},
   \code{\link{device}}, \code{\link{edges}},
   \code{\link{editing}}, \code{\link{effects}},
-  \code{\link{geometry}}, \code{\link{morphology}},
-  \code{\link{ocr}}, \code{\link{options}},
-  \code{\link{painting}}, \code{\link{segmentation}},
-  \code{\link{transform}}, \code{\link{video}}
+  \code{\link{fx}}, \code{\link{geometry}},
+  \code{\link{morphology}}, \code{\link{ocr}},
+  \code{\link{options}}, \code{\link{painting}},
+  \code{\link{segmentation}}, \code{\link{transform}},
+  \code{\link{video}}
 }
 \concept{image}

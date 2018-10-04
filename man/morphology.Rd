@@ -4,7 +4,6 @@
 \alias{morphology}
 \alias{image_morphology}
 \alias{image_convolve}
-\alias{image_fx}
 \title{Morphology}
 \usage{
 image_morphology(image, method = "convolve", kernel = "Gaussian",
@@ -12,8 +11,6 @@ image_morphology(image, method = "convolve", kernel = "Gaussian",
 
 image_convolve(image, kernel = "Gaussian", iterations = 1,
   scaling = NULL, bias = NULL)
-
-image_fx(image, expression = "p", channel = NULL)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
@@ -32,10 +29,6 @@ or it can contain a custom matrix (see examples)}
 dynamic range, for example: \code{"50\%!"}}
 
 \item{bias}{output bias string, for example \code{"50\%"}}
-
-\item{expression}{string with an \href{https://www.imagemagick.org/script/fx.php}{fx expression}}
-
-\item{channel}{a value of \code{\link[=channel_types]{channel_types()}} specifying which channel(s) to set}
 }
 \description{
 Apply a morphology method. This is a very flexible function which
@@ -43,73 +36,15 @@ can be used to apply any morphology method with custom parameters.
 See \href{http://www.imagemagick.org/Usage/morphology/}{imagemagick website}
 for examples.
 }
-\examples{
-#example from IM website:
-if(magick_config()$version > "6.8.8"){
-pixel <- image_blank(1, 1, 'white') \%>\% image_border('black', '5x5')
-
-# See the effect of Dilate method
-pixel \%>\% image_scale('800\%')
-pixel \%>\% image_morphology('Dilate', "Diamond") \%>\% image_scale('800\%')
-
-# These produce the same output:
-pixel \%>\% image_morphology('Dilate', "Diamond", iter = 3) \%>\% image_scale('800\%')
-pixel \%>\% image_morphology('Dilate', "Diamond:3") \%>\% image_scale('800\%')
-
-# Plus example
-pixel \%>\% image_morphology('Dilate', "Plus", iterations = 2) \%>\% image_scale('800\%')
-
-# Rose examples
-rose \%>\% image_morphology('ErodeI', 'Octagon', iter = 3)
-rose \%>\% image_morphology('DilateI', 'Octagon', iter = 3)
-rose \%>\% image_morphology('OpenI', 'Octagon', iter = 3)
-rose \%>\% image_morphology('CloseI', 'Octagon', iter = 3)
-
-# Edge detection
-man <- demo_image('man.gif')
-man \%>\% image_morphology('EdgeIn', 'Octagon')
-man \%>\% image_morphology('EdgeOut', 'Octagon')
-man \%>\% image_morphology('Edge', 'Octagon')
-
-# Octagonal Convex Hull
- man \%>\%
-   image_morphology('Close', 'Diamond') \%>\%
-   image_morphology('Thicken', 'ConvexHull', iterations = -1)
-
-# Thinning down to a Skeleton
-man \%>\% image_morphology('Thinning', 'Skeleton', iterations = -1)
-
-# Show image_fx() expression
-img <- image_convert(logo, colorspace = "Gray")
-image_fx(img, expression = "pow(p, 0.5)")
-image_fx(img, expression = "random()")
-gradient_x <- image_convolve(img, kernel = "Prewitt")
-gradient_y <- image_convolve(img, kernel = "Prewitt:90")
-gradient <- c(image_fx(gradient_x, expression = "p^2"),
-                image_fx(gradient_y, expression = "p^2"))
-gradient <- image_flatten(gradient, operator = "Plus")
-gradient <- image_fx(gradient, expression = "sqrt(p)")
-gradient
-
-# Specify custom kernel matrix usingn a string:
-img <- demo_image("test_mag.gif")
-i <- image_convolve(img, kernel = '4x5:
-       0 -1  0  0
-      -1 +1 -1  0
-      -1 +1 -1  0
-      -1 +1 +1 -1
-       0 -1 -1  0 ', bias = "50\%")
-}
-}
 \seealso{
 Other image: \code{\link{_index_}}, \code{\link{analysis}},
   \code{\link{animation}}, \code{\link{attributes}},
   \code{\link{color}}, \code{\link{composite}},
   \code{\link{device}}, \code{\link{edges}},
   \code{\link{editing}}, \code{\link{effects}},
-  \code{\link{geometry}}, \code{\link{ocr}},
-  \code{\link{options}}, \code{\link{painting}},
-  \code{\link{segmentation}}, \code{\link{transform}},
-  \code{\link{video}}
+  \code{\link{fx}}, \code{\link{geometry}},
+  \code{\link{ocr}}, \code{\link{options}},
+  \code{\link{painting}}, \code{\link{segmentation}},
+  \code{\link{transform}}, \code{\link{video}}
 }
 \concept{image}
