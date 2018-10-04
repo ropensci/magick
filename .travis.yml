@@ -3,6 +3,7 @@ cache: packages
 latex: false
 fortran: false
 r_build_args: '--no-build-vignettes'
+env: _R_CHECK_FORCE_SUGGESTS_=0
 
 matrix:
   include:

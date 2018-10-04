@@ -57,13 +57,14 @@ if(magick_config()$version > "6.9.0"){
 objects \%>\%
   image_connect(connectivity = 4) \%>\%
   image_split()
-}
+
 # Fuzzy c-means
 image_fuzzycmeans(logo)
 
 logo \%>\%
   image_convert(colorspace = "HCL") \%>\%
   image_fuzzycmeans(smoothing = 5)
+}
 }
 \seealso{
 Other image: \code{\link{_index_}}, \code{\link{analysis}},

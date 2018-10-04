@@ -34,6 +34,13 @@
 #' objects %>%
 #'   image_connect(connectivity = 4) %>%
 #'   image_split()
+#'
+#' # Fuzzy c-means
+#' image_fuzzycmeans(logo)
+#'
+#' logo %>%
+#'   image_convert(colorspace = "HCL") %>%
+#'   image_fuzzycmeans(smoothing = 5)
 #' }
 image_connect <- function(image, connectivity = 4){
   assert_image(image)
@@ -61,12 +68,6 @@ image_split <- function(image, keep_color = TRUE){
 #' @rdname segmentation
 #' @param min_pixels the minimum number of pixels contained in a hexahedra before it can be considered valid (expressed as a percentage)
 #' @param smoothing the smoothing threshold which eliminates noise in the second derivative of the histogram (higher values gives smoother second derivative)
-#' @examples # Fuzzy c-means
-#' image_fuzzycmeans(logo)
-#'
-#' logo %>%
-#'   image_convert(colorspace = "HCL") %>%
-#'   image_fuzzycmeans(smoothing = 5)
 image_fuzzycmeans <- function(image, min_pixels = 1, smoothing = 1.5){
   assert_image(image)
   min_pixels <- as.numeric(min_pixels)
