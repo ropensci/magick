@@ -32,7 +32,6 @@ Suggests:
     rmarkdown,
     rsvg,
     webp,
-    png,
     pdftools,
     ggplot2,
     raster,
