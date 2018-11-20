@@ -1,3 +1,6 @@
+2.1
+  - Fix compilation for IM 6.8.8 (Suse Linux 12)
+
 2.0
   - Ignore attribute warnings in image_read() instead of error (fixes #134)
   - New functions image_threshold() and image_lat(), tnx Jan Wijffels
