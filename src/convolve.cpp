@@ -23,7 +23,7 @@ XPtrImage magick_image_fx( XPtrImage input, std::string expression, Rcpp::Charac
   return output;
 }
 
-#if MagickLibVersion >= 0x688
+#if MagickLibVersion >= 0x689
 
 Magick::KernelInfoType Kernel(const char * str){
   ssize_t val = MagickCore::ParseCommandOption(
