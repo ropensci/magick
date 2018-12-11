@@ -1,3 +1,7 @@
+---
+output: github_document
+---
+
 # magick ![](http://www.textfiles.com/underconstruction/HeHeartlandPark2601underconstructionbar9.gif)
 
 ##### *Advanced Image-Processing in R*

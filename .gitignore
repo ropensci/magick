@@ -22,4 +22,3 @@ inst/doc/*.html
 src/Makevars
 windows
 !img/*
-README.md
