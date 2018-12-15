@@ -61,8 +61,8 @@ addons:
 bioc_packages:
   - EBImage
 
-r_github_packages:
-  - jimhester/covr
+cran_packages:
+  - covr
 
 warnings_are_errors: true
 #r_check_revdep: true
