@@ -123,7 +123,7 @@ image_display(tiger)
 image_browse(tiger)
 ```
 
-Another method is converting the image to a raster object and plot it on R's graphics display. However this is very slow and only useful in combination with other plotting functionality. See [#raster](#raster-graphics) below.
+Another method is converting the image to a raster object and plot it on R's graphics display. However this is very slow and only useful in combination with other plotting functionality. See [#raster](#raster-images) below.
 
 ## Transformations
 
