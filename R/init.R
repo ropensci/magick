@@ -26,6 +26,10 @@
     } else if(file.exists("/opt/X11/lib/X11/fontconfig")){
       Sys.setenv(FONTCONFIG_PATH = "/opt/X11/lib/X11/fontconfig")
     }
+  } else if(is_mac()){
+    # Workaround for R's built-in OpenMP conflicts
+    # https://github.com/ropensci/magick/issues/170
+    Sys.setenv(KMP_DUPLICATE_LIB_OK = 'TRUE')
   }
   register_s3_method("knitr", "knit_print", "magick-image")
 }
@@ -54,4 +58,7 @@ register_s3_method <- function(pkg, generic, class, fun = NULL) {
   )
 }
 
+is_mac <- function(){
+  grepl("darwin", R.Version()$platform)
+}
 
