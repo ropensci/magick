@@ -19,6 +19,7 @@ Apply a custom an \href{https://www.imagemagick.org/script/fx.php}{fx expression
 }
 \examples{
 # Show image_fx() expression
+if(magick_config()$version > "6.8.8"){
 img <- image_convert(logo, colorspace = "Gray")
 image_fx(img, expression = "pow(p, 0.5)")
 image_fx(img, expression = "random()")
@@ -30,6 +31,7 @@ gradient <- c(image_fx(gradient_x, expression = "p^2"),
 gradient <- image_flatten(gradient, operator = "Plus")
 gradient <- image_fx(gradient, expression = "sqrt(p)")
 gradient
+}
 }
 \seealso{
 Other image: \code{\link{_index_}}, \code{\link{analysis}},

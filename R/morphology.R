@@ -46,7 +46,6 @@
 #'
 #' # Thinning down to a Skeleton
 #' man %>% image_morphology('Thinning', 'Skeleton', iterations = -1)
-#' }
 #'
 #' # Specify custom kernel matrix usingn a string:
 #' img <- demo_image("test_mag.gif")
