@@ -2,16 +2,16 @@ language: r
 cache: packages
 latex: false
 fortran: false
-r_build_args: '--no-build-vignettes'
 env: _R_CHECK_FORCE_SUGGESTS_=0
 
 matrix:
   include:
-    - os: linux
+    - dist: trusty
+    - dist: xenial
     - os: osx
-      cran_packages: covr
+      r_packages: covr
       brew_packages: imagemagick
-      env: R_CODECOV=true
+      after_success: R -e 'covr::codecov(type = "all")'
     - os: osx
       brew_packages: imagemagick@6 --HEAD --with-fontconfig --with-webp --with-librsvg
     - os: osx
@@ -24,8 +24,6 @@ matrix:
       addons:
         apt:
           update: true
-          sources:
-            - sourceline: 'ppa:ubuntugis/ppa'
           packages:
             - libmagick++-dev
             - librsvg2-dev
@@ -43,7 +41,6 @@ addons:
     update: true
     sources:
       - sourceline: 'ppa:opencpu/imagemagick'
-      - sourceline: 'ppa:ubuntugis/ppa'
     packages:
       - libmagick++-dev
       - librsvg2-dev
@@ -66,9 +63,6 @@ notifications:
   email:
     on_success: change
     on_failure: change
-
-after_success:
-  - if [[ "${R_CODECOV}" ]]; then R -e 'covr::codecov(type = "all")'; fi
 
 # Prevents Travis timeout for building magick
 before_install:
