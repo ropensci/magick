@@ -14,7 +14,7 @@ matrix:
       brew_packages: imagemagick
       after_success: R -e 'covr::codecov(type = "all")'
     - os: osx
-      brew_packages: imagemagick@6 --HEAD --with-fontconfig --with-webp --with-librsvg
+      brew_packages: imagemagick@6 --with-fontconfig --with-librsvg
     - os: osx
       disable_homebrew: true
     - os: osx
@@ -22,6 +22,7 @@ matrix:
       disable_homebrew: true
     - dist: trusty
       r_check_args: '--ignore-vignettes'
+      r_build_args: '--no-build-vignettes'
       addons:
         apt:
           update: true
