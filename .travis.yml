@@ -2,7 +2,8 @@ language: r
 cache: packages
 latex: false
 fortran: false
-env: _R_CHECK_FORCE_SUGGESTS_=0
+env:
+  - _R_CHECK_FORCE_SUGGESTS_=false
 
 matrix:
   include:
@@ -55,9 +56,6 @@ addons:
 
 bioc_packages:
   - EBImage
-
-warnings_are_errors: true
-#r_check_revdep: true
 
 notifications:
   email:
