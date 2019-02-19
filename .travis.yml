@@ -12,7 +12,7 @@ matrix:
     - os: osx
       brew_packages: imagemagick
     - os: osx
-      brew_packages: imagemagick@6 --with-fontconfig --with-librsvg
+      brew_packages: imagemagick@6
     - os: osx
       disable_homebrew: true
     - os: osx
