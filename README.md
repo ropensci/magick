@@ -144,13 +144,12 @@ On __Fedora__,  __CentOS or RHEL__ we need [ImageMagick-c++-devel](https://apps.
 sudo yum install ImageMagick-c++-devel
 ````
 
-On __macOS__ use [imagemagick@6](https://github.com/Homebrew/homebrew-core/blob/master/Formula/imagemagick@6.rb) from Homebrew. Note that we need to build `--with-fontconfig` to support text features such as annotation and svg rendering.
+On __macOS__ use [imagemagick@6](https://github.com/Homebrew/homebrew-core/blob/master/Formula/imagemagick@6.rb) from Homebrew.
 
 ```
-brew reinstall imagemagick@6 --with-fontconfig --with-librsvg 
-brew link --force imagemagick@6
+brew install imagemagick@6
 ```
 
-There is also a fork of imagemagick called graphicsmagick, but it doesn't work as well. I highly recommend you build with imagemagick.
+There is also a fork of imagemagick called graphicsmagick, but it doesn't work as well, don't use that.
 
 [![](http://www.ropensci.org/public_images/github_footer.png)](http://ropensci.org)
