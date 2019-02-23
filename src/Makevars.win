@@ -11,8 +11,9 @@ endif
 IMPATH=../windows/imagemagick${IM}-${VERSION}
 LIBBUILD=${subst gcc ,-,${R_COMPILED_BY}}${R_ARCH}
 
-PKG_CPPFLAGS=-I$(IMPATH)/include/ImageMagick-${IM} \
-	-I$(IMPATH)/include${LIBBUILD}
+PKG_CPPFLAGS=	-I$(IMPATH)/include${LIBBUILD} \
+	-I$(IMPATH)/include/ImageMagick-${IM}
+
 PKG_CXXFLAGS=-DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -D_LIB
 
 CXX_STD=CXX11
