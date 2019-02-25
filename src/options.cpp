@@ -23,19 +23,16 @@ Rcpp::CharacterVector list_options(const char * str){
 }
 
 // [[Rcpp::export]]
-Rcpp::String set_magick_tempdir(const char * tmpdir){
-  MagickCore::ExceptionInfo *exception = MagickCore::AcquireExceptionInfo();
-  MagickCore::SetImageRegistry(MagickCore::StringRegistryType, "temporary-path", tmpdir, exception);
-  exception=DestroyExceptionInfo(exception);
-
+Rcpp::String set_magick_tempdir(const char * new_tmpdir){
+  if(new_tmpdir && strlen(new_tmpdir)){
+    MagickCore::ExceptionInfo *exception = MagickCore::AcquireExceptionInfo();
+    MagickCore::SetImageRegistry(MagickCore::StringRegistryType, "temporary-path", new_tmpdir, exception);
+    exception=DestroyExceptionInfo(exception);
+  }
+  //Try to read current tempdir
   static char path[4000] = "";
 #if MagickLibVersion >= 0x681
   MagickCore::GetPathTemplate(path);
 #endif
-
-  /* Remove file template except for the leading "/path/to/magick-" */
-  if(strlen(path) < 24)
-    return Rcpp::String(NA_STRING);
-  path[strlen(path)-17]='\0';
   return Rcpp::String(path);
 }

@@ -962,13 +962,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // set_magick_tempdir
-Rcpp::String set_magick_tempdir(const char * tmpdir);
-RcppExport SEXP _magick_set_magick_tempdir(SEXP tmpdirSEXP) {
+Rcpp::String set_magick_tempdir(const char * new_tmpdir);
+RcppExport SEXP _magick_set_magick_tempdir(SEXP new_tmpdirSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const char * >::type tmpdir(tmpdirSEXP);
-    rcpp_result_gen = Rcpp::wrap(set_magick_tempdir(tmpdir));
+    Rcpp::traits::input_parameter< const char * >::type new_tmpdir(new_tmpdirSEXP);
+    rcpp_result_gen = Rcpp::wrap(set_magick_tempdir(new_tmpdir));
     return rcpp_result_gen;
 END_RCPP
 }

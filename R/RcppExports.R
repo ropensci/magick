@@ -313,8 +313,8 @@ list_options <- function(str) {
     .Call('_magick_list_options', PACKAGE = 'magick', str)
 }
 
-set_magick_tempdir <- function(tmpdir) {
-    .Call('_magick_set_magick_tempdir', PACKAGE = 'magick', tmpdir)
+set_magick_tempdir <- function(new_tmpdir) {
+    .Call('_magick_set_magick_tempdir', PACKAGE = 'magick', new_tmpdir)
 }
 
 magick_image_properties <- function(input) {
