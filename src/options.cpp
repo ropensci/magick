@@ -28,7 +28,7 @@ Rcpp::String set_magick_tempdir(const char * tmpdir){
   MagickCore::SetImageRegistry(MagickCore::StringRegistryType, "temporary-path", tmpdir, exception);
   exception=DestroyExceptionInfo(exception);
 
-  char path[4000] = "";
+  static char path[4000] = "";
 #if MagickLibVersion >= 0x681
   MagickCore::GetPathTemplate(path);
 #endif
