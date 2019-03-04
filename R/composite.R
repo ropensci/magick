@@ -3,7 +3,7 @@
 #' Similar to the ImageMagick `composite` utility: compose an image on top of another one using a
 #' [CompositeOperator](https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator).
 #'
-#' The `image_compose` function is vectorized over both image arguments: if the first image has
+#' The `image_composite` function is vectorized over both image arguments: if the first image has
 #' `n` frames and the second `m` frames, the output image will contain `n` * `m` frames.
 #'
 #' The [image_border] function creates a slightly larger solid color frame and then composes the
