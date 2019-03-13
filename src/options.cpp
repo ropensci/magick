@@ -30,7 +30,7 @@ Rcpp::String set_magick_tempdir(const char * new_tmpdir){
     exception=DestroyExceptionInfo(exception);
   }
   //Try to read current tempdir
-  static char path[4000] = "";
+  static char path[MaxTextExtent] = "";
 #if MagickLibVersion >= 0x681
   MagickCore::GetPathTemplate(path);
 #endif
