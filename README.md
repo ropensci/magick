@@ -34,7 +34,7 @@ About the underlying library:
 
 **Run examples in RStudio** to see live previews of the images! If you do not use RStudio, use `image_browse` to open images. On Linux you can also use `image_display` to get an X11 preview.
 
-```{r eval = FALSE}
+```r
 library(magick)
 frink <- image_read("https://jeroen.github.io/images/frink.png")
 image_trim(frink)
@@ -48,7 +48,7 @@ frink %>%
   image_border("red", "10x10")
 ```
 
-```{r eval = FALSE, include = FALSE}
+```r
 image_rotate(frink, 45) %>% image_write("img/frink-rotated.png")
 ```
 
@@ -56,7 +56,7 @@ image_rotate(frink, 45) %>% image_write("img/frink-rotated.png")
 
 Effects
 
-```{r eval = FALSE}
+```r
 image_oilpaint(frink)
 image_implode(frink)
 image_charcoal(frink) ## <-- result of this is shown
@@ -64,7 +64,7 @@ image_blur(frink)
 image_edge(frink)
 ```
 
-```{r eval = FALSE, include = FALSE}
+```r
 image_charcoal(frink) %>% image_write("img/frink-charcoal.png")
 ```
 
@@ -72,7 +72,7 @@ image_charcoal(frink) %>% image_write("img/frink-charcoal.png")
 
 Create GIF animation:
 
-```{r eval = FALSE}
+```r
 # Download images
 oldlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-2.png")
 newlogo <- image_read("https://www.r-project.org/logo/Rlogo.png")
@@ -92,7 +92,7 @@ image_write(animation2, "img/anim2.gif")
 
 Read GIF anination frames. See the [rotating earth example GIF](https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif).
 
-```{r eval = FALSE}
+```r
 earth <- image_read("https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif")
 length(earth)
 earth[1]
@@ -105,7 +105,7 @@ image_write(earth1, "img/earth1.gif") ## <-- result of this is shown
 
 R logo with dancing banana
 
-```{r eval = FALSE}
+```r
 logo <- image_read("https://www.r-project.org/logo/Rlogo.png")
 banana <- image_read("https://jeroen.github.io/images/banana.gif")
 front <- image_scale(banana, "300")
