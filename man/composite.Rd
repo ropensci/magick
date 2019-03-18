@@ -40,7 +40,7 @@ Similar to the ImageMagick \code{composite} utility: compose an image on top of 
 \href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{CompositeOperator}.
 }
 \details{
-The \code{image_compose} function is vectorized over both image arguments: if the first image has
+The \code{image_composite} function is vectorized over both image arguments: if the first image has
 \code{n} frames and the second \code{m} frames, the output image will contain \code{n} * \code{m} frames.
 
 The \link{image_border} function creates a slightly larger solid color frame and then composes the
