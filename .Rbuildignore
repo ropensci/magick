@@ -9,3 +9,6 @@ appveyor.yml$
 ^README\.Rmd$
 ^notes.md$
 ^testsuite$
+^pkgdown$
+^_pkgdown\.yml$
+^docs$

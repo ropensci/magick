@@ -1,0 +1,22 @@
+template:
+  package: rotemplate
+
+destination: docs
+
+toc:
+  depth: 3
+
+navbar:
+  title: "magick"
+  left:
+    - icon: fa-home
+      href: index.html
+    - text: "Get started"
+      href: articles/intro.html
+    - text: "Reference"
+      href: reference/index.html
+    - text: "Changelog"
+      href: news/index.html
+  right:
+    - icon: fa-github
+      href: https://github.com/ropensci/magick

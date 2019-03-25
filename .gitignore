@@ -5,9 +5,6 @@
 *.a
 *.so
 *.dll
-*.png
-*.gif
-*.png
 *.jpg
 *.pdf
 *.tiff
@@ -22,3 +19,4 @@ inst/doc/*.html
 src/Makevars
 windows
 !img/*
+docs/
