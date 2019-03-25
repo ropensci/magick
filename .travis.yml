@@ -8,6 +8,15 @@ env:
 matrix:
   include:
     - dist: trusty
+      github_packages:
+        - r-lib/pkgdown
+        - ropensci/rotemplate
+      deploy:
+        provider: script
+        script: Rscript -e 'pkgdown::deploy_site_github()'
+        skip_cleanup: true
+        on:
+          tags: true
     - dist: xenial
     - os: osx
       brew_packages: imagemagick
