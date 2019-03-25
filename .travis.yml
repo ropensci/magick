@@ -10,7 +10,7 @@ matrix:
     - dist: trusty
       github_packages:
         - r-lib/pkgdown
-        - ropenscilabs/rotemplate
+        - ropensci/rotemplate
       deploy:
         provider: script
         script: Rscript -e 'pkgdown::deploy_site_github()'
