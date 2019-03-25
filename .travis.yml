@@ -8,7 +8,9 @@ env:
 matrix:
   include:
     - dist: trusty
-      before_cache: Rscript -e 'remotes::install_github("r-lib/pkgdown");remotes::install_github("ropenscilabs/rotemplate")'
+      github_packages:
+        - r-lib/pkgdown
+        - ropenscilabs/rotemplate
       deploy:
         provider: script
         script: Rscript -e 'pkgdown::deploy_site_github()'
