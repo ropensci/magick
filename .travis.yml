@@ -8,7 +8,6 @@ env:
 matrix:
   include:
     - dist: trusty
-    - dist: xenial
       github_packages:
         - r-lib/pkgdown
         - ropensci/rotemplate
@@ -18,6 +17,7 @@ matrix:
         skip_cleanup: true
         on:
           tags: true
+    - dist: xenial
     - os: osx
       brew_packages: imagemagick
     - os: osx
