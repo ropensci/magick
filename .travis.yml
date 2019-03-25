@@ -8,6 +8,11 @@ env:
 matrix:
   include:
     - dist: trusty
+      before_cache: Rscript -e 'remotes::install_github("r-lib/pkgdown")'
+      deploy:
+        provider: script
+        script: Rscript -e 'pkgdown::deploy_site_github()'
+        skip_cleanup: true
     - dist: xenial
     - os: osx
       brew_packages: imagemagick
