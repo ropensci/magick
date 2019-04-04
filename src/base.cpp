@@ -124,6 +124,11 @@ XPtrImage magick_image_copy(XPtrImage image, XPtrImage add){
 }
 
 // [[Rcpp::export]]
+void magick_image_destroy(XPtrImage image){
+  image.release();
+}
+
+// [[Rcpp::export]]
 bool autobrewed(){
 #ifdef BUILD_AUTOBREW
   return true;

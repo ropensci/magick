@@ -20,6 +20,11 @@
 #' portable method is `image_browse()` which opens the image in a browser. RStudio has
 #' an embedded viewer that does this automatically which is quite nice.
 #'
+#' Image objects are automatically released by the garbage collector when they are no longer
+#' reachable. Because the GC only runs once in a while, you can also call `image_destroy()`
+#' explicitly to release the memory immediately. This is usually only needed if you create
+#' a lot of images in a short period of time, and you might run out of memory.
+#'
 #' @importFrom Rcpp sourceCpp
 #' @useDynLib magick
 #' @export
@@ -288,6 +293,13 @@ image_blank <- function(width, height, color = "none", pseudo_image = ""){
   height <- as.numeric(height)
   color <- as.character(color)
   magick_image_blank(width, height, color, pseudo_image)
+}
+
+#' @export
+#' @rdname editing
+image_destroy <- function(image){
+  assert_image(image)
+  magick_image_destroy(image)
 }
 
 #' @export

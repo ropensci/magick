@@ -13,6 +13,7 @@
 \alias{image_browse}
 \alias{image_strip}
 \alias{image_blank}
+\alias{image_destroy}
 \alias{image_join}
 \alias{image_attributes}
 \alias{demo_image}
@@ -41,6 +42,8 @@ image_browse(image, browser = getOption("browser"))
 image_strip(image)
 
 image_blank(width, height, color = "none", pseudo_image = "")
+
+image_destroy(image)
 
 image_join(...)
 
@@ -126,6 +129,11 @@ rendering delegates from imagemagick itself.
 X11 is required for \code{image_display()} which is only works on some platforms. A more
 portable method is \code{image_browse()} which opens the image in a browser. RStudio has
 an embedded viewer that does this automatically which is quite nice.
+
+Image objects are automatically released by the garbage collector when they are no longer
+reachable. Because the GC only runs once in a while, you can also call \code{image_destroy()}
+explicitly to release the memory immediately. This is usually only needed if you create
+a lot of images in a short period of time, and you might run out of memory.
 }
 \examples{
 # Download image from the web

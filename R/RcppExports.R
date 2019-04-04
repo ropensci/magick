@@ -125,6 +125,10 @@ magick_image_copy <- function(image, add) {
     .Call('_magick_magick_image_copy', PACKAGE = 'magick', image, add)
 }
 
+magick_image_destroy <- function(image) {
+    invisible(.Call('_magick_magick_image_destroy', PACKAGE = 'magick', image))
+}
+
 autobrewed <- function() {
     .Call('_magick_autobrewed', PACKAGE = 'magick')
 }
