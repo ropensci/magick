@@ -1,11 +1,3 @@
-template:
-  package: rotemplate
-
-destination: docs
-
-toc:
-  depth: 3
-
 navbar:
   title: "magick"
   left:

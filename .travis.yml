@@ -8,25 +8,15 @@ env:
 matrix:
   include:
     - dist: trusty
-      github_packages:
-        - r-lib/pkgdown
-        - ropensci/rotemplate
-      deploy:
-        provider: script
-        script: Rscript -e 'pkgdown::deploy_site_github()'
-        skip_cleanup: true
-        on:
-          tags: true
     - dist: xenial
     - os: osx
       brew_packages: imagemagick
     - os: osx
       brew_packages: imagemagick@6
     - os: osx
-      disable_homebrew: true
-    - os: osx
       osx_image: xcode7.3
       disable_homebrew: true
+      before_install: sed -i.bak 's/-isysroot /-I/g' $(R RHOME)/etc/Makeconf
     - dist: trusty
       r_check_args: '--ignore-vignettes'
       r_build_args: '--no-build-vignettes'
@@ -62,14 +52,4 @@ addons:
       - libfftw3-dev
       - cargo
 
-bioc_packages:
-  - EBImage
-
-notifications:
-  email:
-    on_success: change
-    on_failure: change
-
-# Prevents Travis timeout for building magick
-before_install:
-  - (while true; do echo 'Ping? Pong!'; sleep 500; done) &
+bioc_packages: EBImage
