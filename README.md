@@ -150,6 +150,6 @@ On __macOS__ use [imagemagick@6](https://github.com/Homebrew/homebrew-core/blob/
 brew install imagemagick@6
 ```
 
-There is also a fork of imagemagick called graphicsmagick, but it doesn't work as well, don't use that.
+The unversioned homebrew formula`imagemagick` can also be used, however it has some unsolved OpenMP problems. 
 
-[![](http://www.ropensci.org/public_images/github_footer.png)](http://ropensci.org)
+There is also a fork of imagemagick called graphicsmagick, but this doesn't work for this package.
