@@ -153,3 +153,4 @@ brew install imagemagick@6
 The unversioned homebrew formula`imagemagick` can also be used, however it has some unsolved OpenMP problems. 
 
 There is also a fork of imagemagick called graphicsmagick, but this doesn't work for this package.
+
