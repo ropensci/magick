@@ -1,6 +1,6 @@
 # magick ![](http://www.textfiles.com/underconstruction/HeHeartlandPark2601underconstructionbar9.gif)
 
-##### *Advanced Image-Processing in R*
+> Advanced Image-Processing in R
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![Build Status](https://travis-ci.org/ropensci/magick.svg?branch=master)](https://travis-ci.org/ropensci/magick)
@@ -10,13 +10,13 @@
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/magick)](https://cran.r-project.org/package=magick)
 [![Github Stars](https://img.shields.io/github/stars/ropensci/magick.svg?style=social&label=Github)](https://github.com/ropensci/magick)
 
-> Bindings to ImageMagick: the most comprehensive open-source image
-  processing library available. Supports many common formats (png, jpeg, tiff,
-  pdf, etc) and manipulations (rotate, scale, crop, trim, flip, blur, etc).
-  All operations are vectorized via the Magick++ STL meaning they operate either
-  on a single frame or a series of frames for working with layers, collages,
-  or animation. In RStudio images are automatically previewed when printed to
-  the console, resulting in an interactive editing environment.
+Bindings to ImageMagick: the most comprehensive open-source image
+processing library available. Supports many common formats (png, jpeg, tiff,
+pdf, etc) and manipulations (rotate, scale, crop, trim, flip, blur, etc).
+All operations are vectorized via the Magick++ STL meaning they operate either
+on a single frame or a series of frames for working with layers, collages,
+or animation. In RStudio images are automatically previewed when printed to
+the console, resulting in an interactive editing environment.
 
 ## Documentation
 
