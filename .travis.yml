@@ -39,7 +39,7 @@ addons:
   apt:
     update: true
     sources:
-      - sourceline: 'ppa:opencpu/imagemagick'
+      - sourceline: 'ppa:jeroen/imagemagick'
     packages:
       - libmagick++-dev
       - librsvg2-dev
