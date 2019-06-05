@@ -34,6 +34,7 @@ matrix:
             - r-cran-rgdal
             - libfftw3-dev
             - cargo
+            - gsfonts
 
 addons:
   apt:
@@ -51,5 +52,6 @@ addons:
       - r-cran-rgdal
       - libfftw3-dev
       - cargo
+      - gsfonts
 
 bioc_packages: EBImage
