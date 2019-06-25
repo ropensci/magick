@@ -8,17 +8,18 @@ ifeq ($(R_COMPILED_BY),-4.6.3)
 VERSION=6.9.5-4
 endif
 
-IMPATH=../windows/imagemagick${IM}-${VERSION}
-LIBBUILD=${subst gcc ,-,${R_COMPILED_BY}}${R_ARCH}
+IMPATH = ../windows/imagemagick${IM}-${VERSION}
+LIBBUILD = ${subst gcc ,-,${R_COMPILED_BY}}${R_ARCH}
 
-PKG_CPPFLAGS=	-I$(IMPATH)/include${LIBBUILD} \
+PKG_CPPFLAGS = -I$(IMPATH)/include${LIBBUILD} \
+	-I$(IMPATH)/include-conf \
 	-I$(IMPATH)/include/ImageMagick-${IM}
 
-PKG_CXXFLAGS=-DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -D_LIB
+PKG_CXXFLAGS = -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -D_LIB
 
-CXX_STD=CXX11
+CXX_STD = CXX11
 
-PKG_LIBS= \
+PKG_LIBS = \
 	-L$(IMPATH)/lib${LIBBUILD} \
 	-L$(IMPATH)/lib${R_ARCH} \
 	-lMagick++-${IM}.Q16 -lMagickWand-${IM}.Q16 -lMagickCore-${IM}.Q16 \
