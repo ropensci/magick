@@ -1,18 +1,11 @@
 # ImageMagick build target
 IM=6
 VERSION=6.9.9
-
-# Legacy support for R < 3.3
-R_COMPILED_BY ?= -4.6.3
-ifeq ($(R_COMPILED_BY),-4.6.3)
-VERSION=6.9.5-4
-endif
-
 IMPATH = ../windows/imagemagick${IM}-${VERSION}
 LIBBUILD = ${subst gcc ,-,${R_COMPILED_BY}}${R_ARCH}
 
 PKG_CPPFLAGS = -I$(IMPATH)/include${LIBBUILD} \
-	-I$(IMPATH)/include-conf \
+	-I$(IMPATH)/include-conf${R_ARCH} \
 	-I$(IMPATH)/include/ImageMagick-${IM}
 
 PKG_CXXFLAGS = -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -D_LIB
