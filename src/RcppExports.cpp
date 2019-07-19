@@ -624,14 +624,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_shadow
-XPtrImage magick_image_shadow(XPtrImage input, const char * geomstr);
-RcppExport SEXP _magick_magick_image_shadow(SEXP inputSEXP, SEXP geomstrSEXP) {
+XPtrImage magick_image_shadow(XPtrImage input, const char * col, const char * geomstr);
+RcppExport SEXP _magick_magick_image_shadow(SEXP inputSEXP, SEXP colSEXP, SEXP geomstrSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< const char * >::type col(colSEXP);
     Rcpp::traits::input_parameter< const char * >::type geomstr(geomstrSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_shadow(input, geomstr));
+    rcpp_result_gen = Rcpp::wrap(magick_image_shadow(input, col, geomstr));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1413,7 +1414,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_composite", (DL_FUNC) &_magick_magick_image_composite, 5},
     {"_magick_magick_image_border", (DL_FUNC) &_magick_magick_image_border, 4},
     {"_magick_magick_image_frame", (DL_FUNC) &_magick_magick_image_frame, 3},
-    {"_magick_magick_image_shadow", (DL_FUNC) &_magick_magick_image_shadow, 2},
+    {"_magick_magick_image_shadow", (DL_FUNC) &_magick_magick_image_shadow, 3},
     {"_magick_magick_coder_info", (DL_FUNC) &_magick_magick_coder_info, 1},
     {"_magick_magick_config_internal", (DL_FUNC) &_magick_magick_config_internal, 0},
     {"_magick_magick_image_fx", (DL_FUNC) &_magick_magick_image_fx, 3},

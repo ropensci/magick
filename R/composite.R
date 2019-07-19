@@ -79,7 +79,9 @@ image_frame <- function(image, color = "lightgray", geometry = "25x25+6+6"){
 #' @export
 #' @rdname composite
 #' @examples image_shadow(imlogo)
-image_shadow <- function(image, geometry = '80x3+5+5'){
+image_shadow <- function(image, color = 'lightgray', geometry = '80x3+5+5'){
   assert_image(image)
-  magick_image_shadow(image, geometry)
+  color <- as.character(color)
+  geometry <- as.character(geometry)
+  magick_image_shadow(image, color, geometry)
 }

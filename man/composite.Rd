@@ -16,7 +16,7 @@ image_border(image, color = "lightgray", geometry = "10x10",
 
 image_frame(image, color = "lightgray", geometry = "25x25+6+6")
 
-image_shadow(image, geometry = "80x3+5+5")
+image_shadow(image, color = "lightgray", geometry = "80x3+5+5")
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
