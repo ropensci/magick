@@ -5,6 +5,7 @@
 \alias{image_composite}
 \alias{image_border}
 \alias{image_frame}
+\alias{image_shadow}
 \title{Image Composite}
 \usage{
 image_composite(image, composite_image, operator = "atop",
@@ -14,6 +15,8 @@ image_border(image, color = "lightgray", geometry = "10x10",
   operator = "copy")
 
 image_frame(image, color = "lightgray", geometry = "25x25+6+6")
+
+image_shadow(image, geometry = "80x3+5+5")
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
@@ -61,6 +64,7 @@ image_composite(imlogo, rlogo, operator = "blend", compose_args="50")
 # Add a border frame around the image
 image_border(imlogo, "red", "10x10")
 image_frame(imlogo)
+image_shadow(imlogo)
 }
 \seealso{
 Other image: \code{\link{_index_}}, \code{\link{analysis}},

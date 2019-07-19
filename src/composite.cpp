@@ -49,3 +49,16 @@ XPtrImage magick_image_frame( XPtrImage input, Rcpp::CharacterVector color, Rcpp
     for_each ( output->begin(), output->end(), Magick::frameImage(Geom(geometry.at(0))));
   return output;
 }
+
+// [[Rcpp::export]]
+XPtrImage magick_image_shadow( XPtrImage input, const char * geomstr){
+  XPtrImage output = copy(input);
+  Magick::Geometry geom = Geom(geomstr);
+  const double opacity = geom.width();
+  const double sigma = geom.height();
+  const size_t x = geom.xOff();
+  const size_t y = geom.yOff();
+  //REprintf("opacity: %f, sigma: %f, x: %d, y: %d", opacity, sigma, x, y);
+  for_each ( output->begin(), output->end(), Magick::shadowImage(opacity, sigma, x, y));
+  return output;
+}
