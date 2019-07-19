@@ -205,8 +205,8 @@ magick_image_frame <- function(input, color, geometry) {
     .Call('_magick_magick_image_frame', PACKAGE = 'magick', input, color, geometry)
 }
 
-magick_image_shadow <- function(input, col, geomstr) {
-    .Call('_magick_magick_image_shadow', PACKAGE = 'magick', input, col, geomstr)
+magick_image_shadow_mask <- function(input, geomstr) {
+    .Call('_magick_magick_image_shadow_mask', PACKAGE = 'magick', input, geomstr)
 }
 
 magick_coder_info <- function(format) {

@@ -79,9 +79,21 @@ image_frame <- function(image, color = "lightgray", geometry = "25x25+6+6"){
 #' @export
 #' @rdname composite
 #' @examples image_shadow(imlogo)
-image_shadow <- function(image, color = 'lightgray', geometry = '80x3+5+5'){
+image_shadow_mask <- function(image, geometry = '50x10+30+30'){
   assert_image(image)
-  color <- as.character(color)
   geometry <- as.character(geometry)
-  magick_image_shadow(image, color, geometry)
+  magick_image_shadow_mask(image, geometry)
+}
+
+#' @export
+#' @rdname composite
+#' @inheritParams edges
+#' @examples image_shadow(imlogo)
+image_shadow <- function(image, color = 'black', bg = 'white', geometry = '50x10+30+30',
+                         operator = 'atop', offset = '+20+20'){
+  assert_image(image)
+  geometry <- as.character(geometry)
+  input <- image_background(image, color, flatten = TRUE)
+  shadow <- image_background(magick_image_shadow_mask(input, geometry), bg)
+  image_composite(shadow, image, operator = operator, offset = offset)
 }
