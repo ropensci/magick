@@ -623,6 +623,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_shadow_mask
+XPtrImage magick_image_shadow_mask(XPtrImage input, const char * geomstr);
+RcppExport SEXP _magick_magick_image_shadow_mask(SEXP inputSEXP, SEXP geomstrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< const char * >::type geomstr(geomstrSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_shadow_mask(input, geomstr));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_coder_info
 Rcpp::List magick_coder_info(Rcpp::String format);
 RcppExport SEXP _magick_magick_coder_info(SEXP formatSEXP) {
@@ -1401,6 +1413,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_composite", (DL_FUNC) &_magick_magick_image_composite, 5},
     {"_magick_magick_image_border", (DL_FUNC) &_magick_magick_image_border, 4},
     {"_magick_magick_image_frame", (DL_FUNC) &_magick_magick_image_frame, 3},
+    {"_magick_magick_image_shadow_mask", (DL_FUNC) &_magick_magick_image_shadow_mask, 2},
     {"_magick_magick_coder_info", (DL_FUNC) &_magick_magick_coder_info, 1},
     {"_magick_magick_config_internal", (DL_FUNC) &_magick_magick_config_internal, 0},
     {"_magick_magick_image_fx", (DL_FUNC) &_magick_magick_image_fx, 3},
