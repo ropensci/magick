@@ -25,6 +25,9 @@ library(ggplot2)
 myplot <- image_ggplot(logo)
 myplot + ggtitle("Test plot")
 
+# Show that coordinates are reversed:
+myplot + theme_classic()
+
 # Or add to plot as annotation
 image <- image_fill(logo, 'none')
 raster <- as.raster(image)

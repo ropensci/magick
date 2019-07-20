@@ -15,6 +15,9 @@
 #' myplot <- image_ggplot(logo)
 #' myplot + ggtitle("Test plot")
 #'
+#' # Show that coordinates are reversed:
+#' myplot + theme_classic()
+#'
 #' # Or add to plot as annotation
 #' image <- image_fill(logo, 'none')
 #' raster <- as.raster(image)
@@ -27,11 +30,11 @@
 #' grid.raster(image)
 image_ggplot <- function(image, interpolate = FALSE) {
   info <- image_info(image)
-  data <- data.frame(x = c(1, info$width), y = c(1, info$height))
-  ggplot2::ggplot(data, aes(x, y)) +
+  ggplot(data.frame(x = 0, y = 0), aes(x, y)) +
     ggplot2::geom_blank() +
     ggplot2::theme_void() +
-    ggplot2::coord_fixed(expand = FALSE) +
-    ggplot2::annotation_raster(image, 1, info$width, 1, info$height, interpolate = interpolate) +
+    ggplot2::scale_y_reverse() +
+    ggplot2::coord_fixed(expand = FALSE, xlim = c(0, info$width), ylim = c(0, info$height)) +
+    ggplot2::annotation_raster(image, 0, info$width, -info$height, 0, interpolate = interpolate) +
     NULL
 }
