@@ -286,7 +286,7 @@ XPtrImage magick_image_reducenoise( XPtrImage input, const size_t radius){
  */
 
 // [[Rcpp::export]]
-XPtrImage magick_image_annotate( XPtrImage input, const std::string text, const char * gravity,
+XPtrImage magick_image_annotate( XPtrImage input, Rcpp::CharacterVector text, const char * gravity,
                                  const char * location, double rot, double size, const char * font,
                                  Rcpp::CharacterVector color, Rcpp::CharacterVector strokecolor,
                                  Rcpp::CharacterVector boxcolor){
@@ -312,9 +312,18 @@ XPtrImage magick_image_annotate( XPtrImage input, const std::string text, const 
     draw.push_back(Magick::DrawableRotation(rot));
     draw.push_back(Magick::DrawableTranslation(-x, -y));
   }
-
-  draw.push_back(Magick::DrawableText(x, y, text, "UTF-8"));
-  for_each (output->begin(), output->end(), Magick::drawImage(draw));
+  if(text.size() == 1){
+    draw.push_back(Magick::DrawableText(x, y, std::string(text[0]), "UTF-8"));
+    for_each (output->begin(), output->end(), Magick::drawImage(draw));
+  } else if(text.size() == output->size()){
+    for(size_t i = 0; i < output->size(); i++){
+      draw.push_back(Magick::DrawableText(x, y, std::string(text[i]), "UTF-8"));
+      output->at(i).draw(draw);
+      draw.pop_back();
+    }
+  } else {
+    throw std::runtime_error("Length of 'text' must be equal to images or 1");
+  }
   return output;
 }
 

@@ -1,8 +1,8 @@
 #' Image Painting
 #'
 #' The [image_fill()] function performs flood-fill by painting starting point and all
-#' neighboring pixels of approximately the same color. Annotate simply prints some
-#' text on the image.
+#' neighboring pixels of approximately the same color. Annotate prints some text on
+#' the image.
 #'
 #' Note that more sophisticated drawing mechanisms are available via the graphics
 #' device using [image_draw].
@@ -33,7 +33,7 @@ image_fill <- function(image, color, point = "1x1", fuzz = 0){
 
 #' @export
 #' @rdname painting
-#' @param text annotation text
+#' @param text character vector of length equal to 'image' or length 1
 #' @param degrees rotates text around center point
 #' @param gravity string with
 #' [gravity](https://www.imagemagick.org/Magick++/Enumerations.html#GravityType)
