@@ -71,7 +71,6 @@ image_composite(imlogo, rlogo, operator = "blend", compose_args="50")
 image_border(imlogo, "red", "10x10")
 image_frame(imlogo)
 image_shadow(imlogo)
-image_shadow(imlogo)
 }
 \seealso{
 Other image: \code{\link{_index_}}, \code{\link{analysis}},
