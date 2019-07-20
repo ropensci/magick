@@ -4,15 +4,17 @@
 \alias{image_ggplot}
 \title{Image to ggplot}
 \usage{
-image_ggplot(image)
+image_ggplot(image, interpolate = FALSE)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
+
+\item{interpolate}{passed to \link[ggplot2:annotation_raster]{ggplot2::annotation_raster}}
 }
 \description{
-Converts image to raster using \code{\link[=image_raster]{image_raster()}} and then plots it with ggplot2
-\link[ggplot2:geom_raster]{geom_raster}. See examples for other ways to use magick
-images in ggplot2.
+Create a ggplot with axes set to pixel coordinates and plot the raster image
+on it using \link[ggplot2:annotation_raster]{ggplot2::annotation_raster}. See examples for how to plot an image
+onto an existing ggplot.
 }
 \examples{
 # Plot with base R
