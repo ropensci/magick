@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Anticonf script by Jeroen Ooms (2017)
 # The script will try 'Magick++-config' and 'pkg-config' to find required
 # cflags and ldflags. Make sure this executable is in PATH when installing
