@@ -75,7 +75,7 @@ image_read <- function(path, density = NULL, depth = NULL, strip = FALSE){
     magick_image_readbin(path, density, depth, strip)
   } else if(is.character(path) && all(nchar(path))){
     path <- vapply(path, replace_url, character(1))
-    magick_image_readpath(path, density, depth, strip)
+    magick_image_readpath(enc2native(path), density, depth, strip)
   } else {
     stop("path must be URL, filename or raw vector")
   }
