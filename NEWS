@@ -1,6 +1,8 @@
 2.1
   - Fix compilation for IM 6.8.8 (Suse Linux 12)
   - Add image_destroy() to release memory immediately without waiting for GC
+  - New functions image_shadow() and image_shadow_mask()
+  - image_annotate() is now vectorized over the 'text' parameter
 
 2.0
   - Ignore attribute warnings in image_read() instead of error (fixes #134)

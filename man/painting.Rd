@@ -23,7 +23,7 @@ image_annotate(image, text, gravity = "northwest", location = "+0+0",
 \item{fuzz}{Fuzz percentage: value between 0 and 100. Relative distance between
 colors to be considered similar in the filling algorithm.}
 
-\item{text}{annotation text}
+\item{text}{character vector of length equal to 'image' or length 1}
 
 \item{gravity}{string with
 \href{https://www.imagemagick.org/Magick++/Enumerations.html#GravityType}{gravity}
@@ -46,8 +46,8 @@ for background color that annotation text is rendered on.}
 }
 \description{
 The \code{\link[=image_fill]{image_fill()}} function performs flood-fill by painting starting point and all
-neighboring pixels of approximately the same color. Annotate simply prints some
-text on the image.
+neighboring pixels of approximately the same color. Annotate prints some text on
+the image.
 }
 \details{
 Note that more sophisticated drawing mechanisms are available via the graphics
