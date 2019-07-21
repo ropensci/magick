@@ -30,7 +30,7 @@
 #' grid.raster(image)
 image_ggplot <- function(image, interpolate = FALSE) {
   info <- image_info(image)
-  ggplot(data.frame(x = 0, y = 0), aes(x, y)) +
+  ggplot2::ggplot(data.frame(x = 0, y = 0), ggplot2::aes_string('x', 'y')) +
     ggplot2::geom_blank() +
     ggplot2::theme_void() +
     ggplot2::scale_y_reverse() +
