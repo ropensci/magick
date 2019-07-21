@@ -46,8 +46,8 @@ image_orient(image, orientation = NULL)
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
-\item{fuzz}{Fuzz percentage: value between 0 and 100. Relative distance between
-colors to be considered similar in the filling algorithm.}
+\item{fuzz}{relative color distance (value between 0 and 100) to be considered similar
+in the filling algorithm}
 
 \item{geometry}{a \link{geometry} string specifying area (for cropping) or size (for resizing).}
 

@@ -14,21 +14,27 @@
 #' @inheritParams editing
 #' @param color a valid [color string](https://www.imagemagick.org/Magick++/Color.html) such as
 #' `"navyblue"` or `"#000080"`
-#' @param point a [geometry_point] string indicating the starting point of the flood-fill
-#' @param fuzz Fuzz percentage: value between 0 and 100. Relative distance between
-#' colors to be considered similar in the filling algorithm.
+#' @param point a geometry_point string indicating the starting point of the flood-fill
+#' @param fuzz relative color distance (value between 0 and 100) to be considered similar
+#' in the filling algorithm
+#' @param refcolor if set, `fuzz` color distance will be measured against this color,
+#' not the color of the starting `point`. Any color (within `fuzz` color distance of
+#' the given `refcolor`), connected to starting point will be replaced with the `color`.
+#' If the pixel at the starting point does not itself match the given `refcolor`
+#' (according to `fuzz`) then no action will be taken.
 #' @examples
 #' logo <- image_read("logo:")
 #' logo <- image_background(logo, 'white')
 #' image_fill(logo, "pink", point = "+450+400")
 #' image_fill(logo, "pink", point = "+450+400", fuzz = 25)
-image_fill <- function(image, color, point = "1x1", fuzz = 0){
+image_fill <- function(image, color, point = "1x1", fuzz = 0, refcolor = NULL){
   assert_image(image)
   color <- as.character(color)
   point <- as.character(point)
+  refcolor <- as.character(refcolor)
   if(fuzz > 100)
     stop("Parameter 'fuzz' must be percentage value (0-100)")
-  magick_image_fill(image, color, point, fuzz)
+  magick_image_fill(image, color, point, fuzz, refcolor)
 }
 
 #' @export

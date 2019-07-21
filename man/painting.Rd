@@ -6,7 +6,7 @@
 \alias{image_annotate}
 \title{Image Painting}
 \usage{
-image_fill(image, color, point = "1x1", fuzz = 0)
+image_fill(image, color, point = "1x1", fuzz = 0, refcolor = NULL)
 
 image_annotate(image, text, gravity = "northwest", location = "+0+0",
   degrees = 0, size = 10, font = "", color = NULL,
@@ -18,10 +18,16 @@ image_annotate(image, text, gravity = "northwest", location = "+0+0",
 \item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
 \code{"navyblue"} or \code{"#000080"}}
 
-\item{point}{a \link{geometry_point} string indicating the starting point of the flood-fill}
+\item{point}{a geometry_point string indicating the starting point of the flood-fill}
 
-\item{fuzz}{Fuzz percentage: value between 0 and 100. Relative distance between
-colors to be considered similar in the filling algorithm.}
+\item{fuzz}{relative color distance (value between 0 and 100) to be considered similar
+in the filling algorithm}
+
+\item{refcolor}{if set, \code{fuzz} color distance will be measured against this color,
+not the color of the starting \code{point}. Any color (within \code{fuzz} color distance of
+the given \code{refcolor}), connected to starting point will be replaced with the \code{color}.
+If the pixel at the starting point does not itself match the given \code{refcolor}
+(according to \code{fuzz}) then no action will be taken.}
 
 \item{text}{character vector of length equal to 'image' or length 1}
 

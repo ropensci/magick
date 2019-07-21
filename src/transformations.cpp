@@ -173,13 +173,19 @@ XPtrImage magick_image_emboss( XPtrImage input, const double radius = 1, const d
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_fill( XPtrImage input, const char * color, const char * point, double fuzz_percent){
+XPtrImage magick_image_fill( XPtrImage input, const char * color, const char * point,
+                             double fuzz_percent, Rcpp::CharacterVector border_color){
   XPtrImage output = copy(input);
   double fuzz = fuzz_pct_to_abs(fuzz_percent);
   if(fuzz != 0)
     for_each ( output->begin(), output->end(), Magick::colorFuzzImage( fuzz ));
-  for_each ( output->begin(), output->end(), Magick::floodFillColorImage(
-      Magick::Geometry(Geom(point)), Color(color)));
+  if(border_color.size()){
+    for_each ( output->begin(), output->end(), Magick::floodFillColorImage(
+        Magick::Geometry(Geom(point)), Color(color), Color(border_color[0])));
+  } else {
+    for_each ( output->begin(), output->end(), Magick::floodFillColorImage(
+        Magick::Geometry(Geom(point)), Color(color)));
+  }
   if(fuzz != 0)
     for_each ( output->begin(), output->end(), Magick::colorFuzzImage(input->front().colorFuzz()));
   return output;
