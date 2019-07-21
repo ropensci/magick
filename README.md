@@ -133,7 +133,7 @@ sudo apt-get install -y libmagick++-dev
 If you are on __Ubuntu__ 14.04 (trusty) or 16.04 (xenial) you can get a more recent backport from the ppa:
 
 ```
-sudo add-apt-repository -y ppa:jeroen/imagemagick
+sudo add-apt-repository -y ppa:cran/imagemagick
 sudo apt-get update
 sudo apt-get install -y libmagick++-dev 
 ```
