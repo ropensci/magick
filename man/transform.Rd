@@ -9,6 +9,7 @@
 \alias{image_scale}
 \alias{image_sample}
 \alias{image_crop}
+\alias{image_crop2}
 \alias{image_flip}
 \alias{image_flop}
 \alias{image_deskew}
@@ -30,6 +31,9 @@ image_scale(image, geometry = NULL)
 image_sample(image, geometry = NULL)
 
 image_crop(image, geometry = NULL, repage = TRUE)
+
+image_crop2(image, left = 0, top = 0, right = 0, bottom = 0,
+  repage = TRUE)
 
 image_flip(image)
 
@@ -58,6 +62,14 @@ type from: \link{filter_types}}
 
 \item{repage}{resize the canvas to the cropped area}
 
+\item{left}{Number of pixels to crop to the left}
+
+\item{top}{Number of pixels to crop to the top}
+
+\item{right}{Number of pixels to crop to the right}
+
+\item{bottom}{Number of pixels to crop to the bottom}
+
 \item{threshold}{straightens an image. A threshold of 40 works for most images.}
 
 \item{pagesize}{geometry string with preferred size and location of an image canvas}
@@ -79,7 +91,7 @@ documentation. Short descriptions:
 \itemize{
 \item \link{image_trim} removes edges that are the background color from the image.
 \item \link{image_chop} removes vertical or horizontal subregion of image.
-\item \link{image_crop} cuts out a subregion of original image
+\item \link{image_crop} & \link{image_crop2} cuts out a subregion of original image
 \item \link{image_rotate} rotates and increases size of canvas to fit rotated image.
 \item \link{image_deskew} auto rotate to correct skewed images
 \item \link{image_resize} resizes using custom \href{https://www.imagemagick.org/Magick++/Enumerations.html#FilterTypes}{filterType}
@@ -119,6 +131,7 @@ image_resize(rose, "400x", filter = "Point")
 image_scale(rose, "400x")
 image_sample(rose, "400x")
 image_crop(logo, "400x400+200+200")
+image_crop2(logo, left = 80, right = 80)
 image_flip(logo)
 image_flop(logo)
 if(magick_config()$version > "6.8.6")

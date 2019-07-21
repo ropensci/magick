@@ -8,7 +8,7 @@
 #'
 #' - [image_trim] removes edges that are the background color from the image.
 #' - [image_chop] removes vertical or horizontal subregion of image.
-#' - [image_crop] cuts out a subregion of original image
+#' - [image_crop] & [image_crop2] cuts out a subregion of original image
 #' - [image_rotate] rotates and increases size of canvas to fit rotated image.
 #' - [image_deskew] auto rotate to correct skewed images
 #' - [image_resize] resizes using custom [filterType](https://www.imagemagick.org/Magick++/Enumerations.html#FilterTypes)
@@ -110,6 +110,20 @@ image_crop <- function(image, geometry = NULL, repage = TRUE){
   assert_image(image)
   geometry <- as.character(geometry)
   magick_image_crop(image, geometry, repage)
+}
+
+#' @export
+#' @rdname transform
+#' @param left Number of pixels to crop to the left
+#' @param top Number of pixels to crop to the top
+#' @param right Number of pixels to crop to the right
+#' @param bottom Number of pixels to crop to the bottom
+#' @examples image_crop2(logo, left = 80, right = 80)
+image_crop2 <- function(image, left = 0, top = 0, right = 0, bottom = 0, repage = TRUE){
+  d <- dim(image[[1]])
+  geometry <- sprintf("%sx%s+%s+%s",
+                      d[2] - left - right, d[3] - top - bottom, left, top)
+  image_crop(image, geometry, repage)
 }
 
 #' @export
