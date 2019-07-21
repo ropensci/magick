@@ -21,8 +21,8 @@ image_fft(image)
 \item{metric}{string with a \href{http://www.imagemagick.org/script/command-line-options.php#metric}{metric}
 from \link[=metric_types]{metric_types()} such as \code{"AE"} or \code{"phash"}}
 
-\item{fuzz}{Fuzz percentage: value between 0 and 100. Relative distance between
-colors to be considered similar in the filling algorithm.}
+\item{fuzz}{relative color distance (value between 0 and 100) to be considered similar
+in the filling algorithm}
 }
 \description{
 Functions for image calculations and analysis. This part of the package needs more work.
