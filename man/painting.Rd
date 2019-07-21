@@ -6,7 +6,7 @@
 \alias{image_annotate}
 \title{Image Painting}
 \usage{
-image_fill(image, color, point = "1x1", fuzz = 0)
+image_fill(image, color, point = "1x1", fuzz = 0, endcolor = NULL)
 
 image_annotate(image, text, gravity = "northwest", location = "+0+0",
   degrees = 0, size = 10, font = "", color = NULL,
@@ -22,6 +22,8 @@ image_annotate(image, text, gravity = "northwest", location = "+0+0",
 
 \item{fuzz}{Fuzz percentage: value between 0 and 100. Relative distance between
 colors to be considered similar in the filling algorithm.}
+
+\item{endcolor}{if set, do not fill pixels matching this color (within fuzz distance)}
 
 \item{text}{character vector of length equal to 'image' or length 1}
 

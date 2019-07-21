@@ -1202,8 +1202,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_fill
-XPtrImage magick_image_fill(XPtrImage input, const char * color, const char * point, double fuzz_percent);
-RcppExport SEXP _magick_magick_image_fill(SEXP inputSEXP, SEXP colorSEXP, SEXP pointSEXP, SEXP fuzz_percentSEXP) {
+XPtrImage magick_image_fill(XPtrImage input, const char * color, const char * point, double fuzz_percent, Rcpp::CharacterVector border_color);
+RcppExport SEXP _magick_magick_image_fill(SEXP inputSEXP, SEXP colorSEXP, SEXP pointSEXP, SEXP fuzz_percentSEXP, SEXP border_colorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -1211,7 +1211,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const char * >::type color(colorSEXP);
     Rcpp::traits::input_parameter< const char * >::type point(pointSEXP);
     Rcpp::traits::input_parameter< double >::type fuzz_percent(fuzz_percentSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_fill(input, color, point, fuzz_percent));
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type border_color(border_colorSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_fill(input, color, point, fuzz_percent, border_color));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1460,7 +1461,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_charcoal", (DL_FUNC) &_magick_magick_image_charcoal, 3},
     {"_magick_magick_image_deskew", (DL_FUNC) &_magick_magick_image_deskew, 2},
     {"_magick_magick_image_emboss", (DL_FUNC) &_magick_magick_image_emboss, 3},
-    {"_magick_magick_image_fill", (DL_FUNC) &_magick_magick_image_fill, 4},
+    {"_magick_magick_image_fill", (DL_FUNC) &_magick_magick_image_fill, 5},
     {"_magick_magick_image_negate", (DL_FUNC) &_magick_magick_image_negate, 1},
     {"_magick_magick_image_oilpaint", (DL_FUNC) &_magick_magick_image_oilpaint, 2},
     {"_magick_magick_image_implode", (DL_FUNC) &_magick_magick_image_implode, 2},

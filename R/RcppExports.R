@@ -393,8 +393,8 @@ magick_image_emboss <- function(input, radius = 1, sigma = 0.5) {
     .Call('_magick_magick_image_emboss', PACKAGE = 'magick', input, radius, sigma)
 }
 
-magick_image_fill <- function(input, color, point, fuzz_percent) {
-    .Call('_magick_magick_image_fill', PACKAGE = 'magick', input, color, point, fuzz_percent)
+magick_image_fill <- function(input, color, point, fuzz_percent, border_color) {
+    .Call('_magick_magick_image_fill', PACKAGE = 'magick', input, color, point, fuzz_percent, border_color)
 }
 
 magick_image_negate <- function(input) {

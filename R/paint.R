@@ -17,18 +17,20 @@
 #' @param point a [geometry_point] string indicating the starting point of the flood-fill
 #' @param fuzz Fuzz percentage: value between 0 and 100. Relative distance between
 #' colors to be considered similar in the filling algorithm.
+#' @param endcolor if set, do not fill pixels matching this color (within fuzz distance)
 #' @examples
 #' logo <- image_read("logo:")
 #' logo <- image_background(logo, 'white')
 #' image_fill(logo, "pink", point = "+450+400")
 #' image_fill(logo, "pink", point = "+450+400", fuzz = 25)
-image_fill <- function(image, color, point = "1x1", fuzz = 0){
+image_fill <- function(image, color, point = "1x1", fuzz = 0, endcolor = NULL){
   assert_image(image)
   color <- as.character(color)
   point <- as.character(point)
+  endcolor <- as.character(endcolor)
   if(fuzz > 100)
     stop("Parameter 'fuzz' must be percentage value (0-100)")
-  magick_image_fill(image, color, point, fuzz)
+  magick_image_fill(image, color, point, fuzz, endcolor)
 }
 
 #' @export
