@@ -13,7 +13,7 @@
 #' @family image
 #' @inheritParams editing
 #' @param color a valid [color string](https://www.imagemagick.org/Magick++/Color.html) such as
-#' `"navyblue"` or `"#000080"`
+#' `"navyblue"` or `"#000080"`. Use `"none"` for transparent.
 #' @param point a geometry_point string indicating the starting point of the flood-fill
 #' @param fuzz relative color distance (value between 0 and 100) to be considered similar
 #' in the filling algorithm

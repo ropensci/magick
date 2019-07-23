@@ -71,7 +71,7 @@ may be used to manually adjust the tree depth.}
 \link{channel_types} for example \code{"alpha"} or \code{"hue"} or \code{"cyan"}}
 
 \item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
-\code{"navyblue"} or \code{"#000080"}}
+\code{"navyblue"} or \code{"#000080"}. Use \code{"none"} for transparent.}
 
 \item{fuzz}{relative color distance (value between 0 and 100) to be considered similar
 in the filling algorithm}

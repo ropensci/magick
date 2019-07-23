@@ -36,7 +36,7 @@ from \link[=compose_types]{compose_types()}}
 \item{compose_args}{additional arguments needed for some composite operations}
 
 \item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
-\code{"navyblue"} or \code{"#000080"}}
+\code{"navyblue"} or \code{"#000080"}. Use \code{"none"} for transparent.}
 
 \item{geometry}{a \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry string}
 to set height and width of the border, e.g. \code{"10x8"}. In addition \link{image_frame} allows
