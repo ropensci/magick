@@ -20,7 +20,7 @@
   Sys.setenv(MAGICK_TMPDIR = tempdir())
 
   if(autobrewed()){
-    fontdir <- normalizePath(file.path(lib, pkg, "etc/fonts"), mustWork = FALSE)
+    fontdir <- normalizePath(file.path(lib, pkg, "etc/fontconfig"), mustWork = FALSE)
     if(file.exists("/opt/X11/lib/X11/fontconfig")){
       Sys.setenv(FONTCONFIG_PATH = "/opt/X11/lib/X11/fontconfig")
     } else if(file.exists(fontdir)){
