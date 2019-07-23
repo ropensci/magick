@@ -19,6 +19,8 @@
   # Needed by older versions of IM:
   Sys.setenv(MAGICK_TMPDIR = tempdir())
 
+  # NB: it is needed that autobrew fontconfig is newer than xQuarts
+  # or at least new enough to read the fontconfig data from the xQuarts fontconfig
   if(autobrewed()){
     fontdir <- normalizePath(file.path(lib, pkg, "etc/fontconfig"), mustWork = FALSE)
     if(file.exists("/opt/X11/lib/X11/fontconfig")){
