@@ -5,6 +5,7 @@
   - image_annotate() is now vectorized over the 'text' parameter
   - rewrite image_ggplot() to use ggplot2::annotation_raster for performance
   - image_fill() gains a new argument 'refcolor'
+  - the mac binary package now bundles the same fontconfig data as xQuarts to prevent conflicts
 
 2.0
   - Ignore attribute warnings in image_read() instead of error (fixes #134)
