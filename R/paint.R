@@ -27,7 +27,7 @@
 #' logo <- image_background(logo, 'white')
 #' image_fill(logo, "pink", point = "+450+400")
 #' image_fill(logo, "pink", point = "+450+400", fuzz = 25)
-image_fill <- function(image, color, point = "1x1", fuzz = 0, refcolor = NULL){
+image_fill <- function(image, color, point = "+1+1", fuzz = 0, refcolor = NULL){
   assert_image(image)
   color <- as.character(color)
   point <- as.character(point)

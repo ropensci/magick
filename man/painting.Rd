@@ -6,7 +6,7 @@
 \alias{image_annotate}
 \title{Image Painting}
 \usage{
-image_fill(image, color, point = "1x1", fuzz = 0, refcolor = NULL)
+image_fill(image, color, point = "+1+1", fuzz = 0, refcolor = NULL)
 
 image_annotate(image, text, gravity = "northwest", location = "+0+0",
   degrees = 0, size = 10, font = "", color = NULL,
