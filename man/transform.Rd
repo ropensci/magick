@@ -29,7 +29,7 @@ image_scale(image, geometry = NULL)
 
 image_sample(image, geometry = NULL)
 
-image_crop(image, geometry = NULL, repage = TRUE)
+image_crop(image, geometry = NULL, gravity = "center", repage = TRUE)
 
 image_flip(image)
 
@@ -55,6 +55,10 @@ in the filling algorithm}
 
 \item{filter}{string with \href{https://www.imagemagick.org/Magick++/Enumerations.html#FilterTypes}{filter}
 type from: \link{filter_types}}
+
+\item{gravity}{string with
+\href{https://www.imagemagick.org/Magick++/Enumerations.html#GravityType}{gravity}
+value from \link{gravity_types}.}
 
 \item{repage}{resize the canvas to the cropped area}
 

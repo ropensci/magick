@@ -75,16 +75,3 @@ XPtrImage magick_image_flop( XPtrImage input){
   for_each ( output->begin(), output->end(), Magick::flopImage());
   return output;
 }
-
-// [[Rcpp::export]]
-XPtrImage magick_image_crop( XPtrImage input, Rcpp::CharacterVector geometry, bool repage){
-  XPtrImage output = copy(input);
-  if(geometry.size()){
-    for_each (output->begin(), output->end(), Magick::cropImage(Geom(geometry.at(0))));
-  } else if(input->size()){
-    for_each (output->begin(), output->end(), Magick::cropImage(input->front().size()));
-  }
-  if(repage)
-    for_each ( output->begin(), output->end(), Magick::pageImage(Magick::Geometry()));
-  return output;
-}

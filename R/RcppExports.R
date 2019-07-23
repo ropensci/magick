@@ -361,10 +361,6 @@ magick_image_flop <- function(input) {
     .Call('_magick_magick_image_flop', PACKAGE = 'magick', input)
 }
 
-magick_image_crop <- function(input, geometry, repage) {
-    .Call('_magick_magick_image_crop', PACKAGE = 'magick', input, geometry, repage)
-}
-
 magick_image_fuzzycmeans <- function(input, min_pixels = 1.0, smoothing = 1.5) {
     .Call('_magick_magick_image_fuzzycmeans', PACKAGE = 'magick', input, min_pixels, smoothing)
 }
@@ -439,5 +435,9 @@ magick_image_annotate <- function(input, text, gravity, location, rot, size, fon
 
 magick_image_compare <- function(input, reference_image, metric, fuzz_percent) {
     .Call('_magick_magick_image_compare', PACKAGE = 'magick', input, reference_image, metric, fuzz_percent)
+}
+
+magick_image_crop <- function(input, geometry, gravity, repage) {
+    .Call('_magick_magick_image_crop', PACKAGE = 'magick', input, geometry, gravity, repage)
 }
 

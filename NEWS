@@ -7,6 +7,7 @@
   - image_fill() gains a new argument 'refcolor'
   - the mac binary package now bundles the same fontconfig data as xQuarts to prevent conflicts
   - image_convert() gains a parameter matte to enable/disable the alpha channel
+  - image_crop() gains a gravity argument
 
 2.0
   - Ignore attribute warnings in image_read() instead of error (fixes #134)

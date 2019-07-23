@@ -355,3 +355,20 @@ XPtrImage magick_image_compare( XPtrImage input, XPtrImage reference_image, cons
   return output;
 #endif
 }
+
+
+// [[Rcpp::export]]
+XPtrImage magick_image_crop( XPtrImage input, Rcpp::CharacterVector geometry,
+                             const char * gravity, bool repage){
+  XPtrImage output = copy(input);
+  for(size_t i = 0; i < output->size(); i++){
+    MagickCore::RectangleInfo region = geometry.size() ? Geom(geometry.at(0)) : input->front().size();
+    MagickCore::GravityAdjustGeometry(output->at(i).columns(), output->at(i).rows(),
+                                      Gravity(gravity), &region);
+    output->at(i).crop(region);
+  }
+  if(repage)
+    for_each ( output->begin(), output->end(), Magick::pageImage(Magick::Geometry()));
+  return output;
+}
+
