@@ -219,13 +219,16 @@ XPtrImage magick_image_implode( XPtrImage input, double factor){
 
 // [[Rcpp::export]]
 XPtrImage magick_image_format( XPtrImage input, Rcpp::CharacterVector format, Rcpp::CharacterVector type,
-                               Rcpp::CharacterVector space, Rcpp::IntegerVector depth, Rcpp::LogicalVector antialias){
+                               Rcpp::CharacterVector space, Rcpp::IntegerVector depth, Rcpp::LogicalVector antialias,
+                               Rcpp::LogicalVector matte){
   XPtrImage output = copy(input);
   if(antialias.size()){
     for (Iter it = output->begin(); it != output->end(); ++it)
       it->strokeAntiAlias(antialias.at(0));
     for_each ( output->begin(), output->end(), Magick::myAntiAliasImage(antialias.at(0)));
   }
+  if(matte.size())
+    for_each ( output->begin(), output->end(), Magick::matteImage(matte.at(0)));
   if(type.size())
     for_each ( output->begin(), output->end(), Magick::typeImage(Type(type.at(0))));
   if(space.size())

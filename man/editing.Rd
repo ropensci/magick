@@ -29,7 +29,7 @@ image_write(image, path = NULL, format = NULL, quality = NULL,
   depth = NULL, density = NULL, comment = NULL, flatten = FALSE)
 
 image_convert(image, format = NULL, type = NULL, colorspace = NULL,
-  depth = NULL, antialias = NULL)
+  depth = NULL, antialias = NULL, matte = NULL)
 
 image_data(image, channels = NULL, frame = 1)
 
@@ -86,6 +86,8 @@ value from \link{image_types} for example \code{grayscale} to convert into black
 from \link{colorspace_types} for example \code{"gray"}, \code{"rgb"} or \code{"cmyk"}}
 
 \item{antialias}{enable anti-aliasing for text and strokes}
+
+\item{matte}{set to \code{TRUE} or \code{FALSE} to enable or disable transparency}
 
 \item{channels}{string with image channel(s) for example \code{"rgb"}, \code{"rgba"},
 \code{"cmyk"},\code{"gray"}, or \code{"ycbcr"}. Default is either \code{"gray"}, \code{"rgb"} or \code{"rgba"}
