@@ -228,7 +228,7 @@ XPtrImage magick_image_format( XPtrImage input, Rcpp::CharacterVector format, Rc
     for_each ( output->begin(), output->end(), Magick::myAntiAliasImage(antialias.at(0)));
   }
   if(matte.size())
-    for_each ( output->begin(), output->end(), Magick::matteImage(matte.at(0)));
+    for_each ( output->begin(), output->end(), Magick::myMatteImage(matte.at(0)));
   if(type.size())
     for_each ( output->begin(), output->end(), Magick::typeImage(Type(type.at(0))));
   if(space.size())

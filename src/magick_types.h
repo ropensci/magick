@@ -37,6 +37,7 @@ Magick::Point Point(const char * str);
 #define container vector
 #define myAntiAliasImage textAntiAliasImage
 #define myAntiAlias textAntiAlias
+#define myMatteImage alphaFlagImage
 #define myDrawableDashArray DrawableStrokeDashArray
 #define myMedianImage medianConvolveImage
 #define myFilterType FilterType
@@ -51,6 +52,7 @@ Magick::Point Point(const char * str);
 #define Point Geom
 #define myAntiAliasImage antiAliasImage
 #define myAntiAlias antiAlias
+#define myMatteImage matteImage
 #define myDrawableDashArray DrawableDashArray
 #define myMedianImage medianFilterImage
 #define myFilterType FilterTypes
