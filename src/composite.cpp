@@ -90,3 +90,13 @@ XPtrImage magick_image_crop( XPtrImage input, Rcpp::CharacterVector geometry,
     for_each ( output->begin(), output->end(), Magick::pageImage(Magick::Geometry()));
   return output;
 }
+
+// [[Rcpp::export]]
+XPtrImage magick_image_extent( XPtrImage input, Rcpp::CharacterVector geometry,
+                               Rcpp::CharacterVector gravity, Rcpp::CharacterVector color){
+  XPtrImage output = copy(input);
+  for(size_t i = 0; i < output->size(); i++){
+    output->at(i).extent(Geom(geometry.at(0)), Color(color.at(0)), Gravity(gravity.at(0)));
+  }
+  return output;
+}

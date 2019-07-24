@@ -9,6 +9,7 @@
 \alias{image_scale}
 \alias{image_sample}
 \alias{image_crop}
+\alias{image_extent}
 \alias{image_flip}
 \alias{image_flop}
 \alias{image_deskew}
@@ -30,6 +31,8 @@ image_scale(image, geometry = NULL)
 image_sample(image, geometry = NULL)
 
 image_crop(image, geometry = NULL, gravity = NULL, repage = TRUE)
+
+image_extent(image, geometry, gravity = "center", color = "none")
 
 image_flip(image)
 
@@ -61,6 +64,9 @@ type from: \link{filter_types}}
 value from \link{gravity_types}.}
 
 \item{repage}{resize the canvas to the cropped area}
+
+\item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
+\code{"navyblue"} or \code{"#000080"}. Use \code{"none"} for transparent.}
 
 \item{threshold}{straightens an image. A threshold of 40 works for most images.}
 
@@ -123,6 +129,7 @@ image_resize(rose, "400x", filter = "Point")
 image_scale(rose, "400x")
 image_sample(rose, "400x")
 image_crop(logo, "400x400+200+200")
+image_extent(rose, '200x200', color = 'pink')
 image_flip(logo)
 image_flop(logo)
 if(magick_config()$version > "6.8.6")

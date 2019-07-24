@@ -116,6 +116,16 @@ image_crop <- function(image, geometry = NULL, gravity = NULL, repage = TRUE){
 
 #' @export
 #' @rdname transform
+#' @examples image_extent(rose, '200x200', color = 'pink')
+image_extent <- function(image, geometry, gravity = "center", color = "none"){
+  assert_image(image)
+  geometry <- as.character(geometry)
+  gravity <- as.character(gravity)
+  magick_image_extent(image, geometry, gravity, color)
+}
+
+#' @export
+#' @rdname transform
 #' @examples
 #' image_flip(logo)
 image_flip <- function(image){

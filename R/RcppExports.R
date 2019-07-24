@@ -213,6 +213,10 @@ magick_image_crop <- function(input, geometry, gravity, repage) {
     .Call('_magick_magick_image_crop', PACKAGE = 'magick', input, geometry, gravity, repage)
 }
 
+magick_image_extent <- function(input, geometry, gravity, color) {
+    .Call('_magick_magick_image_extent', PACKAGE = 'magick', input, geometry, gravity, color)
+}
+
 magick_coder_info <- function(format) {
     .Call('_magick_magick_coder_info', PACKAGE = 'magick', format)
 }
