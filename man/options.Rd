@@ -16,6 +16,7 @@
 \alias{gravity_types}
 \alias{orientation_types}
 \alias{morphology_types}
+\alias{style_types}
 \title{Magick Options}
 \usage{
 magick_options()
@@ -45,6 +46,8 @@ gravity_types()
 orientation_types()
 
 morphology_types()
+
+style_types()
 }
 \description{
 List option types and values supported in your version of ImageMagick. For

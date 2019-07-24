@@ -9,8 +9,8 @@
 image_fill(image, color, point = "+1+1", fuzz = 0, refcolor = NULL)
 
 image_annotate(image, text, gravity = "northwest", location = "+0+0",
-  degrees = 0, size = 10, font = "", color = NULL,
-  strokecolor = NULL, boxcolor = NULL)
+  degrees = 0, size = 10, font = "", style = "normal",
+  weight = 400, color = NULL, strokecolor = NULL, boxcolor = NULL)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
@@ -44,6 +44,10 @@ value from \link{gravity_types}.}
 \item{font}{string with font family such as \code{"sans"}, \code{"mono"}, \code{"serif"},
 \code{"Times"}, \code{"Helvetica"}, \code{"Trebuchet"}, \code{"Georgia"}, \code{"Palatino"} or \code{"Comic Sans"}.}
 
+\item{style}{value of \link{style_types} for example \code{"italic"}}
+
+\item{weight}{thickness of the font, 400 is normal and 700 is bold.}
+
 \item{strokecolor}{a \href{https://www.imagemagick.org/Magick++/Color.html}{color string}
 adds a stroke (border around the text)}
 
@@ -58,6 +62,9 @@ the image.
 \details{
 Note that more sophisticated drawing mechanisms are available via the graphics
 device using \link{image_draw}.
+
+Setting a font, weight, style only works if your imagemagick is compiled
+with fontconfig support.
 }
 \examples{
 logo <- image_read("logo:")

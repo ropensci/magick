@@ -93,3 +93,9 @@ orientation_types <- function(){
 morphology_types <- function(){
   list_options('morphology')
 }
+
+#' @export
+#' @rdname options
+style_types <- function(){
+  list_options('style')
+}

@@ -38,6 +38,8 @@ image_fill <- function(image, color, point = "+1+1", fuzz = 0, refcolor = NULL){
 }
 
 #' @export
+#' @details Setting a font, weight, style only works if your imagemagick is compiled
+#' with fontconfig support.
 #' @rdname painting
 #' @param text character vector of length equal to 'image' or length 1
 #' @param degrees rotates text around center point
@@ -52,6 +54,8 @@ image_fill <- function(image, color, point = "+1+1", fuzz = 0, refcolor = NULL){
 #' for background color that annotation text is rendered on.
 #' @param font string with font family such as `"sans"`, `"mono"`, `"serif"`,
 #' `"Times"`, `"Helvetica"`, `"Trebuchet"`, `"Georgia"`, `"Palatino"` or `"Comic Sans"`.
+#' @param style value of [style_types][style_types] for example `"italic"`
+#' @param weight thickness of the font, 400 is normal and 700 is bold.
 #' @examples # Add some text to an image
 #' image_annotate(logo, "This is a test")
 #' image_annotate(logo, "CONFIDENTIAL", size = 50, color = "red", boxcolor = "pink",
@@ -60,12 +64,14 @@ image_fill <- function(image, color, point = "+1+1", fuzz = 0, refcolor = NULL){
 #' # Setting fonts requires fontconfig support (and that you have the font)
 #' image_annotate(logo, "The quick brown fox", font = "monospace", size = 50)
 image_annotate <- function(image, text, gravity = "northwest", location = "+0+0", degrees = 0,
-                           size = 10, font = "", color = NULL, strokecolor = NULL, boxcolor = NULL){
+                           size = 10, font = "", style = "normal", weight = 400,
+                           color = NULL, strokecolor = NULL, boxcolor = NULL){
   assert_image(image)
   font <- as.character(font)
   size <- as.integer(size)
   color <- as.character(color)
   strokecolor <- as.character(strokecolor)
   boxcolor <- as.character(boxcolor)
-  magick_image_annotate(image, text, gravity, location, degrees, size, font, color, strokecolor, boxcolor)
+  magick_image_annotate(image, text, gravity, location, degrees, size,
+                        font, style, weight, color, strokecolor, boxcolor)
 }
