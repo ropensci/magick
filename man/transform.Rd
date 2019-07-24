@@ -29,7 +29,7 @@ image_scale(image, geometry = NULL)
 
 image_sample(image, geometry = NULL)
 
-image_crop(image, geometry = NULL, gravity = "center", repage = TRUE)
+image_crop(image, geometry = NULL, gravity = NULL, repage = TRUE)
 
 image_flip(image)
 

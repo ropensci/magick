@@ -107,9 +107,10 @@ image_sample <- function(image, geometry = NULL){
 #' @inheritParams painting
 #' @param repage resize the canvas to the cropped area
 #' @examples image_crop(logo, "400x400+200+200")
-image_crop <- function(image, geometry = NULL, gravity = 'center', repage = TRUE){
+image_crop <- function(image, geometry = NULL, gravity = NULL, repage = TRUE){
   assert_image(image)
   geometry <- as.character(geometry)
+  gravity <- as.character(gravity)
   magick_image_crop(image, geometry, gravity, repage)
 }
 

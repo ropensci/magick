@@ -1350,14 +1350,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_crop
-XPtrImage magick_image_crop(XPtrImage input, Rcpp::CharacterVector geometry, const char * gravity, bool repage);
+XPtrImage magick_image_crop(XPtrImage input, Rcpp::CharacterVector geometry, Rcpp::CharacterVector gravity, bool repage);
 RcppExport SEXP _magick_magick_image_crop(SEXP inputSEXP, SEXP geometrySEXP, SEXP gravitySEXP, SEXP repageSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type geometry(geometrySEXP);
-    Rcpp::traits::input_parameter< const char * >::type gravity(gravitySEXP);
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type gravity(gravitySEXP);
     Rcpp::traits::input_parameter< bool >::type repage(repageSEXP);
     rcpp_result_gen = Rcpp::wrap(magick_image_crop(input, geometry, gravity, repage));
     return rcpp_result_gen;
