@@ -10,6 +10,8 @@
   - image_crop() gains a gravity argument
   - the 'offset' parameter in image_composite() can now also be a gravity type
   - New functions image_extent() and image_shear()
+  - image_annotate() gains parameters 'weight' and 'style'
+  - Windows: support upcoming GCC 8.x toolchain
 
 2.0
   - Ignore attribute warnings in image_read() instead of error (fixes #134)
