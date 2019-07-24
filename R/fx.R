@@ -19,7 +19,7 @@
 #' gradient <- c(image_fx(gradient_x, expression = "p^2"),
 #'                 image_fx(gradient_y, expression = "p^2"))
 #' gradient <- image_flatten(gradient, operator = "Plus")
-#' gradient <- image_fx(gradient, expression = "sqrt(p)")
+#' #gradient <- image_fx(gradient, expression = "sqrt(p)")
 #' gradient
 #' }
 image_fx <- function(image, expression = "p", channel = NULL){
