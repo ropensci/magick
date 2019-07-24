@@ -103,7 +103,7 @@ If \code{FALSE} output is the same as \code{as.raster()}.}
 \item{browser}{argument passed to \link[utils:browseURL]{browseURL}}
 
 \item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
-\code{"navyblue"} or \code{"#000080"}. Use \code{"none"} for transparent.}
+\code{"navyblue"} or \code{"#000080"}. Use \code{"none"} for transparency.}
 
 \item{pseudo_image}{string with \href{http://www.imagemagick.org/script/formats.php#pseudo}{pseudo image}
 specification for example \code{"radial-gradient:purple-yellow"}}

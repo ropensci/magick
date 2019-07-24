@@ -181,3 +181,14 @@ image_orient <- function(image, orientation = NULL){
   orientation <- as.character(orientation)
   magick_image_orient(image, orientation)
 }
+
+#' @export
+#' @rdname transform
+#' @examples
+#' image_shear(logo, "10x10")
+image_shear <- function(image, geometry = "10x10", color = "none"){
+  assert_image(image)
+  stopifnot(is.character(geometry))
+  stopifnot(is.character(color))
+  magick_image_shear(image, geometry, color)
+}

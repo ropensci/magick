@@ -1128,6 +1128,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_shear
+XPtrImage magick_image_shear(XPtrImage input, const char * geometry, const char * color);
+RcppExport SEXP _magick_magick_image_shear(SEXP inputSEXP, SEXP geometrySEXP, SEXP colorSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< const char * >::type geometry(geometrySEXP);
+    Rcpp::traits::input_parameter< const char * >::type color(colorSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_shear(input, geometry, color));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_fuzzycmeans
 XPtrImage magick_image_fuzzycmeans(XPtrImage input, const double min_pixels, const double smoothing);
 RcppExport SEXP _magick_magick_image_fuzzycmeans(SEXP inputSEXP, SEXP min_pixelsSEXP, SEXP smoothingSEXP) {
@@ -1473,6 +1486,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_trim", (DL_FUNC) &_magick_magick_image_trim, 2},
     {"_magick_magick_image_flip", (DL_FUNC) &_magick_magick_image_flip, 1},
     {"_magick_magick_image_flop", (DL_FUNC) &_magick_magick_image_flop, 1},
+    {"_magick_magick_image_shear", (DL_FUNC) &_magick_magick_image_shear, 3},
     {"_magick_magick_image_fuzzycmeans", (DL_FUNC) &_magick_magick_image_fuzzycmeans, 3},
     {"_magick_magick_image_connect", (DL_FUNC) &_magick_magick_image_connect, 2},
     {"_magick_magick_image_noise", (DL_FUNC) &_magick_magick_image_noise, 2},

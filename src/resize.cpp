@@ -75,3 +75,12 @@ XPtrImage magick_image_flop( XPtrImage input){
   for_each ( output->begin(), output->end(), Magick::flopImage());
   return output;
 }
+
+// [[Rcpp::export]]
+XPtrImage magick_image_shear( XPtrImage input, const char * geometry, const char * color){
+  XPtrImage output = copy(input);
+  Magick::Geometry geom(Geom(geometry));
+  for_each ( output->begin(), output->end(), Magick::backgroundColorImage(color));
+  for_each ( output->begin(), output->end(), Magick::shearImage(geom.width(), geom.height()));
+  return output;
+}

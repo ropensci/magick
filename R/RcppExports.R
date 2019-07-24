@@ -369,6 +369,10 @@ magick_image_flop <- function(input) {
     .Call('_magick_magick_image_flop', PACKAGE = 'magick', input)
 }
 
+magick_image_shear <- function(input, geometry, color) {
+    .Call('_magick_magick_image_shear', PACKAGE = 'magick', input, geometry, color)
+}
+
 magick_image_fuzzycmeans <- function(input, min_pixels = 1.0, smoothing = 1.5) {
     .Call('_magick_magick_image_fuzzycmeans', PACKAGE = 'magick', input, min_pixels, smoothing)
 }
