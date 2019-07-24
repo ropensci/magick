@@ -72,7 +72,11 @@ XPtrImage magick_image_shadow_mask( XPtrImage input, const char * geomstr){
   const double sigma = geom.height();
   const size_t x = geom.xOff();
   const size_t y = geom.yOff();
+#if MagickLibVersion >= 0x675
   for_each ( output->begin(), output->end(), Magick::shadowImage(opacity, sigma, x, y));
+#else
+  throw std::runtime_error("shadowImage not supported, ImageMagick too old");
+#endif
   return output;
 }
 
