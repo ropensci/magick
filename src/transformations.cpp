@@ -122,12 +122,6 @@ Magick::Point Point(const char * str){
 }
 #endif
 
-Magick::Geometry apply_geom_gravity(Frame image, Magick::Geometry geom, Magick::GravityType gravity){
-  MagickCore::RectangleInfo region(geom);
-  MagickCore::GravityAdjustGeometry(image.columns(), image.rows(), gravity, &region);
-  return region;
-}
-
 // [[Rcpp::export]]
 XPtrImage magick_image_noise( XPtrImage input, const char * noisetype){
   XPtrImage output = copy(input);
@@ -360,21 +354,5 @@ XPtrImage magick_image_compare( XPtrImage input, XPtrImage reference_image, cons
   output.attr("distortion") = distortion;
   return output;
 #endif
-}
-
-
-// [[Rcpp::export]]
-XPtrImage magick_image_crop( XPtrImage input, Rcpp::CharacterVector geometry,
-                             Rcpp::CharacterVector gravity, bool repage){
-  XPtrImage output = copy(input);
-  for(size_t i = 0; i < output->size(); i++){
-    Magick::Geometry region(geometry.size() ? Geom(geometry.at(0)) : input->front().size());
-    if(gravity.size())
-      region = apply_geom_gravity(output->at(i), region, Gravity(gravity.at(0)));
-    output->at(i).crop(region);
-  }
-  if(repage)
-    for_each ( output->begin(), output->end(), Magick::pageImage(Magick::Geometry()));
-  return output;
 }
 

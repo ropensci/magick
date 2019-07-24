@@ -16,7 +16,8 @@
 #' @family image
 #' @inheritParams editing
 #' @inheritParams painting
-#' @param offset a [geometry_point][geometry_point] string to set x/y offset of top image
+#' @param offset string with eiter a [gravity_type][gravity_types] or a [geometry_point][geometry_point]
+#' to set position of top image.
 #' @param operator string with a
 #' [composite operator](https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator)
 #' from [compose_types()][compose_types]
@@ -31,6 +32,10 @@
 #'
 #' # Same as 'blend 50' in the command line
 #' image_composite(imlogo, rlogo, operator = "blend", compose_args="50")
+#'
+#' # Offset can be geometry or gravity
+#' image_composite(logo, rose, offset = "+100+100")
+#' image_composite(logo, rose, offset = "East")
 image_composite <- function(image, composite_image, operator = "atop", offset = "+0+0", compose_args = ""){
   assert_image(image)
   assert_image(composite_image)

@@ -209,6 +209,10 @@ magick_image_shadow_mask <- function(input, geomstr) {
     .Call('_magick_magick_image_shadow_mask', PACKAGE = 'magick', input, geomstr)
 }
 
+magick_image_crop <- function(input, geometry, gravity, repage) {
+    .Call('_magick_magick_image_crop', PACKAGE = 'magick', input, geometry, gravity, repage)
+}
+
 magick_coder_info <- function(format) {
     .Call('_magick_magick_coder_info', PACKAGE = 'magick', format)
 }
@@ -435,9 +439,5 @@ magick_image_annotate <- function(input, text, gravity, location, rot, size, fon
 
 magick_image_compare <- function(input, reference_image, metric, fuzz_percent) {
     .Call('_magick_magick_image_compare', PACKAGE = 'magick', input, reference_image, metric, fuzz_percent)
-}
-
-magick_image_crop <- function(input, geometry, gravity, repage) {
-    .Call('_magick_magick_image_crop', PACKAGE = 'magick', input, geometry, gravity, repage)
 }
 

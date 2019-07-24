@@ -31,7 +31,8 @@ image_shadow(image, color = "black", bg = "white",
 \href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}
 from \link[=compose_types]{compose_types()}}
 
-\item{offset}{a \link{geometry_point} string to set x/y offset of top image}
+\item{offset}{string with eiter a \link[=gravity_types]{gravity_type} or a \link{geometry_point}
+to set position of top image.}
 
 \item{compose_args}{additional arguments needed for some composite operations}
 
@@ -66,6 +67,10 @@ image_composite(imlogo, rlogo)
 
 # Same as 'blend 50' in the command line
 image_composite(imlogo, rlogo, operator = "blend", compose_args="50")
+
+# Offset can be geometry or gravity
+image_composite(logo, rose, offset = "+100+100")
+image_composite(logo, rose, offset = "East")
 
 # Add a border frame around the image
 image_border(imlogo, "red", "10x10")

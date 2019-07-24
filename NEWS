@@ -8,6 +8,7 @@
   - the mac binary package now bundles the same fontconfig data as xQuarts to prevent conflicts
   - image_convert() gains a parameter matte to enable/disable the alpha channel
   - image_crop() gains a gravity argument
+  - the 'offset' parameter in image_composite() can now also be a gravity type
 
 2.0
   - Ignore attribute warnings in image_read() instead of error (fixes #134)

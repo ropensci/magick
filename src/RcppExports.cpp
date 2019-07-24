@@ -635,6 +635,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_crop
+XPtrImage magick_image_crop(XPtrImage input, Rcpp::CharacterVector geometry, Rcpp::CharacterVector gravity, bool repage);
+RcppExport SEXP _magick_magick_image_crop(SEXP inputSEXP, SEXP geometrySEXP, SEXP gravitySEXP, SEXP repageSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type geometry(geometrySEXP);
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type gravity(gravitySEXP);
+    Rcpp::traits::input_parameter< bool >::type repage(repageSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_crop(input, geometry, gravity, repage));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_coder_info
 Rcpp::List magick_coder_info(Rcpp::String format);
 RcppExport SEXP _magick_magick_coder_info(SEXP formatSEXP) {
@@ -1349,20 +1363,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// magick_image_crop
-XPtrImage magick_image_crop(XPtrImage input, Rcpp::CharacterVector geometry, Rcpp::CharacterVector gravity, bool repage);
-RcppExport SEXP _magick_magick_image_crop(SEXP inputSEXP, SEXP geometrySEXP, SEXP gravitySEXP, SEXP repageSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type geometry(geometrySEXP);
-    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type gravity(gravitySEXP);
-    Rcpp::traits::input_parameter< bool >::type repage(repageSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_crop(input, geometry, gravity, repage));
-    return rcpp_result_gen;
-END_RCPP
-}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_animate", (DL_FUNC) &_magick_magick_image_animate, 4},
@@ -1417,6 +1417,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_border", (DL_FUNC) &_magick_magick_image_border, 4},
     {"_magick_magick_image_frame", (DL_FUNC) &_magick_magick_image_frame, 3},
     {"_magick_magick_image_shadow_mask", (DL_FUNC) &_magick_magick_image_shadow_mask, 2},
+    {"_magick_magick_image_crop", (DL_FUNC) &_magick_magick_image_crop, 4},
     {"_magick_magick_coder_info", (DL_FUNC) &_magick_magick_coder_info, 1},
     {"_magick_magick_config_internal", (DL_FUNC) &_magick_magick_config_internal, 0},
     {"_magick_magick_image_fx", (DL_FUNC) &_magick_magick_image_fx, 3},
@@ -1474,7 +1475,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_reducenoise", (DL_FUNC) &_magick_magick_image_reducenoise, 2},
     {"_magick_magick_image_annotate", (DL_FUNC) &_magick_magick_image_annotate, 10},
     {"_magick_magick_image_compare", (DL_FUNC) &_magick_magick_image_compare, 4},
-    {"_magick_magick_image_crop", (DL_FUNC) &_magick_magick_image_crop, 4},
     {NULL, NULL, 0}
 };
 
