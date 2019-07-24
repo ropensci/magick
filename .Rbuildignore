@@ -6,7 +6,7 @@ appveyor.yml$
 ^windows
 ^[^/]+\.(gif|png|jpg|jpeg|pdf|tiff|svg|webp)$
 ^img$
-^README\.Rmd$
+^README\.md$
 ^notes.md$
 ^testsuite$
 ^pkgdown$
