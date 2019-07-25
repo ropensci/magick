@@ -56,6 +56,7 @@
 #' # Read bitmap arrays from from other image packages
 #' curl::curl_download("https://jeroen.github.io/images/example.webp", "example.webp")
 #' if(require(webp)) image_read(webp::read_webp("example.webp"))
+#' unlink(c("example.webp", "output.png"))
 image_read <- function(path, density = NULL, depth = NULL, strip = FALSE){
   if(is.numeric(density))
     density <- paste0(density, "x", density)

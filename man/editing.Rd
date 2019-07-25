@@ -158,6 +158,7 @@ plot(raster)
 # Read bitmap arrays from from other image packages
 curl::curl_download("https://jeroen.github.io/images/example.webp", "example.webp")
 if(require(webp)) image_read(webp::read_webp("example.webp"))
+unlink(c("example.webp", "output.png"))
 if(require(rsvg))
 tiger <- image_read_svg("http://jeroen.github.io/images/tiger.svg")
 if(require(pdftools))
