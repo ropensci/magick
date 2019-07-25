@@ -2,11 +2,11 @@
 ^\.Rproj\.user$
 ^src/Makevars$
 .travis.yml$
+^README.md$
 appveyor.yml$
 ^windows
 ^[^/]+\.(gif|png|jpg|jpeg|pdf|tiff|svg|webp)$
 ^img$
-^README\.md$
 ^notes.md$
 ^testsuite$
 ^pkgdown$
