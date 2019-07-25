@@ -90,7 +90,7 @@ image_write(animation2, "man/figures/anim2.gif")
 
 ![](man/figures/anim2.gif)
 
-Read GIF anination frames. See the [rotating earth example GIF](https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif).
+Read GIF animation frames. See the [rotating earth example GIF](https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif).
 
 ```r
 earth <- image_read("https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif")

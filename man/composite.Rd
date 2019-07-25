@@ -31,7 +31,7 @@ image_shadow(image, color = "black", bg = "white",
 \href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}
 from \link[=compose_types]{compose_types()}}
 
-\item{offset}{string with eiter a \link[=gravity_types]{gravity_type} or a \link{geometry_point}
+\item{offset}{string with either a \link[=gravity_types]{gravity_type} or a \link{geometry_point}
 to set position of top image.}
 
 \item{compose_args}{additional arguments needed for some composite operations}

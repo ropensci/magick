@@ -16,7 +16,7 @@
 #' @family image
 #' @inheritParams editing
 #' @inheritParams painting
-#' @param offset string with eiter a [gravity_type][gravity_types] or a [geometry_point][geometry_point]
+#' @param offset string with either a [gravity_type][gravity_types] or a [geometry_point][geometry_point]
 #' to set position of top image.
 #' @param operator string with a
 #' [composite operator](https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator)
