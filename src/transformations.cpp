@@ -329,12 +329,13 @@ XPtrImage magick_image_annotate( XPtrImage input, Rcpp::CharacterVector text, co
     draw.push_back(Magick::DrawableRotation(rot));
     draw.push_back(Magick::DrawableTranslation(-x, -y));
   }
-  if(text.size() == 1){
+  int len = text.size();
+  if(len == 1){
     draw.push_back(Magick::DrawableText(x, y, std::string(text[0]), "UTF-8"));
     for_each (output->begin(), output->end(), Magick::drawImage(draw));
-  } else if(text.size() == output->size()){
+  } else if(len > 1){
     for(size_t i = 0; i < output->size(); i++){
-      draw.push_back(Magick::DrawableText(x, y, std::string(text[i]), "UTF-8"));
+      draw.push_back(Magick::DrawableText(x, y, std::string(text[i % len]), "UTF-8"));
       output->at(i).draw(draw);
       draw.pop_back();
     }
