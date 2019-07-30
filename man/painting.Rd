@@ -10,7 +10,8 @@ image_fill(image, color, point = "+1+1", fuzz = 0, refcolor = NULL)
 
 image_annotate(image, text, gravity = "northwest", location = "+0+0",
   degrees = 0, size = 10, font = "", style = "normal",
-  weight = 400, color = NULL, strokecolor = NULL, boxcolor = NULL)
+  weight = 400, kerning = 0, decoration = NULL, color = NULL,
+  strokecolor = NULL, boxcolor = NULL)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
@@ -47,6 +48,10 @@ value from \link{gravity_types}.}
 \item{style}{value of \link{style_types} for example \code{"italic"}}
 
 \item{weight}{thickness of the font, 400 is normal and 700 is bold.}
+
+\item{kerning}{increases or decreases whitespace bewteen letters}
+
+\item{decoration}{value of \link{decoration_types} for example \code{"underline"}}
 
 \item{strokecolor}{a \href{https://www.imagemagick.org/Magick++/Color.html}{color string}
 adds a stroke (border around the text)}

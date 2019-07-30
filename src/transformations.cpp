@@ -121,6 +121,14 @@ Magick::StyleType FontStyle(const char * str){
   return (Magick::StyleType) val;
 }
 
+Magick::DecorationType FontDecoration(const char * str){
+  ssize_t val = MagickCore::ParseCommandOption(
+    MagickCore::MagickDecorateOptions, Magick::MagickFalse, str);
+  if(val < 0)
+    throw std::runtime_error(std::string("Invalid DecorationType value: ") + str);
+  return (Magick::DecorationType) val;
+}
+
 #if MagickLibVersion >= 0x700
 Magick::Point Point(const char * str){
   Magick::Point point(str);
@@ -305,7 +313,8 @@ XPtrImage magick_image_reducenoise( XPtrImage input, const size_t radius){
 // [[Rcpp::export]]
 XPtrImage magick_image_annotate( XPtrImage input, Rcpp::CharacterVector text, const char * gravity,
                                  const char * location, double rot, double size, const char * font,
-                                 const char * style, double weight, Rcpp::CharacterVector color,
+                                 const char * style, double weight, double kerning,
+                                 Rcpp::CharacterVector decoration, Rcpp::CharacterVector color,
                                  Rcpp::CharacterVector strokecolor, Rcpp::CharacterVector boxcolor){
   XPtrImage output = copy(input);
   typedef std::container<Magick::Drawable> drawlist;
@@ -321,6 +330,10 @@ XPtrImage magick_image_annotate( XPtrImage input, Rcpp::CharacterVector text, co
     draw.push_back(Magick::DrawableFillColor(Color(color[0])));
   if(boxcolor.size())
     draw.push_back(Magick::DrawableTextUnderColor(Color(boxcolor[0])));
+  if(kerning != 0)
+    draw.push_back(Magick::DrawableTextKerning(kerning));
+  if(decoration.size())
+    draw.push_back(Magick::DrawableTextDecoration(FontDecoration(decoration[0])));
   draw.push_back(Magick::DrawablePointSize(size));
   draw.push_back(Magick::DrawableFont(normalize_font(font), FontStyle(style), weight, Magick::NormalStretch));
   if(rot){

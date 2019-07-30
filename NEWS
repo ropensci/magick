@@ -1,3 +1,6 @@
+2.2
+  - image_annotate() gains parameters 'kerning' and 'decoration'
+
 2.1
   - New website at https://docs.ropensci.org/magick
   - Fix compilation for IM 6.8.8 (Suse Linux 12)

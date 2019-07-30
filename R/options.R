@@ -99,3 +99,9 @@ morphology_types <- function(){
 style_types <- function(){
   list_options('style')
 }
+
+#' @export
+#' @rdname options
+decoration_types <- function(){
+  list_options('decoration')
+}

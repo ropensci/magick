@@ -56,6 +56,8 @@ image_fill <- function(image, color, point = "+1+1", fuzz = 0, refcolor = NULL){
 #' `"Times"`, `"Helvetica"`, `"Trebuchet"`, `"Georgia"`, `"Palatino"` or `"Comic Sans"`.
 #' @param style value of [style_types][style_types] for example `"italic"`
 #' @param weight thickness of the font, 400 is normal and 700 is bold.
+#' @param kerning increases or decreases whitespace bewteen letters
+#' @param decoration value of [decoration_types][decoration_types] for example `"underline"`
 #' @examples # Add some text to an image
 #' image_annotate(logo, "This is a test")
 #' image_annotate(logo, "CONFIDENTIAL", size = 50, color = "red", boxcolor = "pink",
@@ -64,14 +66,18 @@ image_fill <- function(image, color, point = "+1+1", fuzz = 0, refcolor = NULL){
 #' # Setting fonts requires fontconfig support (and that you have the font)
 #' image_annotate(logo, "The quick brown fox", font = "monospace", size = 50)
 image_annotate <- function(image, text, gravity = "northwest", location = "+0+0", degrees = 0,
-                           size = 10, font = "", style = "normal", weight = 400,
-                           color = NULL, strokecolor = NULL, boxcolor = NULL){
+                           size = 10, font = "", style = "normal", weight = 400, kerning = 0,
+                           decoration = NULL, color = NULL, strokecolor = NULL, boxcolor = NULL){
   assert_image(image)
   font <- as.character(font)
   size <- as.integer(size)
+  weight <- as.numeric(weight)
+  kerning <- as.numeric(kerning)
   color <- as.character(color)
   strokecolor <- as.character(strokecolor)
   boxcolor <- as.character(boxcolor)
+  decoration <- as.character(decoration)
   magick_image_annotate(image, text, gravity, location, degrees, size,
-                        font, style, weight, color, strokecolor, boxcolor)
+                        font, style, weight, kerning, decoration,
+                        color, strokecolor, boxcolor)
 }
