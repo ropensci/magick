@@ -63,7 +63,7 @@ To install from source on macOS you need `imagemagick@6` from homebrew.
 brew install imagemagick@6
 ```
 
-Unfortunately the current `imagemagick@6` configuration on homebrew disables a bunch of features, including librsvg and fontconfig. Therefore the quality of fonts and svg rendering might be supoptimal. The is not a problem for the CRAN binary package.
+Unfortunately the current `imagemagick@6` configuration on homebrew disables a bunch of features, including librsvg and fontconfig. Therefore the quality of fonts and svg rendering might be suboptimal. The is not a problem for the CRAN binary package.
 
 ## Image IO
 

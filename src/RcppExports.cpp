@@ -1000,6 +1000,30 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_separate
+XPtrImage magick_image_separate(XPtrImage input, const char * channel);
+RcppExport SEXP _magick_magick_image_separate(SEXP inputSEXP, SEXP channelSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< const char * >::type channel(channelSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_separate(input, channel));
+    return rcpp_result_gen;
+END_RCPP
+}
+// magick_image_combine
+XPtrImage magick_image_combine(XPtrImage input, const char * channel);
+RcppExport SEXP _magick_magick_image_combine(SEXP inputSEXP, SEXP channelSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< const char * >::type channel(channelSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_combine(input, channel));
+    return rcpp_result_gen;
+END_RCPP
+}
 // list_options
 Rcpp::CharacterVector list_options(const char * str);
 RcppExport SEXP _magick_list_options(SEXP strSEXP) {
@@ -1477,6 +1501,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_fft", (DL_FUNC) &_magick_magick_image_fft, 1},
     {"_magick_magick_image_montage", (DL_FUNC) &_magick_magick_image_montage, 1},
     {"_magick_magick_image_strip", (DL_FUNC) &_magick_magick_image_strip, 1},
+    {"_magick_magick_image_separate", (DL_FUNC) &_magick_magick_image_separate, 2},
+    {"_magick_magick_image_combine", (DL_FUNC) &_magick_magick_image_combine, 2},
     {"_magick_list_options", (DL_FUNC) &_magick_list_options, 1},
     {"_magick_set_magick_tempdir", (DL_FUNC) &_magick_set_magick_tempdir, 1},
     {"_magick_magick_image_properties", (DL_FUNC) &_magick_magick_image_properties, 1},

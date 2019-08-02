@@ -325,6 +325,14 @@ magick_image_strip <- function(input) {
     .Call('_magick_magick_image_strip', PACKAGE = 'magick', input)
 }
 
+magick_image_separate <- function(input, channel) {
+    .Call('_magick_magick_image_separate', PACKAGE = 'magick', input, channel)
+}
+
+magick_image_combine <- function(input, channel) {
+    .Call('_magick_magick_image_combine', PACKAGE = 'magick', input, channel)
+}
+
 list_options <- function(str) {
     .Call('_magick_list_options', PACKAGE = 'magick', str)
 }

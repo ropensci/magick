@@ -6,6 +6,8 @@
 \alias{image_quantize}
 \alias{image_map}
 \alias{image_channel}
+\alias{image_separate}
+\alias{image_combine}
 \alias{image_transparent}
 \alias{image_background}
 \alias{image_colorize}
@@ -24,6 +26,10 @@ image_quantize(image, max = 256, colorspace = "rgb", dither = NULL,
 image_map(image, map, dither = FALSE)
 
 image_channel(image, channel = "lightness")
+
+image_separate(image, channel = "default")
+
+image_combine(image, channel = "default")
 
 image_transparent(image, color, fuzz = 0)
 

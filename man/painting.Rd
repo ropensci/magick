@@ -49,7 +49,7 @@ value from \link{gravity_types}.}
 
 \item{weight}{thickness of the font, 400 is normal and 700 is bold.}
 
-\item{kerning}{increases or decreases whitespace bewteen letters}
+\item{kerning}{increases or decreases whitespace between letters}
 
 \item{decoration}{value of \link{decoration_types} for example \code{"underline"}}
 

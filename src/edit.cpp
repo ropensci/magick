@@ -221,3 +221,19 @@ XPtrImage magick_image_strip( XPtrImage input){
   for_each (output->begin(), output->end(), Magick::stripImage());
   return output;
 }
+
+// [[Rcpp::export]]
+XPtrImage magick_image_separate( XPtrImage input, const char * channel){
+  XPtrImage output = create();
+  separateImages( output.get(), input->front(), Channel(channel));
+  return output;
+}
+
+// [[Rcpp::export]]
+XPtrImage magick_image_combine( XPtrImage input, const char * channel){
+  Frame x;
+  combineImages(&x, input->begin(), input->end(), Channel(channel));
+  XPtrImage output = create(1);
+  output->push_back(x);
+  return output;
+}

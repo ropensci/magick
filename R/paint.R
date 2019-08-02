@@ -56,7 +56,7 @@ image_fill <- function(image, color, point = "+1+1", fuzz = 0, refcolor = NULL){
 #' `"Times"`, `"Helvetica"`, `"Trebuchet"`, `"Georgia"`, `"Palatino"` or `"Comic Sans"`.
 #' @param style value of [style_types][style_types] for example `"italic"`
 #' @param weight thickness of the font, 400 is normal and 700 is bold.
-#' @param kerning increases or decreases whitespace bewteen letters
+#' @param kerning increases or decreases whitespace between letters
 #' @param decoration value of [decoration_types][decoration_types] for example `"underline"`
 #' @examples # Add some text to an image
 #' image_annotate(logo, "This is a test")
