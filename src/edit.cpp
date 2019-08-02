@@ -232,7 +232,12 @@ XPtrImage magick_image_separate( XPtrImage input, const char * channel){
 // [[Rcpp::export]]
 XPtrImage magick_image_combine( XPtrImage input, const char * channel){
   Frame x;
+#if MagickLibVersion >= 0x700
+  /* Remove when fixed in https://github.com/ImageMagick/ImageMagick/issues/1655 */
+  combineImages(&x, input->begin(), input->end(), Channel(channel), MagickCore::UndefinedColorspace);
+#else
   combineImages(&x, input->begin(), input->end(), Channel(channel));
+#endif
   XPtrImage output = create(1);
   output->push_back(x);
   return output;
