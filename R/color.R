@@ -99,10 +99,10 @@ image_separate <- function(image, channel = 'default'){
 
 #' @export
 #' @rdname color
-image_combine <- function(image, channel = 'default', colorspace = 'undefined'){
+image_combine <- function(image, colorspace = 'sRGB', channel = 'default'){
   channel <- as.character(channel)
   colorspace <- as.character(colorspace)
-  magick_image_combine(image, channel, colorspace)
+  magick_image_combine(image, colorspace, channel)
 }
 
 #' @export

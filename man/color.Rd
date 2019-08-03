@@ -29,7 +29,7 @@ image_channel(image, channel = "lightness")
 
 image_separate(image, channel = "default")
 
-image_combine(image, channel = "default", colorspace = "undefined")
+image_combine(image, colorspace = "sRGB", channel = "default")
 
 image_transparent(image, color, fuzz = 0)
 

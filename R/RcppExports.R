@@ -329,8 +329,8 @@ magick_image_separate <- function(input, channel) {
     .Call('_magick_magick_image_separate', PACKAGE = 'magick', input, channel)
 }
 
-magick_image_combine <- function(input, channel, colorspace) {
-    .Call('_magick_magick_image_combine', PACKAGE = 'magick', input, channel, colorspace)
+magick_image_combine <- function(input, colorspace, channel) {
+    .Call('_magick_magick_image_combine', PACKAGE = 'magick', input, colorspace, channel)
 }
 
 list_options <- function(str) {

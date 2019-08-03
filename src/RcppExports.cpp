@@ -1013,15 +1013,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_combine
-XPtrImage magick_image_combine(XPtrImage input, const char * channel, const char * colorspace);
-RcppExport SEXP _magick_magick_image_combine(SEXP inputSEXP, SEXP channelSEXP, SEXP colorspaceSEXP) {
+XPtrImage magick_image_combine(XPtrImage input, const char * colorspace, const char * channel);
+RcppExport SEXP _magick_magick_image_combine(SEXP inputSEXP, SEXP colorspaceSEXP, SEXP channelSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< const char * >::type channel(channelSEXP);
     Rcpp::traits::input_parameter< const char * >::type colorspace(colorspaceSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_combine(input, channel, colorspace));
+    Rcpp::traits::input_parameter< const char * >::type channel(channelSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_combine(input, colorspace, channel));
     return rcpp_result_gen;
 END_RCPP
 }
