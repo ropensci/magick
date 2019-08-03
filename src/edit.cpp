@@ -233,7 +233,7 @@ XPtrImage magick_image_separate( XPtrImage input, const char * channel){
 XPtrImage magick_image_combine( XPtrImage input, const char * channel, const char * colorspace){
   Frame x;
 #if MagickLibVersion >= 0x700
-  combineImages(&x, input->begin(), input->end(), Channel(channel), ColorSpace(colorspace););
+  combineImages(&x, input->begin(), input->end(), Channel(channel), ColorSpace(colorspace));
 #else
   combineImages(&x, input->begin(), input->end(), Channel(channel));
   x.colorspaceType(ColorSpace(colorspace));
