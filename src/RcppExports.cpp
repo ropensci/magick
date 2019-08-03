@@ -1013,14 +1013,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_combine
-XPtrImage magick_image_combine(XPtrImage input, const char * channel);
-RcppExport SEXP _magick_magick_image_combine(SEXP inputSEXP, SEXP channelSEXP) {
+XPtrImage magick_image_combine(XPtrImage input, const char * channel, const char * colorspace);
+RcppExport SEXP _magick_magick_image_combine(SEXP inputSEXP, SEXP channelSEXP, SEXP colorspaceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< const char * >::type channel(channelSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_combine(input, channel));
+    Rcpp::traits::input_parameter< const char * >::type colorspace(colorspaceSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_combine(input, channel, colorspace));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1502,7 +1503,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_montage", (DL_FUNC) &_magick_magick_image_montage, 1},
     {"_magick_magick_image_strip", (DL_FUNC) &_magick_magick_image_strip, 1},
     {"_magick_magick_image_separate", (DL_FUNC) &_magick_magick_image_separate, 2},
-    {"_magick_magick_image_combine", (DL_FUNC) &_magick_magick_image_combine, 2},
+    {"_magick_magick_image_combine", (DL_FUNC) &_magick_magick_image_combine, 3},
     {"_magick_list_options", (DL_FUNC) &_magick_list_options, 1},
     {"_magick_set_magick_tempdir", (DL_FUNC) &_magick_set_magick_tempdir, 1},
     {"_magick_magick_image_properties", (DL_FUNC) &_magick_magick_image_properties, 1},
