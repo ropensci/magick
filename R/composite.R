@@ -36,18 +36,19 @@
 #' # Offset can be geometry or gravity
 #' image_composite(logo, rose, offset = "+100+100")
 #' image_composite(logo, rose, offset = "East")
-image_composite <- function(image, composite_image, operator = "atop", offset = "+0+0", compose_args = ""){
+image_composite <- function(image, composite_image, operator = "atop",
+                            offset = "+0+0", gravity = "northwest", compose_args = ""){
   assert_image(image)
   assert_image(composite_image)
   compose_args <- as.character(compose_args)
 
   # avoid some overhead
   if(length(composite_image) == 1){
-    magick_image_composite(image, composite_image, offset, operator, compose_args)
+    magick_image_composite(image, composite_image, offset, gravity, operator, compose_args)
   } else {
     # vectorize over both 1st and 2nd argument
     image_apply(composite_image, function(x){
-      magick_image_composite(image, x, offset, operator, compose_args)
+      magick_image_composite(image, x, offset, gravity, operator, compose_args)
     })
   }
 }

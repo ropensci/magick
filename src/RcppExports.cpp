@@ -582,17 +582,18 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_composite
-XPtrImage magick_image_composite(XPtrImage input, XPtrImage composite_image, const char * offset, const char * composite, Rcpp::CharacterVector args);
-RcppExport SEXP _magick_magick_image_composite(SEXP inputSEXP, SEXP composite_imageSEXP, SEXP offsetSEXP, SEXP compositeSEXP, SEXP argsSEXP) {
+XPtrImage magick_image_composite(XPtrImage input, XPtrImage composite_image, const char * offset, const char * gravity, const char * composite, Rcpp::CharacterVector args);
+RcppExport SEXP _magick_magick_image_composite(SEXP inputSEXP, SEXP composite_imageSEXP, SEXP offsetSEXP, SEXP gravitySEXP, SEXP compositeSEXP, SEXP argsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< XPtrImage >::type composite_image(composite_imageSEXP);
     Rcpp::traits::input_parameter< const char * >::type offset(offsetSEXP);
+    Rcpp::traits::input_parameter< const char * >::type gravity(gravitySEXP);
     Rcpp::traits::input_parameter< const char * >::type composite(compositeSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type args(argsSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_composite(input, composite_image, offset, composite, args));
+    rcpp_result_gen = Rcpp::wrap(magick_image_composite(input, composite_image, offset, gravity, composite, args));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1469,7 +1470,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_lat", (DL_FUNC) &_magick_magick_image_lat, 2},
     {"_magick_magick_image_threshold_black", (DL_FUNC) &_magick_magick_image_threshold_black, 3},
     {"_magick_magick_image_threshold_white", (DL_FUNC) &_magick_magick_image_threshold_white, 3},
-    {"_magick_magick_image_composite", (DL_FUNC) &_magick_magick_image_composite, 5},
+    {"_magick_magick_image_composite", (DL_FUNC) &_magick_magick_image_composite, 6},
     {"_magick_magick_image_border", (DL_FUNC) &_magick_magick_image_border, 4},
     {"_magick_magick_image_frame", (DL_FUNC) &_magick_magick_image_frame, 3},
     {"_magick_magick_image_shadow_mask", (DL_FUNC) &_magick_magick_image_shadow_mask, 2},

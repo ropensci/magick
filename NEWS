@@ -1,6 +1,7 @@
 2.2
   - image_annotate() gains parameters 'kerning' and 'decoration'
   - New function image_separate() and image_combine()
+  - image_composite() now has separate parameters 'offset' and 'gravity'
 
 2.1
   - New website at https://docs.ropensci.org/magick
