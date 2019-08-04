@@ -83,6 +83,8 @@ XPtrImage magick_image_shadow_mask( XPtrImage input, const char * geomstr){
   return output;
 }
 
+/* The C++ crop() API doesn't work well, see https://github.com/ImageMagick/ImageMagick/issues/1642 */
+
 // [[Rcpp::export]]
 XPtrImage magick_image_crop( XPtrImage input, Rcpp::CharacterVector geometry,
                              Rcpp::CharacterVector gravity, bool repage){
@@ -91,7 +93,12 @@ XPtrImage magick_image_crop( XPtrImage input, Rcpp::CharacterVector geometry,
     Magick::Geometry region(geometry.size() ? Geom(geometry.at(0)) : input->front().size());
     if(gravity.size())
       region = apply_geom_gravity(output->at(i), region, Gravity(gravity.at(0)));
-    output->at(i).crop(region);
+
+    MagickCore::ExceptionInfo *exception = MagickCore::AcquireExceptionInfo();
+    MagickCore::Image *newImage = MagickCore::CropImageToTiles(output->at(i).constImage(), std::string(region).c_str(), exception);
+    Magick::throwException(exception, output->at(i).quiet());
+    exception=DestroyExceptionInfo(exception);
+    output->at(i).replaceImage(newImage);
   }
   if(repage)
     for_each ( output->begin(), output->end(), Magick::pageImage(Magick::Geometry()));

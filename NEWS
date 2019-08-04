@@ -2,6 +2,7 @@
   - image_annotate() gains parameters 'kerning' and 'decoration'
   - New function image_separate() and image_combine()
   - image_composite() now has separate parameters 'offset' and 'gravity'
+  - image_crop() now uses the CropImageToTiles API which is more sophisticated
 
 2.1
   - New website at https://docs.ropensci.org/magick
