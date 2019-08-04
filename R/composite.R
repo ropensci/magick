@@ -35,7 +35,7 @@
 #'
 #' # Offset can be geometry or gravity
 #' image_composite(logo, rose, offset = "+100+100")
-#' image_composite(logo, rose, offset = "East")
+#' image_composite(logo, rose, gravity = "East")
 image_composite <- function(image, composite_image, operator = "atop",
                             offset = "+0+0", gravity = "northwest", compose_args = ""){
   assert_image(image)

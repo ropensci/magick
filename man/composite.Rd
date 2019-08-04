@@ -74,7 +74,7 @@ image_composite(imlogo, rlogo, operator = "blend", compose_args="50")
 
 # Offset can be geometry or gravity
 image_composite(logo, rose, offset = "+100+100")
-image_composite(logo, rose, offset = "East")
+image_composite(logo, rose, gravity = "East")
 
 # Add a border frame around the image
 image_border(imlogo, "red", "10x10")
