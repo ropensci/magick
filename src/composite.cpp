@@ -83,7 +83,7 @@ XPtrImage magick_image_shadow_mask( XPtrImage input, const char * geomstr){
   return output;
 }
 
-/* The C++ crop() API doesn't work well, see https://github.com/ImageMagick/ImageMagick/issues/1642 */
+// The C++ crop() API doesn't work well, see https://github.com/ImageMagick/ImageMagick/issues/1642
 
 // [[Rcpp::export]]
 XPtrImage magick_image_crop( XPtrImage input, Rcpp::CharacterVector geometry,
