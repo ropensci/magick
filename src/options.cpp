@@ -27,7 +27,9 @@ Rcpp::String set_magick_tempdir(const char * new_tmpdir){
   if(new_tmpdir && strlen(new_tmpdir)){
     MagickCore::ExceptionInfo *exception = MagickCore::AcquireExceptionInfo();
     MagickCore::SetImageRegistry(MagickCore::StringRegistryType, "temporary-path", new_tmpdir, exception);
-    Magick::throwException(exception, false);
+#if MagickLibVersion >= 0x690
+    Magick::throwException(exception);
+#endif
     exception=DestroyExceptionInfo(exception);
   }
   //Try to read current tempdir
