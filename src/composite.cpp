@@ -96,8 +96,8 @@ XPtrImage magick_image_crop( XPtrImage input, Rcpp::CharacterVector geometry,
 
     MagickCore::ExceptionInfo *exception = MagickCore::AcquireExceptionInfo();
     MagickCore::Image *newImage = MagickCore::CropImageToTiles(output->at(i).constImage(), std::string(region).c_str(), exception);
-    Magick::throwException(exception, false);
-    exception=DestroyExceptionInfo(exception);
+    Magick::throwException(exception);
+    exception=MagickCore::DestroyExceptionInfo(exception);
     output->at(i).replaceImage(newImage);
   }
   if(repage)
