@@ -330,8 +330,10 @@ XPtrImage magick_image_annotate( XPtrImage input, Rcpp::CharacterVector text, co
     draw.push_back(Magick::DrawableFillColor(Color(color[0])));
   if(boxcolor.size())
     draw.push_back(Magick::DrawableTextUnderColor(Color(boxcolor[0])));
+#if MagickLibVersion >= 0x689
   if(kerning != 0)
     draw.push_back(Magick::DrawableTextKerning(kerning));
+#endif
   if(decoration.size())
     draw.push_back(Magick::DrawableTextDecoration(FontDecoration(decoration[0])));
   draw.push_back(Magick::DrawablePointSize(size));
