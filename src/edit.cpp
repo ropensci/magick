@@ -225,7 +225,11 @@ XPtrImage magick_image_strip( XPtrImage input){
 // [[Rcpp::export]]
 XPtrImage magick_image_separate( XPtrImage input, const char * channel){
   XPtrImage output = create();
+#if MagickLibVersion >= 0x687
   separateImages( output.get(), input->front(), Channel(channel));
+#else
+  throw std::runtime_error("Your imagemagick is too old for separateImages");
+#endif
   return output;
 }
 
@@ -234,9 +238,11 @@ XPtrImage magick_image_combine( XPtrImage input, const char * colorspace, const 
   Frame x;
 #if MagickLibVersion >= 0x700
   combineImages(&x, input->begin(), input->end(), Channel(channel), ColorSpace(colorspace));
-#else
+#elif MagickLibVersion >= 0x687
   combineImages(&x, input->begin(), input->end(), Channel(channel));
   x.colorspaceType(ColorSpace(colorspace));
+#else
+  throw std::runtime_error("Your imagemagick is too old for combineImages");
 #endif
   XPtrImage output = create(1);
   output->push_back(x);
