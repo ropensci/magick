@@ -5,6 +5,7 @@
 \alias{image_read}
 \alias{image_read_svg}
 \alias{image_read_pdf}
+\alias{image_read_video}
 \alias{image_write}
 \alias{image_convert}
 \alias{image_data}
@@ -24,6 +25,8 @@ image_read(path, density = NULL, depth = NULL, strip = FALSE)
 image_read_svg(path, width = NULL, height = NULL)
 
 image_read_pdf(path, pages = NULL, density = 300, password = "")
+
+image_read_video(path, fps = 1)
 
 image_write(image, path = NULL, format = NULL, quality = NULL,
   depth = NULL, density = NULL, comment = NULL, flatten = FALSE)
@@ -67,6 +70,8 @@ demo_image(path)
 \item{pages}{integer vector with page numbers. Defaults to all pages.}
 
 \item{password}{user \link[pdftools:pdf_render_page]{password} to open protected pdf files}
+
+\item{fps}{how many images to capture per second of video}
 
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 

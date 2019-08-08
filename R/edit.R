@@ -119,6 +119,15 @@ image_read_pdf <- function(path, pages = NULL, density = 300, password = ""){
   image_join(images)
 }
 
+#' @export
+#' @rdname editing
+#' @param fps how many images to capture per second of video
+image_read_video <- function(path, fps = 1){
+  images <- av::av_video_images(path, fps = fps)
+  on.exit(unlink(images))
+  image_read(images)
+}
+
 image_readbitmap <- function(x){
   if(length(dim(x)) != 3)
     stop("Only 3D arrays can be converted to bitmaps")

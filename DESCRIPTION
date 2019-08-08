@@ -24,7 +24,7 @@ Imports:
     curl
 LinkingTo: Rcpp
 Suggests:
-    av,
+    av (>= 2.9100),
     spelling,
     jsonlite,
     methods,
@@ -44,3 +44,4 @@ Encoding: UTF-8
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 Language: en-US
+Remotes: ropensci/av
