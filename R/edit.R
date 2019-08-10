@@ -122,8 +122,8 @@ image_read_pdf <- function(path, pages = NULL, density = 300, password = ""){
 #' @export
 #' @rdname editing
 #' @param fps how many images to capture per second of video
-image_read_video <- function(path, fps = 1){
-  images <- av::av_video_images(path, fps = fps)
+image_read_video <- function(path, fps = 1, format = 'jpeg'){
+  images <- av::av_video_images(path, fps = fps, format = format)
   on.exit(unlink(images))
   image_read(images)
 }
