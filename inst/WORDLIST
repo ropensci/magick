@@ -11,6 +11,7 @@ EBImage
 Exif
 filterType
 fontconfig
+framerate
 frink
 fx
 FX
@@ -35,6 +36,7 @@ jpeg
 labelling
 lapply
 libmagick
+librsvg
 lossy
 macOS
 Magck
@@ -54,6 +56,7 @@ RStudio
 similarish
 Steinberg
 STL
+suboptimal
 subregion
 svg
 tesseract
