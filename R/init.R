@@ -19,6 +19,14 @@
   # Needed by older versions of IM:
   Sys.setenv(MAGICK_TMPDIR = tempdir())
 
+  # Set the default viewer
+  if(is.null(getOption('magick.viewer'))){
+    fun <- function(x){}
+    body(fun) <- parse(text = 'magick:::image_preview(x)')
+    environment(fun) <- baseenv()
+    options(magick.viewer = fun)
+  }
+
   # NB: it is needed that autobrew fontconfig is newer than xQuarts
   # or at least new enough to read the fontconfig data from the xQuarts fontconfig
   if(autobrewed()){

@@ -121,8 +121,11 @@ image_read_pdf <- function(path, pages = NULL, density = 300, password = ""){
 
 #' @export
 #' @rdname editing
-#' @param fps how many images to capture per second of video
-image_read_video <- function(path, fps = 1, format = 'jpeg'){
+#' @param fps how many images to capture per second of video. Set to
+#' `NULL` to get all frames from the input video.
+image_read_video <- function(path, fps = 1, format = 'png'){
+  if(!requireNamespace('av', quietly = TRUE) || utils::packageVersion('av') < '0.3')
+    stop("Please install or update the 'av' package")
   images <- av::av_video_images(path, fps = fps, format = format)
   on.exit(unlink(images))
   image_read(images)

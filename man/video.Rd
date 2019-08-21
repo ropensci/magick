@@ -6,9 +6,9 @@
 \alias{image_write_gif}
 \title{Write Video}
 \usage{
-image_write_video(image, path = NULL, framerate = 1, ...)
+image_write_video(image, path = NULL, framerate = 10, ...)
 
-image_write_gif(image, path = NULL, ...)
+image_write_gif(image, path = NULL, delay = 1/10, ...)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
@@ -19,6 +19,8 @@ image_write_gif(image, path = NULL, ...)
 
 \item{...}{additional parameters passed to \link[av:av_encode_video]{av_encode_video} and
 \link[gifski:gifski]{gifski}.}
+
+\item{delay}{duration of each frame in seconds (inverse of framerate)}
 }
 \description{
 High quality video / gif exporter based on external packages \link[gifski:gifski]{gifski}

@@ -1,4 +1,4 @@
-#' RStudio AutoViewer
+#' RStudio Graphics AutoViewer
 #'
 #' This enables a \link{addTaskCallback} that automatically updates the viewer after
 #' the state of a magick graphics device has changed. This is enabled by default in

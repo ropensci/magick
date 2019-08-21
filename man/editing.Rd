@@ -26,7 +26,7 @@ image_read_svg(path, width = NULL, height = NULL)
 
 image_read_pdf(path, pages = NULL, density = 300, password = "")
 
-image_read_video(path, fps = 1, format = "jpeg")
+image_read_video(path, fps = 1, format = "png")
 
 image_write(image, path = NULL, format = NULL, quality = NULL,
   depth = NULL, density = NULL, comment = NULL, flatten = FALSE)
@@ -71,7 +71,8 @@ demo_image(path)
 
 \item{password}{user \link[pdftools:pdf_render_page]{password} to open protected pdf files}
 
-\item{fps}{how many images to capture per second of video}
+\item{fps}{how many images to capture per second of video. Set to
+\code{NULL} to get all frames from the input video.}
 
 \item{format}{output format such as \code{"png"}, \code{"jpeg"}, \code{"gif"}, \code{"rgb"} or \code{"rgba"}.}
 

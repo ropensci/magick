@@ -96,23 +96,14 @@ rep_magick_image <- function(x, times){
 #' @export
 "print.magick-image" <- function(x, info = TRUE, ...){
   img <- x
-  viewer <- getOption("viewer")
-  viewer_supported <- c("bmp", "png", "jpeg", "jpg", "svg", "gif", "webp")
   is_knit_image <- isTRUE(getOption('knitr.in.progress'))
-  if(!is_knit_image && is.function(viewer) && !magick_image_dead(x) && length(img)){
-    format <- tolower(image_info(img[1])$format)
-    if(length(img) > 1 && format != "gif"){
-      img <- image_animate(img, fps = 1)
-      format <- "gif"
-    } else if(is.na(match(format, viewer_supported))){
-      img <- image_convert(img, "PNG")
-      format <- 'png'
-    }
-    tmp <- file.path(tempdir(), paste0("preview.", format))
-    image_write(img, path = tmp, format = format)
-    viewer(tmp)
-  } else if(isTRUE(getOption('jupyter.in_kernel'))){
+  if(isTRUE(getOption('jupyter.in_kernel'))){
     jupyter_print_image(img)
+  } else if(!is_knit_image && !magick_image_dead(x) && length(img)){
+    previewer <- getOption('magick.viewer')
+    if(is.function(previewer)){
+      previewer(img)
+    }
   }
   if(isTRUE(info))
     print(image_info(x))
@@ -151,6 +142,36 @@ rep_magick_image <- function(x, times){
 #' @importFrom graphics plot
 "plot.magick-image" <- function(x, ...){
   plot(as.raster(x), ...)
+}
+
+image_preview <- function(img, max_width = 800, max_len = 10, viewer = getOption('viewer')){
+  if(is.function(viewer)){
+    viewer_supported <- c("bmp", "png", "jpeg", "jpg", "svg", "gif", "webp")
+    format <- tolower(image_info(img[1])$format)
+    len <- length(img)
+    info <- image_info(img)
+    if(len > 1 && format != "gif"){
+      if(info$width[1] > max_width){
+        img <- image_resize(img, paste0(max_width, 'x'))
+      }
+      if(len > max_len){
+        i <- round(seq(1, len, length.out = max_len))
+        img <- img[i]
+      } else {
+        i <- seq_len(len)
+      }
+      img <- image_annotate(img, paste0("[preview] frame ", i, "/", len), size = 18, font = 'mono',
+                            location = '+10+10', color = 'white', boxcolor = 'black')
+      img <- image_animate(img, fps = 1)
+      format <- "gif"
+    } else if(is.na(match(format, viewer_supported))){
+      img <- image_convert(img, "PNG")
+      format <- 'png'
+    }
+    tmp <- file.path(tempdir(), paste0("preview.", format))
+    image_write(img, path = tmp, format = format)
+    viewer(tmp)
+  }
 }
 
 jupyter_print_image <- function(img){

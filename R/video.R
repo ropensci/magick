@@ -15,21 +15,23 @@
 #' @param framerate frames per second, passed to [av_encode_video][av::av_encode_video]
 #' @param ... additional parameters passed to [av_encode_video][av::av_encode_video] and
 #' [gifski][gifski::gifski].
-image_write_video <- function(image, path = NULL, framerate = 1, ...){
+image_write_video <- function(image, path = NULL, framerate = 10, ...){
   png_files <- write_png_files(image)
   on.exit(unlink(png_files))
   av::av_encode_video(png_files, output = path, framerate = framerate, ...)
 }
 
+#' @param delay duration of each frame in seconds (inverse of framerate)
 #' @rdname video
 #' @export
-image_write_gif <- function(image, path = NULL, ...){
+image_write_gif <- function(image, path = NULL, delay = 1/10, ...){
   png_files <- write_png_files(image)
   on.exit(unlink(png_files))
   info <- image_info(image)
   width <- info$width[1]
   height <- info$height[1]
-  gifski::gifski(png_files, gif_file = path, width = width, height = height, ...)
+  gifski::gifski(png_files, gif_file = path, width = width,
+                 height = height, delay = delay, ...)
 }
 
 write_png_files <- function(image){

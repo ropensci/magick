@@ -4,7 +4,7 @@
 \alias{autoviewer}
 \alias{autoviewer_enable}
 \alias{autoviewer_disable}
-\title{RStudio AutoViewer}
+\title{RStudio Graphics AutoViewer}
 \usage{
 autoviewer_enable()
 

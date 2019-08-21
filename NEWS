@@ -1,7 +1,11 @@
 2.2
-  - image_annotate() gains parameters 'kerning' and 'decoration'
-  - New function image_separate() and image_combine()
+  - New function image_read_video() to sample images from a video file
+  - RStudio: automatic preview now displays max 10 frames at 800px for videos.
+    This prevents R from freezing due to rendering large videos in a preview.
+    You can override the preview function via options('magick.viewer')
+  - New functions image_separate() and image_combine()
   - image_composite() now has separate parameters 'offset' and 'gravity'
+  - image_annotate() gains parameters 'kerning' and 'decoration'
   - image_crop() now uses the CropImageToTiles API which is more sophisticated
 
 2.1
