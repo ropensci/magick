@@ -100,5 +100,8 @@ image_shadow <- function(image, color = 'black', bg = 'white', geometry = '50x10
   geometry <- as.character(geometry)
   input <- image_background(image, color, flatten = TRUE)
   shadow <- image_background(magick_image_shadow_mask(input, geometry), bg)
-  image_composite(shadow, image, operator = operator, offset = offset)
+  image_join(lapply(seq_along(input), function(i){
+    # Prevent double loop which results in n^2 output frames
+    image_composite(shadow[i], image[i], operator = operator, offset = offset)
+  }))
 }

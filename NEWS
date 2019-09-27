@@ -1,3 +1,6 @@
+2.3
+  - Double loop fix in image_shadow
+
 2.2
   - New function image_read_video() to sample images from a video file
   - RStudio: automatic preview now displays max 10 frames at 800px for videos.
