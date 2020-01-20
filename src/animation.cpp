@@ -72,8 +72,25 @@ XPtrImage magick_image_append( XPtrImage image, bool stack){
 
 // [[Rcpp::export]]
 XPtrImage magick_image_optimize_frames( XPtrImage input){
-  XPtrImage output = create();
-  optimizeImageLayers(output.get(), input->begin(), input->end());
-  for_each ( output->begin(), output->end(), Magick::magickImage("gif"));
-  return output;
+  Iter first_ = input->begin();
+  Iter last_ = input->end();
+
+  MagickCore::ExceptionInfo *exception = MagickCore::AcquireExceptionInfo();
+
+  // Build image list
+  linkImages( first_, last_ );
+  MagickCore::Image* images = MagickCore::OptimizeImageLayers( first_->image(),
+                                                               exception);
+  // Unlink image list
+  unlinkImages( first_, last_ );
+
+  // Report any error
+  Magick::throwException(exception);
+  exception=MagickCore::DestroyExceptionInfo(exception);
+
+  // Move images to container
+  XPtrImage out = create();
+  insertImages( out.get(), images );
+
+  return out;
 }
