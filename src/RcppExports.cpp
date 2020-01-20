@@ -7,13 +7,13 @@
 using namespace Rcpp;
 
 // magick_image_animate
-XPtrImage magick_image_animate(XPtrImage input, size_t delay, size_t iter, const char * method, bool optimize);
+XPtrImage magick_image_animate(XPtrImage input, Rcpp::IntegerVector delay, size_t iter, const char * method, bool optimize);
 RcppExport SEXP _magick_magick_image_animate(SEXP inputSEXP, SEXP delaySEXP, SEXP iterSEXP, SEXP methodSEXP, SEXP optimizeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< size_t >::type delay(delaySEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type delay(delaySEXP);
     Rcpp::traits::input_parameter< size_t >::type iter(iterSEXP);
     Rcpp::traits::input_parameter< const char * >::type method(methodSEXP);
     Rcpp::traits::input_parameter< bool >::type optimize(optimizeSEXP);

@@ -1,7 +1,8 @@
 #include "magick_types.h"
 
 // [[Rcpp::export]]
-XPtrImage magick_image_animate( XPtrImage input, size_t delay, size_t iter, const char * method,
+XPtrImage magick_image_animate( XPtrImage input, Rcpp::IntegerVector delay,
+                                size_t iter, const char * method,
                                 bool optimize){
   XPtrImage output = create();
   if (optimize) {
@@ -10,8 +11,21 @@ XPtrImage magick_image_animate( XPtrImage input, size_t delay, size_t iter, cons
     for_each ( input->begin(), input->end(), Magick::gifDisposeMethodImage(Dispose(method)));
     coalesceImages( output.get(), input->begin(), input->end());
   }
+
   for_each ( output->begin(), output->end(), Magick::magickImage("gif"));
-  for_each ( output->begin(), output->end(), Magick::animationDelayImage(delay));
+
+  if (delay.size() == 1) {
+    for_each ( output->begin(), output->end(), Magick::animationDelayImage(delay[0]));
+  } else {
+    Image::iterator outit = output->begin();
+    Rcpp::IntegerVector::iterator delit = delay.begin();
+    while (outit != output->end()) {
+      outit->animationDelay(*delit);
+      outit++;
+      delit++;
+    }
+  }
+
   for_each ( output->begin(), output->end(), Magick::animationIterationsImage(iter));
   return output;
 }

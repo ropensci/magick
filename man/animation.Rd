@@ -13,8 +13,8 @@
 \alias{image_apply}
 \title{Image Frames and Animation}
 \usage{
-image_animate(image, fps = 10, loop = 0, dispose = c("background",
-  "previous", "none"), optimize = FALSE)
+image_animate(image, fps = 10, delay = NULL, loop = 0,
+  dispose = c("background", "previous", "none"), optimize = FALSE)
 
 image_morph(image, frames = 8)
 
@@ -33,14 +33,17 @@ image_apply(image, FUN, ...)
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
-\item{fps}{frames per second}
+\item{fps}{frames per second. Ignored if \code{delay} is not \code{NULL}.}
+
+\item{delay}{delay after each frame, in 1/100 seconds.
+Must be length 1, or number of frames. If specified, then \code{fps} is ignored.}
 
 \item{loop}{how many times to repeat the animation. Default is infinite.}
 
 \item{dispose}{a frame \href{http://www.imagemagick.org/Usage/anim_basics/#dispose}{disposal method}
 from \link[=dispose_types]{dispose_types()}}
 
-\item{optimize}{optimize the gif animation by storing only the differences
+\item{optimize}{optimize the \code{gif} animation by storing only the differences
 between frames.}
 
 \item{frames}{number of frames to use in output animation}
