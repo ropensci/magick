@@ -79,6 +79,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_optimize_frames
+XPtrImage magick_image_optimize_frames(XPtrImage input);
+RcppExport SEXP _magick_magick_image_optimize_frames(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_optimize_frames(input));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_attr_comment
 Rcpp::CharacterVector magick_attr_comment(XPtrImage input, Rcpp::CharacterVector set);
 RcppExport SEXP _magick_magick_attr_comment(SEXP inputSEXP, SEXP setSEXP) {
@@ -1428,6 +1439,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_flatten", (DL_FUNC) &_magick_magick_image_flatten, 2},
     {"_magick_magick_image_average", (DL_FUNC) &_magick_magick_image_average, 1},
     {"_magick_magick_image_append", (DL_FUNC) &_magick_magick_image_append, 2},
+    {"_magick_magick_image_optimize_frames", (DL_FUNC) &_magick_magick_image_optimize_frames, 1},
     {"_magick_magick_attr_comment", (DL_FUNC) &_magick_magick_attr_comment, 2},
     {"_magick_magick_attr_text_antialias", (DL_FUNC) &_magick_magick_attr_text_antialias, 2},
     {"_magick_magick_attr_stroke_antialias", (DL_FUNC) &_magick_magick_attr_stroke_antialias, 2},

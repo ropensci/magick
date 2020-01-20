@@ -25,6 +25,10 @@ magick_image_append <- function(image, stack) {
     .Call('_magick_magick_image_append', PACKAGE = 'magick', image, stack)
 }
 
+magick_image_optimize_frames <- function(input) {
+    .Call('_magick_magick_image_optimize_frames', PACKAGE = 'magick', input)
+}
+
 magick_attr_comment <- function(input, set) {
     .Call('_magick_magick_attr_comment', PACKAGE = 'magick', input, set)
 }

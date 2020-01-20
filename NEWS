@@ -1,5 +1,6 @@
 2.3
   - Double loop fix in image_shadow
+  - New function image_optimize_frames()
 
 2.2
   - New function image_read_video() to sample images from a video file
