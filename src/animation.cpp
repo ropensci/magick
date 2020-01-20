@@ -1,10 +1,15 @@
 #include "magick_types.h"
 
 // [[Rcpp::export]]
-XPtrImage magick_image_animate( XPtrImage input, size_t delay, size_t iter, const char * method){
-  for_each ( input->begin(), input->end(), Magick::gifDisposeMethodImage(Dispose(method)));
+XPtrImage magick_image_animate( XPtrImage input, size_t delay, size_t iter, const char * method,
+                                bool optimize){
   XPtrImage output = create();
-  coalesceImages( output.get(), input->begin(), input->end());
+  if (optimize) {
+    optimizeImageLayers(output.get(), input->begin(), input->end());
+  } else {
+    for_each ( input->begin(), input->end(), Magick::gifDisposeMethodImage(Dispose(method)));
+    coalesceImages( output.get(), input->begin(), input->end());
+  }
   for_each ( output->begin(), output->end(), Magick::magickImage("gif"));
   for_each ( output->begin(), output->end(), Magick::animationDelayImage(delay));
   for_each ( output->begin(), output->end(), Magick::animationIterationsImage(iter));
