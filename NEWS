@@ -4,6 +4,7 @@
   - image_animate() can now optimize animated gifs, by storing only the
     differences between frames.
   - image_animate() can now create animations with variable delays between frames.
+  - image_read() now supports cimg objects (from the imager package)
 
 2.2
   - New function image_read_video() to sample images from a video file

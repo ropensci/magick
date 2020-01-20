@@ -66,6 +66,8 @@ image_read <- function(path, density = NULL, depth = NULL, strip = FALSE){
     convert_EBImage(path)
   } else if(inherits(path, "nativeRaster") || (is.matrix(path) && is.integer(path))){
     image_read_nativeraster(path)
+  } else if(inherits(path, "cimg")) {
+    image_read_cimg((path))
   } else if (grDevices::is.raster(path)) {
     image_read_raster2(path)
   } else if (is.matrix(path) && is.character(path)){
@@ -159,6 +161,16 @@ image_read_raster1 <- function(x){
 image_read_raster2 <- function(x){
   stopifnot(is.matrix(x) && is.character(x))
   magick_image_readbitmap_raster2(x)
+}
+
+# This can probably be more efficient
+image_read_cimg <- function(x){
+  rast <- as.raster(x)
+  if(is.list(rast)){
+    image_join(lapply(rast, image_read))
+  } else {
+    image_read(rast)
+  }
 }
 
 #EBImage BioConductor class
