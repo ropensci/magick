@@ -1540,7 +1540,9 @@ static const R_CallMethodDef CallEntries[] = {
     {NULL, NULL, 0}
 };
 
+void set_memory_pool(DllInfo *dll);
 RcppExport void R_init_magick(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
+    set_memory_pool(dll);
 }
