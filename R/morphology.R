@@ -42,10 +42,10 @@
 #' # Octagonal Convex Hull
 #'  man %>%
 #'    image_morphology('Close', 'Diamond') %>%
-#'    image_morphology('Thicken', 'ConvexHull', iterations = -1)
+#'    image_morphology('Thicken', 'ConvexHull', iterations = 1)
 #'
 #' # Thinning down to a Skeleton
-#' man %>% image_morphology('Thinning', 'Skeleton', iterations = -1)
+#' man %>% image_morphology('Thinning', 'Skeleton', iterations = 1)
 #'
 #' # Specify custom kernel matrix usingn a string:
 #' img <- demo_image("test_mag.gif")
@@ -61,7 +61,7 @@ image_morphology <- function(image, method = "convolve", kernel = "Gaussian",
   assert_image(image)
   method <- as.character(method)
   kernel <- as.character(kernel)
-  iterations <- as.integer(iterations)
+  iterations <- as.integer(max(0, iterations))
   opt_names <- as.character(names(opts))
   opt_values <- as.character(unname(opts))
   magick_image_morphology(image, method, kernel, iterations, opt_names, opt_values)

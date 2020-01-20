@@ -9,7 +9,6 @@ matrix:
   include:
     - dist: trusty
     - dist: xenial
-    - dist: bionic
     - os: osx
       brew_packages: imagemagick
     - os: osx
