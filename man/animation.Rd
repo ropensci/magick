@@ -11,7 +11,6 @@
 \alias{image_average}
 \alias{image_append}
 \alias{image_apply}
-\alias{image_optimize_frames}
 \title{Image Frames and Animation}
 \usage{
 image_animate(image, fps = 10, loop = 0, dispose = c("background",
@@ -30,8 +29,6 @@ image_average(image)
 image_append(image, stack = FALSE)
 
 image_apply(image, FUN, ...)
-
-image_optimize_frames(image)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
@@ -63,7 +60,6 @@ For details see \href{https://www.imagemagick.org/Magick++/STL.html}{Magick++ ST
 documentation. Short descriptions:
 \itemize{
 \item \link{image_animate} coalesces frames by playing the sequence and converting to \code{gif} format.
-\item \link{image_optimize_frames} optimizes a coalesced \code{gif} animation.
 \item \link{image_morph} expands number of frames by interpolating intermediate frames to blend
 into each other when played as an animation.
 \item \link{image_mosaic} inlays images to form a single coherent picture.
@@ -71,14 +67,8 @@ into each other when played as an animation.
 \item \link{image_flatten} merges frames as layers into a single frame using a given operator.
 \item \link{image_average} averages frames into single frame.
 \item \link{image_append} stack images left-to-right (default) or top-to-bottom.
-\item \link{image_apply} applies a function to each frame.
+\item \link{image_apply} applies a function to each frame
 }
-
-The \link{image_optimize_frames} function compares each image the \code{gif}
-disposed forms of the previous image in the sequence.  From this it
-attempts to select the smallest cropped image to replace each frame,
-while preserving the results of the \code{gif} animation. It can significantly
-reduce the size of animated \code{gif}s that have large fixed areas.
 
 The \link{image_apply} function calls an image function to each frame and joins
 results back into a single image. Because most operations are already vectorized

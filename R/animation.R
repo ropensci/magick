@@ -6,7 +6,6 @@
 #' documentation. Short descriptions:
 #'
 #'  - [image_animate] coalesces frames by playing the sequence and converting to `gif` format.
-#'  - [image_optimize_frames] optimizes a coalesced `gif` animation.
 #'  - [image_morph] expands number of frames by interpolating intermediate frames to blend
 #'  into each other when played as an animation.
 #'  - [image_mosaic] inlays images to form a single coherent picture.
@@ -14,13 +13,7 @@
 #'  - [image_flatten] merges frames as layers into a single frame using a given operator.
 #'  - [image_average] averages frames into single frame.
 #'  - [image_append] stack images left-to-right (default) or top-to-bottom.
-#'  - [image_apply] applies a function to each frame.
-#'
-#' The [image_optimize_frames] function compares each image the `gif`
-#' disposed forms of the previous image in the sequence.  From this it
-#' attempts to select the smallest cropped image to replace each frame,
-#' while preserving the results of the `gif` animation. It can significantly
-#' reduce the size of animated `gif`s that have large fixed areas.
+#'  - [image_apply] applies a function to each frame
 #'
 #' The [image_apply] function calls an image function to each frame and joins
 #' results back into a single image. Because most operations are already vectorized
@@ -138,12 +131,4 @@ image_apply <- function(image, FUN, ...){
   if(!all(vapply(out, inherits, logical(1), what = "magick-image")))
     stop(sprintf("Function %s did not return a valid image.", deparse(substitute(FUN))))
   image_join(out)
-}
-
-#' @rdname animation
-#' @export
-
-image_optimize_frames <- function(image) {
-  assert_image(image)
-  magick_image_optimize_frames(image)
 }
