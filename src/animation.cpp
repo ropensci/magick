@@ -5,8 +5,14 @@ XPtrImage magick_image_animate( XPtrImage input, Rcpp::IntegerVector delay,
                                 size_t iter, const char * method,
                                 bool optimize){
   XPtrImage output = create();
+  /* AFAICT optimizeImageLayers also coalesces the images, and the dispose method
+   * is optimized, so it does not seem to make sense to call both. */
   if (optimize) {
+#if MagickLibVersion >= 0x689
     optimizeImageLayers(output.get(), input->begin(), input->end());
+#else
+    throw std::runtime_error("Your imagemagick is too old for optimizeImageLayers");
+#endif
   } else {
     for_each ( input->begin(), input->end(), Magick::gifDisposeMethodImage(Dispose(method)));
     coalesceImages( output.get(), input->begin(), input->end());
