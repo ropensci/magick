@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Anticonf script by Jeroen Ooms (2017)
+# Anticonf script by Jeroen Ooms (2020)
 # The script will try 'Magick++-config' and 'pkg-config' to find required
 # cflags and ldflags. Make sure this executable is in PATH when installing
 # the package. Alternatively, you can set INCLUDE_DIR and LIB_DIR manually:
@@ -75,7 +75,7 @@ if [ $? -ne 0 ]; then
   echo " - deb: '$PKG_DEB_NAME' (Debian, Ubuntu)"
   echo " - rpm: '$PKG_RPM_NAME' (Fedora, CentOS, RHEL)"
   echo " - csw: '$PKG_CSW_NAME' (Solaris)"
-  echo "On MacOS it is recommended to use install ImageMagick-6 from homebrew"
+  echo "On MacOS it is recommended to use ImageMagick-6 from homebrew"
   echo "   brew install imagemagick@6"
   echo "For older Ubuntu versions Trusty (14.04) and Xenial (16.04) use our PPA:"
   echo "   sudo add-apt-repository -y ppa:cran/imagemagick"
