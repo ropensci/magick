@@ -28,11 +28,26 @@ image_read_pdf(path, pages = NULL, density = 300, password = "")
 
 image_read_video(path, fps = 1, format = "png")
 
-image_write(image, path = NULL, format = NULL, quality = NULL,
-  depth = NULL, density = NULL, comment = NULL, flatten = FALSE)
+image_write(
+  image,
+  path = NULL,
+  format = NULL,
+  quality = NULL,
+  depth = NULL,
+  density = NULL,
+  comment = NULL,
+  flatten = FALSE
+)
 
-image_convert(image, format = NULL, type = NULL, colorspace = NULL,
-  depth = NULL, antialias = NULL, matte = NULL)
+image_convert(
+  image,
+  format = NULL,
+  type = NULL,
+  colorspace = NULL,
+  depth = NULL,
+  antialias = NULL,
+  matte = NULL
+)
 
 image_data(image, channels = NULL, frame = 1)
 
@@ -88,7 +103,7 @@ transparency with background color.}
 \item{type}{string with \href{https://www.imagemagick.org/Magick++/Enumerations.html#ImageType}{imagetype}
 value from \link{image_types} for example \code{grayscale} to convert into black/white}
 
-\item{colorspace}{string with a \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{colorspace}
+\item{colorspace}{string with a \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{\code{colorspace}}
 from \link{colorspace_types} for example \code{"gray"}, \code{"rgb"} or \code{"cmyk"}}
 
 \item{antialias}{enable anti-aliasing for text and strokes}
@@ -174,14 +189,24 @@ image_blank(600, 400, "green")
 image_blank(600, 400, pseudo_image = "radial-gradient:purple-yellow")
 }
 \seealso{
-Other image: \code{\link{_index_}}, \code{\link{analysis}},
-  \code{\link{animation}}, \code{\link{attributes}},
-  \code{\link{color}}, \code{\link{composite}},
-  \code{\link{device}}, \code{\link{edges}},
-  \code{\link{effects}}, \code{\link{fx}},
-  \code{\link{geometry}}, \code{\link{morphology}},
-  \code{\link{ocr}}, \code{\link{options}},
-  \code{\link{painting}}, \code{\link{segmentation}},
-  \code{\link{transform}}, \code{\link{video}}
+Other image: 
+\code{\link{_index_}},
+\code{\link{analysis}},
+\code{\link{animation}},
+\code{\link{attributes}()},
+\code{\link{color}},
+\code{\link{composite}},
+\code{\link{device}},
+\code{\link{edges}},
+\code{\link{effects}()},
+\code{\link{fx}},
+\code{\link{geometry}},
+\code{\link{morphology}},
+\code{\link{ocr}},
+\code{\link{options}()},
+\code{\link{painting}},
+\code{\link{segmentation}},
+\code{\link{transform}()},
+\code{\link{video}}
 }
 \concept{image}

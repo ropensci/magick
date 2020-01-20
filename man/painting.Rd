@@ -8,10 +8,22 @@
 \usage{
 image_fill(image, color, point = "+1+1", fuzz = 0, refcolor = NULL)
 
-image_annotate(image, text, gravity = "northwest", location = "+0+0",
-  degrees = 0, size = 10, font = "", style = "normal",
-  weight = 400, kerning = 0, decoration = NULL, color = NULL,
-  strokecolor = NULL, boxcolor = NULL)
+image_annotate(
+  image,
+  text,
+  gravity = "northwest",
+  location = "+0+0",
+  degrees = 0,
+  size = 10,
+  font = "",
+  style = "normal",
+  weight = 400,
+  kerning = 0,
+  decoration = NULL,
+  color = NULL,
+  strokecolor = NULL,
+  boxcolor = NULL
+)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
@@ -85,14 +97,24 @@ image_annotate(logo, "CONFIDENTIAL", size = 50, color = "red", boxcolor = "pink"
 image_annotate(logo, "The quick brown fox", font = "monospace", size = 50)
 }
 \seealso{
-Other image: \code{\link{_index_}}, \code{\link{analysis}},
-  \code{\link{animation}}, \code{\link{attributes}},
-  \code{\link{color}}, \code{\link{composite}},
-  \code{\link{device}}, \code{\link{edges}},
-  \code{\link{editing}}, \code{\link{effects}},
-  \code{\link{fx}}, \code{\link{geometry}},
-  \code{\link{morphology}}, \code{\link{ocr}},
-  \code{\link{options}}, \code{\link{segmentation}},
-  \code{\link{transform}}, \code{\link{video}}
+Other image: 
+\code{\link{_index_}},
+\code{\link{analysis}},
+\code{\link{animation}},
+\code{\link{attributes}()},
+\code{\link{color}},
+\code{\link{composite}},
+\code{\link{device}},
+\code{\link{edges}},
+\code{\link{editing}},
+\code{\link{effects}()},
+\code{\link{fx}},
+\code{\link{geometry}},
+\code{\link{morphology}},
+\code{\link{ocr}},
+\code{\link{options}()},
+\code{\link{segmentation}},
+\code{\link{transform}()},
+\code{\link{video}}
 }
 \concept{image}

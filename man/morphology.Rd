@@ -6,11 +6,21 @@
 \alias{image_convolve}
 \title{Morphology}
 \usage{
-image_morphology(image, method = "convolve", kernel = "Gaussian",
-  iterations = 1, opts = list())
+image_morphology(
+  image,
+  method = "convolve",
+  kernel = "Gaussian",
+  iterations = 1,
+  opts = list()
+)
 
-image_convolve(image, kernel = "Gaussian", iterations = 1,
-  scaling = NULL, bias = NULL)
+image_convolve(
+  image,
+  kernel = "Gaussian",
+  iterations = 1,
+  scaling = NULL,
+  bias = NULL
+)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
@@ -67,10 +77,10 @@ man \%>\% image_morphology('Edge', 'Octagon')
 # Octagonal Convex Hull
  man \%>\%
    image_morphology('Close', 'Diamond') \%>\%
-   image_morphology('Thicken', 'ConvexHull', iterations = -1)
+   image_morphology('Thicken', 'ConvexHull', iterations = 1)
 
 # Thinning down to a Skeleton
-man \%>\% image_morphology('Thinning', 'Skeleton', iterations = -1)
+man \%>\% image_morphology('Thinning', 'Skeleton', iterations = 1)
 
 # Specify custom kernel matrix usingn a string:
 img <- demo_image("test_mag.gif")
@@ -83,14 +93,24 @@ i <- image_convolve(img, kernel = '4x5:
 }
 }
 \seealso{
-Other image: \code{\link{_index_}}, \code{\link{analysis}},
-  \code{\link{animation}}, \code{\link{attributes}},
-  \code{\link{color}}, \code{\link{composite}},
-  \code{\link{device}}, \code{\link{edges}},
-  \code{\link{editing}}, \code{\link{effects}},
-  \code{\link{fx}}, \code{\link{geometry}},
-  \code{\link{ocr}}, \code{\link{options}},
-  \code{\link{painting}}, \code{\link{segmentation}},
-  \code{\link{transform}}, \code{\link{video}}
+Other image: 
+\code{\link{_index_}},
+\code{\link{analysis}},
+\code{\link{animation}},
+\code{\link{attributes}()},
+\code{\link{color}},
+\code{\link{composite}},
+\code{\link{device}},
+\code{\link{edges}},
+\code{\link{editing}},
+\code{\link{effects}()},
+\code{\link{fx}},
+\code{\link{geometry}},
+\code{\link{ocr}},
+\code{\link{options}()},
+\code{\link{painting}},
+\code{\link{segmentation}},
+\code{\link{transform}()},
+\code{\link{video}}
 }
 \concept{image}

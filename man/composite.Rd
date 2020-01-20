@@ -9,18 +9,29 @@
 \alias{image_shadow}
 \title{Image Composite}
 \usage{
-image_composite(image, composite_image, operator = "atop",
-  offset = "+0+0", gravity = "northwest", compose_args = "")
+image_composite(
+  image,
+  composite_image,
+  operator = "atop",
+  offset = "+0+0",
+  gravity = "northwest",
+  compose_args = ""
+)
 
-image_border(image, color = "lightgray", geometry = "10x10",
-  operator = "copy")
+image_border(image, color = "lightgray", geometry = "10x10", operator = "copy")
 
 image_frame(image, color = "lightgray", geometry = "25x25+6+6")
 
 image_shadow_mask(image, geometry = "50x10+30+30")
 
-image_shadow(image, color = "black", bg = "white",
-  geometry = "50x10+30+30", operator = "atop", offset = "+20+20")
+image_shadow(
+  image,
+  color = "black",
+  bg = "white",
+  geometry = "50x10+30+30",
+  operator = "atop",
+  offset = "+20+20"
+)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
@@ -82,14 +93,24 @@ image_frame(imlogo)
 image_shadow(imlogo)
 }
 \seealso{
-Other image: \code{\link{_index_}}, \code{\link{analysis}},
-  \code{\link{animation}}, \code{\link{attributes}},
-  \code{\link{color}}, \code{\link{device}},
-  \code{\link{edges}}, \code{\link{editing}},
-  \code{\link{effects}}, \code{\link{fx}},
-  \code{\link{geometry}}, \code{\link{morphology}},
-  \code{\link{ocr}}, \code{\link{options}},
-  \code{\link{painting}}, \code{\link{segmentation}},
-  \code{\link{transform}}, \code{\link{video}}
+Other image: 
+\code{\link{_index_}},
+\code{\link{analysis}},
+\code{\link{animation}},
+\code{\link{attributes}()},
+\code{\link{color}},
+\code{\link{device}},
+\code{\link{edges}},
+\code{\link{editing}},
+\code{\link{effects}()},
+\code{\link{fx}},
+\code{\link{geometry}},
+\code{\link{morphology}},
+\code{\link{ocr}},
+\code{\link{options}()},
+\code{\link{painting}},
+\code{\link{segmentation}},
+\code{\link{transform}()},
+\code{\link{video}}
 }
 \concept{image}

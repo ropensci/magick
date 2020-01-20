@@ -6,8 +6,12 @@
 \alias{image_lat}
 \title{Image thresholding}
 \usage{
-image_threshold(image, type = c("black", "white"), threshold = "50\%",
-  channel = NULL)
+image_threshold(
+  image,
+  type = c("black", "white"),
+  threshold = "50\%",
+  channel = NULL
+)
 
 image_lat(image, geometry = "10x10+5\%")
 }

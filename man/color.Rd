@@ -20,8 +20,13 @@
 \usage{
 image_modulate(image, brightness = 100, saturation = 100, hue = 100)
 
-image_quantize(image, max = 256, colorspace = "rgb", dither = NULL,
-  treedepth = NULL)
+image_quantize(
+  image,
+  max = 256,
+  colorspace = "rgb",
+  dither = NULL,
+  treedepth = NULL
+)
 
 image_map(image, map, dither = FALSE)
 
@@ -60,7 +65,7 @@ current position corresponding to an argument range of 0 to 200 (100 for no chan
 \item{max}{preferred number of colors in the image. The actual number of colors in the image may
 be less than your request, but never more.}
 
-\item{colorspace}{string with a \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{colorspace}
+\item{colorspace}{string with a \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{\code{colorspace}}
 from \link{colorspace_types} for example \code{"gray"}, \code{"rgb"} or \code{"cmyk"}}
 
 \item{dither}{apply Floyd/Steinberg error diffusion to the image: averages intensities of several
@@ -149,14 +154,24 @@ image_median(logo)
 image_convert(logo, type = 'grayscale')
 }
 \seealso{
-Other image: \code{\link{_index_}}, \code{\link{analysis}},
-  \code{\link{animation}}, \code{\link{attributes}},
-  \code{\link{composite}}, \code{\link{device}},
-  \code{\link{edges}}, \code{\link{editing}},
-  \code{\link{effects}}, \code{\link{fx}},
-  \code{\link{geometry}}, \code{\link{morphology}},
-  \code{\link{ocr}}, \code{\link{options}},
-  \code{\link{painting}}, \code{\link{segmentation}},
-  \code{\link{transform}}, \code{\link{video}}
+Other image: 
+\code{\link{_index_}},
+\code{\link{analysis}},
+\code{\link{animation}},
+\code{\link{attributes}()},
+\code{\link{composite}},
+\code{\link{device}},
+\code{\link{edges}},
+\code{\link{editing}},
+\code{\link{effects}()},
+\code{\link{fx}},
+\code{\link{geometry}},
+\code{\link{morphology}},
+\code{\link{ocr}},
+\code{\link{options}()},
+\code{\link{painting}},
+\code{\link{segmentation}},
+\code{\link{transform}()},
+\code{\link{video}}
 }
 \concept{image}

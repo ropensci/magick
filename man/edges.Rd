@@ -12,8 +12,14 @@ image_edge(image, radius = 1)
 
 image_canny(image, geometry = "0x1+10\%+30\%")
 
-image_hough_draw(image, geometry = NULL, color = "red",
-  bg = "transparent", size = 3, overlay = FALSE)
+image_hough_draw(
+  image,
+  geometry = NULL,
+  color = "red",
+  bg = "transparent",
+  size = 3,
+  overlay = FALSE
+)
 
 image_hough_txt(image, geometry = NULL, format = c("mvg", "svg"))
 }
@@ -40,10 +46,10 @@ Best results are obtained by finding edges with \code{\link[=image_canny]{image_
 then performing Hough-line detection on the edge image.
 }
 \details{
-For Hough-line detection, the geometry format is \code{{W}x{H}+{threshold}}
+For Hough-line detection, the geometry format is \verb{\{W\}x\{H\}+\{threshold\}}
 defining the size and threshold of the filter used to find 'peaks' in
 the intermediate search image. For canny edge detection the format is
-\code{{radius}x{sigma}+{lower\%}+{upper\%}}. More details and examples are
+\verb{\{radius\}x\{sigma\}+\{lower\%\}+\{upper\%\}}. More details and examples are
 available at the \href{https://www.imagemagick.org/Usage/transform/#hough}{imagemagick website}.
 }
 \examples{
@@ -55,14 +61,24 @@ rectangle \%>\% image_hough_txt(format = 'svg') \%>\% cat()
 }
 }
 \seealso{
-Other image: \code{\link{_index_}}, \code{\link{analysis}},
-  \code{\link{animation}}, \code{\link{attributes}},
-  \code{\link{color}}, \code{\link{composite}},
-  \code{\link{device}}, \code{\link{editing}},
-  \code{\link{effects}}, \code{\link{fx}},
-  \code{\link{geometry}}, \code{\link{morphology}},
-  \code{\link{ocr}}, \code{\link{options}},
-  \code{\link{painting}}, \code{\link{segmentation}},
-  \code{\link{transform}}, \code{\link{video}}
+Other image: 
+\code{\link{_index_}},
+\code{\link{analysis}},
+\code{\link{animation}},
+\code{\link{attributes}()},
+\code{\link{color}},
+\code{\link{composite}},
+\code{\link{device}},
+\code{\link{editing}},
+\code{\link{effects}()},
+\code{\link{fx}},
+\code{\link{geometry}},
+\code{\link{morphology}},
+\code{\link{ocr}},
+\code{\link{options}()},
+\code{\link{painting}},
+\code{\link{segmentation}},
+\code{\link{transform}()},
+\code{\link{video}}
 }
 \concept{image}

@@ -13,8 +13,14 @@
 \alias{image_apply}
 \title{Image Frames and Animation}
 \usage{
-image_animate(image, fps = 10, delay = NULL, loop = 0,
-  dispose = c("background", "previous", "none"), optimize = FALSE)
+image_animate(
+  image,
+  fps = 10,
+  delay = NULL,
+  loop = 0,
+  dispose = c("background", "previous", "none"),
+  optimize = FALSE
+)
 
 image_morph(image, frames = 8)
 
@@ -112,14 +118,24 @@ frames <- image_apply(front, function(x){image_composite(background, x, offset =
 image_animate(frames, fps = 10)
 }
 \seealso{
-Other image: \code{\link{_index_}}, \code{\link{analysis}},
-  \code{\link{attributes}}, \code{\link{color}},
-  \code{\link{composite}}, \code{\link{device}},
-  \code{\link{edges}}, \code{\link{editing}},
-  \code{\link{effects}}, \code{\link{fx}},
-  \code{\link{geometry}}, \code{\link{morphology}},
-  \code{\link{ocr}}, \code{\link{options}},
-  \code{\link{painting}}, \code{\link{segmentation}},
-  \code{\link{transform}}, \code{\link{video}}
+Other image: 
+\code{\link{_index_}},
+\code{\link{analysis}},
+\code{\link{attributes}()},
+\code{\link{color}},
+\code{\link{composite}},
+\code{\link{device}},
+\code{\link{edges}},
+\code{\link{editing}},
+\code{\link{effects}()},
+\code{\link{fx}},
+\code{\link{geometry}},
+\code{\link{morphology}},
+\code{\link{ocr}},
+\code{\link{options}()},
+\code{\link{painting}},
+\code{\link{segmentation}},
+\code{\link{transform}()},
+\code{\link{video}}
 }
 \concept{image}

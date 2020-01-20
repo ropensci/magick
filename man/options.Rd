@@ -61,14 +61,24 @@ descriptions see
 ImageMagick Manual: \href{https://www.imagemagick.org/Magick++/Enumerations.html}{Enumerations}
 }
 \seealso{
-Other image: \code{\link{_index_}}, \code{\link{analysis}},
-  \code{\link{animation}}, \code{\link{attributes}},
-  \code{\link{color}}, \code{\link{composite}},
-  \code{\link{device}}, \code{\link{edges}},
-  \code{\link{editing}}, \code{\link{effects}},
-  \code{\link{fx}}, \code{\link{geometry}},
-  \code{\link{morphology}}, \code{\link{ocr}},
-  \code{\link{painting}}, \code{\link{segmentation}},
-  \code{\link{transform}}, \code{\link{video}}
+Other image: 
+\code{\link{_index_}},
+\code{\link{analysis}},
+\code{\link{animation}},
+\code{\link{attributes}()},
+\code{\link{color}},
+\code{\link{composite}},
+\code{\link{device}},
+\code{\link{edges}},
+\code{\link{editing}},
+\code{\link{effects}()},
+\code{\link{fx}},
+\code{\link{geometry}},
+\code{\link{morphology}},
+\code{\link{ocr}},
+\code{\link{painting}},
+\code{\link{segmentation}},
+\code{\link{transform}()},
+\code{\link{video}}
 }
 \concept{image}
