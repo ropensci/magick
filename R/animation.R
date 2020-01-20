@@ -30,15 +30,19 @@
 #' from [dispose_types()][dispose_types]
 #' @param fps frames per second
 #' @param loop how many times to repeat the animation. Default is infinite.
-image_animate <- function(image, fps = 10, loop = 0, dispose = c("background", "previous", "none")){
+#' @param optimize optimize the `gif` animation by storing only the differences
+#' between frames.
+image_animate <- function(image, fps = 10, loop = 0, dispose = c("background", "previous", "none"),
+                          optimize = FALSE){
   assert_image(image)
   stopifnot(is.numeric(fps))
   stopifnot(is.numeric(loop))
+  stopifnot(is.logical(optimize))
   if(100 %% fps)
     stop("argument 'fps' must be a factor of 100")
   delay <- as.integer(100/fps)
   dispose <- match.arg(dispose)
-  magick_image_animate(image, delay, as.integer(loop), dispose)
+  magick_image_animate(image, delay, as.integer(loop), dispose, optimize)
 }
 
 image_coalesce <- image_animate

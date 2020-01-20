@@ -14,7 +14,7 @@
 \title{Image Frames and Animation}
 \usage{
 image_animate(image, fps = 10, loop = 0, dispose = c("background",
-  "previous", "none"))
+  "previous", "none"), optimize = FALSE)
 
 image_morph(image, frames = 8)
 
@@ -39,6 +39,9 @@ image_apply(image, FUN, ...)
 
 \item{dispose}{a frame \href{http://www.imagemagick.org/Usage/anim_basics/#dispose}{disposal method}
 from \link[=dispose_types]{dispose_types()}}
+
+\item{optimize}{optimize the gif animation by storing only the differences
+between frames.}
 
 \item{frames}{number of frames to use in output animation}
 

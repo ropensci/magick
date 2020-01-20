@@ -1,5 +1,7 @@
 2.3
   - Double loop fix in image_shadow
+  - image_animate() can now optimize animated gifs, by storing only the
+    differences between frames.
 
 2.2
   - New function image_read_video() to sample images from a video file
