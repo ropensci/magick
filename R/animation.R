@@ -28,21 +28,29 @@
 #' @aliases image_coalesce
 #' @param dispose a frame [disposal method](http://www.imagemagick.org/Usage/anim_basics/#dispose)
 #' from [dispose_types()][dispose_types]
-#' @param fps frames per second
+#' @param fps frames per second. Ignored if `delay` is not `NULL`.
+#' @param delay delay after each frame, in 1/100 seconds.
+#' Must be length 1, or number of frames. If specified, then `fps` is ignored.
 #' @param loop how many times to repeat the animation. Default is infinite.
 #' @param optimize optimize the `gif` animation by storing only the differences
 #' between frames.
-image_animate <- function(image, fps = 10, loop = 0, dispose = c("background", "previous", "none"),
+image_animate <- function(image, fps = 10, delay = NULL, loop = 0,
+                          dispose = c("background", "previous", "none"),
                           optimize = FALSE){
   assert_image(image)
   stopifnot(is.numeric(fps))
+  stopifnot(is.null(delay) || (
+    is.numeric(delay) && length(delay) %in% c(1, length(image))))
   stopifnot(is.numeric(loop))
   stopifnot(is.logical(optimize))
-  if(100 %% fps)
-    stop("argument 'fps' must be a factor of 100")
-  delay <- as.integer(100/fps)
+  if(is.null(delay)) {
+    if(100 %% fps)
+      stop("argument 'fps' must be a factor of 100")
+    delay <- 100/fps
+  }
   dispose <- match.arg(dispose)
-  magick_image_animate(image, delay, as.integer(loop), dispose, optimize)
+  magick_image_animate(image, as.integer(delay), as.integer(loop), dispose,
+                       optimize)
 }
 
 image_coalesce <- image_animate
