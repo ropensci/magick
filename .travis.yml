@@ -9,6 +9,7 @@ matrix:
   include:
     - dist: trusty
     - dist: xenial
+      r_check_args: '' # because _R_CHECK_THINGS_IN_TEMP_DIR_ is broken
     - os: osx
       brew_packages: imagemagick
     - os: osx
