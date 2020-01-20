@@ -36,10 +36,6 @@
     } else if(file.exists(fontdir)){
       Sys.setenv(FONTCONFIG_PATH = fontdir)
     }
-  } else if(is_mac()){
-    # Workaround for R's built-in OpenMP conflicts
-    # https://github.com/ropensci/magick/issues/170
-    Sys.setenv(KMP_DUPLICATE_LIB_OK = 'TRUE')
   }
   register_s3_method("knitr", "knit_print", "magick-image")
 }

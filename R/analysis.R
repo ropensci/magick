@@ -46,7 +46,7 @@ image_compare_dist <- function(image, reference_image, metric = "", fuzz = 0){
 #' @rdname analysis
 image_fft <- function(image){
   if(!isTRUE(magick_config()$fftw))
-    stop("ImageMagick was configured without FFTW support. Reinstall with: brew reinstall imagemagick --with-fftw")
+    stop("ImageMagick was configured without FFTW support.")
   assert_image(image)
   magick_image_fft(image)
 }

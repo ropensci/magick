@@ -1,4 +1,4 @@
-/* Jeroen Ooms (2018)
+/* Jeroen Ooms (2020)
  * Bindings to vectorized image manipulations.
  * See API: https://www.imagemagick.org/Magick++/STL.html
  */
@@ -7,6 +7,10 @@
 
 // [[Rcpp::init]]
 void my_magick_init(DllInfo *dll) {
+ // Workaround for sMacOS OpenMP conflict: https://github.com/ropensci/magick/issues/170
+#ifdef __APPLE__
+  setenv("KMP_DUPLICATE_LIB_OK", "1", 1);
+#endif
   Magick::InitializeMagick("");
 }
 
