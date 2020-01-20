@@ -5,6 +5,11 @@
 
 #include "magick_types.h"
 
+// [[Rcpp::init]]
+void my_magick_init(DllInfo *dll) {
+  Magick::InitializeMagick("");
+}
+
 //External R pointer finalizer
 void finalize_image( Image *image ){
   delete image;

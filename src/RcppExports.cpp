@@ -1540,7 +1540,9 @@ static const R_CallMethodDef CallEntries[] = {
     {NULL, NULL, 0}
 };
 
+void my_magick_init(DllInfo *dll);
 RcppExport void R_init_magick(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
+    my_magick_init(dll);
 }

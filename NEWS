@@ -1,4 +1,5 @@
 2.3
+  - Call Magick::InitializeMagick("") before init, fixes crash with openmp on OSX.
   - Double loop fix in image_shadow
   - image_animate() can now optimize animated gifs, by storing only the
     differences between frames.
