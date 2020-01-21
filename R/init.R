@@ -5,8 +5,10 @@
   has <- paste(names(which(support)), collapse = ", ")
   not <- paste(names(which(!support)), collapse = ", ")
   threads <- magick_threads(0)
-  packageStartupMessage(sprintf("Linking to ImageMagick %s\nEnabled features: %s\nDisabled features: %s\nUsing %d thread(s)",
-                                as.character(magick_config()$version), has, not, threads))
+  packageStartupMessage(sprintf("Linking to ImageMagick %s\nEnabled features: %s\nDisabled features: %s",
+                                as.character(magick_config()$version), has, not))
+  if(isTRUE(threads > 1))
+    packageStartupMessage(sprintf("Using %d threads", threads))
 
   # For RStudio
   autoviewer_enable()
