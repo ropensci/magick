@@ -24,5 +24,6 @@ coder_info <- function(format){
 magick_config <- function(){
   out <- magick_config_internal()
   out$version = numeric_version(out$version)
+  out$threads = magick_threads()
   out
 }
