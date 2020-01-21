@@ -16,9 +16,13 @@ void my_magick_init(DllInfo *dll) {
 
 // [[Rcpp::export]]
 int magick_threads(size_t i = 0){
+#if MagickLibVersion >= 0x689
   if(i > 0)
     Magick::ResourceLimits::thread(i);
   return Magick::ResourceLimits::thread();
+#else
+  return NA_INTEGER;
+#endif
 }
 
 //External R pointer finalizer
