@@ -19,6 +19,10 @@
   # Needed by older versions of IM:
   Sys.setenv(MAGICK_TMPDIR = tempdir())
 
+  if(is_check()){
+    Sys.setenv(MAGICK_THREAD_LIMIT = 1)
+  }
+
   # Set the default viewer
   if(is.null(getOption('magick.viewer'))){
     fun <- function(x){}
@@ -68,3 +72,6 @@ is_mac <- function(){
   grepl("darwin", R.Version()$platform)
 }
 
+is_check <- function(){
+  grepl('magick.Rcheck', getwd(), fixed = TRUE)
+}

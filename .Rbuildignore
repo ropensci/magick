@@ -13,3 +13,4 @@ appveyor.yml$
 ^_pkgdown\.yml$
 ^docs$
 ^man/figures
+^configure.log$

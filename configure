@@ -28,7 +28,7 @@ if [ -z "$PKGCONFIG_LIBS" ] && [ $(command -v GraphicsMagick++-config) ]; then
   echo "Warning: found GraphicsMagick++ instead of ImageMagick++. GraphicsMagick is not supported."
 fi
 
-# Hack for CRAN server
+# Workaround for broken ImageMagick on CRAN server
 if [ -e "/Builds/CRAN-QA-Simon" ] || [ -e "/Volumes/SSD-Data/Builds" ]; then
   unset PKGCONFIG_CFLAGS
   unset PKGCONFIG_LIBS
@@ -65,19 +65,17 @@ echo "Using PKG_CFLAGS=$PKG_CFLAGS"
 echo "Using PKG_LIBS=$PKG_LIBS"
 
 # Test configuration
-tmpfile=$(mktemp)
-echo "#include $PKG_TEST_HEADER" | ${CXX} -E ${CPPFLAGS} ${PKG_CFLAGS} ${CXXFLAGS} -xc++ - >/dev/null 2>$tmpfile
+echo "#include $PKG_TEST_HEADER" | ${CXX} -E ${CPPFLAGS} ${PKG_CFLAGS} ${CXXFLAGS} -xc++ - >/dev/null 2>configure.log
 
 # Customize the error
 if [ $? -ne 0 ]; then
-  echo "------------------------- ANTICONF ERROR ---------------------------"
-  echo "Configuration failed because $PKG_CONFIG_NAME was not found. Try installing:"
-  echo " - deb: '$PKG_DEB_NAME' (Debian, Ubuntu)"
-  echo " - rpm: '$PKG_RPM_NAME' (Fedora, CentOS, RHEL)"
-  echo " - csw: '$PKG_CSW_NAME' (Solaris)"
-  echo "On MacOS it is recommended to use ImageMagick-6 from homebrew"
-  echo "   brew install imagemagick@6"
-  echo "For older Ubuntu versions Trusty (14.04) and Xenial (16.04) use our PPA:"
+  echo "--------------------------- [ANTICONF] --------------------------------"
+  echo "Configuration failed to find the $PKG_CONFIG_NAME library. Try installing:"
+  echo " - deb: $PKG_DEB_NAME (Debian, Ubuntu)"
+  echo " - rpm: $PKG_RPM_NAME (Fedora, CentOS, RHEL)"
+  echo " - csw: $PKG_CSW_NAME (Solaris)"
+  echo " - brew imagemagick@6 (MacOS)"
+  echo "For Ubuntu versions Trusty (14.04) and Xenial (16.04) use our PPA:"
   echo "   sudo add-apt-repository -y ppa:cran/imagemagick"
   echo "   sudo apt-get update"
   echo "   sudo apt-get install -y libmagick++-dev"
@@ -85,9 +83,10 @@ if [ $? -ne 0 ]; then
   echo "PATH and PKG_CONFIG_PATH contains a $PKG_CONFIG_NAME.pc file. If pkg-config"
   echo "is unavailable you can set INCLUDE_DIR and LIB_DIR manually via:"
   echo "R CMD INSTALL --configure-vars='INCLUDE_DIR=... LIB_DIR=...'"
+  echo "-------------------------- [ERROR MESSAGE] ---------------------------"
+  cat configure.log
   echo "--------------------------------------------------------------------"
-  cat $tmpfile
-  exit 1;
+  exit 1
 fi
 
 # Write to Makevars

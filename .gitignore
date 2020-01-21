@@ -20,3 +20,4 @@ src/Makevars
 windows
 !img/*
 docs/
+configure.log
