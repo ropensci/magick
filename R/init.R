@@ -20,7 +20,7 @@
   Sys.setenv(MAGICK_TMPDIR = tempdir())
 
   if(is_check()){
-    Sys.setenv(MAGICK_THREAD_LIMIT = 1)
+    Sys.setenv(MAGICK_THREAD_LIMIT = 2)
   }
 
   # Set the default viewer
