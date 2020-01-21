@@ -365,9 +365,9 @@ image_animate(image_scale(img, "200x200"), fps = 1, dispose = "previous")
 Morphing creates a sequence of `n` images that gradually morph one image into another. It makes animations 
 
 ```{r}
-newlogo <- image_scale(image_read("https://jeroen.github.io/images/Rlogo.png"), "x150")
-oldlogo <- image_scale(image_read("https://developer.r-project.org/Logo/Rlogo-3.png"), "x150")
-frames <- image_morph(c(oldlogo, newlogo), frames = 10)
+newlogo <- image_scale(image_read("https://jeroen.github.io/images/Rlogo.png"))
+oldlogo <- image_scale(image_read("https://developer.r-project.org/Logo/Rlogo-3.png"))
+frames <- image_morph(image_background(c(oldlogo, newlogo), 'white'), frames = 10)
 image_animate(frames)
 ```
 
