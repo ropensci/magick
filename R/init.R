@@ -13,15 +13,16 @@
 }
 
 .onLoad <- function(lib, pkg){
+  if(is_check()){
+    # Try to please cran...
+    Sys.setenv(OMP_THREAD_LIMIT = 1, MAGICK_THREAD_LIMIT = 1)
+  }
+
   # Set tempdir to R session
   set_magick_tempdir(tempdir())
 
   # Needed by older versions of IM:
   Sys.setenv(MAGICK_TMPDIR = tempdir())
-
-  if(is_check()){
-    Sys.setenv(MAGICK_THREAD_LIMIT = 2)
-  }
 
   # Set the default viewer
   if(is.null(getOption('magick.viewer'))){
