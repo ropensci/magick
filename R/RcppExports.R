@@ -85,6 +85,10 @@ magick_image_as_raster <- function(data) {
     .Call('_magick_magick_image_as_raster', PACKAGE = 'magick', data)
 }
 
+magick_threads <- function(i = 0L) {
+    .Call('_magick_magick_threads', PACKAGE = 'magick', i)
+}
+
 magick_image_dead <- function(image) {
     .Call('_magick_magick_image_dead', PACKAGE = 'magick', image)
 }

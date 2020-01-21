@@ -4,18 +4,18 @@
   support <- unlist(magick_config()[testfor])
   has <- paste(names(which(support)), collapse = ", ")
   not <- paste(names(which(!support)), collapse = ", ")
-
-  packageStartupMessage(sprintf("Linking to ImageMagick %s\nEnabled features: %s\nDisabled features: %s",
-                                as.character(magick_config()$version), has, not))
+  threads <- magick_threads(0)
+  packageStartupMessage(sprintf("Linking to ImageMagick %s\nEnabled features: %s\nDisabled features: %s\nUsing %d thread(s)",
+                                as.character(magick_config()$version), has, not, threads))
 
   # For RStudio
   autoviewer_enable()
 }
 
 .onLoad <- function(lib, pkg){
-  if(is_check()){
-    # Try to please cran...
-    Sys.setenv(OMP_THREAD_LIMIT = 1, MAGICK_THREAD_LIMIT = 1)
+  # Try to please cran...
+  if(is_check() && magick_threads() > 2){
+    magick_threads(2)
   }
 
   # Set tempdir to R session

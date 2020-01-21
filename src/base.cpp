@@ -14,6 +14,13 @@ void my_magick_init(DllInfo *dll) {
   Magick::InitializeMagick("");
 }
 
+// [[Rcpp::export]]
+int magick_threads(size_t i = 0){
+  if(i > 0)
+    Magick::ResourceLimits::thread(i);
+  return Magick::ResourceLimits::thread();
+}
+
 //External R pointer finalizer
 void finalize_image( Image *image ){
   delete image;
