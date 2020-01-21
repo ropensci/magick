@@ -33,7 +33,7 @@
 #' Must be length 1, or number of frames. If specified, then `fps` is ignored.
 #' @param loop how many times to repeat the animation. Default is infinite.
 #' @param optimize optimize the `gif` animation by storing only the differences
-#' between frames.
+#' between frames. Input images must be exactly the same size.
 image_animate <- function(image, fps = 10, delay = NULL, loop = 0,
                           dispose = c("background", "previous", "none"),
                           optimize = FALSE){

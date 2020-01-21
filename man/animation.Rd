@@ -50,7 +50,7 @@ Must be length 1, or number of frames. If specified, then \code{fps} is ignored.
 from \link[=dispose_types]{dispose_types()}}
 
 \item{optimize}{optimize the \code{gif} animation by storing only the differences
-between frames.}
+between frames. Input images must be exactly the same size.}
 
 \item{frames}{number of frames to use in output animation}
 

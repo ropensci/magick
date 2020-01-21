@@ -391,7 +391,7 @@ background <- image_background(image_scale(logo, "200"), "white", flatten = TRUE
 frames <- image_composite(background, banana, offset = "+70+30")
 
 # Turn frames into animation
-animation <- image_animate(frames, fps = 10)
+animation <- image_animate(frames, fps = 10, optimize = TRUE)
 print(animation)
 ```
 
@@ -463,7 +463,7 @@ out <- lapply(datalist, function(data){
   print(p)
 })
 dev.off()
-animation <- image_animate(img, fps = 2)
+animation <- image_animate(img, fps = 2, optimize = TRUE)
 print(animation)
 ```
 
