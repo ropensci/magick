@@ -182,8 +182,12 @@ if(require(webp)) image_read(webp::read_webp("example.webp"))
 unlink(c("example.webp", "output.png"))
 if(require(rsvg))
 tiger <- image_read_svg("http://jeroen.github.io/images/tiger.svg")
-if(require(fontawesome) & require(rsvg))
-r_logo <- image_read_svg(fontawesome::fa("r-project", fill="steelblue"))
+svgtxt <- '<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="400" viewBox="0 0 400 400" fill="none">
+ <circle fill="steelblue" cx="200" cy="200" r="100" />
+ <circle fill="yellow" cx="200" cy="200" r="90" />
+</svg>'
+circles <- image_read_svg(svgtxt)
 if(require(pdftools))
 image_read_pdf(file.path(R.home('doc'), 'NEWS.pdf'), pages = 1, density = 100)
 # create a solid canvas
