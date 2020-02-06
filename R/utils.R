@@ -21,7 +21,14 @@ is_url <- function(path){
   grepl("https?://", path)
 }
 
+is_svg <- function(path){
+  # svg files ending in "</svg>" with or without whitespace following it
+  grepl("<\\/svg>\\s?$", path)
+}
+
 replace_url <- function(path){
+  if(is_svg(path))
+    return(path)
   if(is_url(path)){
     pattern <- "\\[[-,0-9]+\\]$"
     suffix <- regmatches(path, regexpr(pattern, path))

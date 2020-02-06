@@ -13,8 +13,8 @@
 #'
 #' For reading svg or pdf it is recommended to use `image_read_svg()` and `image_read_pdf()`
 #' if the [rsvg][rsvg::rsvg] and [pdftools][pdftools::pdf_render_page] R packages are available.
-#' These functions provide more rendering options and better quality than built-in svg/pdf
-#' rendering delegates from imagemagick itself.
+#' These functions provide more rendering options (including rendering of literal svg) and
+#' better quality than built-in svg/pdf rendering delegates from imagemagick itself.
 #'
 #' X11 is required for `image_display()` which is only works on some platforms. A more
 #' portable method is `image_browse()` which opens the image in a browser. RStudio has
@@ -95,9 +95,12 @@ For better results use image_read_svg() which uses the rsvg package.", call. = F
 #' @rdname editing
 #' @examples if(require(rsvg))
 #' tiger <- image_read_svg("http://jeroen.github.io/images/tiger.svg")
+#' if(require(fontawesome) & require(rsvg))
+#' r_logo <- image_read_svg(fontawesome::fa("r-project", fill="steelblue"))
 image_read_svg <- function(path, width = NULL, height = NULL){
   path <- vapply(path, replace_url, character(1))
   images <- lapply(path, function(x){
+    if(is_svg(x)) x <- charToRaw(x)
     bitmap <- rsvg::rsvg_raw(x, width = width, height = height)
     magick_image_readbitmap_raw(bitmap)
   })
