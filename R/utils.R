@@ -18,7 +18,7 @@ read_path <- function(path){
 }
 
 is_url <- function(path){
-  grepl("https?://", path)
+  grepl("^https?://", path)
 }
 
 is_svg <- function(path){
