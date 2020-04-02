@@ -11,9 +11,9 @@ matrix:
     - dist: xenial
       r_check_args: '' # because _R_CHECK_THINGS_IN_TEMP_DIR_ is broken
     - os: osx
-      brew_packages: imagemagick
+      brew_packages: imagemagick ghostscript
     - os: osx
-      brew_packages: imagemagick@6
+      brew_packages: imagemagick@6 ghostscript
     - os: osx
       osx_image: xcode7.3
       disable_homebrew: true
