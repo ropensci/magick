@@ -146,8 +146,8 @@ a single frame as a raw bitmap matrix with pixel values.
 
 For reading svg or pdf it is recommended to use \code{image_read_svg()} and \code{image_read_pdf()}
 if the \link[rsvg:rsvg]{rsvg} and \link[pdftools:pdf_render_page]{pdftools} R packages are available.
-These functions provide more rendering options and better quality than built-in svg/pdf
-rendering delegates from imagemagick itself.
+These functions provide more rendering options (including rendering of literal svg) and
+better quality than built-in svg/pdf rendering delegates from imagemagick itself.
 
 X11 is required for \code{image_display()} which is only works on some platforms. A more
 portable method is \code{image_browse()} which opens the image in a browser. RStudio has
@@ -182,6 +182,12 @@ if(require(webp)) image_read(webp::read_webp("example.webp"))
 unlink(c("example.webp", "output.png"))
 if(require(rsvg))
 tiger <- image_read_svg("http://jeroen.github.io/images/tiger.svg")
+svgtxt <- '<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="400" viewBox="0 0 400 400" fill="none">
+ <circle fill="steelblue" cx="200" cy="200" r="100" />
+ <circle fill="yellow" cx="200" cy="200" r="90" />
+</svg>'
+circles <- image_read_svg(svgtxt)
 if(require(pdftools))
 image_read_pdf(file.path(R.home('doc'), 'NEWS.pdf'), pages = 1, density = 100)
 # create a solid canvas
