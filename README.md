@@ -1,4 +1,4 @@
-# magick ![](http://www.textfiles.com/underconstruction/HeHeartlandPark2601underconstructionbar9.gif)
+# rOpenSci: The *magick* package <img src="hexlogo.png" align="right" height="134.5" />
 
 > Advanced Image-Processing in R
 
