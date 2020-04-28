@@ -77,6 +77,10 @@ magick_attr_quantize <- function(input, numcolors) {
     .Call('_magick_magick_attr_quantize', PACKAGE = 'magick', input, numcolors)
 }
 
+magick_attr_density <- function(input, density) {
+    .Call('_magick_magick_attr_density', PACKAGE = 'magick', input, density)
+}
+
 magick_image_info <- function(input) {
     .Call('_magick_magick_image_info', PACKAGE = 'magick', input)
 }

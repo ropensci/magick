@@ -125,7 +125,10 @@ image_read_pdf <- function(path, pages = NULL, density = 300, password = ""){
     bitmap <- pdftools::pdf_render_page(path, page = page, dpi = density, opw = password)
     magick_image_readbitmap_raw(bitmap)
   })
-  image_join(images)
+  out <- image_join(images)
+  if(length(density))
+    try(magick_attr_density(out, paste0(density, 'x', density)))
+  out
 }
 
 #' @export

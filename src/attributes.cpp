@@ -162,6 +162,18 @@ Rcpp::IntegerVector magick_attr_quantize( XPtrImage input, Rcpp::IntegerVector n
 }
 
 // [[Rcpp::export]]
+Rcpp::CharacterVector magick_attr_density( XPtrImage input, Rcpp::CharacterVector density){
+  if(density.size()){
+    for_each ( input->begin(), input->end(), Magick::resolutionUnitsImage(Magick::PixelsPerInchResolution));
+    for_each ( input->begin(), input->end(), Magick::densityImage(Point(density[0])));
+  }
+  Rcpp::CharacterVector out;
+  for (Iter it = input->begin(); it != input->end(); ++it)
+    out.push_back(std::string(it->density()));
+  return out;
+}
+
+// [[Rcpp::export]]
 Rcpp::DataFrame magick_image_info( XPtrImage input){
   int len = input->size();
   Rcpp::CharacterVector format(len);

@@ -236,6 +236,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_attr_density
+Rcpp::CharacterVector magick_attr_density(XPtrImage input, Rcpp::CharacterVector density);
+RcppExport SEXP _magick_magick_attr_density(SEXP inputSEXP, SEXP densitySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type density(densitySEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_attr_density(input, density));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_info
 Rcpp::DataFrame magick_image_info(XPtrImage input);
 RcppExport SEXP _magick_magick_image_info(SEXP inputSEXP) {
@@ -1453,6 +1465,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_attr_format", (DL_FUNC) &_magick_magick_attr_format, 2},
     {"_magick_magick_attr_quality", (DL_FUNC) &_magick_magick_attr_quality, 2},
     {"_magick_magick_attr_quantize", (DL_FUNC) &_magick_magick_attr_quantize, 2},
+    {"_magick_magick_attr_density", (DL_FUNC) &_magick_magick_attr_density, 2},
     {"_magick_magick_image_info", (DL_FUNC) &_magick_magick_image_info, 1},
     {"_magick_magick_image_as_raster", (DL_FUNC) &_magick_magick_image_as_raster, 1},
     {"_magick_magick_threads", (DL_FUNC) &_magick_magick_threads, 1},
