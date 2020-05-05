@@ -252,7 +252,7 @@ static void image_new_page(const pGEcontext gc, pDevDesc dd) {
     image_clip(0, oldsize.width(), oldsize.height(), 0, dd);
   }
   Frame x(Geom(dd->right, dd->bottom), col2magick(gc->fill));
-  x.density(Geom(1.0 / dd->ipr[0], 1.0 / dd->ipr[1]));
+  x.density(Magick::myGeomPoint(1.0 / dd->ipr[0], 1.0 / dd->ipr[1]));
   x.magick("PNG");
   x.depth(8L);
   x.strokeAntiAlias(getdev(dd)->antialias);

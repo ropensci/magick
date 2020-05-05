@@ -34,6 +34,7 @@ std::string normalize_font(const char * family);
 //IM 6~7 compatiblity
 #if MagickLibVersion >= 0x700
 Magick::Point Point(const char * str);
+#define myGeomPoint Point
 #define container vector
 #define myAntiAliasImage textAntiAliasImage
 #define myAntiAlias textAntiAlias
@@ -50,6 +51,7 @@ Magick::Point Point(const char * str);
 #else
 #define container list
 #define Point Geom
+#define myGeomPoint Geom
 #define myAntiAliasImage antiAliasImage
 #define myAntiAlias antiAlias
 #define myMatteImage matteImage
