@@ -51,7 +51,7 @@ Magick::Point Point(const char * str);
 #else
 #define container list
 #define Point Geom
-#define myGeomPoint Geom
+#define myGeomPoint Geometry
 #define myAntiAliasImage antiAliasImage
 #define myAntiAlias antiAlias
 #define myMatteImage matteImage
