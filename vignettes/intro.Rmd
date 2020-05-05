@@ -504,27 +504,6 @@ qplot(speed, dist, data = cars, geom = c("point", "smooth"))
 grid.raster(frink)
 ```
 
-### The `raster` package
-
-The `raster` package has its own classes for bitmaps which are useful for spatial applications. The simplest way to convert an image to raster is export it as a `tiff` file:
-
-```{r, fig.height=2}
-tiff_file <- tempfile()
-image_write(frink, path = tiff_file, format = 'tiff')
-r <- raster::brick(tiff_file)
-raster::plotRGB(r)
-```
-
-You can also manually convert the bitmap array into a raster object, but this seems to drop some meta data:
-
-```{r, fig.height=2}
-buf <- as.integer(frink[[1]])
-rr <- raster::brick(buf)
-raster::plotRGB(rr, asp = 1)
-```
-
-The raster package also does not seem to support transparency, which perhaps makes sense in the context of spatial imaging.
-
 ## OCR text extraction
 
 A recent addition to the package is to extract text from images using OCR. This requires the tesseract package:

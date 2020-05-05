@@ -34,8 +34,6 @@ Suggests:
     webp,
     pdftools,
     ggplot2,
-    raster,
-    rgdal,
     gapminder,
     IRdisplay,
     tesseract (>= 2.0),
