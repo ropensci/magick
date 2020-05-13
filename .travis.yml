@@ -5,46 +5,27 @@ fortran: false
 env:
   - _R_CHECK_FORCE_SUGGESTS_=false
 
-r_check_args: ' '
-
 matrix:
   include:
     - dist: trusty
     - dist: xenial
-      r_check_args: '' # because _R_CHECK_THINGS_IN_TEMP_DIR_ is broken
     - os: osx
       brew_packages: imagemagick ghostscript
     - os: osx
       brew_packages: imagemagick@6 ghostscript
+    - os: osx10.1
+      disable_homebrew: true
+      r_check_args: ""
     - os: osx
       r: 3.6
       r_check_args:
       osx_image: xcode7.3
       disable_homebrew: true
       before_install: sed -i.bak 's/-isysroot /-I/g' $(R RHOME)/etc/Makeconf
-    - dist: trusty
-      r_check_args: '--ignore-vignettes'
-      r_build_args: '--no-build-vignettes'
-      addons:
-        apt:
-          update: true
-          packages:
-            - libmagick++-dev
-            - librsvg2-dev
-            - libwebp-dev
-            - libpoppler-cpp-dev
-            - libtesseract-dev
-            - libleptonica-dev
-            - tesseract-ocr-eng
-            - libfftw3-dev
-            - cargo
-            - gsfonts
 
 addons:
   apt:
     update: true
-    sources:
-      - sourceline: 'ppa:cran/imagemagick'
     packages:
       - libmagick++-dev
       - librsvg2-dev
