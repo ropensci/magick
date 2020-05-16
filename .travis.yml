@@ -14,6 +14,9 @@ matrix:
       brew_packages: imagemagick ghostscript
     - os: osx
       brew_packages: imagemagick@6 ghostscript
+    - os: osx11.4
+      disable_homebrew: true
+      r_check_args: ""
     - os: osx10.1
       disable_homebrew: true
       r_check_args: ""
