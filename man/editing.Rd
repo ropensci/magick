@@ -68,7 +68,7 @@ image_join(...)
 
 image_attributes(image)
 
-image_get_artifact(image, artifact = "artifact:*")
+image_get_artifact(image, artifact = "")
 
 demo_image(path)
 }
