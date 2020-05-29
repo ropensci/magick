@@ -225,6 +225,10 @@ magick_image_extent <- function(input, geometry, gravity, color) {
     .Call('_magick_magick_image_extent', PACKAGE = 'magick', input, geometry, gravity, color)
 }
 
+magick_image_artifact <- function(input, name) {
+    .Call('_magick_magick_image_artifact', PACKAGE = 'magick', input, name)
+}
+
 magick_coder_info <- function(format) {
     .Call('_magick_magick_coder_info', PACKAGE = 'magick', format)
 }

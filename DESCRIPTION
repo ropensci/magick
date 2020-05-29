@@ -40,5 +40,5 @@ Suggests:
     gifski
 Encoding: UTF-8
 RoxygenNote: 7.1.0
-Roxygen: list(markdown = TRUE)
+Roxygen: list(load = "installed", markdown = TRUE)
 Language: en-US

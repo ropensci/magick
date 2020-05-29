@@ -17,6 +17,7 @@
 \alias{image_destroy}
 \alias{image_join}
 \alias{image_attributes}
+\alias{image_get_artifact}
 \alias{demo_image}
 \title{Image Editing}
 \usage{
@@ -66,6 +67,8 @@ image_destroy(image)
 image_join(...)
 
 image_attributes(image)
+
+image_get_artifact(image, artifact = "artifact:*")
 
 demo_image(path)
 }
@@ -130,6 +133,9 @@ If \code{FALSE} output is the same as \code{as.raster()}.}
 specification for example \code{"radial-gradient:purple-yellow"}}
 
 \item{...}{several images or lists of images to be combined}
+
+\item{artifact}{string with name of the artifact to extract, see the
+\link{image_deskew} for an example.}
 }
 \description{
 Read, write and join or combine images. All image functions are vectorized, meaning

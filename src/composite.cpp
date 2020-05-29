@@ -116,3 +116,12 @@ XPtrImage magick_image_extent( XPtrImage input, Rcpp::CharacterVector geometry,
   }
   return output;
 }
+
+// [[Rcpp::export]]
+Rcpp::CharacterVector magick_image_artifact(XPtrImage input, std::string name){
+  Rcpp::CharacterVector artifacts(input->size());
+  for(size_t i = 0; i < input->size(); i++){
+    artifacts.at(i) = input->at(i).artifact(name);
+  }
+  return artifacts;
+}

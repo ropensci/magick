@@ -13,6 +13,7 @@
 \alias{image_flip}
 \alias{image_flop}
 \alias{image_deskew}
+\alias{image_deskew_angle}
 \alias{image_page}
 \alias{image_repage}
 \alias{image_orient}
@@ -40,6 +41,8 @@ image_flip(image)
 image_flop(image)
 
 image_deskew(image, threshold = 40)
+
+image_deskew_angle(image, threshold = 40)
 
 image_page(image, pagesize = NULL, density = NULL)
 
@@ -136,7 +139,8 @@ image_extent(rose, '200x200', color = 'pink')
 image_flip(logo)
 image_flop(logo)
 skewed <- image_rotate(logo, 5)
-image_deskew(skewed)
+deskewed <- image_deskew(skewed)
+attr(deskewed, 'angle')
 if(magick_config()$version > "6.8.6")
   image_orient(logo)
 image_shear(logo, "10x10")

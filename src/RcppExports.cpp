@@ -688,6 +688,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_artifact
+Rcpp::CharacterVector magick_image_artifact(XPtrImage input, std::string name);
+RcppExport SEXP _magick_magick_image_artifact(SEXP inputSEXP, SEXP nameSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< std::string >::type name(nameSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_artifact(input, name));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_coder_info
 Rcpp::List magick_coder_info(Rcpp::String format);
 RcppExport SEXP _magick_magick_coder_info(SEXP formatSEXP) {
@@ -1502,6 +1514,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_shadow_mask", (DL_FUNC) &_magick_magick_image_shadow_mask, 2},
     {"_magick_magick_image_crop", (DL_FUNC) &_magick_magick_image_crop, 4},
     {"_magick_magick_image_extent", (DL_FUNC) &_magick_magick_image_extent, 4},
+    {"_magick_magick_image_artifact", (DL_FUNC) &_magick_magick_image_artifact, 2},
     {"_magick_magick_coder_info", (DL_FUNC) &_magick_magick_coder_info, 1},
     {"_magick_magick_config_internal", (DL_FUNC) &_magick_magick_config_internal, 0},
     {"_magick_magick_image_fx", (DL_FUNC) &_magick_magick_image_fx, 3},

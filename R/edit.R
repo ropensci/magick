@@ -358,6 +358,16 @@ image_attributes <- function(image){
 
 #' @export
 #' @rdname editing
+#' @param artifact string with name of the artifact to extract, see the
+#' [image_deskew] for an example.
+image_get_artifact <- function(image, artifact = ""){
+  assert_image(image)
+  artifact <- as.character(artifact)
+  magick_image_artifact(image, artifact)
+}
+
+#' @export
+#' @rdname editing
 demo_image <- function(path){
   image_read(system.file('images', path, package = 'magick'))
 }

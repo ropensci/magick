@@ -146,10 +146,19 @@ image_flop <- function(image){
 #' @rdname transform
 #' @param threshold straightens an image. A threshold of 40 works for most images.
 #' @examples skewed <- image_rotate(logo, 5)
-#' image_deskew(skewed)
+#' deskewed <- image_deskew(skewed)
+#' attr(deskewed, 'angle')
 image_deskew <- function(image, threshold = 40){
   assert_image(image)
-  magick_image_deskew(image, threshold)
+  out <- magick_image_deskew(image, threshold)
+  attr(out, 'angle') <- as.numeric(image_get_artifact(out, 'deskew:angle'))
+  out
+}
+
+#' @export
+#' @rdname transform
+image_deskew_angle <- function(image, threshold = 40){
+  attr(image_deskew(image), 'angle')
 }
 
 #' @export
