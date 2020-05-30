@@ -21,10 +21,10 @@ image_fx_sequence(images, expression = "p")
 Apply a custom an \href{https://www.imagemagick.org/script/fx.php}{fx expression} to the image.
 }
 \details{
-There are two different interfaces. The \link{image_fx} function is vectorized
-over \code{image} and applies the same fx to each frame in the image. To apply
-an advanced effect with multiple input images, use the \link{image_fx_sequence}
-function. See examples.
+There are two different interfaces. The \link{image_fx} function simply applies
+the same fx to each frame in the input image. The \link{image_fx_sequence} function
+on the other hand treats the entire input vector as a sequence, allowing you
+to apply an expression with multiple input images. See examples.
 }
 \examples{
 # Show image_fx() expression
