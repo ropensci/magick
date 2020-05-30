@@ -8,7 +8,7 @@
 \usage{
 image_fx(image, expression = "p", channel = NULL)
 
-image_fx_sequence(images, expression = "p")
+image_fx_sequence(image, expression = "p")
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
