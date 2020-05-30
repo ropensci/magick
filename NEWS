@@ -1,3 +1,7 @@
+2.4
+  - New functions: image_fx_sequence, image_deskew_angle, image_get_artifacts
+  - Print imagemagick version during CMD check
+
 2.3
   - Call Magick::InitializeMagick("") before init, fixes crash with openmp on OSX.
   - Double loop fix in image_shadow

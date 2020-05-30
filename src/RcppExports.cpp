@@ -734,6 +734,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_fx_sequence
+XPtrImage magick_image_fx_sequence(XPtrImage input, const std::string expr);
+RcppExport SEXP _magick_magick_image_fx_sequence(SEXP inputSEXP, SEXP exprSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< const std::string >::type expr(exprSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_fx_sequence(input, expr));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_morphology
 XPtrImage magick_image_morphology(XPtrImage input, std::string method, std::string kernel, size_t iter, Rcpp::CharacterVector opt_names, Rcpp::CharacterVector opt_values);
 RcppExport SEXP _magick_magick_image_morphology(SEXP inputSEXP, SEXP methodSEXP, SEXP kernelSEXP, SEXP iterSEXP, SEXP opt_namesSEXP, SEXP opt_valuesSEXP) {
@@ -1518,6 +1530,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_coder_info", (DL_FUNC) &_magick_magick_coder_info, 1},
     {"_magick_magick_config_internal", (DL_FUNC) &_magick_magick_config_internal, 0},
     {"_magick_magick_image_fx", (DL_FUNC) &_magick_magick_image_fx, 3},
+    {"_magick_magick_image_fx_sequence", (DL_FUNC) &_magick_magick_image_fx_sequence, 2},
     {"_magick_magick_image_morphology", (DL_FUNC) &_magick_magick_image_morphology, 6},
     {"_magick_magick_image_convolve_kernel", (DL_FUNC) &_magick_magick_image_convolve_kernel, 5},
     {"_magick_magick_image_convolve_matrix", (DL_FUNC) &_magick_magick_image_convolve_matrix, 5},

@@ -23,6 +23,15 @@ XPtrImage magick_image_fx( XPtrImage input, std::string expression, Rcpp::Charac
   return output;
 }
 
+// [[Rcpp::export]]
+XPtrImage magick_image_fx_sequence( XPtrImage input, const std::string expr){
+  Frame x;
+  Magick::fxImages(&x, input->begin(), input->end(), expr);
+  XPtrImage output = create(1);
+  output->push_back(x);
+  return output;
+}
+
 #if MagickLibVersion >= 0x689
 
 Magick::KernelInfoType Kernel(const char * str){

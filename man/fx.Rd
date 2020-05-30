@@ -3,9 +3,12 @@
 \name{fx}
 \alias{fx}
 \alias{image_fx}
+\alias{image_fx_sequence}
 \title{Image FX}
 \usage{
 image_fx(image, expression = "p", channel = NULL)
+
+image_fx_sequence(images, expression = "p")
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
@@ -16,6 +19,12 @@ image_fx(image, expression = "p", channel = NULL)
 }
 \description{
 Apply a custom an \href{https://www.imagemagick.org/script/fx.php}{fx expression} to the image.
+}
+\details{
+There are two different interfaces. The \link{image_fx} function is vectorized
+over \code{image} and applies the same fx to each frame in the image. To apply
+an advanced effect with multiple input images, use the \link{image_fx_sequence}
+function. See examples.
 }
 \examples{
 # Show image_fx() expression
@@ -32,6 +41,9 @@ gradient <- image_flatten(gradient, operator = "Plus")
 #gradient <- image_fx(gradient, expression = "sqrt(p)")
 gradient
 }
+# Use multiple source images
+input <- c(logo, image_flop(logo))
+image_fx_sequence(input, "(u+v)/2")
 }
 \seealso{
 Other image: 

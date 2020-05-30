@@ -2,6 +2,11 @@
 #'
 #' Apply a custom an [fx expression](https://www.imagemagick.org/script/fx.php) to the image.
 #'
+#' There are two different interfaces. The [image_fx] function is vectorized
+#' over `image` and applies the same fx to each frame in the image. To apply
+#' an advanced effect with multiple input images, use the [image_fx_sequence]
+#' function. See examples.
+#'
 #' @export
 #' @inheritParams thresholding
 #' @rdname fx
@@ -27,4 +32,15 @@ image_fx <- function(image, expression = "p", channel = NULL){
   expression <- as.character(expression)
   channel <- as.character(channel)
   magick_image_fx(image, expression, channel)
+}
+
+
+#' @rdname fx
+#' @export
+#' @examples # Use multiple source images
+#' input <- c(logo, image_flop(logo))
+#' image_fx_sequence(input, "(u+v)/2")
+image_fx_sequence <- function(images, expression = "p"){
+  expression <- as.character(expression)
+  magick_image_fx_sequence(images, expression)
 }
