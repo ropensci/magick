@@ -44,7 +44,7 @@ replace_url <- function(path){
 
 download_url <- function(url){
   req <- curl::curl_fetch_memory(url)
-  if(req$status >= 400)
+  if(req$status_code >= 400)
     stop(sprintf("Failed to download %s (HTTP %d)", url, req$status))
   headers <- curl::parse_headers_list(req$headers)
   ctype <- headers[['content-type']]
@@ -61,7 +61,7 @@ download_url <- function(url){
 
 read_url <- function(path){
   req <- curl::curl_fetch_memory(path)
-  if(req$status >= 400)
+  if(req$status_code >= 400)
     stop(sprintf("Failed to download %s (HTTP %d)", path, req$status))
   return(req$content)
 }
