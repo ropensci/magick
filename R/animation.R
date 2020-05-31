@@ -61,7 +61,7 @@ image_coalesce <- image_animate
 #' @examples
 #' # Combine images
 #' logo <- image_read("https://jeroen.github.io/images/Rlogo.png")
-#' oldlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-3.png")
+#' oldlogo <- image_read("https://jeroen.github.io/images/Rlogo-old.png")
 #'
 #' # Create morphing animation
 #' both <- image_scale(c(oldlogo, logo), "400")

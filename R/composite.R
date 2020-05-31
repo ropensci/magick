@@ -25,7 +25,7 @@
 #' @param compose_args additional arguments needed for some composite operations
 #' @examples # Compose images using one of many operators
 #' imlogo <- image_scale(image_read("logo:"), "x275")
-#' rlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-3.png")
+#' rlogo <- image_read("https://jeroen.github.io/images/Rlogo-old.png")
 #'
 #' # Standard is atop
 #' image_composite(imlogo, rlogo)

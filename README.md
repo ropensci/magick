@@ -74,7 +74,7 @@ Create GIF animation:
 ```r
 # Download images
 oldlogo <- image_read("https://developer.r-project.org/Logo/Rlogo-2.png")
-newlogo <- image_read("https://www.r-project.org/logo/Rlogo.png")
+newlogo <- image_read("https://jeroen.github.io/images/Rlogo-old.png")
 logos <- c(oldlogo, newlogo)
 logos <- image_scale(logos, "400x400")
 
