@@ -93,14 +93,17 @@ XPtrImage magick_image_crop( XPtrImage input, Rcpp::CharacterVector geometry,
     Magick::Geometry region(geometry.size() ? Geom(geometry.at(0)) : input->front().size());
     if(gravity.size())
       region = apply_geom_gravity(output->at(i), region, Gravity(gravity.at(0)));
-
-    MagickCore::ExceptionInfo *exception = MagickCore::AcquireExceptionInfo();
-    MagickCore::Image *newImage = MagickCore::CropImageToTiles(output->at(i).constImage(), std::string(region).c_str(), exception);
-#if MagickLibVersion >= 0x690
-    Magick::throwException(exception);
-#endif
-    exception=MagickCore::DestroyExceptionInfo(exception);
-    output->at(i).replaceImage(newImage);
+    if(region.percent()){
+      MagickCore::ExceptionInfo *exception = MagickCore::AcquireExceptionInfo();
+      MagickCore::Image *newImage = MagickCore::CropImageToTiles(output->at(i).constImage(), std::string(region).c_str(), exception);
+  #if MagickLibVersion >= 0x690
+      Magick::throwException(exception);
+  #endif
+      exception=MagickCore::DestroyExceptionInfo(exception);
+      output->at(i).replaceImage(newImage);
+    } else {
+      output->at(i).crop(region);
+    }
   }
   if(repage)
     for_each ( output->begin(), output->end(), Magick::pageImage(Magick::Geometry()));
