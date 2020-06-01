@@ -25,11 +25,15 @@ XPtrImage magick_image_fx( XPtrImage input, std::string expression, Rcpp::Charac
 
 // [[Rcpp::export]]
 XPtrImage magick_image_fx_sequence( XPtrImage input, const std::string expr){
+#if MagickLibVersion >= 0x688
   Frame x;
   Magick::fxImages(&x, input->begin(), input->end(), expr);
   XPtrImage output = create(1);
   output->push_back(x);
   return output;
+#else
+  Rcpp::warning("ImageMagick too old to support fx_sequence (requires >= 6.8.8)");
+#endif
 }
 
 #if MagickLibVersion >= 0x689
