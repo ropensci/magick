@@ -16,7 +16,7 @@
 
 .onLoad <- function(lib, pkg){
   # Try to please cran...
-  if(is_check() && magick_threads() > 2){
+  if(is_check() && isTRUE(magick_threads() > 2)){
     magick_threads(2)
   }
 
