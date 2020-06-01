@@ -11,6 +11,9 @@ matrix:
       dist: precise
       r_build_args: '--no-build-vignettes'
       r_check_args: '--no-examples --no-build-vignettes'
+      addons:
+      apt:
+        packages: libmagick++-dev
     - dist: trusty
     - dist: xenial
       r_check_args: "" # because _R_CHECK_THINGS_IN_TEMP_DIR_ is broken
