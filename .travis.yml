@@ -7,6 +7,10 @@ env:
 
 matrix:
   include:
+    - r: 3.2.5
+      dist: precise
+      r_build_args: '--no-build-vignettes'
+      r_check_args: '--no-examples --no-build-vignettes'
     - dist: trusty
     - dist: xenial
       r_check_args: "" # because _R_CHECK_THINGS_IN_TEMP_DIR_ is broken
