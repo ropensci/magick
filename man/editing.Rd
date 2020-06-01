@@ -21,7 +21,7 @@
 \alias{demo_image}
 \title{Image Editing}
 \usage{
-image_read(path, density = NULL, depth = NULL, strip = FALSE)
+image_read(path, density = NULL, depth = NULL, strip = FALSE, defines = NULL)
 
 image_read_svg(path, width = NULL, height = NULL)
 
@@ -60,7 +60,7 @@ image_browse(image, browser = getOption("browser"))
 
 image_strip(image)
 
-image_blank(width, height, color = "none", pseudo_image = "", options = NULL)
+image_blank(width, height, color = "none", pseudo_image = "", defines = NULL)
 
 image_destroy(image)
 
@@ -80,6 +80,9 @@ demo_image(path)
 \item{depth}{color depth (either 8 or 16)}
 
 \item{strip}{drop image comments and metadata}
+
+\item{defines}{a named character vector with extra options to control reading.
+These are the \verb{-define key\{=value\}} settings in the \href{http://www.imagemagick.org/script/command-line-options.php#define}{command line tool}.}
 
 \item{width}{in pixels}
 
@@ -131,9 +134,6 @@ If \code{FALSE} output is the same as \code{as.raster()}.}
 
 \item{pseudo_image}{string with \href{http://www.imagemagick.org/script/formats.php#pseudo}{pseudo image}
 specification for example \code{"radial-gradient:purple-yellow"}}
-
-\item{options}{a named string vector with extra options. These are the \code{-define}
-values in the imagemagick command line tool. See example.}
 
 \item{...}{several images or lists of images to be combined}
 
@@ -203,7 +203,7 @@ image_read_pdf(file.path(R.home('doc'), 'NEWS.pdf'), pages = 1, density = 100)
 image_blank(600, 400, "green")
 image_blank(600, 400, pseudo_image = "radial-gradient:purple-yellow")
 image_blank(200, 200, pseudo_image = "gradient:#3498db-#db3a34",
-  options = c('gradient:direction' = 'east'))
+  defines = c('gradient:direction' = 'east'))
 }
 \seealso{
 Other image: 

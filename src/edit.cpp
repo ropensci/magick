@@ -60,7 +60,8 @@ XPtrImage magick_image_readbitmap_double(Rcpp::NumericVector x){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_readbin(Rcpp::RawVector x, Rcpp::CharacterVector density, Rcpp::IntegerVector depth, bool strip = false){
+XPtrImage magick_image_readbin(Rcpp::RawVector x, Rcpp::CharacterVector density, Rcpp::IntegerVector depth,
+                               bool strip, Rcpp::CharacterVector defines){
   XPtrImage image = create();
 #if MagickLibVersion >= 0x689
   Magick::ReadOptions opts = Magick::ReadOptions();
@@ -71,6 +72,11 @@ XPtrImage magick_image_readbin(Rcpp::RawVector x, Rcpp::CharacterVector density,
     opts.density(std::string(density.at(0)).c_str());
   if(depth.size())
     opts.depth(depth.at(0));
+  if(defines.size()){
+    Rcpp::CharacterVector names = defines.names();
+    for(int i = 0; i < defines.size(); i++)
+      MagickCore::SetImageOption(opts.imageInfo(), names.at(i), defines.at(i));
+  }
   Magick::readImages(image.get(), Magick::Blob(x.begin(), x.length()), opts);
 #else
   Magick::readImages(image.get(), Magick::Blob(x.begin(), x.length()));
@@ -81,7 +87,8 @@ XPtrImage magick_image_readbin(Rcpp::RawVector x, Rcpp::CharacterVector density,
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_readpath(Rcpp::CharacterVector paths, Rcpp::CharacterVector density, Rcpp::IntegerVector depth, bool strip = false){
+XPtrImage magick_image_readpath(Rcpp::CharacterVector paths, Rcpp::CharacterVector density, Rcpp::IntegerVector depth,
+                                bool strip, Rcpp::CharacterVector defines){
   XPtrImage image = create();
 #if MagickLibVersion >= 0x689
   Magick::ReadOptions opts = Magick::ReadOptions();
@@ -92,6 +99,11 @@ XPtrImage magick_image_readpath(Rcpp::CharacterVector paths, Rcpp::CharacterVect
     opts.density(std::string(density.at(0)).c_str());
   if(depth.size())
     opts.depth(depth.at(0));
+  if(defines.size()){
+    Rcpp::CharacterVector names = defines.names();
+    for(int i = 0; i < defines.size(); i++)
+      MagickCore::SetImageOption(opts.imageInfo(), names.at(i), defines.at(i));
+  }
   for(int i = 0; i < paths.size(); i++)
     Magick::readImages(image.get(), std::string(paths[i]), opts);
 #else

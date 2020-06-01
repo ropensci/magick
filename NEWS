@@ -1,5 +1,6 @@
 2.4
   - New functions: image_fx_sequence, image_deskew_angle, image_get_artifacts
+  - Add 'defines' parameter to image_read and image_blank
   - Print imagemagick version during CMD check
 
 2.3

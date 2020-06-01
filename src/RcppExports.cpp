@@ -927,8 +927,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_readbin
-XPtrImage magick_image_readbin(Rcpp::RawVector x, Rcpp::CharacterVector density, Rcpp::IntegerVector depth, bool strip);
-RcppExport SEXP _magick_magick_image_readbin(SEXP xSEXP, SEXP densitySEXP, SEXP depthSEXP, SEXP stripSEXP) {
+XPtrImage magick_image_readbin(Rcpp::RawVector x, Rcpp::CharacterVector density, Rcpp::IntegerVector depth, bool strip, Rcpp::CharacterVector defines);
+RcppExport SEXP _magick_magick_image_readbin(SEXP xSEXP, SEXP densitySEXP, SEXP depthSEXP, SEXP stripSEXP, SEXP definesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -936,13 +936,14 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type density(densitySEXP);
     Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type depth(depthSEXP);
     Rcpp::traits::input_parameter< bool >::type strip(stripSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_readbin(x, density, depth, strip));
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type defines(definesSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_readbin(x, density, depth, strip, defines));
     return rcpp_result_gen;
 END_RCPP
 }
 // magick_image_readpath
-XPtrImage magick_image_readpath(Rcpp::CharacterVector paths, Rcpp::CharacterVector density, Rcpp::IntegerVector depth, bool strip);
-RcppExport SEXP _magick_magick_image_readpath(SEXP pathsSEXP, SEXP densitySEXP, SEXP depthSEXP, SEXP stripSEXP) {
+XPtrImage magick_image_readpath(Rcpp::CharacterVector paths, Rcpp::CharacterVector density, Rcpp::IntegerVector depth, bool strip, Rcpp::CharacterVector defines);
+RcppExport SEXP _magick_magick_image_readpath(SEXP pathsSEXP, SEXP densitySEXP, SEXP depthSEXP, SEXP stripSEXP, SEXP definesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -950,7 +951,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type density(densitySEXP);
     Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type depth(depthSEXP);
     Rcpp::traits::input_parameter< bool >::type strip(stripSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_readpath(paths, density, depth, strip));
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type defines(definesSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_readpath(paths, density, depth, strip, defines));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1546,8 +1548,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_readbitmap_raster2", (DL_FUNC) &_magick_magick_image_readbitmap_raster2, 1},
     {"_magick_magick_image_readbitmap_raw", (DL_FUNC) &_magick_magick_image_readbitmap_raw, 1},
     {"_magick_magick_image_readbitmap_double", (DL_FUNC) &_magick_magick_image_readbitmap_double, 1},
-    {"_magick_magick_image_readbin", (DL_FUNC) &_magick_magick_image_readbin, 4},
-    {"_magick_magick_image_readpath", (DL_FUNC) &_magick_magick_image_readpath, 4},
+    {"_magick_magick_image_readbin", (DL_FUNC) &_magick_magick_image_readbin, 5},
+    {"_magick_magick_image_readpath", (DL_FUNC) &_magick_magick_image_readpath, 5},
     {"_magick_magick_image_read_list", (DL_FUNC) &_magick_magick_image_read_list, 1},
     {"_magick_magick_image_write", (DL_FUNC) &_magick_magick_image_write, 6},
     {"_magick_magick_image_write_frame", (DL_FUNC) &_magick_magick_image_write_frame, 3},

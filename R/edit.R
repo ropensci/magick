@@ -35,6 +35,8 @@
 #' @param image magick image object returned by [image_read()] or [image_graph()]
 #' @param density resolution to render pdf or svg
 #' @param strip drop image comments and metadata
+#' @param defines a named character vector with extra options to control reading.
+#' These are the `-define key{=value}` settings in the [command line tool](http://www.imagemagick.org/script/command-line-options.php#define).
 #' @examples
 #' # Download image from the web
 #' frink <- image_read("https://jeroen.github.io/images/frink.png")
@@ -57,11 +59,12 @@
 #' curl::curl_download("https://jeroen.github.io/images/example.webp", "example.webp")
 #' if(require(webp)) image_read(webp::read_webp("example.webp"))
 #' unlink(c("example.webp", "output.png"))
-image_read <- function(path, density = NULL, depth = NULL, strip = FALSE){
+image_read <- function(path, density = NULL, depth = NULL, strip = FALSE, defines = NULL){
   if(is.numeric(density))
     density <- paste0(density, "x", density)
   density <- as.character(density)
   depth <- as.integer(depth)
+  defines <- validate_defines(defines)
   image <- if(isS4(path) && methods::is(path, "Image")){
     convert_EBImage(path)
   } else if(inherits(path, "nativeRaster") || (is.matrix(path) && is.integer(path))){
@@ -75,10 +78,10 @@ image_read <- function(path, density = NULL, depth = NULL, strip = FALSE){
   } else if(is.array(path)){
     image_readbitmap(path)
   } else if(is.raw(path)) {
-    magick_image_readbin(path, density, depth, strip)
+    magick_image_readbin(path, density, depth, strip, defines)
   } else if(is.character(path) && all(nchar(path))){
     path <- vapply(path, replace_url, character(1))
-    magick_image_readpath(enc2native(path), density, depth, strip)
+    magick_image_readpath(enc2native(path), density, depth, strip, defines)
   } else {
     stop("path must be URL, filename or raw vector")
   }
@@ -321,25 +324,19 @@ image_strip <- function(image){
 #' @rdname editing
 #' @inheritParams device
 #' @inheritParams painting
-#' @param options a named string vector with extra options. These are the `-define`
-#' values in the imagemagick command line tool. See example.
 #' @param pseudo_image string with [pseudo image](http://www.imagemagick.org/script/formats.php#pseudo)
 #' specification for example `"radial-gradient:purple-yellow"`
 #' @examples # create a solid canvas
 #' image_blank(600, 400, "green")
 #' image_blank(600, 400, pseudo_image = "radial-gradient:purple-yellow")
 #' image_blank(200, 200, pseudo_image = "gradient:#3498db-#db3a34",
-#'   options = c('gradient:direction' = 'east'))
-image_blank <- function(width, height, color = "none", pseudo_image = "", options = NULL){
+#'   defines = c('gradient:direction' = 'east'))
+image_blank <- function(width, height, color = "none", pseudo_image = "", defines = NULL){
   width <- as.numeric(width)
   height <- as.numeric(height)
   color <- as.character(color)
-  if(length(options)){
-    stopifnot(is.character(options))
-    if(length(unique(names(options))) != length(options))
-      stop("Argument 'options' does not have proper names")
-  }
-  magick_image_blank(width, height, color, pseudo_image, options)
+  defines <- validate_defines(defines)
+  magick_image_blank(width, height, color, pseudo_image, defines)
 }
 
 #' @export
@@ -379,4 +376,16 @@ image_get_artifact <- function(image, artifact = ""){
 #' @rdname editing
 demo_image <- function(path){
   image_read(system.file('images', path, package = 'magick'))
+}
+
+validate_defines <- function(defines){
+  if(length(defines)){
+    if(!is.character(defines))
+      stop("Argumet 'defines' must be named character vector")
+    if(length(unique(names(defines))) != length(defines))
+      stop("Argument 'defines' does not have proper names")
+    return(defines)
+  } else {
+    return(character())
+  }
 }
