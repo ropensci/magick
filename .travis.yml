@@ -11,6 +11,7 @@ matrix:
       dist: precise
       r_build_args: '--no-build-vignettes'
       r_check_args: '--no-examples --no-build-vignettes'
+      warnings_are_errors: false
       addons:
         apt:
           packages: libmagick++-dev
@@ -50,5 +51,3 @@ addons:
       - libfftw3-dev
       - cargo
       - gsfonts
-
-bioc_packages: EBImage
