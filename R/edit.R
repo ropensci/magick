@@ -321,16 +321,25 @@ image_strip <- function(image){
 #' @rdname editing
 #' @inheritParams device
 #' @inheritParams painting
+#' @param options a named string vector with extra options. These are the `-define`
+#' values in the imagemagick command line tool. See example.
 #' @param pseudo_image string with [pseudo image](http://www.imagemagick.org/script/formats.php#pseudo)
 #' specification for example `"radial-gradient:purple-yellow"`
 #' @examples # create a solid canvas
 #' image_blank(600, 400, "green")
 #' image_blank(600, 400, pseudo_image = "radial-gradient:purple-yellow")
-image_blank <- function(width, height, color = "none", pseudo_image = ""){
+#' image_blank(200, 200, pseudo_image = "gradient:#3498db-#db3a34",
+#'   options = c('gradient:direction' = 'east'))
+image_blank <- function(width, height, color = "none", pseudo_image = "", options = NULL){
   width <- as.numeric(width)
   height <- as.numeric(height)
   color <- as.character(color)
-  magick_image_blank(width, height, color, pseudo_image)
+  if(length(options)){
+    stopifnot(is.character(options))
+    if(length(unique(names(options))) != length(options))
+      stop("Argument 'options' does not have proper names")
+  }
+  magick_image_blank(width, height, color, pseudo_image, options)
 }
 
 #' @export

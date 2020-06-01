@@ -105,8 +105,8 @@ create <- function(len) {
     .Call('_magick_create', PACKAGE = 'magick', len)
 }
 
-magick_image_blank <- function(width, height, color, pseudo_image) {
-    .Call('_magick_magick_image_blank', PACKAGE = 'magick', width, height, color, pseudo_image)
+magick_image_blank <- function(width, height, color, pseudo_image, options) {
+    .Call('_magick_magick_image_blank', PACKAGE = 'magick', width, height, color, pseudo_image, options)
 }
 
 copy <- function(image) {

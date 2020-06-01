@@ -60,7 +60,7 @@ image_browse(image, browser = getOption("browser"))
 
 image_strip(image)
 
-image_blank(width, height, color = "none", pseudo_image = "")
+image_blank(width, height, color = "none", pseudo_image = "", options = NULL)
 
 image_destroy(image)
 
@@ -132,6 +132,9 @@ If \code{FALSE} output is the same as \code{as.raster()}.}
 \item{pseudo_image}{string with \href{http://www.imagemagick.org/script/formats.php#pseudo}{pseudo image}
 specification for example \code{"radial-gradient:purple-yellow"}}
 
+\item{options}{a named string vector with extra options. These are the \code{-define}
+values in the imagemagick command line tool. See example.}
+
 \item{...}{several images or lists of images to be combined}
 
 \item{artifact}{string with name of the artifact to extract, see the
@@ -199,6 +202,8 @@ image_read_pdf(file.path(R.home('doc'), 'NEWS.pdf'), pages = 1, density = 100)
 # create a solid canvas
 image_blank(600, 400, "green")
 image_blank(600, 400, pseudo_image = "radial-gradient:purple-yellow")
+image_blank(200, 200, pseudo_image = "gradient:#3498db-#db3a34",
+  options = c('gradient:direction' = 'east'))
 }
 \seealso{
 Other image: 

@@ -315,8 +315,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_blank
-XPtrImage magick_image_blank(size_t width, size_t height, const char * color, const char * pseudo_image);
-RcppExport SEXP _magick_magick_image_blank(SEXP widthSEXP, SEXP heightSEXP, SEXP colorSEXP, SEXP pseudo_imageSEXP) {
+XPtrImage magick_image_blank(size_t width, size_t height, const char * color, const char * pseudo_image, SEXP options);
+RcppExport SEXP _magick_magick_image_blank(SEXP widthSEXP, SEXP heightSEXP, SEXP colorSEXP, SEXP pseudo_imageSEXP, SEXP optionsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -324,7 +324,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< size_t >::type height(heightSEXP);
     Rcpp::traits::input_parameter< const char * >::type color(colorSEXP);
     Rcpp::traits::input_parameter< const char * >::type pseudo_image(pseudo_imageSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_blank(width, height, color, pseudo_image));
+    Rcpp::traits::input_parameter< SEXP >::type options(optionsSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_blank(width, height, color, pseudo_image, options));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1496,7 +1497,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_dead", (DL_FUNC) &_magick_magick_image_dead, 1},
     {"_magick_magick_image_length", (DL_FUNC) &_magick_magick_image_length, 1},
     {"_magick_create", (DL_FUNC) &_magick_create, 1},
-    {"_magick_magick_image_blank", (DL_FUNC) &_magick_magick_image_blank, 4},
+    {"_magick_magick_image_blank", (DL_FUNC) &_magick_magick_image_blank, 5},
     {"_magick_copy", (DL_FUNC) &_magick_copy, 1},
     {"_magick_magick_image_rev", (DL_FUNC) &_magick_magick_image_rev, 1},
     {"_magick_magick_image_join", (DL_FUNC) &_magick_magick_image_join, 1},
