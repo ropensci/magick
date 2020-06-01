@@ -122,9 +122,13 @@ XPtrImage magick_image_extent( XPtrImage input, Rcpp::CharacterVector geometry,
 
 // [[Rcpp::export]]
 Rcpp::CharacterVector magick_image_artifact(XPtrImage input, std::string name){
+#if MagickLibVersion >= 0x687
   Rcpp::CharacterVector artifacts(input->size());
   for(size_t i = 0; i < input->size(); i++){
     artifacts.at(i) = input->at(i).artifact(name);
   }
   return artifacts;
+#else
+  Rcpp::warning("ImageMagick too old to support artifacts (requires >= 6.8.7)");
+#endif
 }
