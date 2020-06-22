@@ -364,11 +364,13 @@ static void image_raster(unsigned int *raster, int w, int h,
   VOID_END_RCPP
 }
 
+#if R_GE_version >= 13
+
 static SEXP image_setPattern(SEXP pattern, pDevDesc dd) {
     return R_NilValue;
 }
 
-static void image_releasePattern(SEXP ref, pDevDesc dd) {} 
+static void image_releasePattern(SEXP ref, pDevDesc dd) {}
 
 static SEXP image_setClipPath(SEXP path, SEXP ref, pDevDesc dd) {
     return R_NilValue;
@@ -381,6 +383,8 @@ static SEXP image_setMask(SEXP path, SEXP ref, pDevDesc dd) {
 }
 
 static void image_releaseMask(SEXP ref, pDevDesc dd) {}
+
+#endif
 
 /* TODO: somehow R adds another protect */
 static void image_close(pDevDesc dd) {
