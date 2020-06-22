@@ -28,11 +28,7 @@ to apply an expression with multiple input images. See examples.
 }
 \examples{
 # Show image_fx() expression
-if(magick_config()$version > "6.8.8"){
 img <- image_convert(logo, colorspace = "Gray")
-image_fx(img, expression = "pow(p, 0.5)")
-#image_fx(img, expression = "rand()")
-
 gradient_x <- image_convolve(img, kernel = "Prewitt")
 gradient_y <- image_convolve(img, kernel = "Prewitt:90")
 gradient <- c(image_fx(gradient_x, expression = "p^2"),
@@ -40,6 +36,10 @@ gradient <- c(image_fx(gradient_x, expression = "p^2"),
 gradient <- image_flatten(gradient, operator = "Plus")
 #gradient <- image_fx(gradient, expression = "sqrt(p)")
 gradient
+
+\donttest{
+image_fx(img, expression = "pow(p, 0.5)")
+image_fx(img, expression = "rand()")
 }
 # Use multiple source images
 input <- c(logo, image_flop(logo))
