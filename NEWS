@@ -1,7 +1,11 @@
-2.4
+2.4.0
   - New functions: image_fx_sequence, image_deskew_angle, image_get_artifacts
   - Add 'defines' parameter to image_read and image_blank
   - Print imagemagick version during CMD check
+  - Prepare for R_GE_version 13 (R_GE_definitions) by Paul Murrell
+  - Try to limit to 2 threads during CMD check, as per CRAN policy
+  - Image_blank() gains an options parameter
+  - Some tweaks to image_crop() again
 
 2.3
   - Call Magick::InitializeMagick("") before init, fixes crash with openmp on OSX.
