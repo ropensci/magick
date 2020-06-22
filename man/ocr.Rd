@@ -14,7 +14,7 @@ image_ocr_data(image, language = "eng", ...)
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
 \item{language}{passed to \link[tesseract:tesseract]{tesseract}. To install additional languages see
-instructions in \link[tesseract:tesseract_download]{tesseract_download()}.}
+instructions in \link[tesseract:tessdata]{tesseract_download()}.}
 
 \item{HOCR}{if \code{TRUE} return results as HOCR xml instead of plain text}
 
@@ -28,7 +28,7 @@ To use this function you need to tesseract first:\preformatted{  install.package
 }
 
 Best results are obtained if you set the correct language in \link[tesseract:tesseract]{tesseract}.
-To install additional languages see instructions in \link[tesseract:tesseract_download]{tesseract_download()}.
+To install additional languages see instructions in \link[tesseract:tessdata]{tesseract_download()}.
 }
 \examples{
 if(require("tesseract")){

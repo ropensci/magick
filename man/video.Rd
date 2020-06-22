@@ -15,16 +15,16 @@ image_write_gif(image, path = NULL, delay = 1/10, ...)
 
 \item{path}{filename of the output gif or video. This is also the return value.}
 
-\item{framerate}{frames per second, passed to \link[av:av_encode_video]{av_encode_video}}
+\item{framerate}{frames per second, passed to \link[av:encoding]{av_encode_video}}
 
-\item{...}{additional parameters passed to \link[av:av_encode_video]{av_encode_video} and
+\item{...}{additional parameters passed to \link[av:encoding]{av_encode_video} and
 \link[gifski:gifski]{gifski}.}
 
 \item{delay}{duration of each frame in seconds (inverse of framerate)}
 }
 \description{
 High quality video / gif exporter based on external packages \link[gifski:gifski]{gifski}
-and \link[av:av_encode_video]{av}.
+and \link[av:encoding]{av}.
 }
 \details{
 This requires an image with multiple frames. The GIF exporter accomplishes the same
