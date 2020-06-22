@@ -137,7 +137,7 @@ sudo apt-get update
 sudo apt-get install -y libmagick++-dev 
 ```
 
-On __Fedora__,  __CentOS or RHEL__ we need [ImageMagick-c++-devel](https://apps.fedoraproject.org/packages/ImageMagick-c++-devel). However on CentOS the system version of ImageMagick is quite old. More recent versions are available from the [ImageMagick downloads](https://www.imagemagick.org/download/linux/CentOS/x86_64/) website.
+On __Fedora__,  __CentOS or RHEL__ we need [ImageMagick-c++-devel](https://src.fedoraproject.org/rpms/ImageMagick). However on CentOS the system version of ImageMagick is quite old. More recent versions are available from the [ImageMagick downloads](https://www.imagemagick.org/download/linux/CentOS/x86_64/) website.
 
 ```
 sudo yum install ImageMagick-c++-devel

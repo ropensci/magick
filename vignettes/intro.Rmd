@@ -51,7 +51,7 @@ On Linux you need to install the ImageMagick++ library: on Debian/Ubuntu this is
 sudo apt-get install libmagick++-dev
 ```
 
-On Fedora or CentOS/RHEL we need [ImageMagick-c++-devel](https://apps.fedoraproject.org/packages/ImageMagick-c++-devel):
+On Fedora or CentOS/RHEL we need [ImageMagick-c++-devel](https://src.fedoraproject.org/rpms/ImageMagick):
 
 ```
 sudo yum install ImageMagick-c++-devel
