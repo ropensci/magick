@@ -364,6 +364,24 @@ static void image_raster(unsigned int *raster, int w, int h,
   VOID_END_RCPP
 }
 
+static SEXP image_setPattern(SEXP pattern, pDevDesc dd) {
+    return R_NilValue;
+}
+
+static void image_releasePattern(SEXP ref, pDevDesc dd) {} 
+
+static SEXP image_setClipPath(SEXP path, SEXP ref, pDevDesc dd) {
+    return R_NilValue;
+}
+
+static void image_releaseClipPath(SEXP ref, pDevDesc dd) {}
+
+static SEXP image_setMask(SEXP path, SEXP ref, pDevDesc dd) {
+    return R_NilValue;
+}
+
+static void image_releaseMask(SEXP ref, pDevDesc dd) {}
+
 /* TODO: somehow R adds another protect */
 static void image_close(pDevDesc dd) {
   BEGIN_RCPP
@@ -524,6 +542,15 @@ static pDevDesc magick_driver_new(MagickDevice * device, int bg, int width, int 
   dd->cap = image_capture;
   dd->raster = image_raster;
 
+#if R_GE_version >= 13
+  dd->setPattern      = image_setPattern;
+  dd->releasePattern  = image_releasePattern;
+  dd->setClipPath     = image_setClipPath;
+  dd->releaseClipPath = image_releaseClipPath;
+  dd->setMask         = image_setMask;
+  dd->releaseMask     = image_releaseMask;
+#endif
+
   // Converts text() with fontface = 5 (adobe symbols) to UTF-8, see also BMDeviceDriver
 #ifdef __APPLE__
   dd->wantSymbolUTF8 = TRUE;
@@ -563,6 +590,11 @@ static pDevDesc magick_driver_new(MagickDevice * device, int bg, int width, int 
   dd->haveTransparentBg = 2;
   dd->haveRaster = 2;
   dd->haveCapture = 2;
+
+#if R_GE_version >= 13
+  dd->deviceVersion = R_GE_definitions;
+#endif
+
   dd->deviceSpecific = device;
   return dd;
 }
