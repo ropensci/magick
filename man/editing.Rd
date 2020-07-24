@@ -37,7 +37,8 @@ image_write(
   depth = NULL,
   density = NULL,
   comment = NULL,
-  flatten = FALSE
+  flatten = FALSE,
+  defines = NULL
 )
 
 image_convert(
