@@ -122,7 +122,7 @@ depending on the image}
 
 \item{frame}{integer setting which frame to extract from the image}
 
-\item{tidy}{converts raster data to long form for use with \link[ggplot2:geom_tile]{geom_raster}.
+\item{tidy}{converts raster data to long form for use with \link[ggplot2:geom_raster]{geom_raster}.
 If \code{FALSE} output is the same as \code{as.raster()}.}
 
 \item{animate}{support animations in the X11 display}

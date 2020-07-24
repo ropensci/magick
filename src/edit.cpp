@@ -129,7 +129,8 @@ XPtrImage magick_image_read_list(Rcpp::List list){
 
 // [[Rcpp::export]]
 Rcpp::RawVector magick_image_write( XPtrImage input, Rcpp::CharacterVector format, Rcpp::IntegerVector quality,
-                                    Rcpp::IntegerVector depth, Rcpp::CharacterVector density, Rcpp::CharacterVector comment){
+                                    Rcpp::IntegerVector depth, Rcpp::CharacterVector density,
+                                    Rcpp::CharacterVector comment, Rcpp::CharacterVector defines){
   if(!input->size())
     return Rcpp::RawVector(0);
   XPtrImage image = copy(input);
@@ -149,6 +150,26 @@ Rcpp::RawVector magick_image_write( XPtrImage input, Rcpp::CharacterVector forma
   }
   if(comment.size())
     for_each ( image->begin(), image->end(), Magick::commentImage(std::string(comment.at(0))));
+  if(defines.size()){
+    Rcpp::CharacterVector names = defines.names();
+
+    for(int i = 0; i < defines.size(); i++) {
+      std::string name = Rcpp::as<std::string>(names.at(i));
+      size_t pos = name.find(":");
+      if (pos == std::string::npos) {
+        throw std::runtime_error("Malformed define: can't find ':' in key \"" + name + "\"");
+      }
+
+      std::string format = name.substr(0, pos);
+      std::string option = name.substr(pos+1);
+      std::string value = Rcpp::as<std::string>(defines.at(i));
+
+      for (Iter it = image->begin(); it != image->end(); ++it) {
+        it->defineValue(format, option, value);
+      }
+    }
+  }
+
   Magick::Blob output;
   writeImages( image->begin(), image->end(),  &output );
   Rcpp::RawVector res(output.length());

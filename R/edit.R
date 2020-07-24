@@ -210,7 +210,8 @@ convert_EBImage <- function(x){
 #' @param quality number between 0 and 100 for jpeg quality. Defaults to 75.
 #' @param comment text string added to the image metadata for supported formats
 image_write <- function(image, path = NULL, format = NULL, quality = NULL,
-                        depth = NULL, density = NULL, comment = NULL, flatten = FALSE){
+                        depth = NULL, density = NULL, comment = NULL,
+                        flatten = FALSE, defines = NULL) {
   assert_image(image)
   if(!length(image))
     warning("Writing image with 0 frames")
@@ -221,7 +222,8 @@ image_write <- function(image, path = NULL, format = NULL, quality = NULL,
   depth <- as.integer(depth)
   density <- as.character(density)
   comment <- as.character(comment)
-  buf <- magick_image_write(image, format, quality, depth, density, comment)
+  defines <- validate_defines(defines)
+  buf <- magick_image_write(image, format, quality, depth, density, comment, defines)
   if(is.character(path)){
     writeBin(buf, path)
     return(invisible(path))
