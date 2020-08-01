@@ -88,7 +88,7 @@ XPtrImage magick_image_readbin(Rcpp::RawVector x, Rcpp::CharacterVector density,
 
 // [[Rcpp::export]]
 XPtrImage magick_image_readpath(Rcpp::CharacterVector paths, Rcpp::CharacterVector density, Rcpp::IntegerVector depth,
-                                bool strip, Rcpp::CharacterVector defines){
+                                bool strip, Rcpp::List defines){
   XPtrImage image = create();
 #if MagickLibVersion >= 0x689
   Magick::ReadOptions opts = Magick::ReadOptions();
@@ -99,6 +99,28 @@ XPtrImage magick_image_readpath(Rcpp::CharacterVector paths, Rcpp::CharacterVect
     opts.density(std::string(density.at(0)).c_str());
   if(depth.size())
     opts.depth(depth.at(0));
+  if(defines.size()){
+    Rcpp::CharacterVector names = defines.names();
+
+    for(int i = 0; i < defines.size(); i++) {
+      std::string name = Rcpp::as<std::string>(names.at(i));
+      size_t pos = name.find(":");
+      if (pos == std::string::npos) {
+        throw std::runtime_error("Malformed define: can't find ':' in key \"" + name + "\"");
+      }
+
+      std::string format = name.substr(0, pos);
+      std::string option = name.substr(pos+1);
+
+      Rcpp::RObject value = defines.at(i);
+      if (Rcpp::is<Rcpp::CharacterVector>(value)) {
+        MagickCore::SetImageOption(opts.imageInfo(), names.at(i), defines.at(i));
+      } else if (Rcpp::is<Rcpp::LogicalVector>(value)) {
+        MagickCore::SetImageOption(opts.imageInfo(), names.at(i), defines.at(i));
+      }
+    }
+  }
+
   if(defines.size()){
     Rcpp::CharacterVector names = defines.names();
     for(int i = 0; i < defines.size(); i++)
@@ -130,7 +152,7 @@ XPtrImage magick_image_read_list(Rcpp::List list){
 // [[Rcpp::export]]
 Rcpp::RawVector magick_image_write( XPtrImage input, Rcpp::CharacterVector format, Rcpp::IntegerVector quality,
                                     Rcpp::IntegerVector depth, Rcpp::CharacterVector density,
-                                    Rcpp::CharacterVector comment, Rcpp::CharacterVector defines){
+                                    Rcpp::CharacterVector comment, Rcpp::List defines){
   if(!input->size())
     return Rcpp::RawVector(0);
   XPtrImage image = copy(input);
@@ -162,10 +184,18 @@ Rcpp::RawVector magick_image_write( XPtrImage input, Rcpp::CharacterVector forma
 
       std::string format = name.substr(0, pos);
       std::string option = name.substr(pos+1);
-      std::string value = Rcpp::as<std::string>(defines.at(i));
 
-      for (Iter it = image->begin(); it != image->end(); ++it) {
-        it->defineValue(format, option, value);
+      Rcpp::RObject value = defines.at(i);
+      if (Rcpp::is<Rcpp::CharacterVector>(value)) {
+        std::string value_str = Rcpp::as<std::string>(value);
+        for (Iter it = image->begin(); it != image->end(); ++it) {
+          it->defineValue(format, option, value_str);
+        }
+      } else if (Rcpp::is<Rcpp::LogicalVector>(value)) {
+        bool value_bool = Rcpp::as<bool>(value);
+        for (Iter it = image->begin(); it != image->end(); ++it) {
+          it->defineSet(format, option, value_bool);
+        }
       }
     }
   }

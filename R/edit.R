@@ -382,12 +382,20 @@ demo_image <- function(path){
 
 validate_defines <- function(defines){
   if(length(defines)){
-    if(!is.character(defines))
-      stop("Argumet 'defines' must be named character vector")
-    if(length(unique(names(defines))) != length(defines))
+    if (is.list(defines)) {
+      for (x in defines) {
+        if (!is.character(x) && !is.logical(x) || length(x) != 1) {
+          stop("Argument 'defines' must be a logical vector, character vector, or named list of length-1 character and logical vectors")
+        }
+      }
+    } else if (!is.character(x) && !is.logical(x)) {
+      stop("Argument 'defines' must be a logical vector, character vector, or named list of length-1 character and logical vectors")
+    }
+    if(length(unique(names(defines))) != length(defines) || '' %in% names(defines))
       stop("Argument 'defines' does not have proper names")
-    return(defines)
+    return(as.list(defines))
   } else {
-    return(character())
+    # Empty named list
+    return(setNames(list(), character(0)))
   }
 }

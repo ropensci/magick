@@ -942,7 +942,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_readpath
-XPtrImage magick_image_readpath(Rcpp::CharacterVector paths, Rcpp::CharacterVector density, Rcpp::IntegerVector depth, bool strip, Rcpp::CharacterVector defines);
+XPtrImage magick_image_readpath(Rcpp::CharacterVector paths, Rcpp::CharacterVector density, Rcpp::IntegerVector depth, bool strip, Rcpp::List defines);
 RcppExport SEXP _magick_magick_image_readpath(SEXP pathsSEXP, SEXP densitySEXP, SEXP depthSEXP, SEXP stripSEXP, SEXP definesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -951,7 +951,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type density(densitySEXP);
     Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type depth(depthSEXP);
     Rcpp::traits::input_parameter< bool >::type strip(stripSEXP);
-    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type defines(definesSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type defines(definesSEXP);
     rcpp_result_gen = Rcpp::wrap(magick_image_readpath(paths, density, depth, strip, defines));
     return rcpp_result_gen;
 END_RCPP
@@ -968,7 +968,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_write
-Rcpp::RawVector magick_image_write(XPtrImage input, Rcpp::CharacterVector format, Rcpp::IntegerVector quality, Rcpp::IntegerVector depth, Rcpp::CharacterVector density, Rcpp::CharacterVector comment, Rcpp::CharacterVector defines);
+Rcpp::RawVector magick_image_write(XPtrImage input, Rcpp::CharacterVector format, Rcpp::IntegerVector quality, Rcpp::IntegerVector depth, Rcpp::CharacterVector density, Rcpp::CharacterVector comment, Rcpp::List defines);
 RcppExport SEXP _magick_magick_image_write(SEXP inputSEXP, SEXP formatSEXP, SEXP qualitySEXP, SEXP depthSEXP, SEXP densitySEXP, SEXP commentSEXP, SEXP definesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -979,7 +979,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type depth(depthSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type density(densitySEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type comment(commentSEXP);
-    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type defines(definesSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type defines(definesSEXP);
     rcpp_result_gen = Rcpp::wrap(magick_image_write(input, format, quality, depth, density, comment, defines));
     return rcpp_result_gen;
 END_RCPP
