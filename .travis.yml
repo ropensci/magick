@@ -18,6 +18,7 @@ matrix:
     - dist: trusty
     - dist: xenial
       r_check_args: "" # because _R_CHECK_THINGS_IN_TEMP_DIR_ is broken
+    - dist: bionic
     - os: osx
       brew_packages: imagemagick ghostscript
     - os: osx
