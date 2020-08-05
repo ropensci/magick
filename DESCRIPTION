@@ -1,7 +1,7 @@
 Package: magick
 Type: Package
 Title: Advanced Graphics and Image-Processing in R
-Version: 2.4.0.9000
+Version: 2.4.0.9001
 Authors@R: person("Jeroen", "Ooms", role = c("aut", "cre"), email = "jeroen@berkeley.edu",
     comment = c(ORCID = "0000-0002-4035-0289"))
 Description: Bindings to 'ImageMagick': the most comprehensive open-source image
@@ -39,6 +39,6 @@ Suggests:
     tesseract (>= 2.0),
     gifski
 Encoding: UTF-8
-RoxygenNote: 7.1.0.9000
+RoxygenNote: 7.1.1
 Roxygen: list(load = "installed", markdown = TRUE)
 Language: en-US
