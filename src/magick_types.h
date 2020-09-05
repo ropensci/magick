@@ -74,6 +74,7 @@ Magick::Color Color(const char * str);
 Magick::DisposeType Dispose(const char * str);
 Magick::CompositeOperator Composite(const char * str);
 Magick::ColorspaceType ColorSpace(const char * str);
+Magick::InterlaceType Interlace(const char* str);
 Magick::myFilterType Filter(const char * str);
 Magick::ChannelType Channel(const char * str);
 Magick::GravityType Gravity(const char * str);

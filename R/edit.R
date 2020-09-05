@@ -240,16 +240,17 @@ image_write <- function(image, path = NULL, format = NULL, quality = NULL,
 #' from [colorspace_types][colorspace_types] for example `"gray"`, `"rgb"` or `"cmyk"`
 #' @param matte set to `TRUE` or `FALSE` to enable or disable transparency
 image_convert <- function(image, format = NULL, type = NULL, colorspace = NULL,
-                          depth = NULL, antialias = NULL, matte = NULL){
+                          depth = NULL, antialias = NULL, matte = NULL, interlace = NULL){
   assert_image(image)
   depth <- as.integer(depth)
   antialias <- as.logical(antialias)
   type <- as.character(type)
   colorspace <- as.character(colorspace)
   matte <- as.logical(matte)
+  interlace <- as.character(interlace)
   if(length(depth) && is.na(match(depth, c(8, 16))))
     stop('depth must be 8 or 16 bit')
-  magick_image_format(image, toupper(format), type, colorspace, depth, antialias, matte)
+  magick_image_format(image, toupper(format), type, colorspace, depth, antialias, matte, tolower(interlace))
 }
 
 image_write_frame <- function(image, format = "rgba", i = 1){
