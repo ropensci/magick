@@ -251,7 +251,7 @@ image_convert <- function(image, format = NULL, type = NULL, colorspace = NULL,
   interlace <- as.character(interlace)
   if(length(depth) && is.na(match(depth, c(8, 16))))
     stop('depth must be 8 or 16 bit')
-  magick_image_format(image, toupper(format), type, colorspace, depth, antialias, matte, tolower(interlace))
+  magick_image_format(image, toupper(format), type, colorspace, depth, antialias, matte, interlace)
 }
 
 image_write_frame <- function(image, format = "rgba", i = 1){
