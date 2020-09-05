@@ -239,6 +239,7 @@ image_write <- function(image, path = NULL, format = NULL, quality = NULL,
 #' @param colorspace string with a [`colorspace`](https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType)
 #' from [colorspace_types][colorspace_types] for example `"gray"`, `"rgb"` or `"cmyk"`
 #' @param matte set to `TRUE` or `FALSE` to enable or disable transparency
+#' @param interlace string with [interlace](https://www.imagemagick.org/Magick++/Enumerations.html#InterlaceType)
 image_convert <- function(image, format = NULL, type = NULL, colorspace = NULL,
                           depth = NULL, antialias = NULL, matte = NULL, interlace = NULL){
   assert_image(image)

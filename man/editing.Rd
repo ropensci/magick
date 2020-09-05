@@ -117,13 +117,15 @@ from \link{colorspace_types} for example \code{"gray"}, \code{"rgb"} or \code{"c
 
 \item{matte}{set to \code{TRUE} or \code{FALSE} to enable or disable transparency}
 
+\item{interlace}{string with \href{https://www.imagemagick.org/Magick++/Enumerations.html#InterlaceType}{interlace}}
+
 \item{channels}{string with image channel(s) for example \code{"rgb"}, \code{"rgba"},
 \code{"cmyk"},\code{"gray"}, or \code{"ycbcr"}. Default is either \code{"gray"}, \code{"rgb"} or \code{"rgba"}
 depending on the image}
 
 \item{frame}{integer setting which frame to extract from the image}
 
-\item{tidy}{converts raster data to long form for use with \link[ggplot2:geom_raster]{geom_raster}.
+\item{tidy}{converts raster data to long form for use with \link[ggplot2:geom_tile]{geom_raster}.
 If \code{FALSE} output is the same as \code{as.raster()}.}
 
 \item{animate}{support animations in the X11 display}
