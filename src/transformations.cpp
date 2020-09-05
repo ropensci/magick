@@ -48,6 +48,13 @@ Magick::ColorspaceType ColorSpace(const char * str){
   return (Magick::ColorspaceType) val;
 }
 
+Magick::InterlaceType Interlace(const char * str){
+  ssize_t val = MagickCore::ParseCommandOption( MagickCore::MagickInterlaceOptions, Magick::MagickFalse, str);
+  if(val < 0)
+    throw std::runtime_error(std::string("Invalid InterlaceType value: ") + str);
+  return (Magick::InterlaceType) val;
+}
+
 Magick::NoiseType Noise(const char * str){
   ssize_t val = MagickCore::ParseCommandOption(
     MagickCore::MagickNoiseOptions, Magick::MagickFalse, str);

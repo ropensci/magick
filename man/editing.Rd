@@ -47,7 +47,8 @@ image_convert(
   colorspace = NULL,
   depth = NULL,
   antialias = NULL,
-  matte = NULL
+  matte = NULL,
+  interlace = NULL
 )
 
 image_data(image, channels = NULL, frame = 1)
