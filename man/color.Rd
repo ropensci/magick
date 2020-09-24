@@ -68,7 +68,7 @@ be less than your request, but never more.}
 \item{colorspace}{string with a \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{\code{colorspace}}
 from \link{colorspace_types} for example \code{"gray"}, \code{"rgb"} or \code{"cmyk"}}
 
-\item{dither}{a boolean (defaults to \code{TRUE}) specify whether to apply Floyd/Steinberg error
+\item{dither}{a boolean (defaults to \code{TRUE}) specifying whether to apply Floyd/Steinberg error
 diffusion to the image: averages intensities of several neighboring pixels}
 
 \item{treedepth}{depth of the quantization color classification tree. Values of 0 or 1 allow
