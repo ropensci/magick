@@ -52,8 +52,8 @@ image_modulate <- function(image, brightness = 100, saturation = 100, hue = 100)
 #' @rdname color
 #' @param max preferred number of colors in the image. The actual number of colors in the image may
 #' be less than your request, but never more.
-#' @param dither apply Floyd/Steinberg error diffusion to the image: averages intensities of several
-#' neighboring pixels
+#' @param dither a boolean (defaults to `TRUE`) specifying whether to apply Floyd/Steinberg error
+#' diffusion to the image: averages intensities of several neighboring pixels
 #' @param treedepth depth of the quantization color classification tree. Values of 0 or 1 allow
 #' selection of the optimal tree depth for the color reduction algorithm. Values between 2 and 8
 #' may be used to manually adjust the tree depth.
@@ -63,7 +63,7 @@ image_modulate <- function(image, brightness = 100, saturation = 100, hue = 100)
 #' image_quantize(logo, max = 10, colorspace = 'rgb')
 #' image_quantize(logo, max = 10, colorspace = 'cmyk')
 #'
-image_quantize <- function(image, max = 256, colorspace = 'rgb', dither = NULL, treedepth = NULL){
+image_quantize <- function(image, max = 256, colorspace = 'rgb', dither = TRUE, treedepth = NULL){
   assert_image(image)
   max <- as.integer(max)
   colorspace <- as.character(colorspace)

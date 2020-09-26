@@ -10,6 +10,6 @@ as_EBImage(image)
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 }
 \description{
-Convert a Magck image to \href{https://bioconductor.org/packages/release/bioc/html/EBImage.html}{EBImage}
+Convert a Magick image to \href{https://bioconductor.org/packages/release/bioc/html/EBImage.html}{EBImage}
 class. Note that EBImage only supports multi-frame images in greyscale.
 }
