@@ -24,7 +24,7 @@ image_quantize(
   image,
   max = 256,
   colorspace = "rgb",
-  dither = NULL,
+  dither = TRUE,
   treedepth = NULL
 )
 
