@@ -1,6 +1,6 @@
 #' Convert to EBImage
 #'
-#' Convert a Magck image to [EBImage](https://bioconductor.org/packages/release/bioc/html/EBImage.html)
+#' Convert a Magick image to [EBImage](https://bioconductor.org/packages/release/bioc/html/EBImage.html)
 #' class. Note that EBImage only supports multi-frame images in greyscale.
 #'
 #' @export
