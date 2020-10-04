@@ -1471,6 +1471,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_distort
+XPtrImage magick_image_distort(XPtrImage input, std::string method, Rcpp::NumericVector values, bool bestfit);
+RcppExport SEXP _magick_magick_image_distort(SEXP inputSEXP, SEXP methodSEXP, SEXP valuesSEXP, SEXP bestfitSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< std::string >::type method(methodSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type values(valuesSEXP);
+    Rcpp::traits::input_parameter< bool >::type bestfit(bestfitSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_distort(input, method, values, bestfit));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_animate", (DL_FUNC) &_magick_magick_image_animate, 5},
@@ -1591,6 +1605,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_reducenoise", (DL_FUNC) &_magick_magick_image_reducenoise, 2},
     {"_magick_magick_image_annotate", (DL_FUNC) &_magick_magick_image_annotate, 14},
     {"_magick_magick_image_compare", (DL_FUNC) &_magick_magick_image_compare, 4},
+    {"_magick_magick_image_distort", (DL_FUNC) &_magick_magick_image_distort, 4},
     {NULL, NULL, 0}
 };
 

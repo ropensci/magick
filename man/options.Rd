@@ -18,6 +18,7 @@
 \alias{morphology_types}
 \alias{style_types}
 \alias{decoration_types}
+\alias{distort_types}
 \title{Magick Options}
 \usage{
 magick_options()
@@ -51,6 +52,8 @@ morphology_types()
 style_types()
 
 decoration_types()
+
+distort_types()
 }
 \description{
 List option types and values supported in your version of ImageMagick. For

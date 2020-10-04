@@ -105,3 +105,9 @@ style_types <- function(){
 decoration_types <- function(){
   list_options('decoration')
 }
+
+#' @export
+#' @rdname options
+distort_types <- function(){
+  list_options('distort')
+}

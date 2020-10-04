@@ -203,3 +203,18 @@ image_shear <- function(image, geometry = "10x10", color = "none"){
   stopifnot(is.character(color))
   magick_image_shear(image, geometry, color)
 }
+
+#' @export
+#' @rdname transform
+#' @param distortion string to set image orientation one of the [distort_types].
+#' @param coordinates numeric vector (typically of length 12) with distortion coordinates
+#' @param bestfit if set to `TRUE` the size of the output image can be different from input
+#' @examples building <- demo_image('building.jpg')
+#' image_distort(building, 'perspective', c(7,40,4,30,4,124,4,123,85,122,100,123,85,2,100,30))
+image_distort <- function(image, distortion = 'perspective', coordinates, bestfit = FALSE){
+  assert_image(image)
+  stopifnot(is.character(distortion))
+  stopifnot(is.numeric(coordinates))
+  stopifnot(is.logical(bestfit))
+  magick_image_distort(image, distortion, coordinates, bestfit)
+}

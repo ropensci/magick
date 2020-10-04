@@ -18,6 +18,7 @@
 \alias{image_repage}
 \alias{image_orient}
 \alias{image_shear}
+\alias{image_distort}
 \title{Image Transform}
 \usage{
 image_trim(image, fuzz = 0)
@@ -51,6 +52,8 @@ image_repage(image)
 image_orient(image, orientation = NULL)
 
 image_shear(image, geometry = "10x10", color = "none")
+
+image_distort(image, distortion = "perspective", coordinates, bestfit = FALSE)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
@@ -84,6 +87,12 @@ the image. Specifies an image density when decoding a Postscript or PDF.}
 \item{orientation}{string to set image orientation one of the \link{orientation_types}.
 If \code{NULL} it applies auto-orientation which tries to infer the correct orientation
 from the Exif data.}
+
+\item{distortion}{string to set image orientation one of the \link{distort_types}.}
+
+\item{coordinates}{numeric vector (typically of length 12) with distortion coordinates}
+
+\item{bestfit}{if set to \code{TRUE} the size of the output image can be different from input}
 }
 \description{
 Basic transformations like rotate, resize, crop and flip. The \link{geometry} syntax
@@ -144,6 +153,8 @@ attr(deskewed, 'angle')
 if(magick_config()$version > "6.8.6")
   image_orient(logo)
 image_shear(logo, "10x10")
+building <- demo_image('building.jpg')
+image_distort(building, 'perspective', c(7,40,4,30,4,124,4,123,85,122,100,123,85,2,100,30))
 }
 \seealso{
 Other image: 

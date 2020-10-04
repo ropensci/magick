@@ -473,3 +473,7 @@ magick_image_compare <- function(input, reference_image, metric, fuzz_percent) {
     .Call('_magick_magick_image_compare', PACKAGE = 'magick', input, reference_image, metric, fuzz_percent)
 }
 
+magick_image_distort <- function(input, method, values, bestfit) {
+    .Call('_magick_magick_image_distort', PACKAGE = 'magick', input, method, values, bestfit)
+}
+

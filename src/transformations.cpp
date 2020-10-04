@@ -129,6 +129,14 @@ Magick::DecorationType FontDecoration(const char * str){
   return (Magick::DecorationType) val;
 }
 
+Magick::DistortImageMethod DistortionMethod(const char * str){
+  ssize_t val = MagickCore::ParseCommandOption(
+    MagickCore::MagickDistortOptions, Magick::MagickFalse, str);
+  if(val < 0)
+    throw std::runtime_error(std::string("Invalid DistortImageMethod value: ") + str);
+  return (Magick::DistortImageMethod) val;
+}
+
 #if MagickLibVersion >= 0x700
 Magick::Point Point(const char * str){
   Magick::Point point(str);
@@ -380,3 +388,10 @@ XPtrImage magick_image_compare( XPtrImage input, XPtrImage reference_image, cons
 #endif
 }
 
+// [[Rcpp::export]]
+XPtrImage magick_image_distort(XPtrImage input, std::string method, Rcpp::NumericVector values, bool bestfit){
+  XPtrImage out = copy(input);;
+  for_each (out->begin(), out->end(),
+            Magick::distortImage(DistortionMethod(method.c_str()), values.size(), values.begin(), bestfit));
+  return out;
+}
