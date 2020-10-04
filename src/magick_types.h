@@ -64,6 +64,7 @@ Magick::Point Point(const char * str);
 #define myBlueQ blueQuantum
 #define myAlphaQ alphaQuantum
 #define hasMatte() matte()
+#define DistortMethod DistortImageMethod
 #endif
 
 // Option parsers

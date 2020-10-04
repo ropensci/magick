@@ -129,12 +129,12 @@ Magick::DecorationType FontDecoration(const char * str){
   return (Magick::DecorationType) val;
 }
 
-Magick::DistortImageMethod DistortionMethod(const char * str){
+Magick::DistortMethod DistortionMethod(const char * str){
   ssize_t val = MagickCore::ParseCommandOption(
     MagickCore::MagickDistortOptions, Magick::MagickFalse, str);
   if(val < 0)
-    throw std::runtime_error(std::string("Invalid DistortImageMethod value: ") + str);
-  return (Magick::DistortImageMethod) val;
+    throw std::runtime_error(std::string("Invalid DistortMethod value: ") + str);
+  return (Magick::DistortMethod) val;
 }
 
 #if MagickLibVersion >= 0x700
