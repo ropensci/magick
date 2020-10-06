@@ -48,6 +48,13 @@ Magick::ColorspaceType ColorSpace(const char * str){
   return (Magick::ColorspaceType) val;
 }
 
+Magick::InterlaceType Interlace(const char * str){
+  ssize_t val = MagickCore::ParseCommandOption( MagickCore::MagickInterlaceOptions, Magick::MagickFalse, str);
+  if(val < 0)
+    throw std::runtime_error(std::string("Invalid InterlaceType value: ") + str);
+  return (Magick::InterlaceType) val;
+}
+
 Magick::NoiseType Noise(const char * str){
   ssize_t val = MagickCore::ParseCommandOption(
     MagickCore::MagickNoiseOptions, Magick::MagickFalse, str);
@@ -244,7 +251,7 @@ XPtrImage magick_image_implode( XPtrImage input, double factor){
 // [[Rcpp::export]]
 XPtrImage magick_image_format( XPtrImage input, Rcpp::CharacterVector format, Rcpp::CharacterVector type,
                                Rcpp::CharacterVector space, Rcpp::IntegerVector depth, Rcpp::LogicalVector antialias,
-                               Rcpp::LogicalVector matte){
+                               Rcpp::LogicalVector matte, Rcpp::CharacterVector interlace){
   XPtrImage output = copy(input);
   if(antialias.size()){
     for (Iter it = output->begin(); it != output->end(); ++it)
@@ -259,6 +266,8 @@ XPtrImage magick_image_format( XPtrImage input, Rcpp::CharacterVector format, Rc
     for_each ( output->begin(), output->end(), Magick::colorSpaceImage(ColorSpace(space.at(0))));
   if(depth.size())
     for_each ( output->begin(), output->end(), Magick::depthImage(depth.at(0)));
+  if(interlace.size())
+    for_each ( output->begin(), output->end(), Magick::interlaceTypeImage(Interlace(interlace.at(0))));
   if(format.size())
     for_each ( output->begin(), output->end(), Magick::magickImage(std::string(format.at(0))));
   return output;

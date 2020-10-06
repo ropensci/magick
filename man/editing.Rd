@@ -47,7 +47,8 @@ image_convert(
   colorspace = NULL,
   depth = NULL,
   antialias = NULL,
-  matte = NULL
+  matte = NULL,
+  interlace = NULL
 )
 
 image_data(image, channels = NULL, frame = 1)
@@ -115,6 +116,8 @@ from \link{colorspace_types} for example \code{"gray"}, \code{"rgb"} or \code{"c
 \item{antialias}{enable anti-aliasing for text and strokes}
 
 \item{matte}{set to \code{TRUE} or \code{FALSE} to enable or disable transparency}
+
+\item{interlace}{string with \href{https://www.imagemagick.org/Magick++/Enumerations.html#InterlaceType}{interlace}}
 
 \item{channels}{string with image channel(s) for example \code{"rgb"}, \code{"rgba"},
 \code{"cmyk"},\code{"gray"}, or \code{"ycbcr"}. Default is either \code{"gray"}, \code{"rgb"} or \code{"rgba"}
