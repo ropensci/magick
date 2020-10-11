@@ -450,7 +450,7 @@ By default `image_draw()` sets all margins to 0 and uses graphics coordinates to
 
 ### Animated Graphics
 
-The graphics device supports multiple frames which makes it easy to create animated graphics. The code below shows how you would implement the example from the very cool [gganimate](https://github.com/dgrtwo/gganimate) package using the magick graphics device.
+The graphics device supports multiple frames which makes it easy to create animated graphics. The code below shows how you would implement the example from the very cool [gganimate](https://gganimate.com/) package using the magick graphics device.
 
 
 ```{r}
