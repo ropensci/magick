@@ -50,7 +50,9 @@ Rcpp::List magick_config_internal(){
   out["fftw"] = false;
 #endif
 
-#ifdef MAGICKCORE_GS_DELEGATE
+/* On Windows, the system ghostscript is used
+ * See https://github.com/ImageMagick/ImageMagick6/blob/master/magick/version.c#L136 */
+#if defined(MAGICKCORE_GS_DELEGATE) || defined(MAGICKCORE_WINDOWS_SUPPORT)
   out["ghostscript"] = true;
 #else
   out["ghostscript"] = false;
