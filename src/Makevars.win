@@ -1,6 +1,6 @@
 # ImageMagick build target
 IM=6
-VERSION=6.9.9-rsvg
+VERSION=6.9.11-34
 IMPATH = ../windows/imagemagick${IM}-${VERSION}
 LIBBUILD = ${subst gcc ,-,${R_COMPILED_BY}}${R_ARCH}
 
@@ -16,12 +16,13 @@ PKG_LIBS = \
 	-L$(IMPATH)/lib${LIBBUILD} \
 	-L$(IMPATH)/lib${R_ARCH} \
 	-lMagick++-${IM}.Q16 -lMagickWand-${IM}.Q16 -lMagickCore-${IM}.Q16 \
-	-lfftw3 -llcms2 -ljpeg -ltiff -lwebp -llzma -lbz2 \
+	-lfftw3 -llcms2 -ljpeg -ltiff -llzma -lbz2 \
 	-lrsvg-2 -lxml2 \
 	-lpangocairo-1.0 -lpango-1.0 -lpangowin32-1.0 \
 	-lcairo -lfreetype -lpixman-1 -lgdk_pixbuf-2.0 \
 	-lcairo-gobject -lgio-2.0 -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 \
 	-lffi -lpcre -lpng16 -lintl -lz -liconv -lfribidi \
+	-lopenjp2 -lwebpmux -lwebp -lwebpdecoder -lwebpdemux \
 	-lusp10 -liphlpapi -lgdiplus -lgdi32 -lole32 -ldnsapi -lws2_32 -luserenv
 
 all: clean winlibs
