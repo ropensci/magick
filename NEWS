@@ -1,6 +1,8 @@
 2.5.0
-  - MacOS: upgrade CRAN packages to imagemagick 6.9.11-32
+  - Windows / MacOS: binary packages to imagemagick 6.9.11-32
+  - Windows: new imagemagick should work again with latest GhostScript
   - New function image_distort()
+  - image_convert() gains a parameter 'interlace' (#269)
 
 2.4.0
   - New functions: image_fx_sequence, image_deskew_angle, image_get_artifacts

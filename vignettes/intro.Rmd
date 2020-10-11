@@ -21,9 +21,9 @@ dev.off <- function(){
 }
 ```
 
-The new [magick](https://cran.r-project.org/package=magick) package is an ambitious effort to modernize and simplify high-quality image processing in R. It wraps the [ImageMagick STL](https://www.imagemagick.org/Magick++/STL.html) which is perhaps the most comprehensive open-source image processing library available today.
+The [magick](https://cran.r-project.org/package=magick) package provide a modern and simple toolkit for image processing in R. It wraps the [ImageMagick STL](https://www.imagemagick.org/Magick++/STL.html) which is the most comprehensive open-source image processing library available today.
 
-The ImageMagick library has an overwhelming amount of functionality. The current version of Magick exposes a decent chunk of it, but being a first release, documentation is still sparse. This post briefly introduces the most important concepts to get started.
+The ImageMagick library has an overwhelming amount of functionality. Magick exposes a decent subset of it, but it is impossible to document everything in detail. This article introduces some basic concepts and examples to get started.
 
 ## Installing `magick`
 
