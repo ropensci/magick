@@ -1031,13 +1031,18 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_montage
-XPtrImage magick_image_montage(XPtrImage image);
-RcppExport SEXP _magick_magick_image_montage(SEXP imageSEXP) {
+XPtrImage magick_image_montage(XPtrImage image, Rcpp::CharacterVector geometry, Rcpp::CharacterVector tile, Rcpp::CharacterVector gravity, std::string bg, bool shadow);
+RcppExport SEXP _magick_magick_image_montage(SEXP imageSEXP, SEXP geometrySEXP, SEXP tileSEXP, SEXP gravitySEXP, SEXP bgSEXP, SEXP shadowSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type image(imageSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_montage(image));
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type geometry(geometrySEXP);
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type tile(tileSEXP);
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type gravity(gravitySEXP);
+    Rcpp::traits::input_parameter< std::string >::type bg(bgSEXP);
+    Rcpp::traits::input_parameter< bool >::type shadow(shadowSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_montage(image, geometry, tile, gravity, bg, shadow));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1571,7 +1576,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_write_integer", (DL_FUNC) &_magick_magick_image_write_integer, 1},
     {"_magick_magick_image_display", (DL_FUNC) &_magick_magick_image_display, 2},
     {"_magick_magick_image_fft", (DL_FUNC) &_magick_magick_image_fft, 1},
-    {"_magick_magick_image_montage", (DL_FUNC) &_magick_magick_image_montage, 1},
+    {"_magick_magick_image_montage", (DL_FUNC) &_magick_magick_image_montage, 6},
     {"_magick_magick_image_strip", (DL_FUNC) &_magick_magick_image_strip, 1},
     {"_magick_magick_image_separate", (DL_FUNC) &_magick_magick_image_separate, 2},
     {"_magick_magick_image_combine", (DL_FUNC) &_magick_magick_image_combine, 3},

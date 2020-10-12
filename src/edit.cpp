@@ -220,10 +220,19 @@ XPtrImage magick_image_fft( XPtrImage image){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_montage( XPtrImage image){
+XPtrImage magick_image_montage( XPtrImage image, Rcpp::CharacterVector geometry, Rcpp::CharacterVector tile,
+                                Rcpp::CharacterVector gravity, std::string bg = "white", bool shadow = false){
   XPtrImage out = create();
-  Magick::Montage montageOpts = Magick::Montage();
-  montageImages(out.get(), image->begin(), image->end(), montageOpts);
+  Magick::Montage opts = Magick::Montage();
+  if(geometry.length())
+    opts.geometry(Geom(geometry.at(0)));
+  if(tile.length())
+    opts.tile(Geom(tile.at(0)));
+  if(gravity.length())
+    opts.gravity(Gravity(gravity.at(0)));
+  opts.shadow(shadow);
+  opts.backgroundColor(bg);
+  montageImages(out.get(), image->begin(), image->end(), opts);
   return out;
 }
 

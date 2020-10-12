@@ -333,8 +333,8 @@ magick_image_fft <- function(image) {
     .Call('_magick_magick_image_fft', PACKAGE = 'magick', image)
 }
 
-magick_image_montage <- function(image) {
-    .Call('_magick_magick_image_montage', PACKAGE = 'magick', image)
+magick_image_montage <- function(image, geometry, tile, gravity, bg = "white", shadow = FALSE) {
+    .Call('_magick_magick_image_montage', PACKAGE = 'magick', image, geometry, tile, gravity, bg, shadow)
 }
 
 magick_image_strip <- function(input) {

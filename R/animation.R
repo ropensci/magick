@@ -85,13 +85,6 @@ image_mosaic <- function(image, operator = NULL){
 
 #' @export
 #' @rdname animation
-image_montage <- function(image){
-  assert_image(image)
-  magick_image_montage(image)
-}
-
-#' @export
-#' @rdname animation
 image_flatten <- function(image, operator = NULL){
   assert_image(image)
   operator <- as.character(operator)
@@ -143,4 +136,32 @@ image_apply <- function(image, FUN, ...){
   if(!all(vapply(out, inherits, logical(1), what = "magick-image")))
     stop(sprintf("Function %s did not return a valid image.", deparse(substitute(FUN))))
   image_join(out)
+}
+
+#' @export
+#' @rdname animation
+#' @param geometry a [geometry][geometry] string that defines the size the individual
+#' thumbnail images, and the spacing between them.
+#' @param tile a [geometry][geometry] string for example "4x5 with limits on how the
+#' tiled images are to be laid out on the final result.
+#' @param gravity a gravity direction, if the image is smaller than the frame, where
+#'in the frame is the image to be placed.
+#' @param bg a background color string
+#' @param shadow enable shadows between images
+#' @examples # Simple 4x3 montage
+#' input <- rep(logo, 12)
+#' image_montage(input, geometry = 'x100+10+10', tile = '4x3', bg = 'pink', shadow = TRUE)
+#'
+#' # With varying frame size
+#' input <- c(wizard, wizard, logo, logo)
+#' image_montage(input, tile = '2x2', bg = 'pink', gravity = 'southwest')
+image_montage <- function(image, geometry = NULL, tile = NULL, gravity = 'Center',
+                          bg = 'white', shadow = FALSE){
+  assert_image(image)
+  geometry <- as.character(geometry)
+  tile <- as.character(tile)
+  gravity <- as.character(gravity)
+  bg <- as.character(bg)
+  shadow <- as.logical(shadow)
+  magick_image_montage(image, geometry, tile, gravity, bg, shadow)
 }

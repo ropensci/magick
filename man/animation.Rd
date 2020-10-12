@@ -6,11 +6,11 @@
 \alias{image_coalesce}
 \alias{image_morph}
 \alias{image_mosaic}
-\alias{image_montage}
 \alias{image_flatten}
 \alias{image_average}
 \alias{image_append}
 \alias{image_apply}
+\alias{image_montage}
 \title{Image Frames and Animation}
 \usage{
 image_animate(
@@ -26,8 +26,6 @@ image_morph(image, frames = 8)
 
 image_mosaic(image, operator = NULL)
 
-image_montage(image)
-
 image_flatten(image, operator = NULL)
 
 image_average(image)
@@ -35,6 +33,15 @@ image_average(image)
 image_append(image, stack = FALSE)
 
 image_apply(image, FUN, ...)
+
+image_montage(
+  image,
+  geometry = NULL,
+  tile = NULL,
+  gravity = "Center",
+  bg = "white",
+  shadow = FALSE
+)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
@@ -63,6 +70,19 @@ from \link[=compose_types]{compose_types()}}
 \item{FUN}{a function to be called on each frame in the image}
 
 \item{...}{additional parameters for \code{FUN}}
+
+\item{geometry}{a \link{geometry} string that defines the size the individual
+thumbnail images, and the spacing between them.}
+
+\item{tile}{a \link{geometry} string for example "4x5 with limits on how the
+tiled images are to be laid out on the final result.}
+
+\item{gravity}{a gravity direction, if the image is smaller than the frame, where
+in the frame is the image to be placed.}
+
+\item{bg}{a background color string}
+
+\item{shadow}{enable shadows between images}
 }
 \description{
 Operations to manipulate or combine multiple frames of an image. Details below.
@@ -116,6 +136,13 @@ front <- image_scale(banana, "300")
 background <- image_background(image_scale(logo, "400"), 'white')
 frames <- image_apply(front, function(x){image_composite(background, x, offset = "+70+30")})
 image_animate(frames, fps = 10)
+# Simple 4x3 montage
+input <- rep(logo, 12)
+image_montage(input, geometry = 'x100+10+10', tile = '4x3', bg = 'pink', shadow = TRUE)
+
+# With varying frame size
+input <- c(wizard, wizard, logo, logo)
+image_montage(input, tile = '2x2', bg = 'pink', gravity = 'southwest')
 }
 \seealso{
 Other image: 
