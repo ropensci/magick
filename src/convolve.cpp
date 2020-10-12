@@ -32,7 +32,7 @@ XPtrImage magick_image_fx_sequence( XPtrImage input, const std::string expr){
   output->push_back(x);
   return output;
 #else
-  Rcpp::warning("ImageMagick too old to support fx_sequence (requires >= 6.8.8)");
+  throw std::runtime_error("ImageMagick too old to support fx_sequence (requires >= 6.8.8)");
 #endif
 }
 
