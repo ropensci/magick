@@ -129,6 +129,6 @@ Rcpp::CharacterVector magick_image_artifact(XPtrImage input, std::string name){
   }
   return artifacts;
 #else
-  Rcpp::warning("ImageMagick too old to support artifacts (requires >= 6.8.7)");
+  throw std::runtime_error("ImageMagick too old to support artifacts (requires >= 6.8.7)");
 #endif
 }
