@@ -279,7 +279,7 @@ XPtrImage magick_image_set_define( XPtrImage input, Rcpp::CharacterVector format
   std::string val(value.at(0));
   std::string fmt(format.at(0));
   std::string key(name.at(0));
-  for(int i = 0; i < input->size(); i++){
+  for(size_t i = 0; i < input->size(); i++){
     if(!val.length()){
       input->at(i).defineSet(fmt, key, true); // empty string
     } else if(Rcpp::CharacterVector::is_na(value.at(0))) {
