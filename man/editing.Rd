@@ -194,7 +194,7 @@ plot(raster)
 curl::curl_download("https://jeroen.github.io/images/example.webp", "example.webp")
 if(require(webp)) image_read(webp::read_webp("example.webp"))
 unlink(c("example.webp", "output.png"))
-if(require(rsvg))
+if(require(rsvg)){
 tiger <- image_read_svg("http://jeroen.github.io/images/tiger.svg")
 svgtxt <- '<?xml version="1.0" encoding="UTF-8"?>
 <svg width="400" height="400" viewBox="0 0 400 400" fill="none">
@@ -202,6 +202,7 @@ svgtxt <- '<?xml version="1.0" encoding="UTF-8"?>
  <circle fill="yellow" cx="200" cy="200" r="90" />
 </svg>'
 circles <- image_read_svg(svgtxt)
+}
 if(require(pdftools))
 image_read_pdf(file.path(R.home('doc'), 'NEWS.pdf'), pages = 1, density = 100)
 # create a solid canvas
