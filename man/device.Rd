@@ -104,6 +104,7 @@ Other image:
 \code{\link{attributes}()},
 \code{\link{color}},
 \code{\link{composite}},
+\code{\link{defines}},
 \code{\link{edges}},
 \code{\link{editing}},
 \code{\link{effects}()},

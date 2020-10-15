@@ -31,12 +31,11 @@
 #' @family image
 #' @rdname editing
 #' @name editing
+#' @inheritParams defines
 #' @param path a file, url, or raster object or bitmap array
 #' @param image magick image object returned by [image_read()] or [image_graph()]
 #' @param density resolution to render pdf or svg
 #' @param strip drop image comments and metadata
-#' @param defines a named character vector with extra options to control reading.
-#' These are the `-define key{=value}` settings in the [command line tool](http://www.imagemagick.org/script/command-line-options.php#define).
 #' @examples
 #' # Download image from the web
 #' frink <- image_read("https://jeroen.github.io/images/frink.png")
@@ -210,7 +209,8 @@ convert_EBImage <- function(x){
 #' @param quality number between 0 and 100 for jpeg quality. Defaults to 75.
 #' @param comment text string added to the image metadata for supported formats
 image_write <- function(image, path = NULL, format = NULL, quality = NULL,
-                        depth = NULL, density = NULL, comment = NULL, flatten = FALSE){
+                        depth = NULL, density = NULL, comment = NULL, flatten = FALSE,
+                        defines = NULL){
   assert_image(image)
   if(!length(image))
     warning("Writing image with 0 frames")
@@ -221,6 +221,11 @@ image_write <- function(image, path = NULL, format = NULL, quality = NULL,
   depth <- as.integer(depth)
   density <- as.character(density)
   comment <- as.character(comment)
+  if(length(defines)){
+    image_set_defines(image, defines = defines)
+    defines[seq_along(defines)] = NA_character_;
+    on.exit(image_set_defines(image, defines = defines))
+  }
   buf <- magick_image_write(image, format, quality, depth, density, comment)
   if(is.character(path)){
     writeBin(buf, path)
@@ -378,16 +383,4 @@ image_get_artifact <- function(image, artifact = ""){
 #' @rdname editing
 demo_image <- function(path){
   image_read(system.file('images', path, package = 'magick'))
-}
-
-validate_defines <- function(defines){
-  if(length(defines)){
-    if(!is.character(defines))
-      stop("Argumet 'defines' must be named character vector")
-    if(length(unique(names(defines))) != length(defines))
-      stop("Argument 'defines' does not have proper names")
-    return(defines)
-  } else {
-    return(character())
-  }
 }

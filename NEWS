@@ -5,6 +5,7 @@
   - image_montage() gains a few parameters similar to the command line
   - image_convert() gains a parameter 'interlace' (#269)
   - image_ggplot() no longer inverts y-scale, to avoid bug in R/ggplot2
+  - Add 'defines' parameter to image_write (#261)
 
 2.4.0
   - New functions: image_fx_sequence, image_deskew_angle, image_get_artifacts

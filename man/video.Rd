@@ -38,6 +38,7 @@ Other image:
 \code{\link{attributes}()},
 \code{\link{color}},
 \code{\link{composite}},
+\code{\link{defines}},
 \code{\link{device}},
 \code{\link{edges}},
 \code{\link{editing}},

@@ -349,6 +349,10 @@ magick_image_combine <- function(input, colorspace, channel) {
     .Call('_magick_magick_image_combine', PACKAGE = 'magick', input, colorspace, channel)
 }
 
+magick_image_set_define <- function(input, format, name, value) {
+    .Call('_magick_magick_image_set_define', PACKAGE = 'magick', input, format, name, value)
+}
+
 list_options <- function(str) {
     .Call('_magick_list_options', PACKAGE = 'magick', str)
 }

@@ -68,6 +68,7 @@ Other image:
 \code{\link{attributes}()},
 \code{\link{color}},
 \code{\link{composite}},
+\code{\link{defines}},
 \code{\link{device}},
 \code{\link{editing}},
 \code{\link{effects}()},

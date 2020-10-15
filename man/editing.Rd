@@ -37,7 +37,8 @@ image_write(
   depth = NULL,
   density = NULL,
   comment = NULL,
-  flatten = FALSE
+  flatten = FALSE,
+  defines = NULL
 )
 
 image_convert(
@@ -83,7 +84,8 @@ demo_image(path)
 \item{strip}{drop image comments and metadata}
 
 \item{defines}{a named character vector with extra options to control reading.
-These are the \verb{-define key\{=value\}} settings in the \href{http://www.imagemagick.org/script/command-line-options.php#define}{command line tool}.}
+These are the \verb{-define key\{=value\}} settings in the \href{http://www.imagemagick.org/script/command-line-options.php#define}{command line tool}.
+Use an empty string for value-less defines, and NA to unset a define.}
 
 \item{width}{in pixels}
 
@@ -216,6 +218,7 @@ Other image:
 \code{\link{attributes}()},
 \code{\link{color}},
 \code{\link{composite}},
+\code{\link{defines}},
 \code{\link{device}},
 \code{\link{edges}},
 \code{\link{effects}()},

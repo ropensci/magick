@@ -99,6 +99,7 @@ Other image:
 \code{\link{animation}},
 \code{\link{attributes}()},
 \code{\link{color}},
+\code{\link{defines}},
 \code{\link{device}},
 \code{\link{edges}},
 \code{\link{editing}},
