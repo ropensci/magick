@@ -748,7 +748,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_morphology
-XPtrImage magick_image_morphology(XPtrImage input, std::string method, std::string kernel, size_t iter, Rcpp::CharacterVector opt_names, Rcpp::CharacterVector opt_values);
+XPtrImage magick_image_morphology(XPtrImage input, std::string method, std::string kernel, ssize_t iter, Rcpp::CharacterVector opt_names, Rcpp::CharacterVector opt_values);
 RcppExport SEXP _magick_magick_image_morphology(SEXP inputSEXP, SEXP methodSEXP, SEXP kernelSEXP, SEXP iterSEXP, SEXP opt_namesSEXP, SEXP opt_valuesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -756,7 +756,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< std::string >::type method(methodSEXP);
     Rcpp::traits::input_parameter< std::string >::type kernel(kernelSEXP);
-    Rcpp::traits::input_parameter< size_t >::type iter(iterSEXP);
+    Rcpp::traits::input_parameter< ssize_t >::type iter(iterSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type opt_names(opt_namesSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type opt_values(opt_valuesSEXP);
     rcpp_result_gen = Rcpp::wrap(magick_image_morphology(input, method, kernel, iter, opt_names, opt_values));
@@ -764,14 +764,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_convolve_kernel
-XPtrImage magick_image_convolve_kernel(XPtrImage input, std::string kernel, size_t iter, Rcpp::CharacterVector scaling, Rcpp::CharacterVector bias);
+XPtrImage magick_image_convolve_kernel(XPtrImage input, std::string kernel, ssize_t iter, Rcpp::CharacterVector scaling, Rcpp::CharacterVector bias);
 RcppExport SEXP _magick_magick_image_convolve_kernel(SEXP inputSEXP, SEXP kernelSEXP, SEXP iterSEXP, SEXP scalingSEXP, SEXP biasSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
     Rcpp::traits::input_parameter< std::string >::type kernel(kernelSEXP);
-    Rcpp::traits::input_parameter< size_t >::type iter(iterSEXP);
+    Rcpp::traits::input_parameter< ssize_t >::type iter(iterSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type scaling(scalingSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type bias(biasSEXP);
     rcpp_result_gen = Rcpp::wrap(magick_image_convolve_kernel(input, kernel, iter, scaling, bias));

@@ -61,7 +61,6 @@ image_morphology <- function(image, method = "convolve", kernel = "Gaussian",
   assert_image(image)
   method <- as.character(method)
   kernel <- as.character(kernel)
-  iterations <- as.integer(max(0, iterations))
   opt_names <- as.character(names(opts))
   opt_values <- as.character(unname(opts))
   magick_image_morphology(image, method, kernel, iterations, opt_names, opt_values)
@@ -87,6 +86,8 @@ image_convolve <- function(image, kernel = 'Gaussian', iterations = 1, scaling =
     if(nrow(kernel) != ncol(kernel))
       stop("Kernel matrix must be squared")
     kernel <- t(kernel) #See issue #126
+    if(iterations < 1)
+      stop("Convolve with matrix kernel does not support negative iterations")
     magick_image_convolve_matrix(image, kernel, iterations, scaling, bias)
   } else {
     stop("Argument 'kernel' must either be a string or matrix")

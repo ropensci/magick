@@ -55,7 +55,7 @@ Magick::MorphologyMethod Method(const char * str){
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_morphology( XPtrImage input, std::string method, std::string kernel, size_t iter,
+XPtrImage magick_image_morphology( XPtrImage input, std::string method, std::string kernel, ssize_t iter,
                                    Rcpp::CharacterVector opt_names, Rcpp::CharacterVector opt_values){
   XPtrImage output = copy(input);
   for (int i = 0; i < opt_values.length(); i++){
@@ -68,7 +68,7 @@ XPtrImage magick_image_morphology( XPtrImage input, std::string method, std::str
 }
 
 // [[Rcpp::export]]
-XPtrImage magick_image_convolve_kernel( XPtrImage input, std::string kernel, size_t iter,
+XPtrImage magick_image_convolve_kernel( XPtrImage input, std::string kernel, ssize_t iter,
                                  Rcpp::CharacterVector scaling, Rcpp::CharacterVector bias){
   XPtrImage output = copy(input);
   if(scaling.length()){
@@ -103,12 +103,12 @@ XPtrImage magick_image_convolve_matrix( XPtrImage input, Rcpp::NumericMatrix mat
 }
 
 #else
-XPtrImage magick_image_morphology( XPtrImage input, std::string method, std::string kernel, size_t iter,
+XPtrImage magick_image_morphology( XPtrImage input, std::string method, std::string kernel, ssize_t iter,
                                    Rcpp::CharacterVector opt_names, Rcpp::CharacterVector opt_values){
   throw std::runtime_error("ImageMagick too old. Morphology requires at least version  6.8.8");
 }
 
-XPtrImage magick_image_convolve_kernel( XPtrImage input, std::string kernel, size_t iter,
+XPtrImage magick_image_convolve_kernel( XPtrImage input, std::string kernel, ssize_t iter,
                                         Rcpp::CharacterVector scaling, Rcpp::CharacterVector bias){
   throw std::runtime_error("ImageMagick too old. Convolve requires at least version  6.8.8");
 }
