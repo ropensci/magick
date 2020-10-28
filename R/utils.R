@@ -52,7 +52,7 @@ download_url <- function(url){
   extension <- if(length(matches) && !is.na(matches) && !grepl("(text|octet)", ctype)){
     sub("*.", ".", mimetypes$pattern[matches[1]], fixed = TRUE)
   } else {
-    basename(url)
+    sub("\\?.*", "", basename(url))
   }
   filename <- tempfile(fileext = extension)
   writeBin(req$content, filename)
