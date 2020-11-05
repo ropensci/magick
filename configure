@@ -51,7 +51,7 @@ elif [ `uname` = "Darwin" ]; then
     PKG_LIBS="-L$BREWDIR/opt/imagemagick@6/lib -lMagick++-6.Q16"
   else
     curl -sfL "https://autobrew.github.io/scripts/$PKG_BREW_NAME" > autobrew
-    source autobrew
+    . ./autobrew
   fi
 fi
 
