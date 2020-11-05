@@ -1,6 +1,7 @@
 2.5.1
   - Fix encoding bug for image_read() filepaths on Windows
   - Re-allow iter = -1 in image_morphology()
+  - Do not require bash in configure script
 
 2.5.0
   - Windows / MacOS: binary packages to imagemagick 6.9.11-32

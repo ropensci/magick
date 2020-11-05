@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # Anticonf script by Jeroen Ooms (2020)
 # The script will try 'Magick++-config' and 'pkg-config' to find required
 # cflags and ldflags. Make sure this executable is in PATH when installing
@@ -15,20 +14,20 @@ PKG_TEST_HEADER="<Magick++.h>"
 PKG_LIBS="-lMagick++-6.Q16"
 
 # Use Magick++-config (on Solaris /opt/csw/bin must be in PATH)
-if [ $(command -v pkg-config) ]; then
-  PKGCONFIG_CFLAGS=$(pkg-config --cflags --silence-errors ${PKG_CONFIG_NAME})
-  PKGCONFIG_LIBS=$(pkg-config --libs ${PKG_CONFIG_NAME})
-elif [ $(command -v Magick++-config) ]; then
-  PKGCONFIG_CFLAGS=$(Magick++-config --cflags)
-  PKGCONFIG_LIBS=$(Magick++-config --libs)
+if [ `command -v pkg-config` ]; then
+  PKGCONFIG_CFLAGS=`pkg-config --cflags --silence-errors ${PKG_CONFIG_NAME}`
+  PKGCONFIG_LIBS=`pkg-config --libs ${PKG_CONFIG_NAME}`
+elif [ `command -v Magick++-config` ]; then
+  PKGCONFIG_CFLAGS=`Magick++-config --cflags`
+  PKGCONFIG_LIBS=`Magick++-config --libs`
 fi
 
 # Pick up on GraphicsMagick but warn against it
-if [ -z "$PKGCONFIG_LIBS" ] && [ $(command -v GraphicsMagick++-config) ]; then
+if [ -z "$PKGCONFIG_LIBS" ] && [ `command -v GraphicsMagick++-config` ]; then
   echo "Warning: found GraphicsMagick++ instead of ImageMagick++. GraphicsMagick is not supported."
 fi
 
-# Workaround for broken ImageMagick on CRAN server
+# Workaround for broken ImageMagick on old CRAN servers
 if [ -e "/Builds/CRAN-QA-Simon" ] || [ -e "/Volumes/SSD-Data/Builds" ]; then
   unset PKGCONFIG_CFLAGS
   unset PKGCONFIG_LIBS
@@ -43,10 +42,10 @@ elif [ "$PKGCONFIG_CFLAGS" ] || [ "$PKGCONFIG_LIBS" ]; then
   echo "Found pkg-config cflags and libs!"
   PKG_CFLAGS=${PKGCONFIG_CFLAGS}
   PKG_LIBS=${PKGCONFIG_LIBS}
-elif [[ "$OSTYPE" == "darwin"* ]]; then
+elif [ `uname` = "Darwin" ]; then
   brew --version 2>/dev/null
   if [ $? -eq 0 ]; then
-    BREWDIR=$(brew --prefix)
+    BREWDIR=`brew --prefix`
     INCLUDE_DIR="$BREWDIR/opt/imagemagick@6/include/ImageMagick-6"
     PKG_CFLAGS="-I$INCLUDE_DIR -DMAGICKCORE_QUANTUM_DEPTH=16 -DMAGICKCORE_HDRI_ENABLE=0"
     PKG_LIBS="-L$BREWDIR/opt/imagemagick@6/lib -lMagick++-6.Q16"
@@ -57,9 +56,9 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 # Find compiler
-CXX=$(${R_HOME}/bin/R CMD config CXX)
-CXXFLAGS=$(${R_HOME}/bin/R CMD config CXXFLAGS)
-CPPFLAGS=$(${R_HOME}/bin/R CMD config CPPFLAGS)
+CXX=`${R_HOME}/bin/R CMD config CXX`
+CXXFLAGS=`${R_HOME}/bin/R CMD config CXXFLAGS`
+CPPFLAGS=`${R_HOME}/bin/R CMD config CPPFLAGS`
 
 # For debugging
 echo "Using PKG_CFLAGS=$PKG_CFLAGS"
