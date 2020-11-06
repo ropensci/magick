@@ -14,3 +14,4 @@ appveyor.yml$
 ^docs$
 ^man/figures
 ^configure.log$
+^inst/etc$
