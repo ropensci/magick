@@ -1,3 +1,6 @@
+2.5.2
+  - Remove some accidental files from source pkg
+
 2.5.1
   - Fix encoding bug for image_read() filepaths on Windows
   - Re-allow iter = -1 in image_morphology()
