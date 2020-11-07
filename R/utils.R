@@ -82,3 +82,7 @@ df_to_tibble <- function(df){
   class(df) <- c("tbl_df", "tbl", "data.frame")
   df
 }
+
+is_windows <- function(){
+  identical(.Platform$OS.type, 'windows')
+}

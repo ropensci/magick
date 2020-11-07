@@ -80,7 +80,13 @@ image_read <- function(path, density = NULL, depth = NULL, strip = FALSE, define
     magick_image_readbin(path, density, depth, strip, defines)
   } else if(is.character(path) && all(nchar(path))){
     path <- vapply(path, replace_url, character(1))
-    magick_image_readpath(enc2utf8(path), density, depth, strip, defines)
+    # See https://github.com/ropensci/magick/issues/285
+    path <- if(is_windows()){
+      enc2utf8(path)
+    } else {
+      enc2native(path)
+    }
+    magick_image_readpath(path, density, depth, strip, defines)
   } else {
     stop("path must be URL, filename or raw vector")
   }
