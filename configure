@@ -28,7 +28,7 @@ if [ -z "$PKGCONFIG_LIBS" ] && [ `command -v GraphicsMagick++-config` ]; then
 fi
 
 # Workaround for broken ImageMagick on old CRAN servers
-if [ -e "/Builds/CRAN-QA-Simon" ] || [ -e "/Volumes/SSD-Data/Builds" ]; then
+if [ -d "/Builds/CRAN-QA-Simon" ] || [ -d "/Volumes/SSD-Data/Builds" ]; then
   unset PKGCONFIG_CFLAGS
   unset PKGCONFIG_LIBS
 fi
