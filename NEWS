@@ -1,4 +1,5 @@
 2.5.2
+  - Fixes for CRAN
   - Remove some accidental files from source pkg
 
 2.5.1
