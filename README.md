@@ -3,7 +3,7 @@
 > Advanced Image-Processing in R
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![Build Status](https://travis-ci.org/ropensci/magick.svg?branch=master)](https://travis-ci.org/ropensci/magick)
+[![Build Status](https://travis-ci.com/ropensci/magick.svg?branch=master)](https://travis-ci.com/ropensci/magick)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/magick?branch=master&svg=true)](https://ci.appveyor.com/project/jeroen/magick)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/magick)](https://cran.r-project.org/package=magick)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/magick)](https://cran.r-project.org/package=magick)

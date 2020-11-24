@@ -15,10 +15,6 @@ matrix:
     - os: osx
       brew_packages: imagemagick@6 ghostscript
     - os: osx
-      osx_image: xcode11.4
-      disable_homebrew: true
-      r_check_args: ""
-    - os: osx
       osx_image: xcode10.1
       disable_homebrew: true
       r_check_args: ""
