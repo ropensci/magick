@@ -12,8 +12,10 @@ matrix:
     - dist: bionic
     - os: osx
       brew_packages: imagemagick ghostscript
+      osx_image: xcode12.2
     - os: osx
       brew_packages: imagemagick@6 ghostscript
+      osx_image: xcode12.2
     - os: osx
       osx_image: xcode10.1
       disable_homebrew: true
