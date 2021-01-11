@@ -108,6 +108,12 @@ decoration_types <- function(){
 
 #' @export
 #' @rdname options
+compress_types <- function(){
+  list_options('compress')
+}
+
+#' @export
+#' @rdname options
 distort_types <- function(){
   list_options('distort')
 }

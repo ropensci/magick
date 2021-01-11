@@ -5,6 +5,13 @@
 
 #include "magick_types.h"
 
+Magick::CompressionType Compression(const char * str){
+  ssize_t val = MagickCore::ParseCommandOption( MagickCore::MagickCompressOptions, Magick::MagickFalse, str);
+  if(val < 0)
+    throw std::runtime_error(std::string("Invalid CompressionType value: ") + str);
+  return (Magick::CompressionType) val;
+}
+
 XPtrImage magick_image_bitmap(void * data, Magick::StorageType type, size_t slices, size_t width, size_t height){
   const char * format;
   switch ( slices ){ //TODO: K is blackchannel, there should be a 'graychannel' instead? (G = Green!)
@@ -129,7 +136,8 @@ XPtrImage magick_image_read_list(Rcpp::List list){
 
 // [[Rcpp::export]]
 Rcpp::RawVector magick_image_write( XPtrImage input, Rcpp::CharacterVector format, Rcpp::IntegerVector quality,
-                                    Rcpp::IntegerVector depth, Rcpp::CharacterVector density, Rcpp::CharacterVector comment){
+                                    Rcpp::IntegerVector depth, Rcpp::CharacterVector density, Rcpp::CharacterVector comment,
+                                    Rcpp::CharacterVector compression){
   if(!input->size())
     return Rcpp::RawVector(0);
   XPtrImage image = copy(input);
@@ -149,6 +157,8 @@ Rcpp::RawVector magick_image_write( XPtrImage input, Rcpp::CharacterVector forma
   }
   if(comment.size())
     for_each ( image->begin(), image->end(), Magick::commentImage(std::string(comment.at(0))));
+  if(compression.size())
+    for_each ( image->begin(), image->end(), Magick::compressTypeImage(Compression(std::string(compression.at(0)).c_str())));
   Magick::Blob output;
   writeImages( image->begin(), image->end(),  &output );
   Rcpp::RawVector res(output.length());

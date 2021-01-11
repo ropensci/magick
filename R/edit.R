@@ -215,9 +215,10 @@ convert_EBImage <- function(x){
 #' transparency with background color.
 #' @param quality number between 0 and 100 for jpeg quality. Defaults to 75.
 #' @param comment text string added to the image metadata for supported formats
+#' @param compression a string with compression type from [compress_types]
 image_write <- function(image, path = NULL, format = NULL, quality = NULL,
                         depth = NULL, density = NULL, comment = NULL, flatten = FALSE,
-                        defines = NULL){
+                        defines = NULL, compression = NULL){
   assert_image(image)
   if(!length(image))
     warning("Writing image with 0 frames")
@@ -228,12 +229,13 @@ image_write <- function(image, path = NULL, format = NULL, quality = NULL,
   depth <- as.integer(depth)
   density <- as.character(density)
   comment <- as.character(comment)
+  compression <- as.character(compression)
   if(length(defines)){
     image_set_defines(image, defines = defines)
     defines[seq_along(defines)] = NA_character_;
     on.exit(image_set_defines(image, defines = defines))
   }
-  buf <- magick_image_write(image, format, quality, depth, density, comment)
+  buf <- magick_image_write(image, format, quality, depth, density, comment, compression)
   if(is.character(path)){
     writeBin(buf, path)
     return(invisible(path))
