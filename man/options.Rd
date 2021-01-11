@@ -18,6 +18,7 @@
 \alias{morphology_types}
 \alias{style_types}
 \alias{decoration_types}
+\alias{compress_types}
 \alias{distort_types}
 \title{Magick Options}
 \usage{
@@ -52,6 +53,8 @@ morphology_types()
 style_types()
 
 decoration_types()
+
+compress_types()
 
 distort_types()
 }

@@ -38,7 +38,8 @@ image_write(
   density = NULL,
   comment = NULL,
   flatten = FALSE,
-  defines = NULL
+  defines = NULL,
+  compression = NULL
 )
 
 image_convert(
@@ -108,6 +109,8 @@ Use an empty string for value-less defines, and NA to unset a define.}
 
 \item{flatten}{should image be flattened before writing? This also replaces
 transparency with background color.}
+
+\item{compression}{a string with compression type from \link{compress_types}}
 
 \item{type}{string with \href{https://www.imagemagick.org/Magick++/Enumerations.html#ImageType}{imagetype}
 value from \link{image_types} for example \code{grayscale} to convert into black/white}

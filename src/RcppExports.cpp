@@ -968,8 +968,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_write
-Rcpp::RawVector magick_image_write(XPtrImage input, Rcpp::CharacterVector format, Rcpp::IntegerVector quality, Rcpp::IntegerVector depth, Rcpp::CharacterVector density, Rcpp::CharacterVector comment);
-RcppExport SEXP _magick_magick_image_write(SEXP inputSEXP, SEXP formatSEXP, SEXP qualitySEXP, SEXP depthSEXP, SEXP densitySEXP, SEXP commentSEXP) {
+Rcpp::RawVector magick_image_write(XPtrImage input, Rcpp::CharacterVector format, Rcpp::IntegerVector quality, Rcpp::IntegerVector depth, Rcpp::CharacterVector density, Rcpp::CharacterVector comment, Rcpp::CharacterVector compression);
+RcppExport SEXP _magick_magick_image_write(SEXP inputSEXP, SEXP formatSEXP, SEXP qualitySEXP, SEXP depthSEXP, SEXP densitySEXP, SEXP commentSEXP, SEXP compressionSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -979,7 +979,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type depth(depthSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type density(densitySEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type comment(commentSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_write(input, format, quality, depth, density, comment));
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type compression(compressionSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_write(input, format, quality, depth, density, comment, compression));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1585,7 +1586,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_readbin", (DL_FUNC) &_magick_magick_image_readbin, 5},
     {"_magick_magick_image_readpath", (DL_FUNC) &_magick_magick_image_readpath, 5},
     {"_magick_magick_image_read_list", (DL_FUNC) &_magick_magick_image_read_list, 1},
-    {"_magick_magick_image_write", (DL_FUNC) &_magick_magick_image_write, 6},
+    {"_magick_magick_image_write", (DL_FUNC) &_magick_magick_image_write, 7},
     {"_magick_magick_image_write_frame", (DL_FUNC) &_magick_magick_image_write_frame, 3},
     {"_magick_magick_image_write_integer", (DL_FUNC) &_magick_magick_image_write_integer, 1},
     {"_magick_magick_image_display", (DL_FUNC) &_magick_magick_image_display, 2},
