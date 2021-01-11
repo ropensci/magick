@@ -1,3 +1,6 @@
+2.6.0
+  - image_write() gains a compression parameter
+
 2.5.2
   - Fixes for CRAN
   - Remove some accidental files from source pkg
