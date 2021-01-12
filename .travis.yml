@@ -5,6 +5,10 @@ fortran: false
 env:
   - _R_CHECK_FORCE_SUGGESTS_=false
 
+branches:
+  only:
+  - master
+
 matrix:
   include:
     - dist: xenial
@@ -13,13 +17,6 @@ matrix:
     - os: osx
       brew_packages: imagemagick ghostscript
       osx_image: xcode12.2
-    - os: osx
-      brew_packages: imagemagick@6 ghostscript
-      osx_image: xcode12.2
-    - os: osx
-      osx_image: xcode10.1
-      disable_homebrew: true
-      r_check_args: ""
     - os: osx
       r: 3.6
       r_check_args:
