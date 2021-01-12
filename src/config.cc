@@ -58,6 +58,12 @@ Rcpp::List magick_config_internal(){
   out["ghostscript"] = false;
 #endif
 
+#ifdef MAGICKCORE_HEIC_DELEGATE
+  out["heic"] = true;
+#else
+  out["heic"] = false;
+#endif
+
 #ifdef MAGICKCORE_JPEG_DELEGATE
   out["jpeg"] = true;
 #else
