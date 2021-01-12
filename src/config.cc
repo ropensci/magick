@@ -100,6 +100,12 @@ Rcpp::List magick_config_internal(){
   out["png"] = false;
 #endif
 
+#ifdef MAGICKCORE_RAW_R_DELEGATE
+  out["raw"] = true;
+#else
+  out["raw"] = false;
+#endif
+
 #ifdef MAGICKCORE_RSVG_DELEGATE
   out["rsvg"] = true;
 #else
