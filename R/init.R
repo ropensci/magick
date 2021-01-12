@@ -1,6 +1,6 @@
 .onAttach <- function(lib, pkg){
   # Test for features
-  testfor <- c("cairo", "fontconfig", "freetype", "fftw", "ghostscript", "lcms", "pango", "rsvg", "webp", "x11")
+  testfor <- c("cairo", "fontconfig", "freetype", "fftw", "ghostscript", "heic", "lcms", "pango", "raw", "rsvg", "webp", "x11")
   support <- unlist(magick_config()[testfor])
   has <- paste(names(which(support)), collapse = ", ")
   not <- paste(names(which(!support)), collapse = ", ")
