@@ -115,6 +115,10 @@ image_write(image_animate(image_join(frames)), "man/figures/Rlogo-banana.gif")
 
 ![](man/figures/Rlogo-banana.gif)
 
+## Use magick in Shiny Apps
+
+This demo application shows how to use magick with shiny: https://github.com/jeroen/shinymagick
+
 ## Installation
 
 Binary packages for __macOS__ or __Windows__ can be installed directly from CRAN:
