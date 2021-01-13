@@ -43,7 +43,7 @@ dynamic range, for example: \code{"50\%!"}}
 \description{
 Apply a morphology method. This is a very flexible function which
 can be used to apply any morphology method with custom parameters.
-See \href{http://www.imagemagick.org/Usage/morphology/}{imagemagick website}
+See \href{https://legacy.imagemagick.org/Usage/morphology/}{imagemagick website}
 for examples.
 }
 \examples{

@@ -53,7 +53,7 @@ Must be length 1, or number of frames. If specified, then \code{fps} is ignored.
 
 \item{loop}{how many times to repeat the animation. Default is infinite.}
 
-\item{dispose}{a frame \href{http://www.imagemagick.org/Usage/anim_basics/#dispose}{disposal method}
+\item{dispose}{a frame \href{https://legacy.imagemagick.org/Usage/anim_basics/#dispose}{disposal method}
 from \link[=dispose_types]{dispose_types()}}
 
 \item{optimize}{optimize the \code{gif} animation by storing only the differences

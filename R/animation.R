@@ -26,7 +26,7 @@
 #' @name animation
 #' @family image
 #' @aliases image_coalesce
-#' @param dispose a frame [disposal method](http://www.imagemagick.org/Usage/anim_basics/#dispose)
+#' @param dispose a frame [disposal method](https://legacy.imagemagick.org/Usage/anim_basics/#dispose)
 #' from [dispose_types()][dispose_types]
 #' @param fps frames per second. Ignored if `delay` is not `NULL`.
 #' @param delay delay after each frame, in 1/100 seconds.

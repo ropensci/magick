@@ -7,7 +7,7 @@
 #' defining the size and threshold of the filter used to find 'peaks' in
 #' the intermediate search image. For canny edge detection the format is
 #' `{radius}x{sigma}+{lower%}+{upper%}`. More details and examples are
-#' available at the [imagemagick website](https://www.imagemagick.org/Usage/transform/#hough).
+#' available at the [imagemagick website](https://legacy.imagemagick.org/Usage/transform/).
 #'
 #' @export
 #' @inheritParams editing

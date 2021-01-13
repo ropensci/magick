@@ -2,7 +2,7 @@
 #'
 #' Apply a morphology method. This is a very flexible function which
 #' can be used to apply any morphology method with custom parameters.
-#' See [imagemagick website](http://www.imagemagick.org/Usage/morphology/)
+#' See [imagemagick website](https://legacy.imagemagick.org/Usage/morphology/)
 #' for examples.
 #'
 #' @export

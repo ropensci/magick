@@ -50,7 +50,7 @@ For Hough-line detection, the geometry format is \verb{\{W\}x\{H\}+\{threshold\}
 defining the size and threshold of the filter used to find 'peaks' in
 the intermediate search image. For canny edge detection the format is
 \verb{\{radius\}x\{sigma\}+\{lower\%\}+\{upper\%\}}. More details and examples are
-available at the \href{https://www.imagemagick.org/Usage/transform/#hough}{imagemagick website}.
+available at the \href{https://legacy.imagemagick.org/Usage/transform/}{imagemagick website}.
 }
 \examples{
 if(magick_config()$version > "6.8.9"){
