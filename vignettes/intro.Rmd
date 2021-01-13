@@ -212,7 +212,7 @@ img_blurred <- image_convolve(img, kern)
 image_append(c(img, img_blurred))
 ```
 
-Or use any of the [standard kernels](http://www.imagemagick.org/Usage/convolve/)
+Or use any of the [standard kernels](https://legacy.imagemagick.org/Usage/convolve/)
 
 ```{r}
 img %>% image_convolve('Sobel') %>% image_negate()
