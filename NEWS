@@ -1,5 +1,7 @@
 2.6.0
   - image_write() gains a compression parameter
+  - Updated binaries for Windows/MacOS to ImageMagick-6.9.11-57
+  - Added libraw and libheif delegates to Windows/MacOS binaries
 
 2.5.2
   - Fixes for CRAN

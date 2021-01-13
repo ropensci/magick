@@ -1,6 +1,6 @@
 # ImageMagick build target
 IM=6
-VERSION=6.9.11-34
+VERSION=6.9.11-57
 IMPATH = ../windows/imagemagick${IM}-${VERSION}
 LIBBUILD = ${subst gcc ,-,${R_COMPILED_BY}}${R_ARCH}
 
@@ -16,6 +16,7 @@ PKG_LIBS = \
 	-L$(IMPATH)/lib${LIBBUILD} \
 	-L$(IMPATH)/lib${R_ARCH} \
 	-lMagick++-${IM}.Q16 -lMagickWand-${IM}.Q16 -lMagickCore-${IM}.Q16 \
+	-lraw -lheif -lde265 -lx265 -laom \
 	-lfftw3 -llcms2 -ljpeg -ltiff -llzma -lbz2 \
 	-lrsvg-2 -lxml2 \
 	-lpangocairo-1.0 -lpango-1.0 -lpangowin32-1.0 \
