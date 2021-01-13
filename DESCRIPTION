@@ -1,7 +1,7 @@
 Package: magick
 Type: Package
 Title: Advanced Graphics and Image-Processing in R
-Version: 2.5.9000
+Version: 2.6.0
 Authors@R: person("Jeroen", "Ooms", role = c("aut", "cre"), email = "jeroen@berkeley.edu",
     comment = c(ORCID = "0000-0002-4035-0289"))
 Description: Bindings to 'ImageMagick': the most comprehensive open-source image
