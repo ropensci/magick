@@ -15,3 +15,4 @@ appveyor.yml$
 ^man/figures
 ^configure.log$
 ^inst/etc$
+^\.github$
