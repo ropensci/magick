@@ -132,8 +132,10 @@ rep_magick_image <- function(x, times){
 
 #' @export
 #' @importFrom grDevices as.raster
-"as.raster.magick-image" <- function(image, ...){
+"as.raster.magick-image" <- function(image, native = FALSE, ...){
   assert_image(image)
+  if(isTRUE(native))
+    return(as.integer(image))
   bitmap <- image_write_frame(image, format = "rgba")
   magick_image_as_raster(bitmap)
 }
