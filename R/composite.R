@@ -105,3 +105,18 @@ image_shadow <- function(image, color = 'black', bg = 'white', geometry = '50x10
     image_composite(shadow[i], image[i], operator = operator, offset = offset)
   }))
 }
+
+#' @export
+#' @rdname composite
+#' @inheritParams edges
+#' @examples image_shade(imlogo)
+#' @param azimuth position of light source
+#' @param elevation position of light source
+#' @param color Set to true to shade the red, green, and blue components of the image.
+image_shade <- function(image, azimuth = 30, elevation = 30, color = FALSE){
+  assert_image(image)
+  azimuth <- as.numeric(azimuth)
+  elevation <- as.numeric(elevation)
+  color <- as.logical(color)
+  magick_image_shade(image, azimuth, elevation, color)
+}

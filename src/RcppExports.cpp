@@ -661,6 +661,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_shade
+XPtrImage magick_image_shade(XPtrImage input, double azimuth, double elevation, bool color);
+RcppExport SEXP _magick_magick_image_shade(SEXP inputSEXP, SEXP azimuthSEXP, SEXP elevationSEXP, SEXP colorSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< double >::type azimuth(azimuthSEXP);
+    Rcpp::traits::input_parameter< double >::type elevation(elevationSEXP);
+    Rcpp::traits::input_parameter< bool >::type color(colorSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_shade(input, azimuth, elevation, color));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_crop
 XPtrImage magick_image_crop(XPtrImage input, Rcpp::CharacterVector geometry, Rcpp::CharacterVector gravity, bool repage);
 RcppExport SEXP _magick_magick_image_crop(SEXP inputSEXP, SEXP geometrySEXP, SEXP gravitySEXP, SEXP repageSEXP) {
@@ -1562,6 +1576,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_border", (DL_FUNC) &_magick_magick_image_border, 4},
     {"_magick_magick_image_frame", (DL_FUNC) &_magick_magick_image_frame, 3},
     {"_magick_magick_image_shadow_mask", (DL_FUNC) &_magick_magick_image_shadow_mask, 2},
+    {"_magick_magick_image_shade", (DL_FUNC) &_magick_magick_image_shade, 4},
     {"_magick_magick_image_crop", (DL_FUNC) &_magick_magick_image_crop, 4},
     {"_magick_magick_image_extent", (DL_FUNC) &_magick_magick_image_extent, 4},
     {"_magick_magick_image_artifact", (DL_FUNC) &_magick_magick_image_artifact, 2},
