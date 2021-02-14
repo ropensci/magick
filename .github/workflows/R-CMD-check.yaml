@@ -20,7 +20,7 @@ jobs:
           - {os: windows-latest, r: 'release'}
           - {os: macOS-latest, r: 'release', brew_packages: 'imagemagick ghostscript'}
           - {os: macOS-latest, r: 'release', brew_packages: 'imagemagick@6 ghostscript'}
-          - {os: ubuntu-16.04, r: '3.4', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
+          - {os: ubuntu-16.04, r: '3.5', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
           - {os: ubuntu-18.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest"}
           - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
           - {os: ubuntu-20.04, r: 'devel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
@@ -62,7 +62,7 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
-          sudo apt-get install -y gsfonts tesseract-ocr-eng # for ubuntu-16.04
+          sudo apt-get install -y gsfonts
 
       - name: Install brew packages
         if: runner.os == 'MacOS'
