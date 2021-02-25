@@ -1,5 +1,6 @@
 2.7.0
   - New function image_level()
+  - New function image_shade()
 
 2.6.0
   - image_write() gains a compression parameter
