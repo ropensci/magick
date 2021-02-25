@@ -85,6 +85,13 @@ XPtrImage magick_image_shadow_mask( XPtrImage input, const char * geomstr){
   return output;
 }
 
+// [[Rcpp::export]]
+XPtrImage magick_image_shade( XPtrImage input, double azimuth = 30, double elevation = 30, bool color = false){
+  XPtrImage output = copy(input);
+  for_each ( output->begin(), output->end(), Magick::shadeImage(azimuth, elevation, color));
+  return output;
+}
+
 // The C++ crop() API doesn't work well, see https://github.com/ImageMagick/ImageMagick/issues/1642
 
 // [[Rcpp::export]]

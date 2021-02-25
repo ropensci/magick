@@ -221,6 +221,10 @@ magick_image_shadow_mask <- function(input, geomstr) {
     .Call('_magick_magick_image_shadow_mask', PACKAGE = 'magick', input, geomstr)
 }
 
+magick_image_shade <- function(input, azimuth = 30, elevation = 30, color = FALSE) {
+    .Call('_magick_magick_image_shade', PACKAGE = 'magick', input, azimuth, elevation, color)
+}
+
 magick_image_crop <- function(input, geometry, gravity, repage) {
     .Call('_magick_magick_image_crop', PACKAGE = 'magick', input, geometry, gravity, repage)
 }

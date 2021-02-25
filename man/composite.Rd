@@ -7,6 +7,7 @@
 \alias{image_frame}
 \alias{image_shadow_mask}
 \alias{image_shadow}
+\alias{image_shade}
 \title{Image Composite}
 \usage{
 image_composite(
@@ -32,6 +33,8 @@ image_shadow(
   operator = "atop",
   offset = "+20+20"
 )
+
+image_shade(image, azimuth = 30, elevation = 30, color = FALSE)
 }
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
@@ -51,14 +54,17 @@ value from \link{gravity_types}.}
 
 \item{compose_args}{additional arguments needed for some composite operations}
 
-\item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
-\code{"navyblue"} or \code{"#000080"}. Use \code{"none"} for transparency.}
+\item{color}{Set to true to shade the red, green, and blue components of the image.}
 
 \item{geometry}{a \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry string}
 to set height and width of the border, e.g. \code{"10x8"}. In addition \link{image_frame} allows
 for adding shadow by setting an offset e.g. \code{"20x10+7+2"}.}
 
 \item{bg}{background color}
+
+\item{azimuth}{position of light source}
+
+\item{elevation}{position of light source}
 }
 \description{
 Similar to the ImageMagick \code{composite} utility: compose an image on top of another one using a
@@ -91,6 +97,7 @@ image_composite(logo, rose, gravity = "East")
 image_border(imlogo, "red", "10x10")
 image_frame(imlogo)
 image_shadow(imlogo)
+image_shade(imlogo)
 }
 \seealso{
 Other image: 
