@@ -201,6 +201,10 @@ magick_image_threshold_white <- function(input, threshold, channel) {
     .Call('_magick_magick_image_threshold_white', PACKAGE = 'magick', input, threshold, channel)
 }
 
+magick_image_level <- function(input, black_pct, white_pct, mid_point, channel) {
+    .Call('_magick_magick_image_level', PACKAGE = 'magick', input, black_pct, white_pct, mid_point, channel)
+}
+
 magick_image_composite <- function(input, composite_image, offset, gravity, composite, args) {
     .Call('_magick_magick_image_composite', PACKAGE = 'magick', input, composite_image, offset, gravity, composite, args)
 }

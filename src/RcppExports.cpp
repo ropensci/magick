@@ -606,6 +606,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_level
+XPtrImage magick_image_level(XPtrImage input, double black_pct, double white_pct, double mid_point, Rcpp::CharacterVector channel);
+RcppExport SEXP _magick_magick_image_level(SEXP inputSEXP, SEXP black_pctSEXP, SEXP white_pctSEXP, SEXP mid_pointSEXP, SEXP channelSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< double >::type black_pct(black_pctSEXP);
+    Rcpp::traits::input_parameter< double >::type white_pct(white_pctSEXP);
+    Rcpp::traits::input_parameter< double >::type mid_point(mid_pointSEXP);
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type channel(channelSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_level(input, black_pct, white_pct, mid_point, channel));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_composite
 XPtrImage magick_image_composite(XPtrImage input, XPtrImage composite_image, const char * offset, const char * gravity, const char * composite, Rcpp::CharacterVector args);
 RcppExport SEXP _magick_magick_image_composite(SEXP inputSEXP, SEXP composite_imageSEXP, SEXP offsetSEXP, SEXP gravitySEXP, SEXP compositeSEXP, SEXP argsSEXP) {
@@ -1558,6 +1573,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_lat", (DL_FUNC) &_magick_magick_image_lat, 2},
     {"_magick_magick_image_threshold_black", (DL_FUNC) &_magick_magick_image_threshold_black, 3},
     {"_magick_magick_image_threshold_white", (DL_FUNC) &_magick_magick_image_threshold_white, 3},
+    {"_magick_magick_image_level", (DL_FUNC) &_magick_magick_image_level, 5},
     {"_magick_magick_image_composite", (DL_FUNC) &_magick_magick_image_composite, 6},
     {"_magick_magick_image_border", (DL_FUNC) &_magick_magick_image_border, 4},
     {"_magick_magick_image_frame", (DL_FUNC) &_magick_magick_image_frame, 3},

@@ -42,6 +42,20 @@ image_threshold <- function(image, type = c("black", "white"), threshold = "50%"
 
 #' @export
 #' @rdname thresholding
+#' @param black_point value between 0 and 100, the darkest color in the image
+#' @param white_point value between 0 and 100, the lightest color in the image
+#' @param mid_point value between 0 and 10 used for gamma correction
+image_level <- function(image, black_point = 0, white_point = 100, mid_point = 1, channel = NULL){
+  assert_image(image)
+  black_point <- as.numeric(black_point)
+  white_point <- as.numeric(white_point)
+  mid_point <- as.numeric(mid_point)
+  channel <- as.character(channel)
+  magick_image_level(image, black_point, white_point, mid_point, channel)
+}
+
+#' @export
+#' @rdname thresholding
 #' @param geometry pixel window plus offset for LAT algorithm
 image_lat <- function(image, geometry = '10x10+5%'){
   assert_image(image)

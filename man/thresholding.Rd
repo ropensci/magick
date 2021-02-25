@@ -3,6 +3,7 @@
 \name{thresholding}
 \alias{thresholding}
 \alias{image_threshold}
+\alias{image_level}
 \alias{image_lat}
 \title{Image thresholding}
 \usage{
@@ -12,6 +13,8 @@ image_threshold(
   threshold = "50\%",
   channel = NULL
 )
+
+image_level(image, black_point, white_point, mid_point = 1, channel = NULL)
 
 image_lat(image, geometry = "10x10+5\%")
 }
@@ -23,6 +26,12 @@ image_lat(image, geometry = "10x10+5\%")
 \item{threshold}{pixel intensity threshold percentage for black or white thresholding}
 
 \item{channel}{a value of \code{\link[=channel_types]{channel_types()}} specifying which channel(s) to set}
+
+\item{black_point}{value between 0 and 100, the darkest color in the image}
+
+\item{white_point}{value between 0 and 100, the lightest color in the image}
+
+\item{mid_point}{value between 0 and 10 used for gamma correction}
 
 \item{geometry}{pixel window plus offset for LAT algorithm}
 }
