@@ -1,3 +1,6 @@
+2.7.0
+  - New function image_level()
+
 2.6.0
   - image_write() gains a compression parameter
   - Updated binaries for Windows/MacOS to ImageMagick-6.9.11-57

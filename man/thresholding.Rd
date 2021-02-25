@@ -14,7 +14,13 @@ image_threshold(
   channel = NULL
 )
 
-image_level(image, black_point, white_point, mid_point = 1, channel = NULL)
+image_level(
+  image,
+  black_point = 0,
+  white_point = 100,
+  mid_point = 1,
+  channel = NULL
+)
 
 image_lat(image, geometry = "10x10+5\%")
 }
