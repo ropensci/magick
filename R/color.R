@@ -7,6 +7,7 @@
 #'
 #'  - [image_modulate] adjusts brightness, saturation and hue of image relative to current.
 #'  - [image_quantize] reduces number of unique colors in the image.
+#'  - [image_ordered_dither] reduces number of unique colors using a dithering threshold map.
 #'  - [image_map] replaces colors of image with the closest color from a reference image.
 #'  - [image_channel] extracts a single channel from an image and returns as grayscale.
 #'  - [image_transparent] sets pixels approximately matching given color to transparent.
@@ -80,6 +81,17 @@ image_map <- function(image, map, dither = FALSE){
   assert_image(map)
   dither <- as.logical(dither)
   magick_image_map(image, map, dither)
+}
+
+#' @export
+#' @rdname color
+#' @param threshold_map A string giving the dithering pattern to use. See
+#' [the ImageMagick documentation](https://legacy.imagemagick.org/Usage/option_link.cgi?ordered-dither)
+#' for possible values
+image_ordered_dither <- function(image, threshold_map){
+  assert_image(image)
+  threshold_map <- as.character(threshold_map)
+  magick_image_ordered_dither(image, threshold_map)
 }
 
 #' @export

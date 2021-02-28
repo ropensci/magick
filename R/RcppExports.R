@@ -181,6 +181,10 @@ magick_image_quantize <- function(input, max, space, dither, depth) {
     .Call('_magick_magick_image_quantize', PACKAGE = 'magick', input, max, space, dither, depth)
 }
 
+magick_image_ordered_dither <- function(input, threshold_map) {
+    .Call('_magick_magick_image_ordered_dither', PACKAGE = 'magick', input, threshold_map)
+}
+
 magick_image_transparent <- function(input, color, fuzz_percent) {
     .Call('_magick_magick_image_transparent', PACKAGE = 'magick', input, color, fuzz_percent)
 }

@@ -543,6 +543,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_ordered_dither
+XPtrImage magick_image_ordered_dither(XPtrImage input, std::string threshold_map);
+RcppExport SEXP _magick_magick_image_ordered_dither(SEXP inputSEXP, SEXP threshold_mapSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< std::string >::type threshold_map(threshold_mapSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_ordered_dither(input, threshold_map));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_transparent
 XPtrImage magick_image_transparent(XPtrImage input, const char * color, double fuzz_percent);
 RcppExport SEXP _magick_magick_image_transparent(SEXP inputSEXP, SEXP colorSEXP, SEXP fuzz_percentSEXP) {
@@ -1582,6 +1594,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_equalize", (DL_FUNC) &_magick_magick_image_equalize, 1},
     {"_magick_magick_image_median", (DL_FUNC) &_magick_magick_image_median, 2},
     {"_magick_magick_image_quantize", (DL_FUNC) &_magick_magick_image_quantize, 5},
+    {"_magick_magick_image_ordered_dither", (DL_FUNC) &_magick_magick_image_ordered_dither, 2},
     {"_magick_magick_image_transparent", (DL_FUNC) &_magick_magick_image_transparent, 3},
     {"_magick_magick_image_background", (DL_FUNC) &_magick_magick_image_background, 2},
     {"_magick_magick_image_lat", (DL_FUNC) &_magick_magick_image_lat, 2},

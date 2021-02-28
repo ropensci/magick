@@ -87,6 +87,14 @@ XPtrImage magick_image_quantize( XPtrImage input, size_t max, Rcpp::CharacterVec
 }
 
 // [[Rcpp::export]]
+XPtrImage magick_image_ordered_dither( XPtrImage input, std::string threshold_map){
+  XPtrImage output = copy(input);
+  for(size_t i = 0; i < output->size(); i++)
+    output->at(i).orderedDither(threshold_map);
+  return output;
+}
+
+// [[Rcpp::export]]
 XPtrImage magick_image_transparent( XPtrImage input, const char * color, double fuzz_percent){
   double fuzz = fuzz_pct_to_abs(fuzz_percent);
   XPtrImage output = copy(input);

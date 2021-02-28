@@ -5,6 +5,7 @@
 \alias{image_modulate}
 \alias{image_quantize}
 \alias{image_map}
+\alias{image_ordered_dither}
 \alias{image_channel}
 \alias{image_separate}
 \alias{image_combine}
@@ -29,6 +30,8 @@ image_quantize(
 )
 
 image_map(image, map, dither = FALSE)
+
+image_ordered_dither(image, threshold_map)
 
 image_channel(image, channel = "lightness")
 
@@ -77,6 +80,10 @@ may be used to manually adjust the tree depth.}
 
 \item{map}{reference image to map colors from}
 
+\item{threshold_map}{A string giving the dithering pattern to use. See
+\href{https://legacy.imagemagick.org/Usage/option_link.cgi?ordered-dither}{the ImageMagick documentation}
+for possible values}
+
 \item{channel}{a string with a
 \href{https://www.imagemagick.org/Magick++/Enumerations.html#ChannelType}{channel} from
 \link{channel_types} for example \code{"alpha"} or \code{"hue"} or \code{"cyan"}}
@@ -105,6 +112,7 @@ documentation. Short descriptions:
 \itemize{
 \item \link{image_modulate} adjusts brightness, saturation and hue of image relative to current.
 \item \link{image_quantize} reduces number of unique colors in the image.
+\item \link{image_ordered_dither} reduces number of unique colors using a dithering threshold map.
 \item \link{image_map} replaces colors of image with the closest color from a reference image.
 \item \link{image_channel} extracts a single channel from an image and returns as grayscale.
 \item \link{image_transparent} sets pixels approximately matching given color to transparent.
