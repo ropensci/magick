@@ -1329,6 +1329,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_motion_blur
+XPtrImage magick_image_motion_blur(XPtrImage input, const double radius, const double sigma, const double angle);
+RcppExport SEXP _magick_magick_image_motion_blur(SEXP inputSEXP, SEXP radiusSEXP, SEXP sigmaSEXP, SEXP angleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< const double >::type radius(radiusSEXP);
+    Rcpp::traits::input_parameter< const double >::type sigma(sigmaSEXP);
+    Rcpp::traits::input_parameter< const double >::type angle(angleSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_motion_blur(input, radius, sigma, angle));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_charcoal
 XPtrImage magick_image_charcoal(XPtrImage input, const double radius, const double sigma);
 RcppExport SEXP _magick_magick_image_charcoal(SEXP inputSEXP, SEXP radiusSEXP, SEXP sigmaSEXP) {
@@ -1656,6 +1670,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_connect", (DL_FUNC) &_magick_magick_image_connect, 2},
     {"_magick_magick_image_noise", (DL_FUNC) &_magick_magick_image_noise, 2},
     {"_magick_magick_image_blur", (DL_FUNC) &_magick_magick_image_blur, 3},
+    {"_magick_magick_image_motion_blur", (DL_FUNC) &_magick_magick_image_motion_blur, 4},
     {"_magick_magick_image_charcoal", (DL_FUNC) &_magick_magick_image_charcoal, 3},
     {"_magick_magick_image_deskew", (DL_FUNC) &_magick_magick_image_deskew, 2},
     {"_magick_magick_image_emboss", (DL_FUNC) &_magick_magick_image_emboss, 3},

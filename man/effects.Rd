@@ -6,6 +6,7 @@
 \alias{image_reducenoise}
 \alias{image_noise}
 \alias{image_blur}
+\alias{image_motion_blur}
 \alias{image_charcoal}
 \alias{image_oilpaint}
 \alias{image_emboss}
@@ -20,6 +21,8 @@ image_reducenoise(image, radius = 1L)
 image_noise(image, noisetype = "gaussian")
 
 image_blur(image, radius = 1, sigma = 0.5)
+
+image_motion_blur(image, radius = 1, sigma = 0.5, angle = 0)
 
 image_charcoal(image, radius = 1, sigma = 0.5)
 
@@ -44,6 +47,8 @@ from \link{noise_types}.}
 
 \item{sigma}{the standard deviation of the Laplacian, in pixels.}
 
+\item{angle}{angle, in degrees, for various transformations}
+
 \item{factor}{image implode factor (special effect)}
 }
 \description{
@@ -56,6 +61,7 @@ image_despeckle(logo)
 image_reducenoise(logo)
 image_noise(logo)
 image_blur(logo, 10, 10)
+image_motion_blur(logo, 10, 10, 45)
 image_charcoal(logo)
 image_oilpaint(logo, radius = 3)
 image_emboss(logo)

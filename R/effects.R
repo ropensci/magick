@@ -49,6 +49,16 @@ image_blur <- function(image, radius = 1, sigma = 0.5){
 
 #' @export
 #' @rdname effects
+#' @param angle angle, in degrees, for various transformations
+#' @examples
+#' image_motion_blur(logo, 10, 10, 45)
+image_motion_blur <- function(image, radius = 1, sigma = 0.5, angle = 0){
+  assert_image(image)
+  magick_image_motion_blur(image, radius, sigma, angle)
+}
+
+#' @export
+#' @rdname effects
 #' @examples
 #' image_charcoal(logo)
 image_charcoal <- function(image, radius = 1, sigma = 0.5){

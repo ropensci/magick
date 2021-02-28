@@ -429,6 +429,10 @@ magick_image_blur <- function(input, radius = 1, sigma = 0.5) {
     .Call('_magick_magick_image_blur', PACKAGE = 'magick', input, radius, sigma)
 }
 
+magick_image_motion_blur <- function(input, radius = 1, sigma = 0.5, angle = 0.0) {
+    .Call('_magick_magick_image_motion_blur', PACKAGE = 'magick', input, radius, sigma, angle)
+}
+
 magick_image_charcoal <- function(input, radius = 1, sigma = 0.5) {
     .Call('_magick_magick_image_charcoal', PACKAGE = 'magick', input, radius, sigma)
 }

@@ -168,6 +168,14 @@ XPtrImage magick_image_blur( XPtrImage input, const double radius = 1, const dou
 }
 
 // [[Rcpp::export]]
+XPtrImage magick_image_motion_blur( XPtrImage input, const double radius = 1, const double sigma = 0.5, const double angle = 0.0){
+  XPtrImage output = copy(input);
+  for(size_t i = 0; i < output->size(); i++)
+    output->at(i).motionBlur(radius, sigma, angle);
+  return output;
+}
+
+// [[Rcpp::export]]
 XPtrImage magick_image_charcoal( XPtrImage input, const double radius = 1, const double sigma = 0.5){
   XPtrImage output = copy(input);
 #if MagickLibVersion >= 0x700
