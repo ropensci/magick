@@ -1,6 +1,6 @@
 2.7.0
-  - New function image_level()
-  - New function image_shade()
+  - New functions image_shade, image_motion_blur, image_ordered_dither,
+    image_level to support ggfx.
 
 2.6.0
   - image_write() gains a compression parameter
