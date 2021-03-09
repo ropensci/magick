@@ -2,7 +2,7 @@
 
 > Advanced Image-Processing in R
 
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Build Status](https://travis-ci.com/ropensci/magick.svg?branch=master)](https://travis-ci.com/ropensci/magick)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/magick?branch=master&svg=true)](https://ci.appveyor.com/project/jeroen/magick)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/magick)](https://cran.r-project.org/package=magick)
@@ -21,7 +21,7 @@ the console, resulting in an interactive editing environment.
 
 About the R package:
 
-  - [vignette: 	The magick package: Advanced Image-Processing in R](https://cran.r-project.org/web/packages/magick/vignettes/intro.html)
+  - [Getting started: The magick package: Advanced Image-Processing in R](https://docs.ropensci.org/magick/articles/intro.html)
   - [rOpenSci Community Call (recording)](https://vimeo.com/channels/rocommunitycalls/180799058)
 
 About the underlying library:
