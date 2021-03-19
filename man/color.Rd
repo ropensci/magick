@@ -143,6 +143,7 @@ image_quantize(logo, max = 10, colorspace = 'gray')
 image_quantize(logo, max = 10, colorspace = 'rgb')
 image_quantize(logo, max = 10, colorspace = 'cmyk')
 
+image_ordered_dither(logo, 'o8x8')
 # Change background color
 translogo <- image_transparent(logo, 'white')
 image_background(translogo, "pink", flatten = TRUE)

@@ -88,6 +88,7 @@ image_map <- function(image, map, dither = FALSE){
 #' @param threshold_map A string giving the dithering pattern to use. See
 #' [the ImageMagick documentation](https://legacy.imagemagick.org/Usage/option_link.cgi?ordered-dither)
 #' for possible values
+#' @examples image_ordered_dither(logo, 'o8x8')
 image_ordered_dither <- function(image, threshold_map){
   assert_image(image)
   threshold_map <- as.character(threshold_map)
