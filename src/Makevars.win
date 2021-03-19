@@ -1,6 +1,6 @@
 # ImageMagick build target
 IM=6
-VERSION=6.9.11-57
+VERSION=6.9.12-3
 IMPATH = ../windows/imagemagick${IM}-${VERSION}
 LIBBUILD = ${subst gcc ,-,${R_COMPILED_BY}}${R_ARCH}
 
