@@ -1,5 +1,5 @@
 2.7.1
-  - Windows: update to imagemagick 6.9.12-3 plus thresholds.xml patch
+  - Win/Mac: update to imagemagick 6.9.12-3 + thresholds.xml bugfix.
 
 2.7.0
   - New functions image_shade, image_motion_blur, image_ordered_dither,
