@@ -34,8 +34,8 @@ replace_url <- function(path){
     suffix <- regmatches(path, regexpr(pattern, path))
     path <- sub(pattern, "", path)
     paste0(download_url(path), suffix)
-  } else if(grepl("^[^/\\]+:$", path)) {
-    # demo images e.g. "logo:" or "wizard:"
+  } else if(grepl("^[^/\\]+:($|[^/\\])", path)) {
+    # demo images e.g. "logo:" or "wizard:" or "cr2:myfile.cr2"
     return(path)
   } else {
     normalizePath(path, mustWork = FALSE)
