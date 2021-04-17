@@ -1,3 +1,6 @@
+2.7.2
+  - Fix compatibility with super old ImageMagick for CentOS < 7.7
+
 2.7.1
   - Win/Mac: update to imagemagick 6.9.12-3 + thresholds.xml bugfix.
 
