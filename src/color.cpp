@@ -89,8 +89,12 @@ XPtrImage magick_image_quantize( XPtrImage input, size_t max, Rcpp::CharacterVec
 // [[Rcpp::export]]
 XPtrImage magick_image_ordered_dither( XPtrImage input, std::string threshold_map){
   XPtrImage output = copy(input);
+#if MagickLibVersion >= 0x689
   for(size_t i = 0; i < output->size(); i++)
     output->at(i).orderedDither(threshold_map);
+#else
+  Rcpp::warning("ImageMagick too old to support orderedDither (requires >= 6.8.9)");
+#endif
   return output;
 }
 
