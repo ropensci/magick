@@ -14,7 +14,7 @@ CXX_STD = CXX11
 
 PKG_LIBS = \
 	-L$(IMPATH)/lib${LIBBUILD} \
-	-L$(IMPATH)/lib${R_ARCH} \
+	-L$(IMPATH)/lib${R_ARCH}${CRT} \
 	-lMagick++-${IM}.Q16 -lMagickWand-${IM}.Q16 -lMagickCore-${IM}.Q16 \
 	-lraw -lheif -lde265 -lx265 -laom \
 	-lfftw3 -llcms2 -ljpeg -ltiff -llzma -lbz2 \
