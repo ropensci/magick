@@ -53,7 +53,12 @@ image_animate <- function(image, fps = 10, delay = NULL, loop = 0,
                        optimize)
 }
 
-image_coalesce <- image_animate
+#' @export
+#' @rdname animation
+image_coalesce <- function(image, dispose = c("background", "previous", "none")){
+  dispose <- match.arg(dispose)
+  magick_image_coalesce(image,dispose)
+}
 
 #' @export
 #' @rdname animation
