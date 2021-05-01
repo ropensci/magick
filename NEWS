@@ -1,5 +1,6 @@
 2.7.2
   - Reintroduce a separate image_coalesce() function (cf image_animate)
+  - Automatically coalesce gif images when reading by default
   - Fix compatibility with super old ImageMagick for CentOS < 7.7
   - Fix build for ucrt64 on Windows
 

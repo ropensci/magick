@@ -36,6 +36,7 @@
 #' @param image magick image object returned by [image_read()] or [image_graph()]
 #' @param density resolution to render pdf or svg
 #' @param strip drop image comments and metadata
+#' @param coalesce automatically [image_coalesce()] gif images
 #' @examples
 #' # Download image from the web
 #' frink <- image_read("https://jeroen.github.io/images/frink.png")
@@ -58,7 +59,7 @@
 #' curl::curl_download("https://jeroen.github.io/images/example.webp", "example.webp")
 #' if(require(webp)) image_read(webp::read_webp("example.webp"))
 #' unlink(c("example.webp", "output.png"))
-image_read <- function(path, density = NULL, depth = NULL, strip = FALSE, defines = NULL){
+image_read <- function(path, density = NULL, depth = NULL, strip = FALSE, coalesce = TRUE, defines = NULL){
   if(is.numeric(density))
     density <- paste0(density, "x", density)
   density <- as.character(density)
@@ -95,6 +96,9 @@ image_read <- function(path, density = NULL, depth = NULL, strip = FALSE, define
       warning("ImageMagick was built without librsvg which causes poor qualty of SVG rendering.
 For better results use image_read_svg() which uses the rsvg package.", call. = FALSE)
     }
+  }
+  if(isTRUE(coalesce) && length(image) > 1 && identical('GIF', toupper(image_info(image)$format[1]))){
+    return(image_coalesce(image))
   }
   return(image)
 }

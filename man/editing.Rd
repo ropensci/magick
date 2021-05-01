@@ -21,7 +21,14 @@
 \alias{demo_image}
 \title{Image Editing}
 \usage{
-image_read(path, density = NULL, depth = NULL, strip = FALSE, defines = NULL)
+image_read(
+  path,
+  density = NULL,
+  depth = NULL,
+  strip = FALSE,
+  coalesce = TRUE,
+  defines = NULL
+)
 
 image_read_svg(path, width = NULL, height = NULL)
 
@@ -83,6 +90,8 @@ demo_image(path)
 \item{depth}{color depth (either 8 or 16)}
 
 \item{strip}{drop image comments and metadata}
+
+\item{coalesce}{automatically \code{\link[=image_coalesce]{image_coalesce()}} gif images}
 
 \item{defines}{a named character vector with extra options to control reading.
 These are the \verb{-define key\{=value\}} settings in the \href{http://www.imagemagick.org/script/command-line-options.php#define}{command line tool}.

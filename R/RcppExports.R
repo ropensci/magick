@@ -5,8 +5,8 @@ magick_image_animate <- function(input, delay, iter, method, optimize) {
     .Call('_magick_magick_image_animate', PACKAGE = 'magick', input, delay, iter, method, optimize)
 }
 
-magick_image_coalesce <- function(input, method) {
-    .Call('_magick_magick_image_coalesce', PACKAGE = 'magick', input, method)
+magick_image_coalesce <- function(input) {
+    .Call('_magick_magick_image_coalesce', PACKAGE = 'magick', input)
 }
 
 magick_image_morph <- function(image, frames) {

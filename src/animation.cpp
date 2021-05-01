@@ -38,9 +38,9 @@ XPtrImage magick_image_animate( XPtrImage input, Rcpp::IntegerVector delay,
 
 
 // [[Rcpp::export]]
-XPtrImage magick_image_coalesce( XPtrImage input, const char * method){
+XPtrImage magick_image_coalesce( XPtrImage input){
   XPtrImage output = create();
-  for_each ( input->begin(), input->end(), Magick::gifDisposeMethodImage(Dispose(method)));
+  // this fixes optimized gif images
   coalesceImages( output.get(), input->begin(), input->end());
   return output;
 }

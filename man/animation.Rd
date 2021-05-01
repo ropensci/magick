@@ -22,7 +22,7 @@ image_animate(
   optimize = FALSE
 )
 
-image_coalesce(image, dispose = c("background", "previous", "none"))
+image_coalesce(image)
 
 image_morph(image, frames = 8)
 
