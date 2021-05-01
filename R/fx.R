@@ -38,8 +38,10 @@ image_fx <- function(image, expression = "p", channel = NULL){
 #' @rdname fx
 #' @export
 #' @examples # Use multiple source images
+#' \donttest{
 #' input <- c(logo, image_flop(logo))
 #' image_fx_sequence(input, "(u+v)/2")
+#' }
 image_fx_sequence <- function(image, expression = "p"){
   expression <- as.character(expression)
   magick_image_fx_sequence(image, expression)

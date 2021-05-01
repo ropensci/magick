@@ -42,8 +42,10 @@ image_fx(img, expression = "pow(p, 0.5)")
 image_fx(img, expression = "rand()")
 }
 # Use multiple source images
+\donttest{
 input <- c(logo, image_flop(logo))
 image_fx_sequence(input, "(u+v)/2")
+}
 }
 \seealso{
 Other image: 
