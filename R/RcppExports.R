@@ -145,6 +145,10 @@ autobrewed <- function() {
     .Call('_magick_autobrewed', PACKAGE = 'magick')
 }
 
+magick_resource_limits <- function() {
+    .Call('_magick_magick_resource_limits', PACKAGE = 'magick')
+}
+
 magick_image_contrast <- function(input, sharpen) {
     .Call('_magick_magick_image_contrast', PACKAGE = 'magick', input, sharpen)
 }

@@ -430,6 +430,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_resource_limits
+Rcpp::List magick_resource_limits();
+RcppExport SEXP _magick_magick_resource_limits() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(magick_resource_limits());
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_contrast
 XPtrImage magick_image_contrast(XPtrImage input, size_t sharpen);
 RcppExport SEXP _magick_magick_image_contrast(SEXP inputSEXP, SEXP sharpenSEXP) {
@@ -1610,6 +1620,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_copy", (DL_FUNC) &_magick_magick_image_copy, 2},
     {"_magick_magick_image_destroy", (DL_FUNC) &_magick_magick_image_destroy, 1},
     {"_magick_autobrewed", (DL_FUNC) &_magick_autobrewed, 0},
+    {"_magick_magick_resource_limits", (DL_FUNC) &_magick_magick_resource_limits, 0},
     {"_magick_magick_image_contrast", (DL_FUNC) &_magick_magick_image_contrast, 2},
     {"_magick_magick_image_normalize", (DL_FUNC) &_magick_magick_image_normalize, 1},
     {"_magick_magick_image_modulate", (DL_FUNC) &_magick_magick_image_modulate, 4},

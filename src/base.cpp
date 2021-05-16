@@ -165,3 +165,18 @@ bool autobrewed(){
   return false;
 #endif
 }
+
+
+// [[Rcpp::export]]
+Rcpp::List magick_resource_limits(){
+  return Rcpp::List::create(
+#if MagickLibVersion >= 0x689
+    Rcpp::_["area"] = Magick::ResourceLimits::area(),
+    Rcpp::_["thread"] = Magick::ResourceLimits::thread(),
+    Rcpp::_["map"] = Magick::ResourceLimits::map(),
+    Rcpp::_["memory"] = Magick::ResourceLimits::memory(),
+    Rcpp::_["disk"] = Magick::ResourceLimits::disk(),
+    Rcpp::_["file"] = Magick::ResourceLimits::file()
+#endif
+  );
+}
