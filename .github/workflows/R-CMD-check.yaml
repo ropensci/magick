@@ -16,7 +16,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: windows-latest, r: '3.6'}
+          - {os: windows-latest, r: '3.6', rspm: "https://packagemanager.rstudio.com/cran/latest"}
           - {os: windows-latest, r: 'release'}
           - {os: macOS-latest, r: 'release', brew_packages: 'imagemagick ghostscript'}
           - {os: macOS-latest, r: 'release', brew_packages: 'imagemagick@6 ghostscript'}
