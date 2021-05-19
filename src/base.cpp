@@ -175,8 +175,7 @@ Rcpp::List magick_resource_limits(){
     Rcpp::_["thread"] = Magick::ResourceLimits::thread(),
     Rcpp::_["map"] = Magick::ResourceLimits::map(),
     Rcpp::_["memory"] = Magick::ResourceLimits::memory(),
-    Rcpp::_["disk"] = Magick::ResourceLimits::disk(),
-    Rcpp::_["file"] = Magick::ResourceLimits::file()
+    Rcpp::_["disk"] = Magick::ResourceLimits::disk()
 #endif
   );
 }
