@@ -1,3 +1,6 @@
+2.7.3
+  - MacOS: fix for changed fonts.conf location in latest xQuartz versions
+
 2.7.2
   - Reintroduce a separate image_coalesce() function (cf image_animate)
   - Automatically coalesce gif images when reading by default
