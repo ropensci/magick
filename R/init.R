@@ -38,7 +38,9 @@
   # or at least new enough to read the fontconfig data from the xQuarts fontconfig
   if(autobrewed()){
     fontdir <- normalizePath(file.path(lib, pkg, "etc/fontconfig"), mustWork = FALSE)
-    if(file.exists("/opt/X11/lib/X11/fontconfig")){
+    if(file.exists("/opt/X11/etc/X11/fontconfig")){
+      Sys.setenv(FONTCONFIG_PATH = "/opt/X11/etc/X11/fontconfig")
+    } else if(file.exists("/opt/X11/lib/X11/fontconfig")){
       Sys.setenv(FONTCONFIG_PATH = "/opt/X11/lib/X11/fontconfig")
     } else if(file.exists(fontdir)){
       Sys.setenv(FONTCONFIG_PATH = fontdir)
