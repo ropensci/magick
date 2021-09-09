@@ -19,6 +19,7 @@ jobs:
           - {os: windows-latest, r: '3.6', rspm: "https://packagemanager.rstudio.com/cran/latest"}
           - {os: windows-latest, r: 'release'}
           - {os: windows-latest, r: 'devel'}
+          - {os: windows-2022, r: 'devel-ucrt'}
           - {os: macOS-latest, r: 'release', brew_packages: 'imagemagick ghostscript'}
           - {os: macOS-latest, r: 'release', brew_packages: 'imagemagick@6 ghostscript'}
           - {os: ubuntu-16.04, r: '3.5', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
