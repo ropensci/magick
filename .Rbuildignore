@@ -16,3 +16,6 @@ appveyor.yml$
 ^configure.log$
 ^inst/etc$
 ^\.github$
+\.o$
+\.so$
+\.dll$
