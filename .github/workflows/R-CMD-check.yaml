@@ -66,10 +66,6 @@ jobs:
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
           sudo apt-get install -y gsfonts
 
-      - name: Install brew packages
-        if: runner.os == 'MacOS'
-        run: brew install ${{ matrix.config.brew_packages }}
-
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
