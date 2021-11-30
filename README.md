@@ -2,12 +2,14 @@
 
 > Advanced Image-Processing in R
 
+<!-- badges: start -->
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Build Status](https://travis-ci.com/ropensci/magick.svg?branch=master)](https://travis-ci.com/ropensci/magick)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/magick?branch=master&svg=true)](https://ci.appveyor.com/project/jeroen/magick)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/magick)](https://cran.r-project.org/package=magick)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/magick)](https://cran.r-project.org/package=magick)
 [![Github Stars](https://img.shields.io/github/stars/ropensci/magick.svg?style=social&label=Github)](https://github.com/ropensci/magick)
+<!-- badges: end -->
 
 Bindings to ImageMagick: the most comprehensive open-source image
 processing library available. Supports many common formats (png, jpeg, tiff,
