@@ -1,8 +1,6 @@
 navbar:
   title: "magick"
   left:
-    - icon: fa-home
-      href: index.html
     - text: "Get started"
       href: articles/intro.html
     - text: "Reference"
