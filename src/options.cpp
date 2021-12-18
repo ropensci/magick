@@ -39,3 +39,8 @@ Rcpp::String set_magick_tempdir(const char * new_tmpdir){
 #endif
   return Rcpp::String(path);
 }
+
+// [[Rcpp::export]]
+void set_magick_seed(unsigned long seed){
+  Magick::SetRandomSeed(seed);
+}

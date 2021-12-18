@@ -6,6 +6,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // magick_image_animate
 XPtrImage magick_image_animate(XPtrImage input, Rcpp::IntegerVector delay, size_t iter, const char * method, bool optimize);
 RcppExport SEXP _magick_magick_image_animate(SEXP inputSEXP, SEXP delaySEXP, SEXP iterSEXP, SEXP methodSEXP, SEXP optimizeSEXP) {
@@ -1181,6 +1186,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// set_magick_seed
+void set_magick_seed(unsigned long seed);
+RcppExport SEXP _magick_set_magick_seed(SEXP seedSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< unsigned long >::type seed(seedSEXP);
+    set_magick_seed(seed);
+    return R_NilValue;
+END_RCPP
+}
 // magick_image_properties
 Rcpp::DataFrame magick_image_properties(XPtrImage input);
 RcppExport SEXP _magick_magick_image_properties(SEXP inputSEXP) {
@@ -1679,6 +1694,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_set_define", (DL_FUNC) &_magick_magick_image_set_define, 4},
     {"_magick_list_options", (DL_FUNC) &_magick_list_options, 1},
     {"_magick_set_magick_tempdir", (DL_FUNC) &_magick_set_magick_tempdir, 1},
+    {"_magick_set_magick_seed", (DL_FUNC) &_magick_set_magick_seed, 1},
     {"_magick_magick_image_properties", (DL_FUNC) &_magick_magick_image_properties, 1},
     {"_magick_magick_image_scale", (DL_FUNC) &_magick_magick_image_scale, 2},
     {"_magick_magick_image_sample", (DL_FUNC) &_magick_magick_image_sample, 2},

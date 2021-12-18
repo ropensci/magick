@@ -381,6 +381,10 @@ set_magick_tempdir <- function(new_tmpdir) {
     .Call('_magick_set_magick_tempdir', PACKAGE = 'magick', new_tmpdir)
 }
 
+set_magick_seed <- function(seed) {
+    invisible(.Call('_magick_set_magick_seed', PACKAGE = 'magick', seed))
+}
+
 magick_image_properties <- function(input) {
     .Call('_magick_magick_image_properties', PACKAGE = 'magick', input)
 }
