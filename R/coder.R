@@ -30,6 +30,7 @@ magick_config <- function(){
 
 #' @rdname config
 #' @export
+#' @param seed integer with seed value to use
 #' @examples # Reproduce random image
 #' magick_set_seed(123)
 #' image_blank(200,200, pseudo_image = "plasma:fractal")

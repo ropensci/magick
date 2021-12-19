@@ -14,6 +14,8 @@ magick_set_seed(seed)
 }
 \arguments{
 \item{format}{image format such as \code{png}, \code{tiff} or \code{pdf}.}
+
+\item{seed}{integer with seed value to use}
 }
 \description{
 ImageMagick can be configured to support various additional tool and formats
