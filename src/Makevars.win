@@ -32,7 +32,7 @@ clean:
 	rm -f $(OBJECTS) $(SHLIB)
 
 winlibs:
-	@echo "Linking to imagemagagick-$(VERSION)"
+	@echo "Linking to imagemagick-$(VERSION)"
 	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R" ${VERSION}
 
 .PHONY: all winlibs clean
