@@ -1,5 +1,6 @@
-2,7.4
+2.7.4
   - New function magick_set_seed()
+  - Fix signature of as.raster.magick-image()
 
 2.7.3
   - MacOS: fix for changed fonts.conf location in latest xQuartz versions
