@@ -38,9 +38,6 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
-      - if: runner.os == 'Linux'
-        run: sudo apt-get install -y libavfilter-dev
-
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: rcmdcheck
