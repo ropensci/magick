@@ -27,12 +27,6 @@ if [ -z "$PKGCONFIG_LIBS" ] && [ `command -v GraphicsMagick++-config` ]; then
   echo "Warning: found GraphicsMagick++ instead of ImageMagick++. GraphicsMagick is not supported."
 fi
 
-# Workaround for broken ImageMagick on old CRAN servers
-if [ -d "/Builds/CRAN-QA-Simon" ] || [ -d "/Volumes/SSD-Data/Builds" ]; then
-  unset PKGCONFIG_CFLAGS
-  unset PKGCONFIG_LIBS
-fi
-
 # Note that cflags may be empty in case of success
 if [ "$INCLUDE_DIR" ] || [ "$LIB_DIR" ]; then
   echo "Found INCLUDE_DIR and/or LIB_DIR!"
@@ -75,10 +69,6 @@ if [ $? -ne 0 ]; then
   echo " - rpm: $PKG_RPM_NAME (Fedora, CentOS, RHEL)"
   echo " - csw: $PKG_CSW_NAME (Solaris)"
   echo " - brew imagemagick@6 (MacOS)"
-  echo "For Ubuntu versions Trusty (14.04) and Xenial (16.04) use our PPA:"
-  echo "   sudo add-apt-repository -y ppa:cran/imagemagick"
-  echo "   sudo apt-get update"
-  echo "   sudo apt-get install -y libmagick++-dev"
   echo "If $PKG_CONFIG_NAME is already installed, check that 'pkg-config' is in your"
   echo "PATH and PKG_CONFIG_PATH contains a $PKG_CONFIG_NAME.pc file. If pkg-config"
   echo "is unavailable you can set INCLUDE_DIR and LIB_DIR manually via:"
