@@ -133,14 +133,6 @@ Installation from source on Linux or OSX requires the imagemagick [`Magick++`](h
 sudo apt-get install -y libmagick++-dev
 ```
 
-If you are on __Ubuntu__ 14.04 (trusty) or 16.04 (xenial) you can get a more recent backport from the ppa:
-
-```
-sudo add-apt-repository -y ppa:cran/imagemagick
-sudo apt-get update
-sudo apt-get install -y libmagick++-dev 
-```
-
 On __Fedora__,  __CentOS or RHEL__ we need [ImageMagick-c++-devel](https://src.fedoraproject.org/rpms/ImageMagick). However on CentOS the system version of ImageMagick is quite old. More recent versions are available from the [ImageMagick downloads](https://www.imagemagick.org/download/linux/CentOS/x86_64/) website.
 
 ```
