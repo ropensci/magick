@@ -1,10 +1,11 @@
-# rOpenSci: The *magick* package <img src="hexlogo.png" align="right" height="134.5" />
+# rOpenSci: The *magick* package
 
 > Advanced Image-Processing in R
 
 <!-- badges: start -->
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/magick)](https://cran.r-project.org/package=magick)
+[![magick status badge](https://ropensci.r-universe.dev/badges/magick)](https://ropensci.r-universe.dev/magick)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/magick)](https://cran.r-project.org/package=magick)
 [![R-CMD-check](https://github.com/ropensci/magick/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/magick/actions)
 <!-- badges: end -->
