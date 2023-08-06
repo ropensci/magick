@@ -1,10 +1,16 @@
 # ImageMagick build target
 IM=6
+ifeq ($(R_COMPILED_BY),gcc 8.3.0)
 VERSION=6.9.12-3
+else
+VERSION=6.9.12-93
+NTDLL=-lntdll
+endif
+
 IMPATH = ../windows/imagemagick${IM}-${VERSION}
 LIBBUILD = ${subst gcc ,-,${R_COMPILED_BY}}${R_ARCH}
 
-PKG_CPPFLAGS = -I$(IMPATH)/include${LIBBUILD} \
+PKG_CPPFLAGS = \
 	-I$(IMPATH)/include-config${R_ARCH} \
 	-I$(IMPATH)/include/ImageMagick-${IM}
 
@@ -12,17 +18,18 @@ PKG_CXXFLAGS = -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -D_LIB
 
 PKG_LIBS = \
 	-L$(IMPATH)/lib${LIBBUILD} \
-	-L$(IMPATH)/lib${R_ARCH}${CRT} \
+	-L$(IMPATH)/lib${R_ARCH} \
 	-lMagick++-${IM}.Q16 -lMagickWand-${IM}.Q16 -lMagickCore-${IM}.Q16 \
 	-lraw -lheif -lde265 -lx265 -laom \
-	-lfftw3 -llcms2 -ljpeg -ltiff -llzma -lbz2 \
 	-lrsvg-2 -lxml2 \
 	-lpangocairo-1.0 -lpango-1.0 -lpangowin32-1.0 \
 	-lcairo -lfreetype -lpixman-1 -lgdk_pixbuf-2.0 \
+	-lfftw3 -llcms2 -ljpeg -ltiff -llzma -lbz2 \
 	-lcairo-gobject -lgio-2.0 -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 \
 	-lffi -lpcre -lpng16 -lintl -lz -liconv -lfribidi \
 	-lopenjp2 -lwebpmux -lwebp -lwebpdecoder -lwebpdemux \
-	-lusp10 -liphlpapi -lgdiplus -lgdi32 -lole32 -ldnsapi -lws2_32 -luserenv
+	-lusp10 -liphlpapi -lgdiplus -lgdi32 -lole32 -ldnsapi \
+	-lws2_32 -luserenv -lbcrypt -lurlmon ${NTDLL}
 
 all: clean winlibs
 

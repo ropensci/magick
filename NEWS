@@ -1,3 +1,6 @@
+2.7.5
+  - Win/Mac: update to libmagick 6.9.12-93
+
 2.7.4
   - New function magick_set_seed()
   - Fix signature of as.raster.magick-image()
