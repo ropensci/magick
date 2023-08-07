@@ -14,7 +14,8 @@ Description: Bindings to 'ImageMagick': the most comprehensive open-source image
     version of the package includes a native graphics device for creating 
     in-memory graphics or drawing onto images using pixel coordinates.
 License: MIT + file LICENSE
-URL: https://docs.ropensci.org/magick/ (website) https://github.com/ropensci/magick (devel)
+URL: https://docs.ropensci.org/magick/
+    https://ropensci.r-universe.dev/magick
 BugReports: https://github.com/ropensci/magick/issues
 SystemRequirements: ImageMagick++: ImageMagick-c++-devel (rpm) or libmagick++-dev (deb)
 VignetteBuilder: knitr
