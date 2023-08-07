@@ -21,10 +21,12 @@
 #' @param HOCR if `TRUE` return results as HOCR xml instead of plain text
 #' @param ... additional parameters passed to [tesseract][tesseract::tesseract]
 #' @examples
+#' \donttest{
 #' if(require("tesseract")){
 #' img <- image_read("http://jeroen.github.io/images/testocr.png")
 #' image_ocr(img)
 #' image_ocr_data(img)
+#' }
 #' }
 image_ocr <- function(image, language = "eng", HOCR = FALSE, ...){
   assert_image(image)

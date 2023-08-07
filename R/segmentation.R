@@ -29,6 +29,7 @@
 #' objects <- image_convert(demo_image("objects.gif"), colorspace = "Gray")
 #' objects
 #'
+#' \donttest{
 #' # Split image in blobs of connected pixel levels
 #' if(magick_config()$version > "6.9.0"){
 #' objects %>%
@@ -41,6 +42,7 @@
 #' logo %>%
 #'   image_convert(colorspace = "HCL") %>%
 #'   image_fuzzycmeans(smoothing = 5)
+#' }
 #' }
 image_connect <- function(image, connectivity = 4){
   assert_image(image)

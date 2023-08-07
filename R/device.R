@@ -57,6 +57,7 @@
 #' dev.off()
 #' print(img)
 #'
+#' \donttest{
 #' # Vectorized example with custom coordinates
 #' earth <- image_read("https://jeroen.github.io/images/earth.gif")
 #' img <- image_draw(earth, xlim = c(0,1), ylim = c(0,1))
@@ -64,6 +65,7 @@
 #' text(.5, .9, "Our planet", cex = 3, col = "white")
 #' dev.off()
 #' print(img)
+#' }
 image_graph <- function(width = 800, height = 600, bg = "white", pointsize = 12, res = 72,
                         clip = TRUE, antialias = TRUE) {
   img <- magick_device_internal(bg = bg, width = width, height = height, pointsize = pointsize,

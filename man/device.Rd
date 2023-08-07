@@ -88,6 +88,7 @@ symbols(rep(200, 11), seq(0, 400, 40), circles = runif(11, 5, 35),
 dev.off()
 print(img)
 
+\donttest{
 # Vectorized example with custom coordinates
 earth <- image_read("https://jeroen.github.io/images/earth.gif")
 img <- image_draw(earth, xlim = c(0,1), ylim = c(0,1))
@@ -95,6 +96,7 @@ rect(.1, .1, .9, .9, border = "red", lty = "dashed", lwd = 5)
 text(.5, .9, "Our planet", cex = 3, col = "white")
 dev.off()
 print(img)
+}
 }
 \seealso{
 Other image: 

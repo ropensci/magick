@@ -24,17 +24,21 @@ instructions in \link[tesseract:tessdata]{tesseract_download()}.}
 Extract text from an image using the \link[tesseract:tesseract]{tesseract} package.
 }
 \details{
-To use this function you need to tesseract first:\preformatted{  install.packages("tesseract")
-}
+To use this function you need to tesseract first:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{  install.packages("tesseract")
+}\if{html}{\out{</div>}}
 
 Best results are obtained if you set the correct language in \link[tesseract:tesseract]{tesseract}.
 To install additional languages see instructions in \link[tesseract:tessdata]{tesseract_download()}.
 }
 \examples{
+\donttest{
 if(require("tesseract")){
 img <- image_read("http://jeroen.github.io/images/testocr.png")
 image_ocr(img)
 image_ocr_data(img)
+}
 }
 }
 \seealso{
