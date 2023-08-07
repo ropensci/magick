@@ -16,10 +16,8 @@
 
 .onLoad <- function(lib, pkg){
   # Try to please cran...
-  if(is_check()){
-    try(magick_threads(2))
-    Sys.setenv(OMP_THREAD_LIMIT=2)
-    Sys.setenv(OMP_NUM_THREADS=2)
+  if(is_check() && isTRUE(magick_threads() > 2)){
+    magick_threads(2)
   }
 
   # Set tempdir to R session
