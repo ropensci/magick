@@ -4,7 +4,7 @@ ifeq ($(R_COMPILED_BY),gcc 8.3.0)
 VERSION=6.9.12-3
 else
 VERSION=6.9.12-93
-NTDLL=-lntdll
+#NTDLL=-lntdll
 endif
 
 IMPATH = ../windows/imagemagick${IM}-${VERSION}
