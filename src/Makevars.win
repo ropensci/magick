@@ -1,5 +1,5 @@
 RWINLIB = ../windows/imagemagick
-LIBBUILD = lib${subst gcc ,-,${R_COMPILED_BY}}${R_ARCH}
+OLDLIBDIR = lib${subst gcc,,${COMPILED_BY}}${R_ARCH}
 
 PKG_CPPFLAGS = \
 	-I$(RWINLIB)/include-config${R_ARCH} \
@@ -8,7 +8,7 @@ PKG_CPPFLAGS = \
 PKG_CXXFLAGS = -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -D_LIB
 
 PKG_LIBS = \
-	-L$(RWINLIB)/$(LIBBUILD) \
+	-L$(RWINLIB)/$(OLDLIBDIR) \
 	-L$(RWINLIB)/lib \
 	-lMagick++-6.Q16 -lMagickWand-6.Q16 -lMagickCore-6.Q16 \
 	-lraw -lheif -lde265 -lx265 -laom \
