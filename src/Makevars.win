@@ -1,43 +1,33 @@
-# ImageMagick build target
-IM=6
-ifeq ($(R_COMPILED_BY),gcc 8.3.0)
-VERSION=6.9.12-3
-else
-VERSION=6.9.12-93
-#NTDLL=-lntdll
-endif
-
-IMPATH = ../windows/imagemagick${IM}-${VERSION}
-LIBBUILD = ${subst gcc ,-,${R_COMPILED_BY}}${R_ARCH}
+RWINLIB = ../windows/imagemagick
+LIBBUILD = lib${subst gcc ,-,${R_COMPILED_BY}}${R_ARCH}
 
 PKG_CPPFLAGS = \
-	-I$(IMPATH)/include-config${R_ARCH} \
-	-I$(IMPATH)/include/ImageMagick-${IM}
+	-I$(RWINLIB)/include-config${R_ARCH} \
+	-I$(RWINLIB)/include/ImageMagick-6
 
 PKG_CXXFLAGS = -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -D_LIB
 
 PKG_LIBS = \
-	-L$(IMPATH)/lib${LIBBUILD} \
-	-L$(IMPATH)/lib${R_ARCH} \
-	-lMagick++-${IM}.Q16 -lMagickWand-${IM}.Q16 -lMagickCore-${IM}.Q16 \
+	-L$(RWINLIB)/$(LIBBUILD) \
+	-L$(RWINLIB)/lib \
+	-lMagick++-6.Q16 -lMagickWand-6.Q16 -lMagickCore-6.Q16 \
 	-lraw -lheif -lde265 -lx265 -laom \
 	-lrsvg-2 -lxml2 \
-	-lpangocairo-1.0 -lpango-1.0 -lpangowin32-1.0 \
+	-lpangocairo-1.0 -lpango-1.0 -lpangowin32-1.0 -lharfbuzz -ldwrite \
 	-lcairo -lfreetype -lpixman-1 -lgdk_pixbuf-2.0 \
 	-lfftw3 -llcms2 -ljpeg -ltiff -llzma -lbz2 \
-	-lcairo-gobject -lgio-2.0 -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 \
-	-lffi -lpcre -lpng16 -lintl -lz -liconv -lfribidi \
-	-lopenjp2 -lwebpmux -lwebp -lwebpdecoder -lwebpdemux \
+	-lcairo-gobject -lgio-2.0 -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 -lpcre2-8 \
+	-lffi -lpng16 -lintl -lz -liconv -lfribidi \
+	-lopenjp2 -lwebpmux -lwebp -lsharpyuv -lwebpdecoder -lwebpdemux \
 	-lusp10 -liphlpapi -lgdiplus -lgdi32 -lole32 -ldnsapi \
-	-lws2_32 -luserenv -lbcrypt -lurlmon ${NTDLL}
+	-lws2_32 -luserenv -lbcrypt -lurlmon -lrpcrt4 -lshlwapi -luuid -lntdll
 
 all: clean winlibs
 
 clean:
-	rm -f $(OBJECTS) $(SHLIB)
+	rm -f  $(SHLIB)
 
 winlibs:
-	@echo "Linking to imagemagick-$(VERSION)"
 	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R" ${VERSION}
 
 .PHONY: all winlibs clean

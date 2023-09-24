@@ -1,10 +1,18 @@
-# Build against imagemagick static website.
-VERSION <- commandArgs(TRUE)
-IM <- substr(VERSION, 1,1)
-if(!file.exists(sprintf("../windows/imagemagick%s-%s/include/ImageMagick-%s/Magick++.h", IM, VERSION, IM))){
-  if(getRversion() < "3.3.0") setInternet2()
-  download.file(sprintf("https://github.com/rwinlib/imagemagick%s/archive/v%s.zip", IM, VERSION), "lib.zip", quiet = TRUE)
+if(!file.exists("../windows/imagemagick/include/ImageMagick-6/Magick++.h")){
+  unlink("../windows", recursive = TRUE)
+  url <- if(grepl("aarch", R.version$platform)){
+    "https://github.com/r-windows/bundles/releases/download/imagemagick-6.9.12.93/imagemagick-6.9.12.93-clang-aarch64.tar.xz"
+  } else if(grepl("clang", Sys.getenv('R_COMPILED_BY'))){
+    "https://github.com/r-windows/bundles/releases/download/imagemagick-6.9.12.93/imagemagick-6.9.12.93-clang-x86_64.tar.xz"
+  } else if(getRversion() >= "4.3") {
+    "https://github.com/r-windows/bundles/releases/download/imagemagick-6.9.12.93/imagemagick-6.9.12.93-ucrt-x86_64.tar.xz"
+  } else {
+    "https://github.com/rwinlib/imagemagick6/archive/v6.9.12-96.tar.gz"
+  }
+  download.file(url, basename(url), quiet = TRUE)
   dir.create("../windows", showWarnings = FALSE)
-  unzip("lib.zip", exdir = "../windows")
-  unlink("lib.zip")
+  untar(basename(url), exdir = "../windows", tar = 'internal')
+  unlink(basename(url))
+  setwd("../windows")
+  file.rename(list.files(), 'imagemagick')
 }
