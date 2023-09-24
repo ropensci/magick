@@ -7,6 +7,10 @@ PKG_CPPFLAGS = \
 
 PKG_CXXFLAGS = -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -D_LIB
 
+ifneq ($(R_ARCH),/i386)
+NTDLL=-lntdll
+endif
+
 PKG_LIBS = \
 	-L$(RWINLIB)/$(OLDLIBDIR) \
 	-L$(RWINLIB)/lib \
@@ -20,7 +24,7 @@ PKG_LIBS = \
 	-lffi -lpng16 -lintl -lz -liconv -lfribidi \
 	-lopenjp2 -lwebpmux -lwebp -lsharpyuv -lwebpdecoder -lwebpdemux \
 	-lusp10 -liphlpapi -lgdiplus -lgdi32 -lole32 -ldnsapi \
-	-lws2_32 -luserenv -lbcrypt -lurlmon -lrpcrt4 -lshlwapi -luuid -lntdll
+	-lws2_32 -luserenv -lbcrypt -lurlmon -lrpcrt4 -lshlwapi -luuid $(NTDLL)
 
 all: clean winlibs
 
