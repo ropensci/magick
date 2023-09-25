@@ -1,3 +1,6 @@
+2.8.0
+  - Windows: update to libmagick 6.9.12-96
+
 2.7.5
   - Win/Mac: update to libmagick 6.9.12-93
 
