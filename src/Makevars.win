@@ -24,7 +24,8 @@ PKG_LIBS = \
 	-lffi -lpng16 -lintl -lz -liconv -lfribidi \
 	-lopenjp2 -lwebpmux -lwebp -lsharpyuv -lwebpdecoder -lwebpdemux \
 	-lusp10 -liphlpapi -lgdiplus -lgdi32 -lole32 -ldnsapi \
-	-lws2_32 -luserenv -lbcrypt -lurlmon -lrpcrt4 -lshlwapi -luuid $(NTDLL)
+	-lws2_32 -luserenv -lbcrypt -lurlmon -lrpcrt4 -lshlwapi -luuid $(NTDLL) \
+	-pthread
 
 all: clean winlibs
 
