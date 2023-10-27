@@ -115,7 +115,7 @@ setup_device <- function(info, xlim = NULL, ylim = NULL, xaxs = "i", yaxs = "i",
     xlim <- c(0, info$width)
   if(!length(ylim))
     ylim <- c(info$height, 0)
-  graphics::plot.new()
   graphics::par(mar = mar)
+  graphics::plot.new()
   graphics::plot.window(xlim = xlim, ylim = ylim, xaxs = xaxs, yaxs = yaxs, ...)
 }
