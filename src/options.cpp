@@ -42,5 +42,7 @@ Rcpp::String set_magick_tempdir(const char * new_tmpdir){
 
 // [[Rcpp::export]]
 void set_magick_seed(unsigned long seed){
+#if MagickLibVersion >= 0x694
   Magick::SetRandomSeed(seed);
+#endif
 }
