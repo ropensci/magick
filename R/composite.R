@@ -94,8 +94,8 @@ image_shadow_mask <- function(image, geometry = '50x10+30+30'){
 #' @rdname composite
 #' @inheritParams edges
 #' @examples image_shadow(imlogo)
-image_shadow <- function(image, color = 'black', bg = 'white', geometry = '50x10+30+30',
-                         operator = 'atop', offset = '+20+20'){
+image_shadow <- function(image, color = 'black', bg = 'none', geometry = '50x10+30+30',
+                         operator = 'copy', offset = '+20+20'){
   assert_image(image)
   geometry <- as.character(geometry)
   input <- image_background(image, color, flatten = TRUE)

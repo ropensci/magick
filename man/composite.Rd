@@ -28,9 +28,9 @@ image_shadow_mask(image, geometry = "50x10+30+30")
 image_shadow(
   image,
   color = "black",
-  bg = "white",
+  bg = "none",
   geometry = "50x10+30+30",
-  operator = "atop",
+  operator = "copy",
   offset = "+20+20"
 )
 
