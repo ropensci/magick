@@ -497,8 +497,8 @@ magick_image_reducenoise <- function(input, radius) {
     .Call('_magick_magick_image_reducenoise', PACKAGE = 'magick', input, radius)
 }
 
-magick_image_annotate <- function(input, text, gravity, location, rot, size, font, style, weight, kerning, decoration, color, strokecolor, boxcolor) {
-    .Call('_magick_magick_image_annotate', PACKAGE = 'magick', input, text, gravity, location, rot, size, font, style, weight, kerning, decoration, color, strokecolor, boxcolor)
+magick_image_annotate <- function(input, text, gravity, location, rot, size, font, style, weight, kerning, decoration, color, strokecolor, strokewidth, boxcolor) {
+    .Call('_magick_magick_image_annotate', PACKAGE = 'magick', input, text, gravity, location, rot, size, font, style, weight, kerning, decoration, color, strokecolor, strokewidth, boxcolor)
 }
 
 magick_image_compare <- function(input, reference_image, metric, fuzz_percent) {
