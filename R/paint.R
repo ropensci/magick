@@ -69,7 +69,7 @@ image_fill <- function(image, color, point = "+1+1", fuzz = 0, refcolor = NULL){
 image_annotate <- function(image, text, gravity = "northwest", location = "+0+0", degrees = 0,
                            size = 10, font = "", style = "normal", weight = 400, kerning = 0,
                            decoration = NULL, color = NULL, strokecolor = NULL,
-                           strokewidth = 1, boxcolor = NULL){
+                           strokewidth = NULL, boxcolor = NULL){
   assert_image(image)
   font <- as.character(font)
   size <- as.integer(size)

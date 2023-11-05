@@ -22,7 +22,7 @@ image_annotate(
   decoration = NULL,
   color = NULL,
   strokecolor = NULL,
-  strokewidth = 1,
+  strokewidth = NULL,
   boxcolor = NULL
 )
 }
