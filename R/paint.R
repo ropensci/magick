@@ -50,6 +50,7 @@ image_fill <- function(image, color, point = "+1+1", fuzz = 0, refcolor = NULL){
 #' @param size font-size in pixels
 #' @param strokecolor a [color string](https://www.imagemagick.org/Magick++/Color.html)
 #' adds a stroke (border around the text)
+#' @param strokewidth set the strokewidth of the border around the text
 #' @param boxcolor a [color string](https://www.imagemagick.org/Magick++/Color.html)
 #' for background color that annotation text is rendered on.
 #' @param font string with font family such as `"sans"`, `"mono"`, `"serif"`,
@@ -67,7 +68,8 @@ image_fill <- function(image, color, point = "+1+1", fuzz = 0, refcolor = NULL){
 #' image_annotate(logo, "The quick brown fox", font = "monospace", size = 50)
 image_annotate <- function(image, text, gravity = "northwest", location = "+0+0", degrees = 0,
                            size = 10, font = "", style = "normal", weight = 400, kerning = 0,
-                           decoration = NULL, color = NULL, strokecolor = NULL, boxcolor = NULL){
+                           decoration = NULL, color = NULL, strokecolor = NULL,
+                           strokewidth = NULL, boxcolor = NULL){
   assert_image(image)
   font <- as.character(font)
   size <- as.integer(size)
@@ -75,9 +77,10 @@ image_annotate <- function(image, text, gravity = "northwest", location = "+0+0"
   kerning <- as.numeric(kerning)
   color <- as.character(color)
   strokecolor <- as.character(strokecolor)
+  strokewidth <- as.integer(strokewidth)
   boxcolor <- as.character(boxcolor)
   decoration <- as.character(decoration)
   magick_image_annotate(image, text, gravity, location, degrees, size,
                         font, style, weight, kerning, decoration,
-                        color, strokecolor, boxcolor)
+                        color, strokecolor, strokewidth, boxcolor)
 }

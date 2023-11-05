@@ -1546,8 +1546,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_annotate
-XPtrImage magick_image_annotate(XPtrImage input, Rcpp::CharacterVector text, const char * gravity, const char * location, double rot, double size, const char * font, const char * style, double weight, double kerning, Rcpp::CharacterVector decoration, Rcpp::CharacterVector color, Rcpp::CharacterVector strokecolor, Rcpp::CharacterVector boxcolor);
-RcppExport SEXP _magick_magick_image_annotate(SEXP inputSEXP, SEXP textSEXP, SEXP gravitySEXP, SEXP locationSEXP, SEXP rotSEXP, SEXP sizeSEXP, SEXP fontSEXP, SEXP styleSEXP, SEXP weightSEXP, SEXP kerningSEXP, SEXP decorationSEXP, SEXP colorSEXP, SEXP strokecolorSEXP, SEXP boxcolorSEXP) {
+XPtrImage magick_image_annotate(XPtrImage input, Rcpp::CharacterVector text, const char * gravity, const char * location, double rot, double size, const char * font, const char * style, double weight, double kerning, Rcpp::CharacterVector decoration, Rcpp::CharacterVector color, Rcpp::CharacterVector strokecolor, Rcpp::IntegerVector strokewidth, Rcpp::CharacterVector boxcolor);
+RcppExport SEXP _magick_magick_image_annotate(SEXP inputSEXP, SEXP textSEXP, SEXP gravitySEXP, SEXP locationSEXP, SEXP rotSEXP, SEXP sizeSEXP, SEXP fontSEXP, SEXP styleSEXP, SEXP weightSEXP, SEXP kerningSEXP, SEXP decorationSEXP, SEXP colorSEXP, SEXP strokecolorSEXP, SEXP strokewidthSEXP, SEXP boxcolorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -1564,8 +1564,9 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type decoration(decorationSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type color(colorSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type strokecolor(strokecolorSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type strokewidth(strokewidthSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type boxcolor(boxcolorSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_annotate(input, text, gravity, location, rot, size, font, style, weight, kerning, decoration, color, strokecolor, boxcolor));
+    rcpp_result_gen = Rcpp::wrap(magick_image_annotate(input, text, gravity, location, rot, size, font, style, weight, kerning, decoration, color, strokecolor, strokewidth, boxcolor));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1723,7 +1724,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_orient", (DL_FUNC) &_magick_magick_image_orient, 2},
     {"_magick_magick_image_despeckle", (DL_FUNC) &_magick_magick_image_despeckle, 2},
     {"_magick_magick_image_reducenoise", (DL_FUNC) &_magick_magick_image_reducenoise, 2},
-    {"_magick_magick_image_annotate", (DL_FUNC) &_magick_magick_image_annotate, 14},
+    {"_magick_magick_image_annotate", (DL_FUNC) &_magick_magick_image_annotate, 15},
     {"_magick_magick_image_compare", (DL_FUNC) &_magick_magick_image_compare, 4},
     {"_magick_magick_image_distort", (DL_FUNC) &_magick_magick_image_distort, 4},
     {NULL, NULL, 0}

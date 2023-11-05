@@ -340,7 +340,8 @@ XPtrImage magick_image_annotate( XPtrImage input, Rcpp::CharacterVector text, co
                                  const char * location, double rot, double size, const char * font,
                                  const char * style, double weight, double kerning,
                                  Rcpp::CharacterVector decoration, Rcpp::CharacterVector color,
-                                 Rcpp::CharacterVector strokecolor, Rcpp::CharacterVector boxcolor){
+                                 Rcpp::CharacterVector strokecolor, Rcpp::IntegerVector strokewidth,
+                                 Rcpp::CharacterVector boxcolor){
   XPtrImage output = copy(input);
   typedef std::container<Magick::Drawable> drawlist;
   Magick::Geometry pos(location);
@@ -351,6 +352,8 @@ XPtrImage magick_image_annotate( XPtrImage input, Rcpp::CharacterVector text, co
   draw.push_back(Magick::DrawableTextAntialias(true));
   if(strokecolor.size())
     draw.push_back(Magick::DrawableStrokeColor(Color(strokecolor[0])));
+  if(strokewidth.size())
+    draw.push_back(Magick::DrawableStrokeWidth(strokewidth[0]));
   if(color.size())
     draw.push_back(Magick::DrawableFillColor(Color(color[0])));
   if(boxcolor.size())

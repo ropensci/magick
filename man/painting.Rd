@@ -22,6 +22,7 @@ image_annotate(
   decoration = NULL,
   color = NULL,
   strokecolor = NULL,
+  strokewidth = NULL,
   boxcolor = NULL
 )
 }
@@ -67,6 +68,8 @@ value from \link{gravity_types}.}
 
 \item{strokecolor}{a \href{https://www.imagemagick.org/Magick++/Color.html}{color string}
 adds a stroke (border around the text)}
+
+\item{strokewidth}{set the strokewidth of the border around the text}
 
 \item{boxcolor}{a \href{https://www.imagemagick.org/Magick++/Color.html}{color string}
 for background color that annotation text is rendered on.}
