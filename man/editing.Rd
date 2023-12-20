@@ -202,8 +202,8 @@ raster <- as.raster(frink)
 par(ask=FALSE)
 plot(raster)
 
-# Read bitmap arrays from from other image packages
-curl::curl_download("https://jeroen.github.io/images/example.webp", "example.webp")
+# Read bitmap arrays from other image packages
+download.file("https://jeroen.github.io/images/example.webp", "example.webp", mode = 'wb')
 if(require(webp)) image_read(webp::read_webp("example.webp"))
 unlink(c("example.webp", "output.png"))
 if(require(rsvg)){
