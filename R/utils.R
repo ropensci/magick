@@ -27,21 +27,25 @@ replace_url <- function(path){
   }
 }
 
+# Uses file extension from HTTP content-type if available to help IM guess type.
 download_url <- function(url){
-  req <- curl::curl_fetch_memory(url)
-  if(req$status_code >= 400)
-    stop(sprintf("Failed to download %s (HTTP %d)", url, req$status))
-  headers <- curl::parse_headers_list(req$headers)
-  ctype <- headers[['content-type']]
-  matches <- match(ctype, mimetypes$type)
-  extension <- if(length(matches) && !is.na(matches) && !grepl("(text|octet)", ctype)){
-    sub("*.", ".", mimetypes$pattern[matches[1]], fixed = TRUE)
+  tmp <- tempfile(fileext = sub("\\?.*", "", basename(url)))
+  if(requireNamespace('curl', quietly = TRUE)){
+    h <- curl::new_handle()
+    curl::curl_download(url, tmp, handle = h)
+    headers <- curl::parse_headers_list(curl::handle_data(h)$headers)
+    ctype <- headers[['content-type']]
+    matches <- match(ctype, mimetypes$type)
+    if(length(matches) && !is.na(matches) && !grepl("(text|octet)", ctype)){
+      extension <- sub("*.", ".", mimetypes$pattern[matches[1]], fixed = TRUE)
+      outfile <- tempfile(fileext = extension)
+      file.rename(tmp, outfile)
+      return(outfile)
+    }
   } else {
-    sub("\\?.*", "", basename(url))
+    utils::download.file(url, tmp, quiet = TRUE) #Fallback for webR
   }
-  filename <- tempfile(fileext = extension)
-  writeBin(req$content, filename)
-  return(filename)
+  return(tmp)
 }
 
 assert_image <- function(image){

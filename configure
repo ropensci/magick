@@ -82,5 +82,10 @@ fi
 # Write to Makevars
 sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" src/Makevars.in > src/Makevars
 
+# Dont use curl on webR
+if [ `uname` = "Emscripten" ]; then
+sed -i.bak 's/curl/utils/g' DESCRIPTION
+fi
+
 # Success
 exit 0
