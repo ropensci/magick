@@ -11,7 +11,7 @@ PKG_RPM_NAME="ImageMagick-c++-devel"
 PKG_CSW_NAME="imagemagick_dev"
 PKG_BREW_NAME="imagemagick"
 PKG_TEST_HEADER="<Magick++.h>"
-PKG_LIBS="-lMagick++-6.Q16"
+PKG_LIBS="-lMagick++-6.Q16 -lMagickWand-6.Q16 -lMagickCore-6.Q16"
 
 # Use Magick++-config (on Solaris /opt/csw/bin must be in PATH)
 if [ `command -v pkg-config` ]; then
@@ -42,7 +42,7 @@ elif [ `uname` = "Darwin" ]; then
     BREWDIR=`brew --prefix`
     INCLUDE_DIR="$BREWDIR/opt/imagemagick@6/include/ImageMagick-6"
     PKG_CFLAGS="-I$INCLUDE_DIR -DMAGICKCORE_QUANTUM_DEPTH=16 -DMAGICKCORE_HDRI_ENABLE=0"
-    PKG_LIBS="-L$BREWDIR/opt/imagemagick@6/lib -lMagick++-6.Q16"
+    PKG_LIBS="-L$BREWDIR/opt/imagemagick@6/lib -lMagick++-6.Q16 -lMagickWand-6.Q16 -lMagickCore-6.Q16"
   else
     curl -sfL "https://autobrew.github.io/scripts/$PKG_BREW_NAME" > autobrew
     . ./autobrew
