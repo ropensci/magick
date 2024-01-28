@@ -56,8 +56,8 @@ available at the \href{https://legacy.imagemagick.org/Usage/transform/}{imagemag
 if(magick_config()$version > "6.8.9"){
 shape <- demo_image("shape_rectangle.gif")
 rectangle <- image_canny(shape)
-rectangle \%>\% image_hough_draw('5x5+20')
-rectangle \%>\% image_hough_txt(format = 'svg') \%>\% cat()
+rectangle |> image_hough_draw('5x5+20')
+rectangle |> image_hough_txt(format = 'svg') |> cat()
 }
 }
 \seealso{

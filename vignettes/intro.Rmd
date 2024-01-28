@@ -103,14 +103,7 @@ Note that size is currently 0 because ImageMagick is lazy (in the good sense) an
 
 IDE's with a built-in web browser (such as RStudio) automatically display magick images in the viewer. This results in a neat interactive image editing environment.
 
-<img id="rstudioimg" alt="rstudio">
-<script>
-//this is a hack to prevent pandoc 'self_contained' from embedding this image
-//in future version of pandoc we can use the image and set 'data-external=1' instead
-window.onload = function(){
-  document.getElementById("rstudioimg").src = "https://jeroen.github.io/images/magick-rstudio.png";
-}
-</script>
+<img alt="rstudio screenshot" data-external=1 src = "https://jeroen.github.io/images/magick-rstudio.png">
 
 Alternatively, on Linux you can use `image_display` to preview the image in an X11 window. Finally `image_browse` opens the image in your system's default application for a given type.
 
@@ -215,8 +208,8 @@ image_append(c(img, img_blurred))
 Or use any of the [standard kernels](https://legacy.imagemagick.org/Usage/convolve/)
 
 ```{r}
-img %>% image_convolve('Sobel') %>% image_negate()
-img %>% image_convolve('DoG:0,0,2') %>% image_negate()
+img |> image_convolve('Sobel') |> image_negate()
+img |> image_convolve('DoG:0,0,2') |> image_negate()
 ```
 
 ### Text annotation
@@ -258,13 +251,13 @@ test <- image_annotate(test, "This is how we combine transformations", color = "
 print(test)
 ```
 
-Using `magrittr` pipe syntax makes it a bit more readable
+Using pipe syntax makes it a bit more readable
 
 ```{r}
-image_read("https://jeroen.github.io/images/frink.png") %>%
-  image_rotate(270) %>%
-  image_background("blue", flatten = TRUE) %>%
-  image_border("red", "10x10") %>%
+image_read("https://jeroen.github.io/images/frink.png") |>
+  image_rotate(270) |>
+  image_background("blue", flatten = TRUE) |>
+  image_border("red", "10x10") |>
   image_annotate("The same thing with pipes", color = "white", size = 30)
 ```
 
@@ -277,16 +270,16 @@ The standard base methods `[` `[[`, `c()` and `length()` are used to manipulate 
 
 ```{r}
 # Download earth gif and make it a bit smaller for vignette
-earth <- image_read("https://jeroen.github.io/images/earth.gif") %>%
-  image_scale("200x") %>%
+earth <- image_read("https://jeroen.github.io/images/earth.gif") |>
+  image_scale("200x") |>
   image_quantize(128)
 
 length(earth)
 earth
 head(image_info(earth))
 
-rev(earth) %>% 
-  image_flip() %>% 
+rev(earth) |> 
+  image_flip() |> 
   image_annotate("meanwhile in Australia", size = 20, color = "white")
 ```
 
@@ -367,9 +360,9 @@ Morphing creates a sequence of `n` images that gradually morph one image into an
 ```{r}
 newlogo <- image_scale(image_read("https://jeroen.github.io/images/Rlogo.png"))
 oldlogo <- image_scale(image_read("https://jeroen.github.io/images/Rlogo-old.png"))
-image_resize(c(oldlogo, newlogo), '200x150!') %>%
-  image_background('white') %>%
-  image_morph() %>%
+image_resize(c(oldlogo, newlogo), '200x150!') |>
+  image_background('white') |>
+  image_morph() |>
   image_animate(optimize = TRUE)
 ```
 

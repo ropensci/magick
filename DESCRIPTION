@@ -40,6 +40,6 @@ Suggests:
     tesseract (>= 2.0),
     gifski
 Encoding: UTF-8
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.0
 Roxygen: list(load = "installed", markdown = TRUE)
 Language: en-US

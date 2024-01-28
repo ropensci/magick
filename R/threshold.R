@@ -24,8 +24,8 @@
 #' image_threshold(test, type = "white", threshold = "50%")
 #'
 #' # Turn image into BW
-#' test %>%
-#'   image_threshold(type = "white", threshold = "50%") %>%
+#' test |>
+#'   image_threshold(type = "white", threshold = "50%") |>
 #'   image_threshold(type = "black", threshold = "50%")
 #'
 #' # adaptive thresholding

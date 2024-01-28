@@ -42,14 +42,14 @@ image_scale(frink, "200x200")
 image_flip(frink)
 image_rotate(frink, 45) ## <-- result of this is shown
 image_negate(frink)
-frink %>% 
-  image_background("green") %>% 
-  image_flatten() %>%
+frink |> 
+  image_background("green") |> 
+  image_flatten() |>
   image_border("red", "10x10")
 ```
 
 ```r
-image_rotate(frink, 45) %>% image_write("man/figures/frink-rotated.png")
+image_rotate(frink, 45) |> image_write("man/figures/frink-rotated.png")
 ```
 
 ![](man/figures/frink-rotated.png)
@@ -65,7 +65,7 @@ image_edge(frink)
 ```
 
 ```r
-image_charcoal(frink) %>% image_write("man/figures/frink-charcoal.png")
+image_charcoal(frink) |> image_write("man/figures/frink-charcoal.png")
 ```
 
 ![](man/figures/frink-charcoal.png)

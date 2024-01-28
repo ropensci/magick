@@ -14,38 +14,38 @@
 #' @family image
 #' @examples #example from IM website:
 #' if(magick_config()$version > "6.8.8"){
-#' pixel <- image_blank(1, 1, 'white') %>% image_border('black', '5x5')
+#' pixel <- image_blank(1, 1, 'white') |> image_border('black', '5x5')
 #'
 #' # See the effect of Dilate method
-#' pixel %>% image_scale('800%')
-#' pixel %>% image_morphology('Dilate', "Diamond") %>% image_scale('800%')
+#' pixel |> image_scale('800%')
+#' pixel |> image_morphology('Dilate', "Diamond") |> image_scale('800%')
 #'
 #' # These produce the same output:
-#' pixel %>% image_morphology('Dilate', "Diamond", iter = 3) %>% image_scale('800%')
-#' pixel %>% image_morphology('Dilate', "Diamond:3") %>% image_scale('800%')
+#' pixel |> image_morphology('Dilate', "Diamond", iter = 3) |> image_scale('800%')
+#' pixel |> image_morphology('Dilate', "Diamond:3") |> image_scale('800%')
 #'
 #' # Plus example
-#' pixel %>% image_morphology('Dilate', "Plus", iterations = 2) %>% image_scale('800%')
+#' pixel |> image_morphology('Dilate', "Plus", iterations = 2) |> image_scale('800%')
 #'
 #' # Rose examples
-#' rose %>% image_morphology('ErodeI', 'Octagon', iter = 3)
-#' rose %>% image_morphology('DilateI', 'Octagon', iter = 3)
-#' rose %>% image_morphology('OpenI', 'Octagon', iter = 3)
-#' rose %>% image_morphology('CloseI', 'Octagon', iter = 3)
+#' rose |> image_morphology('ErodeI', 'Octagon', iter = 3)
+#' rose |> image_morphology('DilateI', 'Octagon', iter = 3)
+#' rose |> image_morphology('OpenI', 'Octagon', iter = 3)
+#' rose |> image_morphology('CloseI', 'Octagon', iter = 3)
 #'
 #' # Edge detection
 #' man <- demo_image('man.gif')
-#' man %>% image_morphology('EdgeIn', 'Octagon')
-#' man %>% image_morphology('EdgeOut', 'Octagon')
-#' man %>% image_morphology('Edge', 'Octagon')
+#' man |> image_morphology('EdgeIn', 'Octagon')
+#' man |> image_morphology('EdgeOut', 'Octagon')
+#' man |> image_morphology('Edge', 'Octagon')
 #'
 #' # Octagonal Convex Hull
-#'  man %>%
-#'    image_morphology('Close', 'Diamond') %>%
+#'  man |>
+#'    image_morphology('Close', 'Diamond') |>
 #'    image_morphology('Thicken', 'ConvexHull', iterations = 1)
 #'
 #' # Thinning down to a Skeleton
-#' man %>% image_morphology('Thinning', 'Skeleton', iterations = 1)
+#' man |> image_morphology('Thinning', 'Skeleton', iterations = 1)
 #'
 #' # Specify custom kernel matrix usingn a string:
 #' img <- demo_image("test_mag.gif")

@@ -1,3 +1,6 @@
+2.8.3
+  - Switch to base-R pipe in examples and vignette
+
 2.8.2
   - Fix image_draw() for small images: #317
   - Change image_shadow() to transparent background by default
