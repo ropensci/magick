@@ -23,6 +23,22 @@ Rcpp::CharacterVector list_options(const char * str){
 }
 
 // [[Rcpp::export]]
+void dump_option_list(SEXP args){
+  /* This is equivalent to calling: convert -list font */
+  MagickCore::ExceptionInfo *exception = MagickCore::AcquireExceptionInfo();
+  MagickCore::ImageInfo *info = MagickCore::AcquireImageInfo();
+  const int argc = Rf_length(args);
+  const char **argv = (const char **) malloc(Rf_length(args));
+  for(int i = 0; i < argc; i++)
+    argv[i] = CHAR(STRING_ELT(args, i));
+  MogrifyImageInfo(info, argc, argv, exception);
+  Magick::throwException(exception);
+  exception=DestroyExceptionInfo(exception);
+  info=DestroyImageInfo(info);
+  free(argv);
+}
+
+// [[Rcpp::export]]
 Rcpp::String set_magick_tempdir(const char * new_tmpdir){
   if(new_tmpdir && strlen(new_tmpdir)){
     MagickCore::ExceptionInfo *exception = MagickCore::AcquireExceptionInfo();

@@ -1175,6 +1175,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// dump_option_list
+void dump_option_list(SEXP args);
+RcppExport SEXP _magick_dump_option_list(SEXP argsSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type args(argsSEXP);
+    dump_option_list(args);
+    return R_NilValue;
+END_RCPP
+}
 // set_magick_tempdir
 Rcpp::String set_magick_tempdir(const char * new_tmpdir);
 RcppExport SEXP _magick_set_magick_tempdir(SEXP new_tmpdirSEXP) {
@@ -1694,6 +1704,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_combine", (DL_FUNC) &_magick_magick_image_combine, 3},
     {"_magick_magick_image_set_define", (DL_FUNC) &_magick_magick_image_set_define, 4},
     {"_magick_list_options", (DL_FUNC) &_magick_list_options, 1},
+    {"_magick_dump_option_list", (DL_FUNC) &_magick_dump_option_list, 1},
     {"_magick_set_magick_tempdir", (DL_FUNC) &_magick_set_magick_tempdir, 1},
     {"_magick_set_magick_seed", (DL_FUNC) &_magick_set_magick_seed, 1},
     {"_magick_magick_image_properties", (DL_FUNC) &_magick_magick_image_properties, 1},

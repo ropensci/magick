@@ -4,6 +4,10 @@
 #' descriptions see
 #' [ImageMagick Enumerations](https://www.imagemagick.org/Magick++/Enumerations.html).
 #'
+#' The [dump_option_info] function is equivalent to calling `convert -list [option]` on
+#' the command line. It does not return anything, it only makes ImageMagick print
+#' stuff to the console, use only for debugging.
+#'
 #' @rdname options
 #' @family image
 #' @name options
@@ -116,4 +120,12 @@ compress_types <- function(){
 #' @rdname options
 distort_types <- function(){
   list_options('distort')
+}
+
+#' @export
+#' @rdname options
+#' @param option one of the [option_types]
+dump_option_info <- function(option = 'font'){
+  option <- as.character(option)
+  dump_option_list(c("-list", option))
 }

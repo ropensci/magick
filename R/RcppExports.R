@@ -377,6 +377,10 @@ list_options <- function(str) {
     .Call('_magick_list_options', PACKAGE = 'magick', str)
 }
 
+dump_option_list <- function(args) {
+    invisible(.Call('_magick_dump_option_list', PACKAGE = 'magick', args))
+}
+
 set_magick_tempdir <- function(new_tmpdir) {
     .Call('_magick_set_magick_tempdir', PACKAGE = 'magick', new_tmpdir)
 }
