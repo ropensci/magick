@@ -28,14 +28,15 @@ void dump_option_list(SEXP args){
   MagickCore::ExceptionInfo *exception = MagickCore::AcquireExceptionInfo();
   MagickCore::ImageInfo *info = MagickCore::AcquireImageInfo();
   const int argc = Rf_length(args);
-  const char **argv = (const char **) malloc(Rf_length(args));
+  const char *argv[1000];
   for(int i = 0; i < argc; i++)
     argv[i] = CHAR(STRING_ELT(args, i));
   MogrifyImageInfo(info, argc, argv, exception);
-  Magick::throwException(exception);
-  exception=DestroyExceptionInfo(exception);
   info=DestroyImageInfo(info);
-  free(argv);
+#if MagickLibVersion >= 0x690
+  Magick::throwException(exception);
+#endif
+  exception=DestroyExceptionInfo(exception);
 }
 
 // [[Rcpp::export]]
