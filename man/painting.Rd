@@ -56,11 +56,12 @@ value from \link{gravity_types}.}
 \item{size}{font-size in pixels}
 
 \item{font}{string with font family such as \code{"sans"}, \code{"mono"}, \code{"serif"},
-\code{"Times"}, \code{"Helvetica"}, \code{"Trebuchet"}, \code{"Georgia"}, \code{"Palatino"} or \code{"Comic Sans"}.}
+\code{"Times"}, \code{"Helvetica"}, \code{"Trebuchet"}, \code{"Georgia"}, \code{"Palatino"} or \code{"Comic Sans"}.
+See \code{\link[=magick_fonts]{magick_fonts()}} for what is available.}
 
 \item{style}{value of \link{style_types} for example \code{"italic"}}
 
-\item{weight}{thickness of the font, 400 is normal and 700 is bold.}
+\item{weight}{thickness of the font, 400 is normal and 700 is bold, see \code{\link[=magick_fonts]{magick_fonts()}}.}
 
 \item{kerning}{increases or decreases whitespace between letters}
 

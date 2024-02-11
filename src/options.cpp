@@ -33,6 +33,7 @@ Rcpp::DataFrame list_font_info(){
   Rcpp::CharacterVector name(number_fonts);
   Rcpp::CharacterVector family(number_fonts);
   Rcpp::CharacterVector glyphs(number_fonts);
+  Rcpp::IntegerVector weight(number_fonts);
   for (int i = 0; i < number_fonts; i++){
     if(type_info[i]->name)
       name[i] = type_info[i]->name;
@@ -40,11 +41,14 @@ Rcpp::DataFrame list_font_info(){
       family[i] = type_info[i]->family;
     if(type_info[i]->glyphs)
       glyphs[i] = type_info[i]->glyphs;
+    if(type_info[i]->weight)
+      weight[i] = type_info[i]->weight;
   }
   MagickCore::RelinquishMagickMemory((void *) type_info);
   return Rcpp::DataFrame::create(
     Rcpp::_["name"] = name,
     Rcpp::_["family"] = family,
+    Rcpp::_["weight"] = weight,
     Rcpp::_["glyphs"] = glyphs,
     Rcpp::_["stringsAsFactors"] = false
   );

@@ -55,8 +55,9 @@ image_fill <- function(image, color, point = "+1+1", fuzz = 0, refcolor = NULL){
 #' for background color that annotation text is rendered on.
 #' @param font string with font family such as `"sans"`, `"mono"`, `"serif"`,
 #' `"Times"`, `"Helvetica"`, `"Trebuchet"`, `"Georgia"`, `"Palatino"` or `"Comic Sans"`.
+#' See [magick_fonts()] for what is available.
 #' @param style value of [style_types][style_types] for example `"italic"`
-#' @param weight thickness of the font, 400 is normal and 700 is bold.
+#' @param weight thickness of the font, 400 is normal and 700 is bold, see [magick_fonts()].
 #' @param kerning increases or decreases whitespace between letters
 #' @param decoration value of [decoration_types][decoration_types] for example `"underline"`
 #' @examples # Add some text to an image
