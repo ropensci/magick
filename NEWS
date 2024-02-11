@@ -1,5 +1,6 @@
 2.8.3
   - Switch to base-R pipe in examples and vignette
+  - New functions magick_fonts() and dump_option_info()
 
 2.8.2
   - Fix image_draw() for small images: #317
