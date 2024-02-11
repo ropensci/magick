@@ -1175,6 +1175,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// list_font_info
+Rcpp::DataFrame list_font_info();
+RcppExport SEXP _magick_list_font_info() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(list_font_info());
+    return rcpp_result_gen;
+END_RCPP
+}
 // dump_option_list
 void dump_option_list(SEXP args);
 RcppExport SEXP _magick_dump_option_list(SEXP argsSEXP) {
@@ -1704,6 +1714,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_combine", (DL_FUNC) &_magick_magick_image_combine, 3},
     {"_magick_magick_image_set_define", (DL_FUNC) &_magick_magick_image_set_define, 4},
     {"_magick_list_options", (DL_FUNC) &_magick_list_options, 1},
+    {"_magick_list_font_info", (DL_FUNC) &_magick_list_font_info, 0},
     {"_magick_dump_option_list", (DL_FUNC) &_magick_dump_option_list, 1},
     {"_magick_set_magick_tempdir", (DL_FUNC) &_magick_set_magick_tempdir, 1},
     {"_magick_set_magick_seed", (DL_FUNC) &_magick_set_magick_seed, 1},

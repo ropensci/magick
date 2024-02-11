@@ -22,6 +22,34 @@ Rcpp::CharacterVector list_options(const char * str){
   return out;
 }
 
+// Copied code from MagickCore ListTypeInfo()
+// [[Rcpp::export]]
+Rcpp::DataFrame list_font_info(){
+  size_t number_fonts=0;
+  MagickCore::ExceptionInfo *exception = MagickCore::AcquireExceptionInfo();
+  const MagickCore::TypeInfo **type_info = MagickCore::GetTypeInfoList("*",&number_fonts,exception);
+  if(type_info == NULL || number_fonts == 0)
+    return R_NilValue;
+  Rcpp::CharacterVector name(number_fonts);
+  Rcpp::CharacterVector family(number_fonts);
+  Rcpp::CharacterVector glyphs(number_fonts);
+  for (int i = 0; i < number_fonts; i++){
+    if(type_info[i]->name)
+      name[i] = type_info[i]->name;
+    if(type_info[i]->family)
+      family[i] = type_info[i]->family;
+    if(type_info[i]->glyphs)
+      glyphs[i] = type_info[i]->glyphs;
+  }
+  MagickCore::RelinquishMagickMemory((void *) type_info);
+  return Rcpp::DataFrame::create(
+    Rcpp::_["name"] = name,
+    Rcpp::_["family"] = family,
+    Rcpp::_["glyphs"] = glyphs,
+    Rcpp::_["stringsAsFactors"] = false
+  );
+}
+
 // [[Rcpp::export]]
 void dump_option_list(SEXP args){
   /* This is equivalent to calling: convert -list font */

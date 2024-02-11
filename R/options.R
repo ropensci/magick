@@ -22,6 +22,12 @@ magick_options <- function(){
 
 #' @export
 #' @rdname options
+magick_fonts <- function(){
+  list_font_info()
+}
+
+#' @export
+#' @rdname options
 option_types <- function(){
   list_options("List")
 }

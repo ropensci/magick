@@ -3,6 +3,7 @@
 \name{options}
 \alias{options}
 \alias{magick_options}
+\alias{magick_fonts}
 \alias{option_types}
 \alias{filter_types}
 \alias{metric_types}
@@ -24,6 +25,8 @@
 \title{Magick Options}
 \usage{
 magick_options()
+
+magick_fonts()
 
 option_types()
 
