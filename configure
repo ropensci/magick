@@ -1,4 +1,4 @@
-# Anticonf script by Jeroen Ooms (2020)
+# Anticonf script by Jeroen Ooms (2024)
 # The script will try 'Magick++-config' and 'pkg-config' to find required
 # cflags and ldflags. Make sure this executable is in PATH when installing
 # the package. Alternatively, you can set INCLUDE_DIR and LIB_DIR manually:
@@ -8,12 +8,11 @@
 PKG_CONFIG_NAME="Magick++"
 PKG_DEB_NAME="libmagick++-dev"
 PKG_RPM_NAME="ImageMagick-c++-devel"
-PKG_CSW_NAME="imagemagick_dev"
 PKG_BREW_NAME="imagemagick"
 PKG_TEST_HEADER="<Magick++.h>"
 PKG_LIBS="-lMagick++-6.Q16 -lMagickWand-6.Q16 -lMagickCore-6.Q16"
 
-# Use Magick++-config (on Solaris /opt/csw/bin must be in PATH)
+# Use Magick++-config
 if [ `command -v pkg-config` ]; then
   PKGCONFIG_CFLAGS=`pkg-config --cflags --silence-errors ${PKG_CONFIG_NAME}`
   PKGCONFIG_LIBS=`pkg-config --libs ${PKG_CONFIG_NAME}`
@@ -67,8 +66,7 @@ if [ $? -ne 0 ]; then
   echo "Configuration failed to find the $PKG_CONFIG_NAME library. Try installing:"
   echo " - deb: $PKG_DEB_NAME (Debian, Ubuntu)"
   echo " - rpm: $PKG_RPM_NAME (Fedora, CentOS, RHEL)"
-  echo " - csw: $PKG_CSW_NAME (Solaris)"
-  echo " - brew imagemagick@6 (MacOS)"
+  echo " - brew: imagemagick or imagemagick@6 (MacOS)"
   echo "If $PKG_CONFIG_NAME is already installed, check that 'pkg-config' is in your"
   echo "PATH and PKG_CONFIG_PATH contains a $PKG_CONFIG_NAME.pc file. If pkg-config"
   echo "is unavailable you can set INCLUDE_DIR and LIB_DIR manually via:"

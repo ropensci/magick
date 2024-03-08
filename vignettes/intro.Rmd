@@ -57,7 +57,7 @@ On Fedora or CentOS/RHEL we need [ImageMagick-c++-devel](https://src.fedoraproje
 sudo yum install ImageMagick-c++-devel
 ```
 
-To install from source on macOS you need `imagemagick@6` from homebrew.
+To install from source on macOS you need either `imagemagick@6` or `imagemagick` from homebrew.
 
 ```
 brew install imagemagick@6
