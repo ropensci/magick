@@ -150,7 +150,7 @@
   - Reset clipping area when magick graphics device is closed or starts new page
   - Change default colorspace for image_quantize() to RGB which is safer
   - Breaking: 'fuzz' parameter rescaled to be a percentage (0-100)
-  - Add image_strip() as well as 'strip = TRUE' paremeter to image_read()
+  - Add image_strip() as well as 'strip = TRUE' parameter to image_read()
   - Adding image_blank() to create empty images
   - Graphics device: hardcode font aliases for families used by R, issue #80
   - Better font family lookup in graphics and image_annotate()
@@ -236,7 +236,7 @@
   - Try to fix the mac binary package
 
 0.2
-  - Build binary package on macOS --with-zero-configuation (fixes "config xml file" errors).
+  - Build binary package on macOS --with-zero-configuration (fixes "config xml file" errors).
   - image_read now reads straight from disk rather than via R.
   - Add as.raster() method for images
   - image_write gains a 'flatten' argument
