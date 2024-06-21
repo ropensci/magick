@@ -31,7 +31,7 @@ std::string normalize_font(const char * family);
 #define MQD MAGICKCORE_QUANTUM_DEPTH
 #define fuzz_pct_to_abs(x) ((x / 100 ) * (MQD * MQD * MQD * MQD + 1))
 
-//IM 6~7 compatiblity
+//IM 6~7 compatibility
 #if MagickLibVersion >= 0x700
 Magick::Point Point(const char * str);
 #define myGeomPoint Point

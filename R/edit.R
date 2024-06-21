@@ -168,13 +168,13 @@ image_readbitmap <- function(x){
   }
 }
 
-# output of dev.caputure(native = TRUE)
+# output of dev.capture(native = TRUE)
 image_read_nativeraster <- function(x){
   stopifnot(is.matrix(x) && is.integer(x))
   magick_image_readbitmap_native(x)
 }
 
-# output of dev.caputure(native = FALSE) or as.raster()
+# output of dev.capture(native = FALSE) or as.raster()
 image_read_raster1 <- function(x){
   stopifnot(is.matrix(x) && is.character(x))
   magick_image_readbitmap_raster1(t(x))

@@ -53,7 +53,7 @@ image_set_defines <- function(image, defines){
 validate_defines <- function(defines){
   if(length(defines)){
     if(!is.character(defines))
-      stop("Argumet 'defines' must be named character vector")
+      stop("Argument 'defines' must be named character vector")
     nms <- names(defines)
     if(length(unique(nms)) != length(defines))
       stop("Argument 'defines' does not have proper names")
