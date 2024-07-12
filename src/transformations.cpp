@@ -259,12 +259,17 @@ XPtrImage magick_image_implode( XPtrImage input, double factor){
 // [[Rcpp::export]]
 XPtrImage magick_image_format( XPtrImage input, Rcpp::CharacterVector format, Rcpp::CharacterVector type,
                                Rcpp::CharacterVector space, Rcpp::IntegerVector depth, Rcpp::LogicalVector antialias,
-                               Rcpp::LogicalVector matte, Rcpp::CharacterVector interlace){
+                               Rcpp::LogicalVector matte, Rcpp::CharacterVector interlace, Rcpp::RawVector profile){
   XPtrImage output = copy(input);
   if(antialias.size()){
     for (Iter it = output->begin(); it != output->end(); ++it)
       it->strokeAntiAlias(antialias.at(0));
     for_each ( output->begin(), output->end(), Magick::myAntiAliasImage(antialias.at(0)));
+  }
+  if(profile.size()){
+    Magick::Blob blob(profile.begin(), profile.size());
+    for (Iter it = output->begin(); it != output->end(); ++it)
+      it->iccColorProfile(blob);
   }
   if(matte.size())
     for_each ( output->begin(), output->end(), Magick::myMatteImage(matte.at(0)));
@@ -278,6 +283,7 @@ XPtrImage magick_image_format( XPtrImage input, Rcpp::CharacterVector format, Rc
     for_each ( output->begin(), output->end(), Magick::interlaceTypeImage(Interlace(interlace.at(0))));
   if(format.size())
     for_each ( output->begin(), output->end(), Magick::magickImage(std::string(format.at(0))));
+
   return output;
 }
 

@@ -481,8 +481,8 @@ magick_image_implode <- function(input, factor) {
     .Call('_magick_magick_image_implode', PACKAGE = 'magick', input, factor)
 }
 
-magick_image_format <- function(input, format, type, space, depth, antialias, matte, interlace) {
-    .Call('_magick_magick_image_format', PACKAGE = 'magick', input, format, type, space, depth, antialias, matte, interlace)
+magick_image_format <- function(input, format, type, space, depth, antialias, matte, interlace, profile) {
+    .Call('_magick_magick_image_format', PACKAGE = 'magick', input, format, type, space, depth, antialias, matte, interlace, profile)
 }
 
 magick_image_page <- function(input, pagesize, density) {

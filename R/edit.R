@@ -258,8 +258,9 @@ image_write <- function(image, path = NULL, format = NULL, quality = NULL,
 #' from [colorspace_types][colorspace_types] for example `"gray"`, `"rgb"` or `"cmyk"`
 #' @param matte set to `TRUE` or `FALSE` to enable or disable transparency
 #' @param interlace string with [interlace](https://www.imagemagick.org/Magick++/Enumerations.html#InterlaceType)
+#' @param profile path to file with ICC color profile
 image_convert <- function(image, format = NULL, type = NULL, colorspace = NULL,
-                          depth = NULL, antialias = NULL, matte = NULL, interlace = NULL){
+                          depth = NULL, antialias = NULL, matte = NULL, interlace = NULL, profile = NULL){
   assert_image(image)
   depth <- as.integer(depth)
   antialias <- as.logical(antialias)
@@ -269,7 +270,10 @@ image_convert <- function(image, format = NULL, type = NULL, colorspace = NULL,
   interlace <- as.character(interlace)
   if(length(depth) && is.na(match(depth, c(8, 16))))
     stop('depth must be 8 or 16 bit')
-  magick_image_format(image, toupper(format), type, colorspace, depth, antialias, matte, interlace)
+  profile <- if(length(profile) && is.character(profile)){
+    readBin(profile, raw(), file.info(profile)$size)
+  } else raw(0)
+  magick_image_format(image, toupper(format), type, colorspace, depth, antialias, matte, interlace, profile)
 }
 
 image_write_frame <- function(image, format = "rgba", i = 1){

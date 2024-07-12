@@ -1488,8 +1488,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // magick_image_format
-XPtrImage magick_image_format(XPtrImage input, Rcpp::CharacterVector format, Rcpp::CharacterVector type, Rcpp::CharacterVector space, Rcpp::IntegerVector depth, Rcpp::LogicalVector antialias, Rcpp::LogicalVector matte, Rcpp::CharacterVector interlace);
-RcppExport SEXP _magick_magick_image_format(SEXP inputSEXP, SEXP formatSEXP, SEXP typeSEXP, SEXP spaceSEXP, SEXP depthSEXP, SEXP antialiasSEXP, SEXP matteSEXP, SEXP interlaceSEXP) {
+XPtrImage magick_image_format(XPtrImage input, Rcpp::CharacterVector format, Rcpp::CharacterVector type, Rcpp::CharacterVector space, Rcpp::IntegerVector depth, Rcpp::LogicalVector antialias, Rcpp::LogicalVector matte, Rcpp::CharacterVector interlace, Rcpp::RawVector profile);
+RcppExport SEXP _magick_magick_image_format(SEXP inputSEXP, SEXP formatSEXP, SEXP typeSEXP, SEXP spaceSEXP, SEXP depthSEXP, SEXP antialiasSEXP, SEXP matteSEXP, SEXP interlaceSEXP, SEXP profileSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -1501,7 +1501,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::LogicalVector >::type antialias(antialiasSEXP);
     Rcpp::traits::input_parameter< Rcpp::LogicalVector >::type matte(matteSEXP);
     Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type interlace(interlaceSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_image_format(input, format, type, space, depth, antialias, matte, interlace));
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type profile(profileSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_format(input, format, type, space, depth, antialias, matte, interlace, profile));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1740,7 +1741,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_negate", (DL_FUNC) &_magick_magick_image_negate, 1},
     {"_magick_magick_image_oilpaint", (DL_FUNC) &_magick_magick_image_oilpaint, 2},
     {"_magick_magick_image_implode", (DL_FUNC) &_magick_magick_image_implode, 2},
-    {"_magick_magick_image_format", (DL_FUNC) &_magick_magick_image_format, 8},
+    {"_magick_magick_image_format", (DL_FUNC) &_magick_magick_image_format, 9},
     {"_magick_magick_image_page", (DL_FUNC) &_magick_magick_image_page, 3},
     {"_magick_magick_image_repage", (DL_FUNC) &_magick_magick_image_repage, 1},
     {"_magick_magick_image_orient", (DL_FUNC) &_magick_magick_image_orient, 2},
