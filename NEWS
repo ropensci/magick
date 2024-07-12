@@ -1,3 +1,6 @@
+2.8.4
+  - image_convert() gains a parameter 'profile'
+
 2.8.3
   - Switch to base-R pipe in examples and vignette
   - New functions magick_fonts() and dump_option_info()
