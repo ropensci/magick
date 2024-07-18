@@ -65,6 +65,9 @@ image_read <- function(path, density = NULL, depth = NULL, strip = FALSE, coales
   density <- as.character(density)
   depth <- as.integer(depth)
   defines <- validate_defines(defines)
+  if(is.character(path) && grepl("\\.pdf$", path) && Sys.which('gs') ==  ""){
+    message("Ghostscript (gs) not found on the PATH.\nTry image_read_pdf() to read PDF using pdftools instead.")
+  }
   image <- if(isS4(path) && methods::is(path, "Image")){
     convert_EBImage(path)
   } else if(inherits(path, "nativeRaster") || (is.matrix(path) && is.integer(path))){
