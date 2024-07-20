@@ -65,9 +65,6 @@ image_read <- function(path, density = NULL, depth = NULL, strip = FALSE, coales
   density <- as.character(density)
   depth <- as.integer(depth)
   defines <- validate_defines(defines)
-  if(is.character(path) && grepl("\\.pdf$", path) && Sys.which('gs') ==  "" && !file.exists('C:\\Program Files\\gs')){
-    message("Ghostscript (gs) not found on the PATH.\nTry image_read_pdf() to read PDF using pdftools instead.")
-  }
   image <- if(isS4(path) && methods::is(path, "Image")){
     convert_EBImage(path)
   } else if(inherits(path, "nativeRaster") || (is.matrix(path) && is.integer(path))){
@@ -90,7 +87,12 @@ image_read <- function(path, density = NULL, depth = NULL, strip = FALSE, coales
     } else {
       enc2native(path)
     }
-    magick_image_readpath(path, density, depth, strip, defines)
+    withCallingHandlers(magick_image_readpath(path, density, depth, strip, defines), error = function(err){
+      # Here we can put some additional diagnostics in case imagemagick fails
+      if(any(grepl("\\.pdf$", path)) && Sys.which('gs') ==  ""){
+        message("Ghostscript (gs) not found on the PATH.\nUse: image_read_pdf() to read with pdftools.")
+      }
+    })
   } else {
     stop("path must be URL, filename or raw vector")
   }
