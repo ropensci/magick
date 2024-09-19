@@ -1,3 +1,7 @@
+2.8.5
+  - Reduce some test verbosity as per CRAN request
+  - Update maintainer email address
+
 2.8.4
   - image_convert() gains a parameter 'profile'
 
