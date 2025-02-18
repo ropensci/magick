@@ -204,18 +204,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// magick_attr_label
-Rcpp::CharacterVector magick_attr_label(XPtrImage input, Rcpp::CharacterVector label);
-RcppExport SEXP _magick_magick_attr_label(SEXP inputSEXP, SEXP labelSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type label(labelSEXP);
-    rcpp_result_gen = Rcpp::wrap(magick_attr_label(input, label));
-    return rcpp_result_gen;
-END_RCPP
-}
 // magick_attr_format
 Rcpp::CharacterVector magick_attr_format(XPtrImage input, Rcpp::CharacterVector format);
 RcppExport SEXP _magick_magick_attr_format(SEXP inputSEXP, SEXP formatSEXP) {
@@ -1637,7 +1625,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_attr_fillcolor", (DL_FUNC) &_magick_magick_attr_fillcolor, 2},
     {"_magick_magick_attr_font", (DL_FUNC) &_magick_magick_attr_font, 2},
     {"_magick_magick_attr_fontsize", (DL_FUNC) &_magick_magick_attr_fontsize, 2},
-    {"_magick_magick_attr_label", (DL_FUNC) &_magick_magick_attr_label, 2},
     {"_magick_magick_attr_format", (DL_FUNC) &_magick_magick_attr_format, 2},
     {"_magick_magick_attr_quality", (DL_FUNC) &_magick_magick_attr_quality, 2},
     {"_magick_magick_attr_quantize", (DL_FUNC) &_magick_magick_attr_quantize, 2},

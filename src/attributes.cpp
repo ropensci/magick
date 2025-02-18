@@ -119,16 +119,6 @@ Rcpp::IntegerVector magick_attr_fontsize( XPtrImage input, Rcpp::IntegerVector p
 }
 
 // [[Rcpp::export]]
-Rcpp::CharacterVector magick_attr_label( XPtrImage input, Rcpp::CharacterVector label){
-  if(label.size())
-    for_each ( input->begin(), input->end(), Magick::labelImage(std::string(label[0])));
-  Rcpp::CharacterVector out;
-  for (Iter it = input->begin(); it != input->end(); ++it)
-    out.push_back(it->label());
-  return out;
-}
-
-// [[Rcpp::export]]
 Rcpp::CharacterVector magick_attr_format( XPtrImage input, Rcpp::CharacterVector format){
   if(format.size())
     for_each ( input->begin(), input->end(), Magick::magickImage(std::string(format[0])));
