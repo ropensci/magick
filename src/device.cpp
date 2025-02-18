@@ -278,7 +278,7 @@ static void image_polyline(int n, double *x, double *y, const pGEcontext gc, pDe
 #else
   bool join = true;
 #endif
-  draw.push_back(Magick::DrawablePolyline(coord(n, x, y)));
+  //draw.push_back(Magick::DrawablePolyline(coord(n, x, y)));
   image_draw(draw, gc, dd, join, false);
   VOID_END_RCPP
 }
