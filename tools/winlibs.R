@@ -9,6 +9,7 @@ if(!file.exists("../windows/imagemagick/include/ImageMagick-6/Magick++.h")){
   } else {
     "https://github.com/rwinlib/imagemagick6/archive/v6.9.12-96.tar.gz"
   }
+  options(timeout = 300)
   download.file(url, basename(url), quiet = TRUE)
   dir.create("../windows", showWarnings = FALSE)
   untar(basename(url), exdir = "../windows", tar = 'internal')
