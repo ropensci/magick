@@ -2,7 +2,7 @@ PKG_CONFIG_NAME = Magick++
 PKG_CONFIG ?= $(BINPREF)pkg-config
 PKG_LIBS := $(shell $(PKG_CONFIG) --libs $(PKG_CONFIG_NAME))
 
-ifneq ($(PKG_LIBS),)
+ifneq ($(findstring lheif,$(PKG_LIBS)),)
 $(info using $(PKG_CONFIG_NAME) from Rtools)
 PKG_CPPFLAGS := $(shell $(PKG_CONFIG) --cflags $(PKG_CONFIG_NAME))
 else
