@@ -19,6 +19,7 @@ URL: https://docs.ropensci.org/magick/
 BugReports: https://github.com/ropensci/magick/issues
 SystemRequirements: ImageMagick++: ImageMagick-c++-devel (rpm) or libmagick++-dev (deb)
 VignetteBuilder: knitr
+Depends: R >= 4.1.0
 Imports:
     Rcpp (>= 0.12.12),
     magrittr,

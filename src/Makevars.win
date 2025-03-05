@@ -1,11 +1,15 @@
+PKG_CONFIG_NAME = Magick++
+PKG_CONFIG ?= $(BINPREF)pkg-config
+PKG_LIBS := $(shell $(PKG_CONFIG) --libs $(PKG_CONFIG_NAME))
+
+ifneq ($(findstring lheif,$(PKG_LIBS)),)
+$(info using $(PKG_CONFIG_NAME) from Rtools)
+PKG_CPPFLAGS := $(shell $(PKG_CONFIG) --cflags $(PKG_CONFIG_NAME))
+else
 RWINLIB = ../windows/imagemagick
-OLDLIBDIR = lib${subst gcc,,${COMPILED_BY}}${R_ARCH}
-
-PKG_CPPFLAGS = \
-	-I$(RWINLIB)/include-config${R_ARCH} \
-	-I$(RWINLIB)/include/ImageMagick-6
-
-PKG_CXXFLAGS = -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -D_LIB
+PKG_CPPFLAGS = -I$(RWINLIB)/include-config$(R_ARCH) -I$(RWINLIB)/include/ImageMagick-6 \
+	-DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -D_LIB
+OLDLIBDIR = lib${subst gcc,,${COMPILED_BY}}$(R_ARCH)
 
 ifneq ($(R_COMPILED_BY),gcc 8.3.0)
 NTDLL=-lntdll
@@ -26,13 +30,14 @@ PKG_LIBS = \
 	-lusp10 -liphlpapi -lgdiplus -lgdi32 -lole32 -ldnsapi \
 	-lws2_32 -luserenv -lbcrypt -lurlmon -lrpcrt4 -lshlwapi -luuid $(NTDLL) \
 	-pthread
+endif
 
-all: clean winlibs
+all: $(SHLIB)
+
+$(OBJECTS): $(RWINLIB)
+
+$(RWINLIB):
+	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R"
 
 clean:
-	rm -f  $(SHLIB)
-
-winlibs:
-	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R" ${VERSION}
-
-.PHONY: all winlibs clean
+	rm -f $(SHLIB) $(OBJECTS)
