@@ -1,4 +1,4 @@
-RWINLIB = ../windows/imagemagick
+RWINLIB = ../.libs/imagemagick
 OLDLIBDIR = lib${subst gcc,,${COMPILED_BY}}${R_ARCH}
 
 PKG_CPPFLAGS = \
@@ -27,12 +27,10 @@ PKG_LIBS = \
 	-lws2_32 -luserenv -lbcrypt -lurlmon -lrpcrt4 -lshlwapi -luuid $(NTDLL) \
 	-pthread
 
-all: clean winlibs
-
-clean:
-	rm -f  $(SHLIB)
+all: winlibs $(SHLIB) cleanup
 
 winlibs:
-	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R" ${VERSION}
+	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R"
 
-.PHONY: all winlibs clean
+cleanup: $(SHLIB)
+	@rm -Rf $(RWINLIB)
