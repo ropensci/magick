@@ -5,4 +5,4 @@ PKG_LIBS=@libs@
 all: $(SHLIB) cleanup
 
 cleanup: $(SHLIB)
-	rm -Rf ../.deps
+	@rm -Rf ../.deps

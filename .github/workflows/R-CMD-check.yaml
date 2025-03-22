@@ -51,4 +51,4 @@ jobs:
         with:
           args: 'c("--no-manual", "--as-cran", "--run-donttest")'
         env:
-          MAKE: ${{ runner.os == 'windows' && '' || 'make -j8' }}
+          MAKEFLAGS: -j8

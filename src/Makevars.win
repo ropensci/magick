@@ -27,7 +27,9 @@ PKG_LIBS = \
 	-lws2_32 -luserenv -lbcrypt -lurlmon -lrpcrt4 -lshlwapi -luuid $(NTDLL) \
 	-pthread
 
-all: winlibs $(SHLIB) cleanup
+all: $(SHLIB) cleanup
+
+$(OBJECTS): winlibs
 
 winlibs:
 	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R"
