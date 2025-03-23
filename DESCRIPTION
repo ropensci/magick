@@ -1,7 +1,7 @@
 Package: magick
 Type: Package
 Title: Advanced Graphics and Image-Processing in R
-Version: 2.8.5
+Version: 2.8.6
 Authors@R: person("Jeroen", "Ooms", role = c("aut", "cre"), email = "jeroenooms@gmail.com",
     comment = c(ORCID = "0000-0002-4035-0289"))
 Description: Bindings to 'ImageMagick': the most comprehensive open-source image
@@ -19,6 +19,7 @@ URL: https://docs.ropensci.org/magick/
 BugReports: https://github.com/ropensci/magick/issues
 SystemRequirements: ImageMagick++: ImageMagick-c++-devel (rpm) or libmagick++-dev (deb)
 VignetteBuilder: knitr
+Depends: R (>= 4.1.0)
 Imports:
     Rcpp (>= 0.12.12),
     magrittr,
