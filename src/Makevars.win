@@ -29,10 +29,11 @@ PKG_LIBS = \
 
 all: $(SHLIB) cleanup
 
-$(OBJECTS): winlibs
+# Needed for parallel make
+$(OBJECTS): | $(RWINLIB)
 
-winlibs:
-	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R"
+$(RWINLIB):
+	@"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R"
 
 cleanup: $(SHLIB)
 	@rm -Rf $(RWINLIB)

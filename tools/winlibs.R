@@ -1,4 +1,4 @@
-if(!file.exists("../.libs/imagemagick/include/ImageMagick-6/Magick++.h")){
+if(!file.exists("base.o") && !file.exists("../.libs/imagemagick/include/ImageMagick-6/Magick++.h")){
   unlink("../.libs", recursive = TRUE)
   url <- if(grepl("aarch", R.version$platform)){
     "https://github.com/r-windows/bundles/releases/download/imagemagick-6.9.12.98/imagemagick-6.9.12.98-clang-aarch64.tar.xz"
