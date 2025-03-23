@@ -19,3 +19,4 @@ appveyor.yml$
 \.o$
 \.so$
 \.dll$
+^\.deps$
