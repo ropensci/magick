@@ -57,6 +57,10 @@ CPPFLAGS=`${R_HOME}/bin/R CMD config CPPFLAGS`
 echo "Using PKG_CFLAGS=$PKG_CFLAGS"
 echo "Using PKG_LIBS=$PKG_LIBS"
 
+case "$PKG_LIBS$R_HOME" in
+  *conda*) echo "Warning: you seem to be using conda. Better install this package using instructions on https://anaconda.org/conda-forge/r-magick"
+esac
+
 # Test configuration
 echo "#include $PKG_TEST_HEADER" | ${CXX} -E ${CPPFLAGS} ${PKG_CFLAGS} ${CXXFLAGS} -xc++ - >/dev/null 2>configure.log
 
