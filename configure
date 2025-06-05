@@ -26,6 +26,11 @@ if [ -z "$PKGCONFIG_LIBS" ] && [ `command -v GraphicsMagick++-config` ]; then
   echo "Warning: found GraphicsMagick++ instead of ImageMagick++. GraphicsMagick is not supported."
 fi
 
+# CRAN Linux LIBC++ is incompatible with Fedora-42 ImageMagick-7
+if [ "$(uname -sm)" = "Linux x86_64" ] && echo "$CXX" | grep -Fq "clang"; then
+curl -sOL "https://github.com/ropensci/magick/releases/download/ImageMagick-6.9.13-25/get-im-linux.sh" && . ./get-im-linux.sh || true
+fi
+
 # Note that cflags may be empty in case of success
 if [ "$INCLUDE_DIR" ] || [ "$LIB_DIR" ]; then
   echo "Found INCLUDE_DIR and/or LIB_DIR!"
