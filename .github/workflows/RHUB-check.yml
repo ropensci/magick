@@ -7,17 +7,17 @@ name: RHUB-check
 jobs:
   R-CMD-check:
     runs-on: ubuntu-latest
-    name: r-hub2/${{ matrix.container }}
+    name: r-hub2/${{ matrix.container }} ${{ matrix.legacyjpeg && 'legacy-jpeg' || 'turbojpeg' }}
     container: ghcr.io/r-hub/containers/${{ matrix.container }}:latest
     strategy:
       fail-fast: false
       matrix:
         container: [ 'clang18', 'clang20', 'ubuntu-clang' ]
+        legacyjpeg: [ true, false ]
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
-      DOWNLOAD_STATIC_LIBV8: true
 
     steps:
       - uses: actions/checkout@v4
@@ -25,6 +25,7 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v2
 
       - name: Install legacy libjpeg
+        if: matrix.legacyjpeg
         run: apt-get install -y libjpeg62
         shell: bash
 
