@@ -118,6 +118,15 @@ XPtrImage magick_image_background( XPtrImage input, const char * color){
 }
 
 // [[Rcpp::export]]
+XPtrImage magick_image_virtual_pixel( XPtrImage input, const char * method ) {
+  XPtrImage output = copy(input);
+  for(size_t i = 0; i < output->size(); i++) {
+    output->at(i).virtualPixelMethod(VirtualPixelValue(method));
+  }
+  return output;
+}
+
+// [[Rcpp::export]]
 XPtrImage magick_image_lat( XPtrImage input, const char * geomstr){
   Magick::Geometry geom = Geom(geomstr);
   size_t width = geom.width();
@@ -183,4 +192,12 @@ XPtrImage magick_image_level( XPtrImage input, double black_pct, double white_pc
     for_each(output->begin(), output->end(), Magick::levelImage(black_point, white_point, mid_point));
   }
   return output;
+}
+
+Magick::VirtualPixelMethod VirtualPixelValue(const char * str){
+  ssize_t val = MagickCore::ParseCommandOption(
+    MagickCore::MagickVirtualPixelOptions, Magick::MagickFalse, str);
+  if(val < 0)
+    throw std::runtime_error(std::string("Invalid VirtualPixelMethod value: ") + str);
+  return (Magick::VirtualPixelMethod) val;
 }

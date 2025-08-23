@@ -21,6 +21,7 @@
 \alias{decoration_types}
 \alias{compress_types}
 \alias{distort_types}
+\alias{virtual_pixel_methods}
 \alias{dump_option_info}
 \title{Magick Options}
 \usage{
@@ -61,6 +62,8 @@ decoration_types()
 compress_types()
 
 distort_types()
+
+virtual_pixel_methods()
 
 dump_option_info(option = "font")
 }

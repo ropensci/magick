@@ -130,6 +130,12 @@ distort_types <- function(){
 
 #' @export
 #' @rdname options
+virtual_pixel_methods <- function(){
+  list_options('virtualPixel')
+}
+
+#' @export
+#' @rdname options
 #' @param option one of the [option_types]
 dump_option_info <- function(option = 'font'){
   option <- as.character(option)

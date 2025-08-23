@@ -11,6 +11,7 @@
 \alias{image_combine}
 \alias{image_transparent}
 \alias{image_background}
+\alias{image_virtual_pixel}
 \alias{image_colorize}
 \alias{image_contrast}
 \alias{image_normalize}
@@ -42,6 +43,8 @@ image_combine(image, colorspace = "sRGB", channel = "default")
 image_transparent(image, color, fuzz = 0)
 
 image_background(image, color, flatten = TRUE)
+
+image_virtual_pixel(image, virtual_pixel_method)
 
 image_colorize(image, opacity, color)
 
@@ -97,6 +100,8 @@ in the filling algorithm}
 \item{flatten}{should image be flattened before writing? This also replaces
 transparency with background color.}
 
+\item{virtual_pixel_method}{a string with a \href{https://www.imagemagick.org/Magick++/Enumerations.html#VirtualPixelMethod}{virtual pixel method} from \link{virtual_pixel_methods}.}
+
 \item{opacity}{percentage of opacity used for coloring}
 
 \item{sharpen}{enhance intensity differences in image}
@@ -123,6 +128,8 @@ documentation. Short descriptions:
 \item \link{image_enhance} tries to minimize noise
 \item \link{image_equalize} equalizes using histogram equalization
 \item \link{image_median} replaces each pixel with the median color in a circular neighborhood
+\item \link{image_virtual_pixel} sets the virtual pixel filling method to use when a raw distortion transformation (e.g. \link{image_distort}) introduces new pixels in the image.
+Some high-level transformations (e.g. \link{image_rotate} and \link{image_shear}) will overwrite the virtual pixel value with a default one.
 }
 
 Note that
@@ -151,6 +158,12 @@ image_background(translogo, "pink", flatten = TRUE)
 # Compare to flood-fill method:
 image_fill(logo, "pink", fuzz = 20)
 
+# Black virtual pixel on a 45° rotation
+image_distort(image_virtual_pixel(logo, "Black"), "AffineProjection", c(0.70710678,0.70710678,-0.70710678,0.70710678,0,0), bestfit = TRUE)
+
+# Tile virtual pixel on a 45° rotation
+image_distort(image_virtual_pixel(logo, "Tile"), "AffineProjection", c(0.70710678,0.70710678,-0.70710678,0.70710678,0,0), bestfit = TRUE)
+
 # Other color tweaks
 image_colorize(logo, 50, "red")
 image_contrast(logo)
@@ -163,7 +176,7 @@ image_median(logo)
 image_convert(logo, type = 'grayscale')
 }
 \seealso{
-Other image: 
+Other image:
 \code{\link{_index_}},
 \code{\link{analysis}},
 \code{\link{animation}},

@@ -18,6 +18,8 @@
 #'  - [image_enhance] tries to minimize noise
 #'  - [image_equalize] equalizes using histogram equalization
 #'  - [image_median] replaces each pixel with the median color in a circular neighborhood
+#'  - [image_virtual_pixel] sets the [virtual pixel](https://usage.imagemagick.org/misc/#virtual) filling method to use when a raw distortion transformation (e.g. [image_distort][image_distort]) introduces new pixels in the image.
+#'    Some high-level transformations (e.g. [image_rotate][image_rotate] and [image_shear][image_shear]) will override the virtual pixel value with a default one.
 #'
 #' Note that
 #' colors are also determined by image properties
@@ -146,6 +148,22 @@ image_background <- function(image, color, flatten = TRUE){
   } else {
     return(out)
   }
+}
+
+#' @export
+#' @rdname color
+#' @inheritParams editing
+#' @param virtual_pixel_method a string with a [virtual pixel method](https://www.imagemagick.org/Magick++/Enumerations.html#VirtualPixelMethod) from [virtual_pixel_methods][virtual_pixel_methods].
+#' @examples
+#' # Black virtual pixel on a 45° rotation
+#' image_distort(image_virtual_pixel(logo, "Black"), "AffineProjection", c(0.70710678,0.70710678,-0.70710678,0.70710678,0,0), bestfit = TRUE)
+#'
+#' # Tile virtual pixel on a 45° rotation
+#' image_distort(image_virtual_pixel(logo, "Tile"), "AffineProjection", c(0.70710678,0.70710678,-0.70710678,0.70710678,0,0), bestfit = TRUE)
+#'
+image_virtual_pixel <- function(image, virtual_pixel_method) {
+  assert_image(image)
+  magick_image_virtual_pixel(image, virtual_pixel_method)
 }
 
 #' @export
