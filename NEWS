@@ -1,3 +1,6 @@
+2.8.8
+  - New function image_virtual_pixel() (#417)
+
 2.8.7
   - Vendor a static build on Linux libc++ systems (due to incompatibility
     with the local ImageMagick-7, see CRAN notes)
