@@ -201,6 +201,10 @@ magick_image_background <- function(input, color) {
     .Call('_magick_magick_image_background', PACKAGE = 'magick', input, color)
 }
 
+magick_image_virtual_pixel <- function(input, method) {
+    .Call('_magick_magick_image_virtual_pixel', PACKAGE = 'magick', input, method)
+}
+
 magick_image_lat <- function(input, geomstr) {
     .Call('_magick_magick_image_lat', PACKAGE = 'magick', input, geomstr)
 }

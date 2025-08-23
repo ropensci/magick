@@ -606,6 +606,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_virtual_pixel
+XPtrImage magick_image_virtual_pixel(XPtrImage input, const char * method);
+RcppExport SEXP _magick_magick_image_virtual_pixel(SEXP inputSEXP, SEXP methodSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrImage >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< const char * >::type method(methodSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_virtual_pixel(input, method));
+    return rcpp_result_gen;
+END_RCPP
+}
 // magick_image_lat
 XPtrImage magick_image_lat(XPtrImage input, const char * geomstr);
 RcppExport SEXP _magick_magick_image_lat(SEXP inputSEXP, SEXP geomstrSEXP) {
@@ -1671,6 +1683,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_magick_magick_image_ordered_dither", (DL_FUNC) &_magick_magick_image_ordered_dither, 2},
     {"_magick_magick_image_transparent", (DL_FUNC) &_magick_magick_image_transparent, 3},
     {"_magick_magick_image_background", (DL_FUNC) &_magick_magick_image_background, 2},
+    {"_magick_magick_image_virtual_pixel", (DL_FUNC) &_magick_magick_image_virtual_pixel, 2},
     {"_magick_magick_image_lat", (DL_FUNC) &_magick_magick_image_lat, 2},
     {"_magick_magick_image_threshold_black", (DL_FUNC) &_magick_magick_image_threshold_black, 3},
     {"_magick_magick_image_threshold_white", (DL_FUNC) &_magick_magick_image_threshold_white, 3},

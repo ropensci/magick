@@ -79,3 +79,4 @@ Magick::InterlaceType Interlace(const char* str);
 Magick::myFilterType Filter(const char * str);
 Magick::ChannelType Channel(const char * str);
 Magick::GravityType Gravity(const char * str);
+Magick::VirtualPixelMethod VirtualPixelValue(const char* str);
