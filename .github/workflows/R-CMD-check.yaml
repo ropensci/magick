@@ -18,15 +18,15 @@ jobs:
         config:
           - {os: macOS-13,   r: 'release'}
           - {os: macOS-14,   r: 'release'}
-          - {os: macOS-15,   r: 'next'}
           - {os: windows-latest, r: '4.1'}
           - {os: windows-latest, r: '4.2'}
+          - {os: windows-latest, r: '4.3'}
+          - {os: windows-latest, r: '4.4'}
           - {os: windows-latest, r: 'release'}
           - {os: windows-latest,   r: 'devel'}
           - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-latest,   r: 'release'}
-          - {os: ubuntu-latest,   r: 'oldrel-1'}
-          - {os: ubuntu-22.04,   r: '4.1'}
+          - {os: ubuntu-latest,   r: 'oldrel-3'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}

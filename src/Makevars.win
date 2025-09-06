@@ -8,7 +8,7 @@ PKG_CPPFLAGS = \
 PKG_CXXFLAGS = -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -D_LIB
 
 ifneq ($(R_COMPILED_BY),gcc 8.3.0)
-NTDLL=-lntdll
+MORELIBS += -lbrotlidec -lbrotlicommon -lntdll
 endif
 
 PKG_LIBS = \
@@ -23,8 +23,8 @@ PKG_LIBS = \
 	-lcairo-gobject -lgio-2.0 -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 -lpcre2-8 \
 	-lffi -lpng16 -lintl -lz -liconv -lfribidi \
 	-lopenjp2 -lwebpmux -lwebp -lsharpyuv -lwebpdecoder -lwebpdemux \
-	-lusp10 -liphlpapi -lgdiplus -lgdi32 -lole32 -ldnsapi \
-	-lws2_32 -luserenv -lbcrypt -lurlmon -lrpcrt4 -lshlwapi -luuid $(NTDLL) \
+	-lusp10 -liphlpapi -lgdiplus -lgdi32 -lole32 -ldnsapi -lmsimg32 -lssp \
+	-lws2_32 -luserenv -lbcrypt -lurlmon -lrpcrt4 -lshlwapi -luuid $(MORELIBS) \
 	-pthread
 
 all: $(SHLIB) cleanup

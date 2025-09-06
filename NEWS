@@ -1,3 +1,6 @@
+2.9.0
+  - Windows / MacOS: update ImageMagick stack
+
 2.8.8
   - New function image_virtual_pixel() (#417)
 
