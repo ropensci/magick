@@ -98,7 +98,7 @@ image_read <- function(path, density = NULL, depth = NULL, strip = FALSE, coales
   }
   if(is.character(path) && !isTRUE(magick_config()$rsvg)){
     if(any(grepl("\\.svg$", tolower(path))) || any(grepl("svg|mvg", tolower(image_info(image)$format)))){
-      warning("ImageMagick was built without librsvg which causes poor qualty of SVG rendering.
+      warning("ImageMagick was built without librsvg which causes poor quality of SVG rendering.
 For better results use image_read_svg() which uses the rsvg package.", call. = FALSE)
     }
   }
