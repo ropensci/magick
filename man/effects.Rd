@@ -42,7 +42,7 @@ image_negate(image)
 \item{radius}{radius, in pixels, for various transformations}
 
 \item{noisetype}{string with a
-\href{https://www.imagemagick.org/Magick++/Enumerations.html#NoiseType}{noisetype} value
+\href{https://imagemagick.org/Magick++/Enumerations.html#NoiseType}{noisetype} value
 from \link{noise_types}.}
 
 \item{sigma}{the standard deviation of the Laplacian, in pixels.}

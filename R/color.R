@@ -2,7 +2,7 @@
 #'
 #' Functions to adjust contrast, brightness, colors of the image. Details below.
 #'
-#' For details see [Magick++ STL](https://www.imagemagick.org/Magick++/STL.html)
+#' For details see [Magick++ STL](https://imagemagick.org/Magick++/STL.html)
 #' documentation. Short descriptions:
 #'
 #'  - [image_modulate] adjusts brightness, saturation and hue of image relative to current.
@@ -23,8 +23,8 @@
 #'
 #' Note that
 #' colors are also determined by image properties
-#' [imagetype](https://www.imagemagick.org/Magick++/Enumerations.html#ImageType) and
-#' [colorspace](https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType)
+#' [imagetype](https://imagemagick.org/Magick++/Enumerations.html#ImageType) and
+#' [colorspace](https://imagemagick.org/Magick++/Enumerations.html#ColorspaceType)
 #' which can be modified via [image_convert()].
 #'
 #' @export
@@ -100,7 +100,7 @@ image_ordered_dither <- function(image, threshold_map){
 #' @export
 #' @rdname color
 #' @param channel a string with a
-#' [channel](https://www.imagemagick.org/Magick++/Enumerations.html#ChannelType) from
+#' [channel](https://imagemagick.org/Magick++/Enumerations.html#ChannelType) from
 #' [channel_types][channel_types] for example `"alpha"` or `"hue"` or `"cyan"`
 image_channel <- function(image, channel = 'lightness'){
   magick_image_channel(image, channel)
@@ -153,7 +153,7 @@ image_background <- function(image, color, flatten = TRUE){
 #' @export
 #' @rdname color
 #' @inheritParams editing
-#' @param virtual_pixel_method a string with a [virtual pixel method](https://www.imagemagick.org/Magick++/Enumerations.html#VirtualPixelMethod) from [virtual_pixel_methods][virtual_pixel_methods].
+#' @param virtual_pixel_method a string with a [virtual pixel method](https://imagemagick.org/Magick++/Enumerations.html#VirtualPixelMethod) from [virtual_pixel_methods][virtual_pixel_methods].
 #' @examples
 #' # Black virtual pixel on a 45° rotation
 #' image_distort(image_virtual_pixel(logo, "Black"), "AffineProjection", c(0.70710678,0.70710678,-0.70710678,0.70710678,0,0), bestfit = TRUE)

@@ -21,7 +21,7 @@ dev.off <- function(){
 }
 ```
 
-The [magick](https://cran.r-project.org/package=magick) package provide a modern and simple toolkit for image processing in R. It wraps the [ImageMagick STL](https://www.imagemagick.org/Magick++/STL.html) which is the most comprehensive open-source image processing library available today.
+The [magick](https://cran.r-project.org/package=magick) package provide a modern and simple toolkit for image processing in R. It wraps the [ImageMagick STL](https://imagemagick.org/Magick++/STL.html) which is the most comprehensive open-source image processing library available today.
 
 The ImageMagick library has an overwhelming amount of functionality. Magick exposes a decent subset of it, but it is impossible to document everything in detail. This article introduces some basic concepts and examples to get started.
 
@@ -131,7 +131,7 @@ Several of the transformation functions take an `geometry` parameter which requi
   - `image_fill(image, "blue", "+100+200")`: *flood fill with blue starting at the point at `x:100, y:200`*
   - `image_border(frink, "red", "20x10")`: *adds a border of 20px left+right and 10px top+bottom*
 
-The full syntax is specified in the [Magick::Geometry](http://www.imagemagick.org/Magick++/Geometry.html) documentation.
+The full syntax is specified in the [Magick::Geometry](https://imagemagick.org/Magick++/Geometry.html) documentation.
 
 ```{r}
 # Example image
@@ -308,7 +308,7 @@ Flattening combines the layers into a single image which has the size of the fir
 image_flatten(img)
 ```
 
-Flattening and mosaic allow for specifying alternative [composite operators](https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator):
+Flattening and mosaic allow for specifying alternative [composite operators](https://imagemagick.org/Magick++/Enumerations.html):
 
 ```{r}
 image_flatten(img, 'Add')
@@ -506,7 +506,7 @@ install.packages("tesseract")
 ```
 
 ```{r, eval = require(tesseract, quietly = TRUE)}
-img <- image_read("http://jeroen.github.io/images/testocr.png")
+img <- image_read("https://jeroen.github.io/images/testocr.png")
 print(img)
 
 # Extract text

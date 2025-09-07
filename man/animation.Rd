@@ -64,7 +64,7 @@ between frames. Input images must be exactly the same size.}
 \item{frames}{number of frames to use in output animation}
 
 \item{operator}{string with a
-\href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}
+\href{https://imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}
 from \link[=compose_types]{compose_types()}}
 
 \item{stack}{place images top-to-bottom (TRUE) or left-to-right (FALSE)}
@@ -90,7 +90,7 @@ in the frame is the image to be placed.}
 Operations to manipulate or combine multiple frames of an image. Details below.
 }
 \details{
-For details see \href{https://www.imagemagick.org/Magick++/STL.html}{Magick++ STL}
+For details see \href{https://imagemagick.org/Magick++/STL.html}{Magick++ STL}
 documentation. Short descriptions:
 \itemize{
 \item \link{image_animate} coalesces frames by playing the sequence and converting to \code{gif} format.

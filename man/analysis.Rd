@@ -18,7 +18,7 @@ image_fft(image)
 
 \item{reference_image}{another image to compare to}
 
-\item{metric}{string with a \href{http://www.imagemagick.org/script/command-line-options.php#metric}{metric}
+\item{metric}{string with a \href{https://imagemagick.org/script/command-line-options.php#metric}{metric}
 from \link[=metric_types]{metric_types()} such as \code{"AE"} or \code{"phash"}}
 
 \item{fuzz}{relative color distance (value between 0 and 100) to be considered similar
@@ -28,7 +28,7 @@ in the filling algorithm}
 Functions for image calculations and analysis. This part of the package needs more work.
 }
 \details{
-For details see \href{https://www.imagemagick.org/Magick++/Image++.html}{Image++}
+For details see \href{https://imagemagick.org/Magick++/Image++.html}{Image++}
 documentation. Short descriptions:
 \itemize{
 \item \link{image_compare} calculates a metric by comparing image with a reference image.

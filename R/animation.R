@@ -2,7 +2,7 @@
 #'
 #' Operations to manipulate or combine multiple frames of an image. Details below.
 #'
-#' For details see [Magick++ STL](https://www.imagemagick.org/Magick++/STL.html)
+#' For details see [Magick++ STL](https://imagemagick.org/Magick++/STL.html)
 #' documentation. Short descriptions:
 #'
 #'  - [image_animate] coalesces frames by playing the sequence and converting to `gif` format.

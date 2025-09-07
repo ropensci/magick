@@ -95,7 +95,7 @@ demo_image(path)
 \item{coalesce}{automatically \code{\link[=image_coalesce]{image_coalesce()}} gif images}
 
 \item{defines}{a named character vector with extra options to control reading.
-These are the \verb{-define key\{=value\}} settings in the \href{http://www.imagemagick.org/script/command-line-options.php#define}{command line tool}.
+These are the \verb{-define key\{=value\}} settings in the \href{https://imagemagick.org/script/command-line-options.php#define}{command line tool}.
 Use an empty string for value-less defines, and NA to unset a define.}
 
 \item{width}{in pixels}
@@ -122,17 +122,17 @@ transparency with background color.}
 
 \item{compression}{a string with compression type from \link{compress_types}}
 
-\item{type}{string with \href{https://www.imagemagick.org/Magick++/Enumerations.html#ImageType}{imagetype}
+\item{type}{string with \href{https://imagemagick.org/Magick++/Enumerations.html#ImageType}{imagetype}
 value from \link{image_types} for example \code{grayscale} to convert into black/white}
 
-\item{colorspace}{string with a \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{\code{colorspace}}
+\item{colorspace}{string with a \href{https://imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{\code{colorspace}}
 from \link{colorspace_types} for example \code{"gray"}, \code{"rgb"} or \code{"cmyk"}}
 
 \item{antialias}{enable anti-aliasing for text and strokes}
 
 \item{matte}{set to \code{TRUE} or \code{FALSE} to enable or disable transparency}
 
-\item{interlace}{string with \href{https://www.imagemagick.org/Magick++/Enumerations.html#InterlaceType}{interlace}}
+\item{interlace}{string with \href{https://imagemagick.org/Magick++/Enumerations.html#InterlaceType}{interlace}}
 
 \item{profile}{path to file with ICC color profile}
 
@@ -149,10 +149,10 @@ If \code{FALSE} output is the same as \code{as.raster()}.}
 
 \item{browser}{argument passed to \link[utils:browseURL]{browseURL}}
 
-\item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
+\item{color}{a valid \href{https://imagemagick.org/Magick++/Color.html}{color string} such as
 \code{"navyblue"} or \code{"#000080"}. Use \code{"none"} for transparency.}
 
-\item{pseudo_image}{string with \href{http://www.imagemagick.org/script/formats.php#pseudo}{pseudo image}
+\item{pseudo_image}{string with \href{https://imagemagick.org/script/formats.php#pseudo}{pseudo image}
 specification for example \code{"radial-gradient:purple-yellow"}}
 
 \item{...}{several images or lists of images to be combined}

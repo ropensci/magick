@@ -42,21 +42,21 @@ image_shade(image, azimuth = 30, elevation = 30, color = FALSE)
 \item{composite_image}{composition image}
 
 \item{operator}{string with a
-\href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}
+\href{https://imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{composite operator}
 from \link[=compose_types]{compose_types()}}
 
 \item{offset}{string with either a \link[=gravity_types]{gravity_type} or a \link{geometry_point}
 to set position of top image.}
 
 \item{gravity}{string with
-\href{https://www.imagemagick.org/Magick++/Enumerations.html#GravityType}{gravity}
+\href{https://imagemagick.org/Magick++/Enumerations.html#GravityType}{gravity}
 value from \link{gravity_types}.}
 
 \item{compose_args}{additional arguments needed for some composite operations}
 
 \item{color}{Set to true to shade the red, green, and blue components of the image.}
 
-\item{geometry}{a \href{https://www.imagemagick.org/Magick++/Geometry.html}{geometry string}
+\item{geometry}{a \href{https://imagemagick.org/Magick++/Geometry.html}{geometry string}
 to set height and width of the border, e.g. \code{"10x8"}. In addition \link{image_frame} allows
 for adding shadow by setting an offset e.g. \code{"20x10+7+2"}.}
 
@@ -68,7 +68,7 @@ for adding shadow by setting an offset e.g. \code{"20x10+7+2"}.}
 }
 \description{
 Similar to the ImageMagick \code{composite} utility: compose an image on top of another one using a
-\href{https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{CompositeOperator}.
+\href{https://imagemagick.org/Magick++/Enumerations.html#CompositeOperator}{CompositeOperator}.
 }
 \details{
 The \code{image_composite} function is vectorized over both image arguments: if the first image has

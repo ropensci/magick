@@ -2,8 +2,8 @@
 #'
 #' The `magick` package for graphics and image processing in R. Important resources:
 #' - [R introduction vignette](https://docs.ropensci.org/magick/articles/intro.html): getting started
-#' - [Magick++ API](https://www.imagemagick.org/Magick++/Image++.html) and
-#'     [Magick++ STL](https://www.imagemagick.org/Magick++/STL.html) detailed descriptions of methods and parameters
+#' - [Magick++ API](https://imagemagick.org/Magick++/Image++.html) and
+#'     [Magick++ STL](https://imagemagick.org/Magick++/STL.html) detailed descriptions of methods and parameters
 #'
 #' Documentation is split into the following pages:
 #' - [analysis] - metrics and calculations: `compare`, `fft`

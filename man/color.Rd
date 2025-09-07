@@ -71,7 +71,7 @@ current position corresponding to an argument range of 0 to 200 (100 for no chan
 \item{max}{preferred number of colors in the image. The actual number of colors in the image may
 be less than your request, but never more.}
 
-\item{colorspace}{string with a \href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{\code{colorspace}}
+\item{colorspace}{string with a \href{https://imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{\code{colorspace}}
 from \link{colorspace_types} for example \code{"gray"}, \code{"rgb"} or \code{"cmyk"}}
 
 \item{dither}{a boolean (defaults to \code{TRUE}) specifying whether to apply Floyd/Steinberg error
@@ -88,10 +88,10 @@ may be used to manually adjust the tree depth.}
 for possible values}
 
 \item{channel}{a string with a
-\href{https://www.imagemagick.org/Magick++/Enumerations.html#ChannelType}{channel} from
+\href{https://imagemagick.org/Magick++/Enumerations.html#ChannelType}{channel} from
 \link{channel_types} for example \code{"alpha"} or \code{"hue"} or \code{"cyan"}}
 
-\item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
+\item{color}{a valid \href{https://imagemagick.org/Magick++/Color.html}{color string} such as
 \code{"navyblue"} or \code{"#000080"}. Use \code{"none"} for transparency.}
 
 \item{fuzz}{relative color distance (value between 0 and 100) to be considered similar
@@ -100,7 +100,7 @@ in the filling algorithm}
 \item{flatten}{should image be flattened before writing? This also replaces
 transparency with background color.}
 
-\item{virtual_pixel_method}{a string with a \href{https://www.imagemagick.org/Magick++/Enumerations.html#VirtualPixelMethod}{virtual pixel method} from \link{virtual_pixel_methods}.}
+\item{virtual_pixel_method}{a string with a \href{https://imagemagick.org/Magick++/Enumerations.html#VirtualPixelMethod}{virtual pixel method} from \link{virtual_pixel_methods}.}
 
 \item{opacity}{percentage of opacity used for coloring}
 
@@ -112,7 +112,7 @@ transparency with background color.}
 Functions to adjust contrast, brightness, colors of the image. Details below.
 }
 \details{
-For details see \href{https://www.imagemagick.org/Magick++/STL.html}{Magick++ STL}
+For details see \href{https://imagemagick.org/Magick++/STL.html}{Magick++ STL}
 documentation. Short descriptions:
 \itemize{
 \item \link{image_modulate} adjusts brightness, saturation and hue of image relative to current.
@@ -128,14 +128,14 @@ documentation. Short descriptions:
 \item \link{image_enhance} tries to minimize noise
 \item \link{image_equalize} equalizes using histogram equalization
 \item \link{image_median} replaces each pixel with the median color in a circular neighborhood
-\item \link{image_virtual_pixel} sets the virtual pixel filling method to use when a raw distortion transformation (e.g. \link{image_distort}) introduces new pixels in the image.
-Some high-level transformations (e.g. \link{image_rotate} and \link{image_shear}) will overwrite the virtual pixel value with a default one.
+\item \link{image_virtual_pixel} sets the \href{https://usage.imagemagick.org/misc/#virtual}{virtual pixel} filling method to use when a raw distortion transformation (e.g. \link{image_distort}) introduces new pixels in the image.
+Some high-level transformations (e.g. \link{image_rotate} and \link{image_shear}) will override the virtual pixel value with a default one.
 }
 
 Note that
 colors are also determined by image properties
-\href{https://www.imagemagick.org/Magick++/Enumerations.html#ImageType}{imagetype} and
-\href{https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{colorspace}
+\href{https://imagemagick.org/Magick++/Enumerations.html#ImageType}{imagetype} and
+\href{https://imagemagick.org/Magick++/Enumerations.html#ColorspaceType}{colorspace}
 which can be modified via \code{\link[=image_convert]{image_convert()}}.
 }
 \examples{
@@ -176,7 +176,7 @@ image_median(logo)
 image_convert(logo, type = 'grayscale')
 }
 \seealso{
-Other image:
+Other image: 
 \code{\link{_index_}},
 \code{\link{analysis}},
 \code{\link{animation}},

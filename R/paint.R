@@ -12,7 +12,7 @@
 #' @rdname painting
 #' @family image
 #' @inheritParams editing
-#' @param color a valid [color string](https://www.imagemagick.org/Magick++/Color.html) such as
+#' @param color a valid [color string](https://imagemagick.org/Magick++/Color.html) such as
 #' `"navyblue"` or `"#000080"`. Use `"none"` for transparency.
 #' @param point a geometry_point string indicating the starting point of the flood-fill
 #' @param fuzz relative color distance (value between 0 and 100) to be considered similar
@@ -44,14 +44,14 @@ image_fill <- function(image, color, point = "+1+1", fuzz = 0, refcolor = NULL){
 #' @param text character vector of length equal to 'image' or length 1
 #' @param degrees rotates text around center point
 #' @param gravity string with
-#' [gravity](https://www.imagemagick.org/Magick++/Enumerations.html#GravityType)
+#' [gravity](https://imagemagick.org/Magick++/Enumerations.html#GravityType)
 #' value from [gravity_types].
 #' @param location geometry string with location relative to `gravity`
 #' @param size font-size in pixels
-#' @param strokecolor a [color string](https://www.imagemagick.org/Magick++/Color.html)
+#' @param strokecolor a [color string](https://imagemagick.org/Magick++/Color.html)
 #' adds a stroke (border around the text)
 #' @param strokewidth set the strokewidth of the border around the text
-#' @param boxcolor a [color string](https://www.imagemagick.org/Magick++/Color.html)
+#' @param boxcolor a [color string](https://imagemagick.org/Magick++/Color.html)
 #' for background color that annotation text is rendered on.
 #' @param font string with font family such as `"sans"`, `"mono"`, `"serif"`,
 #' `"Times"`, `"Helvetica"`, `"Trebuchet"`, `"Georgia"`, `"Palatino"` or `"Comic Sans"`.

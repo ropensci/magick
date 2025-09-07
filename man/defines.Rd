@@ -11,7 +11,7 @@ image_set_defines(image, defines)
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
 \item{defines}{a named character vector with extra options to control reading.
-These are the \verb{-define key\{=value\}} settings in the \href{http://www.imagemagick.org/script/command-line-options.php#define}{command line tool}.
+These are the \verb{-define key\{=value\}} settings in the \href{https://imagemagick.org/script/command-line-options.php#define}{command line tool}.
 Use an empty string for value-less defines, and NA to unset a define.}
 }
 \description{

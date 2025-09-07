@@ -73,7 +73,7 @@ dump_option_info(option = "font")
 \description{
 List option types and values supported in your version of ImageMagick. For
 descriptions see
-\href{https://www.imagemagick.org/Magick++/Enumerations.html}{ImageMagick Enumerations}.
+\href{https://imagemagick.org/Magick++/Enumerations.html}{ImageMagick Enumerations}.
 }
 \details{
 The \link{dump_option_info} function is equivalent to calling \code{convert -list [option]} on
@@ -81,7 +81,7 @@ the command line. It does not return anything, it only makes ImageMagick print
 stuff to the console, use only for debugging.
 }
 \references{
-ImageMagick Manual: \href{https://www.imagemagick.org/Magick++/Enumerations.html}{Enumerations}
+ImageMagick Manual: \href{https://imagemagick.org/Magick++/Enumerations.html}{Enumerations}
 }
 \seealso{
 Other image: 

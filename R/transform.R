@@ -3,7 +3,7 @@
 #' Basic transformations like rotate, resize, crop and flip. The [geometry] syntax
 #' is used to specify sizes and areas.
 #'
-#' For details see [Magick++ STL](https://www.imagemagick.org/Magick++/STL.html)
+#' For details see [Magick++ STL](https://imagemagick.org/Magick++/STL.html)
 #' documentation. Short descriptions:
 #'
 #' - [image_trim] removes edges that are the background color from the image.
@@ -11,7 +11,7 @@
 #' - [image_crop] cuts out a subregion of original image
 #' - [image_rotate] rotates and increases size of canvas to fit rotated image.
 #' - [image_deskew] auto rotate to correct skewed images
-#' - [image_resize] resizes using custom [filterType](https://www.imagemagick.org/Magick++/Enumerations.html#FilterTypes)
+#' - [image_resize] resizes using custom [filterType](https://imagemagick.org/Magick++/Enumerations.html#FilterTypes)
 #' - [image_scale] and [image_sample] resize using simple ratio and pixel sampling algorithm.
 #' - [image_flip] and [image_flop] invert image vertically and horizontally
 #'
@@ -59,7 +59,7 @@ image_rotate <- function(image, degrees){
 
 #' @export
 #' @rdname transform
-#' @param filter string with [filter](https://www.imagemagick.org/Magick++/Enumerations.html#FilterTypes)
+#' @param filter string with [filter](https://imagemagick.org/Magick++/Enumerations.html#FilterTypes)
 #' type from: [filter_types][filter_types]
 #' @examples # Small image
 #' rose <- image_convert(image_read("rose:"), "png")

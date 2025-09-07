@@ -4,7 +4,7 @@
 #' for use in image transformations. You can either specify these manually as
 #' strings or use the helper functions below.
 #'
-#' See [ImageMagick Manual](http://www.imagemagick.org/Magick++/Geometry.html)
+#' See [ImageMagick Manual](https://imagemagick.org/Magick++/Geometry.html)
 #' for details about the syntax specification.
 #' Examples of `geometry` strings:
 #'  - __`"500x300"`__       -- *Resize image keeping aspect ratio, such that width does not exceed 500 and the height does not exceed 300.*

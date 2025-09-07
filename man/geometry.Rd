@@ -38,7 +38,7 @@ for use in image transformations. You can either specify these manually as
 strings or use the helper functions below.
 }
 \details{
-See \href{http://www.imagemagick.org/Magick++/Geometry.html}{ImageMagick Manual}
+See \href{https://imagemagick.org/Magick++/Geometry.html}{ImageMagick Manual}
 for details about the syntax specification.
 Examples of \code{geometry} strings:
 \itemize{

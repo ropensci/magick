@@ -257,12 +257,12 @@ image_write <- function(image, path = NULL, format = NULL, quality = NULL,
 #' @param format output format such as `"png"`, `"jpeg"`, `"gif"`, `"rgb"` or `"rgba"`.
 #' @param depth color depth (either 8 or 16)
 #' @param antialias enable anti-aliasing for text and strokes
-#' @param type string with [imagetype](https://www.imagemagick.org/Magick++/Enumerations.html#ImageType)
+#' @param type string with [imagetype](https://imagemagick.org/Magick++/Enumerations.html#ImageType)
 #' value from [image_types][image_types] for example `grayscale` to convert into black/white
-#' @param colorspace string with a [`colorspace`](https://www.imagemagick.org/Magick++/Enumerations.html#ColorspaceType)
+#' @param colorspace string with a [`colorspace`](https://imagemagick.org/Magick++/Enumerations.html#ColorspaceType)
 #' from [colorspace_types][colorspace_types] for example `"gray"`, `"rgb"` or `"cmyk"`
 #' @param matte set to `TRUE` or `FALSE` to enable or disable transparency
-#' @param interlace string with [interlace](https://www.imagemagick.org/Magick++/Enumerations.html#InterlaceType)
+#' @param interlace string with [interlace](https://imagemagick.org/Magick++/Enumerations.html#InterlaceType)
 #' @param profile path to file with ICC color profile
 image_convert <- function(image, format = NULL, type = NULL, colorspace = NULL,
                           depth = NULL, antialias = NULL, matte = NULL, interlace = NULL, profile = NULL){
@@ -353,7 +353,7 @@ image_strip <- function(image){
 #' @rdname editing
 #' @inheritParams device
 #' @inheritParams painting
-#' @param pseudo_image string with [pseudo image](http://www.imagemagick.org/script/formats.php#pseudo)
+#' @param pseudo_image string with [pseudo image](https://imagemagick.org/script/formats.php#pseudo)
 #' specification for example `"radial-gradient:purple-yellow"`
 #' @examples # create a solid canvas
 #' image_blank(600, 400, "green")

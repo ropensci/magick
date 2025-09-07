@@ -27,8 +27,8 @@ About the R package:
 
 About the underlying library:
 
- - [Magick++ Tutorial](https://www.imagemagick.org/Magick++/tutorial/Magick++_tutorial.pdf)
- - [Magick++ STL Documentation](https://www.imagemagick.org/Magick++/STL.html)
+ - [Magick++ Tutorial](https://imagemagick.org/Magick++/tutorial/Magick++_tutorial.pdf)
+ - [Magick++ STL Documentation](https://imagemagick.org/Magick++/STL.html)
 
 ## Hello World
 
@@ -128,19 +128,19 @@ Binary packages for __macOS__ or __Windows__ can be installed directly from CRAN
 install.packages("magick")
 ```
 
-Installation from source on Linux or OSX requires the imagemagick [`Magick++`](https://www.imagemagick.org/Magick++/Documentation.html) library. On __Debian or Ubuntu__ install [libmagick++-dev](https://packages.debian.org/testing/libmagick++-dev):
+Installation from source on Linux or OSX requires the imagemagick [`Magick++`](https://imagemagick.org/Magick++/Documentation.html) library. On __Debian or Ubuntu__ install [libmagick++-dev](https://packages.debian.org/testing/libmagick++-dev):
 
 ```
 sudo apt-get install -y libmagick++-dev
 ```
 
-On __Fedora__,  __CentOS or RHEL__ we need [ImageMagick-c++-devel](https://src.fedoraproject.org/rpms/ImageMagick). However on CentOS the system version of ImageMagick is quite old. More recent versions are available from the [ImageMagick downloads](https://www.imagemagick.org/download/linux/CentOS/x86_64/) website.
+On __Fedora__,  __CentOS or RHEL__ we need [ImageMagick-c++-devel](https://src.fedoraproject.org/rpms/ImageMagick). However on CentOS the system version of ImageMagick is quite old. More recent versions are available from the [ImageMagick downloads](https://imagemagick.org/download/linux/CentOS/x86_64/) website.
 
 ```
 sudo yum install ImageMagick-c++-devel
 ````
 
-On __macOS__ use [imagemagick@6](https://github.com/Homebrew/homebrew-core/blob/master/Formula/imagemagick@6.rb) from Homebrew.
+On __macOS__ use [imagemagick@6](https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/i/imagemagick@6.rb) from Homebrew.
 
 ```
 brew install imagemagick@6

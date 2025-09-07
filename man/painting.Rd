@@ -29,7 +29,7 @@ image_annotate(
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
-\item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
+\item{color}{a valid \href{https://imagemagick.org/Magick++/Color.html}{color string} such as
 \code{"navyblue"} or \code{"#000080"}. Use \code{"none"} for transparency.}
 
 \item{point}{a geometry_point string indicating the starting point of the flood-fill}
@@ -46,7 +46,7 @@ If the pixel at the starting point does not itself match the given \code{refcolo
 \item{text}{character vector of length equal to 'image' or length 1}
 
 \item{gravity}{string with
-\href{https://www.imagemagick.org/Magick++/Enumerations.html#GravityType}{gravity}
+\href{https://imagemagick.org/Magick++/Enumerations.html#GravityType}{gravity}
 value from \link{gravity_types}.}
 
 \item{location}{geometry string with location relative to \code{gravity}}
@@ -67,12 +67,12 @@ See \code{\link[=magick_fonts]{magick_fonts()}} for what is available.}
 
 \item{decoration}{value of \link{decoration_types} for example \code{"underline"}}
 
-\item{strokecolor}{a \href{https://www.imagemagick.org/Magick++/Color.html}{color string}
+\item{strokecolor}{a \href{https://imagemagick.org/Magick++/Color.html}{color string}
 adds a stroke (border around the text)}
 
 \item{strokewidth}{set the strokewidth of the border around the text}
 
-\item{boxcolor}{a \href{https://www.imagemagick.org/Magick++/Color.html}{color string}
+\item{boxcolor}{a \href{https://imagemagick.org/Magick++/Color.html}{color string}
 for background color that annotation text is rendered on.}
 }
 \description{

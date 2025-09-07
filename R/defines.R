@@ -19,7 +19,7 @@
 #' @export
 #' @inheritParams editing
 #' @param defines a named character vector with extra options to control reading.
-#' These are the `-define key{=value}` settings in the [command line tool](http://www.imagemagick.org/script/command-line-options.php#define).
+#' These are the `-define key{=value}` settings in the [command line tool](https://imagemagick.org/script/command-line-options.php#define).
 #' Use an empty string for value-less defines, and NA to unset a define.
 #' @rdname defines
 #' @name defines

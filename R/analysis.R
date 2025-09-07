@@ -2,7 +2,7 @@
 #'
 #' Functions for image calculations and analysis. This part of the package needs more work.
 #'
-#' For details see [Image++](https://www.imagemagick.org/Magick++/Image++.html)
+#' For details see [Image++](https://imagemagick.org/Magick++/Image++.html)
 #' documentation. Short descriptions:
 #'
 #'  - [image_compare] calculates a metric by comparing image with a reference image.
@@ -19,7 +19,7 @@
 #' @inheritParams editing
 #' @inheritParams painting
 #' @param reference_image another image to compare to
-#' @param metric string with a [metric](http://www.imagemagick.org/script/command-line-options.php#metric)
+#' @param metric string with a [metric](https://imagemagick.org/script/command-line-options.php#metric)
 #' from [metric_types()][metric_types] such as `"AE"` or `"phash"`
 #' @examples
 #' out1 <- image_blur(logo, 3)

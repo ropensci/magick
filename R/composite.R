@@ -1,7 +1,7 @@
 #' Image Composite
 #'
 #' Similar to the ImageMagick `composite` utility: compose an image on top of another one using a
-#' [CompositeOperator](https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator).
+#' [CompositeOperator](https://imagemagick.org/Magick++/Enumerations.html#CompositeOperator).
 #'
 #' The `image_composite` function is vectorized over both image arguments: if the first image has
 #' `n` frames and the second `m` frames, the output image will contain `n` * `m` frames.
@@ -19,7 +19,7 @@
 #' @param offset string with either a [gravity_type][gravity_types] or a [geometry_point][geometry_point]
 #' to set position of top image.
 #' @param operator string with a
-#' [composite operator](https://www.imagemagick.org/Magick++/Enumerations.html#CompositeOperator)
+#' [composite operator](https://imagemagick.org/Magick++/Enumerations.html#CompositeOperator)
 #' from [compose_types()][compose_types]
 #' @param composite_image composition image
 #' @param compose_args additional arguments needed for some composite operations
@@ -56,7 +56,7 @@ image_composite <- function(image, composite_image, operator = "atop",
 
 #' @export
 #' @rdname composite
-#' @param geometry a [geometry string](https://www.imagemagick.org/Magick++/Geometry.html)
+#' @param geometry a [geometry string](https://imagemagick.org/Magick++/Geometry.html)
 #' to set height and width of the border, e.g. `"10x8"`. In addition [image_frame] allows
 #' for adding shadow by setting an offset e.g. `"20x10+7+2"`.
 #' @examples

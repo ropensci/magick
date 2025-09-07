@@ -9,7 +9,7 @@
 #' @export
 #' @rdname config
 #' @param format image format such as \code{png}, \code{tiff} or \code{pdf}.
-#' @references \url{https://www.imagemagick.org/Magick++/CoderInfo.html}
+#' @references \url{https://imagemagick.org/Magick++/CoderInfo.html}
 #' @examples coder_info("png")
 #' coder_info("jpg")
 #' coder_info("pdf")

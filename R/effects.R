@@ -27,7 +27,7 @@ image_reducenoise <- function(image, radius = 1L){
 #' @export
 #' @rdname effects
 #' @param noisetype string with a
-#' [noisetype](https://www.imagemagick.org/Magick++/Enumerations.html#NoiseType) value
+#' [noisetype](https://imagemagick.org/Magick++/Enumerations.html#NoiseType) value
 #' from [noise_types][noise_types].
 #' @examples
 #' image_noise(logo)

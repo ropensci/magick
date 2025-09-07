@@ -1,9 +1,9 @@
 /* ImageMagick Graphics Device
  * R graphics docs: https://svn.r-project.org/R/trunk/src/include/R_ext/GraphicsDevice.h
- * Magick++ docs: https://www.imagemagick.org/Magick++/Drawable.html
+ * Magick++ docs: https://imagemagick.org/Magick++/Drawable.html
  *
  * Constants are defined in https://svn.r-project.org/R/trunk/src/include/R_ext/GraphicsEngine.h
- * and https://www.imagemagick.org/Magick++/Enumerations.html
+ * and https://imagemagick.org/Magick++/Enumerations.html
  *
  */
 #include "magick_types.h"
@@ -458,7 +458,7 @@ static void image_text(double x, double y, const char *str, double rot,
 
 static void image_metric_info(int c, const pGEcontext gc, double* ascent,
                        double* descent, double* width, pDevDesc dd) {
-  /* DOCS: http://www.imagemagick.org/Magick++/TypeMetric.html */
+  /* DOCS: http:s//imagemagick.org/Magick++/TypeMetric.html */
   BEGIN_RCPP
   bool is_unicode = mbcslocale;
   if (c < 0) {

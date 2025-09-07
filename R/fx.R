@@ -1,6 +1,6 @@
 #' Image FX
 #'
-#' Apply a custom an [fx expression](https://www.imagemagick.org/script/fx.php) to the image.
+#' Apply a custom an [fx expression](https://imagemagick.org/script/fx.php) to the image.
 #'
 #' There are two different interfaces. The [image_fx] function simply applies
 #' the same fx to each frame in the input image. The [image_fx_sequence] function
@@ -12,7 +12,7 @@
 #' @rdname fx
 #' @name fx
 #' @family image
-#' @param expression string with an [fx expression](https://www.imagemagick.org/script/fx.php)
+#' @param expression string with an [fx expression](https://imagemagick.org/script/fx.php)
 #' @examples # Show image_fx() expression
 #' img <- image_convert(logo, colorspace = "Gray")
 #' gradient_x <- image_convolve(img, kernel = "Prewitt")

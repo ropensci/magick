@@ -65,16 +65,16 @@ in the filling algorithm}
 
 \item{degrees}{value between 0 and 360 for how many degrees to rotate}
 
-\item{filter}{string with \href{https://www.imagemagick.org/Magick++/Enumerations.html#FilterTypes}{filter}
+\item{filter}{string with \href{https://imagemagick.org/Magick++/Enumerations.html#FilterTypes}{filter}
 type from: \link{filter_types}}
 
 \item{gravity}{string with
-\href{https://www.imagemagick.org/Magick++/Enumerations.html#GravityType}{gravity}
+\href{https://imagemagick.org/Magick++/Enumerations.html#GravityType}{gravity}
 value from \link{gravity_types}.}
 
 \item{repage}{resize the canvas to the cropped area}
 
-\item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
+\item{color}{a valid \href{https://imagemagick.org/Magick++/Color.html}{color string} such as
 \code{"navyblue"} or \code{"#000080"}. Use \code{"none"} for transparency.}
 
 \item{threshold}{straightens an image. A threshold of 40 works for most images.}
@@ -99,7 +99,7 @@ Basic transformations like rotate, resize, crop and flip. The \link{geometry} sy
 is used to specify sizes and areas.
 }
 \details{
-For details see \href{https://www.imagemagick.org/Magick++/STL.html}{Magick++ STL}
+For details see \href{https://imagemagick.org/Magick++/STL.html}{Magick++ STL}
 documentation. Short descriptions:
 \itemize{
 \item \link{image_trim} removes edges that are the background color from the image.
@@ -107,7 +107,7 @@ documentation. Short descriptions:
 \item \link{image_crop} cuts out a subregion of original image
 \item \link{image_rotate} rotates and increases size of canvas to fit rotated image.
 \item \link{image_deskew} auto rotate to correct skewed images
-\item \link{image_resize} resizes using custom \href{https://www.imagemagick.org/Magick++/Enumerations.html#FilterTypes}{filterType}
+\item \link{image_resize} resizes using custom \href{https://imagemagick.org/Magick++/Enumerations.html#FilterTypes}{filterType}
 \item \link{image_scale} and \link{image_sample} resize using simple ratio and pixel sampling algorithm.
 \item \link{image_flip} and \link{image_flop} invert image vertically and horizontally
 }

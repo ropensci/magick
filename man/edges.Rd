@@ -30,7 +30,7 @@ image_hough_txt(image, geometry = NULL, format = c("mvg", "svg"))
 
 \item{geometry}{geometry string, see details.}
 
-\item{color}{a valid \href{https://www.imagemagick.org/Magick++/Color.html}{color string} such as
+\item{color}{a valid \href{https://imagemagick.org/Magick++/Color.html}{color string} such as
 \code{"navyblue"} or \code{"#000080"}. Use \code{"none"} for transparency.}
 
 \item{bg}{background color}

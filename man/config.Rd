@@ -36,5 +36,5 @@ magick_set_seed(123)
 image_blank(200,200, pseudo_image = "plasma:fractal")
 }
 \references{
-\url{https://www.imagemagick.org/Magick++/CoderInfo.html}
+\url{https://imagemagick.org/Magick++/CoderInfo.html}
 }

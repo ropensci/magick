@@ -1,6 +1,6 @@
 /* Jeroen Ooms (2020)
  * Bindings to vectorized image manipulations.
- * See API: https://www.imagemagick.org/Magick++/STL.html
+ * See API: https://imagemagick.org/Magick++/STL.html
  */
 
 #include "magick_types.h"

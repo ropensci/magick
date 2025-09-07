@@ -13,12 +13,12 @@ image_fx_sequence(image, expression = "p")
 \arguments{
 \item{image}{magick image object returned by \code{\link[=image_read]{image_read()}} or \code{\link[=image_graph]{image_graph()}}}
 
-\item{expression}{string with an \href{https://www.imagemagick.org/script/fx.php}{fx expression}}
+\item{expression}{string with an \href{https://imagemagick.org/script/fx.php}{fx expression}}
 
 \item{channel}{a value of \code{\link[=channel_types]{channel_types()}} specifying which channel(s) to set}
 }
 \description{
-Apply a custom an \href{https://www.imagemagick.org/script/fx.php}{fx expression} to the image.
+Apply a custom an \href{https://imagemagick.org/script/fx.php}{fx expression} to the image.
 }
 \details{
 There are two different interfaces. The \link{image_fx} function simply applies
