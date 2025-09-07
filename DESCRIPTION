@@ -1,7 +1,7 @@
 Package: magick
 Type: Package
 Title: Advanced Graphics and Image-Processing in R
-Version: 2.8.8
+Version: 2.9.0
 Authors@R: person("Jeroen", "Ooms", role = c("aut", "cre"), email = "jeroenooms@gmail.com",
     comment = c(ORCID = "0000-0002-4035-0289"))
 Description: Bindings to 'ImageMagick': the most comprehensive open-source image
@@ -10,9 +10,8 @@ Description: Bindings to 'ImageMagick': the most comprehensive open-source image
     All operations are vectorized via the Magick++ STL meaning they operate either
     on a single frame or a series of frames for working with layers, collages,
     or animation. In RStudio images are automatically previewed when printed to
-    the console, resulting in an interactive editing environment. The latest 
-    version of the package includes a native graphics device for creating 
-    in-memory graphics or drawing onto images using pixel coordinates.
+    the console, resulting in an interactive editing environment. Also includes
+    a graphics device for creating drawing onto images using pixel coordinates.
 License: MIT + file LICENSE
 URL: https://docs.ropensci.org/magick/
     https://ropensci.r-universe.dev/magick
@@ -26,7 +25,7 @@ Imports:
     curl
 LinkingTo: Rcpp
 Suggests:
-    av (>= 0.3),
+    av,
     spelling,
     jsonlite,
     methods,
@@ -38,7 +37,7 @@ Suggests:
     ggplot2,
     gapminder,
     IRdisplay,
-    tesseract (>= 2.0),
+    tesseract,
     gifski
 Encoding: UTF-8
 RoxygenNote: 7.3.2
