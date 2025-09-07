@@ -159,10 +159,12 @@ image_background(translogo, "pink", flatten = TRUE)
 image_fill(logo, "pink", fuzz = 20)
 
 # Black virtual pixel on a 45° rotation
-image_distort(image_virtual_pixel(logo, "Black"), "AffineProjection", c(0.70710678,0.70710678,-0.70710678,0.70710678,0,0), bestfit = TRUE)
+logo |> image_virtual_pixel("Black") |>
+  image_distort("AffineProjection", sqrt(0.5) * c(1,1,-1,1,0,0), bestfit = TRUE)
 
 # Tile virtual pixel on a 45° rotation
-image_distort(image_virtual_pixel(logo, "Tile"), "AffineProjection", c(0.70710678,0.70710678,-0.70710678,0.70710678,0,0), bestfit = TRUE)
+logo |> image_virtual_pixel("Tile") |>
+ image_distort("AffineProjection", sqrt(0.5) * c(1,1,-1,1,0,0), bestfit = TRUE)
 
 # Other color tweaks
 image_colorize(logo, 50, "red")

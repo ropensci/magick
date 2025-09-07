@@ -156,10 +156,12 @@ image_background <- function(image, color, flatten = TRUE){
 #' @param virtual_pixel_method a string with a [virtual pixel method](https://imagemagick.org/Magick++/Enumerations.html#VirtualPixelMethod) from [virtual_pixel_methods][virtual_pixel_methods].
 #' @examples
 #' # Black virtual pixel on a 45° rotation
-#' image_distort(image_virtual_pixel(logo, "Black"), "AffineProjection", c(0.70710678,0.70710678,-0.70710678,0.70710678,0,0), bestfit = TRUE)
+#' logo |> image_virtual_pixel("Black") |>
+#'   image_distort("AffineProjection", sqrt(0.5) * c(1,1,-1,1,0,0), bestfit = TRUE)
 #'
 #' # Tile virtual pixel on a 45° rotation
-#' image_distort(image_virtual_pixel(logo, "Tile"), "AffineProjection", c(0.70710678,0.70710678,-0.70710678,0.70710678,0,0), bestfit = TRUE)
+#' logo |> image_virtual_pixel("Tile") |>
+#'  image_distort("AffineProjection", sqrt(0.5) * c(1,1,-1,1,0,0), bestfit = TRUE)
 #'
 image_virtual_pixel <- function(image, virtual_pixel_method) {
   assert_image(image)
