@@ -31,11 +31,11 @@ myplot + theme_classic()
 # Or add to plot as annotation
 image <- image_fill(logo, 'none')
 raster <- as.raster(image)
-myplot <- qplot(mpg, wt, data = mtcars)
+myplot <- ggplot(mtcars, aes(mpg, wt)) + geom_point()
 myplot + annotation_raster(raster, 25, 35, 3, 5)
 
 # Or overplot image using grid
 library(grid)
-qplot(speed, dist, data = cars, geom = c("point", "smooth"))
+ggplot(cars, aes(speed, dist)) + geom_point() + geom_smooth()
 grid.raster(image)
 }
