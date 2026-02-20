@@ -341,6 +341,46 @@ XPtrImage magick_image_reducenoise( XPtrImage input, const size_t radius){
  * https://github.com/ImageMagick/ImageMagick/commit/903e501876d405ffd6f9f38f5e72db9acc3d15e8
  */
 
+struct TextSegment {
+  std::string text;
+  int type; // 0=normal, 1=superscript, 2=subscript
+};
+
+static std::vector<TextSegment> parse_text_parts(const std::string& input) {
+  std::vector<TextSegment> segments;
+  size_t pos = 0;
+  while(pos < input.length()) {
+    size_t sup_pos = input.find("<sup>", pos);
+    size_t sub_pos = input.find("<sub>", pos);
+    size_t tag_pos = std::min(sup_pos, sub_pos);
+    if(tag_pos == std::string::npos) {
+      TextSegment s; s.text = input.substr(pos); s.type = 0;
+      segments.push_back(s);
+      break;
+    }
+    if(tag_pos > pos) {
+      TextSegment s; s.text = input.substr(pos, tag_pos - pos); s.type = 0;
+      segments.push_back(s);
+    }
+    bool is_sup = (tag_pos == sup_pos);
+    std::string open = is_sup ? "<sup>" : "<sub>";
+    std::string close = is_sup ? "</sup>" : "</sub>";
+    size_t cstart = tag_pos + open.length();
+    size_t cend = input.find(close, cstart);
+    TextSegment s;
+    s.type = is_sup ? 1 : 2;
+    if(cend == std::string::npos) {
+      s.text = input.substr(cstart);
+      segments.push_back(s);
+      break;
+    }
+    s.text = input.substr(cstart, cend - cstart);
+    segments.push_back(s);
+    pos = cend + close.length();
+  }
+  return segments;
+}
+
 // [[Rcpp::export]]
 XPtrImage magick_image_annotate( XPtrImage input, Rcpp::CharacterVector text, const char * gravity,
                                  const char * location, double rot, double size, const char * font,
@@ -353,43 +393,121 @@ XPtrImage magick_image_annotate( XPtrImage input, Rcpp::CharacterVector text, co
   Magick::Geometry pos(location);
   double x = pos.xOff();
   double y = pos.yOff();
-  drawlist draw;
-  draw.push_back(Magick::DrawableGravity(Gravity(gravity)));
-  draw.push_back(Magick::DrawableTextAntialias(true));
-  if(strokecolor.size())
-    draw.push_back(Magick::DrawableStrokeColor(Color(strokecolor[0])));
-  if(strokewidth.size())
-    draw.push_back(Magick::DrawableStrokeWidth(strokewidth[0]));
-  if(color.size())
-    draw.push_back(Magick::DrawableFillColor(Color(color[0])));
-  if(boxcolor.size())
-    draw.push_back(Magick::DrawableTextUnderColor(Color(boxcolor[0])));
-#if MagickLibVersion >= 0x689
-  if(kerning != 0)
-    draw.push_back(Magick::DrawableTextKerning(kerning));
-#endif
-  if(decoration.size())
-    draw.push_back(Magick::DrawableTextDecoration(FontDecoration(decoration[0])));
-  draw.push_back(Magick::DrawablePointSize(size));
-  draw.push_back(Magick::DrawableFont(normalize_font(font), FontStyle(style), weight, Magick::NormalStretch));
-  if(rot){
-    //temorary move center for rotation and then back
-    draw.push_back(Magick::DrawableTranslation(x, y));
-    draw.push_back(Magick::DrawableRotation(rot));
-    draw.push_back(Magick::DrawableTranslation(-x, -y));
-  }
   int len = text.size();
-  if(len == 1){
-    draw.push_back(Magick::DrawableText(x, y, std::string(text[0]), "UTF-8"));
-    for_each (output->begin(), output->end(), Magick::drawImage(draw));
-  } else if(len > 1){
-    for(size_t i = 0; i < output->size(); i++){
-      draw.push_back(Magick::DrawableText(x, y, std::string(text[i % len]), "UTF-8"));
-      output->at(i).draw(draw);
-      draw.pop_back();
+  if(len < 1)
+    throw std::runtime_error("Length of 'text' must be equal to images or 1");
+
+  // Check if any text has <sup>/<sub> markup
+  bool has_markup = false;
+  for(int i = 0; i < len; i++){
+    std::string t(text[i]);
+    if(t.find("<sup>") != std::string::npos || t.find("<sub>") != std::string::npos){
+      has_markup = true;
+      break;
+    }
+  }
+
+  if(!has_markup){
+    drawlist draw;
+    draw.push_back(Magick::DrawableGravity(Gravity(gravity)));
+    draw.push_back(Magick::DrawableTextAntialias(true));
+    if(strokecolor.size())
+      draw.push_back(Magick::DrawableStrokeColor(Color(strokecolor[0])));
+    if(strokewidth.size())
+      draw.push_back(Magick::DrawableStrokeWidth(strokewidth[0]));
+    if(color.size())
+      draw.push_back(Magick::DrawableFillColor(Color(color[0])));
+    if(boxcolor.size())
+      draw.push_back(Magick::DrawableTextUnderColor(Color(boxcolor[0])));
+#if MagickLibVersion >= 0x689
+    if(kerning != 0)
+      draw.push_back(Magick::DrawableTextKerning(kerning));
+#endif
+    if(decoration.size())
+      draw.push_back(Magick::DrawableTextDecoration(FontDecoration(decoration[0])));
+    draw.push_back(Magick::DrawablePointSize(size));
+    draw.push_back(Magick::DrawableFont(normalize_font(font), FontStyle(style), weight, Magick::NormalStretch));
+    if(rot){
+      //temporary move center for rotation and then back
+      draw.push_back(Magick::DrawableTranslation(x, y));
+      draw.push_back(Magick::DrawableRotation(rot));
+      draw.push_back(Magick::DrawableTranslation(-x, -y));
+    }
+    if(len == 1){
+      draw.push_back(Magick::DrawableText(x, y, std::string(text[0]), "UTF-8"));
+      for_each (output->begin(), output->end(), Magick::drawImage(draw));
+    } else {
+      for(size_t i = 0; i < output->size(); i++){
+        draw.push_back(Magick::DrawableText(x, y, std::string(text[i % len]), "UTF-8"));
+        output->at(i).draw(draw);
+        draw.pop_back();
+      }
     }
   } else {
-    throw std::runtime_error("Length of 'text' must be equal to images or 1");
+    // Markup rendering: parse <sup>/<sub> tags and render each segment
+    for(size_t i = 0; i < output->size(); i++){
+      Frame& frame = output->at(i);
+      std::string txt(text[i % len]);
+      std::vector<TextSegment> segments = parse_text_parts(txt);
+
+      // Set font on frame for text metrics measurement
+      frame.fontPointsize(size);
+#if MagickLibVersion >= 0x692
+      frame.fontFamily(normalize_font(font));
+      frame.fontWeight((size_t)weight);
+      frame.fontStyle(FontStyle(style));
+#endif
+
+      double cur_x = x;
+      for(size_t j = 0; j < segments.size(); j++){
+        const TextSegment& seg = segments[j];
+        if(seg.text.empty()) continue;
+
+        double seg_size = size;
+        double seg_y = y;
+        if(seg.type == 1){ // superscript
+          seg_size = size * 0.6;
+          seg_y = y - size * 0.4;
+        } else if(seg.type == 2){ // subscript
+          seg_size = size * 0.6;
+          seg_y = y + size * 0.2;
+        }
+
+        // Measure text width at the segment's font size
+        frame.fontPointsize(seg_size);
+        Magick::TypeMetric tm;
+        frame.fontTypeMetrics(seg.text, &tm);
+
+        drawlist draw;
+        draw.push_back(Magick::DrawableGravity(Gravity(gravity)));
+        draw.push_back(Magick::DrawableTextAntialias(true));
+        if(strokecolor.size())
+          draw.push_back(Magick::DrawableStrokeColor(Color(strokecolor[0])));
+        if(strokewidth.size())
+          draw.push_back(Magick::DrawableStrokeWidth(strokewidth[0]));
+        if(color.size())
+          draw.push_back(Magick::DrawableFillColor(Color(color[0])));
+        if(boxcolor.size())
+          draw.push_back(Magick::DrawableTextUnderColor(Color(boxcolor[0])));
+#if MagickLibVersion >= 0x689
+        if(kerning != 0)
+          draw.push_back(Magick::DrawableTextKerning(kerning));
+#endif
+        if(decoration.size())
+          draw.push_back(Magick::DrawableTextDecoration(FontDecoration(decoration[0])));
+        draw.push_back(Magick::DrawablePointSize(seg_size));
+        draw.push_back(Magick::DrawableFont(normalize_font(font), FontStyle(style), weight, Magick::NormalStretch));
+        if(rot){
+          draw.push_back(Magick::DrawableTranslation(cur_x, seg_y));
+          draw.push_back(Magick::DrawableRotation(rot));
+          draw.push_back(Magick::DrawableTranslation(-cur_x, -seg_y));
+        }
+        draw.push_back(Magick::DrawableText(cur_x, seg_y, seg.text, "UTF-8"));
+        frame.draw(draw);
+
+        cur_x += tm.textWidth();
+      }
+    }
   }
   return output;
 }

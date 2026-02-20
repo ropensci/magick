@@ -41,7 +41,8 @@ image_fill <- function(image, color, point = "+1+1", fuzz = 0, refcolor = NULL){
 #' @details Setting a font, weight, style only works if your imagemagick is compiled
 #' with fontconfig support.
 #' @rdname painting
-#' @param text character vector of length equal to 'image' or length 1
+#' @param text character vector of length equal to 'image' or length 1. Supports
+#' `<sup>text</sup>` and `<sub>text</sub>` HTML tags for superscript and subscript.
 #' @param degrees rotates text around center point
 #' @param gravity string with
 #' [gravity](https://imagemagick.org/Magick++/Enumerations.html#GravityType)
@@ -67,6 +68,11 @@ image_fill <- function(image, color, point = "+1+1", fuzz = 0, refcolor = NULL){
 #'
 #' # Setting fonts requires fontconfig support (and that you have the font)
 #' image_annotate(logo, "The quick brown fox", font = "monospace", size = 50)
+#'
+#' # Superscript and subscript are supported via HTML tags
+#' image_annotate(logo, "1st", size = 30)
+#' image_annotate(logo, "1<sup>st</sup>", size = 30)
+#' image_annotate(logo, "H<sub>2</sub>O", size = 30)
 image_annotate <- function(image, text, gravity = "northwest", location = "+0+0", degrees = 0,
                            size = 10, font = "", style = "normal", weight = 400, kerning = 0,
                            decoration = NULL, color = NULL, strokecolor = NULL,

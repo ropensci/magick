@@ -1,6 +1,7 @@
 2.9.0
   - Windows / MacOS: update ImageMagick stack
   - New function image_virtual_pixel() (#417)
+  - image_annotate() now supports `<sup>` and `<sub>` HTML tags for superscript and subscript text
 
 2.8.7
   - Vendor a static build on Linux libc++ systems (due to incompatibility

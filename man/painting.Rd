@@ -43,7 +43,8 @@ the given \code{refcolor}), connected to starting point will be replaced with th
 If the pixel at the starting point does not itself match the given \code{refcolor}
 (according to \code{fuzz}) then no action will be taken.}
 
-\item{text}{character vector of length equal to 'image' or length 1}
+\item{text}{character vector of length equal to 'image' or length 1. Supports
+\verb{<sup>text</sup>} and \verb{<sub>text</sub>} HTML tags for superscript and subscript.}
 
 \item{gravity}{string with
 \href{https://imagemagick.org/Magick++/Enumerations.html#GravityType}{gravity}
@@ -99,6 +100,11 @@ image_annotate(logo, "CONFIDENTIAL", size = 50, color = "red", boxcolor = "pink"
 
 # Setting fonts requires fontconfig support (and that you have the font)
 image_annotate(logo, "The quick brown fox", font = "monospace", size = 50)
+
+# Superscript and subscript are supported via HTML tags
+image_annotate(logo, "1st", size = 30)
+image_annotate(logo, "1<sup>st</sup>", size = 30)
+image_annotate(logo, "H<sub>2</sub>O", size = 30)
 }
 \seealso{
 Other image: 
