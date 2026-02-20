@@ -21,3 +21,4 @@ windows
 !img/*
 docs/
 configure.log
+_codeql_detected_source_root
