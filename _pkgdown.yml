@@ -3,5 +3,3 @@ navbar:
     intro:
       text: Get started
       href: articles/intro.html
-  structure:
-    left: [intro, reference]
