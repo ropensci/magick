@@ -474,7 +474,7 @@ Magick images can also be converted to raster objects for use with R's graphics 
 
 ### Base R rasters
 
-Base R has an `as.raster` format which converts the image to a vector of strings. The paper [Raster Images in R Graphics](https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Murrell.pdf) by Paul Murrell gives a nice overview.
+Base R has an `as.raster` format which converts the image to a vector of strings. The paper [Raster Images in R Graphics](https://journal.r-project.org/articles/RJ-2011-008/) by Paul Murrell gives a nice overview.
 
 ```{r}
 plot(as.raster(frink))

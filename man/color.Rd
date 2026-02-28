@@ -84,7 +84,7 @@ may be used to manually adjust the tree depth.}
 \item{map}{reference image to map colors from}
 
 \item{threshold_map}{A string giving the dithering pattern to use. See
-\href{https://legacy.imagemagick.org/Usage/option_link.cgi?ordered-dither}{the ImageMagick documentation}
+\href{https://legacy.imagemagick.org/Usage/quantize/#od_levels}{the ImageMagick documentation}
 for possible values}
 
 \item{channel}{a string with a

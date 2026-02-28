@@ -88,7 +88,7 @@ image_map <- function(image, map, dither = FALSE){
 #' @export
 #' @rdname color
 #' @param threshold_map A string giving the dithering pattern to use. See
-#' [the ImageMagick documentation](https://legacy.imagemagick.org/Usage/option_link.cgi?ordered-dither)
+#' [the ImageMagick documentation](https://legacy.imagemagick.org/Usage/quantize/#od_levels)
 #' for possible values
 #' @examples image_ordered_dither(logo, 'o8x8')
 image_ordered_dither <- function(image, threshold_map){
