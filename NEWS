@@ -1,5 +1,5 @@
 2.9.1
-  - Fix some ggplot2 deprecation warnings
+  - Update image_ggplot to fix some ggplot2 deprecation warnings
 
 2.9.0
   - Windows / MacOS: update ImageMagick stack
