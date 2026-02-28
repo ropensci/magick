@@ -7,6 +7,7 @@
 #' @export
 #' @inheritParams editing
 #' @param interpolate passed to [ggplot2::annotation_raster]
+#' @importFrom rlang .data
 #' @examples # Plot with base R
 #' plot(logo)
 #'

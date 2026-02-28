@@ -22,7 +22,8 @@ Depends: R (>= 4.1.0)
 Imports:
     Rcpp (>= 0.12.12),
     magrittr,
-    curl
+    curl,
+    rlang
 LinkingTo: Rcpp
 Suggests:
     av,
