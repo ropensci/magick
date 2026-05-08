@@ -18,22 +18,18 @@ jobs:
         config:
           - {os: macOS-26-intel,   r: 'release'}
           - {os: macOS-26,         r: 'release'}
-          - {os: windows-latest, r: '4.1'}
-          - {os: windows-latest, r: '4.2'}
-          - {os: windows-latest, r: '4.3'}
-          - {os: windows-latest, r: '4.4'}
-          - {os: windows-latest, r: 'release'}
+          - {os: windows-latest,   r: 'release'}
           - {os: windows-latest,   r: 'devel'}
-          - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
-          - {os: ubuntu-latest,   r: 'release'}
-          - {os: ubuntu-latest,   r: 'oldrel-3'}
-
+          - {os: ubuntu-latest,    r: 'devel', http-user-agent: 'release'}
+          - {os: ubuntu-latest,    r: 'release'}
+          - {os: ubuntu-latest,    r: 'oldrel-3'}
+          - {os: windows-latest,   r: 'oldrel-3'}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: r-lib/actions/setup-pandoc@v2
 
