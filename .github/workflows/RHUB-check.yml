@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        container: [ 'clang18', 'clang20', 'ubuntu-clang' ]
+        container: [ 'clang21', 'clang22', 'ubuntu-clang' ]
         legacyjpeg: [ true, false ]
 
     env:
