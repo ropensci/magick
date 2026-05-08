@@ -5,3 +5,10 @@ navbar:
       href: articles/intro.html
   structure:
     left: [intro, reference]
+
+template:
+  opengraph:
+    image:
+      src: https://ropensci.r-universe.dev/magick/card.png
+      alt: "Logo for magick package"
+
