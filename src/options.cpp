@@ -34,7 +34,7 @@ Rcpp::DataFrame list_font_info(){
   Rcpp::CharacterVector family(number_fonts);
   Rcpp::CharacterVector glyphs(number_fonts);
   Rcpp::IntegerVector weight(number_fonts);
-  for (int i = 0; i < number_fonts; i++){
+  for (size_t i = 0; i < number_fonts; i++){
     if(type_info[i]->name)
       name[i] = type_info[i]->name;
     if(type_info[i]->family)
